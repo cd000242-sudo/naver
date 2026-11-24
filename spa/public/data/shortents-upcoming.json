@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T09:50:28.121Z",
+ "builtAt": "2026-11-24T10:00:31.350Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 69,
+   "articles90": 70,
    "recent20": 14,
-   "press": 49,
-   "firstArticleAt": "2026-11-24T08:52:00.000Z",
+   "press": 47,
+   "firstArticleAt": "2026-11-24T08:55:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "젠슨 황 구한 트럼프…\"하루 새 200억 원 넘게 수익\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T09:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929536?sid=104"
+     "title": "트럼프 업고 돌아온 젠슨황…'불륜 더 있다' 충격 고백",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T09:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522236?sid=104"
     },
     {
-     "title": "'젠슨 황 복귀'에…대만증시 사상 최대 상승폭·TSMC 상한가",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-24T09:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847265?sid=104"
+     "title": "젠슨 황, 가죽 재킷 벗고 복귀",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-24T09:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368547?sid=115"
     },
     {
-     "title": "가죽자켓 벗고 복귀한 젠슨 황, 본사 앞에서 직원들에게 준 선물",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-24T09:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567631?sid=104"
+     "title": "'컴백' 젠슨 황 껴안고 엉엉 운 여직원…직원들 '환호성'",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-24T09:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078115?sid=104"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 57,
-   "recent20": 6,
-   "press": 45,
-   "firstArticleAt": "2026-11-24T08:23:00.000Z",
+   "articles90": 51,
+   "recent20": 5,
+   "press": 39,
+   "firstArticleAt": "2026-11-24T08:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -67,7 +67,7 @@
      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446315"
     },
     {
-     "title": "‘젠슨 황 복귀 개입’ 트럼프, 엔비디아 급등에 최대 200억원 수익…이...",
+     "title": "‘젠슨 황 복귀 개입’ 트럼프, 엔비디아 급등에 최대 200억 수익",
      "press": "hani.co.kr",
      "publishedAt": "2026-11-24T09:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002833785?sid=104"
@@ -79,30 +79,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 30,
-   "recent20": 3,
-   "press": 29,
-   "firstArticleAt": "2026-11-24T08:21:00.000Z",
+   "articles90": 27,
+   "recent20": 2,
+   "press": 24,
+   "firstArticleAt": "2026-11-24T08:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 업고 돌아온 젠슨황…'불륜 더 있다' 충격 고백",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T09:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522236?sid=104"
+    },
+    {
+     "title": "WSJ \"젠슨 황, 엔비디아 복귀 전 이사회에 추가 불륜 고백…깊이 반성한...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-24T09:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653145?sid=104"
+    },
     {
      "title": "젠슨 황, 복귀 직전에 추가 불륜 사실 고백했다…이사회는 \"복귀가 최선...",
      "press": "hidomin.com",
      "publishedAt": "2026-11-24T09:38:00.000Z",
      "link": "https://www.hidomin.com/news/articleView.html?idxno=730877"
-    },
-    {
-     "title": "\"젠슨 황, 알려진 두 명 외 추가 불륜 이사회에 고백\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-24T09:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522231?sid=104"
-    },
-    {
-     "title": "[속보]젠슨 황, 엔비디아 복귀 전 이사회에 '추가 불륜' 고백...\"깊이 반...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-24T09:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122102?sid=104"
     }
    ]
   },
@@ -111,63 +111,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 33,
-   "recent20": 2,
-   "press": 29,
-   "firstArticleAt": "2026-11-24T08:27:00.000Z",
+   "articles90": 21,
+   "recent20": 3,
+   "press": 20,
+   "firstArticleAt": "2026-11-24T08:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "미세먼지 감축 '삼중고'…국외 유입·엘니뇨·LNG 급등",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-24T09:54:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321744&inflow=N"
+    },
+    {
+     "title": "올겨울 '미세먼지' 짙어진다…정부, 석탄발전 18기 가동중단",
+     "press": "newstree.kr",
+     "publishedAt": "2026-11-24T09:52:00.000Z",
+     "link": "https://www.newstree.kr/newsView/ntr202611240024"
+    },
     {
      "title": "12월 1일부터 미세먼지 계절관리제 시행…수도권·6대 특별·광역시 5등...",
      "press": "topstarnews.net",
      "publishedAt": "2026-11-24T09:42:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285046"
-    },
-    {
-     "title": "정부, 올겨울 미세먼지 계절관리제 시행…초미세먼지 19㎍ 목표",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-24T09:38:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139790"
-    },
-    {
-     "title": "한 총리 \"미세먼지 대응 위해 다음 달부터 계절관리제 시행\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T09:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437486?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "김병기",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 20,
-   "recent20": 4,
-   "press": 19,
-   "firstArticleAt": "2026-11-24T08:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'차남 특혜' 김병기 송치…수사 1년 2개월만",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T09:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929533?sid=102"
-    },
-    {
-     "title": "김병기는 뇌물수수, 빗썸 이재원은 뇌물공여…경찰, 차남 취업 특혜 의...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-24T09:42:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328310"
-    },
-    {
-     "title": "신병확보 불발에 무더기 불송치…김병기 1년 넘게 파서 '반쪽 성과'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-24T09:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014343027?sid=102"
     }
    ]
   },
@@ -176,10 +143,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-24T08:22:00.000Z",
+   "articles90": 17,
+   "recent20": 0,
+   "press": 17,
+   "firstArticleAt": "2026-11-24T08:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,14 +171,111 @@
    ]
   },
   {
+   "keyword": "김병기",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 14,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-24T08:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김병기 수사 14개월 끈 경찰, 의혹 13개 중 7개만 ‘반쪽 송치’",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-24T09:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887180?sid=102"
+    },
+    {
+     "title": "'차남 특혜' 김병기 송치…수사 1년 2개월만",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T09:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929533?sid=102"
+    },
+    {
+     "title": "김병기는 뇌물수수, 빗썸 이재원은 뇌물공여…경찰, 차남 취업 특혜 의...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-24T09:42:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328310"
+    }
+   ]
+  },
+  {
+   "keyword": "화장실",
+   "sources": [
+    "google"
+   ],
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-24T08:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[우리동네 조례한줄] 장애인 화장실서 \"도와주세요\" 외칠 수 있다면",
+     "press": "joongboo.com",
+     "publishedAt": "2026-11-24T09:52:00.000Z",
+     "link": "https://www.joongboo.com/news/articleView.html?idxno=363743496"
+    },
+    {
+     "title": "태양, 과민성 대장증후군 고백..\"화장실 급해 前소속사 YG 신사옥 찾아가...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-24T09:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004469172"
+    },
+    {
+     "title": "공중화장실 문화발전 공로 인정... 기장군도시관리공단 '시장 표창'",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-24T09:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609212?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이마트 임원 근무시간 연장",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-24T08:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이마트 임원 근무시간 연장…12월 1일부터 오후 6시까지, 월례 휴무도 중...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-24T09:56:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630322"
+    },
+    {
+     "title": "이마트, 임원 근무 시간 1시간 연장…리프레시데이 운영 중단",
+     "press": "srtimes.kr",
+     "publishedAt": "2026-11-24T09:24:00.000Z",
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=218515"
+    },
+    {
+     "title": "이마트·SSG닷컴, 임원 고삐 죈다…월례휴무 폐지·4개사 6시 퇴근",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-24T09:22:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122606"
+    }
+   ]
+  },
+  {
    "keyword": "송민호 102일 추가 복무",
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-24T08:22:00.000Z",
+   "articles90": 13,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-24T08:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -240,13 +304,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-24T08:22:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-24T08:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한화에어로스페이스, 창원에 국방 AI 데이터센터 구축…2028년 7월 가동 ...",
+     "press": "consumernews.co.kr",
+     "publishedAt": "2026-11-24T09:54:00.000Z",
+     "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=769031"
+    },
     {
      "title": "한화에어로, 창원에 180MW급 국방 AI 데이터센터 구축",
      "press": "thelec.kr",
@@ -258,76 +328,6 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-24T09:27:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005609183?sid=101"
-    },
-    {
-     "title": "한화에어로, 10조 들여 창원에 국방 AIDC 구축…2028년 가동",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-24T09:20:00.000Z",
-     "link": "https://www.ajunews.com/view/20261124170145059"
-    }
-   ]
-  },
-  {
-   "keyword": "화장실",
-   "sources": [
-    "google"
-   ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-24T08:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "태양, 과민성 대장증후군 고백..\"화장실 급해 前소속사 YG 신사옥 찾아가...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-24T09:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004469172"
-    },
-    {
-     "title": "공중화장실 문화발전 공로 인정... 기장군도시관리공단 '시장 표창'",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-24T09:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609212?sid=101"
-    },
-    {
-     "title": "아내가 원장인데… '어린이집 화장실 불법 촬영' 40대, 2심서 감형",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-24T09:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967527?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "이마트 임원 근무시간 연장",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T08:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이마트, 임원 근무 시간 1시간 연장…리프레시데이 운영 중단",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-24T09:24:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=218515"
-    },
-    {
-     "title": "이마트·SSG닷컴, 임원 고삐 죈다…월례휴무 폐지·4개사 6시 퇴근",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-24T09:22:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122606"
-    },
-    {
-     "title": "이마트, 임원 '9 to 5' 근무제 8년만에 종료…월례 휴무도 폐지",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-24T09:04:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1428569"
     }
    ]
   },
@@ -336,10 +336,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
+   "articles90": 9,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-24T08:21:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-24T08:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -368,10 +368,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 4,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T08:21:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-24T08:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -396,44 +396,12 @@
    ]
   },
   {
-   "keyword": "고양시",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T08:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김미수 고양시의장, 농업인과 소통 넓히고 ‘김장 나눔으로’ 사랑 실천",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-24T09:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/382/0001306583?sid=102"
-    },
-    {
-     "title": "고양시, ‘제3회 대한민국 지자체 홍보대상’ 축제 부문 대상",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-24T09:22:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611240956551420310"
-    },
-    {
-     "title": "고양시 중·고교 ‘교복 입찰 나눠 먹기’ 정황…경기교육청, 수사 의뢰",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-24T08:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833748?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "몸매",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-24T08:42:00.000Z",
    "exclusive": false,
@@ -456,38 +424,6 @@
      "press": "newsen.com",
      "publishedAt": "2026-11-24T08:42:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001190768"
-    }
-   ]
-  },
-  {
-   "keyword": "미세먼지특별대책위원회 한성숙 총리",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T08:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한 총리 \"미세먼지 대응 위해 다음 달부터 계절관리제 시행\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T09:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437486?sid=100"
-    },
-    {
-     "title": "한 총리 “미세먼지, 마음 놓을 상황 아냐…정책 실효성 높이는데 최선...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-24T09:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012300135?sid=100"
-    },
-    {
-     "title": "한 총리 \"미세먼지 마음 놓을 상황 아냐…12월부터 계절관리제\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T08:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929492?sid=100"
     }
    ]
   }
