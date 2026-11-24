@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T15:22:25.140Z",
+ "builtAt": "2026-11-24T15:36:28.149Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
@@ -16,73 +16,42 @@
     "signal.bz"
    ],
    "articles90": 14,
-   "recent20": 1,
+   "recent20": 2,
    "press": 14,
-   "firstArticleAt": "2026-11-24T13:53:00.000Z",
+   "firstArticleAt": "2026-11-24T14:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "미국, 이르면 이번주 '과잉생산 관세' 발표…한국 15% 유지되나",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-24T15:28:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026112500242274013"
+    },
+    {
+     "title": "美 이르면 이번주 '과잉생산 관세' 발표…韓 15% 유지할 듯",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-24T15:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847290?sid=101"
+    },
     {
      "title": "\"美USTR, 이르면 이번주 '과잉생산 관세' 조사 결과 발표\"(종합)",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-24T15:08:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016461542?sid=104"
-    },
-    {
-     "title": "美 USTR 조사결과 과잉생산 관세 발표 임박…한국 등 16개 경제주체 대상...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-24T15:00:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630348"
-    },
-    {
-     "title": "美 ‘과잉생산 관세’ 결과 이르면 이번주 공개…한국도 포함됐다",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-24T14:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567660?sid=104"
     }
    ]
   },
   {
-   "keyword": "비",
+   "keyword": "정부 세종 이전 계획",
    "sources": [
-    "google"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 11,
-   "firstArticleAt": "2026-11-24T14:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[날씨] 수도권, \"비 또는 눈\"· · ·경기북동부 -10℃ 안팎 영하권",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-24T15:20:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3762103"
-    },
-    {
-     "title": "'틈만,' 비, 지방간 고백 \"이렇게 운동하는데 왜!\" 억울함 폭발",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-24T15:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000329021"
-    },
-    {
-     "title": "비 내리는데 아스콘 포장 강행…197억 양구 종합체육공원 공사 ‘논란’",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-24T15:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001233207?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "중앙행정기관 세종 이전",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
+   "articles90": 6,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T13:55:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-24T14:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -99,48 +68,49 @@
      "link": "https://n.news.naver.com/mnews/article/629/0000555213?sid=102"
     },
     {
-     "title": "박수현 충남지사 \"2차 공공기관 이전, 기대 못 미칠 수도…'반값 생활비...",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-24T14:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213507?sid=102"
+     "title": "정부, 내년 개인정보위 등 22곳 세종 우선 이전…인권위, 청사신축 후 옮...",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-24T14:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003489331?sid=100"
     }
    ]
   },
   {
-   "keyword": "화재",
+   "keyword": "EU 하이브리드차 수입 제한",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T14:06:00.000Z",
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T14:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성생명·화재 대표 유임 가닥",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-24T14:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685777?sid=101"
+     "title": "EU, 하이브리드차도 수입 제한… 국산차 ‘빨간불’",
+     "press": "donga.com",
+     "publishedAt": "2026-11-24T15:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764880?sid=103"
     },
     {
-     "title": "‘방화 가능성’ 주택 화재…일가족 3명 숨져",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-24T14:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012300487?sid=102"
+     "title": "EU, 하이브리드차 수입 제한… 한국은 6만7924대 허용",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-24T15:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887221?sid=101"
     },
     {
-     "title": "식품진흥원·왕궁소방대, 화재 초기 대응·인명 대피 합동훈련",
-     "press": "youngnong.co.kr",
-     "publishedAt": "2026-11-24T14:14:00.000Z",
-     "link": "https://www.youngnong.co.kr/news/articleView.html?idxno=72026"
+     "title": "EU, 한국산 HEV 수입 쿼터 6만7924대로 제한… 수출 확대 제동",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-24T14:30:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001743"
     }
    ]
   },
   {
    "keyword": "김혜경·권양숙 오찬",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 3,
@@ -174,8 +144,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 1404,
-  "matched": 739,
-  "avgLeadMin": 518,
+  "matched": 737,
+  "avgLeadMin": 513,
   "recent": [
    {
     "keyword": "아침마당",
