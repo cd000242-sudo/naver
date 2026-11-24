@@ -1,6 +1,7 @@
 import { NOTICE_BOARD, NOTICE_ID_PREFIX } from './communityContract.mjs';
 import { GRADE_TABLE, OWNER_GRADE_TEXT, SCORE_RULES } from './communityGrades.mjs';
 import { isAssociate } from './communityLevel.mjs';
+import { GREETING_BOARD, LEVELUP_BOARD, SECRET_BOARD, secretAccess } from './communitySecret.mjs';
 import { normalizePlatform, validatePromoUrl } from './communityPlatform.mjs';
 import { QNA_BOARD, QNA_OPEN, QNA_SOLVED } from './communityQna.mjs';
 
@@ -15,23 +16,29 @@ export const GRADE_GUIDE = GRADE_TABLE;
  * The server is the authority; these values only decide what the screen offers.
  */
 
-export const BOARD_ORDER = Object.freeze([NOTICE_BOARD, 'news', QNA_BOARD, 'request', 'inquiry', 'free', 'promo']);
+export const BOARD_ORDER = Object.freeze([
+    NOTICE_BOARD, 'news', GREETING_BOARD, LEVELUP_BOARD, QNA_BOARD, 'request', 'inquiry', 'free', 'promo', SECRET_BOARD,
+]);
 
 /** Said when someone tries to write on 공지사항: notices are written in the admin home, never here. */
 export const NOTICE_WRITE_HINT = '공지는 어드민 홈 운영에서 써요.';
 
-const board = (id, label, writeRole, dailyLimit, statuses, defaultStatus, note) =>
-    Object.freeze({ id, label, writeRole, dailyLimit, statuses: Object.freeze(statuses), defaultStatus, note });
+const board = (id, label, writeRole, dailyLimit, statuses, defaultStatus, note, locked = false) =>
+    Object.freeze({ id, label, writeRole, dailyLimit, statuses: Object.freeze(statuses), defaultStatus, note, locked });
 
 /** Built-in board config, used until (and if) the server answers `community-boards`. */
 const BUILT_IN = Object.freeze({
     notice: board('notice', '공지사항', 'admin', 0, [], '', '서비스 공지와 업데이트 안내예요.'),
     news: board('news', '최근 소식', 'operator', 0, [], '', '리더남이 전하는 AI 소식'),
+    greeting: board(GREETING_BOARD, '가입인사', 'member', 3, [], '', '처음 오셨다면 인사를 남겨 주세요.'),
+    // Written by the server only (one line per level-up): `admin` keeps the 글쓰기 button away.
+    levelup: board(LEVELUP_BOARD, '등업신청', 'admin', 0, [], '', '인사 1개와 댓글 1개를 남기고 등업을 신청하세요.'),
     qna: board(QNA_BOARD, '질문하기', 'member', 5, [QNA_OPEN, QNA_SOLVED], QNA_OPEN, '막힌 건 편하게 물어보세요. 도움 된 답은 채택해 주세요.'),
     request: board('request', '요청사항', 'member', 5, ['검토 중', '반영됨'], '검토 중', '바라는 기능을 적어 주세요. 반영하면 상태가 바뀝니다.'),
     inquiry: board('inquiry', '버그 및 오류 신고', 'member', 5, ['대기', '답변 완료'], '대기', '앱이 안 되거나 오류가 나면 알려 주세요.'),
     free: board('free', '자유게시판', 'member', 5, [], '', '묻고 나누는 이야기를 편하게 적어 주세요.'),
     promo: board('promo', '내 글 홍보', 'member', 3, [], '', '내 글을 올리고 남의 글에 들르면 점수가 쌓여요.'),
+    secret: board(SECRET_BOARD, '시크릿 클래스', 'member', 3, [], '', '블로그 주소와 궁금한 점을 적어 주세요. 리더남이 댓글로 피드백해요.', true),
 });
 
 /** Built-in boards merged with the server's config; never adds a board, never changes the order or the names (the screen's names win). */
@@ -104,8 +111,10 @@ export function showWriteButton(boardId, boards) {
 export function canWriteBoard(target, profile) {
     if (!profile || !target) return false;
     if (target.id === NOTICE_BOARD || target.writeRole === 'admin') return false;
-    // An associate (준회원) writes on 자유게시판 only; the counting of "one post" is in associateWriteState.
-    if (isAssociate(profile) && target.id !== 'free') return false;
+    // An associate (준회원) writes on 가입인사 / 자유게시판 only; the counting of "one post" is in associateWriteState.
+    if (isAssociate(profile) && target.id !== GREETING_BOARD && target.id !== 'free') return false;
+    // 시크릿 클래스: the server's answer in the profile (it checks again on every call).
+    if (target.id === SECRET_BOARD && !secretAccess(profile).allowed) return false;
     if (target.writeRole === 'operator') return profile.canWriteNews === true || profile.role === 'owner';
     return true;
 }

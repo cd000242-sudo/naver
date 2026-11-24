@@ -11,6 +11,7 @@ import { isAvatarKey } from './communityAvatarModel.mjs';
 import { pickForest, type Forest } from './communityForest.mjs';
 import { FOREST_GRADE, normalizeRewards } from './communityGrades.mjs';
 import { ASSOCIATE_GRADE, normalizeLevel, normalizeLevelUp, type LevelKey, type LevelUpFlags } from './communityLevel.mjs';
+import { normalizeSecretClass, type SecretClass } from './communitySecret.mjs';
 
 export const COMMUNITY_SESSION_KEY = 'leaderspro.community.session.v1';
 /** Fired on window after the stored login changes, so the menu and the pages (separate React trees) follow. */
@@ -60,6 +61,8 @@ export type CommunityProfile = {
     levelUp: LevelUpFlags;
     /** Progress toward 숲 (likes received, weeks in the weekly top); null when the server sends none. */
     forest: Forest | null;
+    /** 시크릿 클래스: may I open it, and is my licence a lifetime one (1:1 remote help)? */
+    secretClass: SecretClass;
 };
 
 export type CommunitySession = CommunityProfile & {
@@ -113,6 +116,7 @@ export function normalizeProfile(payload: Record<string, unknown>): CommunityPro
         level,
         levelUp: normalizeLevelUp(payload.levelUp),
         forest: pickForest(payload.forest),
+        secretClass: normalizeSecretClass(payload.secretClass),
     };
 }
 

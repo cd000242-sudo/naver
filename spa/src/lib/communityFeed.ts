@@ -11,8 +11,12 @@ import { findCachedPost, readFeedCache, writeFeedCache, type CachedFeed } from '
 import { FEED_PAGE_SIZE, answerKnowsNotice, countsForOldServer, isInvalidBoardReply, judgeFeedReply, pickConfig, pickCounts } from './communityFeedModel.mjs';
 import { loadNewsSplit, markNoticeBoardNew, markNoticeBoardOld, noticeBoardIsOld } from './communityNoticeCompat';
 import { ALL_BOARD, BOARD_ORDER, mergeBoardPages, type SortKey } from './communityModel.mjs';
+import { GREETING_BOARD, LEVELUP_BOARD, SECRET_BOARD } from './communitySecret.mjs';
 import { normalizePlatform } from './communityPlatform.mjs';
 import { loadCommunitySession, normalizeProfile } from './communitySession';
+
+/** Boards that came with community-feed; an old server answers them INVALID_BOARD. */
+const NEWER_BOARDS: readonly string[] = [GREETING_BOARD, LEVELUP_BOARD, SECRET_BOARD];
 
 /** `platform` matters on the promo board only (naver when missing). */
 export type FeedView = { board: string; sort: SortKey; page: number; platform?: string };
@@ -80,7 +84,8 @@ function fromFeedAnswer(result: Record<string, unknown>): FeedBundle {
 /** The old way: the settings, the weekly top and one list per board (all boards = the five old boards merged here). */
 async function loadLegacy(view: FeedView, wants: LegacyWants): Promise<FeedLoad> {
     // An old server has no notice board; its notices are inside `news` and come out as 공지사항 rows by themselves.
-    const boards = view.board === ALL_BOARD ? BOARD_ORDER.filter((id) => id !== NOTICE_BOARD) : [view.board];
+    // An old server (no community-feed) knows only the boards it had: 가입인사 / 등업신청 / 시크릿 클래스 came with the feed.
+    const boards = view.board === ALL_BOARD ? BOARD_ORDER.filter((id) => id !== NOTICE_BOARD && !NEWER_BOARDS.includes(id)) : [view.board];
     const [settings, weekly, ...lists] = await Promise.all([
         wants.config ? boardApi.boards() : Promise.resolve(null),
         wants.weekly ? boardApi.weeklyTop(WEEKLY_LIMIT) : Promise.resolve(null),

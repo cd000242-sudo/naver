@@ -1,4 +1,4 @@
-export type BoardId = 'notice' | 'news' | 'qna' | 'request' | 'inquiry' | 'free' | 'promo';
+export type BoardId = 'notice' | 'news' | 'greeting' | 'levelup' | 'qna' | 'request' | 'inquiry' | 'free' | 'promo' | 'secret';
 export type BoardConfig = Readonly<{
     id: BoardId;
     label: string;
@@ -7,6 +7,8 @@ export type BoardConfig = Readonly<{
     statuses: readonly string[];
     defaultStatus: string;
     note: string;
+    /** 시크릿 클래스: drawn with a lock; its posts reach only the members of the class. */
+    locked: boolean;
 }>;
 export type SortKey = 'latest' | 'popular' | 'comments';
 export type GradeInfo = { key: string; label: string; min?: number; nextAt?: number | null; nextLabel?: string | null };

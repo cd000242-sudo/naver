@@ -3,7 +3,8 @@ import { useLocation } from 'react-router-dom';
 import LoginRequired from '../components/auth/LoginRequired';
 import GuestCommunityView from '../components/community/GuestCommunityView';
 import { guestScreen } from '../lib/communityGuest.mjs';
-import { boardList, parseCommunityQuery } from '../lib/communityModel.mjs';
+import { ALL_BOARD, boardList, parseCommunityQuery } from '../lib/communityModel.mjs';
+import { SECRET_BOARD } from '../lib/communitySecret.mjs';
 import { useBoardFeed } from '../lib/useBoardFeed';
 
 /** /community without a login. Members-only screens never ask the server: the login screen is drawn at once. */
@@ -16,7 +17,9 @@ function GuestCommunityPage({ legacy }: { legacy: boolean }) {
 }
 
 function GuestReader({ view, next, legacy }: { view: ReturnType<typeof parseCommunityQuery>; next: string; legacy: boolean }) {
-    const feed = useBoardFeed(view, 0);
+    // The secret board has nothing for a guest: the side counts come from the all-boards read instead.
+    const feedView = useMemo(() => (view.board === SECRET_BOARD ? { ...view, board: ALL_BOARD } : view), [view]);
+    const feed = useBoardFeed(feedView, 0);
     const boards = useMemo(() => boardList(feed.config), [feed.config]);
     const [blocked, setBlocked] = useState(false);
     useEffect(() => { setBlocked(false); }, [next]);

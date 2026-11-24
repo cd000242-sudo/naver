@@ -21,7 +21,7 @@ const byId = (id) => boardList(null).find((board) => board.id === id);
 
 test('qna is the third board, right after 최근 소식, with the contract settings', () => {
     assert.equal(QNA_BOARD, 'qna');
-    assert.deepEqual(BOARD_ORDER, ['notice', 'news', 'qna', 'request', 'inquiry', 'free', 'promo']);
+    assert.deepEqual(BOARD_ORDER, ['notice', 'news', 'greeting', 'levelup', 'qna', 'request', 'inquiry', 'free', 'promo', 'secret']);
     const qna = byId('qna');
     assert.equal(qna.label, '질문하기');
     assert.equal(qna.writeRole, 'member');

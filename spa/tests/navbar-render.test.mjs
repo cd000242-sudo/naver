@@ -68,7 +68,7 @@ function regions(html) {
 }
 
 // The promo board is two sub-tabs (naver, google) in the menu: eight links for the seven boards.
-const BOARD_LINKS = [...['notice', 'news', 'qna', 'request', 'inquiry', 'free', 'promo'].map((id) => '/community?board=' + id), '/community?board=promo&amp;platform=google'];
+const BOARD_LINKS = [...['notice', 'news', 'greeting', 'levelup', 'qna', 'request', 'inquiry', 'free', 'promo'].map((id) => '/community?board=' + id), '/community?board=promo&amp;platform=google', '/community?board=secret'];
 const QNA = '/community?board=qna';
 
 test('both the bar and the phone sheet link to every one of the nine pages (community: through its seven boards)', () => {
@@ -76,7 +76,7 @@ test('both the bar and the phone sheet link to every one of the nine pages (comm
     for (const region of [bar, sheet]) {
         const boards = hrefs(region).filter((href) => href.startsWith('/community'));
         assert.equal(boards[0], QNA, '질문하기 has its own place before the community boards');
-        assert.deepEqual(boards.slice(1, 9), BOARD_LINKS, 'seven boards in board order, the promo board as naver then google');
+        assert.deepEqual(boards.slice(1, 12), BOARD_LINKS, 'seven boards in board order, the promo board as naver then google');
     }
     for (const page of NINE_PAGES.filter((entry) => entry !== '/community')) {
         assert.ok(hrefs(bar).includes(page), `bar links ${page}`);

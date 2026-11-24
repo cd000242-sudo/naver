@@ -2,6 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import CommunitySidebar, { BoardTabs } from '../components/community/CommunitySidebar';
 import LevelUpCard from '../components/community/LevelUpCard';
+import LevelUpBoardHead from '../components/community/LevelUpBoardHead';
+import SecretLockCard from '../components/community/SecretLockCard';
 import ListReport from '../components/community/ListReport';
 import PromoTabs from '../components/community/PromoTabs';
 import ModerationPanel from '../components/community/ModerationPanel';
@@ -21,6 +23,7 @@ import {
     ALL_BOARD, boardLabel, boardList, communityPath, describeVisit, parseCommunityQuery, reportReasons, showWriteButton,
 } from '../lib/communityModel.mjs';
 import { associateWriteState } from '../lib/communityLevel.mjs';
+import { LEVELUP_BOARD, SECRET_BOARD, secretAccess } from '../lib/communitySecret.mjs';
 import { authorOf } from '../lib/communityOutbox';
 import { visibleOutbox } from '../lib/communityPostOutbox';
 import { reportAction } from '../lib/communityReport.mjs';
@@ -121,6 +124,8 @@ function CommunityPage() {
     const deskView = reportsView || rewardsView;
     const showList = !view.write && !view.post && !editing && !deskView;
     const writeState = associateWriteState(profile, view.board);
+    // 시크릿 클래스 outside the class: the lock screen (the server sends no post of it anyway).
+    const secretLocked = view.board === SECRET_BOARD && !secretAccess(profile).allowed;
 
     return (
         <div className="lp cm">
@@ -134,7 +139,7 @@ function CommunityPage() {
                         {moderator && deskView ? <Link className="lp-btn lp-btn-line" to={communityPath({ board: view.board })}>← 커뮤니티로</Link> : null}
                         {moderator && !reportsView ? <Link className="lp-btn lp-btn-line" to={REPORTS_PATH}>신고 목록</Link> : null}
                         {moderator && !rewardsView ? <Link className="lp-btn lp-btn-line" to={REWARDS_PATH}>보상 승인</Link> : null}
-                        {view.write || editing || deskView || !showWriteButton(view.board, boards) ? null : writeState.open ? (
+                        {view.write || editing || deskView || secretLocked || !showWriteButton(view.board, boards) ? null : writeState.open ? (
                             <Link className="lp-btn lp-btn-dark" to={communityPath({ board: view.board, platform: view.platform, write: true })}>글쓰기</Link>
                         ) : (
                             <button type="button" className="lp-btn lp-btn-dark is-locked" onClick={() => setLevelOpen(true)}>글쓰기</button>
@@ -170,8 +175,10 @@ function CommunityPage() {
                         <PostDetail key={view.post} id={view.post} boards={boards} boardId={view.board} profile={profile} reportConfig={config}
                             preview={preview} onEdit={setEditing} onDeleted={() => { refresh(); navigate(communityPath({ board: view.board })); }} onVisit={visit} onModerated={refresh} />
                     ) : null}
-                    {showList ? (
+                    {showList && secretLocked ? <SecretLockCard /> : null}
+                    {showList && !secretLocked ? (
                         <>
+                            {view.board === LEVELUP_BOARD && view.page === 1 ? <LevelUpBoardHead profile={profile} onDone={refresh} /> : null}
                             {view.page === 1 && feed.status !== 'loading'
                                 ? view.board === ALL_BOARD
                                     ? <TopGrid posts={weekly} boardId={view.board} boards={boards} />

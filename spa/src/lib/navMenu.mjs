@@ -34,6 +34,9 @@ const BOARD_DESC = Object.freeze({
     inquiry: '오류가 나면 알려 주세요',
     free: '묻고 나누는 이야기',
     promo: '네이버 블로그 글 알리기',
+    greeting: '처음 오셨다면 인사',
+    levelup: '새싹으로 등업 신청',
+    secret: '올인원 1년 이상 이용자 전용',
 });
 
 /** The new-notice count is about one board: its row carries the badge too, so the reader sees where the news is. */

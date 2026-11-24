@@ -16,7 +16,7 @@ export const normalizeLevelUp = (raw) => ({ post: raw?.post === true, comment: r
 /** The owner is always a member, whatever the row says. */
 export const isAssociate = (profile) => profile?.level === 'associate' && profile?.role !== 'owner';
 
-const STEP_LABELS = Object.freeze({ post: '자유게시판에 가입 인사 1개', comment: '댓글 1개' });
+const STEP_LABELS = Object.freeze({ post: '가입인사 게시판에 인사 1개', comment: '댓글 1개' });
 
 /** The two checklist rows, in the order a person does them. */
 export function levelUpSteps(profile) {
@@ -27,23 +27,23 @@ export function levelUpSteps(profile) {
 export const levelUpReady = (profile) => isAssociate(profile) && levelUpSteps(profile).every((step) => step.done);
 
 const OPEN = Object.freeze({ open: true, reason: '', message: '' });
-const BOARD_HINT = '등업 후 쓸 수 있어요. 자유게시판에 가입 인사와 댓글을 남겨 주세요.';
+const BOARD_HINT = '등업 후 쓸 수 있어요. 가입인사 게시판에 인사와 댓글을 남겨 주세요.';
 
 /**
- * Where an associate may write: 자유게시판 only, one post. `all` opens the form on 자유게시판, so it counts as free.
+ * Where an associate may write: 가입인사 or 자유게시판 (older greetings), one post in all. `all` opens the form there too.
  * `{ open, reason: 'board' | 'post-done' | '', message }`; a member (or nobody) always gets `open`.
  */
 export function associateWriteState(profile, boardId) {
     if (!isAssociate(profile)) return OPEN;
-    if (boardId !== 'free' && boardId !== 'all') return { open: false, reason: 'board', message: BOARD_HINT };
+    if (boardId !== 'greeting' && boardId !== 'free' && boardId !== 'all') return { open: false, reason: 'board', message: BOARD_HINT };
     const done = normalizeLevelUp(profile.levelUp);
     if (!done.post) return OPEN;
     return {
         open: false,
         reason: 'post-done',
         message: done.comment
-            ? '가입 인사는 1개만 쓸 수 있어요. 이제 [등업 신청]을 눌러 주세요.'
-            : '가입 인사는 1개만 쓸 수 있어요. 댓글을 1개 남기고 [등업 신청]을 눌러 주세요.',
+            ? '가입 인사는 1개만 쓸 수 있어요. 이제 등업신청 게시판에서 [등업 신청]을 눌러 주세요.'
+            : '가입 인사는 1개만 쓸 수 있어요. 댓글을 1개 남기고 등업신청 게시판에서 [등업 신청]을 눌러 주세요.',
     };
 }
 
@@ -57,8 +57,8 @@ export function levelUpFromNeed(need) {
 export function describeLevelUpFailure(result) {
     const done = result?.code === 'LEVEL_UP_NOT_READY' ? levelUpFromNeed(result.need) : null;
     if (done) {
-        if (!done.post && !done.comment) return '자유게시판에 가입 인사 1개와 댓글 1개를 남겨 주세요.';
-        if (!done.post) return '자유게시판에 가입 인사 1개만 더 쓰면 돼요.';
+        if (!done.post && !done.comment) return '가입인사 게시판에 인사 1개와 댓글 1개를 남겨 주세요.';
+        if (!done.post) return '가입인사 게시판에 인사 1개만 더 쓰면 돼요.';
         if (!done.comment) return '댓글 1개만 더 남기면 돼요.';
     }
     return typeof result?.message === 'string' && result.message ? result.message : '등업을 신청하지 못했어요. 잠시 뒤 다시 해 주세요.';

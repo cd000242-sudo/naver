@@ -7,6 +7,7 @@ import type { GradeEntry } from '../../lib/communityGrades.mjs';
 import { useAvatars } from '../../lib/useAvatars';
 import Avatar from './Avatar';
 import { GradeBadge } from './Badges';
+import LockMark from './LockMark';
 
 type Props = {
     /** null = a guest: `guestCard` takes the place of my activity. */
@@ -41,7 +42,9 @@ function MyActivity({ profile }: { profile: CommunityProfile }) {
             {profile.role === 'owner' ? <p className="cm-me-score is-owner"><b>{profile.score}점</b><span>{progress.text}</span></p> : (
                 <>
                     <p className="cm-me-score"><b>{profile.score}점</b><span>{progress.text}</span></p>
-                    {isAssociate(profile) ? null : (
+                    {isAssociate(profile) ? (
+                        <Link className="cm-me-levelup" to={communityPath({ board: 'levelup' })}>등업 신청하러 가기 →</Link>
+                    ) : (
                         <div className="cm-bar" role="progressbar" aria-label="다음 등급까지" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress.percent}>
                             <i style={{ width: `${progress.percent}%` }} />
                         </div>
@@ -58,7 +61,7 @@ function MyActivity({ profile }: { profile: CommunityProfile }) {
 }
 
 function boardEntries(boards: readonly BoardConfig[]) {
-    return [{ id: ALL_BOARD, label: '전체글' }, ...boards.map((board) => ({ id: board.id, label: board.label }))];
+    return [{ id: ALL_BOARD, label: '전체글', locked: false }, ...boards.map((board) => ({ id: board.id, label: board.label, locked: board.locked === true }))];
 }
 
 /** Desktop side column: my activity, the board menu, the grade guide. */
@@ -73,7 +76,7 @@ function CommunitySidebar({ profile, guestCard = null, hrefOf, boards, boardId, 
                         <li key={entry.id}>
                             <Link className={`cm-tab${entry.id === boardId ? ' on' : ''}`} to={hrefOf ? hrefOf(entry.id) : communityPath({ board: entry.id })}
                                 aria-current={entry.id === boardId ? 'page' : undefined}>
-                                <span>{entry.label}</span>
+                                <span>{entry.label}{entry.locked ? <LockMark /> : null}</span>
                                 {typeof counts[entry.id] === 'number' ? <em>{counts[entry.id]}</em> : null}
                             </Link>
                         </li>
@@ -109,7 +112,7 @@ export function BoardTabs({ boards, boardId, hrefOf }: { boards: readonly BoardC
         <nav className="cm-htabs" aria-label="게시판 바로가기">
             {boardEntries(boards).map((entry) => (
                 <Link key={entry.id} className={`cm-htab${entry.id === boardId ? ' on' : ''}`} to={hrefOf ? hrefOf(entry.id) : communityPath({ board: entry.id })}
-                    aria-current={entry.id === boardId ? 'page' : undefined}>{entry.label}</Link>
+                    aria-current={entry.id === boardId ? 'page' : undefined}>{entry.label}{entry.locked ? <LockMark /> : null}</Link>
             ))}
         </nav>
     );

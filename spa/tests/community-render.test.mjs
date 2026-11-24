@@ -255,9 +255,9 @@ test('write form: members choose among five boards, the operator among six; news
     const { model } = load();
     const member = render('../../src/components/community/PostWriteForm.tsx', { boards: model.boardList(null), defaultBoard: 'free', profile: profileOf(), onDone() {}, onCancel() {} });
     const options = [...member.matchAll(/<option value="([^"]+)"/g)].map((match) => match[1]);
-    assert.deepEqual(options, ['qna', 'request', 'inquiry', 'free', 'promo']);
+    assert.deepEqual(options, ['greeting', 'qna', 'request', 'inquiry', 'free', 'promo']);
     const owner = render('../../src/components/community/PostWriteForm.tsx', { boards: model.boardList(null), defaultBoard: 'news', profile: profileOf({ role: 'owner', canWriteNews: true }), onDone() {}, onCancel() {} });
-    assert.deepEqual([...owner.matchAll(/<option value="([^"]+)"/g)].map((match) => match[1]), ['news', 'qna', 'request', 'inquiry', 'free', 'promo']);
+    assert.deepEqual([...owner.matchAll(/<option value="([^"]+)"/g)].map((match) => match[1]), ['news', 'greeting', 'qna', 'request', 'inquiry', 'free', 'promo', 'secret']);
     assert.match(owner, /<option value="news" selected/);
 });
 
@@ -300,7 +300,7 @@ test('sidebar: my activity (nickname, grade badge, score bar, counts), board men
     assert.match(text(html), /21/);
     for (const label of ['전체글', '공지사항', '최근 소식', '질문하기', '요청사항', '버그 및 오류 신고', '자유게시판', '내 글 홍보']) assert.match(text(html), new RegExp(label));
     const menu = tags(html, 'a').map((tag) => attr(tag, 'href')).filter((href) => /board=/.test(href || '')).map((href) => /board=(\w+)/.exec(href)[1]);
-    assert.deepEqual(menu, ['notice', 'news', 'qna', 'request', 'inquiry', 'free', 'promo'], 'the menu follows the agreed order: 질문하기 right after 최근 소식');
+    assert.deepEqual(menu, ['notice', 'news', 'greeting', 'levelup', 'qna', 'request', 'inquiry', 'free', 'promo', 'secret'], 'the menu follows the agreed order: 질문하기 right after 최근 소식');
     const current = tags(html, 'a').filter((tag) => attr(tag, 'aria-current') === 'page');
     assert.equal(current.length, 1);
     assert.match(attr(current[0], 'href'), /board=free/);

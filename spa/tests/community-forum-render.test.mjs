@@ -39,7 +39,7 @@ const viewProps = (item, extra = {}) => ({ post: item, boards: boards(), onLike(
 test('준회원 card: the two conditions with marks, the button; nothing for a member', () => {
     const html = render('../../src/components/community/LevelUpCard.tsx', { profile: associate({ post: true, comment: false }) });
     assert.match(text(html), /준회원이에요/);
-    assert.match(text(html), /자유게시판에 가입 인사 1개/);
+    assert.match(text(html), /가입인사 게시판에 인사 1개/);
     assert.match(text(html), /댓글 1개/);
     assert.equal((html.match(/class="is-done"/g) || []).length, 1, 'one condition done');
     assert.match(html, /<button[^>]*>등업 신청<\/button>/);
@@ -55,9 +55,9 @@ test('write form: an associate who already wrote the greeting sees the card inst
     assert.ok(!/role="textbox"/.test(closed));
     const open = render('../../src/components/community/PostWriteForm.tsx', { ...base, profile: associate({ post: false, comment: false }) });
     assert.match(open, /role="textbox"/);
-    assert.match(text(open), /준회원은 자유게시판에 가입 인사 1개/);
+    assert.match(text(open), /준회원은 가입인사 게시판에 인사 1개/);
     const choices = [...open.matchAll(/<option[^>]*>([^<]*)<\/option>/g)].map((match) => match[1]);
-    assert.deepEqual(choices, ['자유게시판'], 'an associate writes on 자유게시판 only');
+    assert.deepEqual(choices, ['가입인사', '자유게시판'], 'an associate writes on 가입인사 / 자유게시판 only');
     const editing = render('../../src/components/community/PostWriteForm.tsx', { ...base, profile: associate({ post: true, comment: false }), editing: post('p_1', 'free', { body: '내 인사' }) });
     assert.match(text(editing), /글 고치기/, 'the one greeting can still be edited');
 });

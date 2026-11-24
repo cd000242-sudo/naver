@@ -35,7 +35,7 @@ test('isAssociate: members, the owner and a missing profile are not associates',
 
 test('the checklist has two short rows with their done marks', () => {
     assert.deepEqual(levelUpSteps(associate({ post: true, comment: false })), [
-        { key: 'post', label: '자유게시판에 가입 인사 1개', done: true },
+        { key: 'post', label: '가입인사 게시판에 인사 1개', done: true },
         { key: 'comment', label: '댓글 1개', done: false },
     ]);
     assert.equal(levelUpReady(associate({ post: true, comment: true })), true);
@@ -71,13 +71,13 @@ test('the server answers what is missing: true means still missing, so the done 
 
 test('failure words name only what is still missing', () => {
     const both = describeLevelUpFailure({ ok: false, code: 'LEVEL_UP_NOT_READY', need: { post: true, comment: true } });
-    assert.match(both, /가입 인사/);
+    assert.match(both, /가입인사/);
     assert.match(both, /댓글/);
     const onlyComment = describeLevelUpFailure({ ok: false, code: 'LEVEL_UP_NOT_READY', need: { post: false, comment: true } });
     assert.match(onlyComment, /댓글/);
-    assert.doesNotMatch(onlyComment, /가입 인사/);
+    assert.doesNotMatch(onlyComment, /가입인사/);
     const onlyPost = describeLevelUpFailure({ ok: false, code: 'LEVEL_UP_NOT_READY', need: { post: true, comment: false } });
-    assert.match(onlyPost, /가입 인사/);
+    assert.match(onlyPost, /가입인사/);
     assert.doesNotMatch(onlyPost, /댓글/);
     assert.equal(describeLevelUpFailure({ ok: false, code: 'NETWORK', message: '연결에 실패했어요.' }), '연결에 실패했어요.');
     assert.match(describeLevelUpFailure({ ok: false, code: 'X' }), /등업/);

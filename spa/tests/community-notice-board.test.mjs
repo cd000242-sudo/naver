@@ -13,12 +13,12 @@ import { VIEW, feedReply, raw, countOf, withFeed } from './helpers/feed-fixtures
 
 const owner = { role: 'owner', canWriteNews: true };
 const member = { role: 'community', canWriteNews: false };
-const ORDER = ['notice', 'news', 'qna', 'request', 'inquiry', 'free', 'promo'];
+const ORDER = ['notice', 'news', 'greeting', 'levelup', 'qna', 'request', 'inquiry', 'free', 'promo', 'secret'];
 
 test('seven boards in the agreed order: 공지사항, 최근 소식, 질문하기, 요청사항, 문의, 자유게시판, 내 글 홍보', () => {
     assert.equal(NOTICE_BOARD, 'notice');
     assert.deepEqual(BOARD_ORDER, ORDER);
-    assert.deepEqual(boardList(null).map((board) => board.label), ['공지사항', '최근 소식', '질문하기', '요청사항', '버그 및 오류 신고', '자유게시판', '내 글 홍보']);
+    assert.deepEqual(boardList(null).map((board) => board.label), ['공지사항', '최근 소식', '가입인사', '등업신청', '질문하기', '요청사항', '버그 및 오류 신고', '자유게시판', '내 글 홍보', '시크릿 클래스']);
     assert.equal(boardLabel('notice'), '공지사항');
     assert.equal(boardList(null).find((board) => board.id === 'news').note, '리더남이 전하는 AI 소식');
 });
@@ -43,8 +43,8 @@ test('nobody writes on 공지사항, not even the owner; 최근 소식 stays own
     assert.equal(canWriteBoard({ ...byId.notice, writeRole: 'member' }, member), false, 'a server that says "member" cannot open it');
     assert.equal(canWriteBoard(byId.news, owner), true);
     assert.equal(canWriteBoard(byId.news, member), false);
-    assert.deepEqual(writableBoards(boards, owner).map((board) => board.id), ['news', 'qna', 'request', 'inquiry', 'free', 'promo']);
-    assert.deepEqual(writableBoards(boards, member).map((board) => board.id), ['qna', 'request', 'inquiry', 'free', 'promo']);
+    assert.deepEqual(writableBoards(boards, owner).map((board) => board.id), ['news', 'greeting', 'qna', 'request', 'inquiry', 'free', 'promo', 'secret']);
+    assert.deepEqual(writableBoards(boards, member).map((board) => board.id), ['greeting', 'qna', 'request', 'inquiry', 'free', 'promo']);
 });
 
 test('the server says notice is writeRole "admin": the board keeps it, nobody can write, and the 글쓰기 button is hidden there', () => {

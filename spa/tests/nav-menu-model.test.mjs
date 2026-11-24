@@ -13,7 +13,7 @@ const NINE_PAGES = ['/', '/leword', '/products', '/download', '/chatbots', '/pri
 const run = (actions, from = INITIAL_MENU_STATE) => actions.reduce(menuReducer, from);
 
 // [2026-11-08 포럼 단계] 내 글 홍보는 두 서브탭(네이버 블로그 · 구글 블로그)으로 드롭다운에서 바로 간다.
-const COMMUNITY_BOARDS = ['/community?board=notice', '/community?board=news', '/community?board=qna', '/community?board=request', '/community?board=inquiry', '/community?board=free', '/community?board=promo', '/community?board=promo&platform=google'];
+const COMMUNITY_BOARDS = ['/community?board=notice', '/community?board=news', '/community?board=greeting', '/community?board=levelup', '/community?board=qna', '/community?board=request', '/community?board=inquiry', '/community?board=free', '/community?board=promo', '/community?board=promo&platform=google', '/community?board=secret'];
 const pagesOf = (list) => [...new Set(list.map((to) => to.split('?')[0]))];
 
 const QNA = '/community?board=qna';
@@ -49,9 +49,10 @@ test('Community is a dropdown of the seven boards in board order (the promo boar
     const community = NAV_ITEMS.find((item) => item.key === 'community');
     assert.equal(community.type, 'group');
     assert.deepEqual(community.items.map((item) => [item.label, item.to]), [
-        ['공지사항', '/community?board=notice'], ['최근 소식', '/community?board=news'], ['질문하기', QNA], ['요청사항', '/community?board=request'],
+        ['공지사항', '/community?board=notice'], ['최근 소식', '/community?board=news'], ['가입인사', '/community?board=greeting'], ['등업신청', '/community?board=levelup'], ['질문하기', QNA], ['요청사항', '/community?board=request'],
         ['버그 및 오류 신고', '/community?board=inquiry'], ['자유게시판', '/community?board=free'],
         ['내 글 홍보 · 네이버', '/community?board=promo'], ['내 글 홍보 · 구글', '/community?board=promo&platform=google'],
+        ['시크릿 클래스', '/community?board=secret'],
     ]);
     assert.ok(community.items.every((item) => item.desc), 'every row has its one line');
     // The address format is the one the community page itself reads.

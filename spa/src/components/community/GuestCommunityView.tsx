@@ -12,6 +12,7 @@ import CommunitySidebar, { BoardTabs } from './CommunitySidebar';
 import GuestPostDetail from './GuestPostDetail';
 import GuestSideCard from './GuestSideCard';
 import PostList from './PostList';
+import SecretLockCard from './SecretLockCard';
 import TopGrid from './TopGrid';
 import WeeklyTop from './WeeklyTop';
 import '../../styles/light-page.css';
@@ -49,7 +50,9 @@ function GuestCommunityView({ view, feed, boards, next, legacy, blocked = false,
         () => (view.post ? [...feed.pinned, ...feed.posts].find((post) => post.id === view.post) ?? null : null),
         [view.post, feed.pinned, feed.posts],
     );
-    if (blocked || guestScreen(view) === 'login' || (feed.status === 'error' && isLoginReply(feed.code))) {
+    // 시크릿 클래스: the lock screen for every visitor (no posts are asked for, see GuestCommunityPage).
+    const locked = guestScreen(view) === 'secret';
+    if (!locked && (blocked || guestScreen(view) === 'login' || (feed.status === 'error' && isLoginReply(feed.code)))) {
         return <LoginRequired area="community" next={next} legacy={legacy} />;
     }
     const toLogin = (post: PostItem) => navigate(loginPath(communityPath({ board: view.board, post: post.id })));
@@ -64,7 +67,7 @@ function GuestCommunityView({ view, feed, boards, next, legacy, blocked = false,
                         <p>모르는 건 묻고, 잘된 건 나누는 곳</p>
                     </div>
                     <div className="cm-head-actions">
-                        {view.post || !showWriteButton(view.board, boards) ? null : (
+                        {view.post || locked || !showWriteButton(view.board, boards) ? null : (
                             <Link className="lp-btn lp-btn-dark" to={loginPath(communityPath({ board: view.board, write: true }))}>글쓰기</Link>
                         )}
                     </div>
@@ -75,7 +78,7 @@ function GuestCommunityView({ view, feed, boards, next, legacy, blocked = false,
                     boards={boards} boardId={view.board} counts={feed.counts} grades={grades} scoreRules={scoreRules} />
                 <div className="cm-main">
                     <BoardTabs boards={boards} boardId={view.board} hrefOf={guestBoardHref} />
-                    {view.post ? (
+                    {locked ? <SecretLockCard /> : view.post ? (
                         <GuestPostDetail key={view.post} id={view.post} boards={boards} boardId={view.board} preview={preview} onBlocked={onBlocked} />
                     ) : (
                         <>
