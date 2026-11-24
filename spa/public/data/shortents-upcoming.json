@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T10:10:35.152Z",
+ "builtAt": "2026-11-24T10:20:38.657Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,133 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "젠슨 황 복귀에 증시 급등",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 3,
-   "press": 33,
-   "firstArticleAt": "2026-11-24T08:44:00.000Z",
+   "articles90": 41,
+   "recent20": 9,
+   "press": 29,
+   "firstArticleAt": "2026-11-24T08:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘황의 귀환’에 글로벌 증시 환호…코스피 6%대↑(종합)",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-24T10:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162156?sid=101"
+     "title": "[亞증시-종합] 젠슨 황 복귀에 日·臺↑…中 혼조·홍콩↓",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-24T10:18:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446317"
     },
     {
-     "title": "['클릭' 증시] 겸손해진 젠슨 황의 귀환...오천피 회복",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-24T10:04:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108329"
+     "title": "젠슨황 복귀 훈풍에 코스피 급등…5,000선 회복",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T10:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929542?sid=161"
     },
     {
-     "title": "젠슨 황, 믿어도 될까…“AI 반도레 랠리 시험대”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-24T09:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887182?sid=101"
+     "title": "[주간 증시 전망]‘큰 폭 조정’ 코스피, 중장기 투자자에 관심",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-24T10:12:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1795514937693411004"
     }
    ]
   },
   {
-   "keyword": "젠슨 황 CEO 전격 복귀",
+   "keyword": "젠슨 황 전격 복귀",
    "sources": [
     "nate"
    ],
-   "articles90": 25,
-   "recent20": 1,
-   "press": 21,
-   "firstArticleAt": "2026-11-24T08:44:00.000Z",
+   "articles90": 26,
+   "recent20": 3,
+   "press": 20,
+   "firstArticleAt": "2026-11-24T08:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "젠슨황 복귀 훈풍에 코스피 급등…5,000선 회복",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T10:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929542?sid=161"
+    },
+    {
+     "title": "젠슨 황, 알려진 두 여성 외에 또 있었다 … WSJ \"이사회에 추가 불륜 고...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-24T10:16:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/24/2026112450382.html"
+    },
     {
      "title": "트럼프 특명에 밴스 움직였다…'젠슨황 구하기' 물밑 작전",
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-24T10:04:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000522237?sid=104"
-    },
-    {
-     "title": "WSJ \"젠슨 황, 엔비디아 복귀 전 이사회에 추가 불륜 고백…깊이 반성한...",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-24T09:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653145?sid=104"
-    },
-    {
-     "title": "젠슨 황 복귀에도 엔비디아 개장 전 4.08% 하락",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-24T09:36:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611241833369489e250e8e188_1"
     }
    ]
   },
   {
-   "keyword": "김병기",
-   "sources": [
-    "google"
-   ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-24T08:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경찰, 김병기 공소청 송치…혐의 13건 중 6건만 인정(종합)",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-24T10:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162157?sid=102"
-    },
-    {
-     "title": "김병기 수사 14개월 끈 경찰, 의혹 13개 중 7개만 ‘반쪽 송치’",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-24T09:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887180?sid=102"
-    },
-    {
-     "title": "'차남 특혜' 김병기 송치…수사 1년 2개월만",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T09:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929533?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "송민호 102일 추가 복무",
+   "keyword": "민주당 사제폭탄 협박",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 11,
    "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T08:43:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-24T08:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'102일 무단이탈' 송민호, 결국 추가 복무…이달 재소집",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-24T10:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761852"
+     "title": "민주당 폭탄 협박에 광주시당 수색…\"특이사항 없음\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-24T10:12:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784443"
     },
     {
-     "title": "송민호, 이달 말 사회복무요원 재소집…102일 추가 복무",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-24T10:00:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139793"
+     "title": "민주당 폭탄 협박에 광주시당 수색…\"특이사항 없음\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T10:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016461441?sid=102"
     },
     {
-     "title": "송민호, 이달 내 사회복무요원 재소집…102일 추가복무",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T09:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929529?sid=100"
+     "title": "터미널·백화점·민주당사까지…폭탄 테러 협박 잇따라",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-24T09:48:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=930368"
     }
    ]
   },
@@ -143,10 +111,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T08:48:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-24T08:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,29 +139,60 @@
    ]
   },
   {
-   "keyword": "전주·창원 도심융합특구 선정",
+   "keyword": "달",
    "sources": [
-    "signal.bz",
-    "nate"
+    "google"
    ],
    "articles90": 12,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T08:42:00.000Z",
+   "recent20": 5,
+   "press": 9,
+   "firstArticleAt": "2026-11-24T09:12:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "'내달 출범' 2기 친일재산조사위원장에 박영립 변호사 내정",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T10:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016461446?sid=102"
+    },
+    {
+     "title": "[포토타임] 초겨울 밤하늘 수놓은 수퍼문…성탄 전야엔 더 큰 달 뜬다",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-24T10:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567634?sid=102"
+    },
+    {
+     "title": "내달부터 EU행 한국산 하이브리드차 무관세 6만7천924대로 제한(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T10:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016461442?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "전주·창원 도심융합특구 선정",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-24T08:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김윤덕 \"전주 AI 허브 기회 잡았다\"",
+     "press": "sjbnews.com",
+     "publishedAt": "2026-11-24T10:17:00.000Z",
+     "link": "https://sjbnews.com/news/news.php?number=893556"
+    },
     {
      "title": "전주 도심융합특구 후보지 선정...AI 산업거점 조성 탄력",
      "press": "jeonmin.co.kr",
      "publishedAt": "2026-11-24T09:40:00.000Z",
      "link": "http://www.jeonmin.co.kr/news/articleView.html?idxno=451067"
-    },
-    {
-     "title": "전주·창원, 도심융합특구 후보지 선정…혁신거점 조성",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-24T09:34:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904293"
     },
     {
      "title": "창원시, 도심융합특구 후보지 선정…\"방위·원자력 혁신거점으로\"",
@@ -204,44 +203,12 @@
    ]
   },
   {
-   "keyword": "민주당 사제폭탄 협박",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-24T08:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "민주당 폭탄 협박에 광주시당 수색…\"특이사항 없음\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T10:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461441?sid=102"
-    },
-    {
-     "title": "터미널·백화점·민주당사까지…폭탄 테러 협박 잇따라",
-     "press": "namdonews.com",
-     "publishedAt": "2026-11-24T09:48:00.000Z",
-     "link": "https://www.namdonews.com/news/articleView.html?idxno=930368"
-    },
-    {
-     "title": "'민주당 사제폭탄' 테러 협박글…광주시당 수색 결과 이상 없어(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T09:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308019?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "한화 국방 AI 데이터센터",
    "sources": [
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 1,
+   "recent20": 0,
    "press": 9,
    "firstArticleAt": "2026-11-24T08:52:00.000Z",
    "exclusive": false,
@@ -268,17 +235,55 @@
    ]
   },
   {
-   "keyword": "스테이블코인",
+   "keyword": "송민호 102일 추가 복무",
    "sources": [
-    "google"
+    "signal.bz"
    ],
    "articles90": 8,
    "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-24T08:44:00.000Z",
+   "firstArticleAt": "2026-11-24T08:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'102일 무단이탈' 송민호, 결국 추가 복무…이달 재소집",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-24T10:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761852"
+    },
+    {
+     "title": "송민호, 이달 말 사회복무요원 재소집…102일 추가 복무",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-24T10:00:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1139793"
+    },
+    {
+     "title": "송민호, 이달 내 사회복무요원 재소집…102일 추가복무",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T09:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929529?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "스테이블코인",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T08:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "가상자산 거래소 대주주 지분 20% 제한 원칙…스테이블코인 은행 과반 ...",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-24T10:12:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=2026112416063790790f4390e77d_18"
+    },
     {
      "title": "'디지털자산기본법' 정부안 베일 벗어…은행 중심 스테이블코인·거래소...",
      "press": "g-enews.com",
@@ -290,115 +295,77 @@
      "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-24T09:40:00.000Z",
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261124010009447"
-    },
-    {
-     "title": "은행 4곳 손잡으면 '원화 스테이블코인' 발행 가능…핀테크 최대주주도...",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-24T09:24:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=758398"
     }
    ]
   },
   {
-   "keyword": "불구속 송치 뉴스",
+   "keyword": "이마트 임원 근무 1시간 연장",
    "sources": [
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 6,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-24T08:48:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-24T08:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'차남 특혜' 김병기 송치…수사 1년 2개월만",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T09:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929533?sid=102"
+     "title": "이마트, 임원 근무 시간 1시간 연장…리프레시데이 운영 중단",
+     "press": "srtimes.kr",
+     "publishedAt": "2026-11-24T09:24:00.000Z",
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=218515"
     },
     {
-     "title": "경찰, 김병기 송치... 뉴스타파 보도 1년 2개월 만",
-     "press": "newstapa.org",
-     "publishedAt": "2026-11-24T09:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/607/0000003616?sid=102"
+     "title": "이마트·SSG닷컴, 임원 고삐 죈다…월례휴무 폐지·4개사 6시 퇴근",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-24T09:22:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122606"
     },
     {
-     "title": "14개월 끈 김병기 수사… 의혹 절반만 송치",
-     "press": "segye.com",
-     "publishedAt": "2026-11-24T09:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177782?sid=102"
+     "title": "이마트, 임원 '9 to 5' 근무제 8년만에 종료…월례 휴무도 폐지",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-24T09:04:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1428569"
     }
    ]
   },
   {
-   "keyword": "군용기 영공 초근접",
+   "keyword": "육성재, 기립성 저혈압으로 넘어져",
    "sources": [
     "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T08:42:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[한 손 뉴스] ‘만만한’ 한국방공식별구역…러 군용기 또 동해로 침입...",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-24T10:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162155?sid=100"
-    },
-    {
-     "title": "러 군용기 영공 '초근접'.. 정부, 무관 초치해 항의",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-24T09:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609135?sid=100"
-    },
-    {
-     "title": "러 군용기 카디즈 진입…군, 전투기 출격 대응",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-24T09:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012300148?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "몸매",
-   "sources": [
-    "google"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-24T08:42:00.000Z",
+   "firstArticleAt": "2026-11-24T08:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민니, 신이 빚은 콜라병 몸매…골드 드레스 입고 뽐낸 '그리스 여신' 자...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-24T09:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127698"
+     "title": "육성재, ‘나인 투 식스’ 첫방 하루 앞두고 턱 봉합 치료…“기립성 저...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-24T10:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001283219"
     },
     {
-     "title": "'57세' 엄정화, 나이만 먹었네…필라테스로 다진 탄탄한 몸매 [★해시태...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-24T09:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083563"
+     "title": "'기립성 저혈압' 육성재, '나인 투 식스' 첫 방 앞두고 넘어져 '턱 봉합...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-24T09:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492909"
     },
     {
-     "title": "57세 엄정화, 얼굴에 놀라고 몸매 라인에 또 놀라…세월 무색하게 만든...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-24T08:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190768"
+     "title": "육성재, 드라마 첫방 앞두고…\"기립성 저혈압으로 넘어져 턱 부상\"",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-24T08:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761848"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1353,
+  "flagged": 1357,
   "matched": 707,
   "avgLeadMin": 523,
   "recent": [
