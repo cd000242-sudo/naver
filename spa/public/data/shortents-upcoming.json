@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T23:49:08.648Z",
+ "builtAt": "2026-11-24T23:59:13.402Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 36,
-   "recent20": 8,
-   "press": 35,
-   "firstArticleAt": "2026-11-24T22:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 ‘과잉생산 관세’ 이르면 오늘 발표…韓 15% 유지 예상",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-24T23:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162192?sid=104"
-    },
-    {
-     "title": "“15% 지켜낼까” 美 관세 변수",
-     "press": "magazine.hankyung.com",
-     "publishedAt": "2026-11-24T23:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/050/0000113708?sid=101"
-    },
-    {
-     "title": "美, 이르면 25일 中·EU 등 관세 인상 발표…韓 15% 유지 예상",
-     "press": "theguru.co.kr",
-     "publishedAt": "2026-11-24T23:46:00.000Z",
-     "link": "https://www.theguru.co.kr/news/article.html?no=110156"
-    }
-   ]
-  },
-  {
-   "keyword": "필라델피아 반도체 지수",
-   "sources": [
-    "google"
-   ],
-   "articles90": 33,
+   "articles90": 34,
    "recent20": 7,
-   "press": 31,
-   "firstArticleAt": "2026-11-24T22:20:00.000Z",
+   "press": 33,
+   "firstArticleAt": "2026-11-24T22:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘젠슨 황 랠리’ 하루 만에 꺾여…美 반도체지수 7.9%↓",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-24T23:40:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611250014"
+     "title": "美, 이르면 25일 '과잉생산 관세' 발표...한국 15% 상한 유지 전망",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-24T23:54:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566349"
     },
     {
-     "title": "필라델피아지수 뭐길래...밤새 미국에서 벌어진 일, 코스피까지 흔들까...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T23:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437667?sid=101"
+     "title": "차익실현·추가 관세 우려에 뉴욕증시 혼조-나스닥 1.48% 하락",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-24T23:54:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95878"
     },
     {
-     "title": "엔비디아 6% 하락…반도체지수 8% 급반락",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T23:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929661?sid=104"
+     "title": "美 ‘과잉생산 관세’ 발표 임박…한국 ‘15% 상한’ 지켜질까, 마지막...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-24T23:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005768520?sid=101"
     }
    ]
   },
@@ -105,140 +73,11 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000929656?sid=103"
     }
    ]
-  },
-  {
-   "keyword": "황인범 교체 승리 1-0",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-24T22:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "황인범, 친정팀 페예노르트 상대 UCL 경기 교체 출전…FC포르투 1-0 승리...",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-24T23:40:00.000Z",
-     "link": "https://swtvnews.com/news/newsview.php?ncode=1065569303895701"
-    },
-    {
-     "title": "친정팀 상대로 ‘교체 출전’ 황인범…포르투, 페예노르트에 1-0 신승, ...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-24T23:22:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/144/0001151541"
-    },
-    {
-     "title": "‘35분’ 황인범, 친정팀 페예노르트전 교체출전…포르투, UCL 2연승",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-24T23:21:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/396/0000761880"
-    }
-   ]
-  },
-  {
-   "keyword": "김영훈 장관 간담회",
-   "sources": [
-    "nate",
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T22:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "반도체 건설업계 만난 김영훈 고용노동부 장관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T23:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308350?sid=102"
-    },
-    {
-     "title": "장관 발언 듣는 오동호 SK에코플랜트 부사장",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T23:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308347?sid=102"
-    },
-    {
-     "title": "반도체 건설기능인력 양성 간담회 주재하는 김영훈 장관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T23:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308336?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "에이티즈, 빌보드 석권",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T23:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "에이티즈, 美 ‘빌보드 200’ 1위·‘핫 100’ 90위..메인 차트 동시 석...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-24T23:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005644864"
-    },
-    {
-     "title": "에이티즈, 빌보드 양대 메인 차트 동시 석권…‘핫 100’ 90위 진입",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-24T23:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543355"
-    },
-    {
-     "title": "에이티즈의 금빛 항해…초동 205만 장 이어 ‘빌보드 200’ 1위",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-24T23:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001306650"
-    }
-   ]
-  },
-  {
-   "keyword": "교수",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 2,
-   "firstArticleAt": "2026-11-24T23:20:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "인하대 이우기 교수팀 스포츠 AI 성능 과대평가 원인 규명.. '데이터마이...",
-     "press": "veritas-a.com",
-     "publishedAt": "2026-11-24T23:42:00.000Z",
-     "link": "https://www.veritas-a.com/news/articleView.html?idxno=639089"
-    },
-    {
-     "title": "서울대 박정재·이진옥 교수, 한국인의 기원 새롭게 풀어낸 '한반도 사...",
-     "press": "maxmovie.com",
-     "publishedAt": "2026-11-24T23:42:00.000Z",
-     "link": "https://www.maxmovie.com/news/articleView.html?idxno=503150"
-    },
-    {
-     "title": "[부고] 임장원(세명대 저널리즘대학원 교수)씨 장인상",
-     "press": "veritas-a.com",
-     "publishedAt": "2026-11-24T23:20:00.000Z",
-     "link": "https://www.veritas-a.com/news/articleView.html?idxno=639082"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1372,
+  "flagged": 1369,
   "matched": 709,
   "avgLeadMin": 517,
   "recent": [
