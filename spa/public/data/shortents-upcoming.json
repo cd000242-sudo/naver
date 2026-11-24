@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T11:31:02.274Z",
+ "builtAt": "2026-11-24T11:41:05.716Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,82 +8,114 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "삼성 준감위 주주환원 결정",
+   "keyword": "31개 기관 세종 이전",
    "sources": [
-    "nate",
     "daum"
    ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-24T10:03:00.000Z",
+   "articles90": 33,
+   "recent20": 8,
+   "press": 32,
+   "firstArticleAt": "2026-11-24T11:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정부, 31개 기관 5460명 세종행 확정…인권위 청사신축 후 이전",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-24T11:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357788?sid=100"
+    },
+    {
+     "title": "금융위·경찰청·감사원 등 31개 기관 세종행 확정",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-24T11:36:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026112420160057089"
+    },
+    {
+     "title": "정부, 2031년까지 중앙행정기관 등 31개 기관 세종 이전 단계적 추진",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-24T11:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133653?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성 준감위 주주환원 결정",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-24T10:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성준감위 “삼성전자 주주환원 유보, 준법 위반·이해상충 아냐”",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-24T11:34:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611240253"
+    },
+    {
+     "title": "삼성 준감위 \"이재용 증여세·내년 1월 주주환원 이해상충 문제 없다\"",
+     "press": "bloter.net",
+     "publishedAt": "2026-11-24T11:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/293/0000093771?sid=101"
+    },
     {
      "title": "삼성 준감위 “주주환원 결정 시점, 이해상충 해당 안해”",
      "press": "donga.com",
      "publishedAt": "2026-11-24T11:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003764843?sid=101"
-    },
-    {
-     "title": "삼성 준감위 “주주환원 결정 과정, 준법 위반·이해상충 아니다”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-24T11:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685762?sid=101"
-    },
-    {
-     "title": "삼성 준감위, 주주환원 유보 ‘이해상충 없다’ 결론",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-24T10:48:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321745&inflow=N"
     }
    ]
   },
   {
-   "keyword": "EU 하이브리드차 수입 제한",
+   "keyword": "하나저축은행 개인정보 유출",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 18,
-   "recent20": 5,
-   "press": 16,
-   "firstArticleAt": "2026-11-24T10:08:00.000Z",
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-24T10:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[그래픽] EU 세이프가드 주요국 하이브리드차 수입 허용 물량",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T11:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461465?sid=101"
+     "title": "하나저축은행 해킹 사고…고객 552명 개인정보 유출",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-24T11:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193466?sid=102"
     },
     {
-     "title": "EU, 한국산 하이브리드차 수입 제한…200일 간 6만 7924대",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-24T11:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159026?sid=104"
+     "title": "하나저축은행 해킹 피해...고객 552명 개인정보 유출",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T11:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437517?sid=101"
     },
     {
-     "title": "EU 한국산 하이브리드차 내달부터 200일간 6만7924대로 제한, 세이프가드...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-24T11:20:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452839"
+     "title": "하나저축은행 해킹‥고객 552명 개인정보 유출",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-24T11:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537756?sid=101"
     }
    ]
   },
   {
-   "keyword": "지하철 파업",
+   "keyword": "서울지하철 파업 막판 협상",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 16,
-   "recent20": 5,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T10:10:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-24T10:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -94,95 +126,133 @@
      "link": "https://www.ekn.kr/web/view.php?key=20261124028194184"
     },
     {
-     "title": "서울 지하철 노사 막판 교섭 난항…내일 첫차부터 파업 예고",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-24T11:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000555209?sid=102"
-    },
-    {
      "title": "서울지하철 총파업 D-1…노사 막판 교섭 ‘난항’, 출근길 혼란 우려",
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-24T11:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002727925?sid=102"
+    },
+    {
+     "title": "서울 지하철 노사 막판 교섭 난항…내일 첫차부터 파업 예고",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-24T11:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000555209?sid=102"
     }
    ]
   },
   {
-   "keyword": "젠슨 황 전격 복귀",
+   "keyword": "김병기 뇌물 송치 수사",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 10,
+   "articles90": 5,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T10:04:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-24T10:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 복귀에 증시 환호…AI 리스크는 여전",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-24T11:12:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544845"
+     "title": "14개월 걸린 수사 끝에…'6개 혐의' 김병기 불구속 송치",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T11:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522267?sid=102"
     },
     {
-     "title": "[뉴스프라임] 젠슨 황의 귀환…트럼프 \"이사회 직접 설득했다\"",
-     "press": "yonhapnewstv.co.kr",
+     "title": "경찰 수사 14개월만에 김병기 송치…13개 의혹 중 7개만 적용",
+     "press": "donga.com",
      "publishedAt": "2026-11-24T11:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929547?sid=104"
+     "link": "https://n.news.naver.com/mnews/article/020/0003764839?sid=102"
     },
     {
-     "title": "'만인의 남자' 젠슨 황, 회사 복귀 전 추가 불륜 자백",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-24T11:00:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886855"
+     "title": "경찰, 김병기 아들 취업 특혜 등 7개 의혹 ‘혐의 인정’ 송치",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-24T10:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368582?sid=102"
     }
    ]
   },
   {
-   "keyword": "민주당 사제폭탄 협박",
+   "keyword": "호르무즈 유조선 기뢰 충돌",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 5,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-24T10:03:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-24T10:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“폭탄으로 민주당 무너뜨린다” 협박글…경찰, 작성자 추적",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-24T11:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005768446?sid=102"
+     "title": "이란 \"호르무즈서 유조선 2척 기뢰 충돌\"…UAE 해역서도 선박 피격",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-24T11:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979711?sid=104"
     },
     {
-     "title": "경찰, '사제폭탄으로 민주당 무너뜨릴 것' 협박글 작성자 추적",
-     "press": "view.asiae.co.kr",
+     "title": "호르무즈 해협서 유조선 2척 기뢰 충돌로 화재…UAE 인근 화물선도 피격",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T10:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009308052?sid=104"
+    },
+    {
+     "title": "이란 \"호르무즈서 유조선 2척 기뢰 충돌\"…UAE 인근서 화물선 피격",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T10:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929543?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "양홍원 원현주 이혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T10:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "원현주, '불륜 의혹' ♥양홍원과 이혼 엔딩…\"유튜브 해달라\" 새 출발 응...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-24T11:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083581"
+    },
+    {
+     "title": "불륜 의혹 부인→신곡 발표→이혼까지..양홍원, 연이은 SNS 눈길 [핫피플...",
+     "press": "osen.co.kr",
      "publishedAt": "2026-11-24T11:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847275?sid=102"
+     "link": "https://m.entertain.naver.com/article/109/0005644639"
     },
     {
-     "title": "경찰, \"폭탄으로 민주당 테러\" 협박글 작성자 추적",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-24T11:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609220?sid=102"
+     "title": "'불륜 의혹' 양홍원, 원현주와 파경…“이혼 절차 거의 종료”",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-24T11:02:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1139795"
     }
    ]
   },
   {
    "keyword": "국민주권의 날 지정",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T10:06:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T10:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국민주권의 날, 왜 공휴일 아닐까…이재명 대통령의 1년 전 약속",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-24T11:38:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285116"
+    },
     {
      "title": "12월 3일 '국민주권의 날' 지정... 공휴일은 아냐",
      "press": "chungnamilbo.co.kr",
@@ -194,22 +264,92 @@
      "press": "donga.com",
      "publishedAt": "2026-11-24T10:30:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003764836?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 국정원장 논란",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T11:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "또다시 '최초' 앞에 선 강금실‥'파격 발탁' 속내는?",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-24T11:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537762?sid=100"
     },
     {
-     "title": "12월 3일 '국민주권의날' 기념일 지정...공휴일은 아냐",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T10:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437499?sid=100"
+     "title": "강금실·전해철·박능후… 민선 8기 경기도 ‘친노·친문’ 각자도생",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-24T11:14:00.000Z",
+     "link": "https://www.kyeongin.com/article/1775344"
+    },
+    {
+     "title": "“강금실은 얼굴마담…국정원 기조실장이 李 변호인 출신”[황형준의 법...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-24T11:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764841?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "12·3 날 기념일 지정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T10:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "12·3 그 날, 정부 기념일로…\"헌법수호 정신 계승\"",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-24T11:12:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544846"
+    },
+    {
+     "title": "12월 3일 '국민주권의 날' 지정... 공휴일은 아냐",
+     "press": "chungnamilbo.co.kr",
+     "publishedAt": "2026-11-24T10:38:00.000Z",
+     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=922769"
+    },
+    {
+     "title": "12월 3일 ‘국민주권의 날’ 지정… 李 “어둠의 세력 국민의 힘으로 몰...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-24T10:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764836?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1366,
-  "matched": 718,
+  "flagged": 1374,
+  "matched": 720,
   "avgLeadMin": 531,
   "recent": [
+   {
+    "keyword": "하정우♥차정원 10년 열애",
+    "hitKeyword": "방어 몸값 10년 4배",
+    "hitAt": "2026-11-24T20:30:00+09:00",
+    "leadMin": 766
+   },
+   {
+    "keyword": "EU 하이브리드차 수입 제한",
+    "hitKeyword": "EU 하이브리드차 제한",
+    "hitAt": "2026-11-24T20:30:00+09:00",
+    "leadMin": 49
+   },
    {
     "keyword": "서울지하철 총파업 담판",
     "hitKeyword": "서울지하철 총파업 예정",
@@ -257,18 +397,6 @@
     "hitKeyword": "송민호 재복무 확정",
     "hitAt": "2026-11-24T19:30:00+09:00",
     "leadMin": 120
-   },
-   {
-    "keyword": "송민호 102일 복무",
-    "hitKeyword": "송민호 재복무 확정",
-    "hitAt": "2026-11-24T19:30:00+09:00",
-    "leadMin": 100
-   },
-   {
-    "keyword": "송민호, 이달 102일 복무 재소집",
-    "hitKeyword": "송민호 재복무 확정",
-    "hitAt": "2026-11-24T19:30:00+09:00",
-    "leadMin": 50
    }
   ]
  }
