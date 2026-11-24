@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { EVENT_PRICE_UNTIL_MS, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../../lib/pricingSchedule';
 import { fetchSiteContent } from '../../lib/siteOps';
+import { cardCheckoutMode } from '../../lib/cardCheckout.mjs';
 import {
     applyStoreOverrides, individualTotal, isTaxIncludedPrice, productCardAmount, normalPriceOf, perDay, perMonth, sellableProducts, TERMS, won,
     type Product, type TermId,
@@ -117,6 +118,8 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
     const [mailWarn, setMailWarn] = useState(false);
     const [recurringConsent, setRecurringConsent] = useState(false);
     const lewordSubscription = term === 'monthly' && picked.length === 1 && picked[0].id === 'leword';
+    // Only one product for one month registers the card and renews; a year, a lifetime or a cart is paid once (instalments in the Toss window).
+    const cardRenews = cardCheckoutMode(`${picked.map((product) => product.id).join('+')}-${term}`) === 'subscription';
     useEffect(() => { setRecurringConsent(false); }, [term, totalCard, cart.join(',')]);
     useEffect(() => {
         if (!payOpen) return;
@@ -402,7 +405,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
                                     <span className="st-pay-ico" aria-hidden="true"><StoreIcon name="card" size={22} /></span>
                                     <span className="st-pay-body">
                                         <b>카드결제</b>
-                                        <em>{won(totalCard)}원 (부가세 포함){term === 'monthly' ? ' · 30일마다 자동결제' : ' · 토스페이먼츠 보안 결제'}</em>
+                                        <em>{won(totalCard)}원 (부가세 포함){cardRenews ? ' · 30일마다 자동결제' : term === 'monthly' ? ' · 30일 이용 · 자동결제 없음' : ' · 할부 가능 · 토스페이먼츠 보안 결제'}</em>
                                     </span>
                                     <i aria-hidden="true"><StoreIcon name="chevron" /></i>
                                 </button>
@@ -418,7 +421,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
                                     <i aria-hidden="true"><StoreIcon name="chevron" /></i>
                                 </a>
 
-                                {term === 'monthly' && <p className="st-pay-term">카드 구독은 해지 전까지 30일마다 갱신됩니다. 다음 결제를 원하지 않으면 갱신일 전에 구독을 해지해 주세요. 계좌이체는 매 회차 직접 입금하고 확인 후 새 이용권을 받습니다.</p>}
+                                {term === 'monthly' && cardRenews && <p className="st-pay-term">카드 구독은 해지 전까지 30일마다 갱신됩니다. 다음 결제를 원하지 않으면 갱신일 전에 구독을 해지해 주세요. 계좌이체는 매 회차 직접 입금하고 확인 후 새 이용권을 받습니다.</p>}
                                 <p className="st-pay-foot">
                                     코드 발급 후 7일 이내 미사용이면 전액 환불됩니다 · 결제 진행 시 이용약관과 개인정보처리방침에 동의하는 것으로 봅니다.
                                 </p>

@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import ProofShowcase from '../components/ProofShowcase';
 import ProductStore, { type StorePick } from '../components/store/ProductStore';
 import StoreIcon from '../components/store/StoreIcons';
+import { cardCheckoutMode, oneTimePaymentRequest } from '../lib/cardCheckout.mjs';
 import { getScheduledAmount, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../lib/pricingSchedule';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 import { light, lightRadius, motion, type as typeScale } from '../styles/tokens';
@@ -350,6 +351,12 @@ function buildCustomerKey(email: string): string {
             const successUrl = `${origin}/success.html?email=${encodeURIComponent(e)}&productId=${encodeURIComponent(selected.id)}&amount=${chargeAmount}&orderName=${encodeURIComponent(selected.name)}&customerKey=${encodeURIComponent(customerKey)}&orderId=${encodeURIComponent(orderId)}`;
             const failUrl = `${origin}/fail.html`;
             const payment = tossRef.current.payment({ customerKey });
+            // A year, a lifetime or a cart is one payment: the Toss window lets the buyer choose instalments (2026-11-24).
+            // Only a single monthly product registers the card and renews.
+            if (cardCheckoutMode(selected.id) === 'once') {
+                await payment.requestPayment(oneTimePaymentRequest({ origin, productId: selected.id, amount: chargeAmount, orderId, orderName: selected.name, email: e }));
+                return;
+            }
             await payment.requestBillingAuth({ method: 'CARD', successUrl, failUrl });
         } catch (err: any) {
             // 사용자가 결제창을 닫은 경우(USER_CANCEL)와 실제 SDK 오류 구분
