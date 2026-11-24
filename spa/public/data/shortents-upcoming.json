@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T21:58:35.031Z",
+ "builtAt": "2026-11-24T22:08:38.216Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,133 +8,102 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "서울 지하철 협상 타결",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 30,
+   "articles90": 34,
    "recent20": 8,
-   "press": 27,
-   "firstArticleAt": "2026-11-24T20:30:00.000Z",
+   "press": 31,
+   "firstArticleAt": "2026-11-24T20:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[AM-PM] 서울 지하철 노조 파업 철회…지하철 1~8호선 정상운행 外",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T21:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929640?sid=102"
+     "title": "서울 지하철 노사 협상 극적 타결…출근길 교통대란 피했다",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-24T22:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979718?sid=102"
     },
     {
-     "title": "'출근길 대란' 피했다...서울지하철 임단협 파업전 극적 타결",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-24T21:50:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784478"
+     "title": "'출근길 대란' 피했다...서울 지하철 1·2·3노조 협상 타결",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-24T22:02:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1177502"
     },
     {
-     "title": "서울 지하철 파업 2시간 앞두고 극적 타결…출근길 대란 피했다",
-     "press": "abcn.kr",
-     "publishedAt": "2026-11-24T21:50:00.000Z",
-     "link": "https://www.abcn.kr/news/articleView.html?idxno=95000"
+     "title": "출근길 대란 피했다…서울지하철 노사 18시간 만에 극적 타결",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-24T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545695?sid=101"
     }
    ]
   },
   {
-   "keyword": "과잉생산 관세 발표",
+   "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 5,
-   "press": 17,
+   "articles90": 20,
+   "recent20": 6,
+   "press": 18,
    "firstArticleAt": "2026-11-24T20:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "“트럼프 행정부, 이르면 오늘 밤 과잉생산 관세 발표”···외신, 한국...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-24T21:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484869?sid=104"
+    },
+    {
+     "title": "\"美, 이르면 이번주 '과잉생산' 관세 예고...韓 영향 주목-[굿모닝 글로...",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-24T21:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273852?sid=101"
+    },
+    {
      "title": "美USTR, 이르면 오늘 저녁 '과잉생산 관세 발표...한국, 15% 관세 유지 예",
      "press": "beyondpost.co.kr",
      "publishedAt": "2026-11-24T21:54:00.000Z",
      "link": "http://www.beyondpost.co.kr/view.php?ud=2026112506502192142aaae0046f_30"
-    },
-    {
-     "title": "美 '과잉생산 관세' 이르면 오늘 발표…외신 \"韓 15% 유지 예상\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-24T21:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609261?sid=104"
-    },
-    {
-     "title": "美 ‘과잉생산 관세’ 이르면 오늘 발표… “한국 15% 유지 예상”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-24T21:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887285?sid=101"
     }
    ]
   },
   {
-   "keyword": "2026년 25일",
+   "keyword": "국내 코인 발행 허용",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 7,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-24T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 25일 수요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-24T21:30:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194719"
+     "title": "[스테이블코인 어디로] 디지털자산법 베일 벗었지만…업계 \"성장보다 규...",
+     "press": "dealsite.co.kr",
+     "publishedAt": "2026-11-24T22:04:00.000Z",
+     "link": "https://dealsite.co.kr/articles/173432"
     },
     {
-     "title": "전국 광역 단체장 11월 25일 일정",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-24T21:30:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261124001461"
+     "title": "민간이 키운 코인거래소…성장 대가는 ‘지분 족쇄’",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-24T21:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159055?sid=101"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 25일 (수) 띠별운세 '한 주를 잘 넘기자'",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-24T21:30:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104284"
-    }
-   ]
-  },
-  {
-   "keyword": "오정태 딸 카이스트 입학",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-24T20:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "개그맨 오정태 딸, 16살에 카이스트 조기입학…‘철새교육법’ 뭐길래?",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T21:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727986?sid=102"
-    },
-    {
-     "title": "오정태 \"17살 딸, 카이스트 조기입학…합격 선물로 성형수술\"('동상이몽...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-24T21:32:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795555800531471010"
-    },
-    {
-     "title": "‘동상이몽2’ 오정태♥백아영 “첫 딸, 카이스트 합격…성형 약속” [...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-24T21:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054035"
+     "title": "코인거래소 대주주 지분 최대 34%...스테이블코인 발행은 은행 주도로",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-24T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685810?sid=101"
     }
    ]
   },
@@ -143,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T20:31:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-24T20:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,77 +140,86 @@
    ]
   },
   {
-   "keyword": "국내 코인 발행 허용",
+   "keyword": "이도현 임지연 결별?",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "민간이 키운 코인거래소…성장 대가는 ‘지분 족쇄’",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-24T21:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159055?sid=101"
-    },
-    {
-     "title": "코인거래소 대주주 지분 최대 34%...스테이블코인 발행은 은행 주도로",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-24T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685810?sid=101"
-    },
-    {
-     "title": "코인시장 판이 바뀐다…은행엔 열린 문, 거래소엔 높아지는 벽",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-24T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445947?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "배당",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 7,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-24T20:30:00.000Z",
+   "firstArticleAt": "2026-11-24T20:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'월드시리즈 우승팀' 밀워키, 포스트시즌 배당금 1인 6억 6천만 원 수령",
-     "press": "thesportstimes.co.kr",
-     "publishedAt": "2026-11-24T21:05:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/472/0000042602"
+     "title": "이도현, 임지연과 결별 암시?-7주 전 의미심장한 문구",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-24T21:48:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95857"
     },
     {
-     "title": "JB우리 박춘원·김기덕, 4900억 수혈…배당으로 탕진할까[더시그널]",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-24T21:00:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885149"
+     "title": "'임지연과 결별' 이도현…\"당신을 더 사랑했어요\" SNS 눈길",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-24T21:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005445954"
     },
     {
-     "title": "[종목 브리핑] 티쓰리, 3분기 주당 40원 배당 결정",
-     "press": "vegannews.co.kr",
+     "title": "'찼네 차였네'…임지연·이도현 결별에 때아닌 논쟁",
+     "press": "bntnews.co.kr",
      "publishedAt": "2026-11-24T20:56:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=410824"
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611250004"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1380,
-  "matched": 719,
-  "avgLeadMin": 541,
+  "flagged": 1379,
+  "matched": 723,
+  "avgLeadMin": 549,
   "recent": [
+   {
+    "keyword": "후티 사우디 공습 예고",
+    "hitKeyword": "사우디 빌딩 피격",
+    "hitAt": "2026-11-25T07:00:00+09:00",
+    "leadMin": 6083
+   },
+   {
+    "keyword": "상장",
+    "hitKeyword": "ETF 상장폐지 위험",
+    "hitAt": "2026-11-25T07:00:00+09:00",
+    "leadMin": 2009
+   },
+   {
+    "keyword": "EU 하이브리드차 수입 제한",
+    "hitKeyword": "EU 하이브리드차 제한",
+    "hitAt": "2026-11-25T07:00:00+09:00",
+    "leadMin": 384
+   },
+   {
+    "keyword": "리야드 최고층 빌딩 피격",
+    "hitKeyword": "사우디 빌딩 피격",
+    "hitAt": "2026-11-25T07:00:00+09:00",
+    "leadMin": 293
+   },
+   {
+    "keyword": "서울 지하철 파업 철회",
+    "hitKeyword": "서울지하철 파업 철회",
+    "hitAt": "2026-11-25T07:00:00+09:00",
+    "leadMin": 112
+   },
+   {
+    "keyword": "서울 지하철 파업 철회 타결",
+    "hitKeyword": "서울지하철 파업 철회",
+    "hitAt": "2026-11-25T07:00:00+09:00",
+    "leadMin": 32
+   },
+   {
+    "keyword": "오정태 딸 카이스트 입학",
+    "hitKeyword": "오정태 딸 카이스트 입학",
+    "hitAt": "2026-11-25T07:00:00+09:00",
+    "leadMin": 22
+   },
    {
     "keyword": "현대차 N 버츄얼컵 결승 진행",
     "hitKeyword": "현대차 내수",
@@ -259,48 +237,6 @@
     "hitKeyword": "잠실 2가구 청약 경쟁",
     "hitAt": "2026-11-25T06:30:00+09:00",
     "leadMin": 569
-   },
-   {
-    "keyword": "교육청",
-    "hitKeyword": "시도교육청 시험지 파쇄",
-    "hitAt": "2026-11-25T06:00:00+09:00",
-    "leadMin": 9724
-   },
-   {
-    "keyword": "지수",
-    "hitKeyword": "미국 소비자신뢰지수 반등",
-    "hitAt": "2026-11-25T06:00:00+09:00",
-    "leadMin": 4257
-   },
-   {
-    "keyword": "서울교통공사 임단협 최종교섭",
-    "hitKeyword": "서울지하철 임단협 타결",
-    "hitAt": "2026-11-25T06:00:00+09:00",
-    "leadMin": 1074
-   },
-   {
-    "keyword": "서울교통공사 임단협 교섭",
-    "hitKeyword": "서울지하철 임단협 타결",
-    "hitAt": "2026-11-25T06:00:00+09:00",
-    "leadMin": 1013
-   },
-   {
-    "keyword": "수능 시험지 폐기",
-    "hitKeyword": "시도교육청 시험지 파쇄",
-    "hitAt": "2026-11-25T06:00:00+09:00",
-    "leadMin": 499
-   },
-   {
-    "keyword": "미국 과잉생산 관세 조사",
-    "hitKeyword": "미국 과잉생산 관세",
-    "hitAt": "2026-11-25T06:00:00+09:00",
-    "leadMin": 408
-   },
-   {
-    "keyword": "오정태 딸 카이스트 입학",
-    "hitKeyword": "오정태 딸 카이스트 입학",
-    "hitAt": "2026-11-25T06:00:00+09:00",
-    "leadMin": 368
    }
   ]
  }
