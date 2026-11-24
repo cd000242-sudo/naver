@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T10:20:38.657Z",
+ "builtAt": "2026-11-24T10:30:42.268Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 41,
-   "recent20": 9,
-   "press": 29,
-   "firstArticleAt": "2026-11-24T08:52:00.000Z",
+   "articles90": 36,
+   "recent20": 7,
+   "press": 28,
+   "firstArticleAt": "2026-11-24T09:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[亞증시-종합] 젠슨 황 복귀에 日·臺↑…中 혼조·홍콩↓",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-24T10:18:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446317"
+     "title": "[올댓차이나] 홍콩 증시, 美 대중 규제·금리인상 경계에 엿새째 속락…...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-24T10:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014343049?sid=104"
     },
     {
-     "title": "젠슨황 복귀 훈풍에 코스피 급등…5,000선 회복",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T10:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929542?sid=161"
+     "title": "[참성단] 젠슨 황 복귀",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-24T10:22:00.000Z",
+     "link": "https://www.kyeongin.com/article/1775326"
     },
     {
-     "title": "[주간 증시 전망]‘큰 폭 조정’ 코스피, 중장기 투자자에 관심",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-24T10:12:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1795514937693411004"
+     "title": "'젠슨 황 고향' 타이완 증시 9% 급등...TSMC 상한가",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T10:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437505?sid=104"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 26,
-   "recent20": 3,
-   "press": 20,
-   "firstArticleAt": "2026-11-24T08:51:00.000Z",
+   "articles90": 24,
+   "recent20": 5,
+   "press": 18,
+   "firstArticleAt": "2026-11-24T09:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨황 복귀 훈풍에 코스피 급등…5,000선 회복",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T10:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929542?sid=161"
+     "title": "[이슈빡] 대마불사? 돌아온 젠슨 황…증시 반등 어디까지",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-24T10:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405510?sid=101"
     },
     {
-     "title": "젠슨 황, 알려진 두 여성 외에 또 있었다 … WSJ \"이사회에 추가 불륜 고...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-24T10:16:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/24/2026112450382.html"
+     "title": "[참성단] 젠슨 황 복귀",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-24T10:22:00.000Z",
+     "link": "https://www.kyeongin.com/article/1775326"
     },
     {
-     "title": "트럼프 특명에 밴스 움직였다…'젠슨황 구하기' 물밑 작전",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-24T10:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522237?sid=104"
+     "title": "엔비디아 젠슨 황 복귀…K반도체 ‘협력·다변화’ 속도",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-24T10:22:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611240105"
     }
    ]
   },
@@ -79,62 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-24T08:56:00.000Z",
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-24T09:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“사제폭탄으로 민주당 무너뜨리겠다” 광주시당 수색 소동…무슨 일",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-24T10:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567637?sid=102"
+    },
+    {
+     "title": "\"민주당 폭탄 테러\" 협박 글…경찰, 광주시당 수색 결과 '이상 무'",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-24T10:23:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000086261"
+    },
     {
      "title": "민주당 폭탄 협박에 광주시당 수색…\"특이사항 없음\"",
      "press": "slist.kr",
      "publishedAt": "2026-11-24T10:12:00.000Z",
      "link": "https://www.slist.kr/news/articleView.html?idxno=784443"
-    },
-    {
-     "title": "민주당 폭탄 협박에 광주시당 수색…\"특이사항 없음\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T10:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461441?sid=102"
-    },
-    {
-     "title": "터미널·백화점·민주당사까지…폭탄 테러 협박 잇따라",
-     "press": "namdonews.com",
-     "publishedAt": "2026-11-24T09:48:00.000Z",
-     "link": "https://www.namdonews.com/news/articleView.html?idxno=930368"
-    }
-   ]
-  },
-  {
-   "keyword": "제8차 미세먼지 관리제 시행",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-24T08:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미세먼지 감축 '삼중고'…국외 유입·엘니뇨·LNG 급등",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-24T09:54:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321744&inflow=N"
-    },
-    {
-     "title": "올겨울 '미세먼지' 짙어진다…정부, 석탄발전 18기 가동중단",
-     "press": "newstree.kr",
-     "publishedAt": "2026-11-24T09:52:00.000Z",
-     "link": "https://www.newstree.kr/newsView/ntr202611240024"
-    },
-    {
-     "title": "12월 1일부터 미세먼지 계절관리제 시행…수도권·6대 특별·광역시 5등...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-24T09:42:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285046"
     }
    ]
   },
@@ -143,10 +111,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 12,
-   "recent20": 5,
+   "articles90": 11,
+   "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-24T09:12:00.000Z",
+   "firstArticleAt": "2026-11-24T09:20:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
@@ -175,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T08:54:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-24T09:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,14 +171,78 @@
    ]
   },
   {
+   "keyword": "제8차 미세먼지 관리제 시행",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-24T09:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미세먼지 감축 '삼중고'…국외 유입·엘니뇨·LNG 급등",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-24T09:54:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321744&inflow=N"
+    },
+    {
+     "title": "올겨울 '미세먼지' 짙어진다…정부, 석탄발전 18기 가동중단",
+     "press": "newstree.kr",
+     "publishedAt": "2026-11-24T09:52:00.000Z",
+     "link": "https://www.newstree.kr/newsView/ntr202611240024"
+    },
+    {
+     "title": "12월 1일부터 미세먼지 계절관리제 시행…수도권·6대 특별·광역시 5등...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-24T09:42:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285046"
+    }
+   ]
+  },
+  {
+   "keyword": "송민호 102일 추가 복무",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T09:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"한 달에 겨우 4일 출근\"…송민호, 이달 말 재복무 시작",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-24T10:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357780?sid=102"
+    },
+    {
+     "title": "'102일 무단이탈' 송민호, 결국 추가 복무…이달 재소집",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-24T10:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761852"
+    },
+    {
+     "title": "송민호, 이달 말 사회복무요원 재소집…102일 추가 복무",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-24T10:00:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1139793"
+    }
+   ]
+  },
+  {
    "keyword": "한화 국방 AI 데이터센터",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T08:52:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-24T09:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,46 +267,14 @@
    ]
   },
   {
-   "keyword": "송민호 102일 추가 복무",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-24T08:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'102일 무단이탈' 송민호, 결국 추가 복무…이달 재소집",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-24T10:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761852"
-    },
-    {
-     "title": "송민호, 이달 말 사회복무요원 재소집…102일 추가 복무",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-24T10:00:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139793"
-    },
-    {
-     "title": "송민호, 이달 내 사회복무요원 재소집…102일 추가복무",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T09:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929529?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "스테이블코인",
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T08:54:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T09:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -303,10 +303,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T08:51:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-24T09:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -331,41 +331,41 @@
    ]
   },
   {
-   "keyword": "육성재, 기립성 저혈압으로 넘어져",
+   "keyword": "슈퍼문",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 3,
+   "articles90": 5,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T08:54:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-24T09:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "육성재, ‘나인 투 식스’ 첫방 하루 앞두고 턱 봉합 치료…“기립성 저...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-24T10:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001283219"
+     "title": "초겨울 떠오른 슈퍼문",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-24T10:20:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L261124190607132a"
     },
     {
-     "title": "'기립성 저혈압' 육성재, '나인 투 식스' 첫 방 앞두고 넘어져 '턱 봉합...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-24T09:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492909"
+     "title": "서울 하늘에 떠오른 슈퍼문",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T09:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009308024?sid=103"
     },
     {
-     "title": "육성재, 드라마 첫방 앞두고…\"기립성 저혈압으로 넘어져 턱 부상\"",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-24T08:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761848"
+     "title": "서울 하늘 떠오른 슈퍼문",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T09:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009308021?sid=103"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1357,
+  "flagged": 1358,
   "matched": 707,
   "avgLeadMin": 523,
   "recent": [
