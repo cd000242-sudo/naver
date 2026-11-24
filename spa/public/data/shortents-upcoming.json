@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T14:32:07.563Z",
+ "builtAt": "2026-11-24T14:42:11.452Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,178 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 16,
    "recent20": 4,
-   "press": 11,
+   "press": 15,
    "firstArticleAt": "2026-11-24T13:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "美 과잉생산 관세, 이르면 이번주 발표할 듯",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-24T14:38:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451834"
+    },
+    {
+     "title": "“미국 USTR, 이르면 이번주 ‘과잉생산 관세’ 조사 결과 발표”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T14:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300488?sid=104"
+    },
+    {
      "title": "\"USTR, 이르면 이번 주 '과잉생산 관세' 조사 결과 발표\"",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-24T14:26:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002437554?sid=104"
-    },
-    {
-     "title": "WSJ \"미 USTR, 이르면 이번 주 '과잉생산 관세' 조사 결과 발표\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-24T14:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405554?sid=104"
-    },
-    {
-     "title": "\"美, 이르면 이번주 '과잉생산 관세' 발표\"…韓은 15% 이하 전망",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-24T14:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415028?sid=101"
     }
    ]
   },
   {
-   "keyword": "김혜경 권양숙 오찬",
+   "keyword": "美 USTR 조사 결과",
    "sources": [
-    "nate"
+    "daum"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-24T13:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 USTR, 빠르면 이번주 中·EU·14개국 ‘과잉생산 관세’ 조사 발표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-24T14:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014343114?sid=104"
+    },
+    {
+     "title": "\"美USTR, 韓포함 16개국 과잉생산·보조금 조사결과 이번주 발표\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T13:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009308128?sid=104"
+    },
+    {
+     "title": "\"美 USTR, 이르면 이번 주 '과잉생산 관세' 조사 결과 발표\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-24T13:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537792?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "비",
+   "sources": [
+    "google"
    ],
    "articles90": 9,
    "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-24T13:06:00.000Z",
+   "firstArticleAt": "2026-11-24T13:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수요일 아침 최저 영하 8도 ‘뚝’…곳곳 비·눈 내려 빙판길 주의",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-24T14:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567659?sid=103"
+    },
+    {
+     "title": "'사업가♥' 아유미, 딸 낳고 80평 집 샀다…\"인테리어 비용만 1억\"",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-24T13:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004127731"
+    },
+    {
+     "title": "유재석 유연석 디스하는 후배에 비 의리 폭발 “우도환 도움 많이 받아...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-24T13:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190850"
+    }
+   ]
+  },
+  {
+   "keyword": "화재",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T13:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성생명·화재 대표 유임 가닥",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-24T14:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685777?sid=101"
+    },
+    {
+     "title": "‘방화 가능성’ 주택 화재…일가족 3명 숨져",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T14:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300487?sid=102"
+    },
+    {
+     "title": "식품진흥원·왕궁소방대, 화재 초기 대응·인명 대피 합동훈련",
+     "press": "youngnong.co.kr",
+     "publishedAt": "2026-11-24T14:14:00.000Z",
+     "link": "https://www.youngnong.co.kr/news/articleView.html?idxno=72026"
+    }
+   ]
+  },
+  {
+   "keyword": "31개 기관 세종 이전 확정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-24T13:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정부, 내년 개인정보위 등 22곳 세종 우선 이전…인권위, 청사신축 후 옮...",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-24T14:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003489331?sid=100"
+    },
+    {
+     "title": "정부, 중앙행정기관 31곳·5460명 세종 이전 확정 … 2031년 마무리",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-24T14:34:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/24/2026112450412.html"
+    },
+    {
+     "title": "방미통위 등 기관 22곳 내년 세종행…인권위는 2031년 연기",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T14:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522294?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "김혜경, 권양숙 오찬",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-24T13:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,79 +204,14 @@
    ]
   },
   {
-   "keyword": "화재",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T13:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘방화 가능성’ 주택 화재…일가족 3명 숨져",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-24T14:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012300487?sid=102"
-    },
-    {
-     "title": "식품진흥원·왕궁소방대, 화재 초기 대응·인명 대피 합동훈련",
-     "press": "youngnong.co.kr",
-     "publishedAt": "2026-11-24T14:14:00.000Z",
-     "link": "https://www.youngnong.co.kr/news/articleView.html?idxno=72026"
-    },
-    {
-     "title": "경남 진주 다가구 주택 화재…60대 남성1명 '중상'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-24T14:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014343116?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "비",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T13:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'사업가♥' 아유미, 딸 낳고 80평 집 샀다…\"인테리어 비용만 1억\"",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-24T13:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127731"
-    },
-    {
-     "title": "유재석 유연석 디스하는 후배에 비 의리 폭발 “우도환 도움 많이 받아...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-24T13:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190850"
-    },
-    {
-     "title": "[날씨] 수요일 아침 전국 대부분 영하권…곳곳 비와 눈, 빙판길 주의",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-24T13:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060975?sid=103"
-    }
-   ]
-  },
-  {
    "keyword": "중국 대미 수출통제 유예",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T13:03:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-24T13:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -170,46 +234,44 @@
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285161"
     }
    ]
-  },
-  {
-   "keyword": "수능 시험지 폐기",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T13:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“1년 보관한다더니”…작년 수능 시험지 17만여부, 이미 파쇄",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-24T14:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133662?sid=102"
-    },
-    {
-     "title": "\"수능 부정행위 조사한다더니…지난해 시험지 17만부 폐기\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-24T13:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213501?sid=102"
-    },
-    {
-     "title": "지난해 수능 시험지 17만여 부 폐기…세종만 한 부도 안 버렸다",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-24T13:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567652?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1404,
-  "matched": 740,
-  "avgLeadMin": 520,
+  "flagged": 1407,
+  "matched": 745,
+  "avgLeadMin": 517,
   "recent": [
+   {
+    "keyword": "대전 ACLE 베이징 3-2 승리",
+    "hitKeyword": "대전 베이징 3-2 승리",
+    "hitAt": "2026-11-24T23:30:00+09:00",
+    "leadMin": 109
+   },
+   {
+    "keyword": "대전 베이징 승리",
+    "hitKeyword": "대전 베이징 3-2 승리",
+    "hitAt": "2026-11-24T23:30:00+09:00",
+    "leadMin": 78
+   },
+   {
+    "keyword": "내신 부정행위 퇴학 최대",
+    "hitKeyword": "수능 부정행위 적발",
+    "hitAt": "2026-11-24T23:30:00+09:00",
+    "leadMin": 68
+   },
+   {
+    "keyword": "대전, 베이징 3-2로 ACLE 연패 탈출!",
+    "hitKeyword": "대전 베이징 3-2 승리",
+    "hitAt": "2026-11-24T23:30:00+09:00",
+    "leadMin": 28
+   },
+   {
+    "keyword": "정상빈 1골 1도움",
+    "hitKeyword": "정상빈 MLS컵 활약",
+    "hitAt": "2026-11-24T23:30:00+09:00",
+    "leadMin": 18
+   },
    {
     "keyword": "정상빈 1골 1도움 폭발!",
     "hitKeyword": "정상빈 1골 1도움",
@@ -239,36 +301,6 @@
     "hitKeyword": "엔비디아 젠슨 황 복귀",
     "hitAt": "2026-11-24T22:30:00+09:00",
     "leadMin": 189
-   },
-   {
-    "keyword": "EU 하이브리드차 수입 제한",
-    "hitKeyword": "EU 하이브리드차 제한",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 79
-   },
-   {
-    "keyword": "젠슨 황 복귀로 엔비디아 급등",
-    "hitKeyword": "엔비디아 젠슨 황 복귀",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 38
-   },
-   {
-    "keyword": "정상빈 1골 1도움",
-    "hitKeyword": "정상빈 1골 1도움",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 28
-   },
-   {
-    "keyword": "세종 이전 확정",
-    "hitKeyword": "세종 행정기관 이전",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 18
-   },
-   {
-    "keyword": "젠슨 황 복귀 후 급등하는 주가",
-    "hitKeyword": "엔비디아 젠슨 황 복귀",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 18
    }
   ]
  }
