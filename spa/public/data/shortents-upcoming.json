@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T05:08:40.367Z",
+ "builtAt": "2026-11-24T05:18:44.264Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,18 +15,18 @@
    "sources": [
     "google"
    ],
-   "articles90": 24,
-   "recent20": 5,
-   "press": 22,
-   "firstArticleAt": "2026-11-24T03:56:00.000Z",
+   "articles90": 23,
+   "recent20": 4,
+   "press": 21,
+   "firstArticleAt": "2026-11-24T04:09:00.000Z",
    "exclusive": true,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "12월 3일, 국가기념일 '국민주권의 날'로…李 \"위대한 국민 승리\"",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-24T05:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063305?sid=100"
+     "title": "공무원 ‘난임휴직’ 12월 3일부터 시행…본인 신청으로 최대 2년 사용",
+     "press": "gosiweek.com",
+     "publishedAt": "2026-11-24T05:12:00.000Z",
+     "link": "https://www.gosiweek.com/article/1065589738605826"
     },
     {
      "title": "[속보] 매년 12월 3일 '국민주권의 날' 지정…내달 첫 정부 기념식",
@@ -35,10 +35,10 @@
      "link": "https://n.news.naver.com/mnews/article/654/0000213084?sid=100"
     },
     {
-     "title": "[속보] 12월 3일 ‘국민주권의 날’ 지정, 1주일간 기념 주간…국무회의...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-24T04:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060831?sid=100"
+     "title": "12월 3일, 국가기념일 '국민주권의 날'로…李 \"위대한 국민 승리\"",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-24T05:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063305?sid=100"
     }
    ]
   },
@@ -48,12 +48,18 @@
     "signal.bz"
    ],
    "articles90": 26,
-   "recent20": 7,
+   "recent20": 4,
    "press": 17,
-   "firstArticleAt": "2026-11-24T03:47:00.000Z",
+   "firstArticleAt": "2026-11-24T03:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이용철 법무장관 후보자 \"李대통령과 오랜 친분…측근은 아냐\"",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-24T05:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142935?sid=102"
+    },
     {
      "title": "[속보]\"李대통령 공소취소 지휘 않겠다\" 말 못하는 이용철…野 추궁에도...",
      "press": "imaeil.com",
@@ -65,12 +71,38 @@
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-24T05:04:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003158840?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "희귀질환 본인부담률 인하",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 16,
+   "recent20": 5,
+   "press": 16,
+   "firstArticleAt": "2026-11-24T04:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "희귀·중증난치질환자 건강보험 본인부담률 10%→7% 인하",
+     "press": "whosaeng.com",
+     "publishedAt": "2026-11-24T05:16:00.000Z",
+     "link": "http://www.whosaeng.com/175581"
     },
     {
-     "title": "이용철 법무장관 후보자 “무리한 지휘권 행사 않겠다”...공소취소엔 ...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-24T05:02:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73522"
+     "title": "희귀·중증난치질환 산정특례 본인부담률 7%로 인하...136만명 혜택",
+     "press": "bosa.co.kr",
+     "publishedAt": "2026-11-24T05:16:00.000Z",
+     "link": "https://www.bosa.co.kr/news/articleView.html?idxno=3017211"
+    },
+    {
+     "title": "희귀·중증난치질환자 본인부담률 10%→7%…12월부터 적용",
+     "press": "hitnews.co.kr",
+     "publishedAt": "2026-11-24T05:12:00.000Z",
+     "link": "https://www.hitnews.co.kr/news/articleView.html?idxno=81021"
     }
    ]
   },
@@ -80,12 +112,18 @@
     "nate"
    ],
    "articles90": 15,
-   "recent20": 2,
+   "recent20": 3,
    "press": 15,
-   "firstArticleAt": "2026-11-24T03:40:00.000Z",
+   "firstArticleAt": "2026-11-24T04:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "신세계백화점 폭파 협박범은 울산 중학생…경찰에 범행 시인",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-24T05:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003158846?sid=102"
+    },
     {
      "title": "\"신세계백화점 폭파\" 협박 팩스 보낸 범인 검거…울산 사는 중학생",
      "press": "mt.co.kr",
@@ -97,76 +135,38 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-24T04:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005608912?sid=102"
-    },
-    {
-     "title": "“신세계百 폭파” 협박범, 잡고보니 울산 중학생",
-     "press": "donga.com",
-     "publishedAt": "2026-11-24T04:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764728?sid=102"
     }
    ]
   },
   {
-   "keyword": "농업",
-   "sources": [
-    "google"
-   ],
-   "articles90": 24,
-   "recent20": 10,
-   "press": 13,
-   "firstArticleAt": "2026-11-24T04:26:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "고양시 농업진흥구역 '일률 불허' 10년…비공개 관리계획 재검토 요구",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-24T05:04:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611240148"
-    },
-    {
-     "title": "\"중장년 후계농업인 정책 소외 해소해줘야\"",
-     "press": "agrinet.co.kr",
-     "publishedAt": "2026-11-24T05:00:00.000Z",
-     "link": "https://www.agrinet.co.kr/news/articleView.html?idxno=409089"
-    },
-    {
-     "title": "충남 공주시농업기술센터, 여과액비 활용 관비기술 시범단지 현장평가...",
-     "press": "ccdn.co.kr",
-     "publishedAt": "2026-11-24T05:00:00.000Z",
-     "link": "https://www.ccdn.co.kr/news/articleView.html?idxno=1113061"
-    }
-   ]
-  },
-  {
-   "keyword": "희귀질환 본인부담률 인하",
+   "keyword": "이재명 시험 부정행위 처벌",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 14,
    "recent20": 3,
    "press": 13,
-   "firstArticleAt": "2026-11-24T04:16:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-24T03:49:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "12월부터 희귀·중증난치질환자 건강보험 본인부담률 7% 인하",
-     "press": "ablenews.co.kr",
-     "publishedAt": "2026-11-24T05:04:00.000Z",
-     "link": "https://www.ablenews.co.kr/news/articleView.html?idxno=234847"
+     "title": "李대통령, 시험 부정에 “다른 사람들의 기회를 훔치는 것”…국가시험...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-24T05:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060833?sid=100"
     },
     {
-     "title": "12월부터 희귀·중증난치질환자 본인부담률 10%→7% 인하",
-     "press": "medisobizanews.com",
-     "publishedAt": "2026-11-24T05:04:00.000Z",
-     "link": "http://www.medisobizanews.com/news/articleView.html?idxno=144716"
+     "title": "李대통령 “민생 예산 초당적 협력해야”...시험 부정행위 엄정 대응 지...",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-24T05:14:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73523"
     },
     {
-     "title": "136만 희귀질환자…진료비 부담 연평균 22만원 감소",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-24T04:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006414738?sid=102"
+     "title": "앞으로 학교시험서 'AI 커닝' 걸리면 이런 처벌 받는다... 정부 공식발표",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-24T05:10:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1177309"
     }
    ]
   },
@@ -178,10 +178,16 @@
    "articles90": 10,
    "recent20": 2,
    "press": 10,
-   "firstArticleAt": "2026-11-24T03:44:00.000Z",
+   "firstArticleAt": "2026-11-24T03:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프, 젠슨 황 복귀로 최대 220억원 평가이익 가능성",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-24T05:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213258?sid=104"
+    },
     {
      "title": "젠슨 황 복귀 소식에 글로벌 증시 반등 기대…반도체주 훈풍 부나",
      "press": "thepublic.kr",
@@ -193,44 +199,38 @@
      "press": "imaeil.com",
      "publishedAt": "2026-11-24T04:55:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/088/0001041983?sid=101"
-    },
-    {
-     "title": "엔비디아 폭등 여파…'삼전닉스' 단일 레버리지도 18% 상승",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T04:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009307158?sid=101"
     }
    ]
   },
   {
-   "keyword": "이재명 시험 부정행위 처벌",
+   "keyword": "고경표 경찰 조사 인정",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-24T03:49:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-24T03:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[기고] AI가 정답을 알려주는 시대, 시험은 무엇을 평가해야 하나",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-24T04:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006414740?sid=105"
+     "title": "고경표, 피해자에 사죄했지만 합의는 아직…\"뺑소니는 아니다\" 선긋기",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-24T05:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004469086"
     },
     {
-     "title": "이 대통령 \"시험 부정행위 중대범죄…엄두도 못 내게 처벌\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T04:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929365?sid=100"
+     "title": "[MP이슈] 울먹인 고경표, 눈물보다 무거운 0.150%",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-24T05:00:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1139625"
     },
     {
-     "title": "이 대통령 \"시험 부정행위 용납 안돼…행정력 총동원 엄정 대응\"",
-     "press": "kado.net",
-     "publishedAt": "2026-11-24T04:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213065?sid=100"
+     "title": "김대범, 이진우 비보에 안타까움 전하더니 고경표에겐 일침 “대리만 불...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-24T04:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003814216"
     }
    ]
   },
@@ -239,10 +239,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 8,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-24T03:40:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-24T03:53:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -263,38 +263,6 @@
      "press": "tenasia.co.kr",
      "publishedAt": "2026-11-24T04:33:00.000Z",
      "link": "https://m.entertain.naver.com/article/312/0000785924"
-    }
-   ]
-  },
-  {
-   "keyword": "고경표 경찰 조사 인정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T03:43:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[MP이슈] 울먹인 고경표, 눈물보다 무거운 0.150%",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-24T05:00:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139625"
-    },
-    {
-     "title": "김대범, 이진우 비보에 안타까움 전하더니 고경표에겐 일침 “대리만 불...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-24T04:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003814216"
-    },
-    {
-     "title": "‘음주운전’ 고경표, 혐의 대부분 인정…경찰, 마디모 감정 검토",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-24T04:38:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795493582531437006"
     }
    ]
   },
@@ -331,14 +299,46 @@
    ]
   },
   {
+   "keyword": "장학금",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T04:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2027 국가장학금, 1차 신청 오늘(24일) 시작…재학생·신입생 조건?",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-24T05:16:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284817"
+    },
+    {
+     "title": "대전교육청, 체육우수 장학금 4680만원 지원",
+     "press": "ccnnews.co.kr",
+     "publishedAt": "2026-11-24T05:02:00.000Z",
+     "link": "http://www.ccnnews.co.kr/news/articleView.html?idxno=418307"
+    },
+    {
+     "title": "청송군 거림회, (재)청송군인재육성장학회에 500만원 장학금 기탁",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-24T04:50:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561903"
+    }
+   ]
+  },
+  {
    "keyword": "코리아 그랜드 소싱페어",
    "sources": [
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 7,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T03:40:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-24T04:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -369,7 +369,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-24T04:02:00.000Z",
    "exclusive": false,
@@ -392,38 +392,6 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-24T04:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006414726?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "윤하정",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T03:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "윤하정, 유튜브서 폭로 “내 결혼식서 예행연습한 커플있다”…이관희...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-24T04:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001283097"
-    },
-    {
-     "title": "윤하정, 결혼식 민폐 하객 일화 공개… 이관희·유시은 커플 지목?",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-24T03:58:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611240213"
-    },
-    {
-     "title": "'솔로지옥3' 윤하정 \"남의 결혼식 버진로드서 상황극?\" 결혼식 민폐 폭...",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-24T03:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328931"
     }
    ]
   },
@@ -465,7 +433,7 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 2,
    "firstArticleAt": "2026-11-24T04:27:00.000Z",
    "exclusive": false,
@@ -494,7 +462,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1265,
+  "flagged": 1264,
   "matched": 688,
   "avgLeadMin": 538,
   "recent": [
