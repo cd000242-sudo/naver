@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T00:15:06.096Z",
+ "builtAt": "2026-11-24T00:25:09.620Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,102 +8,133 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
-  {
-   "keyword": "러시아 군용기 영공 침범",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 86,
-   "recent20": 20,
-   "press": 66,
-   "firstArticleAt": "2026-11-23T23:06:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "러시아 군용기 울릉도 근접에 경계경보…'北항공기' 안내 소동",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T00:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929282?sid=102"
-    },
-    {
-     "title": "울릉도 경계경보 3분 만에 해제…러 군용기 KADIZ 진입, 영공 침범은 없...",
-     "press": "news.knn.co.kr",
-     "publishedAt": "2026-11-24T00:14:00.000Z",
-     "link": "https://news.knn.co.kr/news/article_sns/1896"
-    },
-    {
-     "title": "러시아 항공기 침범이라더니…울릉도 경계경보 발송",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-24T00:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284557"
-    }
-   ]
-  },
   {
    "keyword": "울릉도 경계경보 발령",
    "sources": [
     "nate"
    ],
-   "articles90": 75,
-   "recent20": 22,
-   "press": 61,
-   "firstArticleAt": "2026-11-23T22:59:00.000Z",
+   "articles90": 77,
+   "recent20": 20,
+   "press": 64,
+   "firstArticleAt": "2026-11-23T23:23:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "러시아 군용기 울릉도 근접에 경계경보…'北항공기' 안내 소동",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T00:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929282?sid=102"
+     "title": "러 군용기 카디즈 진입…울릉도 한때 경계경보",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-24T00:24:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261124500081"
     },
     {
-     "title": "울릉도 경계경보 3분 만에 해제…러 군용기 KADIZ 진입, 영공 침범은 없...",
-     "press": "news.knn.co.kr",
-     "publishedAt": "2026-11-24T00:14:00.000Z",
-     "link": "https://news.knn.co.kr/news/article_sns/1896"
+     "title": "軍 \"北 항공기 아닌 러시아 군용기 접근\"…울릉군 한때 경계경보",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-24T00:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142900?sid=100"
     },
     {
-     "title": "경북도, 울릉 경계경보 해제 문자에 '북한 항공기' 잘못 안내",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T00:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016459571?sid=102"
+     "title": "러시아 군용기 카디즈 진입…울릉도 한때 경계경보",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-24T00:18:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904148"
+    }
+   ]
+  },
+  {
+   "keyword": "북한 비행체 영공 침범",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 66,
+   "recent20": 12,
+   "press": 50,
+   "firstArticleAt": "2026-11-23T23:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "러시아 군용기 접근했는데 '북한 항공기'…문자 오발송, 울릉 혼란",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-24T00:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405328?sid=102"
+    },
+    {
+     "title": "합참 \"러 군용기 울릉도 근접…영공 침범 없어\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-24T00:18:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172938"
+    },
+    {
+     "title": "러시아 군용기 접근했는데 '북한 항공기'?…경북도, 문자 오발송에 울릉...",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-24T00:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545470?sid=103"
     }
    ]
   },
   {
    "keyword": "홈플러스 온라인 배송 중단",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 35,
-   "recent20": 7,
-   "press": 35,
-   "firstArticleAt": "2026-11-23T22:46:00.000Z",
+   "articles90": 38,
+   "recent20": 10,
+   "press": 38,
+   "firstArticleAt": "2026-11-23T22:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "홈플러스, 26일부터 온라인 배송 중단…상품 수급 차질 여파",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-24T00:08:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2022438"
+     "title": "온라인 배송 멈추는 홈플러스…매출 회복·매각 모두 난항",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-24T00:24:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261124500074"
     },
     {
-     "title": "홈플러스, 26일부터 온라인 배송 중단…경영난 심화",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-24T00:08:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321583&inflow=N"
+     "title": "자금난 홈플러스, 온라인 배송도 결국 멈춘다…26일부터 중단",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-24T00:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002249649?sid=101"
     },
     {
-     "title": "홈플러스 26일부터 온라인 배송 멈춘다…\"자금난에 상품 수급 차질\"",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-24T00:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002446577?sid=103"
+     "title": "홈플러스, 온라인 배송 멈추고 ‘셧다운’ 초읽기… 이번주가 분수령",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-24T00:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206847?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "지하철 파업",
+   "sources": [
+    "google"
+   ],
+   "articles90": 27,
+   "recent20": 15,
+   "press": 22,
+   "firstArticleAt": "2026-11-23T22:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울지하철 노사, 총파업 하루 앞두고 막판 교섭…결렬 시 출퇴근길 혼...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-24T00:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003158646?sid=102"
+    },
+    {
+     "title": "서울지하철 내일 멈추나…노사 오늘 최종 담판",
+     "press": "magazine.hankyung.com",
+     "publishedAt": "2026-11-24T00:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/050/0000113661?sid=101"
+    },
+    {
+     "title": "서울 지하철 25일 총파업 예고…출근길 정상 운행·버스 3519회 증편",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T00:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009306239?sid=102"
     }
    ]
   },
@@ -112,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 5,
-   "press": 17,
-   "firstArticleAt": "2026-11-23T22:48:00.000Z",
+   "articles90": 16,
+   "recent20": 2,
+   "press": 16,
+   "firstArticleAt": "2026-11-23T22:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,46 +171,14 @@
    ]
   },
   {
-   "keyword": "지하철 파업",
-   "sources": [
-    "google"
-   ],
-   "articles90": 16,
-   "recent20": 7,
-   "press": 16,
-   "firstArticleAt": "2026-11-23T22:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서울지하철 노사 오늘 막판 담판…결렬 땐 내일 파업",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T00:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929281?sid=102"
-    },
-    {
-     "title": "서울 지하철 총파업 25일 기로…출근시간 100% 운행 계획",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-24T00:10:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284558"
-    },
-    {
-     "title": "서울시, 지하철 총파업 대비 비상수송대책…출근길 100% 운행",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-24T00:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834996?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "정우성",
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T22:50:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T23:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -202,11 +201,107 @@
      "link": "https://m.entertain.naver.com/article/311/0002083372"
     }
    ]
+  },
+  {
+   "keyword": "미래에셋증권",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T23:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미래에셋증권, 육군 56사단에 금융교육·위문금 전달",
+     "press": "handmk.com",
+     "publishedAt": "2026-11-24T00:14:00.000Z",
+     "link": "https://www.handmk.com/news/articleView.html?idxno=45373"
+    },
+    {
+     "title": "미래에셋증권, IB사업부 신설 1년 만에 폐지...IB부문 체제로 재편",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-23T23:54:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=230227"
+    },
+    {
+     "title": "미래에셋증권, IB사업부 신설 1년 만에 폐지…2개 부문 체제 개편",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-23T23:08:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026112407593084901"
+    }
+   ]
+  },
+  {
+   "keyword": "구하라 7주기 여전히 그리움",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T22:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "故구하라 7주기…여전한 그리움",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T23:58:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284546"
+    },
+    {
+     "title": "故 구하라, 오늘(24일) 7주기…여전히 그리운 별",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-23T23:02:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795473918531416006"
+    },
+    {
+     "title": "'구하라법' 마침내 시행됐는데…故 구하라 7주기, 여전한 그리움",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-23T22:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083362"
+    }
+   ]
+  },
+  {
+   "keyword": "박보경 대시 투입",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T23:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김서형, 건강 악화로 촬영 중 드라마 하차…박보경 긴급 투입",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T23:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005767991"
+    },
+    {
+     "title": "촬영까지 했는데…김서형, 건강 악화로 '대시' 하차→'진선규♥' 박보경...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-23T23:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468995"
+    },
+    {
+     "title": "김서형, '대시' 촬영 중 건강 악화로 하차…박보경 대체 투입",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-23T23:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005445343"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1221,
+  "flagged": 1223,
   "matched": 650,
   "avgLeadMin": 548,
   "recent": [
