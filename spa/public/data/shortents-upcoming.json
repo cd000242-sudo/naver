@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T23:54:59.992Z",
+ "builtAt": "2026-11-24T00:05:03.083Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,166 +8,134 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "울릉도 경계경보",
    "sources": [
-    "nate",
+    "signal.bz",
     "daum"
    ],
-   "articles90": 47,
-   "recent20": 31,
-   "press": 41,
+   "articles90": 62,
+   "recent20": 23,
+   "press": 53,
    "firstArticleAt": "2026-11-23T22:59:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "러 군용기 울릉도 근접에 한때 대피경보...경보 발령 후 해제",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-23T23:54:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566069"
+     "title": "러시아 군용기 울릉도 근접에 경계경보…\"영공 침범 없어\"",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-24T00:04:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106446"
     },
     {
-     "title": "러시아 군용기 울릉도 근접 한때 경계경보…\"영공 침범 없어\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-23T23:54:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326255/?sc=Naver"
+     "title": "러시아 군용기 울릉도 접근에 한때 경계경보…軍 \"영공 침범 없다\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-24T00:04:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086896"
     },
     {
-     "title": "러 군용기 울릉도 근접에 경계경보…합참 \"영공 침범 없었다\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-23T23:52:00.000Z",
-     "link": "https://www.ajunews.com/view/20261124083929869"
+     "title": "러 군용기 여러대, 울릉도 근접…한때 경계경보 발령",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-24T00:02:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321582&inflow=N"
     }
    ]
   },
   {
-   "keyword": "북한 항공기 추정 비행체",
+   "keyword": "북한 비행체 영공 침범",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 47,
-   "recent20": 9,
-   "press": 38,
+   "articles90": 67,
+   "recent20": 18,
+   "press": 48,
    "firstArticleAt": "2026-11-23T23:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘北항공기 영공침범’ 소동…합참 “러 군용기 KADIZ 침범, 영공침범 없...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-23T23:50:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261124010009092"
+     "title": "러시아 군용기 울릉도 근접에 경계경보…\"영공 침범 없어\"",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-24T00:04:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106446"
     },
     {
-     "title": "[속보] 군 “北항공기 아닌 러 군용기 울릉도 근접 후 이탈...영공침범 ...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-23T23:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702473?sid=100"
+     "title": "러시아 군용기 울릉도 접근에 한때 경계경보…軍 \"영공 침범 없다\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-24T00:04:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086896"
     },
     {
-     "title": "울릉군 경계경보에 \"러시아 항공기? 북한 항공기?\" …안내 혼선",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-23T23:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652984?sid=102"
+     "title": "러시아군용기 접근했는데 '북한 항공기'…문자 오발송, 울릉 혼란",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T00:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016459546?sid=100"
     }
    ]
   },
   {
-   "keyword": "김민선 유현조 이다연 LPGA 출전",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 19,
-   "recent20": 4,
-   "press": 18,
-   "firstArticleAt": "2026-11-23T22:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민선·유현조·이다연, LPGA 진출 확정…한국 골프 새 도전",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-23T23:51:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085892"
-    },
-    {
-     "title": "美무대 향하는 김민선·유현조·이다연, LPGA 동반 입성",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-23T23:50:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/396/0000761759"
-    },
-    {
-     "title": "김민선·유현조·이다연, 내년에 LPGA 투어서 뛴다",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-23T23:48:00.000Z",
-     "link": "https://www.ajunews.com/view/20261124084057891"
-    }
-   ]
-  },
-  {
-   "keyword": "선관위 직원 영장심사",
+   "keyword": "홈플러스 온라인 배송 중단",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-23T22:27:00.000Z",
+   "articles90": 30,
+   "recent20": 10,
+   "press": 30,
+   "firstArticleAt": "2026-11-23T22:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "선관위 특검 첫 영장 8건 중 7건 기각…\"상급자 포함 재청구 검토\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-23T23:54:00.000Z",
-     "link": "https://www.ajunews.com/view/20261124082804829"
+     "title": "홈플러스, 26일부터 상품수급 차질로 ‘온라인 배송’ 중단",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-24T00:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484601?sid=101"
     },
     {
-     "title": "'개표상황표 은닉' 선관위 직원 1명 구속...나머지 7명 기각",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-23T23:54:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106445"
+     "title": "'자금난' 홈플러스, 26일부터 온라인 배송 중단…\"상품 수급 차질\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-23T23:56:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326254/?sc=Naver"
     },
     {
-     "title": "특검 ‘1호 영장 청구’ 선관위 직원 8명 중 7명 기각…“재청구 검토”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-23T23:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685398?sid=102"
+     "title": "납품대금·임금 체불 이어 상품 수급 차질... 홈플러스, 26일부터 온라인...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-23T23:54:00.000Z",
+     "link": "https://www.insight.co.kr/news/583301"
     }
    ]
   },
   {
-   "keyword": "나의 유죄인간",
+   "keyword": "선관위 직원 1명 구속",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 16,
+   "articles90": 17,
    "recent20": 5,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T22:40:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-23T22:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'잘생쁨' 설인아, 액션·로맨스 다 잡았다…'유죄인간'으로 증명한 존재...",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-23T23:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328885"
-    },
-    {
-     "title": "김인권, '나의 유죄인간' 종영 소감 공개",
+     "title": "선관위 직원 1명 구속·7명 기각…개표 정정에도 당락 유지",
      "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T23:46:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284535"
+     "publishedAt": "2026-11-24T00:02:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284552"
     },
     {
-     "title": "'나의 유죄인간' 김인권, 종영 소감",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-23T23:40:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611240112"
+     "title": "선거 개표상황표 '은닉·위조' 선관위 직원 1명 구속…특검 첫 신병 확보",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-24T00:00:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086871"
+    },
+    {
+     "title": "‘투표율 허위 입력’ 선관위 직원 8명 중 1명 구속",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T23:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767993?sid=102"
     }
    ]
   },
@@ -176,126 +144,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-23T22:33:00.000Z",
+   "articles90": 13,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-23T22:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울지하철 노사 최종교섭…결렬 땐 내일 첫차부터 파업",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-23T23:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727445?sid=102"
+     "title": "서울지하철 노사 오늘 최종 담판…결렬 땐 내일 첫차부터 파업",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-24T00:04:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326257/?sc=Naver"
     },
     {
-     "title": "서울지하철 노사 오늘 막판 담판…결렬 땐 내일 첫차부터 파업",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-23T23:38:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=729096"
+     "title": "서울지하철 파업 하루 앞두고 최종 교섭...출근길 혼란 막을까",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-24T00:00:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566073"
     },
     {
-     "title": "[투데이 라인업] 서울 지하철 노사 최종 교섭 / 이용철 법무부 장관 후...",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-23T23:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979580?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "나스닥 100",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 5,
-   "press": 9,
-   "firstArticleAt": "2026-11-23T22:34:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한투운용, 토스뱅크서 펀드 2종 단독 판매...나스닥·반도체 투자",
-     "press": "ftoday.co.kr",
-     "publishedAt": "2026-11-23T23:54:00.000Z",
-     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=370403"
-    },
-    {
-     "title": "한투운용, 토스뱅크서 나스닥·반도체 펀드 단독 판매…2영업일 환매",
-     "press": "popcornnews.net",
-     "publishedAt": "2026-11-23T23:50:00.000Z",
-     "link": "http://www.popcornnews.net/news/articleView.html?idxno=141188"
-    },
-    {
-     "title": "한국투자신탁운용, 토스뱅크서 미국 나스닥·글로벌 반도체 펀드 단독 ...",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-23T23:46:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=154383"
-    }
-   ]
-  },
-  {
-   "keyword": "김서형 하차, 박보경 합류",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T22:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김서형 '대시' 하차…박보경 대체, 방송 일정은?",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T23:54:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284544"
-    },
-    {
-     "title": "김서형 '대시', 4년 만의 안방 복귀 무산-박보경 대체",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-23T23:40:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95777"
-    },
-    {
-     "title": "촬영까지 했는데…김서형, 건강 악화로 '대시' 하차→'진선규♥' 박보경...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-23T23:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468995"
-    }
-   ]
-  },
-  {
-   "keyword": "개인정보",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T22:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"카카오페이 개인정보 4천만건 팝니다\"…가짜 해커 광고 기승",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-23T23:54:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=729107"
-    },
-    {
-     "title": "HD현대로보틱스 해킹으로 개인정보 유출, 기업명·부서·직책 등 10개 항...",
-     "press": "dailysecu.com",
-     "publishedAt": "2026-11-23T23:12:00.000Z",
-     "link": "https://www.dailysecu.com/news/articleView.html?idxno=209681"
-    },
-    {
-     "title": "삼성증권, '고객의 소리' 8241명 개인정보 유출...배상은? [전문]",
-     "press": "dailybrief.co.kr",
-     "publishedAt": "2026-11-23T22:50:00.000Z",
-     "link": "https://www.dailybrief.co.kr/news/articleView.html?idxno=7389"
+     "title": "서울지하철 총파업 하루 앞…'2212명 감축' 놓고 노사 평행선",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T00:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009306164?sid=102"
     }
    ]
   },
@@ -305,12 +177,18 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-23T22:29:00.000Z",
+   "firstArticleAt": "2026-11-23T22:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "진주시, 2027년 예산 1조9424억 편성… 미래산업·원도심에 집중",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-24T00:02:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611231754405560262"
+    },
     {
      "title": "농협 진주시지부·진주시농축협운영협의회 ‘공명선거 실천 결의대회’",
      "press": "nongmin.com",
@@ -322,12 +200,38 @@
      "press": "knnews.co.kr",
      "publishedAt": "2026-11-23T22:58:00.000Z",
      "link": "https://www.knnews.co.kr/news/articleView.php?idxno=1555777"
+    }
+   ]
+  },
+  {
+   "keyword": "박보경 대시 투입",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T22:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김서형, 건강 악화로 촬영 중 드라마 하차…박보경 긴급 투입",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T23:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005767991"
     },
     {
-     "title": "진주시, 내년 예산 1조9424억원 편성",
-     "press": "kfenews.co.kr",
-     "publishedAt": "2026-11-23T22:56:00.000Z",
-     "link": "https://www.kfenews.co.kr/news/articleView.html?idxno=668568"
+     "title": "촬영까지 했는데…김서형, 건강 악화로 '대시' 하차→'진선규♥' 박보경...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-23T23:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468995"
+    },
+    {
+     "title": "김서형, '대시' 촬영 중 건강 악화로 하차…박보경 대체 투입",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-23T23:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005445343"
     }
    ]
   }
@@ -335,9 +239,51 @@
  "hitRate": {
   "days": 7,
   "flagged": 1220,
-  "matched": 648,
-  "avgLeadMin": 586,
+  "matched": 652,
+  "avgLeadMin": 557,
   "recent": [
+   {
+    "keyword": "조규성 골! 미트윌란 승리!",
+    "hitKeyword": "조규성 6호골 미트윌란",
+    "hitAt": "2026-11-24T09:00:00+09:00",
+    "leadMin": 55
+   },
+   {
+    "keyword": "하정우 차정원 청첩장 10년 열애",
+    "hitKeyword": "하정우 차정원 청첩장",
+    "hitAt": "2026-11-24T09:00:00+09:00",
+    "leadMin": 55
+   },
+   {
+    "keyword": "하정우 차정원 10년 열애",
+    "hitKeyword": "하정우 차정원 청첩장",
+    "hitAt": "2026-11-24T09:00:00+09:00",
+    "leadMin": 35
+   },
+   {
+    "keyword": "김민선 유현조 이다연, LPGA 출전권 확보",
+    "hitKeyword": "김민선 유현조 이다연 LPGA",
+    "hitAt": "2026-11-24T09:00:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "김서형 대시 하차",
+    "hitKeyword": "배우 김서형 하차",
+    "hitAt": "2026-11-24T09:00:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "김민선 유현조 이다연 LPGA 출전",
+    "hitKeyword": "김민선 유현조 이다연 LPGA",
+    "hitAt": "2026-11-24T09:00:00+09:00",
+    "leadMin": 15
+   },
+   {
+    "keyword": "김서형 하차, 박보경 합류",
+    "hitKeyword": "배우 김서형 하차",
+    "hitAt": "2026-11-24T09:00:00+09:00",
+    "leadMin": 15
+   },
    {
     "keyword": "오늘 날씨 영하권",
     "hitKeyword": "전국 영하권 추위",
@@ -355,48 +301,6 @@
     "hitKeyword": "우리들의 발라드2 TOP12",
     "hitAt": "2026-11-24T08:00:00+09:00",
     "leadMin": 388
-   },
-   {
-    "keyword": "소비심리 하락",
-    "hitKeyword": "주가 폭락 소비심리 악화",
-    "hitAt": "2026-11-24T08:00:00+09:00",
-    "leadMin": 86
-   },
-   {
-    "keyword": "트럼프, 젠슨 황 복귀 결정 개입",
-    "hitKeyword": "젠슨 황 엔비디아 복귀",
-    "hitAt": "2026-11-24T08:00:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "젠슨 황 복귀",
-    "hitKeyword": "젠슨 황 엔비디아 복귀",
-    "hitAt": "2026-11-24T08:00:00+09:00",
-    "leadMin": 16
-   },
-   {
-    "keyword": "엔비디아 폭등",
-    "hitKeyword": "엔비디아 CEO 복귀",
-    "hitAt": "2026-11-24T07:30:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "상철 방귀 계약결혼",
-    "hitKeyword": "계약결혼 상철 영숙",
-    "hitAt": "2026-11-24T07:00:00+09:00",
-    "leadMin": 8557
-   },
-   {
-    "keyword": "미국 디지털 301조 조사",
-    "hitKeyword": "미국 한국 투자 조사",
-    "hitAt": "2026-11-24T07:00:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "놀부 기업회생 신청 기각",
-    "hitKeyword": "놀부 회생신청 기각",
-    "hitAt": "2026-11-24T06:30:00+09:00",
-    "leadMin": 650
    }
   ]
  }
