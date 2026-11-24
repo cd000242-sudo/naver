@@ -4,7 +4,7 @@ export const NAV_LOGIN_PATH: string;
 export const LOGIN_EVENT: string;
 
 /** `icon` names one of the eight menu icons (see MenuIcon); the community boards have none. */
-export type NavChild = Readonly<{ key: string; label: string; to: string; icon?: string; desc: string; short?: string }>;
+export type NavChild = Readonly<{ key: string; label: string; to: string; icon?: string; desc: string; short?: string; badge?: boolean }>;
 export type NavLinkItem = Readonly<{ type: 'link'; key: string; label: string; to: string; badge?: boolean; featured?: boolean }>;
 export type NavGroupItem = Readonly<{ type: 'group'; key: string; label: string; badge?: boolean; items: readonly NavChild[] }>;
 export type NavItem = NavLinkItem | NavGroupItem;

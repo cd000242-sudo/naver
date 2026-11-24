@@ -98,6 +98,13 @@ test('new-notice badge moved from Home to the Community group', () => {
     assert.deepEqual(flagged, ['community']);
 });
 
+test('the new-notice badge also marks WHERE the news is: the 공지사항 row, in the dropdown and on the phone', () => {
+    const group = NAV_ITEMS.find((item) => item.key === 'community');
+    assert.deepEqual(group.items.filter((child) => child.badge).map((child) => child.key), ['community-notice']);
+    const sheet = NAV_MOBILE_SECTIONS.find((section) => section.title === '커뮤니티');
+    assert.deepEqual(sheet.items.filter((row) => row.badge).map((row) => row.key), ['community-notice']);
+});
+
 test('mobile sheet lists every destination once, under headed groups, nothing collapsed', () => {
     const mobile = NAV_MOBILE_SECTIONS.flatMap((section) => section.items.map((item) => item.to));
     assert.deepEqual(pagesOf(mobile).sort(), [...NINE_PAGES].sort());

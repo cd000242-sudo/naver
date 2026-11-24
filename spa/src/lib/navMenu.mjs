@@ -36,7 +36,12 @@ const BOARD_DESC = Object.freeze({
     promo: '네이버 블로그 글 알리기',
 });
 
-const boardEntry = (board) => entry(`community-${board.id}`, board.label, communityPath({ board: board.id }), undefined, BOARD_DESC[board.id], undefined);
+/** The new-notice count is about one board: its row carries the badge too, so the reader sees where the news is. */
+const NOTICE_BOARD_ID = 'notice';
+const boardEntry = (board) => Object.freeze({
+    ...entry(`community-${board.id}`, board.label, communityPath({ board: board.id }), undefined, BOARD_DESC[board.id], undefined),
+    ...(board.id === NOTICE_BOARD_ID ? { badge: true } : {}),
+});
 
 /**
  * The community boards as menu entries, in the screen's own board order; each opens `/community?board=<id>`.
@@ -100,7 +105,7 @@ export const NAV_MOBILE_SECTIONS = Object.freeze([
     // The seven boards sit under the community heading; the new-notice badge rides on the heading.
     Object.freeze({
         title: '커뮤니티', badge: true,
-        items: Object.freeze(COMMUNITY_ENTRIES.map((child) => row(child.key, child.label, child.to, undefined))),
+        items: Object.freeze(COMMUNITY_ENTRIES.map((child) => row(child.key, child.label, child.to, undefined, child.badge ? { badge: true } : {}))),
     }),
 ]);
 

@@ -98,7 +98,7 @@ function NavDropdown({ item, pathname, search, unseenNotices, open, dispatch }: 
                     >
                         <MenuIcon name={child.icon} />
                         <span>
-                            <b>{child.label}</b>
+                            <b>{child.label}{child.badge ? <NewBadge count={unseenNotices} size="md" /> : null}</b>
                             <small>{child.desc}</small>
                         </span>
                     </Link>
