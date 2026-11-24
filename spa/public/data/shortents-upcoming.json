@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T16:26:52.570Z",
+ "builtAt": "2026-11-24T16:36:55.435Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,35 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "젠슨 황, 11일 만에 복귀",
+   "keyword": "젠슨 황 복귀와 증시 변동",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T15:00:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-24T15:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨황 복귀에 삼성전자·SK하이닉스 HBM 협력 기대",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-24T15:40:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1795534622693329276"
+     "title": "엔비디아 3%대 하락 출발…전날 ‘젠슨황 복귀’ 랠리 일부 반납",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T16:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300504?sid=104"
     },
     {
-     "title": "젠슨 황 효과, 일단 2400조",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-24T15:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567723?sid=101"
+     "title": "엔비디아 7%대 하락… 뉴욕 증시도 하락",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-24T15:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207082?sid=104"
     },
     {
-     "title": "[미국 특징주] 엔비디아, 젠슨 황 복귀 랠리 하루 만에 꺾여…6%대 급락",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-24T15:15:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125000007"
+     "title": "올해 증시 사이드카 101회 발동…2002년 이후 역대 최다",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-24T15:50:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630250"
     }
    ]
   },
@@ -47,10 +48,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T15:02:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-24T15:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-24T15:00:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-24T15:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
