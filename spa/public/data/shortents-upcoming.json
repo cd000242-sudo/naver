@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T12:41:26.976Z",
+ "builtAt": "2026-11-24T12:51:30.431Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 27,
-   "recent20": 7,
-   "press": 21,
+   "articles90": 32,
+   "recent20": 10,
+   "press": 26,
    "firstArticleAt": "2026-11-24T11:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "金여사, 권양숙 여사·노건호씨와 오찬 환담...한남동 관저",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-24T12:40:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326380/?sc=Naver"
+     "title": "권양숙 여사 “노무현과 이재명, 식성·수면 패턴·성격까지 모든 부분...",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-24T12:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053617?sid=100"
     },
     {
-     "title": "\"노무현·이재명, 식성·수면 패턴·성격까지 닮아\"…김혜경 여사, 권양...",
-     "press": "busan.com",
-     "publishedAt": "2026-11-24T12:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001408812?sid=100"
+     "title": "김혜경 여사, 권양숙 여사와 오찬... \"이 대통령과 노 대통령 닮아\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T12:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522287?sid=100"
     },
     {
-     "title": "김혜경 여사, 권양숙 여사와 관저 오찬…\"李대통령, 盧와 닮아\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-24T12:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357792?sid=100"
+     "title": "김혜경 여사 만난 노건호 “李 대통령이라 다행…너무 잘하고 계셔”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-24T12:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685771?sid=100"
     }
    ]
   },
   {
-   "keyword": "젠슨 황 복귀로 주가 폭등",
+   "keyword": "젠슨 황 복귀로 엔비디아 급등",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-24T11:15:00.000Z",
+   "articles90": 22,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-24T11:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "앤트로픽 주가, 개장전 거래서 나흘만에 공모가 아래로 하락",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-24T12:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014343100?sid=104"
+     "title": "젠슨 황 돌아왔지만 끝나지 않은 논란…美 의회 청문회까지",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-24T12:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078142?sid=105"
     },
     {
-     "title": "트럼프 개입에 '젠슨 황' 복귀...하루 200억 벌었다",
-     "press": "newsbrite.net",
-     "publishedAt": "2026-11-24T12:36:00.000Z",
-     "link": "http://www.newsbrite.net/news/articleView.html?idxno=201721"
+     "title": "[AI 예측] 앤트로픽 공모가 83달러 하회 확률 86%…엔비디아 뛸 때 내렸...",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-24T12:40:00.000Z",
+     "link": "http://coinreaders.com/272995"
     },
     {
-     "title": "젠슨 황 복귀 트럼프 개입에 “이런 정치 본 적 없어, 충격”···독일 ...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-24T12:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484838?sid=104"
+     "title": "독일 외무장관 \"트럼프의 젠슨 황 복귀 개입 충격…자제해야\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-24T12:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445892?sid=104"
     }
    ]
   },
@@ -80,7 +80,7 @@
     "signal.bz"
    ],
    "articles90": 13,
-   "recent20": 2,
+   "recent20": 0,
    "press": 13,
    "firstArticleAt": "2026-11-24T11:29:00.000Z",
    "exclusive": false,
@@ -107,14 +107,78 @@
    ]
   },
   {
+   "keyword": "대전 ACLE 베이징 3-2 승리",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-24T11:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[ACLE 기자회견] 베이징 잡고도 아쉬운 황선홍 감독 \"상대 요리할 수 있...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-24T12:44:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/413/0000227096"
+    },
+    {
+     "title": "[GOAL 현장] ‘대전 3골 폭발에도 2실점’ 황선홍 감독의 진단, “침착함...",
+     "press": "goal.com",
+     "publishedAt": "2026-11-24T12:41:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/216/0000143944"
+    },
+    {
+     "title": "'마사 결승골' 대전, ACLE 5차전서 베이징에 3-2 진땀승(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-24T12:26:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014343096"
+    }
+   ]
+  },
+  {
+   "keyword": "중국 대미 수출통제 유예",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-24T11:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "中, 핵심 광물 대미 수출통제 2개월 추가 유예…보잉 항공기 50대도 구매",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T12:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727949?sid=104"
+    },
+    {
+     "title": "중국, 핵심 광물 수출 통제 또 유예…보잉 항공기 50대 구매",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-24T12:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979715?sid=104"
+    },
+    {
+     "title": "중국, 대미 핵심광물 수출통제 2개월 미루고 보잉 구매",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T12:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929571?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "EU 하이브리드차 수입 제한",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 8,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T11:20:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-24T11:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,81 +203,23 @@
    ]
   },
   {
-   "keyword": "대전 ACLE 베이징 3-2 승리",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-24T11:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'마사 결승골' 대전, ACLE 5차전서 베이징에 3-2 진땀승(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-24T12:26:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014343096"
-    },
-    {
-     "title": "[ACLE 스타] 간절함 담긴 집념...'무한 압박' 이순민 헌신이 이끈 대전의...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-24T12:24:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/413/0000227093"
-    },
-    {
-     "title": "대전하나시티즌, ACLE 베이징에 3-2 진땀승…2연패 끊고 승점 7",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-24T12:20:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285132"
-    }
-   ]
-  },
-  {
-   "keyword": "중국 대미 수출통제 유예",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-24T11:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "중국, 대미 핵심광물 수출통제 2개월 미루고 보잉 구매",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T12:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929571?sid=104"
-    },
-    {
-     "title": "中, 핵심광물 美수출통제 미루고 보잉 구매…\"휴전 의지\" 관측(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T12:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461507?sid=104"
-    },
-    {
-     "title": "시진핑 방미 앞둔 中, 갈륨·게르마늄 등 대미 수출 통제 유예 2개월 연...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-24T12:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177824?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "하나저축은행 552명 개인정보 유출",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
    "firstArticleAt": "2026-11-24T11:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "하나저축은행, 모바일 시스템 뚫렸다…고객 552명 정보 유출",
+     "press": "paxetv.com",
+     "publishedAt": "2026-11-24T12:42:00.000Z",
+     "link": "http://www.paxetv.com/news/articleView.html?idxno=287762"
+    },
     {
      "title": "하나저축銀 해킹…고객 552명 개인정보 유출",
      "press": "g-enews.com",
@@ -225,12 +231,6 @@
      "press": "newsian.co.kr",
      "publishedAt": "2026-11-24T12:04:00.000Z",
      "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101946"
-    },
-    {
-     "title": "하나저축은행 해킹에 552명 정보유출 … 추가 피해 조사 중",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-24T11:56:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/24/2026112450386.html"
     }
    ]
   },
@@ -333,7 +333,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1390,
+  "flagged": 1391,
   "matched": 729,
   "avgLeadMin": 526,
   "recent": [
