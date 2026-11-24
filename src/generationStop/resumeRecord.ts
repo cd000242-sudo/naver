@@ -31,6 +31,8 @@ export interface GstopRecord {
   /** Daily runs: which job stopped. */
   readonly accountId?: string;
   readonly jobKey?: string;
+  /** Run-specific data a resume needs (single full-auto: the inputs of the run; never credentials). */
+  readonly resumeData?: unknown;
 }
 
 export interface GstopRecordInput {
@@ -46,6 +48,7 @@ export interface GstopRecordInput {
   readonly stoppedItemId?: string;
   readonly accountId?: string;
   readonly jobKey?: string;
+  readonly resumeData?: unknown;
 }
 
 export function gstopBuildRecord(input: GstopRecordInput): GstopRecord {
@@ -67,6 +70,7 @@ export function gstopBuildRecord(input: GstopRecordInput): GstopRecord {
     ...(input.stoppedItemId ? { stoppedItemId: input.stoppedItemId } : {}),
     ...(input.accountId ? { accountId: input.accountId } : {}),
     ...(input.jobKey ? { jobKey: input.jobKey } : {}),
+    ...(input.resumeData !== undefined ? { resumeData: input.resumeData } : {}),
   };
 }
 

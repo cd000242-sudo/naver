@@ -10,6 +10,8 @@ const loaders: Record<string, () => Promise<unknown>> = {
   generationStopModal: () => import('../renderer/modules/generationStopModal.js'),
   generationStopResumeCard: () => import('../renderer/modules/generationStopResumeCard.js'),
   continuousStopResume: () => import('../renderer/modules/continuousStopResume.js'),
+  fullAutoStopResume: () => import('../renderer/modules/fullAutoStopResume.js'),
+  multiAccountStopResume: () => import('../renderer/modules/multiAccountStopResume.js'),
 };
 const modules = Object.keys(loaders);
 

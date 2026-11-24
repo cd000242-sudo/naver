@@ -10,8 +10,9 @@ interface SettingsAgentUsage {
   rateLimitedAt?: number;
 }
 const settingsAgentTargets = [
-  { provider: 'codex', title: 'Codex', url: 'https://chatgpt.com/settings/usage', action: '공식 할당량 확인', help: 'ChatGPT 설정 → 사용량에서 남은 한도와 초기화 시각을 확인하세요.' },
+// Display order: Claude Code first (the default writing engine), then Codex (the default image engine).
   { provider: 'claude', title: 'Claude Code', url: 'https://claude.ai/settings/usage', action: '공식 할당량 확인', help: 'Claude 설정 → 사용량에서 세션·주간 한도를 확인하세요.' },
+  { provider: 'codex', title: 'Codex', url: 'https://chatgpt.com/settings/usage', action: '공식 할당량 확인', help: 'ChatGPT 설정 → 사용량에서 남은 한도와 초기화 시각을 확인하세요.' },
   { provider: 'gemini', title: 'Antigravity', url: 'https://antigravity.google/docs/cli/commands/usage', action: '할당량 확인 방법', help: 'Antigravity의 설정 또는 CLI /usage에서 모델별 잔여 할당량을 확인하세요.' },
 ] as const;
 
@@ -54,9 +55,12 @@ function settingsAgentButton(text: string): HTMLButtonElement {
 
 function settingsAgentAddUsage(provider: SettingsAgentProvider, parent: HTMLElement): void {
   const target = settingsAgentTargets.find((item) => item.provider === provider)!;
-  const box = settingsAgentElement('div');
-  box.style.cssText = 'padding:12px;border:1px solid var(--nv-line,#6b7280);border-radius:10px;background:var(--bg-secondary);';
-  box.append(settingsAgentElement('strong', `${target.title} 사용량 · 할당량`));
+  // Folded by default: the account line above already shows the count and a reached limit.
+  const box = settingsAgentElement('details');
+  box.style.cssText = 'padding:10px 12px;border:1px solid var(--nv-line,#6b7280);border-radius:10px;background:var(--bg-secondary);';
+  const summary = settingsAgentElement('summary', `${target.title} 사용량 · 할당량 보기`);
+  summary.style.cssText = 'cursor:pointer;font-weight:700;font-size:0.85rem;color:var(--text-strong);';
+  box.append(summary);
   const status = settingsAgentElement('p', '사용 기록을 확인하고 있습니다.');
   status.id = `settings-${provider}-usage`;
   status.setAttribute('role', 'status');

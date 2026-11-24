@@ -632,6 +632,8 @@ try {
     'generationStopGate.js',
     'generationStopImages.js',
     'continuousStopResume.js',
+    'fullAutoStopResume.js',      // [2026-11-24] single full-auto: saved stop record + resume (fullAutoFlow · publishingHandlers import it)
+    'multiAccountStopResume.js',  // [2026-11-24] multi-account: saved stop record + queue restore (multiAccountManager imports it)
     'generationStopResumeCard.js',
     'pipelineConfig.js',  // [Phase 7.1] 발행 파이프라인 설정 단일 해석처 (publishingHandlers/continuousPublishing/multiAccountManager보다 먼저 로드)
     'accountPauseModal.js',  // [2026-10-09] 메인 화면 발행 중 계정 멈춤 안내 패널 (continuousPublishing/fullAutoFlow 가 import)

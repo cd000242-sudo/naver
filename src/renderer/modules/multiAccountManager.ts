@@ -33,6 +33,7 @@ import { generationStopEndRun, generationStopRunStage } from './generationStopGa
 import { gstopFillShoppingSlots } from '../../generationStop/shoppingSlots.js';
 import { gstopClassify } from '../../generationStop/stopClassifier.js';
 import { generationStopIsEngineLevelError, generationStopRunImages } from './generationStopImages.js';
+import { multiAccountStopResumeClear, multiAccountStopResumeContext, multiAccountStopResumeRegister, multiAccountStopResumeTakeArticle } from './multiAccountStopResume.js';
 import { describeFullAutoImageReview } from '../../image/fullAuto/fullAutoPublishDecision.js';
 import { recheckFullAutoDecisionBeforePublish, runFullAutoImages } from '../../image/fullAuto/fullAutoImageRunner.js';
 import { escapeHtml } from '../utils/htmlUtils.js';
@@ -3163,7 +3164,7 @@ async function initMultiAccountPublishModal() {
             badge.style.color = '#10b981';
         }
     }
-    document.getElementById('ma-start-publish-btn')?.addEventListener('click', async () => {
+    const maStartPublishFromQueue = async () => {
         const unlocked = await window.checkFeatureLockAndShow?.('multi-account-fullauto');
         if (unlocked === false)
             return;
@@ -3414,6 +3415,8 @@ async function initMultiAccountPublishModal() {
                 addProgressItem(`   📝 AI 콘텐츠 생성 중...`, 'info');
                 let structuredContent = null;
                 let generatedImages = [];
+                // [2026-11-24] One saved stop record per item (writing and image stops overwrite it): light queue copy, article, ledger.
+                const maStopCtx = multiAccountStopResumeContext(queueItem, () => publishQueue, () => structuredContent, `${i + 1}/${totalItems}번째 글 · ${queueItem.accountName || ''}`);
                 if (queueItem.sourceKeyword) {
                     setKeywordTitleOptionsFromItem(queueItem.sourceKeyword, queueItem.keywordAsTitle, queueItem.keywordTitlePrefix);
                 }
@@ -3483,12 +3486,17 @@ async function initMultiAccountPublishModal() {
                     }
                     console.log('[FullAuto] 콘텐츠 생성 요청:', contentPayload);
                     // [2026-11-24] A writing stop (limit / login / model) opens the stop window: same engine, another engine, or stop here.
-                    //   (No saved record for multi-account: the choice is made on the spot.)
+                    //   The stop is saved, so the "이어서 발행" card can restore the queue after the app was closed.
                     const maTextEngine = (document.querySelector('input[name="primaryGeminiTextModel"]:checked'))?.value || contentPayload.assembly.generator;
                     let paywalledResult = null;
                     const contentResult = (await generationStopRunStage('text', maTextEngine,
-                        { kind: 'multi', label: String(queueItem.accountName || ''), noRecord: true },
+                        maStopCtx,
                         async (_engine, attempt) => {
+                            const maResumedArticle = multiAccountStopResumeTakeArticle(queueItem);
+                            if (maResumedArticle) {
+                                addMALog('📄 멈췄던 글이 이미 완성돼 있어 다시 쓰지 않고 이미지부터 이어 갑니다.', 'info');
+                                return { success: true, content: maResumedArticle };
+                            }
                             if (attempt > 1) contentPayload.assembly.generator = UnifiedDOMCache.getGenerator();
                             const apiClient = EnhancedApiClient.getInstance();
                             const apiResponse = await apiClient.call('generateStructuredContent', [contentPayload], {
@@ -3786,7 +3794,7 @@ async function initMultiAccountPublishModal() {
                                 },
                                 aiFallbackFn: generateImagesForAutomation,
                                 aiOptions: {
-                                    flightScope: queueItem.accountId || queueItem.id,
+                                    flightScope: queueItem.accountId || queueItem.id, stopContext: maStopCtx,
                                     headingImageMode: itemPipelineCfg.image.headingImageMode,
                                     imageModel: isShoppingAiMode
                                         ? itemPipelineCfg.shopping.aiImageModel
@@ -3814,7 +3822,7 @@ async function initMultiAccountPublishModal() {
                                     updateMAProgress(i, totalItems, queueItem.accountName, describeFullAutoImageStage(stage), 1, TOTAL_SUB_STEPS);
                                 },
                                 baseOptions: {
-                                    flightScope: queueItem.accountId || queueItem.id,
+                                    flightScope: queueItem.accountId || queueItem.id, stopContext: maStopCtx,
                                     imageModel: itemPipelineCfg.image.imageModel,
                                     fallbackProvider: resolveImageProviderFallback(),
                                     stopCheck: () => stopRequested || window.stopFullAutoPublish,
@@ -3830,7 +3838,7 @@ async function initMultiAccountPublishModal() {
                         else if (imageSource === 'naver') {
                             addMALog(`🔍 네이버 이미지 검색 시작 (키워드: ${structuredContent.keywords?.[0] || structuredContent.selectedTitle})`, 'info');
                             generatedImages = await generateImagesForAutomation(imageSource, headings, structuredContent.selectedTitle, {
-                                flightScope: queueItem.accountId || queueItem.id,
+                                flightScope: queueItem.accountId || queueItem.id, stopContext: maStopCtx,
                                 headingImageMode: itemPipelineCfg.image.headingImageMode,
                                 imageModel: isShoppingAiMode
                                     ? itemPipelineCfg.shopping.aiImageModel
@@ -3854,7 +3862,7 @@ async function initMultiAccountPublishModal() {
                             };
                             addMALog(`🎨 AI 이미지 생성 시작 (엔진: ${_maSourceNames[imageSource] || imageSource})`, 'info');
                             generatedImages = await generateImagesForAutomation(imageSource, headings, structuredContent.selectedTitle, {
-                                flightScope: queueItem.accountId || queueItem.id,
+                                flightScope: queueItem.accountId || queueItem.id, stopContext: maStopCtx,
                                 headingImageMode: itemPipelineCfg.image.headingImageMode,
                                 imageModel: isShoppingAiMode
                                     ? itemPipelineCfg.shopping.aiImageModel
@@ -4130,6 +4138,7 @@ async function initMultiAccountPublishModal() {
                     if (result.success && result.results?.[0]?.success) {
                         publishConfirmed = true;
                         queueItem.pipelineStatus = 'completed';
+                        multiAccountStopResumeClear(queueItem);
                         totalSuccess++;
                         networkWaitFailures.delete(queueItem.accountId);
                         updateMAStep('ma-step-publish', 'completed');
@@ -4327,6 +4336,21 @@ async function initMultiAccountPublishModal() {
                 console.warn('[FullAuto] 글 목록 갱신 실패:', e);
             }
         }
+    };
+    document.getElementById('ma-start-publish-btn')?.addEventListener('click', maStartPublishFromQueue);
+    // [2026-11-24] The "이어서 발행" card restores a saved queue here and starts it through the same start handler.
+    multiAccountStopResumeRegister({
+        getQueue: () => publishQueue,
+        setQueue: (items) => { publishQueue = items; },
+        render: () => renderQueue(),
+        start: maStartPublishFromQueue,
+        isRunning: () => isPublishing,
+        hasStarted: () => isPublishing && document.getElementById('ma-start-publish-btn')?.disabled === true,
+        listAccounts: async () => {
+            const result = await window.api.getAllBlogAccounts();
+            if (!result?.success || !Array.isArray(result.accounts)) throw new Error(result?.message || '계정 목록이 비어 있습니다');
+            return result.accounts;
+        },
     });
     async function handleStopPublish() {
         stopRequested = true;

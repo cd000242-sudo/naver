@@ -76,4 +76,51 @@ describe('이어서 발행 카드', () => {
     expect(model[0].canResume).toBe(true);
     expect(model[1].canResume).toBe(false);
   });
+  describe('다중계정 · 단일 풀오토 기록', () => {
+    const multi = gstopBuildRecord({ kind: 'multi', info, label: '계정 A', id: 'multi-m2', now: 7, stoppedItemId: 'm2',
+      queue: [{ id: 'm1', status: 'completed' }, { id: 'm2', status: 'pending' }] });
+    const single = gstopBuildRecord({ kind: 'full-auto', info, label: '키워드 C', id: 'full-auto-1', now: 8, resumeData: { keywords: '키워드 C' } });
+    const singleNoInputs = gstopBuildRecord({ kind: 'full-auto', info, label: '키워드 D', id: 'full-auto-2', now: 9 });
+    const tick = () => new Promise((r) => setTimeout(r, 0));
+
+    it('제목과 [이어서 발행]: 대기열(다중계정)·입력값(풀오토)이 있을 때만', () => {
+      const rows = generationStopResumeCardModel([multi, single, singleNoInputs]);
+      expect(rows.map((row) => [row.id, row.title, row.canResume])).toEqual([
+        ['full-auto-2', '풀오토 발행', false], ['full-auto-1', '풀오토 발행', true], ['multi-m2', '다중계정 발행', true],
+      ]);
+      expect(rows[2].progress).toBe('완료 1 · 멈춤 1 · 남음 0');
+    });
+
+    it('[이어서 발행]: 그 모듈에 기록을 넘기고, 시작된 뒤에만 기록을 지운다', async () => {
+      const d = { ...deps([multi]), resumeRun: vi.fn(async () => true) };
+      await generationStopResumeCardRefresh(d);
+      (document.querySelector('[data-gstop-resume]') as HTMLButtonElement).click();
+      await tick(); await tick();
+      expect(d.resumeRun).toHaveBeenCalledWith(expect.objectContaining({ id: 'multi-m2' }));
+      expect(d.restoreQueue).not.toHaveBeenCalled();
+      expect(d.removed).toEqual(['multi-m2']);
+      expect(document.getElementById(GENERATION_STOP_CARD_ID)).toBeNull();
+    });
+
+    it('시작하지 못하면 기록과 카드를 그대로 둔다', async () => {
+      const d = { ...deps([single]), resumeRun: vi.fn(async () => false) };
+      await generationStopResumeCardRefresh(d);
+      const button = document.querySelector('[data-gstop-resume]') as HTMLButtonElement;
+      button.click();
+      await tick(); await tick();
+      expect(d.removed).toEqual([]);
+      expect(document.getElementById(GENERATION_STOP_CARD_ID)).not.toBeNull();
+      expect(button.disabled).toBe(false);
+    });
+
+    it('이어 가자마자 또 멈춰 새 기록이 저장됐으면 그 기록은 지우지 않는다', async () => {
+      const records: unknown[] = [single];
+      const d = { ...deps(records), list: async () => records as never,
+        resumeRun: vi.fn(async () => { records[0] = { ...single, createdAt: single.createdAt + 5000 }; return true; }) };
+      await generationStopResumeCardRefresh(d);
+      (document.querySelector('[data-gstop-resume]') as HTMLButtonElement).click();
+      await tick(); await tick();
+      expect(d.removed).toEqual([]);
+    });
+  });
 });

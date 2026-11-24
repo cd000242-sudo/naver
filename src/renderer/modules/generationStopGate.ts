@@ -28,6 +28,8 @@ export interface GenerationStopContext {
   readonly ledger?: ReturnType<typeof gstopCreateLedger>;
   readonly queue?: () => readonly GstopQueueEntry[];
   readonly stoppedItemId?: string;
+  /** Run-specific data a resume needs after the app was closed (never credentials). */
+  readonly resumeData?: () => unknown;
   readonly progressLine?: string;
   /** Shopping runs keep their image engine in one more key. */
   readonly shopping?: boolean;
@@ -114,7 +116,7 @@ function generationStopRecordOf(ctx: GenerationStopContext, info: GstopInfo, rec
   return gstopBuildRecord({
     kind: ctx.kind, info, label: ctx.label, id: recordId,
     article: ctx.article?.(), images: ctx.images?.(), ledger: ctx.ledger?.entries(),
-    queue: ctx.queue?.(), stoppedItemId: ctx.stoppedItemId,
+    queue: ctx.queue?.(), stoppedItemId: ctx.stoppedItemId, resumeData: ctx.resumeData?.(),
   });
 }
 

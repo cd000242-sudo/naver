@@ -28,6 +28,19 @@ describe('settings agents and collapsed credentials', () => {
     expect(input.value).toBe('custom-model'); input.dispatchEvent(new Event('change'));
     expect(handler).toHaveBeenCalledOnce();
   });
+  it('shows Claude Code first (the default writing engine) and keeps each usage box folded', () => {
+    mount();
+    const order = Array.from(document.querySelectorAll<HTMLInputElement>('#settings-agent-overview input[name="primaryGeminiTextModel"]')).map((input) => input.value);
+    expect(order).toEqual(['agent-claude', 'agent-codex', 'agent-gemini']);
+    for (const provider of ['codex', 'claude', 'gemini']) {
+      const usage = document.getElementById(`settings-${provider}-usage`)!.closest('details');
+      expect(usage, provider).not.toBeNull();
+      expect(usage!.open, provider).toBe(false);
+      expect(usage!.querySelector('summary')?.textContent, provider).toContain('사용량');
+      // The account box stays on the main screen: it is the part people change.
+      expect(document.querySelector(`[data-settings-agent-accounts="${provider}"]`)!.closest('details'), provider).toBeNull();
+    }
+  });
   it('collapses all API key cards while preserving their input nodes and values', () => {
     mount();
     for (const id of ['gemini-api-key','openai-api-key','claude-api-key','perplexity-api-key','naver-client-id','naver-hub-client-secret','naver-ad-api-key']) {

@@ -28,10 +28,10 @@ import { reconcileOpenaiImageModelSelection } from '../../image/openaiImageModel
 import { noteAccountPauseDispatch, showAccountPauseModal } from './accountPauseModal.js';
 import { gsPrefetchBatchProvider, gsPrefetchLabel, gsPrefetchMatchImages } from '../../image/fullAuto/gensparkBodyPrefetch.js';
 import { mergeCustomPrompt } from '../../contentRequestSections.js';
-import { gstopCreateLedger } from '../../generationStop/stageGate.js';
 import { gstopFillShoppingSlots } from '../../generationStop/shoppingSlots.js';
 import { generationStopIsEngineLevelError } from './generationStopImages.js';
 import { generationStopEndRun, generationStopResolveFailure, generationStopRunStage } from './generationStopGate.js';
+import { fullAutoStopResumeBeginRun, fullAutoStopResumeContext, fullAutoStopResumeFinishRun, fullAutoStopResumeMarkPublished } from './fullAutoStopResume.js';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.emitLog = emitLog;
 exports.resolveImageManagerKeys = resolveImageManagerKeys;
@@ -655,6 +655,8 @@ async function executeFullAutoFlow(formData) {
     if (!isContinuousInvocation) {
         window.stopFullAutoPublish = false;
     }
+    // [2026-11-24] One saved stop record per run; the publish button path may already own it (then it ends it, not us).
+    const ownsFullAutoStopRun = !isContinuousInvocation && fullAutoStopResumeBeginRun(formData);
     const modal = resolveFullAutoProgressModal(window.currentProgressModal, isContinuousInvocation);
     const checkShouldStop = () => {
         if (isFullAutoStopRequested(modal)) {
@@ -771,7 +773,7 @@ async function executeFullAutoFlow(formData) {
             // [2026-11-24] A writing stop (limit / login / model) opens the stop window: same engine, another engine, or stop here.
             const textEngineNow = (document.querySelector('input[name="primaryGeminiTextModel"]:checked'))?.value || formData.generator;
             structuredContent = (await generationStopRunStage('text', textEngineNow,
-                { kind: 'full-auto', label: String(formData.keywords || formData.title || '').slice(0, 40), noRecord: true },
+                fullAutoStopResumeContext(String(formData.keywords || formData.title || '').slice(0, 40)),
                 async (_engine, attempt) => {
                     if (attempt > 1) formData.generator = UnifiedDOMCache.getGenerator();
                     return generateFullAutoContent(formData);
@@ -1011,7 +1013,7 @@ async function executeFullAutoFlow(formData) {
             // [2026-11-24] Stop window state: the engine in use (changes only when the owner picks another one), the finished
             //   slots (never drawn again) and the finished thumbnail. The time budget restarts after the owner answered.
             let activeProvider = originalProvider;
-            const imageStopCtx = { kind: 'full-auto', label: String(formData.keywords || formData.title || '').slice(0, 40), noRecord: true, ledger: gstopCreateLedger(), shopping: isShoppingAiMode };
+            const imageStopCtx = fullAutoStopResumeContext(String(formData.keywords || formData.title || '').slice(0, 40), { shopping: isShoppingAiMode, article: () => structuredContent });
             let preservedThumbnail = null;
             let imageGenerationStartedAt = Date.now();
             const handOffImageStop = async (error) => {
@@ -1510,6 +1512,7 @@ async function executeFullAutoFlow(formData) {
         }
         if (automationResult?.success) {
             clearFullAutoContentRetryCache();
+            fullAutoStopResumeMarkPublished();
             setTimeout(() => {
                 try {
                     resetAllFields();
@@ -1547,6 +1550,7 @@ async function executeFullAutoFlow(formData) {
     }
     finally {
         if (!isContinuousInvocation) void generationStopEndRun();
+        if (ownsFullAutoStopRun) void fullAutoStopResumeFinishRun();
     }
 }
 async function executeSemiAutoFlow(formData) {
@@ -3197,7 +3201,7 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
         appendLog(`🎨 쇼핑 소제목 ${shoppingBatchItems.length}개를 한 배치로 생성해 중복을 검사합니다.`);
         // [2026-11-24] Batch first; the slots that did not arrive are made again ONE AT A TIME with the SAME engine. A slot that
         //   still fails goes to the stop window (same engine / another engine / stop here); finished slots stay in the ledger.
-        const shoppingStopCtx = { kind: 'full-auto', label: String(imageArticleTitle || '').slice(0, 40), noRecord: true, ledger: gstopCreateLedger(), shopping: true };
+        const shoppingStopCtx = fullAutoStopResumeContext(String(imageArticleTitle || '').slice(0, 40), { shopping: true, article: () => structuredContentSnapshot });
         const safeBatch = (await generationStopRunStage('image', imageSource, shoppingStopCtx, async (engine) => {
             const requestShopping = async (slots) => {
                 const result = await generateImagesWithCostSafety({

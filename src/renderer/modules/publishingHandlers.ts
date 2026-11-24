@@ -30,6 +30,8 @@ import { describeFullAutoImageReview } from '../../image/fullAuto/fullAutoPublis
 import { describeFullAutoImageStage } from '../../image/fullAuto/fullAutoImageSlots.js';
 import { recheckFullAutoDecisionBeforePublish, runFullAutoImages } from '../../image/fullAuto/fullAutoImageRunner.js';
 import { publishPreflightEnsureReady } from './publishStartPreflight.js';
+import { generationStopRunStage } from './generationStopGate.js';
+import { fullAutoStopResumeBeginRun, fullAutoStopResumeContext, fullAutoStopResumeFinishRun, fullAutoStopResumeMarkPublished } from './fullAutoStopResume.js';
 import { applyShoppingCollectedToContent, prepareShoppingCollectedImages } from '../utils/shoppingCollectToPool.js';
 
 declare let currentStructuredContent: any;
@@ -415,6 +417,8 @@ export async function handleFullAutoPublish(): Promise<void> {
 
   appendLog('🚀 풀오토 발행 시작: 콘텐츠 생성 → 이미지 생성 → 자동 발행');
 
+  // [2026-11-24] Saved-stop run of this publish (record id + finished image slots); this function owns it.
+  let ownsFullAutoStopRun = false;
   try {
     if (isFullAutoStopRequested(modal)) {
       appendLog('⏹️ 사용자가 풀오토 발행을 중지했습니다.');
@@ -448,6 +452,8 @@ export async function handleFullAutoPublish(): Promise<void> {
       //   시드에서 빠지면 항상 빈 링크로 조회돼 여전히 옛 결과가 적중한다.
       affiliateLink: earlyAffiliateLink,
     };
+    ownsFullAutoStopRun = fullAutoStopResumeBeginRun({ ...contentReuseSeed, imageSource: UnifiedDOMCache.getImageSource() });
+    const fullAutoStopLabel = String(keywords || title || urls[0] || '').slice(0, 40);
 
     let structuredContent: any =
       (window as any).getFullAutoContentRetryCache?.(contentReuseSeed) ||
@@ -466,19 +472,24 @@ export async function handleFullAutoPublish(): Promise<void> {
       }, 300_000);
 
       try {
-        if (urls.length > 0) {
-          appendLog(`🔄 ${urls.length}개 URL 기반 콘텐츠 생성 (첫 번째 URL 사용)`);
-          modal.addLog(`📎 URL: ${urls[0].substring(0, 50)}...`);
-          await generateContentFromUrl(urls[0], undefined, toneStyle, true);
-        } else {
-          appendLog('✏️ 키워드/제목 기반 콘텐츠 생성');
-          modal.addLog(`📝 키워드: ${keywords || title}`);
-          // ✅ [2026-02-13] 풀오토: 키워드 제목 옵션 적용
-          setKeywordTitleOptionsFromItem(keywords || title, faKeywordAsTitle, faKeywordTitlePrefix);
-          await generateContentFromKeywords(title, keywords, toneStyle, true); // suppressModal: true
-        }
+        // [2026-11-24] A writing stop (limit / login / model) opens the stop window: same engine, another engine, or stop here.
+        const textEngineNow = (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement | null)?.value || UnifiedDOMCache.getGenerator();
+        await generationStopRunStage('text', textEngineNow, fullAutoStopResumeContext(fullAutoStopLabel), async () => {
+          if (urls.length > 0) {
+            appendLog(`🔄 ${urls.length}개 URL 기반 콘텐츠 생성 (첫 번째 URL 사용)`);
+            modal.addLog(`📎 URL: ${urls[0].substring(0, 50)}...`);
+            await generateContentFromUrl(urls[0], undefined, toneStyle, true);
+          } else {
+            appendLog('✏️ 키워드/제목 기반 콘텐츠 생성');
+            modal.addLog(`📝 키워드: ${keywords || title}`);
+            // ✅ [2026-02-13] 풀오토: 키워드 제목 옵션 적용
+            setKeywordTitleOptionsFromItem(keywords || title, faKeywordAsTitle, faKeywordTitlePrefix);
+            await generateContentFromKeywords(title, keywords, toneStyle, true); // suppressModal: true
+          }
+        });
       } catch (contentError) {
         clearTimeout(contentTimeout);
+        if ((contentError as any)?.name === 'GstopHaltedError') throw contentError;
         const errMsg = (contentError as Error).message || '알 수 없는 오류';
         appendLog(`❌ 콘텐츠 생성 실패: ${errMsg}`);
         modal.showError('❌ 콘텐츠 생성 실패', `AI 콘텐츠 생성 중 오류가 발생했습니다.\n\n원인: ${errMsg}`);
@@ -1184,6 +1195,7 @@ export async function handleFullAutoPublish(): Promise<void> {
                   allowThumbnailText: false, // 소제목에는 텍스트 합성 안 함
                   thumbnailTextInclude: false,
                   isShoppingConnect: true,
+                  stopContext: fullAutoStopResumeContext(fullAutoStopLabel, { shopping: true, article: () => structuredContent }),
                   headingImageMode: 'all',
                   referenceImagePath: representativeImagePath,
                   collectedImages: shoppingReference.images,
@@ -1212,6 +1224,7 @@ export async function handleFullAutoPublish(): Promise<void> {
                 },
                 aiFallbackFn: generateImagesForAutomationSafely,
                 aiOptions: {
+                  stopContext: fullAutoStopResumeContext(fullAutoStopLabel, { article: () => structuredContent }),
                   stopCheck: () => isFullAutoStopRequested(modal),
                   onProgress: (msg: any) => modal.addLog(msg),
                   allowThumbnailText: formData.includeThumbnailText,
@@ -1239,6 +1252,7 @@ export async function handleFullAutoPublish(): Promise<void> {
                   modal.addLog(label);
                 },
                 baseOptions: {
+                  stopContext: fullAutoStopResumeContext(fullAutoStopLabel, { article: () => structuredContent }),
                   stopCheck: () => isFullAutoStopRequested(modal),
                   onProgress: (msg: any) => modal.addLog(msg),
                   referenceImagePath,
@@ -1633,6 +1647,7 @@ export async function handleFullAutoPublish(): Promise<void> {
 
     // ✅ 발행 성공
     modal.showSuccess('🎉 발행 완료!', '블로그 글이 성공적으로 발행되었습니다.');
+    fullAutoStopResumeMarkPublished();
     (window as any).clearFullAutoContentRetryCache?.();
     clearPublishContentRetryCache();
 
@@ -1652,6 +1667,15 @@ export async function handleFullAutoPublish(): Promise<void> {
     }, 3000);
 
   } catch (error) {
+    if ((error as any)?.name === 'GstopHaltedError') {
+      // [2026-11-24] The owner chose "stop here" in the stop window: the record is kept for [이어서 발행].
+      const haltNotice = '⏸️ 여기서 멈췄습니다. 앱을 다시 열어도 [이어서 발행]으로 이어 갈 수 있습니다.';
+      appendLog(haltNotice);
+      modal.addLog?.(haltNotice);
+      modal.hide?.();
+      toastManager.info(haltNotice);
+      return;
+    }
     appendLog(`❌ 풀오토 발행 실패: ${(error as Error).message}`);
     // ✅ 진행상황 모달 에러 표시 (8초 후 자동 닫기 + 확인 버튼)
     modal.showError('❌ 발행 실패', (error as Error).message);
@@ -1665,6 +1689,8 @@ export async function handleFullAutoPublish(): Promise<void> {
       console.warn('[handleFullAutoPublish] resetPublishing 오류:', e);
     }
     // ✅ [2026-03-22 FIX] throw 제거 — showError가 UX 전담, throw 시 호출자 중복 에러 핸들링 위험
+  } finally {
+    if (ownsFullAutoStopRun) void fullAutoStopResumeFinishRun();
   }
 }
 
