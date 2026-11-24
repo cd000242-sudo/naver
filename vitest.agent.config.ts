@@ -30,6 +30,9 @@ export default defineConfig({
       'src/__tests__/agentContentProviderPolicy.test.ts',
       'src/__tests__/agentVersionParser.test.ts',
       'src/__tests__/userVisibleError.test.ts',
+      // [2026-11-24] Saved agent accounts: the login-with-account and per-account env branches of installer / subscriptionEnv.
+      'src/__tests__/agentAccountLogin.test.ts',
+      'src/__tests__/agentAccountEnv.test.ts',
     ],
     environment: 'node',
     globals: false,
