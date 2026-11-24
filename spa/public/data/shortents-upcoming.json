@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T03:06:10.207Z",
+ "builtAt": "2026-11-24T03:16:22.006Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 90,
-   "recent20": 19,
+   "articles90": 91,
+   "recent20": 10,
    "press": 70,
-   "firstArticleAt": "2026-11-24T02:12:00.000Z",
+   "firstArticleAt": "2026-11-24T02:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성전자 DS 인사 키워드는 '성과주의'…HBM4 개발·양산 주역 승진",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-24T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001077843?sid=105"
+     "title": "삼성 전자계열사 임원 42명 승진 … AI 수혜 삼성전기 인사 규모 두 배 ...",
+     "press": "worktoday.co.kr",
+     "publishedAt": "2026-11-24T03:08:00.000Z",
+     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=92564"
     },
     {
-     "title": "삼성전자 DX부문 임원 승진 3분의 1 급감…TV는 '광고'·미래는 '로봇' 방...",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-24T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002446638?sid=105"
+     "title": "삼성SDS, 임원 10명 승진…AX·클라우드·물류 사업 리더 중용",
+     "press": "thebigdata.co.kr",
+     "publishedAt": "2026-11-24T03:06:00.000Z",
+     "link": "https://www.thebigdata.co.kr/view.php?ud=2026112411001180980ecbf9426b_23"
     },
     {
-     "title": "삼성바이오로직스, 임원 인사…부사장 2명·상무 5명 승진",
+     "title": "삼성전자, 임원 승진자 53% DS부문서 발탁…DS·DX 비중 균등히 맞춰",
      "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-24T03:00:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904196"
+     "publishedAt": "2026-11-24T03:06:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904162"
     }
    ]
   },
@@ -48,30 +48,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 66,
-   "recent20": 9,
-   "press": 51,
-   "firstArticleAt": "2026-11-24T02:16:00.000Z",
+   "articles90": 62,
+   "recent20": 11,
+   "press": 47,
+   "firstArticleAt": "2026-11-24T02:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령, 내년도 예산안 처리 '초당적 지혜' 당부",
-     "press": "sisaweek.com",
-     "publishedAt": "2026-11-24T03:04:00.000Z",
-     "link": "https://www.sisaweek.com/news/articleView.html?idxno=239153"
+     "title": "이 대통령 “수능 부정행위 자수시 처벌 감경하되 제재…다른 시험 응시...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T03:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299966?sid=100"
     },
     {
-     "title": "李 대통령 \"강남·서초 등 핵심지역 꽤 많이 조정 … 폭등·폭락 대비해...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-24T03:04:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/24/2026112450183.html"
+     "title": "李대통령 \"불법 자행 사이비종교, 실효적 조치 검토해야\"",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-24T03:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002467268?sid=100"
     },
     {
-     "title": "이 대통령, \"빛의 혁명은 세계 민주주의 역사에 기록될 승리\"",
-     "press": "tongilnews.com",
-     "publishedAt": "2026-11-24T03:00:00.000Z",
-     "link": "http://www.tongilnews.com/news/articleView.html?idxno=218292"
+     "title": "李대통령, 시험 부정행위 처벌 강화 지시...의심사례 추적",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-24T03:10:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784368"
     }
    ]
   },
@@ -80,62 +80,63 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 3,
-   "press": 40,
-   "firstArticleAt": "2026-11-24T01:37:00.000Z",
+   "articles90": 42,
+   "recent20": 5,
+   "press": 38,
+   "firstArticleAt": "2026-11-24T01:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“두번째 기회 줘서 감사하다”… 젠슨황 복귀에 코스피 반등",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-24T03:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002835128?sid=101"
+     "title": "'스캔들' 젠슨 황 전격 복귀‥엔비디아 폭등",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-24T03:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537645?sid=104"
     },
     {
-     "title": "젠슨 황의 귀환…韓 AI 산업에 다시 볕 드나",
-     "press": "dealsite.co.kr",
-     "publishedAt": "2026-11-24T02:54:00.000Z",
-     "link": "https://dealsite.co.kr/articles/173385"
+     "title": "젠슨 황 복귀에 AI 반도체 불확실성 해소... 삼성전자·SK하이닉스 급반...",
+     "press": "mediawatch.kr",
+     "publishedAt": "2026-11-24T03:08:00.000Z",
+     "link": "https://www.mediawatch.kr/news/article.html?no=261855"
     },
     {
-     "title": "젠슨 황 복귀에 글로벌 금융시장 반등…코스피도 6% 급등",
-     "press": "mediaus.co.kr",
-     "publishedAt": "2026-11-24T02:48:00.000Z",
-     "link": "https://www.mediaus.co.kr/news/articleView.html?idxno=319141"
+     "title": "젠슨 황 복귀에 국내 증시 급등‥5천 선 회복",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-24T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537644?sid=101"
     }
    ]
   },
   {
    "keyword": "김민석 취임 100일",
    "sources": [
-    "nate"
+    "nate",
+    "daum"
    ],
-   "articles90": 46,
-   "recent20": 5,
-   "press": 33,
-   "firstArticleAt": "2026-11-24T01:37:00.000Z",
+   "articles90": 43,
+   "recent20": 6,
+   "press": 30,
+   "firstArticleAt": "2026-11-24T01:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[취임100일] 김민석 \"당정 관계 안정 성과…초반엔 제 실수도 있었다\"",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-24T03:12:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749075"
+    },
+    {
+     "title": "정청래, 김민석 겨냥 \"결자해지\" 압박…출구없는 與신천지 갈등",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T03:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016460347?sid=100"
+    },
     {
      "title": "취임 100일 김민석, 당내 이견 해소 '숙제'",
      "press": "sisaweek.com",
      "publishedAt": "2026-11-24T03:04:00.000Z",
      "link": "https://www.sisaweek.com/news/articleView.html?idxno=239152"
-    },
-    {
-     "title": "박지원 \"김민석 100일 성적은 60점… 민주당 내분에 지지율 곤두박질\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-24T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967404?sid=100"
-    },
-    {
-     "title": "정청래 “반분신 폭탄에 黨 초토화”… 내전으로 얼룩진 ‘김민석 취임...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-24T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002835114?sid=100"
     }
    ]
   },
@@ -144,13 +145,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 1,
-   "press": 22,
-   "firstArticleAt": "2026-11-24T01:37:00.000Z",
+   "articles90": 18,
+   "recent20": 2,
+   "press": 18,
+   "firstArticleAt": "2026-11-24T01:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[제50회 국무회의] 李 대통령 “12·3 ‘국민주권의 날’ 지정…시험 부...",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-24T03:10:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L261124120438fb17"
+    },
     {
      "title": "나경원, '국민주권의 날' 관련 예산 78억여원에 \"자신들만의 돈 잔치·포...",
      "press": "imaeil.com",
@@ -162,12 +169,38 @@
      "press": "m-i.kr",
      "publishedAt": "2026-11-24T02:34:00.000Z",
      "link": "https://www.m-i.kr/news/articleView.html?idxno=2022565"
+    }
+   ]
+  },
+  {
+   "keyword": "정상빈",
+   "sources": [
+    "google"
+   ],
+   "articles90": 16,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-24T02:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "세인트루이스 정상빈, 손흥민 앞에서 1골 1도움…LAFC 상대 첫 골 맛",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-24T03:04:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/003/0014341968"
     },
     {
-     "title": "12월3일 '국민 주권의 날' 지정한다…李대통령 \"빛의 혁명은 위대한 국...",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-24T02:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142915?sid=100"
+     "title": "'손흥민이 아니었다!' 정상빈 미친 활약, MLS컵 PO '코리안 더비' 주인공...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-24T02:48:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/477/0000640556"
+    },
+    {
+     "title": "[속보] 세인트루이스 정상빈, LAFC 손흥민 앞에서 '1골 1도움' 폭발",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-24T02:46:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/629/0000554962"
     }
    ]
   },
@@ -176,13 +209,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 12,
+   "articles90": 10,
    "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T01:40:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-24T01:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "안철수 “강금실은 친중… 中간첩, 국정원 접수” 발언 논란",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-24T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835132?sid=100"
+    },
     {
      "title": "안철수 “강금실, 시진핑 리더십 찬양…한미 방첩동맹 파탄날 것”",
      "press": "joongang.co.kr",
@@ -194,12 +233,6 @@
      "press": "asiatime.co.kr",
      "publishedAt": "2026-11-24T02:52:00.000Z",
      "link": "https://www.asiatime.co.kr/article/20261124500176"
-    },
-    {
-     "title": "안철수 “시진핑 리더십 치켜세운 강금실이 국정원장? 한미 방첩동맹 파...",
-     "press": "donga.com",
-     "publishedAt": "2026-11-24T02:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764713?sid=100"
     }
    ]
   },
@@ -208,10 +241,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 9,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T01:37:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-24T01:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -236,46 +269,14 @@
    ]
   },
   {
-   "keyword": "발언하는 한병도 원내대표",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T01:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 한병도 “국가시험 공정성 위한 당정 노력 계속될 것”",
-     "press": "ilyosisa.co.kr",
-     "publishedAt": "2026-11-24T02:58:00.000Z",
-     "link": "https://www.ilyosisa.co.kr/news/article.html?no=259163"
-    },
-    {
-     "title": "[헤럴드pic] 모두발언하는 한병도 더불어민주당 원내대표",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T02:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727626?sid=100"
-    },
-    {
-     "title": "한병도 \"수능 부정행위자 응시 제한 10년\"…민주당, 법 개정 추진",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-24T02:00:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321598&inflow=N"
-    }
-   ]
-  },
-  {
    "keyword": "손흥민 선발 출전",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 2,
+   "articles90": 8,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-24T01:43:00.000Z",
+   "firstArticleAt": "2026-11-24T02:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -300,46 +301,14 @@
    ]
   },
   {
-   "keyword": "뉴욕 메츠",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T01:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "골드슈미트, 2027년은 메츠에서...1년 800만$ 계약 합의",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-24T03:01:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/410/0001148091"
-    },
-    {
-     "title": "KBO 출신 좌타자와 플래툰…‘WS 우승 도전’ 메츠, 라이벌 양키스 출신...",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-24T02:31:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/382/0001306477"
-    },
-    {
-     "title": "구자욱이 메츠 1루수? 골드슈미트가 차지했다...플래툰이라면 안 가는게...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-24T02:08:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/445/0000492785"
-    }
-   ]
-  },
-  {
    "keyword": "서울교통공사 임단협 최종교섭",
    "sources": [
     "nate"
    ],
-   "articles90": 32,
-   "recent20": 1,
+   "articles90": 23,
+   "recent20": 0,
    "press": 5,
-   "firstArticleAt": "2026-11-24T01:38:00.000Z",
+   "firstArticleAt": "2026-11-24T01:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -364,12 +333,44 @@
    ]
   },
   {
+   "keyword": "성남시",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-24T02:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "행안부 ‘재난 아니다’…신상진 성남시장 재산세 감면 공약 ‘무산’ ...",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-24T02:56:00.000Z",
+     "link": "https://www.kyeongin.com/article/1775300"
+    },
+    {
+     "title": "조우현 의원 발의 '성남시 재생에너지 이용 가로등 설치 및 보급 지원 조...",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-24T02:32:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2022586"
+    },
+    {
+     "title": "정연화 성남시의회 부의장, 무궁화 진흥 조례안 상임위 통과",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-24T02:30:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1315131"
+    }
+   ]
+  },
+  {
    "keyword": "김호중",
    "sources": [
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-24T01:58:00.000Z",
    "exclusive": false,
@@ -396,34 +397,34 @@
    ]
   },
   {
-   "keyword": "한준호 발탁",
+   "keyword": "발언하는 한병도 원내대표",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-24T01:44:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T02:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘친정 체제 개각’ 엄호 나선 與…일각선 한준호 ‘차기 주자 육성론’",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-24T02:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702573?sid=100"
+     "title": "[포토] 한병도 “국가시험 공정성 위한 당정 노력 계속될 것”",
+     "press": "ilyosisa.co.kr",
+     "publishedAt": "2026-11-24T02:58:00.000Z",
+     "link": "https://www.ilyosisa.co.kr/news/article.html?no=259163"
     },
     {
-     "title": "국정원장 후보 제주 출신 강금실...행안부장관 후보 한준호",
-     "press": "samdailbo.com",
-     "publishedAt": "2026-11-24T02:24:00.000Z",
-     "link": "http://www.samdailbo.com/news/articleView.html?idxno=273086"
+     "title": "[헤럴드pic] 모두발언하는 한병도 더불어민주당 원내대표",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T02:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727626?sid=100"
     },
     {
-     "title": "\"생명·안전지키겠다\" 행안부장관에 이재명 최측근 한준호 배치",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-24T02:20:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247850"
+     "title": "한병도 \"수능 부정행위 응시제한 10년 확대 법안, 정기국회 내 처리할 것...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-24T02:00:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261124000390"
     }
    ]
   },
@@ -432,10 +433,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-24T01:40:00.000Z",
+   "firstArticleAt": "2026-11-24T02:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -458,45 +459,13 @@
      "link": "https://www.widedaily.com/news/articleView.html?idxno=304526"
     }
    ]
-  },
-  {
-   "keyword": "서울역",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T01:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"추워서\" 서울역서 라이터 3개 쥐고 불붙인 남성, 시민들이 막아섰다",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-24T02:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001041951?sid=102"
-    },
-    {
-     "title": "\"추워서 불 켰다?\"…서울역서 라이터 여러 개에 불붙이던 남성, 시민들...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-24T01:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014341610?sid=102"
-    },
-    {
-     "title": "서울역서 라이터 뭉치에 불 붙이던 남성…시민 기지로 '제압'",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T01:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929325?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1253,
-  "matched": 679,
-  "avgLeadMin": 557,
+  "flagged": 1248,
+  "matched": 675,
+  "avgLeadMin": 556,
   "recent": [
    {
     "keyword": "김민선·유현조·이다연, LPGA 합류",
