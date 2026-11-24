@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T15:02:17.958Z",
+ "builtAt": "2026-11-24T15:12:21.703Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 5,
-   "press": 20,
-   "firstArticleAt": "2026-11-24T13:37:00.000Z",
+   "articles90": 18,
+   "recent20": 4,
+   "press": 18,
+   "firstArticleAt": "2026-11-24T13:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"美USTR, 이르면 이번주 '과잉생산 관세' 조사 결과 발표\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T15:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016461542?sid=104"
+    },
     {
      "title": "美 USTR 조사결과 과잉생산 관세 발표 임박…한국 등 16개 경제주체 대상...",
      "press": "cbci.co.kr",
@@ -33,12 +39,6 @@
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-24T14:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003567660?sid=104"
-    },
-    {
-     "title": "美, 이르면 이번주 '과잉생산 관세' 발표…韓 15% 상한 유지 촉각",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-24T14:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445899?sid=101"
     }
    ]
   },
@@ -48,29 +48,93 @@
     "google"
    ],
    "articles90": 11,
-   "recent20": 6,
+   "recent20": 7,
    "press": 10,
-   "firstArticleAt": "2026-11-24T13:36:00.000Z",
+   "firstArticleAt": "2026-11-24T13:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "비 내리는데 아스콘 포장 강행…197억 양구 종합체육공원 공사 ‘논란’",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-24T15:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001233207?sid=102"
+    },
+    {
+     "title": "'아침 최저 -8도'·전국 곳곳 약한 눈 또는 비…강추위에 수도 동파 막으...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-24T15:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159040?sid=103"
+    },
     {
      "title": "출근길 추위 오늘이 고비…내일은 한낮 18도까지 풀려[오늘날씨]",
      "press": "news.unn.net",
      "publishedAt": "2026-11-24T15:00:00.000Z",
      "link": "https://news.unn.net/news/articleView.html?idxno=601342"
+    }
+   ]
+  },
+  {
+   "keyword": "중앙행정기관 세종 이전",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-24T13:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'친명' 한준호, 행안장관 출사표…'중수청·지방이전' 시험대",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-24T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000555213?sid=102"
     },
     {
-     "title": "[오늘날씨]서해안 눈 또는 비...꽁꽁 언 아침 영하 8도",
-     "press": "gametoc.co.kr",
-     "publishedAt": "2026-11-24T15:00:00.000Z",
-     "link": "https://www.gametoc.co.kr/news/articleView.html?idxno=113370"
+     "title": "박수현 충남지사 \"2차 공공기관 이전, 기대 못 미칠 수도…'반값 생활비...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-24T14:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213507?sid=102"
     },
     {
-     "title": "\"아내 김태희표 아침 식단\"…비, 근육질 몸매 지키는 특급 레시피",
+     "title": "정부, 내년 개인정보위 등 22곳 세종 우선 이전…인권위, 청사신축 후 옮...",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-24T14:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003489331?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "유시은과 이관희, 민폐 하객 사과",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T14:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이관희·유시은 결혼식 민폐 사과 \"무지하고 경솔했다\"",
      "press": "newsis.com",
      "publishedAt": "2026-11-24T15:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014343151"
+     "link": "https://m.entertain.naver.com/article/003/0014343125"
+    },
+    {
+     "title": "이관희·유시은, '민폐 하객' 인정 \"무지하고 명솔한 행동\"",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-24T14:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329019"
+    },
+    {
+     "title": "윤하정, 결혼식 민폐 하객 저격→누리꾼, '이관희♥유시은' 지목→결국...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-24T14:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492930"
     }
    ]
   },
@@ -107,41 +171,8 @@
    ]
   },
   {
-   "keyword": "31개 기관 세종 이전",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T13:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정부, 내년 개인정보위 등 22곳 세종 우선 이전…인권위, 청사신축 후 옮...",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-24T14:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003489331?sid=100"
-    },
-    {
-     "title": "정부, 중앙행정기관 31곳·5460명 세종 이전 확정 … 2031년 마무리",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-24T14:34:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/24/2026112450412.html"
-    },
-    {
-     "title": "방미통위 등 기관 22곳 내년 세종행…인권위는 2031년 연기",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-24T14:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522294?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "화재",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 4,
@@ -174,10 +205,22 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1410,
-  "matched": 745,
+  "flagged": 1407,
+  "matched": 742,
   "avgLeadMin": 517,
   "recent": [
+   {
+    "keyword": "아침마당",
+    "hitKeyword": "아침마당 우서윤",
+    "hitAt": "2026-11-25T00:00:00+09:00",
+    "leadMin": 2338
+   },
+   {
+    "keyword": "12월 3일 공휴일 지정",
+    "hitKeyword": "12월 3일 국가기념일",
+    "hitAt": "2026-11-25T00:00:00+09:00",
+    "leadMin": 370
+   },
    {
     "keyword": "대전 ACLE 베이징 3-2 승리",
     "hitKeyword": "대전 베이징 3-2 승리",
@@ -225,18 +268,6 @@
     "hitKeyword": "엔비디아 젠슨 황 복귀",
     "hitAt": "2026-11-24T22:30:00+09:00",
     "leadMin": 240
-   },
-   {
-    "keyword": "젠슨 황 CEO 전격 복귀",
-    "hitKeyword": "엔비디아 젠슨 황 복귀",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 199
-   },
-   {
-    "keyword": "젠슨 황 전격 복귀",
-    "hitKeyword": "엔비디아 젠슨 황 복귀",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 189
    }
   ]
  }
