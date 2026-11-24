@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T00:25:09.620Z",
+ "builtAt": "2026-11-24T00:35:12.701Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "울릉도 경계경보 발령",
+   "keyword": "매수 사이드카란",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 77,
-   "recent20": 20,
+   "articles90": 75,
+   "recent20": 54,
    "press": 64,
-   "firstArticleAt": "2026-11-23T23:23:00.000Z",
+   "firstArticleAt": "2026-11-24T00:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코스피 6% 급등, 장중 5000선 돌파…매수 사이드카 발동",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-24T00:34:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284600"
+    },
+    {
+     "title": "[속보] 코스닥 '매수 사이드카' 발동⋯4% 급등",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-24T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077737?sid=101"
+    },
+    {
+     "title": "돌아온 '젠슨 황'에 코스피 5% 급등…매수 사이드카 발동",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-24T00:34:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904151"
+    }
+   ]
+  },
+  {
+   "keyword": "러시아 군용기 KADIZ",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 86,
+   "recent20": 19,
+   "press": 64,
+   "firstArticleAt": "2026-11-23T23:19:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "러 군용기 카디즈 진입…울릉도 한때 경계경보",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-24T00:24:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261124500081"
+     "title": "러시아 군용기 울릉도 접근에 경계경보…경북도, ‘북한기’ 오발송 안...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-24T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702487?sid=102"
     },
     {
-     "title": "軍 \"北 항공기 아닌 러시아 군용기 접근\"…울릉군 한때 경계경보",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-24T00:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142900?sid=100"
+     "title": "군 \"러시아 군용기 수대, 동해 KADIZ 진입…영공 침범은 없어\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929287?sid=100"
     },
     {
-     "title": "러시아 군용기 카디즈 진입…울릉도 한때 경계경보",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-24T00:18:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904148"
+     "title": "러 군용기 동해 KADIZ 진입 후 이탈…울릉군에 한때 경계경보 [종합]",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-24T00:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357440?sid=100"
     }
    ]
   },
@@ -47,158 +79,288 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 66,
-   "recent20": 12,
-   "press": 50,
-   "firstArticleAt": "2026-11-23T23:18:00.000Z",
+   "articles90": 58,
+   "recent20": 8,
+   "press": 45,
+   "firstArticleAt": "2026-11-23T23:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "러시아 군용기 접근했는데 '북한 항공기'…문자 오발송, 울릉 혼란",
+     "title": "러시아 군용기 울릉도 접근에 경계경보…경북도, ‘북한기’ 오발송 안...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-24T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702487?sid=102"
+    },
+    {
+     "title": "경북도, 울릉 경계경보 해제 문자에 '북한 항공기' 잘못 안내",
      "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-24T00:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405328?sid=102"
+     "publishedAt": "2026-11-24T00:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405332?sid=102"
     },
     {
-     "title": "합참 \"러 군용기 울릉도 근접…영공 침범 없어\"",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-24T00:18:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=172938"
-    },
-    {
-     "title": "러시아 군용기 접근했는데 '북한 항공기'?…경북도, 문자 오발송에 울릉...",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-24T00:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545470?sid=103"
+     "title": "합참 \"러 군용기 수대, 동해 KADIZ 진입…영공 침범 없어\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-24T00:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554835?sid=100"
     }
    ]
   },
   {
-   "keyword": "홈플러스 온라인 배송 중단",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 38,
-   "recent20": 10,
-   "press": 38,
-   "firstArticleAt": "2026-11-23T22:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "온라인 배송 멈추는 홈플러스…매출 회복·매각 모두 난항",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-24T00:24:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261124500074"
-    },
-    {
-     "title": "자금난 홈플러스, 온라인 배송도 결국 멈춘다…26일부터 중단",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-24T00:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002249649?sid=101"
-    },
-    {
-     "title": "홈플러스, 온라인 배송 멈추고 ‘셧다운’ 초읽기… 이번주가 분수령",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-24T00:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206847?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "지하철 파업",
+   "keyword": "울릉도",
    "sources": [
     "google"
    ],
-   "articles90": 27,
-   "recent20": 15,
-   "press": 22,
-   "firstArticleAt": "2026-11-23T22:56:00.000Z",
+   "articles90": 52,
+   "recent20": 16,
+   "press": 43,
+   "firstArticleAt": "2026-11-23T23:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울지하철 노사, 총파업 하루 앞두고 막판 교섭…결렬 시 출퇴근길 혼...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-24T00:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158646?sid=102"
+     "title": "러시아 군용기 울릉도 접근에 경계경보…경북도, ‘북한기’ 오발송 안...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-24T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702487?sid=102"
     },
     {
-     "title": "서울지하철 내일 멈추나…노사 오늘 최종 담판",
-     "press": "magazine.hankyung.com",
-     "publishedAt": "2026-11-24T00:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/050/0000113661?sid=101"
+     "title": "러시아 군용기들 동해 카디즈 진입…울릉도에 한 때 경계경보",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-24T00:32:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120425"
     },
     {
-     "title": "서울 지하철 25일 총파업 예고…출근길 정상 운행·버스 3519회 증편",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T00:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009306239?sid=102"
+     "title": "러시아 군용기 울릉도 접근, 경계경보 발령으로 주민들 혼란",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-24T00:30:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887020"
     }
    ]
   },
   {
-   "keyword": "선관위 직원 1명 구속",
+   "keyword": "부산 사하구 주택 화재",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-23T22:56:00.000Z",
+   "articles90": 21,
+   "recent20": 4,
+   "press": 21,
+   "firstArticleAt": "2026-11-23T23:12:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "부산서 단독주택 화재 3명 숨져…80대 어머니·50대 아들 2명",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-24T00:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405333?sid=102"
+    },
+    {
+     "title": "부산 단독주택 화재 참변… 80대 어머니와 50대 두 아들 숨져",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-24T00:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967355?sid=102"
+    },
+    {
+     "title": "부산 당리동서 단독주택 화재로 일가족 3명 숨져",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-24T00:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005608696?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "조규성 시즌 6호골",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 18,
+   "recent20": 3,
+   "press": 17,
+   "firstArticleAt": "2026-11-23T23:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "특검 출범 후 첫 구속…나머지 선관위 직원 7명 기각",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-24T00:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522135?sid=102"
+     "title": "'덴마크를 뒤흔든 코리안 듀오!' 조규성 결승골·홍현석 자책골 유도…...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-24T00:32:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/445/0000492744"
     },
     {
-     "title": "선관위 특검 '1호 영장' 8명 중 1명만 구속…윗선 수사 제동",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-24T00:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142898?sid=102"
+     "title": "'모레노 보고 있나!' 대표팀 탈락 조규성, 10분 만에 시즌 6호골 폭발…...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-24T00:26:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/477/0000640525"
     },
     {
-     "title": "선관위 직원 1명 구속·7명 기각…개표 정정에도 당락 유지",
-     "press": "topstarnews.net",
+     "title": "\"감독이 천재처럼 보였다\" 조규성, 최다 득점자 대신 들어가 10분 만에 ...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-24T00:23:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/108/0003489724"
+    }
+   ]
+  },
+  {
+   "keyword": "축구",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T23:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "명지 1호 근린공원, 두 차례 부결 끝에 조성 물꼬…축구장 등 체육·편의...",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-24T00:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077722?sid=102"
+    },
+    {
+     "title": "경주한수원여자축구단, 창단 10년 만에 첫 우승",
+     "press": "news.lghellovision.net",
+     "publishedAt": "2026-11-24T00:10:00.000Z",
+     "link": "http://news.lghellovision.net/news/articleView.html?idxno=563454"
+    },
+    {
+     "title": "한국대학축구연맹, 노르웨이 린 1896 FK와 협약…대학 선수 유럽 진출 발...",
+     "press": "gukjenews.com",
      "publishedAt": "2026-11-24T00:02:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284552"
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3760962"
     }
    ]
   },
   {
-   "keyword": "정우성",
+   "keyword": "박보경 대시 투입",
    "sources": [
-    "google"
+    "daum"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 3,
    "press": 6,
-   "firstArticleAt": "2026-11-23T23:18:00.000Z",
+   "firstArticleAt": "2026-11-23T23:24:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김서형 건강 악화로 ‘대시 하차…김보경 대체 투입 [공식]",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-24T00:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001306434"
+    },
+    {
+     "title": "김서형, 건강 악화로 드라마 '대시' 하차…박보경 대체 투입",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-24T00:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014341176"
+    },
+    {
+     "title": "[공식] '진선규♥' 박보경, 김서형 빈자리 긴급 투입…SBS \"건강 악화로...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-24T00:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083378"
+    }
+   ]
+  },
+  {
+   "keyword": "SK하이닉스 주가 자사주 매입",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T23:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정우성, 아티스트컴퍼니 지분도 매각…이정재와 10년 동행 결별 수순",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T00:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727483?sid=101"
+     "title": "투자의 귀재였나…윤풍영 SK하이닉스 사장, 자사주 1500주 사자마자 ‘...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-24T00:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702480?sid=101"
     },
     {
-     "title": "이정재 '정산 의혹' 터진 와중 주식 내던졌다…정우성, 사흘 새 '5억 원...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-24T00:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409354"
+     "title": "'절묘한 타이밍' 젠슨 황 복귀 하루 전 매입…SK하닉 사장, 2억원 벌었다",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-24T00:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273728?sid=101"
     },
     {
-     "title": "정우성, 이정재와 결별 수순?…아컴 사내이사 사임 이어 주식 일부 매도...",
-     "press": "xportsnews.com",
+     "title": "오늘부터 자사주 '무한 주문'…젠슨 황 귀환발 반도체 랠리, 외국인 수...",
+     "press": "econovill.com",
      "publishedAt": "2026-11-23T23:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083372"
+     "link": "https://www.econovill.com/news/articleView.html?idxno=758274"
+    }
+   ]
+  },
+  {
+   "keyword": "김민선·유현조·이다연, LPGA 합류",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T23:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한국 여자 골프 경사! 김민선-유현조-이다연, 내년 LPGA에서 뛴다",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-24T00:32:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/076/0004469010"
+    },
+    {
+     "title": "김민선·유현조·이다연, LPGA 진출 확정…한국 골프 새 도전",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-23T23:51:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085892"
+    },
+    {
+     "title": "김민선·유현조·이다연, LPGA 퀄리파잉 시리즈 통과-2027시즌 미국 무대...",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-23T23:32:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95773"
+    }
+   ]
+  },
+  {
+   "keyword": "한준호 국회의원",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T23:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한준호 행안부 장관 후보 \"실용 행정으로 국민 삶 책임지겠다\"",
+     "press": "mygoyang.com",
+     "publishedAt": "2026-11-24T00:26:00.000Z",
+     "link": "http://www.mygoyang.com/news/articleView.html?idxno=91361"
+    },
+    {
+     "title": "한준호 \"국민 생명·안전 지키고 지방 자율·역량 키우는 행안부 역할 충...",
+     "press": "safetynews.co.kr",
+     "publishedAt": "2026-11-23T23:58:00.000Z",
+     "link": "https://www.safetynews.co.kr/news/articleView.html?idxno=251755"
+    },
+    {
+     "title": "[프로필] 한준호 행안장관 후보자…언론 출신 친명계 재선 의원",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T23:23:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261124000091"
     }
    ]
   },
@@ -208,7 +370,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-23T23:08:00.000Z",
    "exclusive": false,
@@ -235,76 +397,94 @@
    ]
   },
   {
-   "keyword": "구하라 7주기 여전히 그리움",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T22:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "故구하라 7주기…여전한 그리움",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T23:58:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284546"
-    },
-    {
-     "title": "故 구하라, 오늘(24일) 7주기…여전히 그리운 별",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-23T23:02:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795473918531416006"
-    },
-    {
-     "title": "'구하라법' 마침내 시행됐는데…故 구하라 7주기, 여전한 그리움",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-23T22:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083362"
-    }
-   ]
-  },
-  {
-   "keyword": "박보경 대시 투입",
+   "keyword": "강유정 문체부 장관 후보자",
    "sources": [
     "daum"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-23T23:24:00.000Z",
+   "firstArticleAt": "2026-11-23T23:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김서형, 건강 악화로 촬영 중 드라마 하차…박보경 긴급 투입",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T23:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005767991"
+     "title": "수석대변인 강유정, 문체부 장관 후보자 됐다…문화예술 평론가 출신",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-24T00:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083373"
     },
     {
-     "title": "촬영까지 했는데…김서형, 건강 악화로 '대시' 하차→'진선규♥' 박보경...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-23T23:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468995"
+     "title": "평론가 출신 강유정 문체부 장관 후보자…K컬처 확장·국정홍보 과제 안...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T23:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727454?sid=103"
     },
     {
-     "title": "김서형, '대시' 촬영 중 건강 악화로 하차…박보경 대체 투입",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-23T23:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005445343"
+     "title": "이재명 대통령, 청와대 출신·친명계 발탁 추진…한준호 행안장관, 강유...",
+     "press": "lecturernews.com",
+     "publishedAt": "2026-11-23T23:32:00.000Z",
+     "link": "https://www.lecturernews.com/news/articleView.html?idxno=214424"
+    }
+   ]
+  },
+  {
+   "keyword": "우서윤 미스코리아",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-24T00:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "우지원, 생방송서 미스코리아 진 딸 뽀뽀 받고 행복 미소 “한번 해봐”...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-24T00:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190595"
+    },
+    {
+     "title": "미코 진 우서윤 “아빠 우지원, 나보다 화장품 훨씬 많이 발라” (아침...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-24T00:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190592"
+    },
+    {
+     "title": "'아침마당' 미스코리아 진 우서윤, 남다른 피지컬 \"우지원 첫째딸\"",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-24T00:12:00.000Z",
+     "link": "http://www.joynews24.com/view/2029536"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1223,
-  "matched": 650,
-  "avgLeadMin": 548,
+  "flagged": 1232,
+  "matched": 653,
+  "avgLeadMin": 545,
   "recent": [
+   {
+    "keyword": "울릉도 경계경보",
+    "hitKeyword": "울릉군 경계경보",
+    "hitAt": "2026-11-24T09:30:00+09:00",
+    "leadMin": 45
+   },
+   {
+    "keyword": "홈플러스 온라인 배송 중단",
+    "hitKeyword": "홈플러스 배송 중단",
+    "hitAt": "2026-11-24T09:30:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "울릉도 경계경보 발령",
+    "hitKeyword": "울릉군 경계경보",
+    "hitAt": "2026-11-24T09:30:00+09:00",
+    "leadMin": 15
+   },
    {
     "keyword": "조규성 골! 미트윌란 승리!",
     "hitKeyword": "조규성 6호골 미트윌란",
@@ -346,24 +526,6 @@
     "hitKeyword": "배우 김서형 하차",
     "hitAt": "2026-11-24T09:00:00+09:00",
     "leadMin": 15
-   },
-   {
-    "keyword": "오늘 날씨 영하권",
-    "hitKeyword": "전국 영하권 추위",
-    "hitAt": "2026-11-24T08:30:00+09:00",
-    "leadMin": 86
-   },
-   {
-    "keyword": "한국 수출 1조달러",
-    "hitKeyword": "중국산 수출 1조달러 위기",
-    "hitAt": "2026-11-24T08:00:00+09:00",
-    "leadMin": 2605
-   },
-   {
-    "keyword": "우리들의 발라드2",
-    "hitKeyword": "우리들의 발라드2 TOP12",
-    "hitAt": "2026-11-24T08:00:00+09:00",
-    "leadMin": 388
    }
   ]
  }
