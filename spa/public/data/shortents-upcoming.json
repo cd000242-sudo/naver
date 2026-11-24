@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T02:05:46.429Z",
+ "builtAt": "2026-11-24T02:15:49.844Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "국무회의 이재명 대통령",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 71,
-   "recent20": 40,
-   "press": 45,
-   "firstArticleAt": "2026-11-24T01:34:00.000Z",
+   "articles90": 67,
+   "recent20": 43,
+   "press": 44,
+   "firstArticleAt": "2026-11-24T01:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령 \"시험 부정행위, 중대범죄…엄두 못 내게 처벌 강화\"",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-24T02:04:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544779"
+     "title": "중수청장, 국무회의 한 차례 불참 후 다시 배석…신임 경찰청장도 참석",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-24T02:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206919?sid=102"
     },
     {
-     "title": "이 대통령 \"종교활동 빙자 불법행위…실효적 조치 검토해야\"",
-     "press": "busan.com",
-     "publishedAt": "2026-11-24T02:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001408656?sid=102"
+     "title": "이 대통령 \"사이비 종교단체 해산, 실효적 조치 검토할 때\"",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-24T02:14:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321602&inflow=N"
     },
     {
-     "title": "이 대통령 \"사이비 단체, 종교활동 빙자 불법행위…실효적 조치 검토해...",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-24T02:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405361?sid=100"
+     "title": "이 대통령 \"행정력 총동원해 시험 부정 범죄 엄정 대응\"",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-24T02:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193373?sid=100"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 48,
-   "recent20": 14,
-   "press": 35,
-   "firstArticleAt": "2026-11-24T00:38:00.000Z",
+   "articles90": 50,
+   "recent20": 8,
+   "press": 36,
+   "firstArticleAt": "2026-11-24T00:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이용철 법무장관 후보자 “새 형사사법체계 안착에 총력”",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-24T02:04:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611240077"
+     "title": "\"공소취소는 무슨\" \"잘된 인사\" 이용철 청문회 시작부터 '으르렁'",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-24T02:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414662?sid=100"
     },
     {
-     "title": "[포토] 모두발언하는 이용철 후보자",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-24T02:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846978?sid=100"
+     "title": "이용철 법무부 장관 후보자 인사청문회…\"공소취소는 검사가 하는 것\"",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-24T02:10:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630180"
     },
     {
-     "title": "이용철 법무장관 후보, 검찰개혁에 \"국민 불편 땐 진정성 퇴색\" … 대책...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-24T02:02:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/24/2026112450147.html"
+     "title": "與 '조희대 탄핵' 박차…이용철 청문회 돌입",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T02:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929334?sid=100"
     }
    ]
   },
@@ -79,63 +79,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 8,
-   "press": 33,
-   "firstArticleAt": "2026-11-24T00:36:00.000Z",
+   "articles90": 31,
+   "recent20": 6,
+   "press": 31,
+   "firstArticleAt": "2026-11-24T00:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“11월이 마지노선” 빨간불 켜진 홈플러스 [이지완의 유통기한]",
-     "press": "economist.co.kr",
-     "publishedAt": "2026-11-24T02:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/243/0000106120?sid=101"
+     "title": "홈플러스, 26일부터 온라인 배송 중단 \"상품 수급 차질\"",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-24T02:14:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888258"
+    },
+    {
+     "title": "홈플러스, 자금난에 온라인 배송 중단···경영 정상화 '빨간불'",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-24T02:06:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=720971"
     },
     {
      "title": "홈플러스, 자금난에 온라인 배송마저 중단…경영 정상화 '기로'",
      "press": "dailysmart.co.kr",
      "publishedAt": "2026-11-24T02:00:00.000Z",
      "link": "http://www.dailysmart.co.kr/news/articleView.html?idxno=133015"
-    },
-    {
-     "title": "[이슈+] 재개장 100일 만에 또…살얼음판 위 홈플러스",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-24T01:56:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=758317"
     }
    ]
   },
   {
    "keyword": "국민주권의 날 지정",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 29,
+   "articles90": 31,
    "recent20": 5,
-   "press": 24,
+   "press": 26,
    "firstArticleAt": "2026-11-24T01:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령 \"12·3 국가기념일 '국민주권의 날'로 지정\"",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-24T02:02:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544781"
+     "title": "'빛의 혁명' 12월 3일 '국민주권의날'로...이 대통령 \"오늘 처리 예정\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T02:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437220?sid=100"
+    },
+    {
+     "title": "이 대통령, 12월 3일 '국민주권의 날'…국가기념일 제정",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-24T02:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394699?sid=100"
     },
     {
      "title": "李 “빛의 혁명, 위대한 국민 승리”…‘12·3 국민주권의 날’ 지정안...",
      "press": "kukinews.com",
      "publishedAt": "2026-11-24T02:02:00.000Z",
      "link": "https://www.kukinews.com/article/view/kuk202611240061"
-    },
-    {
-     "title": "李대통령, 12·3 '국민주권의 날' 지정안 처리 예고…시험 부정 엄단 지...",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-24T01:58:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=316059"
     }
    ]
   },
@@ -144,30 +143,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
+   "articles90": 22,
    "recent20": 5,
-   "press": 19,
-   "firstArticleAt": "2026-11-24T00:43:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-24T00:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경찰, 전광훈 목사 구속영장 신청…사랑제일교회 자금 102억원 혐의",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-24T02:12:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3761244"
+    },
+    {
+     "title": "경찰, '불법 정치자금 의혹' 전광훈 목사 구속영장 신청",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-24T02:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003158755?sid=102"
+    },
     {
      "title": "경찰, '102억 불법 정치자금 의혹' 전광훈 구속영장 신청",
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-24T02:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000554938?sid=102"
-    },
-    {
-     "title": "\"교회 돈 102억 자유통일당 기부\"…전광훈 목사 구속영장",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-24T01:56:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326289/?sc=Naver"
-    },
-    {
-     "title": "전광훈 목사, 102억 정치자금 스캔들로 구속영장 신청",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-24T01:50:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887048"
     }
    ]
   },
@@ -177,29 +176,29 @@
     "nate"
    ],
    "articles90": 17,
-   "recent20": 2,
+   "recent20": 4,
    "press": 17,
-   "firstArticleAt": "2026-11-24T00:40:00.000Z",
+   "firstArticleAt": "2026-11-24T00:46:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "\"건강 악화\" 김서형, 3년만 안방 복귀 무산..박보경 '대시' 합류 [종합]",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-24T02:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005644417"
+    },
+    {
+     "title": "김서형 ‘대시’ 하차, 왜? 공석에 박보경 투입",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-24T02:06:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611240078"
+    },
     {
      "title": "김서형, 건강악하로 ‘대시’ 하차…박보경 투입",
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-24T02:03:00.000Z",
      "link": "https://m.entertain.naver.com/article/144/0001151423"
-    },
-    {
-     "title": "박보경, 김서형 하차한 SBS 드라마 '대시' 합류",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T02:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016460090?sid=103"
-    },
-    {
-     "title": "김서형, 건강 악화로 '대시' 하차…박보경 합류",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-24T01:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000554914"
     }
    ]
   },
@@ -208,10 +207,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-24T00:37:00.000Z",
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-24T00:46:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -236,34 +235,34 @@
    ]
   },
   {
-   "keyword": "박보경 대시 투입",
+   "keyword": "뉴욕 메츠",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T00:40:00.000Z",
-   "exclusive": true,
+   "articles90": 10,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-24T00:56:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김서형, 건강악하로 ‘대시’ 하차…박보경 투입",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-24T02:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001151423"
+     "title": "구자욱이 메츠 1루수? 골드슈미트가 차지했다...플래툰이라면 안 가는게...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-24T02:08:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/445/0000492785"
     },
     {
-     "title": "\"건강 상태 악화\" 김서형, '대시' 촬영 중 하차…박보경 대체 투입[공식...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-24T01:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000640538"
+     "title": "한국선 '200억설'인데 美선 '가성비'… ESPN, 메츠 영입 후보로 구자욱 ...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-24T02:02:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/014/0005608824"
     },
     {
-     "title": "김서형, '대시' 촬영 도중 건강문제로 하차…박보경 대체 투입",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T01:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009306619"
+     "title": "'부자 구단' 뉴욕 메츠, 골드슈미트 영입…3일 간 7500억 썼다",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-24T01:51:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/448/0000653023"
     }
    ]
   },
@@ -304,10 +303,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 4,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T00:42:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-24T00:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -336,10 +335,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-24T00:38:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-24T01:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -362,13 +361,77 @@
      "link": "https://m.sports.naver.com/wfootball/article/436/0000115197"
     }
    ]
+  },
+  {
+   "keyword": "박보경 대시 대체 투입",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T01:08:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김서형, '대시' 촬영 도중 건강문제로 하차…박보경 대체 투입",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T01:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009306619"
+    },
+    {
+     "title": "\"건강 상태 악화\" 김서형, '대시' 촬영 중 하차…박보경 대체 투입[공식...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-24T01:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000640538"
+    },
+    {
+     "title": "김서형, 건강 문제로 '대시' 하차…박보경 대체 투입",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T01:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000522150"
+    }
+   ]
+  },
+  {
+   "keyword": "국가장학금 신청",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T00:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2027학년도 1학기 국가장학금 신청 시작-내년 1월 7일까지",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-24T02:12:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95799"
+    },
+    {
+     "title": "2027 국가장학금 신청기간 시작....소득분위 기준 바뀐다? 신청방법·지...",
+     "press": "christiantoday.co.kr",
+     "publishedAt": "2026-11-24T01:46:00.000Z",
+     "link": "https://www.christiantoday.co.kr/news/378834"
+    },
+    {
+     "title": "교육부와 한국장학재단, 2027학년도 1학기 국가장학금 신청기간 접수 시...",
+     "press": "lecturernews.com",
+     "publishedAt": "2026-11-24T00:56:00.000Z",
+     "link": "https://www.lecturernews.com/news/articleView.html?idxno=214420"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1247,
-  "matched": 669,
-  "avgLeadMin": 552,
+  "flagged": 1246,
+  "matched": 667,
+  "avgLeadMin": 546,
   "recent": [
    {
     "keyword": "관광",
