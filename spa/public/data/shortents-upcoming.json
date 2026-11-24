@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T11:41:05.716Z",
+ "builtAt": "2026-11-24T11:51:09.013Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,63 +15,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 33,
+   "articles90": 38,
    "recent20": 8,
-   "press": 32,
+   "press": 37,
    "firstArticleAt": "2026-11-24T11:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정부, 31개 기관 5460명 세종행 확정…인권위 청사신축 후 이전",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-24T11:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357788?sid=100"
+     "title": "정부, 중앙행정기관 31곳 세종 이전 확정…인권위는 2031년까지 이전",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-24T11:50:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101944"
     },
     {
-     "title": "금융위·경찰청·감사원 등 31개 기관 세종행 확정",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-24T11:36:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026112420160057089"
+     "title": "정부 감사원·경찰청·방미통위 등 31개 기관 2031년까지 세종 이전 고시",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-24T11:50:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452841"
     },
     {
-     "title": "정부, 2031년까지 중앙행정기관 등 31개 기관 세종 이전 단계적 추진",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-24T11:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133653?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성 준감위 주주환원 결정",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-24T10:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성준감위 “삼성전자 주주환원 유보, 준법 위반·이해상충 아냐”",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-24T11:34:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611240253"
-    },
-    {
-     "title": "삼성 준감위 \"이재용 증여세·내년 1월 주주환원 이해상충 문제 없다\"",
-     "press": "bloter.net",
-     "publishedAt": "2026-11-24T11:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/293/0000093771?sid=101"
-    },
-    {
-     "title": "삼성 준감위 “주주환원 결정 시점, 이해상충 해당 안해”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-24T11:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764843?sid=101"
+     "title": "2031년까지 공무원 5460명 세종 이전 확정",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-24T11:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887206?sid=100"
     }
    ]
   },
@@ -80,13 +47,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
+   "articles90": 14,
+   "recent20": 3,
+   "press": 14,
    "firstArticleAt": "2026-11-24T10:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "하나저축銀서도 552명 개인정보 유출…두 달 간 저축은행 5곳서 털려",
+     "press": "weekly.hankooki.com",
+     "publishedAt": "2026-11-24T11:42:00.000Z",
+     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7195550"
+    },
     {
      "title": "하나저축은행 해킹 사고…고객 552명 개인정보 유출",
      "press": "daejonilbo.com",
@@ -98,12 +71,39 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-24T11:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002437517?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성 준감위 주주환원 결정",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-24T10:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성 준감위 \"이재용 증여세·내년 1월 주주환원 이해상충 문제 없다\"",
+     "press": "bloter.net",
+     "publishedAt": "2026-11-24T11:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/293/0000093771?sid=101"
     },
     {
-     "title": "하나저축은행 해킹‥고객 552명 개인정보 유출",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-24T11:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537756?sid=101"
+     "title": "삼성준감위 “삼성전자 주주환원 유보, 준법 위반·이해상충 아냐”",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-24T11:34:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611240253"
+    },
+    {
+     "title": "삼성 준감위 “주주환원 결정 시점, 이해상충 해당 안해”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-24T11:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764843?sid=101"
     }
    ]
   },
@@ -113,23 +113,23 @@
     "nate"
    ],
    "articles90": 9,
-   "recent20": 0,
+   "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-24T10:20:00.000Z",
+   "firstArticleAt": "2026-11-24T10:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "내일 첫차부터 '지하철 총파업'?‥올해도 '벼랑 끝 타결'될까?",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-24T11:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537776?sid=102"
+    },
     {
      "title": "[속보] 내일 지하철 파업하나…공사 “오해 풀었다” vs 올바른노조 “...",
      "press": "ekn.kr",
      "publishedAt": "2026-11-24T11:20:00.000Z",
      "link": "https://www.ekn.kr/web/view.php?key=20261124028194184"
-    },
-    {
-     "title": "서울지하철 총파업 D-1…노사 막판 교섭 ‘난항’, 출근길 혼란 우려",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T11:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727925?sid=102"
     },
     {
      "title": "서울 지하철 노사 막판 교섭 난항…내일 첫차부터 파업 예고",
@@ -145,7 +145,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-24T10:25:00.000Z",
    "exclusive": false,
@@ -172,49 +172,23 @@
    ]
   },
   {
-   "keyword": "호르무즈 유조선 기뢰 충돌",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-24T10:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이란 \"호르무즈서 유조선 2척 기뢰 충돌\"…UAE 해역서도 선박 피격",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-24T11:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979711?sid=104"
-    },
-    {
-     "title": "호르무즈 해협서 유조선 2척 기뢰 충돌로 화재…UAE 인근 화물선도 피격",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T10:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308052?sid=104"
-    },
-    {
-     "title": "이란 \"호르무즈서 유조선 2척 기뢰 충돌\"…UAE 인근서 화물선 피격",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T10:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929543?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "양홍원 원현주 이혼",
    "sources": [
     "daum"
    ],
-   "articles90": 4,
-   "recent20": 0,
+   "articles90": 5,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-24T10:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"이혼 절차 거의 종료\" 원현주, 이혼 발표 후 조용한 양홍원...SNS 심경글...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-24T11:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000640636"
+    },
     {
      "title": "원현주, '불륜 의혹' ♥양홍원과 이혼 엔딩…\"유튜브 해달라\" 새 출발 응...",
      "press": "xportsnews.com",
@@ -226,12 +200,38 @@
      "press": "osen.co.kr",
      "publishedAt": "2026-11-24T11:06:00.000Z",
      "link": "https://m.entertain.naver.com/article/109/0005644639"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 국정원장 논란",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T11:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강금실 국정원장 후보자 적절성 논란에…靑 \"美·英도 여성 정보기관장...",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-24T11:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445886?sid=100"
     },
     {
-     "title": "'불륜 의혹' 양홍원, 원현주와 파경…“이혼 절차 거의 종료”",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-24T11:02:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139795"
+     "title": "또다시 '최초' 앞에 선 강금실‥'파격 발탁' 속내는?",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-24T11:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537762?sid=100"
+    },
+    {
+     "title": "강금실·전해철·박능후… 민선 8기 경기도 ‘친노·친문’ 각자도생",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-24T11:14:00.000Z",
+     "link": "https://www.kyeongin.com/article/1775344"
     }
    ]
   },
@@ -268,34 +268,34 @@
    ]
   },
   {
-   "keyword": "강금실 국정원장 논란",
+   "keyword": "호르무즈 유조선 기뢰 충돌",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-24T11:11:00.000Z",
+   "firstArticleAt": "2026-11-24T10:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "또다시 '최초' 앞에 선 강금실‥'파격 발탁' 속내는?",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-24T11:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537762?sid=100"
+     "title": "이란 \"호르무즈서 유조선 2척 기뢰 충돌\"…UAE 해역서도 선박 피격",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-24T11:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979711?sid=104"
     },
     {
-     "title": "강금실·전해철·박능후… 민선 8기 경기도 ‘친노·친문’ 각자도생",
-     "press": "kyeongin.com",
-     "publishedAt": "2026-11-24T11:14:00.000Z",
-     "link": "https://www.kyeongin.com/article/1775344"
+     "title": "호르무즈 해협서 유조선 2척 기뢰 충돌로 화재…UAE 인근 화물선도 피격",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T10:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009308052?sid=104"
     },
     {
-     "title": "“강금실은 얼굴마담…국정원 기조실장이 李 변호인 출신”[황형준의 법...",
-     "press": "donga.com",
-     "publishedAt": "2026-11-24T11:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764841?sid=100"
+     "title": "이란 \"호르무즈서 유조선 2척 기뢰 충돌\"…UAE 인근서 화물선 피격",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T10:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929543?sid=104"
     }
    ]
   },
