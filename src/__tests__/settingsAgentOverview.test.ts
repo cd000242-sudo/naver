@@ -52,6 +52,19 @@ describe('settings agents and collapsed credentials', () => {
       expect(field.value).toBe('keep-test-value');
     }
   });
+  it('keeps the LDB extension switch on the main screen: it is a connection switch, not an API key', () => {
+    mount();
+    const toggle = document.getElementById('ldb-bridge-enabled') as HTMLInputElement;
+    const handler = vi.fn(); toggle.addEventListener('change', handler);
+    expect(toggle.closest('details')).toBeNull();
+    for (const id of ['ldb-bridge-token', 'ldb-bridge-load', 'ldb-bridge-copy', 'ldb-bridge-status']) {
+      expect(document.getElementById(id)!.closest('details'), id).toBeNull();
+    }
+    expect(toggle.closest('#settings-section-api-keys')).not.toBeNull();
+    toggle.dispatchEvent(new Event('change')); expect(handler).toHaveBeenCalledOnce();
+    // The NAVER keys that shared its block are still folded.
+    expect(document.getElementById('naver-client-id')!.closest('details')).not.toBeNull();
+  });
   it('refreshes all providers regardless of the selected engine and exposes failures', async () => {
     mount();
     (window as any).api.agentUsage = vi.fn(async (provider) => {

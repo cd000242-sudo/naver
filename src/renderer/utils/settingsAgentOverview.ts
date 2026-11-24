@@ -117,7 +117,11 @@ function settingsAgentCollapseApiKeys(): void {
     const title = child.querySelector('h3,h4')?.textContent?.trim().replace(/\s+/g,' ') || 'API 키 설정';
     const summary = settingsAgentElement('summary', `${title} · 펼쳐서 편집`);
     summary.style.cssText = 'cursor:pointer;color:var(--text-strong);font-weight:700;';
-    child.before(details); details.append(summary, child);
+    child.before(details);
+    // The LDB extension switch shares the NAVER block but is a connection switch, not a key: it stays visible.
+    const ldbCard = child.querySelector('#ldb-bridge-enabled')?.closest('label')?.parentElement;
+    if (ldbCard && ldbCard !== child) { ldbCard.style.margin = '12px 0'; details.before(ldbCard); }
+    details.append(summary, child);
   }
 }
 

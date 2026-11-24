@@ -36,6 +36,10 @@ async function openApiKeys(page: Page): Promise<void> {
   await page.locator('#settings-button-fixed').click();
   await expect(page.locator('#settings-modal')).toBeVisible({ timeout: 15_000 });
   await page.locator('#nav-api-keys-btn').click();
+  // [2026-11-24] API key cards are folded by default (agents come first): open the card that holds the HUB key.
+  const hubCard = page.locator('details[data-settings-api-keys]').filter({ has: page.locator('#naver-hub-client-id') });
+  await expect(hubCard).toHaveCount(1, { timeout: 15_000 });
+  if (!(await hubCard.evaluate((el) => (el as HTMLDetailsElement).open))) await hubCard.locator('summary').first().click();
   await expect(page.locator('#naver-hub-client-id')).toBeVisible({ timeout: 15_000 });
 }
 
