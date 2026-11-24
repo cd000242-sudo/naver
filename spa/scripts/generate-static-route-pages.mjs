@@ -308,17 +308,20 @@ function writeKeywordDetailPages(template) {
  *
  * 없는 라우트는 기본값(og-image.jpg)으로 떨어진다 — 조용히 깨지지 않는다.
  */
+// [2026-11-24] The owner's card set (dark + gold, 1200x630): spa/public/og/*.jpg. The home card is og-image.jpg
+// (payment-page/), which every route without its own card keeps.
 const OG_IMAGE_BY_ROUTE = {
   products: 'og/products.jpg',
-  detail: 'og/products.jpg',        // 제품 상세는 제품군 카드를 함께 쓴다
-  'leword-detail': 'og/leword-detail.jpg',
+  detail: 'og/naver.jpg',            // Better Life Naver 상세
+  'leword-detail': 'og/leword.jpg',
   leword: 'og/leword.jpg',
-  // 매일 올리는 '무료 선정 황금키워드' 페이지. 같은 얘기라 leword 카드를 같이 쓴다.
-  briefing: 'og/leword.jpg',
+  briefing: 'og/golden-keywords.jpg',   // 무료 선정 황금키워드
   orbit: 'og/orbit.jpg',
   pricing: 'og/pricing.jpg',
   download: 'og/download.jpg',
-  chatbots: 'og/chatbots.jpg',
+  chatbots: 'og/chatbot.jpg',
+  reviews: 'og/revenue.jpg',         // 수익 후기
+  community: 'og/community.jpg',
 };
 
 /**
