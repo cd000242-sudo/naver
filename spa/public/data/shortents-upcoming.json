@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T13:01:33.327Z",
+ "builtAt": "2026-11-24T13:11:37.019Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,133 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "김혜경 여사 오찬",
    "sources": [
     "daum"
    ],
-   "articles90": 33,
-   "recent20": 6,
-   "press": 27,
+   "articles90": 35,
+   "recent20": 3,
+   "press": 28,
    "firstArticleAt": "2026-11-24T11:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "권양숙 여사 “노무현·이재명 대통령 식성·수면·성격 닮아…건강 챙...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-24T13:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133660?sid=100"
+    },
+    {
+     "title": "김 여사 만난 권양숙 여사 \"두 대통령 식성부터 성격도 닮아\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T13:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522291?sid=100"
+    },
+    {
      "title": "金여사 만난 권양숙 여사 “盧와 李, 식성부터 성격까지 닮아”",
      "press": "donga.com",
      "publishedAt": "2026-11-24T12:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003764849?sid=100"
-    },
-    {
-     "title": "권양숙 여사 “노무현과 이재명, 식성·수면 패턴·성격까지 모든 부분...",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-24T12:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053617?sid=100"
-    },
-    {
-     "title": "김혜경 여사, 권양숙 여사와 오찬... \"이 대통령과 노 대통령 닮아\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-24T12:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522287?sid=100"
     }
    ]
   },
   {
-   "keyword": "젠슨 황 복귀로 주가 폭등",
+   "keyword": "세종 이전 확정",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 22,
    "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-24T11:34:00.000Z",
+   "press": 22,
+   "firstArticleAt": "2026-11-24T11:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[김종석의 왜]젠슨 황, ‘불륜 불륜 불륜’에도 왜?",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-24T12:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368594?sid=101"
+     "title": "금융위 등 31개 기관 세종 이전 확정... 외교·국방·통일·법무 등 미정",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-24T12:54:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326382/?sc=Naver"
     },
     {
-     "title": "앤트로픽 주가, 개장전 거래서 나흘만에 공모가 아래로 하락",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-24T12:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014343100?sid=104"
+     "title": "감사원·경찰청 등 31개 기관 5460명, 2031년까지 세종 이전",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-24T12:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394747?sid=100"
     },
     {
-     "title": "트럼프 개입에 '젠슨 황' 복귀... 하루 200억 벌었다",
-     "press": "newsbrite.net",
-     "publishedAt": "2026-11-24T12:36:00.000Z",
-     "link": "http://www.newsbrite.net/news/articleView.html?idxno=201721"
+     "title": "인천 재외동포청 ‘세종 이전’ 확정… 박찬대 시장 책임론 커질듯",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-24T12:42:00.000Z",
+     "link": "https://www.kyeongin.com/article/1775352"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 복귀로 엔비디아 급등",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 21,
+   "recent20": 5,
+   "press": 17,
+   "firstArticleAt": "2026-11-24T11:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘젠슨 황 복귀’ 급등 후 나스닥 선물 하락세로 돌아서",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-24T13:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484858?sid=104"
+    },
+    {
+     "title": "젠슨 황 11일 만의 귀환…엔비디아 급등, 한국 증시에 가져온 건?｜빽투...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T13:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522290?sid=104"
+    },
+    {
+     "title": "뉴욕증시 프리뷰, 미 주가선물 일제 하락...엔비디아發 랠리 하루 만에...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-24T13:01:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261124001464"
+    }
+   ]
+  },
+  {
+   "keyword": "대전 베이징 승리",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 16,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-24T11:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "베이징 3-2 제압 황선홍 감독, 승리 했지만 선수들 침착함 가져야",
+     "press": "joongdo.co.kr",
+     "publishedAt": "2026-11-24T13:10:00.000Z",
+     "link": "https://www.joongdo.co.kr/web/view.php?key=20261124010008554"
+    },
+    {
+     "title": "‘전반에만 3골’ 대전, 베이징 3-2 꺾고 ACLE 2연패 탈출…포항은 교토...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-24T12:59:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/144/0001151505"
+    },
+    {
+     "title": "대전하나시티즌, 베이징 궈안 3대 2 제압…ACLE 3경기 만에 승리",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-24T12:56:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/656/0000193469"
     }
    ]
   },
@@ -79,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-24T11:32:00.000Z",
+   "articles90": 12,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-24T12:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,17 +171,55 @@
    ]
   },
   {
+   "keyword": "비",
+   "sources": [
+    "google"
+   ],
+   "articles90": 12,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-24T11:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'틈만나면' 비, 오징어볶음 백반 맛집",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-24T13:00:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611240234"
+    },
+    {
+     "title": "[TVis] ‘김태희♥’ 비, 부부싸움 사연에 ‘발끈’ “과거 얘기 꺼내지...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-24T12:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543319"
+    },
+    {
+     "title": "'틈만나면' 비, 신촌 오징어볶음 백반 맛집 추천",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-24T12:58:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305729"
+    }
+   ]
+  },
+  {
    "keyword": "중국 대미 수출통제 유예",
    "sources": [
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 2,
+   "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-24T11:35:00.000Z",
+   "firstArticleAt": "2026-11-24T11:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "中, 핵심광물 美 수출통제 2개월 뒤로 미루고 보잉 구매",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-24T13:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967542?sid=104"
+    },
     {
      "title": "中, 핵심 광물 대미 수출통제 2개월 추가 유예…보잉 항공기 50대도 구매",
      "press": "biz.heraldcorp.com",
@@ -129,12 +231,6 @@
      "press": "mbn.mk.co.kr",
      "publishedAt": "2026-11-24T12:43:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/057/0001979715?sid=104"
-    },
-    {
-     "title": "중국, 대미 핵심광물 수출통제 2개월 미루고 보잉 구매",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T12:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929571?sid=104"
     }
    ]
   },
@@ -143,10 +239,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-24T11:36:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-24T11:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -178,10 +274,16 @@
    "articles90": 5,
    "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-24T11:32:00.000Z",
+   "firstArticleAt": "2026-11-24T12:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "풀타임 뛰고 빈손…76분 뛴 정상빈 1골·1도움",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-24T13:05:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/144/0001151507"
+    },
     {
      "title": "美 프로축구 PO 정상빈, 손흥민 잡고 '펄펄'…'1골 1도움' 활약",
      "press": "news.tvchosun.com",
@@ -193,44 +295,38 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-24T12:26:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/055/0001405540"
-    },
-    {
-     "title": "손흥민, 정상빈과 ‘코리안 더비’서 침묵…LAFC 탈락 위기",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-24T12:16:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/087/0001233152"
     }
    ]
   },
   {
-   "keyword": "부천시",
+   "keyword": "젠슨 황 복귀 후 급등하는 주가",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-24T11:32:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T11:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "부천시 공무원, 396억원 예산 '부당 이체' 시도…결국 '해임'",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-24T12:14:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244089"
+     "title": "‘젠슨 황 복귀’ 급등 후 나스닥 선물 하락세로 돌아서",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-24T13:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484858?sid=104"
     },
     {
-     "title": "시 예산 396억 '셀프 결재' 시도…부천시 공무원 해임",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-24T12:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006414999?sid=102"
+     "title": "젠슨 황, 11일 만에 전격 복귀…엔비디아 30%대 급등",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300305?sid=104"
     },
     {
-     "title": "동원대 웹툰창작과, 부천시 웹툰 융합 공모전 입상",
-     "press": "cnbnews.com",
-     "publishedAt": "2026-11-24T12:04:00.000Z",
-     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1025126"
+     "title": "‘젠슨 황 구원투수 자처’ 트럼프, 정권 명운 걸었다 [1일1트]",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727935?sid=104"
     }
    ]
   },
@@ -239,10 +335,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T11:34:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-24T11:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -265,11 +361,43 @@
      "link": "https://n.news.naver.com/mnews/article/020/0003764845?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "부천시",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T12:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "부천시 공무원, 396억원 예산 '부당 이체' 시도…결국 '해임'",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-24T12:14:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244089"
+    },
+    {
+     "title": "시 예산 396억 '셀프 결재' 시도…부천시 공무원 해임",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-24T12:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414999?sid=102"
+    },
+    {
+     "title": "동원대 웹툰창작과, 부천시 웹툰 융합 공모전 입상",
+     "press": "cnbnews.com",
+     "publishedAt": "2026-11-24T12:04:00.000Z",
+     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1025126"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1393,
+  "flagged": 1397,
   "matched": 729,
   "avgLeadMin": 526,
   "recent": [
