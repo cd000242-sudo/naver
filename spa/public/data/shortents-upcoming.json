@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T09:40:24.559Z",
+ "builtAt": "2026-11-24T09:50:28.121Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,83 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "젠슨 황 CEO 복귀",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 70,
-   "recent20": 16,
-   "press": 52,
-   "firstArticleAt": "2026-11-24T08:50:00.000Z",
+   "articles90": 69,
+   "recent20": 14,
+   "press": 49,
+   "firstArticleAt": "2026-11-24T08:52:00.000Z",
    "exclusive": false,
    "capped": true,
+   "samples": [
+    {
+     "title": "젠슨 황 구한 트럼프…\"하루 새 200억 원 넘게 수익\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T09:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929536?sid=104"
+    },
+    {
+     "title": "'젠슨 황 복귀'에…대만증시 사상 최대 상승폭·TSMC 상한가",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-24T09:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847265?sid=104"
+    },
+    {
+     "title": "가죽자켓 벗고 복귀한 젠슨 황, 본사 앞에서 직원들에게 준 선물",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-24T09:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567631?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 복귀에 증시 급등",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 57,
+   "recent20": 6,
+   "press": 45,
+   "firstArticleAt": "2026-11-24T08:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'젠슨 황 복귀'에…대만증시 사상 최대 상승폭·TSMC 상한가",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-24T09:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847265?sid=104"
+    },
+    {
+     "title": "[채권-마감] 금리 혼조세…주가 급등에도 外人 매수에 방향성 제한",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-24T09:46:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446315"
+    },
+    {
+     "title": "‘젠슨 황 복귀 개입’ 트럼프, 엔비디아 급등에 최대 200억원 수익…이...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-24T09:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833785?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 추가 불륜 고백",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 30,
+   "recent20": 3,
+   "press": 29,
+   "firstArticleAt": "2026-11-24T08:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
    "samples": [
     {
      "title": "젠슨 황, 복귀 직전에 추가 불륜 사실 고백했다…이사회는 \"복귀가 최선...",
@@ -30,16 +93,16 @@
      "link": "https://www.hidomin.com/news/articleView.html?idxno=730877"
     },
     {
-     "title": "젠슨 황, 사임 11일 만에 엔비디아 '복귀'",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-24T09:38:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247865"
+     "title": "\"젠슨 황, 알려진 두 명 외 추가 불륜 이사회에 고백\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T09:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522231?sid=104"
     },
     {
-     "title": "대만 반도체업계, 젠슨 황 복귀 '환영'…투자자들도 반색",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T09:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461418?sid=104"
+     "title": "[속보]젠슨 황, 엔비디아 복귀 전 이사회에 '추가 불륜' 고백...\"깊이 반...",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-24T09:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122102?sid=104"
     }
    ]
   },
@@ -50,11 +113,17 @@
    ],
    "articles90": 33,
    "recent20": 2,
-   "press": 28,
-   "firstArticleAt": "2026-11-24T08:16:00.000Z",
+   "press": 29,
+   "firstArticleAt": "2026-11-24T08:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "12월 1일부터 미세먼지 계절관리제 시행…수도권·6대 특별·광역시 5등...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-24T09:42:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285046"
+    },
     {
      "title": "정부, 올겨울 미세먼지 계절관리제 시행…초미세먼지 19㎍ 목표",
      "press": "mediapen.com",
@@ -66,27 +135,60 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-24T09:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002437486?sid=100"
-    },
-    {
-     "title": "올겨울 초미세먼지 작년보다 짙을 가능성 50%…생활 주변 집중 관리",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-24T09:12:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611240239"
     }
    ]
   },
   {
-   "keyword": "전주·창원 도심융합특구 후보 선정",
+   "keyword": "김병기",
    "sources": [
-    "nate"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 22,
-   "recent20": 2,
-   "press": 22,
-   "firstArticleAt": "2026-11-24T08:12:00.000Z",
+   "articles90": 20,
+   "recent20": 4,
+   "press": 19,
+   "firstArticleAt": "2026-11-24T08:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'차남 특혜' 김병기 송치…수사 1년 2개월만",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T09:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929533?sid=102"
+    },
+    {
+     "title": "김병기는 뇌물수수, 빗썸 이재원은 뇌물공여…경찰, 차남 취업 특혜 의...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-24T09:42:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328310"
+    },
+    {
+     "title": "신병확보 불발에 무더기 불송치…김병기 1년 넘게 파서 '반쪽 성과'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-24T09:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014343027?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "전주·창원 도심융합특구 선정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 3,
+   "press": 18,
+   "firstArticleAt": "2026-11-24T08:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "전주 도심융합특구 후보지 선정...AI 산업거점 조성 탄력",
+     "press": "jeonmin.co.kr",
+     "publishedAt": "2026-11-24T09:40:00.000Z",
+     "link": "http://www.jeonmin.co.kr/news/articleView.html?idxno=451067"
+    },
     {
      "title": "창원시, 도심융합특구 후보지 선정…\"방위·원자력 혁신거점으로\"",
      "press": "cnbnews.com",
@@ -98,88 +200,18 @@
      "press": "newsworks.co.kr",
      "publishedAt": "2026-11-24T09:34:00.000Z",
      "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904293"
-    },
-    {
-     "title": "[전북] 전주 도심융합특구 후보지 선정",
-     "press": "newsfreezone.co.kr",
-     "publishedAt": "2026-11-24T09:12:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=721106"
     }
    ]
   },
   {
-   "keyword": "지하철 파업",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 20,
-   "recent20": 6,
-   "press": 20,
-   "firstArticleAt": "2026-11-24T08:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서울지하철 노사, 총파업 전날 교섭 난항…본교섭 줄줄이 정회",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-24T09:30:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466597"
-    },
-    {
-     "title": "서울지하철 오늘 최종 교섭…결렬 시 내일 총파업",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-24T09:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012300159?sid=102"
-    },
-    {
-     "title": "'총파업 예고' 서울 지하철 노사 최종 담판…\"협상 난항\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T09:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929524?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "한화 국방 AI 데이터센터",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 19,
-   "firstArticleAt": "2026-11-24T08:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한화, 10조 들여 국방 AIDC 짓는다",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-24T09:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609183?sid=101"
-    },
-    {
-     "title": "한화에어로, 10조 들여 창원에 국방 AIDC 구축…2028년 가동",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-24T09:20:00.000Z",
-     "link": "https://www.ajunews.com/view/20261124170145059"
-    },
-    {
-     "title": "한화, 10조 원 투입 국방 AI 데이터센터 구축…2028년 7월 첫 가동 목표",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-24T09:10:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285014"
-    }
-   ]
-  },
-  {
-   "keyword": "송민호, 이달 102일 복무 재소집",
+   "keyword": "송민호 102일 추가 복무",
    "sources": [
     "nate"
    ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-24T08:11:00.000Z",
+   "articles90": 15,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-24T08:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,35 +236,34 @@
    ]
   },
   {
-   "keyword": "김병기",
+   "keyword": "한화 국방 AI 데이터센터",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 2,
-   "press": 18,
-   "firstArticleAt": "2026-11-24T08:11:00.000Z",
+   "articles90": 14,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-24T08:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김병기 의혹 1년 2개월 수사 끝...7개 혐의로 공소청行",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-24T09:34:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108324"
+     "title": "한화에어로, 창원에 180MW급 국방 AI 데이터센터 구축",
+     "press": "thelec.kr",
+     "publishedAt": "2026-11-24T09:46:00.000Z",
+     "link": "https://www.thelec.kr/news/articleView.html?idxno=65875"
     },
     {
-     "title": "부안 출신 김병기 치안감, 치안정감 승진 내정…완주 출신 함영욱 경무...",
-     "press": "domin.co.kr",
-     "publishedAt": "2026-11-24T09:30:00.000Z",
-     "link": "http://www.domin.co.kr/news/articleView.html?idxno=1576666"
+     "title": "한화, 10조 들여 국방 AIDC 짓는다",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-24T09:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609183?sid=101"
     },
     {
-     "title": "경찰, 김병기 의원 송치…수사 1년 2개월 만에 마무리",
-     "press": "news.kbs.co.kr",
+     "title": "한화에어로, 10조 들여 창원에 국방 AIDC 구축…2028년 가동",
+     "press": "ajunews.com",
      "publishedAt": "2026-11-24T09:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012300154?sid=102"
+     "link": "https://www.ajunews.com/view/20261124170145059"
     }
    ]
   },
@@ -241,13 +272,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 15,
+   "articles90": 13,
    "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-24T08:11:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-24T08:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "태양, 과민성 대장증후군 고백..\"화장실 급해 前소속사 YG 신사옥 찾아가...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-24T09:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004469172"
+    },
     {
      "title": "공중화장실 문화발전 공로 인정... 기장군도시관리공단 '시장 표창'",
      "press": "fnnews.com",
@@ -259,12 +296,6 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-24T09:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000967527?sid=102"
-    },
-    {
-     "title": "“누가 피 흘려요”…20대女, 대낮 학교 앞 화장실서 필로폰 투약",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-24T09:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002835217?sid=102"
     }
    ]
   },
@@ -273,10 +304,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-24T08:18:00.000Z",
+   "articles90": 12,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-24T08:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -305,10 +336,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 11,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T08:19:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-24T08:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -333,67 +364,34 @@
    ]
   },
   {
-   "keyword": "오세훈 특검",
+   "keyword": "육성재 기립성 저혈압으로 넘어져",
    "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-24T08:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오세훈, 국무회의서 '탄핵·특검 반대' 꺼냈다 제지…한성숙 \"정치적 발...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-24T09:34:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749136"
-    },
-    {
-     "title": "한성숙 총리, 오세훈 겨냥 \"국무회의서 정치적 발언 부적절\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-24T09:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653140?sid=100"
-    },
-    {
-     "title": "한 총리, 오세훈 시장 직격 \"정치사안 발언 부적절…매우 유감\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-24T09:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979679?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "미세먼지특별대책위원회 한성숙 총리",
-   "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T08:16:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T08:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한 총리 \"미세먼지 대응 위해 다음 달부터 계절관리제 시행\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T09:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437486?sid=100"
+     "title": "'기립성 저혈압' 육성재, '나인 투 식스' 첫 방 앞두고 넘어져 '턱 봉합...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-24T09:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492909"
     },
     {
-     "title": "한 총리 “미세먼지, 마음 놓을 상황 아냐…정책 실효성 높이는데 최선...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-24T09:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012300135?sid=100"
+     "title": "육성재, 드라마 첫방 앞두고…\"기립성 저혈압으로 넘어져 턱 부상\"",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-24T08:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761848"
     },
     {
-     "title": "한 총리 \"미세먼지 마음 놓을 상황 아냐…12월부터 계절관리제\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T08:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929492?sid=100"
+     "title": "육성재, 자택서 기립성 저혈압으로 사고⋯'나인 투 식스' 첫 방송 앞두고...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-24T08:36:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2652448"
     }
    ]
   },
@@ -403,7 +401,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-24T08:28:00.000Z",
    "exclusive": false,
@@ -462,42 +460,41 @@
    ]
   },
   {
-   "keyword": "12월 3일 공휴일 지정",
+   "keyword": "미세먼지특별대책위원회 한성숙 총리",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-24T08:14:00.000Z",
+   "firstArticleAt": "2026-11-24T08:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘12·3 국민주권의 날’ 정부기념일 지정…“尹 파면일 4·4 의견도, 기...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-24T08:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702762?sid=102"
+     "title": "한 총리 \"미세먼지 대응 위해 다음 달부터 계절관리제 시행\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T09:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437486?sid=100"
     },
     {
-     "title": "12월3일 ‘국민주권의 날’ 기념일 지정…‘빛의 혁명’ 기린다",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-24T08:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833753?sid=100"
+     "title": "한 총리 “미세먼지, 마음 놓을 상황 아냐…정책 실효성 높이는데 최선...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T09:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300135?sid=100"
     },
     {
-     "title": "12월 3일 '국민주권의 날' 국가기념일 지정..공휴일은 아냐",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-24T08:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609091?sid=100"
+     "title": "한 총리 \"미세먼지 마음 놓을 상황 아냐…12월부터 계절관리제\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T08:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929492?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1343,
+  "flagged": 1348,
   "matched": 704,
   "avgLeadMin": 525,
   "recent": [
