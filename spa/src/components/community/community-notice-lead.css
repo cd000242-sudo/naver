@@ -1,0 +1,25 @@
+/* Open card of the 공지사항 list: the top post of page 1 with its whole body (NoticeLeadCard.tsx). Needs light-page.css. */
+
+/* Nothing in this card is cut: the title and the body are shown in full, however long they are. */
+.cm-nlead { display: grid; gap: 12px; padding: 20px 22px; border-bottom: 1px solid var(--lp-line); }
+.has-nlead .cm-thead { display: none; }
+
+.cm-nlead-head { display: grid; gap: 8px; min-width: 0; }
+.cm-nlead-flags { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.cm-nlead-flags .lp-state { margin-right: 0; }
+.cm-nlead-title { font-size: 22px; font-weight: 800; line-height: 1.4; overflow-wrap: anywhere; }
+.cm-nlead-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 14px; color: var(--lp-muted); }
+.cm-nlead-author { display: flex; align-items: center; min-width: 0; font-size: 14px; color: var(--lp-text); }
+.cm-nlead-stat { white-space: nowrap; }
+
+.cm-nlead-media { position: relative; display: block; width: 100%; max-width: 360px; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 12px; background: var(--lp-surface-2); }
+.cm-nlead-media .cm-thumb { position: absolute; inset: 0; border-radius: 0; }
+
+.cm-nlead-excerpt { font-size: 16px; line-height: 1.6; color: var(--lp-muted); overflow-wrap: anywhere; white-space: pre-wrap; }
+.cm-nlead .cm-body { padding-bottom: 0; }
+.cm-nlead-go { justify-self: start; }
+
+@media (max-width: 720px) {
+    .cm-nlead { padding: 16px; gap: 10px; }
+    .cm-nlead-title { font-size: 20px; }
+}

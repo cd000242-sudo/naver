@@ -67,7 +67,7 @@ test('part of the body is drawn under the title only when the post has some; an 
 
 test('a notice row shows its body too, and its badges, with the 운영자 at the end', () => {
     const notice = post('nt_1', 'notice', { notice: true, noticeBadge: 'update', nickname: '운영자', isOperator: true, excerpt: 'v2.11.395 에서 바뀐 점' });
-    const [row] = rowsOf(render(listProps([notice], { boardId: 'notice' })));
+    const [row] = rowsOf(render(listProps([notice], { boardId: 'notice', page: 2, totalPages: 2 }))); // page 1 newest first: the open card (community-notice-lead)
     assert.match(row, /cm-row-excerpt">v2\.11\.395 에서 바뀐 점</);
     assert.match(text(row), /공지/);
     assert.ok(row.indexOf('cm-row-excerpt') < row.indexOf('cm-row-author'));

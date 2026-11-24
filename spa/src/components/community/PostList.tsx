@@ -5,12 +5,14 @@ import {
     type BoardConfig, type SortKey,
 } from '../../lib/communityModel.mjs';
 import { splitLead } from '../../lib/communityLead.mjs';
+import { splitNoticeLead } from '../../lib/communityNoticeLead.mjs';
 import { QNA_BOARD, QNA_EMPTY_TEXT } from '../../lib/communityQna.mjs';
 import { pickRowThumb } from '../../lib/communityThumb.mjs';
 import { useAvatars } from '../../lib/useAvatars';
 import Avatar from './Avatar';
 import { GradeBadge, NoticeBadge, QnaChip, StatusBadge } from './Badges';
 import LeadCard from './LeadCard';
+import NoticeLeadCard from './NoticeLeadCard';
 import PostThumb from './PostThumb';
 import RowMenu from './RowMenu';
 
@@ -134,11 +136,13 @@ function PostList({ title, note, boardId, boards, pinned, posts, total, page, to
     const avatars = useAvatars([...local, ...pinned, ...posts].map((post) => post.avatarKey));
     const rowProps = { boardId, boards, sort, now, moderator, avatars, onVisit, onReport, reportMode };
     // 최근 소식, page 1: the first ordinary post is one big card, the others stay rows.
-    const { lead, rest } = splitLead({ boardId, page, posts });
+    // 공지사항, page 1, newest first: the top post is drawn open with its whole body.
+    const notice = splitNoticeLead({ boardId, page, sort, posts });
+    const { lead, rest } = splitLead({ boardId, page, posts: notice.rest });
     // Marks a list in which some row has a picture (the row layout itself is the same for every list).
     const anyThumb = [...pinned, ...rest].some((post) => pickRowThumb(post).has);
     return (
-        <section className={`lp-box cm-board${anyThumb ? ' has-thumbs' : ''}${lead ? ' has-lead' : ''}`} aria-labelledby="cm-board-title">
+        <section className={`lp-box cm-board${anyThumb ? ' has-thumbs' : ''}${lead ? ' has-lead' : ''}${notice.lead ? ' has-nlead' : ''}`} aria-labelledby="cm-board-title">
             <div className="cm-board-head">
                 <h2 id="cm-board-title">{title}</h2>
                 {loading ? null : <span className="cm-count">{total}개</span>}
@@ -169,6 +173,7 @@ function PostList({ title, note, boardId, boards, pinned, posts, total, page, to
             <ul className="cm-rows" aria-busy={refreshing || undefined}>
                 {local.map((post) => <PostRow key={`local-${post.id}`} post={post} pinned={false} {...rowProps} onRetryLocal={onRetryLocal} onDiscardLocal={onDiscardLocal} />)}
                 {pinned.map((post) => <PostRow key={`pin-${post.id}`} post={post} pinned {...rowProps} />)}
+                {notice.lead ? <NoticeLeadCard key={`nlead-${notice.lead.id}`} post={notice.lead} boardId={boardId} sort={sort} now={now} avatars={avatars} /> : null}
                 {lead ? <LeadCard key={`lead-${lead.id}`} post={lead} boardId={boardId} sort={sort} now={now} moderator={moderator} avatars={avatars} onReport={onReport} reportMode={reportMode} /> : null}
                 {rest.map((post) => <PostRow key={post.id} post={post} pinned={false} {...rowProps} />)}
             </ul>

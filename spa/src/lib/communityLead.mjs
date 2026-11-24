@@ -7,7 +7,7 @@
 export const LEAD_BOARD = 'news';
 
 /** A post the card may link to: it has an id, is not pinned and is not one of the reader's own posts still being sent. */
-const canLead = (post) => Boolean(post)
+export const canLead = (post) => Boolean(post)
     && typeof post.id === 'string'
     && post.id !== ''
     && post.pinned !== true

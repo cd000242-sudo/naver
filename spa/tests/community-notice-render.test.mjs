@@ -49,7 +49,7 @@ test('write form opened from 공지사항: no notice option, and one sentence sa
 
 test('notice rows: the list names the board 공지사항 and hides views; the post header too', () => {
     const rows = posts(rawPost('nt_5', 'news', { notice: true, badge: 'update', views: 0 }), rawPost('n_1', 'news'));
-    const html = render('../../src/components/community/PostList.tsx', listProps({ posts: rows, total: 2 }));
+    const html = render('../../src/components/community/PostList.tsx', listProps({ posts: rows, total: 2, page: 2, totalPages: 2 })); // page 1 newest first opens the top post: community-notice-lead.test.mjs
     assert.match(html, /cm-row-board[^>]*>공지사항</);
     assert.match(html, /cm-row-board[^>]*>최근 소식</);
     const view = render('../../src/components/community/PostView.tsx', { post: rows[0], boards: loadLib().model.boardList(null), onLike() {}, onReport() {}, onEdit() {}, onDelete() {}, onVisit() {}, now: NOW });

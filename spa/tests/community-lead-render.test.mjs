@@ -57,7 +57,7 @@ test('news, page 1: the first post is one big card above the rows; the others ar
 
 test('no card on other boards, on the all-posts view, after page 1, while loading, or when empty: nothing changes', () => {
     const items = [post('n_1', 'news', withPicture), post('n_2')];
-    for (const props of [{ boardId: 'all' }, { boardId: 'free' }, { boardId: 'notice' }, { boardId: 'qna' }, { boardId: 'news', page: 2, totalPages: 3 }]) {
+    for (const props of [{ boardId: 'all' }, { boardId: 'free' }, { boardId: 'notice', page: 2, totalPages: 2 }, { boardId: 'qna' }, { boardId: 'news', page: 2, totalPages: 3 }]) {
         const html = render(LIST, listProps(items, props));
         assert.ok(!/<li class="cm-lead/.test(html), JSON.stringify(props));
         assert.ok(!/has-lead/.test(html), JSON.stringify(props));
