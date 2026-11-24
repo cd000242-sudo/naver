@@ -16289,6 +16289,11 @@
     "tier": "none",
     "pc": 70,
     "mobile": 70
+   },
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-24T06:19:03.077Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -20109,6 +20114,11 @@
     "tier": "none",
     "pc": 70,
     "mobile": 70
+   },
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-24T06:19:15.655Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -26781,7 +26791,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-07T02:10:26.277Z",
+    "checkedAt": "2026-11-24T06:19:05.766Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -36950,7 +36960,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-23T09:44:39.115Z",
+    "checkedAt": "2026-11-24T06:18:54.976Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -47086,7 +47096,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-07T02:10:19.017Z",
+    "checkedAt": "2026-11-24T06:19:00.372Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -56107,7 +56117,7 @@
    "carried": true,
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-04T02:30:14.348Z",
+    "checkedAt": "2026-11-24T06:18:58.583Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -86063,8 +86073,8 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-07T02:10:36.704Z",
-    "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
+    "checkedAt": "2026-11-24T06:19:13.875Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -102071,7 +102081,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-23T09:44:39.413Z",
+    "checkedAt": "2026-11-24T06:18:55.879Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -106079,7 +106089,12 @@
    "peakConfidence": "1년치만 봄",
    "effectiveVolume": 500,
    "preemptRank": 3,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-24T06:19:08.464Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -109359,7 +109374,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-07T02:10:31.617Z",
+    "checkedAt": "2026-11-24T06:19:10.323Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -110119,6 +110134,11 @@
     "tier": "none",
     "pc": 70,
     "mobile": 70
+   },
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-24T06:19:11.173Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -111285,5 +111305,5 @@
    ]
   }
  ],
- "revalidatedAt": "2026-11-23T09:44:54.693Z"
+ "revalidatedAt": "2026-11-24T06:19:15.655Z"
 }
