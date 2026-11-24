@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T21:48:32.286Z",
+ "builtAt": "2026-11-24T21:58:35.031Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
+  {
+   "keyword": "서울 지하철 협상 타결",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 30,
+   "recent20": 8,
+   "press": 27,
+   "firstArticleAt": "2026-11-24T20:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[AM-PM] 서울 지하철 노조 파업 철회…지하철 1~8호선 정상운행 外",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T21:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929640?sid=102"
+    },
+    {
+     "title": "'출근길 대란' 피했다...서울지하철 임단협 파업전 극적 타결",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-24T21:50:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784478"
+    },
+    {
+     "title": "서울 지하철 파업 2시간 앞두고 극적 타결…출근길 대란 피했다",
+     "press": "abcn.kr",
+     "publishedAt": "2026-11-24T21:50:00.000Z",
+     "link": "https://www.abcn.kr/news/articleView.html?idxno=95000"
+    }
+   ]
+  },
   {
    "keyword": "과잉생산 관세 발표",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 6,
-   "press": 13,
+   "articles90": 18,
+   "recent20": 5,
+   "press": 17,
    "firstArticleAt": "2026-11-24T20:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 이르면 오늘 ‘과잉생산 관세’ 발표...한국은 15% 상한 유지 관측",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-24T21:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702906?sid=104"
+     "title": "美USTR, 이르면 오늘 저녁 '과잉생산 관세 발표...한국, 15% 관세 유지 예",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-24T21:54:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=2026112506502192142aaae0046f_30"
     },
     {
-     "title": "미국 USTR, 16개 무역 파트너 과잉생산 관세 발표 임박…한국 15% 상한 적...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-24T21:38:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026112506321159842bd56fbc3c_1"
+     "title": "美 '과잉생산 관세' 이르면 오늘 발표…외신 \"韓 15% 유지 예상\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-24T21:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609261?sid=104"
     },
     {
-     "title": "美, 이르면 오늘 '과잉생산 관세' 발표…한국은 15% 상한 유지 전망",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-24T21:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653193?sid=104"
+     "title": "美 ‘과잉생산 관세’ 이르면 오늘 발표… “한국 15% 유지 예상”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-24T21:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887285?sid=101"
     }
    ]
   },
   {
-   "keyword": "서울 지하철 노사 협상 타결",
+   "keyword": "2026년 25일",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-24T20:56:00.000Z",
+   "articles90": 12,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울지하철 파업 철회…3개 노조 임단협 타결로 정상 운행",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-24T21:44:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191382"
+     "title": "[오늘의 운세] 25일 수요일 나의 운세는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-24T21:30:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194719"
     },
     {
-     "title": "[속보] 서울지하철 파업 철회…노사 극적 타결로 ‘출근길 대란’ 피했...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-24T21:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702905?sid=102"
+     "title": "전국 광역 단체장 11월 25일 일정",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-24T21:30:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261124001461"
     },
     {
-     "title": "서울 지하철 노사 임단협 극적 타결…출근길 정상운행",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-24T21:28:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101952"
+     "title": "[오늘의 운세] 2026년 11월 25일 (수) 띠별운세 '한 주를 잘 넘기자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-24T21:30:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104284"
     }
    ]
   },
@@ -79,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-24T20:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "개그맨 오정태 딸, 16살에 카이스트 조기입학…‘철새교육법’ 뭐길래?",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T21:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727986?sid=102"
+    },
     {
      "title": "오정태 \"17살 딸, 카이스트 조기입학…합격 선물로 성형수술\"('동상이몽...",
      "press": "celuvmedia.com",
@@ -97,12 +135,6 @@
      "press": "tvdaily.co.kr",
      "publishedAt": "2026-11-24T21:03:00.000Z",
      "link": "https://m.entertain.naver.com/article/440/0000054035"
-    },
-    {
-     "title": "오정태 딸 카이스트 합격…축하 선물 '성형'",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-24T21:00:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611250005"
     }
    ]
   },
@@ -206,9 +238,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1381,
-  "matched": 720,
-  "avgLeadMin": 544,
+  "flagged": 1380,
+  "matched": 719,
+  "avgLeadMin": 541,
   "recent": [
    {
     "keyword": "현대차 N 버츄얼컵 결승 진행",
