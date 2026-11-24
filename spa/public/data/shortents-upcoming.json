@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T12:21:19.470Z",
+ "builtAt": "2026-11-24T12:31:22.833Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "중앙행정기관 세종 이전",
@@ -17,29 +17,61 @@
     "daum"
    ],
    "articles90": 49,
-   "recent20": 8,
-   "press": 46,
-   "firstArticleAt": "2026-11-24T11:00:00.000Z",
+   "recent20": 10,
+   "press": 45,
+   "firstArticleAt": "2026-11-24T11:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "내년 22개 기관·1600명 세종으로 이전한다…계획 고시",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-24T12:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078140?sid=100"
+     "title": "재외동포청 내년 세종 이전 확정…박찬대 시장 반대 의견 전달 전 고시",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-24T12:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133656?sid=102"
     },
     {
-     "title": "정부, 2031년까지 31개 기관 세종 이전…인권위는 일정 늦춰져",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T12:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727939?sid=100"
+     "title": "금융위·경찰청 등 31개 기관 세종 이전 확정",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-24T12:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833803?sid=102"
     },
     {
-     "title": "금융위·개보위·방미통위 등 22개 기관 1600명 내년 세종시 이전…인권...",
-     "press": "public25.com",
-     "publishedAt": "2026-11-24T12:16:00.000Z",
-     "link": "https://www.public25.com/news/articleView.html?idxno=58989"
+     "title": "세종으로 옮기는 공무원 5460명…인권위는 청사 지은 뒤 이전",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-24T12:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567646?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "권양숙 여사와 김혜경 여사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 23,
+   "recent20": 6,
+   "press": 16,
+   "firstArticleAt": "2026-11-24T11:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김혜경 여사, 권양숙 여사와 오찬…\"노무현·이재명 대통령 많이 닮아\"",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-24T12:30:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321746&inflow=N"
+    },
+    {
+     "title": "김혜경 여사, 권양숙 여사와 오찬… “이 대통령과 노 대통령 닮아”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-24T12:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207077?sid=102"
+    },
+    {
+     "title": "김혜경 여사, 한남동 관저서 권양숙 여사와 오찬 환담",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T12:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437531?sid=100"
     }
    ]
   },
@@ -48,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 5,
-   "press": 15,
-   "firstArticleAt": "2026-11-24T10:52:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-24T11:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,54 +108,22 @@
    ]
   },
   {
-   "keyword": "권양숙 여사와 김혜경 여사",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 20,
-   "recent20": 8,
-   "press": 13,
-   "firstArticleAt": "2026-11-24T11:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "권양숙 여사 \"이재명 대통령, 盧 전 대통령과 모든 부분 닮아\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-24T12:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445890?sid=100"
-    },
-    {
-     "title": "김혜경 여사, 권양숙 여사와 오찬…“李대통령, 盧와 모든 부분 닮아”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-24T12:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702794?sid=100"
-    },
-    {
-     "title": "김혜경 여사, 권양숙 여사와 오찬... 權 \"이 대통령 건강 잘 챙기라\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-24T12:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967540?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "젠슨 황 복귀로 주가 폭등",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 12,
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
    "firstArticleAt": "2026-11-24T11:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황, 11일 만에 전격 복귀…엔비디아 30%대 급등",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-24T12:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012300305?sid=104"
+     "title": "\"AI 붐 위해 개입\"…엔비디아 31% 폭등하며 세계 증시 견인",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-24T12:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653161?sid=101"
     },
     {
      "title": "‘젠슨 황 구원투수 자처’ 트럼프, 정권 명운 걸었다 [1일1트]",
@@ -132,10 +132,10 @@
      "link": "https://n.news.naver.com/mnews/article/016/0002727935?sid=104"
     },
     {
-     "title": "[사설] 젠슨 황 복귀에 주가 급등… 일희일비 말고 '여진' 대비해야",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-24T12:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165516?sid=110"
+     "title": "젠슨 황, 11일 만에 전격 복귀…엔비디아 30%대 급등",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300305?sid=104"
     }
    ]
   },
@@ -204,14 +204,46 @@
    ]
   },
   {
+   "keyword": "김병기 뇌물 송치 수사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T11:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수사 1년여 만 '불구속 송치'…'용두사미' 논란",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-24T12:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405537?sid=102"
+    },
+    {
+     "title": "경찰, 김병기 의원 불구속 송치…1년2개월 만에 수사 일단락",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-24T12:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484836?sid=102"
+    },
+    {
+     "title": "14개월 걸린 수사 끝에…'6개 혐의' 김병기 불구속 송치",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T11:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522267?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "당첨되면 줍줍에 5만3447명 몰려",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-24T10:57:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T11:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -236,34 +268,34 @@
    ]
   },
   {
-   "keyword": "김병기 뇌물 송치 수사",
+   "keyword": "호르무즈 유조선 기뢰 충돌",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-24T11:02:00.000Z",
+   "firstArticleAt": "2026-11-24T11:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수사 1년여 만 '불구속 송치'…'용두사미' 논란",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-24T12:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405537?sid=102"
+     "title": "호르무즈 기뢰 충돌·UAE 피격… 이란 \"협상·해협 개방 안 돼\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-24T12:30:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451810"
     },
     {
-     "title": "14개월 걸린 수사 끝에…'6개 혐의' 김병기 불구속 송치",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-24T11:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522267?sid=102"
+     "title": "호르무즈에서 유조선 2척 기뢰 충돌...UAE 인근 화물선 피격",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T11:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437524?sid=104"
     },
     {
-     "title": "경찰 수사 14개월만에 김병기 송치…13개 의혹 중 7개만 적용",
-     "press": "donga.com",
-     "publishedAt": "2026-11-24T11:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764839?sid=102"
+     "title": "이란 \"호르무즈서 유조선 2척 기뢰 충돌\"…UAE 해역서도 선박 피격",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-24T11:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979711?sid=104"
     }
    ]
   },
@@ -273,7 +305,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-24T11:34:00.000Z",
    "exclusive": false,
@@ -296,38 +328,6 @@
      "press": "kyeonggi.com",
      "publishedAt": "2026-11-24T11:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/666/0000133652?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "호르무즈 유조선 기뢰 충돌",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T10:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "호르무즈에서 유조선 2척 기뢰 충돌...UAE 인근 화물선 피격",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T11:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437524?sid=104"
-    },
-    {
-     "title": "이란 \"호르무즈서 유조선 2척 기뢰 충돌\"…UAE 해역서도 선박 피격",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-24T11:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979711?sid=104"
-    },
-    {
-     "title": "호르무즈 해협서 유조선 2척 기뢰 충돌로 화재…UAE 인근 화물선도 피격",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T10:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308052?sid=104"
     }
    ]
   },
