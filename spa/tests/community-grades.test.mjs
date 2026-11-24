@@ -127,6 +127,16 @@ test('/me: a member sees the reward state; the owner sees 숲 and no reward box;
     assert.ok(!/내 보상/.test(text(owner)), 'the reward box is hidden for the owner');
 });
 
+test('sidebar: the owner sees their own score too, next to the top-grade line (no progress bar)', () => {
+    const props = (p) => ({ profile: p, boards: [], boardId: 'all', counts: {} });
+    const owner = render('../../src/components/community/CommunitySidebar.tsx', props(profile({ role: 'owner', score: 1234 })));
+    assert.match(text(owner), /1234점/);
+    assert.match(text(owner), /숲 · 최고 등급\(관리자\)/);
+    assert.ok(!/progressbar/.test(owner), 'the owner has no next grade to fill');
+    const member = render('../../src/components/community/CommunitySidebar.tsx', props(profile({ score: 40 })));
+    assert.match(text(member), /40점/);
+});
+
 test('sidebar guide: five grades, each reward on its own line; the score rules line; server grades are used when given', () => {
     const props = (extra = {}) => ({ profile: profile(), boards: [], boardId: 'all', counts: {}, ...extra });
     const html = render('../../src/components/community/CommunitySidebar.tsx', props());

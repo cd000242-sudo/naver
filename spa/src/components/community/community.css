@@ -39,7 +39,7 @@
 .cm-guide-more { flex-basis: 100%; font-size: 14px; }
 .cm-guide-more summary { cursor: pointer; display: inline-flex; align-items: center; min-height: 36px; color: var(--lp-accent); font-weight: 700; }
 .cm-guide-more p { margin: 2px 0 6px; font-size: 14px; color: var(--lp-muted); line-height: 1.5; }
-.cm-me-score.is-owner b { font-size: 17px; }
+.cm-me-score.is-owner span { font-weight: 800; color: var(--lp-text, inherit); }
 .cm-guide p { margin-top: 8px; font-size: 14px; color: var(--lp-faint); }
 
 .cm-htabs { display: none; gap: 8px; overflow-x: auto; padding: 2px 2px 6px; scrollbar-width: none; }
@@ -75,10 +75,11 @@
 .cm-sort { display: inline-flex; align-items: center; height: 44px; padding: 0 14px; border-radius: 10px; font-size: 15px; font-weight: 700; color: var(--lp-muted); border: 1px solid var(--lp-line); }
 .cm-sort.on { background: var(--lp-text); color: var(--lp-surface); border-color: var(--lp-text); }
 .cm-note { margin: 14px 22px 0; padding: 14px 16px; border-radius: 12px; background: var(--lp-accent-soft); font-size: 16px; }
-.cm-thead, .cm-row { display: grid; grid-template-columns: 84px minmax(0, 1fr) 196px 66px 58px 56px 84px; align-items: center; gap: 8px; padding: 0 22px; }
-.cm-thead { height: 44px; margin-top: 14px; font-size: 14px; color: var(--lp-faint); font-weight: 700; border-top: 1px solid var(--lp-line); border-bottom: 1px solid var(--lp-line); background: var(--lp-surface-2); }
-.cm-thead span:nth-child(n+4) { text-align: right; }
-.cm-row { min-height: 64px; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--lp-line); }
+/* The old table header no longer matches the rows (title over body, author at the right end): never shown. */
+.cm-thead { display: none; }
+/* Under a board note the rows start below a line, as they did under the header. */
+.cm-note ~ .cm-rows:not(:empty) { margin-top: 14px; border-top: 1px solid var(--lp-line); }
+.cm-row { display: grid; align-items: center; gap: 4px 14px; padding: 0 22px; min-height: 64px; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--lp-line); }
 .cm-row:hover { background: var(--lp-surface-2); }
 .cm-row.is-pin { background: var(--lp-brand-soft); }
 .cm-row-board { font-size: 14px; color: var(--lp-muted); white-space: nowrap; }
@@ -93,7 +94,33 @@
 .cm-nick { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .cm-row-time, .cm-row-num { font-size: 14px; color: var(--lp-muted); text-align: right; white-space: nowrap; }
 .cm-row-num i { display: none; }
-.cm-row-end { grid-column: 7; justify-self: end; }
+.cm-row-end { justify-self: end; }
+.cm-row-excerpt { font-size: 15px; line-height: 1.5; color: var(--lp-muted); overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.cm-row-meta { display: flex; align-items: center; gap: 10px; }
+
+/*
+ * Desktop rows, the same for every board: board | title over part of the body | state | (picture) | author over the
+ * date and counts | menu. The author is the right-end fact; the picture column (community-thumb.css) sits left of it.
+ */
+@media (min-width: 721px) {
+    .cm-row {
+        grid-template-columns: 76px minmax(0, 1fr) auto 196px 44px;
+        grid-template-areas: 'board title end who more' 'board excerpt end meta more';
+    }
+    .cm-row-board { grid-area: board; align-self: start; line-height: 30px; }
+    .cm-row-title { grid-area: title; align-self: end; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; line-height: 1.5; }
+    .cm-row-title .lp-state { margin-right: 6px; }
+    .cm-row-title .cm-title .t { display: inline; -webkit-line-clamp: unset; }
+    .cm-row-title .cm-cmt, .cm-row-title .cm-pic-mark { margin-left: 6px; }
+    .cm-row.is-failed .cm-row-title { display: block; }
+    .cm-row-excerpt { grid-area: excerpt; align-self: start; }
+    .cm-row-end { grid-area: end; }
+    .cm-row-author { grid-area: who; justify-self: end; align-self: end; max-width: 100%; }
+    .cm-row-meta { grid-area: meta; justify-self: end; align-self: start; }
+    .cm-row-num i { display: inline; font-style: normal; margin-right: 3px; }
+    .cm-row-num:empty { display: none; }
+    .cm-row-more { grid-area: more; }
+}
 .cm-visit { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 78px; height: 52px; border-radius: 11px; border: 1.5px solid var(--lp-accent); color: var(--lp-accent); font-size: 13px; font-weight: 700; line-height: 1.2; background: var(--lp-surface); }
 .cm-visit b { font-size: 17px; }
 .cm-visit:hover:not([disabled]) { background: var(--lp-accent-soft); }
@@ -102,11 +129,6 @@
 .cm-pg { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 10px; border: 1px solid var(--lp-line); font-weight: 700; }
 .cm-pg.on { background: var(--lp-text); color: var(--lp-surface); border-color: var(--lp-text); }
 
-@media (max-width: 1320px) and (min-width: 721px) {
-    .cm-thead, .cm-row { grid-template-columns: 76px minmax(0, 1fr) 176px 62px 52px 84px; }
-    .cm-views { display: none; }
-    .cm-row-end { grid-column: 6; }
-}
 @media (max-width: 1080px) {
     .cm-wrap { grid-template-columns: 1fr; }
     .cm-side { position: static; grid-template-columns: 1fr; }
@@ -123,7 +145,6 @@
     .cm-sorts { margin-left: 0; width: 100%; }
     .cm-sort { flex: 1; justify-content: center; }
     .cm-note { margin: 12px 16px 0; }
-    .cm-thead { display: none; }
     .cm-row { display: flex; flex-wrap: wrap; align-items: center; padding: 14px 16px; gap: 4px 12px; min-height: 0; }
     .cm-row-title { flex: 1 1 100%; display: block; }
     .cm-title .t { display: inline; -webkit-line-clamp: unset; }
@@ -134,6 +155,11 @@
     .cm-row-num i { display: inline; font-style: normal; margin-right: 3px; }
     .cm-row-time, .cm-row-num { font-size: 13px; }
     .cm-row-end { margin-left: auto; }
+    .cm-row-excerpt { flex: 1 1 100%; font-size: 14px; -webkit-line-clamp: 1; }
+    .cm-row-meta { display: contents; }
+    .cm-row-author { order: 1; }
+    .cm-row-time, .cm-row-num { order: 2; }
+    .cm-row-end, .cm-row-more { order: 3; }
     .cm-visit { width: 72px; height: 46px; }
 }
 .cm-head-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }

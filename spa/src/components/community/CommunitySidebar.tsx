@@ -32,7 +32,7 @@ function MyActivity({ profile }: { profile: CommunityProfile }) {
                     : <b className="cm-me-nick is-empty">닉네임을 정해 주세요</b>}
                 <GradeBadge grade={profile.grade} isOperator={profile.role === 'owner'} />
             </div>
-            {profile.role === 'owner' ? <p className="cm-me-score is-owner"><b>{progress.text}</b></p> : (
+            {profile.role === 'owner' ? <p className="cm-me-score is-owner"><b>{profile.score}점</b><span>{progress.text}</span></p> : (
                 <>
                     <p className="cm-me-score"><b>{profile.score}점</b><span>{progress.text}</span></p>
                     {isAssociate(profile) ? null : (

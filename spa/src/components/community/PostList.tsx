@@ -65,6 +65,8 @@ function LocalState({ post, onRetryLocal, onDiscardLocal }: Pick<RowProps, 'post
 function PostRow({ post, pinned, boardId, boards, sort, now, moderator, avatars, onVisit, onRetryLocal, onDiscardLocal, onReport, reportMode }: RowProps) {
     const thumb = post.delivery ? null : pickRowThumb(post);
     const qna = post.board === QNA_BOARD;
+    // Part of the body under the title; a post without text gets no empty line.
+    const excerpt = (post.excerpt || '').trim();
     return (
         <li className={`cm-row${pinned ? ' is-pin' : ''}${post.delivery ? ` is-${post.delivery}` : ''}${thumb?.has ? ' has-thumb' : ''}`}>
             <span className="cm-row-board">
@@ -82,14 +84,7 @@ function PostRow({ post, pinned, boardId, boards, sort, now, moderator, avatars,
                 {post.hasImage ? <i className="cm-pic-mark" role="img" aria-label="사진 있음">사진</i> : null}
                 {post.delivery === 'failed' && post.failure ? <span className="cm-row-fail" role="alert">{post.failure}</span> : null}
             </span>
-            <span className="cm-row-author">
-                <Avatar name={post.nickname} src={avatars[post.avatarKey]} size={28} />
-                <GradeBadge grade={post.grade} isOperator={post.isOperator} />
-                <span className="cm-nick">{post.nickname}</span>
-            </span>
-            <span className="cm-row-time">{formatPostDate(post.createdAt, now)}</span>
-            <span className="cm-row-num cm-views">{post.notice ? null : <><i>조회 </i>{post.views}</>}</span>
-            <span className="cm-row-num"><i>좋아요 </i>{post.likes}</span>
+            {excerpt ? <span className="cm-row-excerpt">{excerpt}</span> : null}
             <span className="cm-row-end">
                 {post.delivery
                     ? <LocalState post={post} onRetryLocal={onRetryLocal} onDiscardLocal={onDiscardLocal} />
@@ -98,6 +93,16 @@ function PostRow({ post, pinned, boardId, boards, sort, now, moderator, avatars,
                     : qna
                     ? <span className={`cm-qna-count${post.comments > 0 ? ' has-answers' : ''}`}>댓글 <b>{post.comments}</b></span>
                     : <StatusBadge board={post.board} status={post.status} />}
+            </span>
+            <span className="cm-row-meta">
+                <span className="cm-row-time">{formatPostDate(post.createdAt, now)}</span>
+                <span className="cm-row-num cm-views">{post.notice ? null : <><i>조회 </i>{post.views}</>}</span>
+                <span className="cm-row-num"><i>좋아요 </i>{post.likes}</span>
+            </span>
+            <span className="cm-row-author">
+                <Avatar name={post.nickname} src={avatars[post.avatarKey]} size={28} />
+                <GradeBadge grade={post.grade} isOperator={post.isOperator} />
+                <span className="cm-nick">{post.nickname}</span>
             </span>
             <span className="cm-row-more">
                 {onReport && reportMode && reportMode(post) !== 'hidden' ? <RowMenu post={post} onReport={onReport} /> : null}
@@ -130,7 +135,7 @@ function PostList({ title, note, boardId, boards, pinned, posts, total, page, to
     const rowProps = { boardId, boards, sort, now, moderator, avatars, onVisit, onReport, reportMode };
     // 최근 소식, page 1: the first ordinary post is one big card, the others stay rows.
     const { lead, rest } = splitLead({ boardId, page, posts });
-    // One more column at the right only when some row has a picture; a list of plain text rows looks as before.
+    // Marks a list in which some row has a picture (the row layout itself is the same for every list).
     const anyThumb = [...pinned, ...rest].some((post) => pickRowThumb(post).has);
     return (
         <section className={`lp-box cm-board${anyThumb ? ' has-thumbs' : ''}${lead ? ' has-lead' : ''}`} aria-labelledby="cm-board-title">
