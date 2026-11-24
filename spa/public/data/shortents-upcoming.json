@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T20:58:17.302Z",
+ "builtAt": "2026-11-24T21:08:20.188Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,167 +11,135 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "젠슨 황 복귀로 시장 영향",
+   "keyword": "서울 지하철 노사 극적 타결",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-24T19:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "복귀한 젠슨 황, 코스피 6.32% 띄웠지만…청문회가 기다린다 [글로벌 모...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-24T20:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685803?sid=104"
-    },
-    {
-     "title": "트럼프가 밀고 밴스가 뛰었다…미국이 젠슨 황을 놓지 못한 이유",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-24T20:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445940?sid=104"
-    },
-    {
-     "title": "'깐부' 젠슨 황의 깜짝 복귀…안도하는 韓산업계",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-24T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213515?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "서울 지하철 노사 협상 타결",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
+   "articles90": 15,
+   "recent20": 2,
+   "press": 15,
    "firstArticleAt": "2026-11-24T19:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울 지하철 노사 협상 타결…출근길 대란 피해",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T20:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929634?sid=102"
+     "title": "서울 지하철 ‘출근길 대란’ 피했다…서울교통공사 노사 임단협 타결",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-24T21:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133670?sid=102"
     },
     {
-     "title": "서울지하철 ‘출근길 대란’ 피했다…밤샘 협상 끝 3개 노조 파업 철회",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T20:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727969?sid=101"
+     "title": "출근길 대란 피했다…서울지하철 임단협 극적 타결",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-24T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357826?sid=102"
     },
     {
-     "title": "서울지하철 총파업 극적 철회…18시간 마라톤 협상 끝 임단협 잠정 합의",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-24T19:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847293?sid=102"
+     "title": "서울지하철 노사, 임단협 극적 타결",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-24T20:40:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466610"
     }
    ]
   },
   {
-   "keyword": "미국 과잉생산 관세 조사",
+   "keyword": "국내 코인 발행 허용",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-24T20:02:00.000Z",
+   "firstArticleAt": "2026-11-24T20:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“美USTR, 이르면 이번주 ‘과잉생산 관세’ 조사 결과 발표”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T20:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727971?sid=104"
+     "title": "코인거래소 대주주 지분 최대 34%...스테이블코인 발행은 은행 주도로",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-24T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685810?sid=101"
     },
     {
-     "title": "미 USTR, 이번주 과잉생산 관세 조사결과 발표",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T20:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929617?sid=104"
+     "title": "코인시장 판이 바뀐다…은행엔 열린 문, 거래소엔 높아지는 벽",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-24T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445947?sid=101"
     },
     {
-     "title": "美USTR, 이번주 韓포함 16개국 과잉생산 관세 조사 결과 발표",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-24T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213521?sid=104"
+     "title": "거래소 대주주 지분 20% ‘원칙’… 원화 코인, 과반 지분 은행 주도",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-24T20:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702884?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1386,
-  "matched": 715,
-  "avgLeadMin": 516,
+  "flagged": 1385,
+  "matched": 723,
+  "avgLeadMin": 535,
   "recent": [
    {
-    "keyword": "아침마당",
-    "hitKeyword": "아침마당 우서윤",
-    "hitAt": "2026-11-25T00:00:00+09:00",
-    "leadMin": 2338
+    "keyword": "교육청",
+    "hitKeyword": "시도교육청 시험지 파쇄",
+    "hitAt": "2026-11-25T06:00:00+09:00",
+    "leadMin": 9724
    },
    {
-    "keyword": "12월 3일 공휴일 지정",
-    "hitKeyword": "12월 3일 국가기념일",
-    "hitAt": "2026-11-25T00:00:00+09:00",
-    "leadMin": 370
+    "keyword": "지수",
+    "hitKeyword": "미국 소비자신뢰지수 반등",
+    "hitAt": "2026-11-25T06:00:00+09:00",
+    "leadMin": 4257
    },
    {
-    "keyword": "대전 ACLE 베이징 3-2 승리",
-    "hitKeyword": "대전 베이징 3-2 승리",
-    "hitAt": "2026-11-24T23:30:00+09:00",
-    "leadMin": 109
+    "keyword": "서울교통공사 임단협 최종교섭",
+    "hitKeyword": "서울지하철 임단협 타결",
+    "hitAt": "2026-11-25T06:00:00+09:00",
+    "leadMin": 1074
    },
    {
-    "keyword": "대전 베이징 승리",
-    "hitKeyword": "대전 베이징 3-2 승리",
-    "hitAt": "2026-11-24T23:30:00+09:00",
-    "leadMin": 78
+    "keyword": "서울교통공사 임단협 교섭",
+    "hitKeyword": "서울지하철 임단협 타결",
+    "hitAt": "2026-11-25T06:00:00+09:00",
+    "leadMin": 1013
    },
    {
-    "keyword": "내신 부정행위 퇴학 최대",
-    "hitKeyword": "수능 부정행위 적발",
-    "hitAt": "2026-11-24T23:30:00+09:00",
-    "leadMin": 68
+    "keyword": "수능 시험지 폐기",
+    "hitKeyword": "시도교육청 시험지 파쇄",
+    "hitAt": "2026-11-25T06:00:00+09:00",
+    "leadMin": 499
    },
    {
-    "keyword": "대전, 베이징 3-2로 ACLE 연패 탈출!",
-    "hitKeyword": "대전 베이징 3-2 승리",
-    "hitAt": "2026-11-24T23:30:00+09:00",
-    "leadMin": 28
+    "keyword": "미국 과잉생산 관세 조사",
+    "hitKeyword": "미국 과잉생산 관세",
+    "hitAt": "2026-11-25T06:00:00+09:00",
+    "leadMin": 408
    },
    {
-    "keyword": "정상빈 1골 1도움",
-    "hitKeyword": "정상빈 MLS컵 활약",
-    "hitAt": "2026-11-24T23:30:00+09:00",
-    "leadMin": 18
+    "keyword": "오정태 딸 카이스트 입학",
+    "hitKeyword": "오정태 딸 카이스트 입학",
+    "hitAt": "2026-11-25T06:00:00+09:00",
+    "leadMin": 368
    },
    {
-    "keyword": "정상빈 1골 1도움 폭발!",
-    "hitKeyword": "정상빈 1골 1도움",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 501
+    "keyword": "유시은과 이관희, 민폐 하객 사과",
+    "hitKeyword": "이관희 유시은 사과",
+    "hitAt": "2026-11-25T06:00:00+09:00",
+    "leadMin": 348
    },
    {
-    "keyword": "정상빈 1골 1도움 활약",
-    "hitKeyword": "정상빈 1골 1도움",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 481
+    "keyword": "젠슨 황, 11일 만에 복귀",
+    "hitKeyword": "젠슨 황 엔비디아 복귀",
+    "hitAt": "2026-11-25T06:00:00+09:00",
+    "leadMin": 313
    },
    {
-    "keyword": "젠슨 황 CEO 복귀",
-    "hitKeyword": "엔비디아 젠슨 황 복귀",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 240
+    "keyword": "젠슨 황의 복귀",
+    "hitKeyword": "젠슨 황 엔비디아 복귀",
+    "hitAt": "2026-11-25T06:00:00+09:00",
+    "leadMin": 243
    }
   ]
  }
