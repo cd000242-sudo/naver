@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T19:47:56.222Z",
+ "builtAt": "2026-11-24T19:57:58.958Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 20,
  "candidates": [
   {
-   "keyword": "젠슨 황의 복귀",
+   "keyword": "서울 지하철 협상 타결",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 4,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T18:27:00.000Z",
+   "articles90": 13,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T18:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“젠슨 황 복귀는 정치적 구제금융”… 트럼프 국가자본주의 도마에",
-     "press": "donga.com",
-     "publishedAt": "2026-11-24T19:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764973?sid=104"
+     "title": "서울지하철 3개 노조 파업 철회...출근길 혼잡 피해",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T19:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437620?sid=102"
     },
     {
-     "title": "가죽 재킷 벗고 나타난 젠슨 황 “두번째엔 더 나은 CEO 될것”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-24T19:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764952?sid=104"
+     "title": "서울 지하철 파업 위기 넘겼다...서울교통공사 노사 임단협 극적 타결",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-24T19:44:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125000028"
     },
     {
-     "title": "트럼프, 밴스 통해 “젠슨 황 안보위협 안해” 전달… 이사회 논의 개입",
-     "press": "donga.com",
-     "publishedAt": "2026-11-24T19:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764950?sid=104"
+     "title": "서울지하철 임단협 타결로 파업 철회…'출근길 대란' 피했다(종합2보)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T19:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016461571?sid=102"
     }
    ]
   }
@@ -46,8 +46,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 1390,
-  "matched": 721,
-  "avgLeadMin": 512,
+  "matched": 720,
+  "avgLeadMin": 513,
   "recent": [
    {
     "keyword": "아침마당",
