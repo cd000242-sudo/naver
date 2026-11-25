@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T20:33:20.136Z",
+ "builtAt": "2026-11-25T20:43:24.709Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 13,
  "candidates": [
   {
    "keyword": "관세 15% 유지",
@@ -16,38 +16,38 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-25T19:12:00.000Z",
+   "articles90": 15,
+   "recent20": 5,
+   "press": 11,
+   "firstArticleAt": "2026-11-25T19:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수출 1조弗 시대, 美 관세 15% 상한 유지에 안도…디지털 규제는 '복병'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T20:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014345685?sid=101"
+     "title": "美무역대표, 韓 ‘과잉생산 관세’ 근거에…“정부지원·인프라계획”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-25T20:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728540?sid=104"
     },
     {
-     "title": "美USTR, 14개 경제주체에 과잉생산 관세 예고…韓 15% 상한 유지",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-25T20:16:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611260009"
+     "title": "미국, 과잉 생산 관세 한국 15% 유지...25% 인상 여지 남겨",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T20:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438167?sid=104"
     },
     {
-     "title": "美, 과잉생산 관세 추가…15% 상한은 유지",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T20:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929962?sid=104"
+     "title": "미 USTR, 14개 경제주체에 과잉생산 관세…\"한국 15% 상한 유지\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-25T20:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979882?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1504,
-  "matched": 764,
+  "flagged": 1503,
+  "matched": 763,
   "avgLeadMin": 502,
   "recent": [
    {
