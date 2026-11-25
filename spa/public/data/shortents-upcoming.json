@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T07:19:11.404Z",
+ "builtAt": "2026-11-25T07:29:15.155Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,97 +13,96 @@
   {
    "keyword": "허서홍 사장 승진",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 46,
-   "recent20": 5,
+   "recent20": 8,
    "press": 44,
-   "firstArticleAt": "2026-11-25T05:50:00.000Z",
+   "firstArticleAt": "2026-11-25T06:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "\"본업 강화·실적 개선\"…허서홍 GS리테일 대표, 2년 만에 사장 승진",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-25T07:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394820?sid=101"
+     "title": "GS, 경영 안정 속 미래 성장동력 발굴…허서홍·이태형 사장 승진",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-25T07:28:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1140041"
     },
     {
-     "title": "허서홍 GS리테일 대표, 사장 승진…본업 강화·실적 개선 성과",
-     "press": "byline.network",
-     "publishedAt": "2026-11-25T07:16:00.000Z",
-     "link": "https://byline.network/?p=9004111222629163"
+     "title": "허서홍 GS리테일 대표이사 부사장 사장 승진",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-25T07:24:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3084181"
     },
     {
-     "title": "[오늘Who] GS리테일 허서홍 사장 승진, 역대 최대 실적 발판으로 오너4세...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-25T07:16:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452896"
+     "title": "GS그룹, 2027년 임원인사 단행…허서홍·이태형 사장 승진",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-25T07:24:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=758500"
     }
    ]
   },
   {
-   "keyword": "김건희 매관매직 선고",
+   "keyword": "김건희 매관매직 상고심 선고",
    "sources": [
     "daum"
    ],
-   "articles90": 44,
-   "recent20": 2,
-   "press": 38,
-   "firstArticleAt": "2026-11-25T05:54:00.000Z",
+   "articles90": 38,
+   "recent20": 3,
+   "press": 35,
+   "firstArticleAt": "2026-11-25T06:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김건희 '매관매직' 상고심 다음 달 3일 선고…2심 징역 5년",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-25T07:24:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087824"
+    },
+    {
+     "title": "김건희 '매관매직' 상고심 12월 3일 선고… 2심 징역 5년",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-25T07:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193518?sid=102"
+    },
     {
      "title": "김건희 '매관매직 의혹' 상고심, 12월3일 선고…원심 '징역 5년'",
      "press": "sisajournal.com",
      "publishedAt": "2026-11-25T07:13:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/586/0000143028?sid=102"
-    },
-    {
-     "title": "김건희 '매관매직' 상고심 선고…내달 3일 오전 진행",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-25T07:06:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1428970"
-    },
-    {
-     "title": "김건희 ‘매관매직’ 혐의 상고심 12월3일 선고…2심선 징역 5년 감형",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-25T06:58:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326476/?sc=Naver"
     }
    ]
   },
   {
-   "keyword": "나인 투 식스",
+   "keyword": "과외교사 경찰 출석",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 61,
-   "recent20": 12,
-   "press": 24,
-   "firstArticleAt": "2026-11-25T06:06:00.000Z",
+   "articles90": 20,
+   "recent20": 2,
+   "press": 20,
+   "firstArticleAt": "2026-11-25T06:01:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "[HD포토] 육성재-박민영, '기대되는 커플 케미스트리' (나인 투 식스 제...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T07:18:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286005"
+     "title": "‘리트 만점자’ 과외교사 “죽음이 도주처 아냐…진실 묻어선 안 돼”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-25T07:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833927?sid=102"
     },
     {
-     "title": "[HD포토] 고수-박민영, '일잘러 본부장과 법무팀 차장' (나인 투 식스 제...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T07:18:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286007"
+     "title": "‘리트만점자’ 과외교사, 경찰 참고인 조사 출석…“진실 묻어선 안 돼...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-25T07:10:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611250168"
     },
     {
-     "title": "[HD포토] 고수-박민영, '고비드 소원성취 커플하트' (나인 투 식스 제작...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T07:18:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286006"
+     "title": "‘리트 만점’ 이진우 과외교사 경찰 조사…“진실 묻어선 안 돼”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-25T07:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300940?sid=102"
     }
    ]
   },
@@ -112,30 +111,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 5,
-   "press": 18,
-   "firstArticleAt": "2026-11-25T05:53:00.000Z",
+   "articles90": 22,
+   "recent20": 6,
+   "press": 19,
+   "firstArticleAt": "2026-11-25T06:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 복귀가 끝내 풀지 못한 숙제…승계·트럼프·AI 투자 위험",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-25T07:16:00.000Z",
-     "link": "https://www.ajunews.com/view/20261125160339905"
+     "title": "젠슨 황 \"승계계획 필요없다\"…기존 경영체제 유지",
+     "press": "delighti.co.kr",
+     "publishedAt": "2026-11-25T07:28:00.000Z",
+     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125614"
     },
     {
-     "title": "트럼프, 의회 청문회 앞둔 젠슨 황 CEO 사면 시사",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-25T07:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609695?sid=104"
+     "title": "\"앨리스황, 젠슨과 만남 중 中에 정보 넘겨\"...美정보당국 의회 보고",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-25T07:24:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326493/?sc=Naver"
     },
     {
-     "title": "젠슨 황 \"트럼프가 이사회 압박? 사실 아냐\"...정경유착설도 일축",
-     "press": "tjb.co.kr",
+     "title": "'젠슨황 랠리' 하루 만에 끝?...코스피 또 급락 [앵커리포트]",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T07:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437929?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "박민영 육성재 고수 삼각 로맨스",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 21,
+   "recent20": 1,
+   "press": 16,
+   "firstArticleAt": "2026-11-25T06:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[HD포토] 고수-박민영-육성재, '비주얼 삼각관계' (나인 투 식스 제작발...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T07:22:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286014"
+    },
+    {
+     "title": "[TV랩]'오피스 퀸' 박민영X'햇살' 육성재X'달빛' 고수…'나인 투 식스', ...",
+     "press": "ent.sbs.co.kr",
+     "publishedAt": "2026-11-25T07:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/416/0000328297"
+    },
+    {
+     "title": "[현장] '나인 투 식스' 박민영, 육성재·고수 사이 행복한 고민 (종합)",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T06:58:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285963"
+    }
+   ]
+  },
+  {
+   "keyword": "코리아 핀테크 위크",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-25T06:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "비자, 코리아 핀테크 위크서 미래 금융 3대 트렌드 제시… “연결성·상...",
+     "press": "digitalchosun.dizzo.com",
+     "publishedAt": "2026-11-25T07:24:00.000Z",
+     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/25/2026112580173.html"
+    },
+    {
+     "title": "국내 최대 핀테크 박람회 개막...이억원 \"금융권 AI 전환\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T07:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437930?sid=101"
+    },
+    {
+     "title": "카카오페이, 핀테크 위크서 AI 금융비서·스테이블코인 구상 공개",
+     "press": "digitaltoday.co.kr",
      "publishedAt": "2026-11-25T07:12:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106508"
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=718126"
     }
    ]
   },
@@ -145,12 +208,18 @@
     "daum"
    ],
    "articles90": 10,
-   "recent20": 0,
+   "recent20": 1,
    "press": 10,
-   "firstArticleAt": "2026-11-25T05:52:00.000Z",
+   "firstArticleAt": "2026-11-25T06:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정청래, 송영길 또 직격 “입 너무 싸다…허풍 세고 믿지 못할 사람”",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-25T07:24:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1177734"
+    },
     {
      "title": "송영길 \"李, 정청래 억울함 4시간 들어줘\".. 鄭 \"입조심하시라\"",
      "press": "jibs.co.kr",
@@ -162,12 +231,6 @@
      "press": "pressian.com",
      "publishedAt": "2026-11-25T06:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/002/0002467540?sid=100"
-    },
-    {
-     "title": "정청래, 김민석 100일 맞춰든 '깃발'…\"모든 당원은 징계앞에 평등\"",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-25T06:47:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749220"
     }
    ]
   },
@@ -176,10 +239,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-25T05:51:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-25T06:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,66 +267,34 @@
    ]
   },
   {
-   "keyword": "젠슨 황 관련 스캔들",
+   "keyword": "점검하는 박남춘 사장",
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 4,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T05:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"앨리스황, 젠슨 황과 만남 중 중국에 정보 넘겨\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T07:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437921?sid=104"
-    },
-    {
-     "title": "젠슨 황 돌아왔는데 … 앨리스 황은 어디에",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-25T07:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358059?sid=104"
-    },
-    {
-     "title": "\"앨리스 황, 젠슨과 만남 중 중국에 정보 넘겨\"…미 정보당국 의회 보고",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-25T07:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405748?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "코리아 핀테크 위크 시작",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
+   "articles90": 6,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T05:52:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-25T06:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장정맥 인증 기술·AI금융코치 한 자리에…'핀테크 위크' 개막",
-     "press": "itbiznews.com",
-     "publishedAt": "2026-11-25T07:00:00.000Z",
-     "link": "https://www.itbiznews.com/news/articleView.html?idxno=232736"
+     "title": "박남춘 신임 사장, 첫 행보로 인천국제공항 시설점검",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-25T07:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887392?sid=102"
     },
     {
-     "title": "이억원 금융위원장 \"'다음 금융' 시작…AX·디지털자산 제도화 속도\"",
-     "press": "pointdaily.co.kr",
-     "publishedAt": "2026-11-25T06:56:00.000Z",
-     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=327363"
+     "title": "공항 주요시설 점검하는 박남춘 사장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009309760?sid=101"
     },
     {
-     "title": "[핀테크 위크] 금융 혜택도 알아서 '척척'...토스, 생활 밀착형 서비스...",
-     "press": "techm.kr",
-     "publishedAt": "2026-11-25T06:54:00.000Z",
-     "link": "https://www.techm.kr/news/articleView.html?idxno=157798"
+     "title": "면세점 살펴보는 박남춘 사장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009309759?sid=101"
     }
    ]
   },
@@ -274,11 +305,17 @@
    ],
    "articles90": 5,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T05:59:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-25T06:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "양홍원-원현주 이혼, '스승' 스윙스는 선긋기? \"청룡 간다\" 들뜬 기대감",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-25T07:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004469418"
+    },
     {
      "title": "양홍원·원현주, 이혼 발표한 날..폭로자는 막노동 인증하며 브이 포즈",
      "press": "sportschosun.com",
@@ -290,44 +327,38 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-25T06:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005446338?sid=102"
-    },
-    {
-     "title": "'20세 연하와 이혼' 유명 男배우, 알고 보니 명문고 출신…\"공부만 잘한...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-25T06:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000493124"
     }
    ]
   },
   {
-   "keyword": "선저우 24호 발사",
+   "keyword": "젠슨 황 효과 하루 만에 소멸",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T05:58:00.000Z",
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T06:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "中, 첫 외국인 우주인 탑승 선저우 24호 발사…톈궁 도킹 성공(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T06:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014344861?sid=104"
+     "title": "젠슨 황 효과 하루 만에 소멸…엔비디아 발목 잡는 3대 리스크",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-25T07:16:00.000Z",
+     "link": "https://www.ajunews.com/view/20261125160339905"
     },
     {
-     "title": "中 우주굴기 이정표 '선저우 24호' 발사… 첫 외국인 우주비행사 탑승",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-25T06:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042270?sid=104"
+     "title": "'젠슨 황 효과' 하루 만에 소멸...코스피 4600선 추락",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-25T07:12:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=718115"
     },
     {
-     "title": "중국, 선저우 24호 발사 성공…최초 외국 우주인 파키스탄 무함마드 지...",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-25T06:26:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904384"
+     "title": "‘젠슨 황’ 효과 단기 소멸… 진짜 반등 열쇠는 오늘 밤 美 ‘PCE’",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-25T06:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207286?sid=101"
     }
    ]
   },
@@ -361,6 +392,38 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-25T06:21:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001537962?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "선저우 24호 발사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T06:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "中, 첫 외국인 우주인 탑승 선저우 24호 발사…톈궁 도킹 성공(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T06:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014344861?sid=104"
+    },
+    {
+     "title": "中 우주굴기 이정표 '선저우 24호' 발사… 첫 외국인 우주비행사 탑승",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-25T06:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001042270?sid=104"
+    },
+    {
+     "title": "중국, 선저우 24호 발사 성공…최초 외국 우주인 파키스탄 무함마드 지...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-25T06:26:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904384"
     }
    ]
   },
@@ -399,7 +462,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1436,
+  "flagged": 1439,
   "matched": 733,
   "avgLeadMin": 488,
   "recent": [
