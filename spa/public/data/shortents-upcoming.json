@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T13:01:03.159Z",
+ "builtAt": "2026-11-25T13:11:05.839Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,14 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "빗썸 해킹 추가 피해",
+   "keyword": "빗썸 해킹 추가 피해 확인",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
+   "articles90": 19,
    "recent20": 3,
-   "press": 24,
-   "firstArticleAt": "2026-11-25T11:32:00.000Z",
+   "press": 19,
+   "firstArticleAt": "2026-11-25T11:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,14 +43,47 @@
    ]
   },
   {
+   "keyword": "조이현",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 28,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-25T11:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조이현, 깜찍한 손키스 [포토엔HD]",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-25T12:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191330"
+    },
+    {
+     "title": "조이현, 수줍은 뒤태 [포토엔HD]",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-25T12:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191329"
+    },
+    {
+     "title": "[사진]조이현, 아름다운 미모",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-25T12:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005645296"
+    }
+   ]
+  },
+  {
    "keyword": "도로공사 6연승 선두 질주",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-25T11:35:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-25T11:54:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -75,14 +108,14 @@
    ]
   },
   {
-   "keyword": "대림골목시장 이재명 대통령",
+   "keyword": "이재명 공적주택 중산층",
    "sources": [
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
-   "firstArticleAt": "2026-11-25T11:41:00.000Z",
+   "firstArticleAt": "2026-11-25T12:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -93,16 +126,48 @@
      "link": "https://n.news.naver.com/mnews/article/437/0000522476?sid=102"
     },
     {
-     "title": "이재명 대통령, 은평서 공적주택 현장 간담회 가져",
-     "press": "news.lghellovision.net",
+     "title": "이 대통령 “공적임대주택, 중산층도 선택하게…청년·신혼부부 웬만하...",
+     "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-25T12:34:00.000Z",
-     "link": "http://news.lghellovision.net/news/articleView.html?idxno=563776"
+     "link": "https://n.news.naver.com/mnews/article/056/0012301206?sid=100"
     },
     {
-     "title": "李 대통령, 은평 대림골목시장 깜짝 방문…장바구니 물가 점검",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-25T12:26:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653033"
+     "title": "이재명 대통령, 공적임대주택 대개편 예고…중산층 선택지로 개선",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-25T12:24:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3763208"
+    }
+   ]
+  },
+  {
+   "keyword": "우리은행 연승 성공",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T11:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'박지수 더블더블' KB스타즈, 우리은행 62-51 제압…시즌 첫 연승",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-25T12:24:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110093865363"
+    },
+    {
+     "title": "[AI상보] 허예은·박지수 39점 합작…KB, 우리은행 추격 뿌리치고 첫 연...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T12:10:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125001316"
+    },
+    {
+     "title": "KB스타즈, 우리은행 62-51 제압…허예은 21점·박지수 더블더블로 시즌 ...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T12:10:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286246"
     }
    ]
   },
@@ -137,79 +202,32 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000929915?sid=101"
     }
    ]
-  },
-  {
-   "keyword": "강남",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T12:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'ESG실천병원' 강남베드로병원·'씀씀이가 바른병원' 이문서울이비인후...",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-25T12:54:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=757148"
-    },
-    {
-     "title": "가수 비, 대출받아 920억 강남 빌딩 사더니…5년 만에 ‘깜짝’",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-25T12:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728526?sid=101"
-    },
-    {
-     "title": "강남구의회,'자유총연맹 통일음악회 및 보릿고개 음식 체험전'에 참여",
-     "press": "cnbizm.com",
-     "publishedAt": "2026-11-25T12:52:00.000Z",
-     "link": "https://www.cnbizm.com/news/articleView.html?idxno=322735"
-    }
-   ]
-  },
-  {
-   "keyword": "나인 투 식스",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T11:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'나인 투 식스' 박민영·육성재·고수 인물관계도부터 몇 부작·OTT· 총정...",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-25T12:32:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3763220"
-    },
-    {
-     "title": "'나인 투 식스' 박민영·육성재, 첫 만남부터 신경전…등장 인물 관계도...",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-25T12:00:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305776"
-    },
-    {
-     "title": "나인 투 식스 등장인물 관계도, 원작, 몇부작, OTT는?",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-25T11:42:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611250310"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1513,
-  "matched": 776,
-  "avgLeadMin": 502,
+  "flagged": 1516,
+  "matched": 779,
+  "avgLeadMin": 503,
   "recent": [
+   {
+    "keyword": "배당",
+    "hitKeyword": "삼성전자 배당금 지급",
+    "hitAt": "2026-11-25T22:00:00+09:00",
+    "leadMin": 922
+   },
+   {
+    "keyword": "나인 투 식스",
+    "hitKeyword": "나인투식스 첫방송",
+    "hitAt": "2026-11-25T22:00:00+09:00",
+    "leadMin": 502
+   },
+   {
+    "keyword": "박민영과 나인투식스",
+    "hitKeyword": "나인투식스 첫방송",
+    "hitAt": "2026-11-25T22:00:00+09:00",
+    "leadMin": 351
+   },
    {
     "keyword": "코리아 핀테크 위크 2026",
     "hitKeyword": "청룡영화상 2026",
@@ -251,24 +269,6 @@
     "hitKeyword": "광주 흉기 50대 체포",
     "hitAt": "2026-11-25T21:00:00+09:00",
     "leadMin": 372
-   },
-   {
-    "keyword": "젠슨 황 효과 하루 만에 소멸",
-    "hitKeyword": "젠슨 황 효과 코스피 급락",
-    "hitAt": "2026-11-25T20:30:00+09:00",
-    "leadMin": 241
-   },
-   {
-    "keyword": "코스피 급락 매도 사이드카",
-    "hitKeyword": "반도체주 급락 코스피",
-    "hitAt": "2026-11-25T20:00:00+09:00",
-    "leadMin": 201
-   },
-   {
-    "keyword": "코스피 6.16% 급락",
-    "hitKeyword": "반도체주 급락 코스피",
-    "hitAt": "2026-11-25T20:00:00+09:00",
-    "leadMin": 170
    }
   ]
  }
