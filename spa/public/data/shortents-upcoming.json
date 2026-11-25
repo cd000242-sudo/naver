@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T13:11:05.839Z",
+ "builtAt": "2026-11-25T15:01:20.442Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,166 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
   {
-   "keyword": "빗썸 해킹 추가 피해 확인",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 19,
-   "recent20": 3,
-   "press": 19,
-   "firstArticleAt": "2026-11-25T11:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "빗썸, 해킹 피해 추가 확인…보름 넘게 해킹 사실 몰랐다",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-25T13:00:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784829"
-    },
-    {
-     "title": "빗썸, 해킹 피해 추가 확인...보름 동안 해킹 사실 몰라",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T12:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438047?sid=101"
-    },
-    {
-     "title": "빗썸 개인정보 유출 피해 확대…보름간 해킹 인지 못해",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-25T12:52:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466654"
-    }
-   ]
-  },
-  {
-   "keyword": "조이현",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 28,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T11:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조이현, 깜찍한 손키스 [포토엔HD]",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-25T12:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191330"
-    },
-    {
-     "title": "조이현, 수줍은 뒤태 [포토엔HD]",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-25T12:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191329"
-    },
-    {
-     "title": "[사진]조이현, 아름다운 미모",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-25T12:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005645296"
-    }
-   ]
-  },
-  {
-   "keyword": "도로공사 6연승 선두 질주",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T11:54:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'모마·마미, 13점씩' 도로공사, 6연승 질주",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T12:56:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/052/0002438048"
-    },
-    {
-     "title": "여자배구 한국도로공사, IBK기업은행 완파하고 6연승 질주·선두 도약…...",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-25T12:50:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435962"
-    },
-    {
-     "title": "도로공사, 6연승으로 1위 도약…'장추안 트리플크라운' 현대캐피탈도 승...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-25T12:48:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110094077206"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 공적주택 중산층",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T12:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령 “미래 공적주택 24만 호 공급…중산층 선택해야\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-25T12:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522476?sid=102"
-    },
-    {
-     "title": "이 대통령 “공적임대주택, 중산층도 선택하게…청년·신혼부부 웬만하...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-25T12:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301206?sid=100"
-    },
-    {
-     "title": "이재명 대통령, 공적임대주택 대개편 예고…중산층 선택지로 개선",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-25T12:24:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3763208"
-    }
-   ]
-  },
-  {
-   "keyword": "우리은행 연승 성공",
+   "keyword": "관세 15% 유지",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T11:54:00.000Z",
+   "articles90": 67,
+   "recent20": 9,
+   "press": 48,
+   "firstArticleAt": "2026-11-25T13:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'박지수 더블더블' KB스타즈, 우리은행 62-51 제압…시즌 첫 연승",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-25T12:24:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110093865363"
+     "title": "美USTR(무역대표부) '과잉생산 관세' 예고 발표…\"한국 관세 15% 상한 유...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-25T15:00:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630749"
     },
     {
-     "title": "[AI상보] 허예은·박지수 39점 합작…KB, 우리은행 추격 뿌리치고 첫 연...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T12:10:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125001316"
+     "title": "미 USTR, '과잉생산 관세' 발표...\"한국, 일본, EU 등 관세 15% 유지\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T14:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438111?sid=104"
     },
     {
-     "title": "KB스타즈, 우리은행 62-51 제압…허예은 21점·박지수 더블더블로 시즌 ...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T12:10:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286246"
+     "title": "뉴욕증시, AI 매도세·관세 우려에 하락 출발",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-25T14:58:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446553"
     }
    ]
   },
@@ -176,40 +47,238 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T11:46:00.000Z",
+   "articles90": 63,
+   "recent20": 11,
+   "press": 46,
+   "firstArticleAt": "2026-11-25T13:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프, 중간선거 패배에도 관세 확대…한국 등 16개 경제권 대상",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-25T12:28:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=95522"
+     "title": "美USTR(무역대표부) '과잉생산 관세' 예고 발표…\"한국 관세 15% 상한 유...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-25T15:00:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630749"
     },
     {
-     "title": "‘한국 관세 15% 상한’ 지켜질까…미 ‘과잉생산 조사’ 곧 발표",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-25T12:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485151?sid=104"
+     "title": "뉴욕증시, AI 매도세·관세 우려에 하락 출발",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-25T14:58:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446553"
     },
     {
-     "title": "수출 1조 달러 시대…美 관세 변수에 촉각",
+     "title": "미 USTR, '과잉생산 관세' 발표...\"한국, 일본, EU 등 관세 15% 유지\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T14:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438111?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "전도연, 청룡 여우주연상 수상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 61,
+   "recent20": 10,
+   "press": 40,
+   "firstArticleAt": "2026-11-25T13:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[TOP영상] 설경구, 최초로 남우주연상 4회 수상에 빛나는 대배우(제47회...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T15:00:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286312"
+    },
+    {
+     "title": "47회 청룡영화상 주연상 수상한 전도연과 설경구",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T14:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/001/0016463969"
+    },
+    {
+     "title": "47회 청룡영화상 여우주연상 수상한 전도연",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T14:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/001/0016463967"
+    }
+   ]
+  },
+  {
+   "keyword": "청룡영화상 2026",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 41,
+   "recent20": 4,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T13:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 2026 청룡영화상 구교환, 에너지 넘침",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-25T14:58:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/25/2026112550402.html"
+    },
+    {
+     "title": "[포토] 2026 청룡영화상, 레드카펫 오른 이민호",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-25T14:58:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/25/2026112550403.html"
+    },
+    {
+     "title": "[포토] 2026 청룡영화상 서현우, 부드러운 카리스마",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-25T14:44:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/25/2026112550401.html"
+    }
+   ]
+  },
+  {
+   "keyword": "u-17 월드컵",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T14:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[IN REVIEW] 새로운 韓 황금세대 등장...'남이안 골' 한국 U-17, 에콰도르...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-25T15:00:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/413/0000227153"
+    },
+    {
+     "title": "U17 축구대표팀, 에콰도르 꺾고 3전 전승…조 1위로 월드컵 32강행",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T14:50:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/421/0009310578"
+    },
+    {
+     "title": "김지호 맹활약 U-17 대표팀, 에콰도르 3-2 제압…조별리그 3전 전승 32강...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T14:42:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286310"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 스파이 의혹",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T13:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "시골 간호학교 출신에서 젠슨 황 옆자리까지…‘中 스파이 의혹’ 앨리...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-25T14:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686218?sid=104"
+    },
+    {
+     "title": "젠슨 황 복귀 비판 봇물…중국 스파이 의혹 수면 위로",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-25T13:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301337?sid=104"
+    },
+    {
+     "title": "젠슨황, 엔비디아 전사회의 열고 사과...\"심리치료 받고 있다\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T13:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438077?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "김민석 조희대 탄핵 5당",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T14:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘진보 연대’로 탄핵 밀어붙이는 여…장외 여론전에 집중하는 야",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-25T14:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301350?sid=100"
+    },
+    {
+     "title": "[사설] “6개 사유 뭉뚱그리면 충분”… 명분 없는 탄핵 자인한 꼴",
+     "press": "segye.com",
+     "publishedAt": "2026-11-25T14:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178167?sid=110"
+    },
+    {
+     "title": "[투나잇이슈] 與, '조희대 탄핵' 연대 제안…野 \"죄 나누기\"",
      "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T12:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929915?sid=101"
+     "publishedAt": "2026-11-25T14:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929940?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1516,
-  "matched": 779,
-  "avgLeadMin": 503,
+  "flagged": 1522,
+  "matched": 785,
+  "avgLeadMin": 501,
   "recent": [
+   {
+    "keyword": "도로공사 6연승 선두 질주",
+    "hitKeyword": "도로공사 6연승 1위",
+    "hitAt": "2026-11-25T23:30:00+09:00",
+    "leadMin": 99
+   },
+   {
+    "keyword": "강남",
+    "hitKeyword": "가수 비 강남 빌딩",
+    "hitAt": "2026-11-25T23:30:00+09:00",
+    "leadMin": 89
+   },
+   {
+    "keyword": "박지훈 변호사",
+    "hitKeyword": "박지훈 청룡 신인남우상",
+    "hitAt": "2026-11-25T23:00:00+09:00",
+    "leadMin": 831
+   },
+   {
+    "keyword": "과외 교사 경찰 출석",
+    "hitKeyword": "이진우 과외교사 경찰 출석",
+    "hitAt": "2026-11-25T23:00:00+09:00",
+    "leadMin": 471
+   },
+   {
+    "keyword": "빗썸 해킹 추가 피해",
+    "hitKeyword": "빗썸 해킹 피해 확대",
+    "hitAt": "2026-11-25T23:00:00+09:00",
+    "leadMin": 139
+   },
+   {
+    "keyword": "빗썸 해킹 추가 피해 확인",
+    "hitKeyword": "빗썸 해킹 피해 확대",
+    "hitAt": "2026-11-25T23:00:00+09:00",
+    "leadMin": 49
+   },
    {
     "keyword": "배당",
     "hitKeyword": "삼성전자 배당금 지급",
@@ -233,42 +302,6 @@
     "hitKeyword": "청룡영화상 2026",
     "hitAt": "2026-11-25T21:30:00+09:00",
     "leadMin": 402
-   },
-   {
-    "keyword": "이정효 감독 질문 답변",
-    "hitKeyword": "이정효 수원 1부 승격",
-    "hitAt": "2026-11-25T21:30:00+09:00",
-    "leadMin": 281
-   },
-   {
-    "keyword": "핀테크 위크 2026 개막",
-    "hitKeyword": "청룡영화상 2026",
-    "hitAt": "2026-11-25T21:30:00+09:00",
-    "leadMin": 271
-   },
-   {
-    "keyword": "이정효 감독의 수원 삼성 변화",
-    "hitKeyword": "이정효 수원 1부 승격",
-    "hitAt": "2026-11-25T21:30:00+09:00",
-    "leadMin": 182
-   },
-   {
-    "keyword": "청룡영화상",
-    "hitKeyword": "청룡영화상 2026",
-    "hitAt": "2026-11-25T21:30:00+09:00",
-    "leadMin": 29
-   },
-   {
-    "keyword": "주주",
-    "hitKeyword": "반도체주 주가 폭락",
-    "hitAt": "2026-11-25T21:00:00+09:00",
-    "leadMin": 691
-   },
-   {
-    "keyword": "지인 살해 50대 징역 25년",
-    "hitKeyword": "광주 흉기 50대 체포",
-    "hitAt": "2026-11-25T21:00:00+09:00",
-    "leadMin": 372
    }
   ]
  }
