@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T04:27:50.715Z",
+ "builtAt": "2026-11-25T04:37:57.708Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,102 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "CJ프레시웨이 기부금 심의",
+   "keyword": "CJ프레시웨이 부당 고객유인",
    "sources": [
     "daum"
    ],
-   "articles90": 49,
-   "recent20": 6,
-   "press": 44,
-   "firstArticleAt": "2026-11-25T03:00:00.000Z",
+   "articles90": 26,
+   "recent20": 7,
+   "press": 26,
+   "firstArticleAt": "2026-11-25T03:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "공정위, '복지시설 리베이트 의혹' CJ프레시웨이 제재 착수… CJ \"사실무...",
-     "press": "nbntv.co.kr",
-     "publishedAt": "2026-11-25T04:26:00.000Z",
-     "link": "https://www.nbntv.co.kr/news/articleView.html?idxno=4027953"
+     "title": "CJ프레시웨이, 공정위 판단에 반론…\"기부금과 정상적인 영업활동 구분...",
+     "press": "hinews.co.kr",
+     "publishedAt": "2026-11-25T04:36:00.000Z",
+     "link": "https://www.hinews.co.kr/view.php?ud=202611251333541759cd8b879b3c_48"
     },
     {
-     "title": "CJ프레시웨이, 공정위 '기부금 영업' 제재에 반박",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-25T04:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165584?sid=101"
+     "title": "CJ프레시웨이, 부당 고객유인 혐의로 공정위 심의…\"사실 아냐\" 반박",
+     "press": "socialvalue.kr",
+     "publishedAt": "2026-11-25T04:30:00.000Z",
+     "link": "https://www.socialvalue.kr/news/view/1065587260009378"
     },
     {
-     "title": "CJ프레시웨이, 부당유인 혐의로 과징금 위기…공정위 심의 착수",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-25T04:20:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087669"
+     "title": "공정위 '부당 고객유인 혐의'로 CJ프레시웨이 심의 절차 개시, 회사 \"사...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-25T04:30:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452890"
     }
    ]
   },
   {
    "keyword": "반도체",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 21,
-   "recent20": 7,
-   "press": 20,
-   "firstArticleAt": "2026-11-25T03:36:00.000Z",
+   "articles90": 19,
+   "recent20": 13,
+   "press": 15,
+   "firstArticleAt": "2026-11-25T04:06:00.000Z",
    "exclusive": true,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "가스공사, 국산 AI 반도체 탑재 CCTV로 안전관리 고도화",
-     "press": "energy-news.co.kr",
-     "publishedAt": "2026-11-25T04:26:00.000Z",
-     "link": "https://www.energy-news.co.kr/news/articleView.html?idxno=230078"
+     "title": "서울반도체, RGB 백라이트 '와이콥 픽셀' 양산",
+     "press": "thelec.kr",
+     "publishedAt": "2026-11-25T04:36:00.000Z",
+     "link": "https://www.thelec.kr/news/articleView.html?idxno=65881"
     },
     {
-     "title": "기계연, 반도체 원자층 제어… 차세대 AI 소자 구현",
-     "press": "goodmorningcc.com",
-     "publishedAt": "2026-11-25T04:24:00.000Z",
-     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456532"
+     "title": "10월에만 45만명 거주지 이동…반도체 밀집 ‘이 지역’ 향했다",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-25T04:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061069?sid=101"
     },
     {
-     "title": "조정식 국회의장, 일본서 반도체 협력·기업 애로 해소 '세일즈 외교'",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-25T04:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847621?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "발언하는 김민석 대표",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-25T03:12:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘5당 연대’ 띄운 취임 100일 김민석… 당내선 징계 요구에 사퇴 집회...",
-     "press": "mediawatch.kr",
-     "publishedAt": "2026-11-25T04:24:00.000Z",
-     "link": "https://www.mediawatch.kr/news/article.html?no=261870"
-    },
-    {
-     "title": "[국민의 시선] 취임 100일 맞은 김민석 더불어민주당 대표...당내 갈등 ...",
-     "press": "newsworker.co.kr",
-     "publishedAt": "2026-11-25T04:06:00.000Z",
-     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=516005"
-    },
-    {
-     "title": "김민석, 당내 갈등 수습 고심…27일 이후 수습책 전망",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-25T04:02:00.000Z",
-     "link": "https://www.naeil.com/news/read/610022?ref=naver"
+     "title": "중견기업 수출, 반도체·바이오 호조에 2개 분기 연속 역대 최대",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-25T04:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609540?sid=101"
     }
    ]
   },
@@ -115,10 +82,16 @@
    "articles90": 9,
    "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-25T03:04:00.000Z",
+   "firstArticleAt": "2026-11-25T03:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "현대모비스, 유럽·북미서 대규모 부품 수주...올해 해외수주 20조원 전...",
+     "press": "newslock.co.kr",
+     "publishedAt": "2026-11-25T04:32:00.000Z",
+     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=140918"
+    },
     {
      "title": "현대모비스, 올해 해외 수주 58% 증가 전망",
      "press": "autotimes.co.kr",
@@ -130,24 +103,51 @@
      "press": "megaeconomy.co.kr",
      "publishedAt": "2026-11-25T04:12:00.000Z",
      "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065585945295434"
+    }
+   ]
+  },
+  {
+   "keyword": "정년연장",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T03:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "중소기업 83% \"정년연장보다 재고용 선호\"... 청년 채용 위축 우려 ↑",
+     "press": "chungnamilbo.co.kr",
+     "publishedAt": "2026-11-25T04:18:00.000Z",
+     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=922932"
     },
     {
-     "title": "현대모비스, 유럽·북미서 1조원대 제동·조향장치 공급…올해 수주 20조...",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-25T04:06:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=729365"
+     "title": "\"60대 베테랑 필요하긴 한데\"…정년 연장 대신 선택한 방법",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-25T04:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357969?sid=101"
+    },
+    {
+     "title": "임금 삭감 없이 65세까지…충남도 공무직 정년 연장",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-25T04:10:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=721275"
     }
    ]
   },
   {
    "keyword": "유정연 첫 영화 영광, 많이 부족해",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 6,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T03:05:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-25T03:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,14 +172,47 @@
    ]
   },
   {
+   "keyword": "채권",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T03:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"채권도 이사하면 돈 된다\"…한화투자증권, 최대 50만원 지급",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-25T04:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159319?sid=101"
+    },
+    {
+     "title": "한은 점도표에 3.75%가 찍힌다면…채권시장 흔들 개수는",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-25T04:26:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2652797"
+    },
+    {
+     "title": "한화투자증권, 채권투자 비대면 이벤트...\"MZ세대 실질 혜택 이벤트에 ...",
+     "press": "thebigdata.co.kr",
+     "publishedAt": "2026-11-25T04:22:00.000Z",
+     "link": "https://www.thebigdata.co.kr/view.php?ud=202611251318343125d0a8833aad_23"
+    }
+   ]
+  },
+  {
    "keyword": "장윤기 사건 징역 3년 구형",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T03:01:00.000Z",
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T03:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,108 +237,56 @@
    ]
   },
   {
-   "keyword": "채권",
+   "keyword": "나인 투 식스",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T03:12:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T03:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한은 점도표에 3.75%가 찍힌다면…채권시장 흔들 개수는",
-     "press": "etoday.co.kr",
+     "title": "박민영, ‘나인 투 식스’ 시청률 공약 6.9%…육성재 “다 같이 OST나 듀...",
+     "press": "newsen.com",
      "publishedAt": "2026-11-25T04:26:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652797"
+     "link": "https://m.entertain.naver.com/article/609/0001190986"
     },
     {
-     "title": "한화투자증권, 채권투자 비대면 이벤트...\"MZ세대 실질 혜택 이벤트에 ...",
-     "press": "thebigdata.co.kr",
-     "publishedAt": "2026-11-25T04:22:00.000Z",
-     "link": "https://www.thebigdata.co.kr/view.php?ud=202611251318343125d0a8833aad_23"
+     "title": "박민영, ‘나인 투 식스’ 촬영장서 쓰러졌다 “육성재와 똑같은 질환”...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-25T03:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190976"
     },
     {
-     "title": "피치 \"연준 12월 인상 뒤 내년 동결…채권 금리, 올해 고점보다 완화\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-25T04:02:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446474"
-    }
-   ]
-  },
-  {
-   "keyword": "65세 정년연장 입법 촉구",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T03:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 양대노총 \"법으로 보장하는 65세 정년 연장이어야\"",
-     "press": "ilyosisa.co.kr",
-     "publishedAt": "2026-11-25T03:52:00.000Z",
-     "link": "https://www.ilyosisa.co.kr/news/article.html?no=259189"
-    },
-    {
-     "title": "[이로운체크] 정년 65세, 어디까지 왔나...27일 특위 앞두고 '연장 방식...",
-     "press": "eroun.net",
-     "publishedAt": "2026-11-25T03:36:00.000Z",
-     "link": "https://www.eroun.net/news/articleView.html?idxno=96452"
-    },
-    {
-     "title": "[포토] \"65세 법정 정년 연장하라\" 구호 외치는 민주노총-한국노총",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-25T03:20:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451959"
-    }
-   ]
-  },
-  {
-   "keyword": "이종석 정보위원회 출석",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-25T03:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이종석 국가정보원장, 정보위원회 전체회의 출석",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T03:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014344234?sid=100"
-    },
-    {
-     "title": "정보위원회 전체회의 출석하는 이종석 국가정보원장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T03:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014344233?sid=100"
-    },
-    {
-     "title": "정보위원회 전체회의 출석한 이종석 국가정보원장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T03:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014344230?sid=100"
+     "title": "‘나인 투 식스’ 박민영, 사귄 지 100일 만에 공개 프러포즈…얼굴 감...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-25T03:58:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1177655"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1378,
-  "matched": 717,
-  "avgLeadMin": 473,
+  "flagged": 1380,
+  "matched": 719,
+  "avgLeadMin": 472,
   "recent": [
+   {
+    "keyword": "양홍원 원현주 이혼",
+    "hitKeyword": "양홍원 원현주 이혼",
+    "hitAt": "2026-11-25T13:30:00+09:00",
+    "leadMin": 52
+   },
+   {
+    "keyword": "양홍원 이혼",
+    "hitKeyword": "양홍원 원현주 이혼",
+    "hitAt": "2026-11-25T13:30:00+09:00",
+    "leadMin": 32
+   },
    {
     "keyword": "노소영, 최태원 화해 요청 거부",
     "hitKeyword": "노소영 최태원 화해권고 거부",
@@ -353,18 +334,6 @@
     "hitKeyword": "LG 케네디 재계약",
     "hitAt": "2026-11-25T12:00:00+09:00",
     "leadMin": 30
-   },
-   {
-    "keyword": "수능 시험지 폐기",
-    "hitKeyword": "시험지 보관 5년 예정",
-    "hitAt": "2026-11-25T11:30:00+09:00",
-    "leadMin": 50
-   },
-   {
-    "keyword": "수능 시험지 보관 5년 추진",
-    "hitKeyword": "시험지 보관 5년 예정",
-    "hitAt": "2026-11-25T11:30:00+09:00",
-    "leadMin": 20
    }
   ]
  }
