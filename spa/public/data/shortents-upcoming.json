@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T22:23:56.753Z",
+ "builtAt": "2026-11-25T22:33:59.248Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,108 +11,112 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "공공",
+   "keyword": "김정은, 핵시설 현지지도",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-25T21:31:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "정종훈 대전 중구의원, 공공기관 이전 총력 대응 강조",
-     "press": "newstnt.com",
-     "publishedAt": "2026-11-25T22:16:00.000Z",
-     "link": "https://www.newstnt.com/news/articleView.html?idxno=730659"
-    },
-    {
-     "title": "이재명 대통령, 서울 공공주택 혁신 행보…신혼부부 위한 2만 가구 공급...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-25T22:06:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887307"
-    },
-    {
-     "title": "한국주택금융공사, 금융 공공기관 브랜드평판 1위…서민금융진흥원 45%...",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-25T22:00:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=508178"
-    }
-   ]
-  },
-  {
-   "keyword": "가능한 사랑 전도연 주연상 수상",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T21:58:00.000Z",
+   "articles90": 29,
+   "recent20": 12,
+   "press": 24,
+   "firstArticleAt": "2026-11-25T21:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“선배님? 설경구 선배님!” 남우주연상 수상 직후 다급히 외친 MC 한지...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-25T22:22:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1177833"
+     "title": "[속보] 김정은 핵시설 현지지도...\"전술핵 다영역 활용\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T22:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929990?sid=100"
     },
     {
-     "title": "설경구·전도연, 청룡영화상 남여 주연상…작품상은 '호프'",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-25T22:06:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326516/?sc=Naver"
+     "title": "김정은 \"전술핵 다영역 활용화 주목해야\"…핵시설 현지 지도",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-25T22:28:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321913&inflow=N"
     },
     {
-     "title": "설경구는 4번째, 전도연은 3번째 주연상…'가능한 사랑' 4관왕·'호프' 최...",
-     "press": "tenasia.co.kr",
+     "title": "김정은, 핵시설 현지지도…\"전술핵 다영역 활용화 주목해야\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-25T22:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979893?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "이강인 아틀레티코 2-0 승리",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 7,
+   "press": 14,
+   "firstArticleAt": "2026-11-25T21:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘3호골 아쉽다’ 이강인 ‘선발+57분 활약’ AT·마드리드, 비킹에 2-0 ...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-25T22:32:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/144/0001151755"
+    },
+    {
+     "title": "'韓 축구 에이스' 이강인이 심상치 않다, 비킹전 조기 교체→10경기 연속...",
+     "press": "goal.com",
+     "publishedAt": "2026-11-25T22:30:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/216/0000143970"
+    },
+    {
+     "title": "'UCL 시즌 첫 골 불발, 키패스 2개' 이강인, 바이킹전 평점 7.2점",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-25T22:29:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/117/0004128180"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 탄핵 연대 제안",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-25T21:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "혁신당에 손 내민 김민석 \"조희대 탄핵 5당 연대\"…\"환영\" 속 신경전도",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-25T22:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979889?sid=100"
+    },
+    {
+     "title": "민주당·진보야당 ‘조희대 탄핵’ 추진에…판사들 “헌법질서 위태”",
+     "press": "sedaily.com",
      "publishedAt": "2026-11-25T22:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786217"
-    }
-   ]
-  },
-  {
-   "keyword": "네타냐후 부패 공소취하",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T21:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이스라엘 법원, 네타냐후 '최대 혐의' 공소 취하 권고",
-     "press": "globale.co.kr",
-     "publishedAt": "2026-11-25T21:50:00.000Z",
-     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41849"
+     "link": "https://n.news.naver.com/mnews/article/011/0004686284?sid=102"
     },
     {
-     "title": "네타냐후 총리 “이스라엘 국민 분열시킨 재판 종결” 요구",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T21:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014345753?sid=104"
-    },
-    {
-     "title": "네타냐후 부패 재판 뒤집히나…법원 “유죄 가능성 거의 없다”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-25T21:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568077?sid=104"
+     "title": "조희대 탄핵 속도 내는 민주당…범여권 5당 연대 추진에 사법부 내 우려...",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-25T21:44:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=102039"
     }
    ]
   },
   {
    "keyword": "호프 수상 나홍진 칸에서",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-25T22:01:00.000Z",
    "exclusive": false,
@@ -137,14 +141,58 @@
      "link": "https://m.entertain.naver.com/article/312/0000786217"
     }
    ]
+  },
+  {
+   "keyword": "2026년 11월 26일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T21:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 26일 목요일 띠별 운세… 닭띠 '대길' 개띠 '...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-25T22:12:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3084266"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 26일 띠별 운세",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-25T21:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003490015?sid=103"
+    },
+    {
+     "title": "[오늘의 운세] 26일 목요일 나의 운세는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-25T21:36:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194720"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 1495,
   "matched": 751,
-  "avgLeadMin": 496,
+  "avgLeadMin": 510,
   "recent": [
+   {
+    "keyword": "김민재 뮌헨 1-1",
+    "hitKeyword": "김민재 바이에른 선발",
+    "hitAt": "2026-11-26T07:30:00+09:00",
+    "leadMin": 7100
+   },
+   {
+    "keyword": "버스",
+    "hitKeyword": "미스 유니버스 기혼 우승",
+    "hitAt": "2026-11-26T07:30:00+09:00",
+    "leadMin": 4369
+   },
    {
     "keyword": "美 관세 발표, 韓 15% 유지?",
     "hitKeyword": "미국 한국 관세 15%",
@@ -192,18 +240,6 @@
     "hitKeyword": "가수 비 강남 빌딩",
     "hitAt": "2026-11-25T23:30:00+09:00",
     "leadMin": 89
-   },
-   {
-    "keyword": "박지훈 변호사",
-    "hitKeyword": "박지훈 청룡 신인남우상",
-    "hitAt": "2026-11-25T23:00:00+09:00",
-    "leadMin": 831
-   },
-   {
-    "keyword": "과외 교사 경찰 출석",
-    "hitKeyword": "이진우 과외교사 경찰 출석",
-    "hitAt": "2026-11-25T23:00:00+09:00",
-    "leadMin": 471
    }
   ]
  }
