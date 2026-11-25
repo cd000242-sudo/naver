@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T20:53:30.023Z",
+ "builtAt": "2026-11-25T21:03:32.982Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,45 +11,88 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "관세 15% 유지",
+   "keyword": "조희대 탄핵 추진 중",
    "sources": [
-    "signal.bz",
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T19:35:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "창원지법 \"법관 탄핵 추진, 헌법 가치 훼손\"…일선 법원 중 첫 입장 표명...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-25T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159574?sid=102"
+    },
+    {
+     "title": "김민석 '5당 연대' 제안…조희대 탄핵 '12·3 의결' 가능할까",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T20:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213949?sid=100"
+    },
+    {
+     "title": "판사들 첫 집단 반발 나왔다…“법관 탄핵은 헌법가치 훼손”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-25T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703234?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "가능한 사랑 전도연 수상",
+   "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 5,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T19:34:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-25T20:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "韓반도체·자동차 콕 집은 美…‘과잉생산 관세’ 15% 넘어 25% 인상 압박",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-25T20:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728541?sid=104"
+     "title": "손예진은 정해인, 현빈은 정려원..'빈진 부부', 청룡 수상 1년 후 [스타...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-25T21:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490295"
     },
     {
-     "title": "美무역대표, 韓 ‘과잉생산 관세’ 근거에…“정부지원·인프라계획”",
-     "press": "biz.heraldcorp.com",
+     "title": "'가능한 사랑' 청룡 4관왕…연기상 싹쓸이",
+     "press": "bntnews.co.kr",
      "publishedAt": "2026-11-25T20:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728540?sid=104"
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611260006"
     },
     {
-     "title": "미국, 과잉 생산 관세 한국 15% 유지...25% 인상 여지 남겨",
-     "press": "ytn.co.kr",
+     "title": "전도연 19년 만의 청룡…조여정·구교환도 수상",
+     "press": "bntnews.co.kr",
      "publishedAt": "2026-11-25T20:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438168?sid=104"
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611260007"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1502,
-  "matched": 762,
-  "avgLeadMin": 503,
+  "flagged": 1504,
+  "matched": 764,
+  "avgLeadMin": 504,
   "recent": [
+   {
+    "keyword": "미국 과잉생산 관세 조사",
+    "hitKeyword": "한국 미국 관세 압박",
+    "hitAt": "2026-11-26T06:00:00+09:00",
+    "leadMin": 1190
+   },
+   {
+    "keyword": "청룡영화상 2026",
+    "hitKeyword": "2026 청룡영화상",
+    "hitAt": "2026-11-26T06:00:00+09:00",
+    "leadMin": 359
+   },
    {
     "keyword": "도로공사 6연승 선두 질주",
     "hitKeyword": "도로공사 6연승 1위",
@@ -97,18 +140,6 @@
     "hitKeyword": "나인투식스 첫방송",
     "hitAt": "2026-11-25T22:00:00+09:00",
     "leadMin": 502
-   },
-   {
-    "keyword": "박민영과 나인투식스",
-    "hitKeyword": "나인투식스 첫방송",
-    "hitAt": "2026-11-25T22:00:00+09:00",
-    "leadMin": 351
-   },
-   {
-    "keyword": "코리아 핀테크 위크 2026",
-    "hitKeyword": "청룡영화상 2026",
-    "hitAt": "2026-11-25T21:30:00+09:00",
-    "leadMin": 402
    }
   ]
  }
