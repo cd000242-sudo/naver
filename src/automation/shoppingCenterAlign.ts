@@ -16,6 +16,8 @@ export interface ShoppingCenterAlignResult {
   readonly lines: number;
   /** How many of them were written this time. */
   readonly changed: number;
+  /** "👉 address" lines taken out of the document because their link card exists (the screen had dropped them already). */
+  readonly removedAddressLines: number;
   readonly message?: string;
 }
 
@@ -24,7 +26,7 @@ export interface ShoppingCenterAlignResult {
  * `hookLines` are the exact one-line texts that sit above the previous-post cards.
  */
 export function shoppingCenterAlignInPage(hookLines: readonly string[]): ShoppingCenterAlignResult {
-  const empty = { images: 0, cards: 0, lines: 0, changed: 0 };
+  const empty = { images: 0, cards: 0, lines: 0, changed: 0, removedAddressLines: 0 };
   try {
     type Block = Record<string, unknown>;
     const starts = ['📎', '👉', '🔗'];
@@ -57,25 +59,48 @@ export function shoppingCenterAlignInPage(hookLines: readonly string[]): Shoppin
     };
     const data = editor.getDocumentData();
     const components = (data?.document?.components || []) as Block[];
-    const found = collect(components);
-    const images = found.blocks.filter((component) => component['@ctype'] === 'image').length;
-    const cards = found.blocks.length - images;
-    const counts = { images, cards, lines: found.paragraphs.length };
-    if (found.blocks.length + found.paragraphs.length === 0) return { status: 'nothing', ...counts, changed: 0 };
     // Writing the document back redraws the editor from this data. Only do it when the data and the screen hold the
     // same photos, cards and text blocks, so a redraw cannot drop anything that exists on the screen only.
     const inData = (type: string): number => components.filter((component) => component?.['@ctype'] === type).length;
     const onScreen = (name: string): number => document.querySelectorAll(`.se-component.se-${name}`).length;
     if (inData('image') !== onScreen('image') || inData('oglink') !== onScreen('oglink') || inData('text') !== onScreen('text')) {
       return {
-        status: 'unsafe', ...counts, changed: 0,
+        status: 'unsafe', ...empty,
         message: `문서/화면 사진 ${inData('image')}/${onScreen('image')} · 카드 ${inData('oglink')}/${onScreen('oglink')} · 글 ${inData('text')}/${onScreen('text')}`,
       };
     }
+    // The address a card was typed from ("👉 https://…") is removed from the SCREEN once the card is drawn, but this
+    // document still holds it, and writing the document back shows it again above the card (live post 2026-11-25).
+    // So it leaves the document here: only a paragraph that is nothing but the address of a card in this document.
+    const comparable = (value: unknown): string => String(value || '').trim()
+      .replace(/^https?:\/\//i, '').replace(/[?#].*$/, '').replace(/\/+$/, '').toLowerCase();
+    const cardLinks = new Set(components.filter((component) => component?.['@ctype'] === 'oglink')
+      .map((component) => comparable(component.link || component.url)).filter(Boolean));
+    const isCardAddressLine = (paragraph: Block): boolean => {
+      const match = /^(?:👉|🔗|▶|→|\s)*(https?:\/\/\S+)$/u.exec(lineOf(paragraph));
+      return Boolean(match) && cardLinks.has(comparable(match![1]));
+    };
+    let removedAddressLines = 0;
+    for (let index = components.length - 1; index >= 0; index -= 1) {
+      const component = components[index];
+      if (component?.['@ctype'] !== 'text' || !Array.isArray(component.value)) continue;
+      const paragraphs = component.value as Block[];
+      const kept = paragraphs.filter((paragraph) => !isCardAddressLine(paragraph));
+      if (kept.length === paragraphs.length) continue;
+      removedAddressLines += paragraphs.length - kept.length;
+      if (kept.length > 0) component.value = kept;
+      else if (index < components.length - 1) components.splice(index, 1); // a block that held only the address
+      else component.value = [{ ...paragraphs[0], nodes: [{ '@ctype': 'textNode', value: '' }] }]; // the last block stays as the typing line
+    }
+    const found = collect(components);
+    const images = found.blocks.filter((component) => component['@ctype'] === 'image').length;
+    const cards = found.blocks.length - images;
+    const counts = { images, cards, lines: found.paragraphs.length, removedAddressLines };
+    if (found.blocks.length + found.paragraphs.length + removedAddressLines === 0) return { status: 'nothing', ...counts, changed: 0 };
     const pendingBlocks = found.blocks.filter((component) => component.align !== 'center');
     const pendingLines = found.paragraphs.filter((paragraph) => alignOf(paragraph) !== 'center');
     const changed = pendingBlocks.length + pendingLines.length;
-    if (changed === 0) return { status: 'unchanged', ...counts, changed: 0 };
+    if (changed + removedAddressLines === 0) return { status: 'unchanged', ...counts, changed: 0 };
     for (const component of pendingBlocks) component.align = 'center';
     for (const paragraph of pendingLines) {
       const style = paragraph.style && typeof paragraph.style === 'object' ? (paragraph.style as Block) : { '@ctype': 'paragraphStyle' };
@@ -129,7 +154,7 @@ export async function alignShoppingPostCenterInEditor(
   let result: ShoppingCenterAlignResult;
   try { result = await frame.evaluate(shoppingCenterAlignInPage, hookLines); }
   catch (error) {
-    result = { status: 'error', images: 0, cards: 0, lines: 0, changed: 0, message: String((error as Error)?.message || error).slice(0, 160) };
+    result = { status: 'error', images: 0, cards: 0, lines: 0, changed: 0, removedAddressLines: 0, message: String((error as Error)?.message || error).slice(0, 160) };
   }
   if (result.status === 'aligned') {
     const deadline = Date.now() + (options.screenWaitMs ?? 4000);
@@ -141,7 +166,7 @@ export async function alignShoppingPostCenterInEditor(
     if (before && after && (after.photos < before.photos || after.cards < before.cards)) {
       log(`   ⚠️ 가운데 정렬 뒤 사진·카드 수가 줄었습니다 (사진 ${before.photos} → ${after.photos}, 카드 ${before.cards} → ${after.cards}). 발행 전에 글을 확인해 주세요.`);
     }
-    log(`   🎯 쇼핑 글 가운데 정렬: 사진 ${result.images}장 · 링크 카드 ${result.cards}개 · 배너 문구 ${result.lines}줄`);
+    log(`   🎯 쇼핑 글 가운데 정렬: 사진 ${result.images}장 · 링크 카드 ${result.cards}개 · 배너 문구 ${result.lines}줄${result.removedAddressLines > 0 ? ` (카드 위 주소 줄 ${result.removedAddressLines}개 정리)` : ''}`);
   } else if (result.status === 'unchanged' || result.status === 'nothing') {
     log(`   ℹ️ 쇼핑 글 가운데 정렬: 바꿀 것이 없습니다 (사진 ${result.images} · 카드 ${result.cards} · 문구 ${result.lines}).`);
   } else {

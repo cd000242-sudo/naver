@@ -48,13 +48,30 @@ describe('shopping post: photos, cards and the banner block go to the centre', (
       text(para(HOOKS[0]), para('#해시태그 #둘째')),
     ]);
     const result = shoppingCenterAlignInPage(HOOKS);
-    expect(result).toMatchObject({ status: 'aligned', images: 1, cards: 1, lines: 4 });
+    expect(result).toMatchObject({ status: 'aligned', images: 1, cards: 1, lines: 3, removedAddressLines: 1 });
     expect(state.sets).toBe(1);
     expect(aligns(state)).toEqual([undefined, 'center', undefined, 'center', undefined]);
     const comps = state.data.document.components;
     expect(lineAligns(comps[0])).toEqual(['left']); // the body stays as the owner set it (2026-09-02: left)
-    expect(lineAligns(comps[2])).toEqual([undefined, 'center', 'center', 'center']);
+    // the "👉 address" line is gone: its card (same link) is right below it
+    expect(lineAligns(comps[2])).toEqual([undefined, 'center', 'center']);
     expect(lineAligns(comps[4])).toEqual(['center', undefined]); // hashtags are not touched
+  });
+
+  // 2026-11-25 live post: the screen-only cleanup had removed "👉 address" once its card was drawn, but the document
+  // still held the line, so writing the document back showed it again above the card.
+  it('an address line leaves the document only when its own card exists', () => {
+    const state = install([
+      text(para(DIVIDER), para('👉 https://naver.me/abc'), para('👉 https://naver.me/no-card-yet')),
+      card(),
+      text(para('https://naver.me/abc')),
+      text(para('#태그')),
+    ]);
+    const result = shoppingCenterAlignInPage(HOOKS);
+    expect(result).toMatchObject({ status: 'aligned', removedAddressLines: 2, cards: 1 });
+    const comps = state.data.document.components;
+    expect(comps.map((c) => c['@ctype'])).toEqual(['text', 'oglink', 'text']); // the block that held only the address is gone
+    expect((comps[0].value as Array<{ nodes: Array<{ value: string }> }>).map((p) => p.nodes[0].value)).toEqual([DIVIDER, '👉 https://naver.me/no-card-yet']);
   });
 
   it('a paragraph without a style object gets one', () => {
