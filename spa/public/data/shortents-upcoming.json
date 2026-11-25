@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T12:00:44.652Z",
+ "builtAt": "2026-11-25T12:10:47.471Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,84 +8,91 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "빗썸 해킹 추가 피해",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 30,
-   "recent20": 5,
-   "press": 29,
-   "firstArticleAt": "2026-11-25T10:32:00.000Z",
+   "articles90": 34,
+   "recent20": 7,
+   "press": 34,
+   "firstArticleAt": "2026-11-25T10:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "빗썸, 개인정보 추가 유출 확인…해킹 기간도 보름 넘어",
-     "press": "paxetv.com",
-     "publishedAt": "2026-11-25T11:58:00.000Z",
-     "link": "http://www.paxetv.com/news/articleView.html?idxno=287870"
+     "title": "빗썸 해킹 피해 추가 확인",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-25T12:08:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611252104481274056c162803_1"
     },
     {
-     "title": "빗썸, 보름 동안 해킹 사실 몰랐다…뒤늦게 드러난 추가 피해",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-25T11:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/117/0004128111?sid=103"
+     "title": "빗썸 개인정보 유출 피해자 추가 확인…해킹 기간도 보름 넘게 늘어",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-25T12:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847875?sid=101"
     },
     {
-     "title": "빗썸, 개인정보 유출 피해 추가 확인…보름간 해킹 몰랐다",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-25T11:48:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904465"
+     "title": "보름간 털린 줄도 몰랐다… 빗썸, 해킹 피해 추가 확인",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-25T12:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887471?sid=101"
     }
    ]
   },
   {
    "keyword": "이재명 대통령 방문한 공적주택",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 5,
-   "press": 18,
-   "firstArticleAt": "2026-11-25T10:31:00.000Z",
+   "articles90": 19,
+   "recent20": 3,
+   "press": 16,
+   "firstArticleAt": "2026-11-25T10:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 \"서울 핵심지역 집값 하향 안정화…급격한 변동에도 대비\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-25T11:50:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446547"
+     "title": "李대통령, LH에 주택 공급 속도전 주문…“사업 속도 가점도 검토”",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-25T12:08:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653030"
     },
     {
-     "title": "李대통령 \"토지임대부 주택도 투기자산화\"…與의원 제안에 공개 반박",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-25T11:48:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446546"
+     "title": "李 대통령, 공적주택 공급 속도전…\"오늘 발표된 것, 절대 밀리지 말고...",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-25T12:08:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=321056"
     },
     {
-     "title": "李대통령, 은평 대림골목시장 ‘깜짝 방문’… 민생 물가 점검",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-25T11:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207342?sid=100"
+     "title": "李대통령, 은평 대림골목시장 깜짝 방문…체감 경기 청취",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-25T12:06:00.000Z",
+     "link": "https://www.ajunews.com/view/20261125205859672"
     }
    ]
   },
   {
    "keyword": "전광훈 구속영장 청구",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 13,
-   "recent20": 1,
+   "recent20": 2,
    "press": 13,
-   "firstArticleAt": "2026-11-25T10:36:00.000Z",
+   "firstArticleAt": "2026-11-25T10:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[자유통일당 성명서] 정권 하수인 인증한 공소청의 전광훈 목사 구속영...",
+     "press": "christiantoday.co.kr",
+     "publishedAt": "2026-11-25T12:08:00.000Z",
+     "link": "https://www.christiantoday.co.kr/news/378889"
+    },
     {
      "title": "공소청, '불법 정치자금' 전광훈에 구속영장 청구",
      "press": "yonhapnewstv.co.kr",
@@ -97,87 +104,49 @@
      "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-25T11:40:00.000Z",
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887370"
-    },
-    {
-     "title": "공소청 ‘102억 불법 정치자금 의혹’ 전광훈 구속영장 청구",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-25T11:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567944?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "청해부대 전쟁불개입 원칙 유지",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-25T10:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "청해부대 임무 확대에…李 “해상 위협 앞에서 무임승차 못해”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-25T11:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765166?sid=100"
-    },
-    {
-     "title": "李 대통령 “청해부대 작전 넓히되 전쟁 불개입 원칙 분명히 지킬 것”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-25T11:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686204?sid=100"
-    },
-    {
-     "title": "李대통령 “청해부대 작전범위 확대…전쟁 불개입 원칙 분명히 지킬 것...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-25T11:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728511?sid=100"
     }
    ]
   },
   {
    "keyword": "청룡영화상",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 21,
-   "recent20": 21,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T11:50:00.000Z",
+   "articles90": 24,
+   "recent20": 24,
+   "press": 9,
+   "firstArticleAt": "2026-11-25T12:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[S포토] 박지연, '우와~' (청룡영화상)",
+     "title": "[S포토] 신민아, '고혹' (청룡영화상)",
      "press": "stardailynews.co.kr",
-     "publishedAt": "2026-11-25T12:00:00.000Z",
-     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=603100"
+     "publishedAt": "2026-11-25T12:08:00.000Z",
+     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=603112"
     },
     {
-     "title": "[포토] 박지훈, 청룡영화상 신인상 수상",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-25T11:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004469630"
+     "title": "[S포토] 신민아, '나비에의 레드 드레스' (청룡영화상)",
+     "press": "stardailynews.co.kr",
+     "publishedAt": "2026-11-25T12:08:00.000Z",
+     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=603111"
     },
     {
-     "title": "[포토] 청룡영화상 신인남우상 박지훈, 영광스러운 순간",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-25T11:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004469629"
+     "title": "[S포토] 신민아, '경국지색' (청룡영화상)",
+     "press": "stardailynews.co.kr",
+     "publishedAt": "2026-11-25T12:08:00.000Z",
+     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=603113"
     }
    ]
   },
   {
    "keyword": "최우제",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 12,
-   "recent20": 5,
+   "recent20": 3,
    "press": 8,
    "firstArticleAt": "2026-11-25T11:00:00.000Z",
    "exclusive": false,
@@ -204,17 +173,55 @@
    ]
   },
   {
+   "keyword": "청해부대 호르무즈 제외 원칙",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T10:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "청해부대 임무 확대에…李 “해상 위협 앞에서 무임승차 못해”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-25T11:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765166?sid=100"
+    },
+    {
+     "title": "李 대통령 “청해부대 작전 넓히되 전쟁 불개입 원칙 분명히 지킬 것”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-25T11:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686204?sid=100"
+    },
+    {
+     "title": "李대통령 “청해부대 작전범위 확대…전쟁 불개입 원칙 분명히 지킬 것...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-25T11:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728511?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 2,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-25T11:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "수출 1조 달러 시대…美 관세 변수에 촉각",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T12:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929915?sid=101"
+    },
     {
      "title": "미국증시 전망, 나스닥 선물 2% 급락…반등 가능할까",
      "press": "topstarnews.net",
@@ -226,19 +233,76 @@
      "press": "obsnews.co.kr",
      "publishedAt": "2026-11-25T11:46:00.000Z",
      "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544999"
+    }
+   ]
+  },
+  {
+   "keyword": "나인 투 식스",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-25T10:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'나인 투 식스' 박민영·육성재, 첫 만남부터 신경전…등장 인물 관계도...",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-25T12:00:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305776"
     },
     {
-     "title": "유럽 조이고, 미국은 조만간…'엎친 데 덮친' 자동차업계 상황",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-25T11:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522451?sid=101"
+     "title": "나인 투 식스 등장인물 관계도, 원작, 몇부작, OTT는?",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-25T11:42:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611250310"
+    },
+    {
+     "title": "[톱:프리뷰] 드라마 '나인 투 식스' 박민영X육성재X고수 \"일과 사랑의 새...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T11:06:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277931"
+    }
+   ]
+  },
+  {
+   "keyword": "배연정 췌장암 수술",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T10:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "배연정 “췌장암 수술 후 힘들어 왜 살렸냐고” 남편이 4년 업고 다녀 (...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-25T12:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191297"
+    },
+    {
+     "title": "배연정, 췌장암 수술 후 걷지도 못했다…♥김도만 \"4년간 업고 다녀\" (퍼...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-25T11:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084059"
+    },
+    {
+     "title": "배연정, 췌장암 16시간 대수술 고백… \"위·간·비장까지 절제\"",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-25T10:50:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3762914"
     }
    ]
   },
   {
    "keyword": "검사",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 3,
@@ -249,16 +313,16 @@
    "capped": false,
    "samples": [
     {
-     "title": "선박·어선 검사증서도 정부24에서 발급 가능",
-     "press": "phmbc.co.kr",
-     "publishedAt": "2026-11-25T11:40:00.000Z",
-     "link": "http://www.phmbc.co.kr/www/news/desk_news?idx=205599&mode=view"
-    },
-    {
      "title": "국내 수산물 방사능 검사 6건 모두 적합",
      "press": "phmbc.co.kr",
      "publishedAt": "2026-11-25T11:40:00.000Z",
      "link": "http://www.phmbc.co.kr/www/news/desk_news?idx=205604&mode=view"
+    },
+    {
+     "title": "선박·어선 검사증서도 정부24에서 발급 가능",
+     "press": "phmbc.co.kr",
+     "publishedAt": "2026-11-25T11:40:00.000Z",
+     "link": "http://www.phmbc.co.kr/www/news/desk_news?idx=205599&mode=view"
     },
     {
      "title": "AI 부정 막으려 중·고교도 금속탐지기 검사.. 수능보다 더 강화?",
@@ -271,10 +335,22 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1507,
-  "matched": 769,
+  "flagged": 1509,
+  "matched": 771,
   "avgLeadMin": 504,
   "recent": [
+   {
+    "keyword": "주주",
+    "hitKeyword": "반도체주 주가 폭락",
+    "hitAt": "2026-11-25T21:00:00+09:00",
+    "leadMin": 691
+   },
+   {
+    "keyword": "지인 살해 50대 징역 25년",
+    "hitKeyword": "광주 흉기 50대 체포",
+    "hitAt": "2026-11-25T21:00:00+09:00",
+    "leadMin": 372
+   },
    {
     "keyword": "젠슨 황 효과 하루 만에 소멸",
     "hitKeyword": "젠슨 황 효과 코스피 급락",
@@ -322,18 +398,6 @@
     "hitKeyword": "앨리스 황 정보 유출",
     "hitAt": "2026-11-25T19:00:00+09:00",
     "leadMin": 3153
-   },
-   {
-    "keyword": "김민솔 3관왕",
-    "hitKeyword": "김민솔 3관왕 달성",
-    "hitAt": "2026-11-25T19:00:00+09:00",
-    "leadMin": 10
-   },
-   {
-    "keyword": "증안 펀드",
-    "hitKeyword": "증안펀드 확대 추진",
-    "hitAt": "2026-11-25T19:00:00+09:00",
-    "leadMin": 10
    }
   ]
  }
