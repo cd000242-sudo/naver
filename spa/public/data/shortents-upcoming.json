@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T02:20:08.647Z",
+ "builtAt": "2026-11-25T02:30:11.946Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 71,
-   "recent20": 11,
-   "press": 60,
-   "firstArticleAt": "2026-11-25T00:53:00.000Z",
+   "articles90": 70,
+   "recent20": 12,
+   "press": 63,
+   "firstArticleAt": "2026-11-25T01:04:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "김민석 “조희대 탄핵 위한 5당 연대 제안”…혁신당 “일정부터 정해야...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-25T02:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207202?sid=100"
+     "title": "김민석 \"조희대 대법원장 탄핵 추진 위한 5당 연대 제안\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-25T02:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357952?sid=100"
     },
     {
-     "title": "김민석 조희대 대법원장 탄핵 5당 연대 제안…시민사회까지 연대 확대 ...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-25T02:16:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630542"
+     "title": "김민석 \"조희대 탄핵 신속 추진 위한 '5당 연대' 공식 제안\"…여론조사...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-25T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522357?sid=100"
     },
     {
-     "title": "개각·이용철 여진…조희대 탄핵 \"5당 연대하자\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T02:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929725?sid=100"
+     "title": "김민석, '조희대 탄핵' 진보5당 연대 제안...\"시민사회와도 연대\"",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-25T02:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394781?sid=100"
     }
    ]
   },
   {
-   "keyword": "연속 수상 기업",
+   "keyword": "지속가능성 연속 수상",
    "sources": [
     "nate"
    ],
-   "articles90": 72,
-   "recent20": 22,
-   "press": 54,
-   "firstArticleAt": "2026-11-25T01:16:00.000Z",
+   "articles90": 47,
+   "recent20": 10,
+   "press": 41,
+   "firstArticleAt": "2026-11-25T01:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성SDI 울산사업장, ‘녹색경영 우수기업’ 대상",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-25T02:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728235?sid=101"
-    },
-    {
-     "title": "삼성SDI 울산사업장, 녹색경영 우수기업 대상 수상",
+     "title": "한샘, 지속가능성보고서상 2년 연속 수상…ESG 공시 기준 반영",
      "press": "newslock.co.kr",
-     "publishedAt": "2026-11-25T02:16:00.000Z",
-     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=140866"
+     "publishedAt": "2026-11-25T02:28:00.000Z",
+     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=140912"
     },
     {
-     "title": "[호텔가 이모저모] 한화호텔앤드리조트, 산업통상부장관상 수상 外",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-25T02:16:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784652"
+     "title": "[카드] 교보증권, 대한민국 지속가능성대회 '우수 보고서상' 5년 연속 수...",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-25T02:26:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=756430"
+    },
+    {
+     "title": "교보증권, 5년 연속 대한민국 지속가능성보고서상 영예…ESG 공시 투명성...",
+     "press": "widedaily.com",
+     "publishedAt": "2026-11-25T02:20:00.000Z",
+     "link": "https://www.widedaily.com/news/articleView.html?idxno=304722"
     }
    ]
   },
@@ -79,62 +79,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 42,
-   "recent20": 12,
-   "press": 42,
-   "firstArticleAt": "2026-11-25T00:52:00.000Z",
+   "articles90": 41,
+   "recent20": 10,
+   "press": 40,
+   "firstArticleAt": "2026-11-25T01:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "KB국민은행, 수출상담회 참가기업 외환 수수료 감면",
-     "press": "press9.kr",
-     "publishedAt": "2026-11-25T02:14:00.000Z",
-     "link": "http://www.press9.kr/news/articleView.html?idxno=87003"
+     "title": "KB국민은행, 국내 수출기업 금융 지원···'Korea Grand Sourcing Fair' 참...",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-25T02:26:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244146"
     },
     {
-     "title": "국민은행, 서울시 구금고 11개 유치…시중은행 중 '점유율 1위'",
-     "press": "bizwnews.com",
-     "publishedAt": "2026-11-25T02:14:00.000Z",
-     "link": "http://www.bizwnews.com/news/articleView.html?idxno=153077"
+     "title": "국민은행, 12조 규모 서울 구금고 품었다…우리은행 8곳 내줘",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-25T02:26:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904337"
     },
     {
-     "title": "KB국민은행, 수출상담회서 기업 맞춤형 금융지원",
-     "press": "bizwork.co.kr",
-     "publishedAt": "2026-11-25T02:14:00.000Z",
-     "link": "https://www.bizwork.co.kr/news/articleView.html?idxno=421154"
-    }
-   ]
-  },
-  {
-   "keyword": "현대차그룹 완속충전기 공개",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 42,
-   "recent20": 4,
-   "press": 38,
-   "firstArticleAt": "2026-11-25T00:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "현대차그룹, ‘HMG 글로벌 완속충전기’ 공개",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-25T02:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728236?sid=101"
-    },
-    {
-     "title": "현대차그룹, 통합 완속충전기 공개 … 내년부터 글로벌 시장 출시",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-25T02:16:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/25/2026112550127.html"
-    },
-    {
-     "title": "현대차·기아·제네시스 충전 경험 하나로…‘HMG 글로벌 완속충전기’...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-25T02:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/468/0001283300?sid=101"
+     "title": "[더밸류 브리핑] 오늘의 은행 소식...KB국민은행·IBK기업은행·SC제일은...",
+     "press": "thevaluenews.co.kr",
+     "publishedAt": "2026-11-25T02:24:00.000Z",
+     "link": "http://www.thevaluenews.co.kr/news/view.php?idx=203631"
     }
    ]
   },
@@ -143,24 +111,24 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 36,
-   "recent20": 4,
-   "press": 35,
-   "firstArticleAt": "2026-11-25T00:52:00.000Z",
+   "articles90": 27,
+   "recent20": 3,
+   "press": 27,
+   "firstArticleAt": "2026-11-25T01:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "지난해 수능 시험지 상당수 이미 폐기.. 강원은 전량 폐기",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-25T02:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000087050?sid=102"
-    },
     {
      "title": "교육부, 수능 시험지 보관기간 1년→5년 연장 추진",
      "press": "kbsm.net",
      "publishedAt": "2026-11-25T02:18:00.000Z",
      "link": "https://www.kbsm.net/news/view.php?idx=543234"
+    },
+    {
+     "title": "작년 수능 시험지 상당수 이미 폐기.. 강원은 전량 폐기",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-25T02:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000087050?sid=102"
     },
     {
      "title": "수능 시험지 보관 5년으로 늘린다··· 교육부, 부정행위 사후 조사 강...",
@@ -171,17 +139,87 @@
    ]
   },
   {
+   "keyword": "LG 케네디와 재계약",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 24,
+   "recent20": 3,
+   "press": 24,
+   "firstArticleAt": "2026-11-25T01:03:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'2만달러 단기 알바'에서 '20만달러 필승조'로…LG, 케네디와 재계약",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T02:24:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/079/0004213683"
+    },
+    {
+     "title": "LG, 아시아쿼터 선수 케네디와 재계약...좌타 스페셜리스트 지켰다",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-25T02:20:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/241/0003543391"
+    },
+    {
+     "title": "LG, 아시아쿼터 케네디와 재계약",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T02:12:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/052/0002437754"
+    }
+   ]
+  },
+  {
+   "keyword": "정청래 송영길 공개 경고",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 20,
+   "recent20": 5,
+   "press": 20,
+   "firstArticleAt": "2026-11-25T01:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정청래 \"입 싼 송영길과 말 섞고 싶지 않아… 李 관련 입 조심하라\"",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-25T02:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193493?sid=100"
+    },
+    {
+     "title": "송영길 “정청래 억울함 원 없이 얘기”…정청래 “입싼 송영길 입조심...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-25T02:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702997?sid=100"
+    },
+    {
+     "title": "정청래 송영길 공개 경고 \"입조심\"…이 대통령 사이비 종교 해산 방침 ...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-25T02:18:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630543"
+    }
+   ]
+  },
+  {
    "keyword": "한전 고객정보 유출 대책",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 3,
-   "press": 21,
-   "firstArticleAt": "2026-11-25T00:51:00.000Z",
+   "articles90": 20,
+   "recent20": 2,
+   "press": 20,
+   "firstArticleAt": "2026-11-25T01:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한전, 정보유출 고객에 최대 1천만원 금융사기 보상보험 제공",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T02:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016462378?sid=102"
+    },
     {
      "title": "한전, 고객정보 유출 사고 관련 3단계 보호 대책 가동",
      "press": "daily.hankooki.com",
@@ -193,12 +231,6 @@
      "press": "sidae.com",
      "publishedAt": "2026-11-25T02:08:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/417/0001165577?sid=101"
-    },
-    {
-     "title": "한전, 개인정보 유출 고객에 무료 보호서비스…최대 1000만원 보상",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-25T02:04:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611250109"
     }
    ]
   },
@@ -209,29 +241,29 @@
     "google"
    ],
    "articles90": 10,
-   "recent20": 2,
+   "recent20": 4,
    "press": 9,
-   "firstArticleAt": "2026-11-25T00:52:00.000Z",
+   "firstArticleAt": "2026-11-25T01:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "복지 문턱 낮추는 정부…2030년 생계급여 수급 대상 27만명 확대 전망",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-25T02:28:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848412"
+    },
+    {
+     "title": "국회 예결위원장 만난 남양주시, 주요사업 국비지원 요청",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T02:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014344054?sid=102"
+    },
     {
      "title": "남양주시, 복지·교통·재정 현안 해결 지원 요청",
      "press": "newstown.co.kr",
      "publishedAt": "2026-11-25T02:14:00.000Z",
      "link": "http://www.newstown.co.kr/news/articleView.html?idxno=723293"
-    },
-    {
-     "title": "부천시, 먹거리·생필품 지원 '그냥드림' 내년 3개 구청으로 확대",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-25T02:12:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023091"
-    },
-    {
-     "title": "최현덕 남양주시장, 국회에 지역 현안사업 국비 지원과 예산 반영 건의",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-25T02:00:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023116"
     }
    ]
   },
@@ -240,13 +272,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 1,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-25T01:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김종철 경찰청장 “범죄 피해자 보호가 제1원칙”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-25T02:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833856?sid=102"
+    },
     {
      "title": "김종철, 취임 첫 현장 행보는 영등포서…'피해자 보호' 강조",
      "press": "newstomato.com",
@@ -258,12 +296,6 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-25T01:38:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000967617?sid=102"
-    },
-    {
-     "title": "김종철 신임 경찰청장, 취임 후 첫 행보로 영등포역 일대 도보 순찰",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T01:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308724?sid=102"
     }
    ]
   },
@@ -273,12 +305,18 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-25T01:00:00.000Z",
+   "firstArticleAt": "2026-11-25T01:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "양양군, 폭설·한파 대비 재난 예·경보시설 40곳 전수점검…겨울철 안...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-25T02:28:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611250092"
+    },
     {
      "title": "중랑구, 구리시와 제설 공조체계 구축…겨울철 폭설 대응 강화",
      "press": "job-post.co.kr",
@@ -290,19 +328,13 @@
      "press": "kwnews.co.kr",
      "publishedAt": "2026-11-25T01:29:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/087/0001233259?sid=102"
-    },
-    {
-     "title": "'폭설' 7일 연속 박스오피스 1위… 누적 관객 49만 돌파",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-25T01:28:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611250201"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1368,
+  "flagged": 1371,
   "matched": 722,
   "avgLeadMin": 503,
   "recent": [
