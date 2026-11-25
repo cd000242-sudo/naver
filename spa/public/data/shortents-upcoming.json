@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T12:10:47.471Z",
+ "builtAt": "2026-11-25T12:20:51.269Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "빗썸 해킹 추가 피해",
@@ -16,12 +16,18 @@
     "signal.bz"
    ],
    "articles90": 34,
-   "recent20": 7,
+   "recent20": 5,
    "press": 34,
-   "firstArticleAt": "2026-11-25T10:42:00.000Z",
+   "firstArticleAt": "2026-11-25T10:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "빗썸 해킹 피해 더 컸다…보름 넘게 뚫리고도 몰랐다",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-25T12:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609887?sid=101"
+    },
     {
      "title": "빗썸 해킹 피해 추가 확인",
      "press": "g-enews.com",
@@ -33,12 +39,6 @@
      "press": "view.asiae.co.kr",
      "publishedAt": "2026-11-25T12:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/277/0005847875?sid=101"
-    },
-    {
-     "title": "보름간 털린 줄도 몰랐다… 빗썸, 해킹 피해 추가 확인",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-25T12:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887471?sid=101"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 3,
+   "articles90": 20,
+   "recent20": 5,
    "press": 16,
-   "firstArticleAt": "2026-11-25T10:48:00.000Z",
+   "firstArticleAt": "2026-11-25T10:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, LH에 주택 공급 속도전 주문…“사업 속도 가점도 검토”",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-25T12:08:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653030"
+     "title": "李대통령 \"재원 부족해 공적주택 못 짓는 일 없을 것…문제는 택지\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T12:16:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125001318"
+    },
+    {
+     "title": "이 대통령, 공공임대 분양 전환 선 그어…\"주거 사다리 기회 넓혀야\"",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-25T12:14:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321906&inflow=N"
     },
     {
      "title": "李 대통령, 공적주택 공급 속도전…\"오늘 발표된 것, 절대 밀리지 말고...",
      "press": "wolyo.co.kr",
      "publishedAt": "2026-11-25T12:08:00.000Z",
      "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=321056"
-    },
-    {
-     "title": "李대통령, 은평 대림골목시장 깜짝 방문…체감 경기 청취",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-25T12:06:00.000Z",
-     "link": "https://www.ajunews.com/view/20261125205859672"
     }
    ]
   },
@@ -80,10 +80,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-25T10:41:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T11:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -113,94 +113,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 24,
-   "recent20": 24,
-   "press": 9,
-   "firstArticleAt": "2026-11-25T12:01:00.000Z",
+   "articles90": 21,
+   "recent20": 21,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T12:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[S포토] 신민아, '고혹' (청룡영화상)",
+     "title": "[S포토] 전도연, '발걸음도 가볍고' (청룡영화상)",
      "press": "stardailynews.co.kr",
-     "publishedAt": "2026-11-25T12:08:00.000Z",
-     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=603112"
+     "publishedAt": "2026-11-25T12:20:00.000Z",
+     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=603125"
     },
     {
-     "title": "[S포토] 신민아, '나비에의 레드 드레스' (청룡영화상)",
+     "title": "[S포토] 전도연, '유력한 여우주연상 후보' (청룡영화상)",
      "press": "stardailynews.co.kr",
-     "publishedAt": "2026-11-25T12:08:00.000Z",
-     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=603111"
+     "publishedAt": "2026-11-25T12:18:00.000Z",
+     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=603123"
     },
     {
-     "title": "[S포토] 신민아, '경국지색' (청룡영화상)",
+     "title": "[S포토] 전도연, '마음 깊이 우러난 미소' (청룡영화상)",
      "press": "stardailynews.co.kr",
-     "publishedAt": "2026-11-25T12:08:00.000Z",
-     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=603113"
-    }
-   ]
-  },
-  {
-   "keyword": "최우제",
-   "sources": [
-    "google"
-   ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T11:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "T1 돌아온 '제우스' 최우제 \"경기 보는 시야 넓어져\"⋯2029년까지 3년 계...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-25T11:56:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653024"
-    },
-    {
-     "title": "'제우스' 최우제, 2년 전 갈등에도 T1 복귀한 이유…\"상혁이 형 보고 시...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-25T11:55:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/445/0000493403"
-    },
-    {
-     "title": "2년 만에 T1으로 복귀한 '제우스' 최우제 \"높은 성적 바라보고 왔다\"",
-     "press": "todaykorea.co.kr",
-     "publishedAt": "2026-11-25T11:52:00.000Z",
-     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=409231"
-    }
-   ]
-  },
-  {
-   "keyword": "청해부대 호르무즈 제외 원칙",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T10:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "청해부대 임무 확대에…李 “해상 위협 앞에서 무임승차 못해”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-25T11:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765166?sid=100"
-    },
-    {
-     "title": "李 대통령 “청해부대 작전 넓히되 전쟁 불개입 원칙 분명히 지킬 것”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-25T11:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686204?sid=100"
-    },
-    {
-     "title": "李대통령 “청해부대 작전범위 확대…전쟁 불개입 원칙 분명히 지킬 것...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-25T11:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728511?sid=100"
+     "publishedAt": "2026-11-25T12:18:00.000Z",
+     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=603124"
     }
    ]
   },
@@ -210,7 +146,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-25T11:14:00.000Z",
    "exclusive": false,
@@ -233,102 +169,6 @@
      "press": "obsnews.co.kr",
      "publishedAt": "2026-11-25T11:46:00.000Z",
      "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544999"
-    }
-   ]
-  },
-  {
-   "keyword": "나인 투 식스",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T10:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'나인 투 식스' 박민영·육성재, 첫 만남부터 신경전…등장 인물 관계도...",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-25T12:00:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305776"
-    },
-    {
-     "title": "나인 투 식스 등장인물 관계도, 원작, 몇부작, OTT는?",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-25T11:42:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611250310"
-    },
-    {
-     "title": "[톱:프리뷰] 드라마 '나인 투 식스' 박민영X육성재X고수 \"일과 사랑의 새...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T11:06:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277931"
-    }
-   ]
-  },
-  {
-   "keyword": "배연정 췌장암 수술",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T10:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "배연정 “췌장암 수술 후 힘들어 왜 살렸냐고” 남편이 4년 업고 다녀 (...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-25T12:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191297"
-    },
-    {
-     "title": "배연정, 췌장암 수술 후 걷지도 못했다…♥김도만 \"4년간 업고 다녀\" (퍼...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T11:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084059"
-    },
-    {
-     "title": "배연정, 췌장암 16시간 대수술 고백… \"위·간·비장까지 절제\"",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-25T10:50:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3762914"
-    }
-   ]
-  },
-  {
-   "keyword": "검사",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-25T11:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국내 수산물 방사능 검사 6건 모두 적합",
-     "press": "phmbc.co.kr",
-     "publishedAt": "2026-11-25T11:40:00.000Z",
-     "link": "http://www.phmbc.co.kr/www/news/desk_news?idx=205604&mode=view"
-    },
-    {
-     "title": "선박·어선 검사증서도 정부24에서 발급 가능",
-     "press": "phmbc.co.kr",
-     "publishedAt": "2026-11-25T11:40:00.000Z",
-     "link": "http://www.phmbc.co.kr/www/news/desk_news?idx=205599&mode=view"
-    },
-    {
-     "title": "AI 부정 막으려 중·고교도 금속탐지기 검사.. 수능보다 더 강화?",
-     "press": "jmbc.co.kr",
-     "publishedAt": "2026-11-25T11:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/659/0000049027?sid=102"
     }
    ]
   }
