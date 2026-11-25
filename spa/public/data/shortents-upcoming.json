@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T06:48:53.027Z",
+ "builtAt": "2026-11-25T06:58:57.337Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "허서홍 사장 승진",
@@ -16,30 +16,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 66,
+   "articles90": 60,
    "recent20": 8,
-   "press": 58,
-   "firstArticleAt": "2026-11-25T05:20:00.000Z",
-   "exclusive": false,
+   "press": 54,
+   "firstArticleAt": "2026-11-25T05:29:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "GS '오너 4세' 3인 나란히 승진…허서홍 리테일 사장으로",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-25T06:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000143026?sid=101"
+     "title": "GS리테일 허서홍 사장 시대 개막…GS그룹, 안정 속 세대교체 가속",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-25T06:54:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848432"
     },
     {
-     "title": "'오너 4세' 허서홍 GS리테일 대표이사 사장 승진 : 유통 경영 성과로 입...",
-     "press": "huffingtonpost.kr",
-     "publishedAt": "2026-11-25T06:46:00.000Z",
-     "link": "https://www.huffingtonpost.kr/article/262396"
+     "title": "유통업계 'CFS 단독 중장년 채용박람회' 개최·허서홍 대표 사장 승진",
+     "press": "wsobi.com",
+     "publishedAt": "2026-11-25T06:52:00.000Z",
+     "link": "http://www.wsobi.com/news/articleView.html?idxno=322567"
     },
     {
-     "title": "'오너 4세' 허서홍 GS리테일 사장 승진…주요 계열사 대표 유임",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-25T06:46:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904386"
+     "title": "신사업 덜어낸 GS 오너 4세 허서홍, 사장 승진…다음 승부수는",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-25T06:52:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261125010009837"
+    }
+   ]
+  },
+  {
+   "keyword": "김건희 매관매직 상고심",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 38,
+   "recent20": 5,
+   "press": 34,
+   "firstArticleAt": "2026-11-25T05:45:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김건희 ‘매관매직’ 혐의 상고심 12월3일 선고…2심선 징역 5년 감형",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-25T06:58:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326476/?sc=Naver"
+    },
+    {
+     "title": "김건희 ‘매관매직’ 의혹 내달 3일 대법 선고...2심 징역 5년",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-25T06:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686082?sid=102"
+    },
+    {
+     "title": "귀금속·디올백·시계…김건희 '매관매직' 내달 3일 대법 선고",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-25T06:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006415443?sid=102"
     }
    ]
   },
@@ -48,62 +80,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 41,
-   "recent20": 2,
-   "press": 30,
-   "firstArticleAt": "2026-11-25T05:22:00.000Z",
+   "articles90": 36,
+   "recent20": 4,
+   "press": 29,
+   "firstArticleAt": "2026-11-25T05:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'이진우 과외' 주장 남성, 경찰 출석...\"진실 묻어선 안 돼\"",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-25T06:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159396?sid=102"
+     "title": "경찰, '이진우 과외선생' 조사...\"진실 묻히면 안돼\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T06:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437912?sid=102"
     },
     {
-     "title": "경찰 출석한 고 이진우 과외교사 \"진실 묻어선 안 되기에\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-25T06:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979811?sid=102"
+     "title": "'리트 만점자' 과외교사 경찰 출석 … \"죽음이 범죄 도주처 돼선 안 돼\"",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-25T06:52:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/25/2026112550267.html"
     },
     {
-     "title": "고 이진우 과외의 진실은? 경찰 출석한 인물의 폭로",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-25T06:22:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887263"
-    }
-   ]
-  },
-  {
-   "keyword": "김건희 매관매직 상고심 선고",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 33,
-   "recent20": 6,
-   "press": 29,
-   "firstArticleAt": "2026-11-25T05:45:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대법원, 김건희 '매관매직' 사건 내달 3일 선고...\"바쉐론 시계 수수 혐...",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-25T06:48:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191437"
-    },
-    {
-     "title": "[속보] 김건희 ‘매관매직’ 혐의 상고심 12월3일 선고…2심선 징역 5년...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-25T06:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833918?sid=102"
-    },
-    {
-     "title": "'尹 비상계엄 2년' 내달 3일 김건희 '매관매직' 상고심 선고(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T06:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016463160?sid=102"
+     "title": "“죽음이 범죄의 도주처가 돼선 안 돼”…故 이진우 씨 과외선생 경찰 ...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-25T06:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005768803?sid=102"
     }
    ]
   },
@@ -112,62 +112,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 26,
-   "recent20": 2,
+   "articles90": 28,
+   "recent20": 6,
    "press": 17,
-   "firstArticleAt": "2026-11-25T05:24:00.000Z",
+   "firstArticleAt": "2026-11-25T05:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“9.6% 넘으면 음방 출연”…박민영표 오피스 로맨스 ‘나인투식스’ (...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-25T06:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001148231"
+     "title": "[현장] '나인 투 식스' 박민영, 육성재·고수 사이 행복한 고민 (종합)",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T06:58:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285963"
     },
     {
-     "title": "'오피스물 장인' 박민영의 귀환…고수·육성재와 현실 로맨스 (나인 투...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T06:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083831"
+     "title": "'달빛' 고수 vs '햇살' 육성재…'나인 투 식스' 박민영의 행복한 고민 \"...",
+     "press": "ent.sbs.co.kr",
+     "publishedAt": "2026-11-25T06:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/416/0000328294"
     },
     {
-     "title": "\"6.9% 넘으면 혼성그룹\"..박민영·육성재·고수, 오피스 로코 '나인 투 식...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-25T06:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490055"
-    }
-   ]
-  },
-  {
-   "keyword": "대만",
-   "sources": [
-    "google"
-   ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-25T05:22:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "대만 반도체 부품업체, 보스턴다이내믹스 '아틀라스' 공급망 합류",
-     "press": "theguru.co.kr",
-     "publishedAt": "2026-11-25T06:46:00.000Z",
-     "link": "https://www.theguru.co.kr/news/article.html?no=110199"
-    },
-    {
-     "title": "‘충주사과’ 16년 연속 대만 수출…누적 508만 달러 돌파",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-25T06:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078350?sid=102"
-    },
-    {
-     "title": "운용사 설립·대만 자금 기대감···성장 노리는 유안타證, '신사업'이...",
-     "press": "sisajournal-e.com",
-     "publishedAt": "2026-11-25T06:32:00.000Z",
-     "link": "https://www.sisajournal-e.com/news/articleView.html?idxno=425312"
+     "title": "“고수X육성재, 둘 다 설레” 공감+판타지 다 잡는 ‘나인 투 식스’[스...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-25T06:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001151657"
     }
    ]
   },
@@ -176,30 +144,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-25T05:19:00.000Z",
+   "articles90": 18,
+   "recent20": 3,
+   "press": 16,
+   "firstArticleAt": "2026-11-25T05:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美정보당국 \"앨리스황, 젠슨과 만남 중 中에 정보 넘겨\" 의회 보고",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T06:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016463219?sid=104"
+    },
+    {
+     "title": "젠슨 황 사면까지 시사한 트럼프…“마오주의” “도덕적 해이 부추겨”...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-25T06:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833920?sid=104"
+    },
     {
      "title": "[유미's 픽] 젠슨 황 돌아왔지만…AI 산업, 엔비디아 '의존' 줄여야 하는...",
      "press": "zdnet.co.kr",
      "publishedAt": "2026-11-25T06:47:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/092/0002446911?sid=105"
+    }
+   ]
+  },
+  {
+   "keyword": "대만",
+   "sources": [
+    "google"
+   ],
+   "articles90": 17,
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-25T05:42:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "트럼프 \"대만 독립 지지 안 해\"…中, 미국에 실천 압박",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T06:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213813?sid=104"
     },
     {
-     "title": "美 의회, 젠슨 황 복귀시킨 트럼프 '정조준'… \"이사회 개입 경위 밝혀...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-25T06:38:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328425"
+     "title": "대만 검찰, 中 선거 개입 연루 혐의 노동당 부대표 구속",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T06:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016463202?sid=104"
     },
     {
-     "title": "‘젠슨 황’ 복귀 후폭풍에 바빠진 백악관…관련 참모들은 신중 모드",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-25T06:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484976?sid=104"
+     "title": "충주사과, 대만 수출 16년 연속 이어가…누적 수출액 508만 달러",
+     "press": "dynews.co.kr",
+     "publishedAt": "2026-11-25T06:48:00.000Z",
+     "link": "https://www.dynews.co.kr/news/articleView.html?idxno=875618"
     }
    ]
   },
@@ -208,13 +208,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
+   "articles90": 13,
    "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-25T05:23:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-25T05:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "GH 주택서 전세 사기 피해 발생 충격…추미애, 유사 계약 전수조사 지시",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-25T06:56:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026112513543999928fbfc802b3_1"
+    },
     {
      "title": "경기도시공사, 사전 검증도 없이 잔금 건냈다 2억 전세 사기 당해 … 임...",
      "press": "biz.newdaily.co.kr",
@@ -226,12 +232,38 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-25T06:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005609627?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "정청래 송영길 공개 비판",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-25T05:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"李·金, 정청래 얘기 4시간 들어줘\" 송영길 주장에 鄭 \"입조심하라, 분...",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-25T06:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002467540?sid=100"
     },
     {
-     "title": "추미애, GH 전세사기 원인 규명·전수조사 긴급 지시",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-25T06:02:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627660"
+     "title": "정청래, 김민석 100일 맞춰든 '깃발'…\"모든 당원은 징계앞에 평등\"",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-25T06:47:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749220"
+    },
+    {
+     "title": "송영길 직격한 정청래 “입 너무 싸…대통령 관계된 말은 더 조심하시라...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-25T06:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833916?sid=100"
     }
    ]
   },
@@ -240,13 +272,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 11,
    "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-25T05:20:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-25T05:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김여정 담화 하루 만에 “스위스 외교관 48시간 내 추방”···대북 제재...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-25T06:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484986?sid=100"
+    },
     {
      "title": "북한, 지난달 개설했던 스위스 외교사무소 전격폐쇄…\"48시간 내 떠나라...",
      "press": "news.jtbc.co.kr",
@@ -258,44 +296,6 @@
      "press": "weekly.khan.co.kr",
      "publishedAt": "2026-11-25T06:21:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/033/0000053637?sid=100"
-    },
-    {
-     "title": "북, 스위스 평양 주재 외교사무소 폐쇄…대북제재 철회 않자 ‘맞불’",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-25T06:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833906?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "코리아 핀테크 위크 개막",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T05:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "첫 월급부터 내 집 마련까지…뱅크샐러드, '핀테크 위크 2026' AI 서비스 ...",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-25T06:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394807?sid=101"
-    },
-    {
-     "title": "뱅크샐러드, '코리아 핀테크 위크 2026'서 미래형 AI 에이전트 비전 공개",
-     "press": "fetv.co.kr",
-     "publishedAt": "2026-11-25T05:58:00.000Z",
-     "link": "https://www.fetv.co.kr/news/articleView.html?idxno=314305"
-    },
-    {
-     "title": "투자 판단부터 주문까지…핀테크 수장들이 그린 AI 시대[르포]",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-25T05:52:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026112514355402246"
     }
    ]
   },
@@ -305,7 +305,7 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-25T05:40:00.000Z",
    "exclusive": false,
@@ -337,7 +337,7 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-25T05:38:00.000Z",
    "exclusive": false,
@@ -364,66 +364,66 @@
    ]
   },
   {
-   "keyword": "송경희 위원장 회의 주재",
+   "keyword": "코리아 핀테크 위크 개막",
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T05:23:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T05:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "송경희 위원장, 개인정보보호위원회 전체회의 주재",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T06:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009309734?sid=100"
+     "title": "첫 월급부터 내 집 마련까지…뱅크샐러드, '핀테크 위크 2026' AI 서비스 ...",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-25T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394807?sid=101"
     },
     {
-     "title": "개인정보보호위원회 전체회의",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T05:36:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125000912"
+     "title": "뱅크샐러드, '코리아 핀테크 위크 2026'서 미래형 AI 에이전트 비전 공개",
+     "press": "fetv.co.kr",
+     "publishedAt": "2026-11-25T05:58:00.000Z",
+     "link": "https://www.fetv.co.kr/news/articleView.html?idxno=314305"
     },
     {
-     "title": "발언하는 송경희 개인정보보호위원장",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T05:36:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125000911"
+     "title": "투자 판단부터 주문까지…핀테크 수장들이 그린 AI 시대[르포]",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-25T05:52:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026112514355402246"
     }
    ]
   },
   {
-   "keyword": "동서울변환소 협의안 합의",
+   "keyword": "롯데 캠프 MVP 나승엽 김기준",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T05:24:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-25T05:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'용인 반도체 전력공급' 동서울변환소 증설 연내 절차 착수",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T06:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016463114?sid=101"
+     "title": "롯데, 수비 강화캠프 마무리…나승엽과 김기준 MVP로 선정",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-25T06:57:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/144/0001151658"
     },
     {
-     "title": "동서울변환소 사업협의안 합의…감일지구 주민투표로 최종 결정",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-25T06:12:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652871"
+     "title": "롯데 '수비강화캠프' MVP는 나승엽, 21일 강행군 속 '루틴' 제대로 입혔...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-25T06:13:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002083825"
     },
     {
-     "title": "10년 표류 동서울변환소 '돌파구'…12월 주민투표로 협의안 확정",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T05:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009309478?sid=102"
+     "title": "롯데, 수비강화캠프 마무리…MVP 나승엽·김기준",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-25T05:38:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/396/0000761927"
     }
    ]
   },
@@ -433,7 +433,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-25T05:37:00.000Z",
    "exclusive": false,
@@ -465,7 +465,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-25T06:22:00.000Z",
    "exclusive": false,
@@ -490,11 +490,43 @@
      "link": "https://n.news.naver.com/mnews/article/018/0006415411?sid=103"
     }
    ]
+  },
+  {
+   "keyword": "송경희 위원장 회의 주재",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-25T05:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "송경희 위원장, 개인정보보호위원회 전체회의 주재",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T06:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009309734?sid=100"
+    },
+    {
+     "title": "개인정보보호위원회 전체회의 주재하는 송경희 위원장",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T05:36:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125000913"
+    },
+    {
+     "title": "모두발언하는 송경희 개인정보보호위원장",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T05:36:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125000914"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1429,
+  "flagged": 1432,
   "matched": 725,
   "avgLeadMin": 469,
   "recent": [
