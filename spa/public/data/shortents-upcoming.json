@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T12:51:00.140Z",
+ "builtAt": "2026-11-25T13:01:03.159Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 25,
+   "articles90": 24,
    "recent20": 3,
-   "press": 25,
-   "firstArticleAt": "2026-11-25T11:23:00.000Z",
+   "press": 24,
+   "firstArticleAt": "2026-11-25T11:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "빗썸 해킹, 한 시간이라더니 보름간 이어져…추가 피해도 확인",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-25T12:40:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446549"
+     "title": "빗썸, 해킹 피해 추가 확인…보름 넘게 해킹 사실 몰랐다",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-25T13:00:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784829"
     },
     {
-     "title": "빗썸 해킹 피해 규모 더 커졌다...보름 넘게 침해 사실 몰라",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-25T12:40:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=718231"
+     "title": "빗썸, 해킹 피해 추가 확인...보름 동안 해킹 사실 몰라",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T12:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438047?sid=101"
     },
     {
-     "title": "빗썸, 해킹 사고 기간 1시간이라더니…2주 동안 털렸다",
-     "press": "insightkorea.co.kr",
-     "publishedAt": "2026-11-25T12:34:00.000Z",
-     "link": "https://www.insightkorea.co.kr/news/articleView.html?idxno=259784"
+     "title": "빗썸 개인정보 유출 피해 확대…보름간 해킹 인지 못해",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-25T12:52:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466654"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 11,
    "recent20": 4,
-   "press": 9,
+   "press": 10,
    "firstArticleAt": "2026-11-25T11:35:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "'모마·마미, 13점씩' 도로공사, 6연승 질주",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T12:56:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/052/0002438048"
+    },
     {
      "title": "여자배구 한국도로공사, IBK기업은행 완파하고 6연승 질주·선두 도약…...",
      "press": "dailysportshankook.co.kr",
@@ -65,12 +71,6 @@
      "press": "stoo.com",
      "publishedAt": "2026-11-25T12:48:00.000Z",
      "link": "http://www.stoo.com/article.php?aid=110094077206"
-    },
-    {
-     "title": "'모마 부진? 4명 두 자릿수 득점' 도로공사, 기업은행 꺾고 6연승 1위 질...",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T12:44:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/079/0004213935"
     }
    ]
   },
@@ -79,15 +79,15 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T11:26:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-25T11:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령 “매래 공적주택 24만 호 공급…중산층 선택해야\"",
+     "title": "이 대통령 “미래 공적주택 24만 호 공급…중산층 선택해야\"",
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-25T12:49:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000522476?sid=102"
@@ -137,11 +137,76 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000929915?sid=101"
     }
    ]
+  },
+  {
+   "keyword": "강남",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-25T12:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'ESG실천병원' 강남베드로병원·'씀씀이가 바른병원' 이문서울이비인후...",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-25T12:54:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=757148"
+    },
+    {
+     "title": "가수 비, 대출받아 920억 강남 빌딩 사더니…5년 만에 ‘깜짝’",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-25T12:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728526?sid=101"
+    },
+    {
+     "title": "강남구의회,'자유총연맹 통일음악회 및 보릿고개 음식 체험전'에 참여",
+     "press": "cnbizm.com",
+     "publishedAt": "2026-11-25T12:52:00.000Z",
+     "link": "https://www.cnbizm.com/news/articleView.html?idxno=322735"
+    }
+   ]
+  },
+  {
+   "keyword": "나인 투 식스",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T11:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'나인 투 식스' 박민영·육성재·고수 인물관계도부터 몇 부작·OTT· 총정...",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-25T12:32:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3763220"
+    },
+    {
+     "title": "'나인 투 식스' 박민영·육성재, 첫 만남부터 신경전…등장 인물 관계도...",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-25T12:00:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305776"
+    },
+    {
+     "title": "나인 투 식스 등장인물 관계도, 원작, 몇부작, OTT는?",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-25T11:42:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611250310"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1512,
+  "flagged": 1513,
   "matched": 776,
   "avgLeadMin": 502,
   "recent": [
