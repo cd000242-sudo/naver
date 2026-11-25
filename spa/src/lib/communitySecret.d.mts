@@ -7,4 +7,5 @@ export const SECRET_BOARD: 'secret';
 export function normalizeSecretClass(raw: unknown): SecretClass;
 export function secretAccess(profile: SecretProfile): SecretClass;
 export const SECRET_LOCK: Readonly<{ title: string; tag: string; lines: readonly string[]; pricing: string; pricingLabel: string }>;
+export const SECRET_REMOTE_HINT: string;
 export const SECRET_LIFETIME_HINT: string;

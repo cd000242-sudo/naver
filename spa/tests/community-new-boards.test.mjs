@@ -68,8 +68,11 @@ test('the lock screen: the two lines, the lifetime line and [가격 보기] to /
     const words = text(html);
     assert.match(words, /시크릿 클래스/);
     assert.match(words, /올인원 1년 이상 이용자 전용/);
-    assert.match(words, /리더남이 제목과 본문을 직접 보고 피드백을 드립니다/);
-    assert.match(words, /영구제 이용자는 1대1 원격으로 같이 봐 드립니다/);
+    // 2026-11-25 owner: diagnosis + direction and keywords; 1:1 remote from a one-year 올인원; lifetime = meeting in person
+    assert.match(words, /리더남이 블로그를 진단하고 방향성과 키워드를 피드백해 드립니다/);
+    assert.match(words, /1대1 원격도 올인원 1년 이상부터 가능합니다/);
+    assert.match(words, /영구제 이용자는 직접 만나서 오프라인으로 꼼꼼하게 봐 드립니다/);
+    assert.doesNotMatch(words, /영구제 이용자는 1대1 원격/);
     assert.match(html, /<a[^>]*href="\/pricing"[^>]*>가격 보기<\/a>/);
 });
 
@@ -102,11 +105,13 @@ test('the side card of an associate points to 등업신청', () => {
     assert.match(html, /href="\/community\?board=levelup"[^>]*>[^<]*등업 신청하러 가기/);
 });
 
-test('write form on 시크릿 클래스: the 1:1 line for a lifetime member only', () => {
+test('write form on 시크릿 클래스: the 1:1 remote line for every member, the in-person line for a lifetime member only', () => {
     const boards = model().boardList(null);
     const base = { boards, defaultBoard: 'secret', onDone() {}, onCancel() {} };
     const life = render('../../src/components/community/PostWriteForm.tsx', { ...base, profile: profile({ secretClass: { allowed: true, lifetime: true } }) });
     assert.match(text(life), /1대1 원격을 원하시면 글에 적어 주세요/);
+    assert.match(text(life), /직접 만나서 보길 원하시면 글에 적어 주세요/);
     const year = render('../../src/components/community/PostWriteForm.tsx', { ...base, profile: profile({ secretClass: { allowed: true, lifetime: false } }) });
-    assert.doesNotMatch(text(year), /1대1 원격/);
+    assert.match(text(year), /1대1 원격을 원하시면 글에 적어 주세요/);
+    assert.doesNotMatch(text(year), /직접 만나서/);
 });

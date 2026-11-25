@@ -8,7 +8,7 @@ import type { CommunityProfile } from '../../lib/communitySession';
 import { forgetThumbs } from '../../lib/communityThumbFetch';
 import { buildThumb } from '../../lib/communityThumbMake';
 import LevelUpCard from './LevelUpCard';
-import { GREETING_BOARD, SECRET_BOARD, SECRET_LIFETIME_HINT, secretAccess } from '../../lib/communitySecret.mjs';
+import { GREETING_BOARD, SECRET_BOARD, SECRET_LIFETIME_HINT, SECRET_REMOTE_HINT, secretAccess } from '../../lib/communitySecret.mjs';
 import NicknameForm from './NicknameForm';
 import PromoFields, { usePromoDraft } from './PromoFields';
 import RichEditor, { type RichEditorHandle } from './RichEditor';
@@ -146,6 +146,7 @@ function PostWriteForm({ boards, defaultBoard, defaultPlatform, profile, onDone,
             )}
             {isAssociate(profile) && !editing ? <p className="au-help">준회원은 가입인사 게시판에 인사 1개를 쓸 수 있어요.</p> : null}
             {boardId === SECRET_BOARD ? <p className="au-help">사진 없이 글로만 올려 주세요.</p> : null}
+            {boardId === SECRET_BOARD ? <p className="au-help cm-secret-life">{SECRET_REMOTE_HINT}</p> : null}
             {boardId === SECRET_BOARD && secretAccess(profile).lifetime ? <p className="au-help cm-secret-life">{SECRET_LIFETIME_HINT}</p> : null}
             {board && !editing && !isAssociate(profile) && board.dailyLimit > 0 ? <p className="au-help">하루에 {board.dailyLimit}개까지 올릴 수 있어요.</p> : null}
             {error ? <p className="lp-error" role="alert">{error}</p> : null}

@@ -29,12 +29,16 @@ export const SECRET_LOCK = Object.freeze({
     title: '시크릿 클래스',
     tag: '올인원 1년 이상 이용자 전용',
     lines: Object.freeze([
-        '본인 블로그를 올려 주시면 리더남이 제목과 본문을 직접 보고 피드백을 드립니다',
-        '영구제 이용자는 1대1 원격으로 같이 봐 드립니다',
+        '본인 블로그를 올려 주시면 리더남이 블로그를 진단하고 방향성과 키워드를 피드백해 드립니다',
+        '1대1 원격도 올인원 1년 이상부터 가능합니다',
+        '영구제 이용자는 직접 만나서 오프라인으로 꼼꼼하게 봐 드립니다',
     ]),
     pricing: '/pricing',
     pricingLabel: '가격 보기',
 });
 
-/** The extra line of the write form on the secret board for a lifetime member. */
-export const SECRET_LIFETIME_HINT = '1대1 원격을 원하시면 글에 적어 주세요';
+/** The line of the write form on the secret board for every member (1:1 remote starts at a one-year 올인원, 2026-11-25). */
+export const SECRET_REMOTE_HINT = '1대1 원격을 원하시면 글에 적어 주세요';
+
+/** The extra line for a lifetime member: the owner meets them in person. */
+export const SECRET_LIFETIME_HINT = '직접 만나서 보길 원하시면 글에 적어 주세요';
