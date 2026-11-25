@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T18:32:42.649Z",
+ "builtAt": "2026-11-25T18:42:45.318Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 3,
+   "articles90": 11,
+   "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-25T17:10:00.000Z",
+   "firstArticleAt": "2026-11-25T17:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,10 +47,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 4,
+   "articles90": 9,
+   "recent20": 2,
    "press": 7,
-   "firstArticleAt": "2026-11-25T17:10:00.000Z",
+   "firstArticleAt": "2026-11-25T17:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
