@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T17:22:20.094Z",
+ "builtAt": "2026-11-25T17:32:22.771Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 34,
+   "articles90": 30,
    "recent20": 2,
-   "press": 24,
-   "firstArticleAt": "2026-11-25T15:53:00.000Z",
+   "press": 20,
+   "firstArticleAt": "2026-11-25T16:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 과잉생산 관세 15% 상한 유지…정부 “대미 무역흑자 압박에도 선방...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-25T17:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207355?sid=101"
+    },
     {
      "title": "美 301조 조사 한 숨 돌린 韓…산업장관 \"흑자 늘어 부담, 15% 방어 선방...",
      "press": "ajunews.com",
@@ -33,19 +39,45 @@
      "press": "ajunews.com",
      "publishedAt": "2026-11-25T17:10:00.000Z",
      "link": "https://www.ajunews.com/view/20261126020513790"
+    }
+   ]
+  },
+  {
+   "keyword": "가능한 사랑, 전도연 여우주연상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-25T16:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "청룡영화상 최우수작품상에 나홍진 '호프'… 주연상에는 설경구·전도연",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-25T16:54:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=562222"
     },
     {
-     "title": "美무역대표, 韓 과잉생산 관세 근거로 정부지원·인프라계획 지목(종합...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T17:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009310588?sid=104"
+     "title": "[TOP영상] 전도연·신민아·문가영·조여정 등, 여신들의 등장! 드레스 ...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T16:24:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286345"
+    },
+    {
+     "title": "'청룡영화상' 나홍진 '호프' 최우수작품상…'가능한 사랑' 4관왕[종합]",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-25T16:20:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305782"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1505,
+  "flagged": 1506,
   "matched": 768,
   "avgLeadMin": 500,
   "recent": [
