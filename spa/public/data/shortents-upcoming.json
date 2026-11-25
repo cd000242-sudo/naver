@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T20:03:11.012Z",
+ "builtAt": "2026-11-25T20:13:13.639Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,45 +15,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 6,
-   "press": 10,
-   "firstArticleAt": "2026-11-25T18:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘일장황몽’ 코스피… 관세까지 덮친다",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-25T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703233?sid=101"
-    },
-    {
-     "title": "산업장관 \"美 과잉생산 관세 15% 유지 선방…디지털 규제에 만반의 준비...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014345679?sid=101"
-    },
-    {
-     "title": "美 한국 과잉생산 보고서에 뜬금없이 태국…'복붙' 정황",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T19:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014345654?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "관세 15% 유지",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
+   "articles90": 12,
    "recent20": 4,
-   "press": 9,
+   "press": 11,
    "firstArticleAt": "2026-11-25T18:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美, 과잉생산 관세 추가…15% 상한은 유지",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T20:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929962?sid=104"
+    },
     {
      "title": "‘일장황몽’ 코스피… 관세까지 덮친다",
      "press": "seoul.co.kr",
@@ -65,21 +39,15 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-25T20:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014345679?sid=101"
-    },
-    {
-     "title": "美 '과잉생산 관세' 한국 상한 15% 유지",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-25T19:46:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466659"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1506,
-  "matched": 766,
-  "avgLeadMin": 501,
+  "flagged": 1504,
+  "matched": 764,
+  "avgLeadMin": 502,
   "recent": [
    {
     "keyword": "도로공사 6연승 선두 질주",
