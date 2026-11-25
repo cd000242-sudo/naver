@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T00:49:32.881Z",
+ "builtAt": "2026-11-25T00:59:36.584Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "김종철 경찰청장 첫 현장행보",
@@ -16,7 +16,7 @@
     "nate"
    ],
    "articles90": 24,
-   "recent20": 4,
+   "recent20": 3,
    "press": 15,
    "firstArticleAt": "2026-11-25T00:00:00.000Z",
    "exclusive": false,
@@ -38,7 +38,39 @@
      "title": "김종철 경찰청장, 취임 후 첫 행보로 영등포역 일대 도보 순찰",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-25T00:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461887?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/001/0016461886?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "윤하정 결혼식 민폐 하객",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 10,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-24T23:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이관희·유시은 사과문 속 반전 전말…다시 끄집어낸 윤하정도 비판 화...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-25T00:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001283277"
+    },
+    {
+     "title": "이관희·유시은, 결혼식 '민폐 하객 논란' 일파만파→\"경솔했다\" 사과",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T00:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009308570"
+    },
+    {
+     "title": "이관희♥유시은, 민폐 하객 논란 사과…\"버진로드 걸은 건 무지·경솔\"",
+     "press": "ent.sbs.co.kr",
+     "publishedAt": "2026-11-25T00:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/416/0000328280"
     }
    ]
   },
@@ -48,10 +80,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T00:04:00.000Z",
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-25T00:14:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
@@ -80,13 +112,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-24T23:20:00.000Z",
+   "firstArticleAt": "2026-11-24T23:31:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "새해 첫날도 스테이와…스트레이 키즈, 고척돔 스페셜 공연",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-25T00:53:00.000Z",
+     "link": "https://m.entertain.naver.com/article/030/0003489468"
+    },
     {
      "title": "1월 1일부터 고척돔 스테이! 스트레이 키즈 스페셜 공연 개최",
      "press": "sports.donga.com",
@@ -98,12 +136,6 @@
      "press": "nc.press",
      "publishedAt": "2026-11-25T00:22:00.000Z",
      "link": "https://www.nc.press/news/articleView.html?idxno=631844"
-    },
-    {
-     "title": "스트레이 키즈, 2027년 첫 행보는 고척돔…콘서트로 팬들과 새해맞이",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-25T00:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001148180"
     }
    ]
   },
@@ -112,10 +144,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T23:26:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-24T23:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -202,11 +234,43 @@
      "link": "https://www.peoplewatch.co.kr/article/view/ppw202611250002"
     }
    ]
+  },
+  {
+   "keyword": "온도",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T00:10:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "與, 범여권 조희대 공동 탄핵 추진단 논의…협의방식엔 온도차",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T00:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009308589?sid=100"
+    },
+    {
+     "title": "[오늘 날씨] 영하권 강추위...강풍에 체감온도 뚝",
+     "press": "newspost.kr",
+     "publishedAt": "2026-11-25T00:26:00.000Z",
+     "link": "https://www.newspost.kr/news/articleView.html?idxno=227752"
+    },
+    {
+     "title": "\"오늘도 춥다\" 영하권 출발...찬 바람에 체감온도 뚝",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-25T00:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122136?sid=103"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1366,
+  "flagged": 1367,
   "matched": 709,
   "avgLeadMin": 501,
   "recent": [
