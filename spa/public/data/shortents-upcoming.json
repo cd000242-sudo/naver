@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T03:47:38.808Z",
+ "builtAt": "2026-11-25T03:57:42.043Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 56,
-   "recent20": 5,
-   "press": 55,
-   "firstArticleAt": "2026-11-25T02:18:00.000Z",
+   "articles90": 47,
+   "recent20": 8,
+   "press": 46,
+   "firstArticleAt": "2026-11-25T02:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "노소영, 최태원 화해권고 요청에 부동의…\"조기 해결 원하면 상고 취하...",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-25T03:46:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95910"
+     "title": "노소영 측 \"최태원, 상고취하하라\"…화해권고 거부",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T03:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929756?sid=102"
     },
     {
-     "title": "노소영 아트센터 나비 관장, 최태원 SK그룹 회장 화해권고 요청 거부",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-25T03:44:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244154"
+     "title": "노소영 \"최태원 화해권고 요청 동의 못 해…즉시 상고 취하해야\"",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-25T03:54:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261125508804?OutUrl=naver"
     },
     {
-     "title": "\"진정성 있다면 상고 취하하라\" … 노소영, 최태원 화해권고 요청 거부",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-25T03:40:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/25/2026112550157.html"
+     "title": "노소영, 최태원 화해권고 요청 거부…\"진정성 있다면 상고 취하하길\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-25T03:50:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=173061"
     }
    ]
   },
   {
-   "keyword": "CJ프레시웨이 고객유인 혐의",
+   "keyword": "CJ프레시웨이 심의",
    "sources": [
     "daum"
    ],
-   "articles90": 36,
-   "recent20": 2,
-   "press": 32,
+   "articles90": 41,
+   "recent20": 5,
+   "press": 38,
    "firstArticleAt": "2026-11-25T03:00:00.000Z",
-   "exclusive": true,
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "공정위, CJ프레시웨이 '부당 고객유인' 제재 심의 착수",
-     "press": "foodnews.co.kr",
-     "publishedAt": "2026-11-25T03:40:00.000Z",
-     "link": "http://www.foodnews.co.kr/news/articleView.html?idxno=121140"
+     "title": "공정위, CJ프레시웨이 '기부금 영업' 제재 착수…사측 \"부당 유인 사실...",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-25T03:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000555405?sid=101"
     },
     {
-     "title": "CJ프레시웨이, 공정위 '부당 고객유인' 판단 정면 반박",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-25T03:28:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=154619"
+     "title": "공정위 \"CJ프레시웨이, 기부금·상품권으로 고객 유인\"...CJ \"납품 대가 ...",
+     "press": "kdfnews.com",
+     "publishedAt": "2026-11-25T03:56:00.000Z",
+     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191418"
     },
     {
-     "title": "\"식자재 납품하려고 복지시설에 기부금\"…공정위, CJ프레시웨이 제재",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-25T03:26:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784693"
+     "title": "CJ프레시웨이, 부당 고객 유인 혐의로 공정위 심의-과징금 최대 200억원...",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-25T03:52:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95911"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 39,
-   "recent20": 1,
-   "press": 32,
-   "firstArticleAt": "2026-11-25T02:20:00.000Z",
+   "articles90": 34,
+   "recent20": 2,
+   "press": 30,
+   "firstArticleAt": "2026-11-25T02:28:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "민주당 김민석 '조희대 탄핵' 신속 추진 위한 5당 연대 제안, \"완전한 내...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-25T03:48:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452881"
+    },
     {
      "title": "與, 진보 4당과 '曺탄핵' 연대 속도전…혁신당 \"일정 先확정\" 압박",
      "press": "slist.kr",
@@ -97,12 +103,6 @@
      "press": "asiatime.co.kr",
      "publishedAt": "2026-11-25T03:22:00.000Z",
      "link": "https://www.asiatime.co.kr/article/20261125500191"
-    },
-    {
-     "title": "민주당 “5당, 조희대 탄핵 공동대응 일치”",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-25T03:18:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239922"
     }
    ]
   },
@@ -111,13 +111,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 42,
-   "recent20": 0,
-   "press": 20,
-   "firstArticleAt": "2026-11-25T02:20:00.000Z",
+   "articles90": 34,
+   "recent20": 1,
+   "press": 19,
+   "firstArticleAt": "2026-11-25T02:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[포토] 양대노총 \"법으로 보장하는 65세 정년 연장이어야\"",
+     "press": "ilyosisa.co.kr",
+     "publishedAt": "2026-11-25T03:52:00.000Z",
+     "link": "https://www.ilyosisa.co.kr/news/article.html?no=259189"
+    },
     {
      "title": "[포토] 양대노총 '65세 정년연장 당장 입법하라!'",
      "press": "asiatoday.co.kr",
@@ -129,12 +135,6 @@
      "press": "newscj.com",
      "publishedAt": "2026-11-25T03:20:00.000Z",
      "link": "https://www.newscj.com/news/articleView.html?idxno=3451959"
-    },
-    {
-     "title": "[포토] 65세 법정 정년연장 연내 입법 처리 촉구하는 양대노총",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-25T03:20:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261125010009804"
     }
    ]
   },
@@ -144,30 +144,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 0,
-   "press": 17,
-   "firstArticleAt": "2026-11-25T02:18:00.000Z",
+   "articles90": 16,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-25T02:31:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "김민석, ‘조희대 탄핵’ 5당 연대 공식 제안…조국혁신당 “환영”",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-25T03:22:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261125500191"
+     "title": "최민희 징계, 김민석도 심판받나",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T03:52:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285779"
+    },
+    {
+     "title": "민주당 최고위서 또 신천지 공방…친청계, 재차 '김민석 징계' 요구",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-25T03:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002467462?sid=100"
     },
     {
      "title": "\"김민석 대표님, 우리 만납시다!\" 홈플러스 노동자들 민주당사 앞 노숙...",
      "press": "worknworld.kctu.org",
      "publishedAt": "2026-11-25T03:22:00.000Z",
      "link": "http://worknworld.kctu.org/news/articleView.html?idxno=510380"
-    },
-    {
-     "title": "이성윤 \"취임100일 김민석, 최민희보다 먼저 징계심의해야\" 박선원 사과",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-25T03:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138931?sid=100"
     }
    ]
   },
@@ -176,13 +176,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 2,
+   "articles90": 17,
+   "recent20": 1,
    "press": 13,
    "firstArticleAt": "2026-11-25T02:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "안방극장 달군 '신병', 스크린으로… 호러 코미디로 돌아온 '신병 더 무...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-25T03:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000967657"
+    },
     {
      "title": "‘신병’ 세계관에 트와이스 ‘충돌’‥유정연, 칼각 경례로 배우 데뷔...",
      "press": "newsen.com",
@@ -194,12 +200,6 @@
      "press": "mhnse.com",
      "publishedAt": "2026-11-25T03:30:00.000Z",
      "link": "https://m.entertain.naver.com/article/445/0000493082"
-    },
-    {
-     "title": "‘신병: 더 무비’, 군병원 괴담 들고 연말 스크린 승부수…류경수 합류...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-25T03:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543402"
     }
    ]
   },
@@ -209,10 +209,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 9,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T02:20:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-25T02:34:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -237,34 +237,34 @@
    ]
   },
   {
-   "keyword": "인천 보복살인 송치",
+   "keyword": "퇴장하는 최민희 최고위원",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T02:21:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T02:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "옛 연인 둔기로 살해한 60대 남성...보복살인 혐의로 송치",
-     "press": "kihoilbo.co.kr",
-     "publishedAt": "2026-11-25T02:40:00.000Z",
-     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3042053"
+     "title": "최민희 징계, 김민석도 심판받나",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T03:52:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285779"
     },
     {
-     "title": "접근금지 풀린 전 연인 살해한 60대…경찰, 보복살인죄 적용",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T02:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009309050?sid=102"
+     "title": "최민희·박선원, 또 최고위 퇴장… 중진 15명 내일 회동",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-25T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835444?sid=100"
     },
     {
-     "title": "전 연인 살해 60대, 스토킹 송치 통보 받고 범행… 보복살인죄 적용",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-25T02:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967627?sid=102"
+     "title": "친청계, 최민희 징계 앞두고 '신천지' 공세 지속...\"결자해지\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-25T02:54:00.000Z",
+     "link": "https://www.ajunews.com/view/20261125112729034"
     }
    ]
   },
@@ -351,23 +351,55 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014344225?sid=100"
     },
     {
-     "title": "인사 나누는 조국 연구원장-신장식 대표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T02:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014344170?sid=100"
-    },
-    {
      "title": "토론회 입장하는 조국 혁신정책연구원장",
      "press": "newsis.com",
      "publishedAt": "2026-11-25T02:56:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014344161?sid=100"
+    },
+    {
+     "title": "토론회 기념촬영하는 조국 연구원장",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T02:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014344159?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "양홍원 이혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-25T02:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'절친' 양홍원 이혼 소식 전해진 날…스윙스 \"내일 청룡 가는데\" 엇갈린...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-25T03:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083755"
+    },
+    {
+     "title": "양홍원 저격→악플 받은 변호사, 한 달 만 밝혀진 원현주와 접점…\"실제...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-25T02:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409517"
+    },
+    {
+     "title": "'이혼 엔딩' 양홍원, 2세 딸 얼굴도 공개해놓고…50만 유튜브 '육아일기...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-25T02:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083722"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1364,
+  "flagged": 1367,
   "matched": 713,
   "avgLeadMin": 476,
   "recent": [
