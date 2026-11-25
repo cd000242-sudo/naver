@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T18:12:35.999Z",
+ "builtAt": "2026-11-25T18:22:39.799Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 2,
+   "articles90": 16,
+   "recent20": 3,
    "press": 12,
-   "firstArticleAt": "2026-11-25T16:44:00.000Z",
+   "firstArticleAt": "2026-11-25T16:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[이슈체크] 역대급 대미흑자 관세 부메랑 피했다…15% 사수에 일단 안도",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-25T18:20:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=209229"
+    },
+    {
+     "title": "미국, 과잉 생산 대응 관세 제안…중국산에는 20% 추가",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-25T18:12:00.000Z",
+     "link": "https://www.tokenpost.kr/news/economy/444434"
+    },
     {
      "title": "다시 시작된 '트럼프 관세' 드라이브.. 美 민주당 막아설 가능성은[이상...",
      "press": "hankyung.com",
      "publishedAt": "2026-11-25T18:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005358335?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "관세 15% 유지",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-25T16:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[이슈체크] 역대급 대미흑자 관세 부메랑 피했다…15% 사수에 일단 안도",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-25T18:20:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=209229"
     },
     {
-     "title": "미 USTR, 과잉생산 관세 발표…韓 15% 상한 유지",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-25T18:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273994?sid=101"
+     "title": "유럽증시, 미 금리 인상·관세 재부각에 1% 하락… 은행·기술주 동반 약...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T18:14:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261126000029"
     },
     {
-     "title": "EU, 미국 ‘과잉생산 관세’ 반발…15% 상한 준수 촉구",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-25T17:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301366?sid=104"
+     "title": "다시 시작된 '트럼프 관세' 드라이브.. 美 민주당 막아설 가능성은[이상...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-25T18:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358335?sid=104"
     }
    ]
   },
