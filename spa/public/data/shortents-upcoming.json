@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T04:37:57.708Z",
+ "builtAt": "2026-11-25T04:48:04.427Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,143 +11,176 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "CJ프레시웨이 부당 고객유인",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 26,
-   "recent20": 7,
-   "press": 26,
-   "firstArticleAt": "2026-11-25T03:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "CJ프레시웨이, 공정위 판단에 반론…\"기부금과 정상적인 영업활동 구분...",
-     "press": "hinews.co.kr",
-     "publishedAt": "2026-11-25T04:36:00.000Z",
-     "link": "https://www.hinews.co.kr/view.php?ud=202611251333541759cd8b879b3c_48"
-    },
-    {
-     "title": "CJ프레시웨이, 부당 고객유인 혐의로 공정위 심의…\"사실 아냐\" 반박",
-     "press": "socialvalue.kr",
-     "publishedAt": "2026-11-25T04:30:00.000Z",
-     "link": "https://www.socialvalue.kr/news/view/1065587260009378"
-    },
-    {
-     "title": "공정위 '부당 고객유인 혐의'로 CJ프레시웨이 심의 절차 개시, 회사 \"사...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-25T04:30:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452890"
-    }
-   ]
-  },
-  {
    "keyword": "반도체",
    "sources": [
     "google"
    ],
-   "articles90": 19,
-   "recent20": 13,
-   "press": 15,
-   "firstArticleAt": "2026-11-25T04:06:00.000Z",
-   "exclusive": true,
+   "articles90": 24,
+   "recent20": 18,
+   "press": 20,
+   "firstArticleAt": "2026-11-25T04:19:00.000Z",
+   "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "서울반도체, RGB 백라이트 '와이콥 픽셀' 양산",
-     "press": "thelec.kr",
-     "publishedAt": "2026-11-25T04:36:00.000Z",
-     "link": "https://www.thelec.kr/news/articleView.html?idxno=65881"
+     "title": "최상위권 어디 썼나 보니…반도체 '인기'·의대 '주춤'",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-25T04:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979800?sid=102"
     },
     {
-     "title": "10월에만 45만명 거주지 이동…반도체 밀집 ‘이 지역’ 향했다",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-25T04:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061069?sid=101"
+     "title": "서울반도체, OLED보다 3배 밝은 LCD 광원 양산",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-25T04:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005768702?sid=101"
     },
     {
-     "title": "중견기업 수출, 반도체·바이오 호조에 2개 분기 연속 역대 최대",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-25T04:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609540?sid=101"
+     "title": "[공시]대성하이텍, 중국서 225억원 규모 반도체 장비 수주",
+     "press": "finomy.com",
+     "publishedAt": "2026-11-25T04:42:00.000Z",
+     "link": "http://www.finomy.com/news/articleView.html?idxno=267861"
     }
    ]
   },
   {
-   "keyword": "현대모비스 유럽 수주",
+   "keyword": "유정연의 스크린 데뷔",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-25T03:10:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-25T03:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "현대모비스, 유럽·북미서 대규모 부품 수주...올해 해외수주 20조원 전...",
-     "press": "newslock.co.kr",
-     "publishedAt": "2026-11-25T04:32:00.000Z",
-     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=140918"
+     "title": "유정연, 첫 스크린 데뷔",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T04:31:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125000771"
     },
     {
-     "title": "현대모비스, 올해 해외 수주 58% 증가 전망",
-     "press": "autotimes.co.kr",
-     "publishedAt": "2026-11-25T04:22:00.000Z",
-     "link": "http://autotimes.co.kr/detail.php?number=690118&thread=27"
+     "title": "\"여러 번 가위 눌려\"..'신병 더 무비', 류경수·정연 품고 스크린으로 [...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-25T04:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490008"
     },
     {
-     "title": "현대모비스, 해외수주 20조원 전망…제동·조향·섀시 '글로벌 영토 확...",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-25T04:12:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065585945295434"
+     "title": "시즌4까지 간 '신병', 이번엔 영화다…트와이스 정연 스크린 데뷔 [종합...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-25T04:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786110"
     }
    ]
   },
   {
-   "keyword": "정년연장",
+   "keyword": "채권",
    "sources": [
-    "daum"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 8,
+   "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-25T03:14:00.000Z",
+   "firstArticleAt": "2026-11-25T03:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "중소기업 83% \"정년연장보다 재고용 선호\"... 청년 채용 위축 우려 ↑",
-     "press": "chungnamilbo.co.kr",
-     "publishedAt": "2026-11-25T04:18:00.000Z",
-     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=922932"
+     "title": "다올자산운용, 현대차·삼성·LG 로봇 관련주 담는 채권혼합형 펀드 출...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-25T04:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609551?sid=101"
     },
     {
-     "title": "\"60대 베테랑 필요하긴 한데\"…정년 연장 대신 선택한 방법",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-25T04:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357969?sid=101"
+     "title": "\"채권도 이사하면 돈 된다\"…한화투자증권, 최대 50만원 지급",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-25T04:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159319?sid=101"
     },
     {
-     "title": "임금 삭감 없이 65세까지…충남도 공무직 정년 연장",
-     "press": "newsfreezone.co.kr",
-     "publishedAt": "2026-11-25T04:10:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=721275"
+     "title": "한은 점도표에 3.75%가 찍힌다면…채권시장 흔들 개수는",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-25T04:26:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2652797"
+    }
+   ]
+  },
+  {
+   "keyword": "65세 정년연장 입법 촉구",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T03:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김동명 위원장, “올해 안에 정년연장 입법 이뤄지지 않으면, 더 이상의...",
+     "press": "news.inochong.org",
+     "publishedAt": "2026-11-25T04:46:00.000Z",
+     "link": "http://news.inochong.org/detail.php?number=6701&thread=22r19"
+    },
+    {
+     "title": "[포토] 양대노총 \"법으로 보장하는 65세 정년 연장이어야\"",
+     "press": "ilyosisa.co.kr",
+     "publishedAt": "2026-11-25T03:52:00.000Z",
+     "link": "https://www.ilyosisa.co.kr/news/article.html?no=259189"
+    },
+    {
+     "title": "[이로운체크] 정년 65세, 어디까지 왔나...27일 특위 앞두고 '연장 방식...",
+     "press": "eroun.net",
+     "publishedAt": "2026-11-25T03:36:00.000Z",
+     "link": "https://www.eroun.net/news/articleView.html?idxno=96452"
+    }
+   ]
+  },
+  {
+   "keyword": "손정의 대구 방문",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T04:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "손정의 회장, ‘대구 선대 묘소’ 비공개 방문",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-25T04:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686003?sid=102"
+    },
+    {
+     "title": "손정의 소프트뱅크그룹 회장, 대구 조상 묘소 비공개 방문",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-25T04:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005768695?sid=100"
+    },
+    {
+     "title": "손정의 소프트뱅크 회장, 대구 선대 묘소 비공개 방문-내년 초 재방한 ...",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-25T04:00:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95912"
     }
    ]
   },
   {
    "keyword": "유정연 첫 영화 영광, 많이 부족해",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T03:15:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T03:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,106 +205,41 @@
    ]
   },
   {
-   "keyword": "채권",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T03:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"채권도 이사하면 돈 된다\"…한화투자증권, 최대 50만원 지급",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-25T04:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159319?sid=101"
-    },
-    {
-     "title": "한은 점도표에 3.75%가 찍힌다면…채권시장 흔들 개수는",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-25T04:26:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652797"
-    },
-    {
-     "title": "한화투자증권, 채권투자 비대면 이벤트...\"MZ세대 실질 혜택 이벤트에 ...",
-     "press": "thebigdata.co.kr",
-     "publishedAt": "2026-11-25T04:22:00.000Z",
-     "link": "https://www.thebigdata.co.kr/view.php?ud=202611251318343125d0a8833aad_23"
-    }
-   ]
-  },
-  {
-   "keyword": "장윤기 사건 징역 3년 구형",
+   "keyword": "서울시립미술관 첫 개인전 이슬기",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T03:50:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-25T03:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "공소청, '장윤기 사건' 부실 수사 경찰 팀장에 징역 3년 구형",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T04:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929764?sid=102"
-    },
-    {
-     "title": "'장윤기 부실수사' 전 강력팀장 징역 3년 구형",
-     "press": "newscj.com",
+     "title": "속담을 누비고 책에 스파게티를 꽂은 '요모조모 이슬기' 전",
+     "press": "newsfreezone.co.kr",
      "publishedAt": "2026-11-25T04:18:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451966"
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=721239"
     },
     {
-     "title": "공소청, ‘장윤기 사건 은폐 의혹’ 경찰에 징역 3 구형",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-25T04:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833875?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "나인 투 식스",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T03:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박민영, ‘나인 투 식스’ 시청률 공약 6.9%…육성재 “다 같이 OST나 듀...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-25T04:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190986"
+     "title": "속담은 이불이 되고 낙서는 벽화가 됐다…이슬기의 엉뚱발랄 미술",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T04:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014344350?sid=103"
     },
     {
-     "title": "박민영, ‘나인 투 식스’ 촬영장서 쓰러졌다 “육성재와 똑같은 질환”...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-25T03:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190976"
-    },
-    {
-     "title": "‘나인 투 식스’ 박민영, 사귄 지 100일 만에 공개 프러포즈…얼굴 감...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-25T03:58:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1177655"
+     "title": "이슬기 작가, 서울시립미술관 첫 개인전 '요모조모 이슬기'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T03:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014344285?sid=103"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1380,
+  "flagged": 1382,
   "matched": 719,
   "avgLeadMin": 472,
   "recent": [
