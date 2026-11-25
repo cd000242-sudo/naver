@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T22:44:01.627Z",
+ "builtAt": "2026-11-25T22:54:04.637Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 34,
-   "recent20": 10,
-   "press": 29,
-   "firstArticleAt": "2026-11-25T21:19:00.000Z",
+   "articles90": 33,
+   "recent20": 7,
+   "press": 28,
+   "firstArticleAt": "2026-11-25T21:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김정은, 핵시설 현지지도…“전술핵 다영역 활용화 주목해야”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-25T22:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301418?sid=100"
+    },
+    {
+     "title": "김정은, 핵시설 현지지도…\"전술핵 다영역 활용화 주목해야\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T22:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016464120?sid=100"
+    },
     {
      "title": "김정은, 핵시설 찾아 핵보유 재천명…지위 부정 땐 '선전포고'",
      "press": "ajunews.com",
      "publishedAt": "2026-11-25T22:42:00.000Z",
      "link": "https://www.ajunews.com/view/20261126070710882"
-    },
-    {
-     "title": "北김정은, 핵시설 현지지도…“전술핵무기 다영역에서 활용화 주목해야...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-25T22:40:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611260012"
-    },
-    {
-     "title": "김정은, 핵물질 기지·핵무기연구소 찾아 “전술핵 다영역 활용” 강조...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-25T22:40:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1177843"
     }
    ]
   },
@@ -49,30 +49,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 5,
-   "press": 14,
+   "articles90": 20,
+   "recent20": 4,
+   "press": 18,
    "firstArticleAt": "2026-11-25T21:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘3호골 아쉽다’ 이강인 ‘선발+57분 활약’ AT·마드리드, 비킹에 2-0 ...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-25T22:32:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/144/0001151755"
+     "title": "이강인 웃었고, 김민재 울었다",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-25T22:52:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650023.html"
     },
     {
-     "title": "'韓 축구 에이스' 이강인이 심상치 않다, 비킹전 조기 교체→10경기 연속...",
-     "press": "goal.com",
-     "publishedAt": "2026-11-25T22:30:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/216/0000143970"
+     "title": "[UCL] 아! 이강인, 슈퍼세이브에 막힌 왼발 슈팅...평점 7.4점",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T22:48:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261126000046"
     },
     {
-     "title": "'UCL 시즌 첫 골 불발, 키패스 2개' 이강인, 바이킹전 평점 7.2점",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-25T22:29:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/117/0004128180"
+     "title": "이강인 선발 출전·평점 7.2…아틀레티코, 비킹에 2-0 승리",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-25T22:44:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784891"
     }
    ]
   },
@@ -81,10 +81,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T21:20:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-25T21:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -109,17 +109,23 @@
    ]
   },
   {
-   "keyword": "호프 수상 나홍진 칸에서",
+   "keyword": "호프 최우수작품상 나홍진",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T22:01:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T21:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“칸에서 주시지” 청룡 작품상에 나홍진 ‘호프’…남녀주연상은 설경...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-25T22:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703320?sid=103"
+    },
     {
      "title": "‘호프’ 작품상…설경구, 청룡영화상 역대 최다 남우주연상",
      "press": "biz.heraldcorp.com",
@@ -131,53 +137,47 @@
      "press": "jasm.co.kr",
      "publishedAt": "2026-11-25T22:06:00.000Z",
      "link": "https://www.jasm.co.kr/news/view/326516/?sc=Naver"
-    },
-    {
-     "title": "'청룡영화상' 설경구·전도연 남녀주연상…'호프' 최우수작품상",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-25T22:04:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261126010010108"
     }
    ]
   },
   {
-   "keyword": "2026년 11월 26일 운세",
+   "keyword": "모두의카드 청소년 확대",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-25T21:36:00.000Z",
+   "firstArticleAt": "2026-11-25T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 2026년 11월 26일 목요일 띠별 운세… 닭띠 '대길' 개띠 '...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-25T22:12:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3084266"
+     "title": "다음달 1일부터 청소년도 ‘모두의카드’ 이용…대중교통비 20% 환급",
+     "press": "gosiweek.com",
+     "publishedAt": "2026-11-25T22:48:00.000Z",
+     "link": "https://www.gosiweek.com/article/1065566628850852"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 26일 띠별 운세",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-25T21:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490015?sid=103"
+     "title": "'모두의카드' 13세도 이용 가능…12월부터 확대",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-25T22:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405912?sid=102"
     },
     {
-     "title": "[오늘의 운세] 26일 목요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-25T21:36:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194720"
+     "title": "12월부터 13~18세 청소년도 ‘모두의카드’ 이용…교통비 환급 혜택 확대",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-25T21:30:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=202611251605241887dd55077bc2_18"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1490,
-  "matched": 748,
-  "avgLeadMin": 505,
+  "flagged": 1489,
+  "matched": 746,
+  "avgLeadMin": 506,
   "recent": [
    {
     "keyword": "김민재 뮌헨 1-1",
