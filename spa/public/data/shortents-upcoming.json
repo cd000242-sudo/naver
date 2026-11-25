@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T15:41:34.351Z",
+ "builtAt": "2026-11-25T15:51:38.734Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 13,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 40,
+   "articles90": 34,
    "recent20": 2,
-   "press": 31,
-   "firstArticleAt": "2026-11-25T14:14:00.000Z",
+   "press": 27,
+   "firstArticleAt": "2026-11-25T14:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -77,9 +77,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1508,
-  "matched": 772,
-  "avgLeadMin": 500,
+  "flagged": 1506,
+  "matched": 770,
+  "avgLeadMin": 499,
   "recent": [
    {
     "keyword": "도로공사 6연승 선두 질주",
