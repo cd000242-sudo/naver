@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T15:11:24.028Z",
+ "builtAt": "2026-11-25T15:21:27.982Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,46 +11,14 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "관세 15% 유지",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 68,
-   "recent20": 14,
-   "press": 47,
-   "firstArticleAt": "2026-11-25T13:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美, 14개 교역국에 과잉생산 관세 추진…韓 15% 상한 유지",
-     "press": "bloter.net",
-     "publishedAt": "2026-11-25T15:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/293/0000093832?sid=101"
-    },
-    {
-     "title": "미국 과잉생산 관세, 도대체 무슨 뜻인가",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T15:08:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286320"
-    },
-    {
-     "title": "美USTR, 14개 경제주체에 과잉생산 관세…韓 15% 상한 유지(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T15:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016463973?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 65,
-   "recent20": 14,
-   "press": 46,
-   "firstArticleAt": "2026-11-25T13:42:00.000Z",
+   "articles90": 57,
+   "recent20": 7,
+   "press": 40,
+   "firstArticleAt": "2026-11-25T13:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -67,10 +35,10 @@
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286320"
     },
     {
-     "title": "美USTR, 14개 경제주체에 과잉생산 관세…韓 15% 상한 유지(종합)",
-     "press": "yna.co.kr",
+     "title": "미, '과잉생산 관세' 예고…\"한국 15% 상한 유지\"",
+     "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-25T15:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016463973?sid=104"
+     "link": "https://n.news.naver.com/mnews/article/055/0001405860?sid=104"
     }
    ]
   },
@@ -109,8 +77,8 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1515,
-  "matched": 779,
+  "flagged": 1513,
+  "matched": 777,
   "avgLeadMin": 499,
   "recent": [
    {
