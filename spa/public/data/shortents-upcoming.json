@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T17:52:29.752Z",
+ "builtAt": "2026-11-25T18:02:32.684Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,42 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
+   "articles90": 19,
    "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-25T16:26:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-25T16:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "EU, 미국 ‘과잉생산 관세’ 반발…15% 상한 준수 촉구",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-25T17:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301366?sid=104"
+    },
+    {
+     "title": "美무역대표, '과잉생산 관세' 근거로 \"韓 정부지원·인프라계획\"",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-25T17:36:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=209228"
+    },
+    {
+     "title": "美 과잉생산 관세 15% 상한 유지…정부 “대미 무역흑자 압박에도 선방...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-25T17:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207355?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "관세 15% 유지",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-25T16:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -48,10 +80,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T16:28:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T16:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
