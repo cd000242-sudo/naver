@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T21:03:32.982Z",
+ "builtAt": "2026-11-25T21:13:35.747Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 8,
  "candidates": [
   {
    "keyword": "조희대 탄핵 추진 중",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T19:35:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-25T20:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -43,22 +43,22 @@
    ]
   },
   {
-   "keyword": "가능한 사랑 전도연 수상",
+   "keyword": "가능한 사랑 전도연 여우주연상",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
+   "articles90": 3,
+   "recent20": 0,
    "press": 2,
-   "firstArticleAt": "2026-11-25T20:40:00.000Z",
+   "firstArticleAt": "2026-11-25T20:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "손예진은 정해인, 현빈은 정려원..'빈진 부부', 청룡 수상 1년 후 [스타...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-25T21:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490295"
+     "title": "전도연 19년 만의 청룡…조여정·구교환도 수상",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-25T20:42:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611260007"
     },
     {
      "title": "'가능한 사랑' 청룡 4관왕…연기상 싹쓸이",
@@ -67,18 +67,18 @@
      "link": "https://www.bntnews.co.kr/article/view/bnt202611260006"
     },
     {
-     "title": "전도연 19년 만의 청룡…조여정·구교환도 수상",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-25T20:42:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611260007"
+     "title": "청룡영화상 작품상에 '호프'...주연상은 설경구·전도연",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T20:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438165?sid=103"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1504,
-  "matched": 764,
+  "flagged": 1502,
+  "matched": 763,
   "avgLeadMin": 504,
   "recent": [
    {
