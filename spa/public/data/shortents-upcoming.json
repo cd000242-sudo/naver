@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T17:12:16.425Z",
+ "builtAt": "2026-11-25T17:22:20.094Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 17,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 7,
+   "articles90": 34,
+   "recent20": 2,
    "press": 24,
    "firstArticleAt": "2026-11-25T15:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美, 과잉생산 관세 예고…외신 \"韓, 15% 안 넘을 듯\"",
+     "title": "美 301조 조사 한 숨 돌린 韓…산업장관 \"흑자 늘어 부담, 15% 방어 선방...",
      "press": "ajunews.com",
-     "publishedAt": "2026-11-25T17:10:00.000Z",
-     "link": "https://www.ajunews.com/view/20261126020513790"
+     "publishedAt": "2026-11-25T17:14:00.000Z",
+     "link": "https://www.ajunews.com/view/20261126020549791"
     },
-    {
-     "title": "美무역대표, 韓 과잉생산 관세 근거로 정부지원·인프라계획 지목(종합...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T17:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009310588?sid=104"
-    },
-    {
-     "title": "USTR \"한국과 협의 불만족스러울 경우 25%로 관세 인상\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T16:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438145?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "관세 15% 유지",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 31,
-   "recent20": 7,
-   "press": 21,
-   "firstArticleAt": "2026-11-25T15:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
     {
      "title": "美, 과잉생산 관세 예고…외신 \"韓, 15% 안 넘을 듯\"",
      "press": "ajunews.com",
@@ -65,44 +39,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-25T17:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009310588?sid=104"
-    },
-    {
-     "title": "USTR \"한국과 협의 불만족스러울 경우 25%로 관세 인상\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T16:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438145?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "선수",
-   "sources": [
-    "google"
-   ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T15:43:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "황당하네! 기차 시간 쫓겨 도핑 검사 거부한 테니스 선수, 4년 정지 위기...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-25T17:02:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/108/0003490287"
-    },
-    {
-     "title": "플라잉 니킥→상대 선수 사망…유럽이 충격에 빠졌는데→'12G 징계' 오워...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T17:00:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/311/0002084179"
-    },
-    {
-     "title": "\"나는 여자입니다\"…남자 의심받는 女 복서, 상대 선수 또 기권→성별 ...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-25T16:35:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/477/0000640964"
     }
    ]
   }
