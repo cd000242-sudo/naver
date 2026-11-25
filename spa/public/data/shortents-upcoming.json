@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T19:43:04.698Z",
+ "builtAt": "2026-11-25T19:53:08.011Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,44 +8,76 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T18:20:00.000Z",
+   "articles90": 10,
+   "recent20": 6,
+   "press": 9,
+   "firstArticleAt": "2026-11-25T18:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[美증시] 반도체, 엔비디아 급락지속에 또 휘청…관세 악재에 투자의견...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-25T19:38:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1140090"
+     "title": "美 관세 압박 속 조선업은 기회?…HD현대중공업·한화오션 협력 기대",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-25T19:52:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=508160"
     },
     {
-     "title": "美, 한국 관세 ‘15% 상한’ 일단 유지… “25%까지 높일수도” 압박",
-     "press": "donga.com",
-     "publishedAt": "2026-11-25T19:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765317?sid=104"
+     "title": "美 '과잉생산 관세' 한국 상한 15% 유지",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-25T19:46:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466659"
     },
     {
-     "title": "美, 관세 부과하며 호남 반도체 언급… “SK 등에 국내 생산 확대 ‘압...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-25T19:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011816?sid=104"
+     "title": "美, '韓과잉생산' 반도체·車 조준…'관세 25% 인상여지' 으름장",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T19:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016463997?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "15% 관세 유지",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 5,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T18:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 '과잉생산 관세' 한국 상한 15% 유지",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-25T19:46:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466659"
+    },
+    {
+     "title": "美, '韓과잉생산' 반도체·車 조준…'관세 25% 인상여지' 으름장",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T19:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016463997?sid=104"
+    },
+    {
+     "title": "김정관 \"최종적으로 관세율 15% 유지한다면 선방한 것\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T19:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438158?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1505,
+  "flagged": 1506,
   "matched": 766,
   "avgLeadMin": 501,
   "recent": [
