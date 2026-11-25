@@ -8,282 +8,11 @@
         {
           "id": "naver-1",
           "rank": 1,
-          "keyword": "관세 15% 유지 변형한 문장은 다음과 같습니다: 관세 15% 유지",
-          "title": "관세 15% 유지 변형한 문장은 다음과 같습니다: 관세 15% 유지",
-          "rawKeyword": "관세 15% 유지 변형한 문장은 다음과 같습니다: 관세 15% 유지",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 100,
-          "source": "naver",
-          "expansions": [
-            "관세청",
-            "관세계산기",
-            "관세청 통관번호",
-            "관세사",
-            "관세 기준",
-            "일본 관세 계산기",
-            "관세 계산",
-            "관세청 유니패스"
-          ],
-          "expansionSeed": "관세"
-        },
-        {
-          "id": "naver-2",
-          "rank": 2,
-          "keyword": "미국 10월 PCE 물가",
-          "title": "미국 10월 PCE 물가",
-          "rawKeyword": "미국 10월 PCE 물가",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "naver",
-          "expansions": [
-            "미국증시",
-            "미국 환율",
-            "미국시간",
-            "미국구글",
-            "미국 이란 전쟁",
-            "미국 중간선거",
-            "미국 이란",
-            "미국주식"
-          ],
-          "expansionSeed": "미국",
-          "insight": {
-            "titles": {
-              "seo": "미국 10월 PCE 물가 최신 이슈와 핵심 내용 정리",
-              "home": "미국 10월 PCE 물가, 美 PCE 물가 들썩… 12월 금리 인상 전망 굳어져 관련 확인할 점",
-              "topic": "미국 10월 PCE 물가",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "미국의 10월 개인소비지출(PCE) 물가 상승률이 전월보다 확대된 가운데 근원 물가 상승률은 2023년 이후 최고 수준으로 치솟았다. 물가 상승 압력이 지속되면서 미 연방준비제도(Fed·연준)가 다음 달 기준금리 인상할 것이라는 전망에도 힘이 실리고 있다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "미국 연방준비제도(Fed·연준)가 선호하는 물가 지표인 개인소비지출( PCE ) 가격지수의 10월 상승률이 5개월 만에 가장 높은 수준을 기록한 것으로 나타났다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.segye.com/newsView/20261126500202?OutUrl=naver",
-                "press": "세계일보"
-              },
-              {
-                "url": "https://www.sedaily.com/article/20119077?ref=naver",
-                "press": "서울경제"
-              }
-            ],
-            "images": [
-              "https://www.segye.com/content/image/2026/11/26/20261126500221.jpg"
-            ],
-            "press": [
-              "세계일보",
-              "서울경제"
-            ],
-            "headlines": [
-              "美 PCE 물가 들썩… 12월 금리 인상 전망 굳어져",
-              "美 10월 PCE 물가 3.8% 상승…힘 실리는 금리 인상론"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
-          }
-        },
-        {
-          "id": "naver-3",
-          "rank": 3,
-          "keyword": "가능한 사랑 전도연 여우주연상",
-          "title": "가능한 사랑 전도연 여우주연상",
-          "rawKeyword": "가능한 사랑 전도연 여우주연상",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 98,
-          "source": "naver",
-          "expansions": [
-            "가능한 사랑",
-            "영화 가능한 사랑",
-            "가능한 사랑 해석",
-            "가능한 사랑 수위",
-            "가능한 사랑 결말",
-            "가능한 사랑 줄거리",
-            "가능한 사랑 평점",
-            "가능한 사랑 조유리"
-          ],
-          "expansionSeed": "전도연",
-          "insight": {
-            "titles": {
-              "seo": "가능한 사랑 전도연 여우주연상 최신 이슈와 핵심 내용 정리",
-              "home": "가능한 사랑 전도연 여우주연상, 청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권 관련 확인할 점",
-              "topic": "가능한 사랑 전도연 여우주연상",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "(서울=연합뉴스) 박원희 기자 = 나홍진 감독의 '호프'가 올해 청룡영화상 최우수작품상의 영예를 안았다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "‘ 가능한 사랑 ’은 해고 노동자 부부를 연기한 배우 설경구와 전도연 이 남녀 주연상 을 가져갔으며, 다큐멘터리 감독 역의 배우 조여정이 여우 조연상을 차지했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261125187600005?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.chosun.com/culture-life/culture_general/2026/11/25/EUJITRT7J5FWRC6B7KRHJBJ3IQ/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
-                "press": "조선일보"
-              }
-            ],
-            "images": [
-              "https://img2.yna.co.kr/photo/yna/YH/2026/11/25/PYH2026112521750001300_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "조선일보"
-            ],
-            "headlines": [
-              "청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권",
-              "청룡영화 작품상에 ‘호프’... 주연상 은 설경구· 전도연"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
-          }
-        },
-        {
-          "id": "naver-4",
-          "rank": 4,
-          "keyword": "조희대 탄핵 추진 중",
-          "title": "조희대 탄핵 추진 중",
-          "rawKeyword": "조희대 탄핵 추진 중",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "naver",
-          "expansions": [
-            "조희대 탄핵",
-            "민주당 조희대 탄핵",
-            "조희대 대법원장",
-            "조희대 임기",
-            "조희대고향",
-            "조희대 직무정지",
-            "추진 뜻",
-            "추진하다"
-          ],
-          "expansionSeed": "조희대",
-          "insight": {
-            "titles": {
-              "seo": "조희대 탄핵 추진 중 최신 이슈와 핵심 내용 정리",
-              "home": "조희대 탄핵 추진 중, 창원지법 전체 판사회의 \"법관 탄핵 추진은 헌법가치 훼손\"(종합) 관련 확인할 점",
-              "topic": "조희대 탄핵 추진 중",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "대상 판사 69명 중 약 60명 참석…\"사법제도 근간 흔들어\" 강경 입장 여권이 조희대 대법원장 탄핵 을 추진 하는 상황에서 창원지방법원이 일선 법원 중 처음으로 사법부 독립이 보장돼야 한다는 강경한 입장을 표명했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "더불어민주당이 조희대 대법원장에 대한 탄핵 소추를 당론으로 추진 중 인 가운데, 경남 창원지법 판사들이 “사법권 독립과 권력분립이라는 헌법적 가치를 훼손하는 것”이라며 우려를 표명했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261125054551052?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.donga.com/news/Politics/article/all/20261125/135089573/2",
-                "press": "동아일보"
-              }
-            ],
-            "images": [
-              "https://img0.yna.co.kr/photo/yna/YH/2026/11/25/PYH2026112502510005200_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "동아일보"
-            ],
-            "headlines": [
-              "창원지법 전체 판사회의 \"법관 탄핵 추진은 헌법가치 훼손\"(종합)",
-              "판사들 ‘曺 탄핵 반대’ 첫 성명…창원지법 “재판독립 침해”"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
-          }
-        },
-        {
-          "id": "naver-5",
-          "rank": 5,
-          "keyword": "빗썸 해킹 추가 피해",
-          "title": "빗썸 해킹 추가 피해",
-          "rawKeyword": "빗썸 해킹 추가 피해",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 96,
-          "source": "naver",
-          "expansions": [
-            "빗썸 해킹",
-            "빗썸 이벤트",
-            "빗썸 출금방법",
-            "빗썸 출금제한",
-            "빗썸 비트코인",
-            "빗썸테더",
-            "빗썸 이더리움",
-            "빗썸 점검"
-          ],
-          "expansionSeed": "빗썸",
-          "insight": {
-            "titles": {
-              "seo": "빗썸 해킹 추가 피해, 7159명 넘겼고 유출 기간도 보름으로",
-              "home": "빗썸 해킹 추가 피해, 1시간인 줄 알았던 유출 기간이 보름으로",
-              "topic": "빗썸 해킹 추가 피해",
-              "topicGroup": "네이버 실시간 검색어",
-              "summary": "빗썸 사내 그룹웨어 해킹의 개인정보 유출 피해자가 7159명보다 늘었다. 유출 기간도 1시간에서 보름 이상으로 늘고 직장 정보까지 샜다.",
-              "aiTitled": true
-            },
-            "facts": [
-              {
-                "text": "(서울=연합뉴스) 박수현 기자 = 가상자산 거래소 빗썸에서 해킹으로 정보가 유출된 피해자가 당초 알려진 7천159명보다",
-                "sourceIndex": 0
-              },
-              {
-                "text": "국내 디지털자산(가상자산) 거래소 빗썸 이 지난달 발생한 사내 그룹웨어 해킹 사고와 관련해 추가 개인정보 유출 사실을 확인했다. 개인별 유출 항목은 다르며 구체적인 피해 규모는 공개되지 않았다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261125176100002?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.news1.kr/finance/blockchain-fintech/6366210",
-                "press": "뉴스1"
-              }
-            ],
-            "images": [
-              "https://img9.yna.co.kr/photo/yna/YH/2026/10/28/PYH2026102812140001300_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "뉴스1"
-            ],
-            "headlines": [
-              "빗썸, 해킹 피해 추가 확인…보름 동안 해킹 사실 몰랐다",
-              "빗썸 , 그룹웨어 해킹 후속 점검서 개인정보 추가 유출 확인"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
-          }
-        },
-        {
-          "id": "naver-6",
-          "rank": 6,
           "keyword": "한국투자저축은행 개인정보 유출",
           "title": "한국투자저축은행 개인정보 유출",
           "rawKeyword": "한국투자저축은행 개인정보 유출",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 95,
+          "priority": 100,
           "source": "naver",
           "expansions": [
             "개인정보유출",
@@ -341,13 +70,77 @@
           }
         },
         {
-          "id": "naver-7",
-          "rank": 7,
+          "id": "naver-2",
+          "rank": 2,
+          "keyword": "미국 과잉생산 관세 조사",
+          "title": "미국 과잉생산 관세 조사",
+          "rawKeyword": "미국 과잉생산 관세 조사",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "naver",
+          "expansions": [
+            "과잉생산 관세",
+            "미국증시",
+            "미국 환율",
+            "미국시간",
+            "미국구글",
+            "미국 이란 전쟁",
+            "미국 중간선거",
+            "미국 이란"
+          ],
+          "expansionSeed": "미국",
+          "insight": {
+            "titles": {
+              "seo": "미국 과잉생산 관세 조사, 16개 경제주체 이번주 결과 발표",
+              "home": "미국 과잉생산 관세, 한중일 포함 16곳... 이번주 결과 왜 주목받나",
+              "topic": "미국 과잉생산 관세 조사",
+              "topicGroup": "네이버 실시간 검색어",
+              "summary": "USTR이 이르면 이번주 과잉생산 관세 조사 결과를 발표할 전망이다. 한중일·EU 등 16개 경제주체의 보조금이 미국 기업 경쟁을 악화시켰다며 지난 3월 조사에 착수했다.",
+              "aiTitled": true
+            },
+            "facts": [
+              {
+                "text": "(워싱턴=연합뉴스) 백나리 특파원 = 미국이 한국을 포함해 14개 경제주체에 과잉생산을 문제 삼는 관세를 예고했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "미국 무역대표부(USTR)는 25일(현지시간) 무역법 301조에 따른 과잉생산 조사 결과를 발표하며 한국에 대한 관세 부담은 기존 한미 무역 합의에서 정한 15% 상한을 넘지 않도록 하겠다고 공식화했다. 다만 기존 약속을 이행하지 않을 경우 관세 율을 25%로 올릴 수 있다고 여지를 뒀다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261125185751071?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.newsis.com/view/NISX20261125_0003882180",
+                "press": "뉴시스"
+              }
+            ],
+            "images": [
+              "https://img1.yna.co.kr/etc/inner/KR/2026/11/25/AKR20261125185751071_01_i_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "뉴시스"
+            ],
+            "headlines": [
+              "美USTR, 14개 경제주체에 과잉생산 관세…韓 15% 상한 유지(종합)",
+              "수출 1조弗 시대, 美 관세 15% 상한 유지에 안도…디지털 규제는 '복병'"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "naver-3",
+          "rank": 3,
           "keyword": "나는 솔로",
           "title": "나는 솔로",
           "rawKeyword": "나는 솔로",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 94,
+          "priority": 98,
           "source": "naver",
           "expansions": [
             "나는 SOLO <나는 솔로>",
@@ -399,191 +192,441 @@
               "' 나는솔로 ' 34기 영수♥영숙, 8남매·8자매 공감대 통했나…티격태격하..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "naver-4",
+          "rank": 4,
+          "keyword": "가능한 사랑 전도연 주연상 수상",
+          "title": "가능한 사랑 전도연 주연상 수상",
+          "rawKeyword": "가능한 사랑 전도연 주연상 수상",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "naver",
+          "expansions": [
+            "전도연 여우주연상",
+            "가능한 사랑",
+            "영화 가능한 사랑",
+            "가능한 사랑 해석",
+            "가능한 사랑 수위",
+            "가능한 사랑 결말",
+            "가능한 사랑 줄거리",
+            "가능한 사랑 평점"
+          ],
+          "expansionSeed": "전도연",
+          "insight": {
+            "titles": {
+              "seo": "가능한 사랑 전도연 주연상 수상 최신 이슈와 핵심 내용 정리",
+              "home": "가능한 사랑 전도연 주연상 수상, 청룡영화 작품상에 ‘호프’... 주연상은 설경구·전도연 관련 확인할 점",
+              "topic": "가능한 사랑 전도연 주연상 수상",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "25일 개최된 제47회 청룡영화상에서 영화 호프가 최우수작품상을 받았으며, 가능한 사랑은 4관왕을 차지했다. 설경구와 전도연이 남녀 주연상을, 구교환과 조여정이 조연상을 수상했다. 고 안성기 배우에게는 공로상이 수여되었으며, 신인상과 음악상 등 주요",
+                "sourceIndex": 0
+              },
+              {
+                "text": "청룡영화상 최우수작품상에 나홍진 '호프'…' 가능한 사랑 ' 4관왕 석권",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.chosun.com/culture-life/culture_general/2026/11/25/EUJITRT7J5FWRC6B7KRHJBJ3IQ/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+                "press": "조선일보"
+              },
+              {
+                "url": "https://www.fnnews.com/news/202611260015548609",
+                "press": "파이낸셜뉴스"
+              }
+            ],
+            "images": [
+              "https://www.chosun.com/resizer/v2/OBGRW5D4KNBEVPGZYQHKBZJ4P4.jpg?auth=84133dd3ea5a9cfa20f5f4bbe228aba185a0d6411e078cb47a7d4b4a71e10dfe&width=1200&height=630&focal=1918,825"
+            ],
+            "press": [
+              "조선일보",
+              "파이낸셜뉴스"
+            ],
+            "headlines": [
+              "청룡영화 작품상에 ‘호프’... 주연상은 설경구·전도연",
+              "청룡영화상 최우수작품상에 나홍진 '호프'…' 가능한 사랑 ' 4관왕 석권"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "naver-5",
+          "rank": 5,
+          "keyword": "조희대 탄핵 논의 시작",
+          "title": "조희대 탄핵 논의 시작",
+          "rawKeyword": "조희대 탄핵 논의 시작",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "naver",
+          "expansions": [
+            "조희대 탄핵",
+            "민주당 조희대 탄핵",
+            "조희대 대법원장",
+            "조희대 임기",
+            "조희대고향",
+            "조희대 직무정지",
+            "시작스터디카페",
+            "평창 시작"
+          ],
+          "expansionSeed": "조희대",
+          "insight": {
+            "titles": {
+              "seo": "조희대 탄핵 논의 시작 최신 이슈와 핵심 내용 정리",
+              "home": "조희대 탄핵 논의 시작, “법관 탄핵은 헌법 훼손”… 전국 첫 판사 집단성명 관련 확인할 점",
+              "topic": "조희대 탄핵 논의 시작",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "창원지법 판사들이 25일 더불어민주당의 조희대 대법원장 탄핵소추 추진에 대해 “재판을 이유로 한 법관 탄핵 등 권력분립과 헌법질서를 위태롭게 하는 시도에 대해 깊은 우려를 표한다”는 입장을 냈다. 민주당이 조 대법원장 탄핵소추를 당론으로 채택한 이후 일선 법원 차원에서 나온 첫 공식 의견이다. 창원지법은 이날 전체 판사회의를 마친 뒤 “재판에 대한 정당한 비판은 존중돼야 하나, 그것이 법관의 신분에 대한 정치적 제재로 이어져서는 안 된다”는 공식 입장을 밝혔다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "민주당의 조희대 대법원장 탄핵 추진이 가시화되면서 법원은 들끓고 있습니다. 다음 달 4일에는 전국 법원장들이 한자리에 모일 예정인데 사법권 독립과 탄핵 에 대한 논의 가 진행될 수 있습니다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.segye.com/newsView/20261125516068?OutUrl=naver",
+                "press": "세계일보"
+              },
+              {
+                "url": "http://www.mbn.co.kr/pages/news/newsView.php?news_seq_no=5232936",
+                "press": "MBN"
+              }
+            ],
+            "images": [
+              "https://www.segye.com/content/image/2026/11/25/20261125516750.jpg"
+            ],
+            "press": [
+              "세계일보",
+              "MBN"
+            ],
+            "headlines": [
+              "“법관 탄핵은 헌법 훼손”… 전국 첫 판사 집단성명",
+              "[뉴스추적] ' 조희대 탄핵 ’에 다른 법원도 입장 낼까…30일 전국법관대..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "naver-6",
+          "rank": 6,
+          "keyword": "재혼 황후 이야기",
+          "title": "재혼 황후 이야기",
+          "rawKeyword": "재혼 황후 이야기",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "naver",
+          "expansions": [
+            "재혼황후",
+            "재혼황후 몇부작",
+            "재혼황후 웹툰",
+            "재혼황후 결말",
+            "재혼황후 ott",
+            "재혼황후 몇시",
+            "재혼황후 촬영지",
+            "재혼황후 캐스팅"
+          ],
+          "expansionSeed": "이야기",
+          "insight": {
+            "titles": {
+              "seo": "재혼 황후 이야기 최신 이슈와 핵심 내용 정리",
+              "home": "재혼 황후 이야기, Attention Required! 관련 확인할 점",
+              "topic": "재혼 황후 이야기",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(제공: 에이엠엔터테인먼트) 배우 신민아가 디즈니+ 오리지널 시리즈 ' 재혼 황후 '의 마지막 이야기 를 이끈다. 동명의 웹소설과 웹툰을 원작으로 한 ' 재혼 황후 '는 오늘(25일) 마지막 2개 에피소드 공개를 앞두고 있다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "‘ 재혼 황후 ’는 지난 20일 글로벌 OTT 순위 집계 사이트 플릭스패트롤 기준 디즈니+ TV쇼 부문 글로벌 종합 1위에 올랐다. 벌어지는 이야기 를 그린 로맨스 판타지다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.bntnews.co.kr/article/view/bnt202611250266",
+                "press": "bnt뉴스"
+              },
+              {
+                "url": "https://www.mk.co.kr/article/12218711",
+                "press": "매일경제"
+              }
+            ],
+            "images": [
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F5191%2F2026%2F11%2F25%2F537021.jpg&type=fface200_200&expire=2&refresh=true"
+            ],
+            "press": [
+              "bnt뉴스",
+              "매일경제"
+            ],
+            "headlines": [
+              "Attention Required!",
+              "이종석, ‘ 재혼 황후 ’로 증명한 안목"
+            ],
+            "extraction": "search-card",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "naver-7",
+          "rank": 7,
+          "keyword": "공공보건포털",
+          "title": "공공",
+          "rawKeyword": "공공",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "naver",
+          "expansions": [
+            "공공보건포털",
+            "공공데이터포털",
+            "공공기관 이전",
+            "서울시공공예약",
+            "공공의적",
+            "공공임대주택",
+            "대전 공공도서관",
+            "공공재"
+          ],
+          "expansionSeed": "공공",
+          "insight": {
+            "titles": {
+              "seo": "공공보건포털 최신 이슈와 핵심 내용 정리",
+              "home": "공공보건포털, 익산공공승마장, 마사회 '말 복지 인증시설' 지정 관련 확인할 점",
+              "topic": "공공보건포털",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(익산=연합뉴스) 김진방 기자 = 전북 익산시는 공공승마장이 한국마사회 주관 '2026년 말 복지 인증시설'로 지정됐다고 25일 밝혔다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "참여를 희망하는 청년은 청년일경험 포털 에 접속해 운영기관 ㈜제이비컴을 검색한 후 희망하는 기업 및 기관의 프로그램을 신청하면 된다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261125128600055?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.khan.co.kr/article/202611241135018",
+                "press": "경향신문"
+              }
+            ],
+            "images": [
+              "https://img7.yna.co.kr/etc/inner/KR/2026/11/25/AKR20261125128600055_01_i_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "경향신문"
+            ],
+            "headlines": [
+              "익산공공승마장, 마사회 '말 복지 인증시설' 지정",
+              "제이비컴, 청년일경험 지원사업 마지막 모집... 공공 기관·기업 현장 경험..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
           }
         },
         {
           "id": "naver-8",
           "rank": 8,
-          "keyword": "사과영양성분",
-          "title": "사과",
-          "rawKeyword": "사과",
+          "keyword": "네타냐후 부패 공소취하",
+          "title": "네타냐후 부패 공소취하",
+          "rawKeyword": "네타냐후 부패 공소취하",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 93,
           "source": "naver",
           "expansions": [
-            "사과영양성분",
-            "꿀사과",
-            "청송사과",
-            "사과유명한곳",
-            "사과낙과",
-            "사과영화",
-            "영화사과"
+            "네타냐후 실각",
+            "네타냐후 선거",
+            "베냐민 네타냐후",
+            "트럼프 네타냐후",
+            "네타냐후 임기",
+            "이스라엘 네타냐후",
+            "네타냐후뜻",
+            "네타냐후 전쟁"
           ],
-          "expansionSeed": "사과",
+          "expansionSeed": "네타냐후",
           "insight": {
             "titles": {
-              "seo": "사과영양성분 최신 이슈와 핵심 내용 정리",
-              "home": "사과영양성분, “사과를 전자레인지에 돌려 보세요”… 카페 갈 필요 없는 ‘고급 디저트’ 나옵니다 관련 확인할 점",
-              "topic": "사과영양성분",
+              "seo": "네타냐후 부패 공소취하 최신 이슈와 핵심 내용 정리",
+              "home": "네타냐후 부패 공소취하, 이스라엘 법원, 네타냐후 부패 핵심사건 공소취하 권고 관련 확인할 점",
+              "topic": "네타냐후 부패 공소취하",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "푸석해진 사과도 전자레인지를 활용하면 달콤한 간식으로 즐길 수 있다. 사과 한 개와 계피 가루, 설탕만 있으면 된다.",
+                "text": "이스라엘 법원이 베냐민 네타냐후 총리의 부패 혐의 재판과 관련해 검찰에 3건의 형사 사건 중 1건은 기소를 취하 하고 다른 1건은 재검토하라고 권고했다. 로이터통신에 따르면 예루살렘 지방법원 재판부는 25일(현지시간) 열린 심리에서 검찰에 이른바 '사건 4000'의 기소 취하 를 권고했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "식품 영양성분 자료에 따르면, 생 사과 100g을 껍질째 먹을 때 얻을 수 있는 식이섬유는 2.4g이지만 껍질을 제거한 과육에는 1.3g만 남는다. 껍질에 집중된 수용성 식이섬유 '펙틴'은 장내 유익균의 먹이 역할을 충실히 수행한다.",
+                "text": "검찰 총장 \"권고 검토…판결이나 적절한 합의로 마무리돼야\" 답변 김상훈 특파원 = 이스라엘 법원이 베냐민 네타냐후 총리의 부패 혐의 재판에서 가장 중대한 혐의에 대해 유죄 판결 가능성이 희박하다며 사실상 공소 취하 (기각)를 권고했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://health.chosun.com/site/data/html_dir/2026/11/13/2026111301968.html",
-                "press": "헬스조선"
+                "url": "https://www.news1.kr/world/middleeast-africa/6366303",
+                "press": "뉴스1"
               },
               {
-                "url": "https://www.nc.press/news/articleView.html?idxno=631209",
-                "press": "뉴스컬처"
+                "url": "https://www.yna.co.kr/view/AKR20261125178800079?input=1195m",
+                "press": "연합뉴스"
               }
             ],
             "images": [
-              "https://health.chosun.com/site/data/img_dir/2026/11/13/2026111301965_0.jpg"
+              "https://i3n.news1.kr/system/photos/2026/10/28/8184886/high.jpg"
             ],
             "press": [
-              "헬스조선",
-              "뉴스컬처"
+              "뉴스1",
+              "연합뉴스"
             ],
             "headlines": [
-              "“사과를 전자레인지에 돌려 보세요”… 카페 갈 필요 없는 ‘고급 디저트’ 나옵니다",
-              "[뉴컬웰니스] 껍질째 먹는 사과 … 장내 유익균 살리는 '펙틴' 효과"
+              "이스라엘 법원, 네타냐후 부패 핵심사건 공소취하 권고",
+              "네타냐후 부패 혐의 벗나…이스라엘 법원, 핵심사건 공소취하 권고"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
+            "collectedAt": "2026-11-25T22:09:24.040Z"
           }
         },
         {
           "id": "naver-9",
           "rank": 9,
-          "keyword": "김가영",
-          "title": "김가영",
-          "rawKeyword": "김가영",
+          "keyword": "에코프로비엠",
+          "title": "에코프로비엠",
+          "rawKeyword": "에코프로비엠",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 92,
           "source": "naver",
           "expansions": [
-            "김가영 당구선수",
-            "김가영 아나운서",
-            "리센느 김가영",
-            "김가영 기상캐스터",
-            "김가영 치어리더",
-            "당구 김가영",
-            "당구선수 김가영",
-            "김가영 당구"
+            "에코프로비엠 주가",
+            "에코프로비엠 전망",
+            "에코프로비엠 채용",
+            "에코프로비엠 유상증자",
+            "에코프로비엠 연봉",
+            "에코프로비엠 수주",
+            "에코프로비엠 헝가리",
+            "에코프로비엠 주가전망"
           ],
-          "expansionSeed": "김가영",
+          "expansionSeed": "에코프로비엠",
           "insight": {
             "titles": {
-              "seo": "김가영 최신 이슈와 핵심 내용 정리",
-              "home": "김가영, [ST포토] 김가영 '신중하게 초크칠' 관련 확인할 점",
-              "topic": "김가영",
+              "seo": "에코프로비엠 최신 이슈와 핵심 내용 정리",
+              "home": "에코프로비엠, \"위험 경고 여러 번 무시해\"…'4명 사상' 에코프로비엠 전 대표 집유 - 머니투데이 관련 확인할 점",
+              "topic": "에코프로비엠",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "이날 LPBA 16강 경기에서 김가영 이 샷을 하고있다. 휴온스 PBA-LPBA 챔피언십 경기가 25일 경기도 고양시 킨텍스 PBA스타디움에서 열렸다.",
+                "text": "\"위험 경고 여러 번 무시해\"…'4명 사상' 에코프로비엠 전 대표 집유 4명의 사상자가 발생한 에코프로비엠 공장 화재사고로 넘겨진 전 대표가 징역을 선고받았다. 사진은 화재 현장 모습./사진=뉴시스 4명의 사상자가 발생한 에코프로비엠(84,300원 ▼4,100 -4.64%) 공장 화재사고로 넘겨진 전 대표가 징역을 선고받았다. 25일 뉴시스에 따르면 청주지법 형사6단독 조진용 판사는 업무상과실치사와 산업안전보건법 위반 혐의로 불구속 기소된 에코프로비엠 전 대표 A씨에게 징역 1년에 집행유예 2년을 선고했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "이날 LPBA 16강 경기에서 승리한 김가영 이 인사를 하고있다. 휴온스 PBA-LPBA 챔피언십 경기가 25일 경기도 고양시 킨텍스 PBA스타디움에서 열렸다.",
+                "text": "에코프로비엠 이 유상증자로 확보한 실탄을 바탕으로 인도네시아 니켈 제련소 투자에 속도를 낸다. 전기차 캐즘(일시적 수요",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "http://www.stoo.com/article.php?aid=110080576572",
-                "press": "스포츠투데이"
+                "url": "https://www.mt.co.kr/society/2026/11/25/2026112518074672423",
+                "press": "머니투데이"
               },
               {
-                "url": "http://www.stoo.com/article.php?aid=110080413699",
-                "press": "스포츠투데이"
+                "url": "https://www.newsway.co.kr/news/view?ud=2026112417454488651",
+                "press": "뉴스웨이"
               }
             ],
             "images": [
-              "https://www.stoo.com/upimages/gisaimg/202611/25_1100805_76572.jpg"
+              "https://thumb.mt.co.kr/cdn-cgi/image/w=1200,h=797,fit=cover,bg=white,f=auto,quality=high,sharpen=2,g=face/21/2026/11/2026112518074672423_1.jpg"
             ],
             "press": [
-              "스포츠투데이"
+              "머니투데이",
+              "뉴스웨이"
             ],
             "headlines": [
-              "[ST포토] 김가영 '신중하게 초크칠'",
-              "[ST포토] 김가영 '기분좋은 8강 진출'"
+              "\"위험 경고 여러 번 무시해\"…'4명 사상' 에코프로비엠 전 대표 집유 - 머니투데이",
+              "유상증자 실탄 푸는 에코프로비엠 …인니 니켈 투자 가속"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
+            "collectedAt": "2026-11-25T22:09:24.040Z"
           }
         },
         {
           "id": "naver-10",
           "rank": 10,
-          "keyword": "윤이나",
-          "title": "윤이나",
-          "rawKeyword": "윤이나",
+          "keyword": "호재성 기사 주식 선행매매 과징금",
+          "title": "호재성 기사 주식 선행매매 과징금",
+          "rawKeyword": "호재성 기사 주식 선행매매 과징금",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 91,
           "source": "naver",
           "expansions": [
-            "윤이나 프로",
-            "윤이나 wtgl",
-            "윤이나 강백호",
-            "윤이나게",
-            "윤이나리",
-            "윤이나다",
-            "wtgl 윤이나",
-            "윤이난다"
+            "호재성 뜻",
+            "과징금 뜻",
+            "쿠팡 과징금",
+            "대상 과징금",
+            "kb증권 과징금",
+            "배민 과징금",
+            "배민 쿠팡 과징금",
+            "nh투자증권 과징금"
           ],
-          "expansionSeed": "윤이나",
+          "expansionSeed": "호재성",
           "insight": {
             "titles": {
-              "seo": "윤이나 최신 이슈와 핵심 내용 정리",
-              "home": "윤이나, 403 Forbidden 관련 확인할 점",
-              "topic": "윤이나",
+              "seo": "호재성 기사 주식 선행매매 과징금 최신 이슈와 핵심 내용 정리",
+              "home": "호재성 기사 주식 선행매매 과징금, ‘호재성 기사’ 이용 주식 선행매매…언론사 기자 등 과징금 50억 부과 관련 확인할 점",
+              "topic": "호재성 기사 주식 선행매매 과징금",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "윤이나 가 WTGL 데뷔전에서 맹활약하며 팀의 첫 승리를 이끌었다. 특히 장타와 정확한 아이언샷이 빛났다.",
+                "text": "금융당국이 호재성 기사 정보를 이용해 주식을 거래한 언론사 기자 등에게 약 50억 원의 과징금을 부과하기로 했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "윤이나 가 여자 실내 팀 골프 리그 WTGL 데뷔전에서 결정적인 티샷으로 소속팀의 시즌 첫 승을 이끌었다.",
+                "text": "금융위가 지난 7월 공개한 합동대응단 조사 사례에는 상장사 내부자 한 명이 호재성 내부정보를 이용했다가 검찰에 고발·통보되고 4860만원의 과징금 을 부과받은 사건도 포함됐다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://sports.khan.co.kr/article/202611252200006?pt=nv",
-                "press": "스포츠경향"
+                "url": "https://www.sedaily.com/article/20119016?ref=naver",
+                "press": "서울경제"
               },
               {
-                "url": "https://www.newsis.com/view/NISX20261125_0003882850",
-                "press": "뉴시스"
+                "url": "https://news.tf.co.kr/read/economy/2366301.htm",
+                "press": "더팩트"
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F144%2F2026%2F11%2F25%2F1151701.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://wimg.sedaily.com/news/cms/2026/11/25/news-p.v1.20261125.217cc90080514a0abe56e140dd379ffe_Z1.jpg"
             ],
             "press": [
-              "스포츠경향",
-              "뉴시스"
+              "서울경제",
+              "더팩트"
             ],
             "headlines": [
-              "403 Forbidden",
-              "윤이나 , '쐐기 3점'으로 WTGL 데뷔전 승리…\"좋은 팀워크 덕분\""
+              "‘호재성 기사’ 이용 주식 선행매매…언론사 기자 등 과징금 50억 부과",
+              "수조원 잭팟 전에 주식 부터 샀나…합동대응단, 에이비엘바이오 파고든..."
             ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
           }
         }
       ]
@@ -595,11 +638,507 @@
         {
           "id": "daum-1",
           "rank": 1,
+          "keyword": "서수빈 신인여우상 수상",
+          "title": "서수빈 신인여우상 수상",
+          "rawKeyword": "서수빈 신인여우상 수상",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 100,
+          "source": "daum",
+          "expansions": [
+            "서수빈 배우",
+            "수상한 파트너",
+            "수상 뜻",
+            "수상구조사",
+            "수상한pt샵",
+            "mma 수상",
+            "마마 수상",
+            "mama 수상"
+          ],
+          "expansionSeed": "서수빈",
+          "insight": {
+            "titles": {
+              "seo": "서수빈 신인여우상 수상 최신 이슈와 핵심 내용 정리",
+              "home": "서수빈 신인여우상 수상, 청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권 관련 확인할 점",
+              "topic": "서수빈 신인여우상 수상",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(서울=연합뉴스) 박원희 기자 = 나홍진 감독의 '호프'가 올해 청룡영화상 최우수작품상의 영예를 안았다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "청룡영화 작품상에 ‘호프’... 주연상은 설경구·전도연",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261125187600005?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.chosun.com/culture-life/culture_general/2026/11/25/EUJITRT7J5FWRC6B7KRHJBJ3IQ/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+                "press": "조선일보"
+              }
+            ],
+            "images": [
+              "https://img2.yna.co.kr/photo/yna/YH/2026/11/25/PYH2026112521750001300_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "조선일보"
+            ],
+            "headlines": [
+              "청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권",
+              "청룡영화 작품상에 ‘호프’... 주연상은 설경구·전도연"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T21:09:24.583Z"
+          }
+        },
+        {
+          "id": "daum-2",
+          "rank": 2,
+          "keyword": "세계의 주인",
+          "title": "세계의 주인",
+          "rawKeyword": "세계의 주인",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "daum",
+          "expansions": [
+            "영화 세계의 주인",
+            "세계의 주인 ott",
+            "세계의 주인 줄거리",
+            "세계의 주인 해석",
+            "세계의 주인 영화",
+            "세계의 주인 나무위키",
+            "세계의 주인 평점",
+            "세계의 주인 고민시"
+          ],
+          "expansionSeed": "세계의 주인",
+          "insight": {
+            "titles": {
+              "seo": "세계의 주인 최신 이슈와 핵심 내용 정리",
+              "home": "세계의 주인, Attention Required! 관련 확인할 점",
+              "topic": "세계의 주인",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "청룡영화제 캡처영화 ' 세계의 주인 '이 제47회 청룡영화상에서 감독상과 신인여우상을 거머쥐며 2관왕에 올랐다. 윤가은 감독과 배우 서수빈은 영화에 함께한 이들에게 감사의 마음을 전했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "휩쓸고, ‘ 세계의 주인 ’ 윤가은 감독이 쟁쟁한 선배들을 제치고 감독상을 거머쥐었다. 25일 오후 서울 여의도 KBS홀에서 제47회 청룡영화상 시상식이 열렸다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.bntnews.co.kr/article/view/bnt202611260025",
+                "press": "bnt뉴스"
+              },
+              {
+                "url": "https://www.mk.co.kr/article/12218773",
+                "press": "매일경제"
+              }
+            ],
+            "images": [
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F5191%2F2026%2F11%2F26%2F537096.jpg&type=fface200_200&expire=2&refresh=true"
+            ],
+            "press": [
+              "bnt뉴스",
+              "매일경제"
+            ],
+            "headlines": [
+              "Attention Required!",
+              "작품상 ‘호프’·연기상 휩쓴 ‘가능한 사랑’·감독상 윤가은…이변과..."
+            ],
+            "extraction": "search-card",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "daum-3",
+          "rank": 3,
+          "keyword": "김정은 핵시설 현지지도",
+          "title": "김정은 핵시설 현지지도",
+          "rawKeyword": "김정은 핵시설 현지지도",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "daum",
+          "expansions": [
+            "김정은",
+            "김정은 죽음",
+            "김정은 사망일",
+            "구성 핵시설",
+            "핵시설 공격",
+            "김정현",
+            "김정훈",
+            "김정균"
+          ],
+          "expansionSeed": "김정",
+          "insight": {
+            "titles": {
+              "seo": "김정은 핵시설 현지지도 최신 이슈와 핵심 내용 정리",
+              "home": "김정은 핵시설 현지지도, 김정은, 핵시설 현지지도…\"전술핵 다영역 활용화 주목해야\" 관련 확인할 점",
+              "topic": "김정은 핵시설 현지지도",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "",
+                "sourceIndex": 0
+              },
+              {
+                "text": "[속보] 김정은 , 핵시설 현지지도 …\"핵보유 정당성 불가역적 현실\"",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261126011600504?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.news1.kr/diplomacy/defense-diplomacy/6366308",
+                "press": "뉴스1"
+              }
+            ],
+            "images": [
+              "https://img8.yna.co.kr/photo/yna/YH/2026/11/26/PYH2026112600650004200_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "뉴스1"
+            ],
+            "headlines": [
+              "김정은, 핵시설 현지지도…\"전술핵 다영역 활용화 주목해야\"",
+              "[속보] 김정은 , 핵시설 현지지도 …\"핵보유 정당성 불가역적 현실\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "daum-4",
+          "rank": 4,
+          "keyword": "뉴욕증시 혼조 마감",
+          "title": "뉴욕증시 혼조 마감",
+          "rawKeyword": "뉴욕증시 혼조 마감",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "daum",
+          "expansions": [
+            "뉴욕증시 마감",
+            "뉴욕증시 시간",
+            "뉴욕증시 실시간 조회",
+            "오늘 뉴욕증시",
+            "뉴욕증시 개장시간",
+            "뉴욕증시지수",
+            "뉴욕증시 휴장일",
+            "실시간 뉴욕증시"
+          ],
+          "expansionSeed": "뉴욕증시",
+          "insight": {
+            "titles": {
+              "seo": "뉴욕증시 혼조 마감 최신 이슈와 핵심 내용 정리",
+              "home": "뉴욕증시 혼조 마감, 뉴욕증시, 엔비디아 급등 후 차익실현에 혼조…나스닥 1.5%↓ 관련 확인할 점",
+              "topic": "뉴욕증시 혼조 마감",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(뉴욕=연합뉴스) 임수정 특파원 = 미국 뉴욕증시의 3대 주요",
+                "sourceIndex": 0
+              },
+              {
+                "text": "미국 뉴욕증시 의 3대 주요 지수가 24일(현지시간) 인공지능(AI) 관련 기술주를 중심으로 차익실현 매물이 쏟아지면서 혼조 세로 마감 했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261125011200072?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.kado.net/news/articleView.html?idxno=2087117",
+                "press": "강원도민일보"
+              }
+            ],
+            "images": [
+              "https://img7.yna.co.kr/photo/reuters/2026/11/25/PRU20261125022801009_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "강원도민일보"
+            ],
+            "headlines": [
+              "뉴욕증시, 엔비디아 급등 후 차익실현에 혼조…나스닥 1.5%↓",
+              "[속보] 31.5% 폭등했던 엔비디아, 하루 만에 급락… 뉴욕증시 혼조 마감"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "daum-5",
+          "rank": 5,
+          "keyword": "설경구 남우주연상",
+          "title": "설경구 남우주연상",
+          "rawKeyword": "설경구 남우주연상",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "daum",
+          "expansions": [
+            "설경구 송윤아",
+            "설경구 나무위키",
+            "설경구 전도연",
+            "설경구 영화",
+            "설경구 와이프",
+            "전도연 설경구",
+            "송윤아 설경구",
+            "설경구 프로필"
+          ],
+          "expansionSeed": "설경구",
+          "insight": {
+            "titles": {
+              "seo": "설경구 남우주연상 최신 이슈와 핵심 내용 정리",
+              "home": "설경구 남우주연상, 청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권 관련 확인할 점",
+              "topic": "설경구 남우주연상",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(서울=연합뉴스) 박원희 기자 = 나홍진 감독의 '호프'가 올해 청룡영화상 최우수작품상의 영예를 안았다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "앞서 2000년 '박하사탕', 2002년 '공공의 적', 2021년 '자산어보'로 청룡영화상 남우주연상 을 받은 설경구 는 5년 만에 다시 트로피를 품에 안으면서 청룡영화상 사상 최초로 남우주연상 을 네 차례 받은 배우가 됐다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261125187600005?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.hankyung.com/article/2026112506727",
+                "press": "한국경제"
+              }
+            ],
+            "images": [
+              "https://img2.yna.co.kr/photo/yna/YH/2026/11/25/PYH2026112521750001300_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "한국경제"
+            ],
+            "headlines": [
+              "청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권",
+              "청룡영화상 남녀 주연상 …'가능한 사랑' 설경구 ·전도연 수상"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "daum-6",
+          "rank": 6,
+          "keyword": "노소영 화해 거부",
+          "title": "노소영 화해 거부",
+          "rawKeyword": "노소영 화해 거부",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "daum",
+          "expansions": [
+            "최태원 노소영",
+            "노소영 위자료",
+            "노소영 자녀",
+            "노소영 리즈",
+            "노소영 나무위키",
+            "최태원 노소영 자녀",
+            "노소영 아빠",
+            "sk 최태원 노소영"
+          ],
+          "expansionSeed": "노소영",
+          "insight": {
+            "titles": {
+              "seo": "노소영 화해 거부 최신 이슈와 핵심 내용 정리",
+              "home": "노소영 화해 거부, 노소영, 최태원 화해권고 요청 거부…\"진정성 있다면 상고 취하\"(종합2보) 관련 확인할 점",
+              "topic": "노소영 화해 거부",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "\"재산분할 9천440억원 전액 지급\" 崔측 제안에 '부동의' 서면 제출 盧측 \" 화해 권고 절차에 최소 한달…빨리 해결하려면 상고 취하해야\" 이영섭 김빛나 기자 = 최태원(66) SK그룹 회장과 재산분할 소송 중인 노소영 (65) 아트센터 나비 관장이 최 회장 측의 화해 권고 요청에 거부 의사를 드러냈다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "최태원 SK그룹 회장 측이 재산분할 소송 중인 노소영 아트센터 나비 관장의 화해 권고 결정 거부 와 관련해 \"요청의 진정성을 의심하고 취지를 폄훼해 심심한 유감을 표한다\"면서도 \"남은 재판에 성실히 임하며 원만한 해결 방안을 계속 찾겠다\"는 입장을 밝혔다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261125086552004?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.newsis.com/view/NISX20261125_0003883112",
+                "press": "뉴시스"
+              }
+            ],
+            "images": [
+              "https://img6.yna.co.kr/photo/yna/YH/2026/07/24/PYH2026072410130001300_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "뉴시스"
+            ],
+            "headlines": [
+              "노소영, 최태원 화해권고 요청 거부…\"진정성 있다면 상고 취하\"(종합2보)",
+              "최태원 회장, 노소영 측 화해 거부 에 \"진정성 폄훼 유감…원만한 해결 ..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "daum-7",
+          "rank": 7,
+          "keyword": "스시자로",
+          "title": "스시자로",
+          "rawKeyword": "스시자로",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "daum",
+          "expansions": [
+            "스시자로 가격",
+            "스시자로 반입방법",
+            "스시자로 후기",
+            "스시자로 사이트",
+            "스시자로 처방",
+            "스시자로 투어",
+            "스시자로 오사카",
+            "스시자로 구매"
+          ],
+          "expansionSeed": "스시자로",
+          "insight": {
+            "titles": {
+              "seo": "스시자로 최신 이슈와 핵심 내용 정리",
+              "home": "스시자로, 스시자로 되팔겠다고?…\"걸리면 최대 징역 5년\" 관련 확인할 점",
+              "topic": "스시자로",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "일본 내 비만치료제 처방이 가능한 의료기관의 위치와 가격 정보를 공유하는 ' 스시자로 지도'도 등장했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "당일치기 ' 스시자로 원정' 확산 한국인들이 대마도를 찾는 가장 큰 이유는 약값 차이다. 국내에서 마운자로 2.5㎎ 4주분을 처방받으려면 30만원 이상이 들지만, 일본에서는 의료기관에 따라 국내 가격의 절반 이하로 구매할 수 있는 것으로 알려졌다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.newsis.com/view/NISX20261125_0003883330",
+                "press": "뉴시스"
+              },
+              {
+                "url": "https://view.asiae.co.kr/article/2026112518064273686",
+                "press": "아시아경제"
+              }
+            ],
+            "images": [
+              "https://img1.newsis.com/2026/06/09/NISI20260609_0002156288_web.jpg"
+            ],
+            "press": [
+              "뉴시스",
+              "아시아경제"
+            ],
+            "headlines": [
+              "스시자로 되팔겠다고?…\"걸리면 최대 징역 5년\"",
+              "'우르르' 대마도 가서 나라 망신?…\"나 먼저 줘\" 떼쓰고 쓰레기 투척한..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "daum-8",
+          "rank": 8,
+          "keyword": "엔비디아 신용등급 강등 검토",
+          "title": "엔비디아 신용등급 강등 검토",
+          "rawKeyword": "엔비디아 신용등급 강등 검토",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "daum",
+          "expansions": [
+            "엔비디아 주가",
+            "엔비디아 젠슨황",
+            "엔비디아 실적발표",
+            "엔비디아 주식",
+            "엔비디아 회장",
+            "엔비디아 그래픽카드",
+            "엔비디아 시총",
+            "엔비디아 ai"
+          ],
+          "expansionSeed": "엔비디아",
+          "insight": {
+            "titles": {
+              "seo": "엔비디아 신용등급 강등 검토 최신 이슈와 핵심 내용 정리",
+              "home": "엔비디아 신용등급 강등 검토, S&P, 엔비디아 신용등급 강등 검토…젠슨 황 복귀에 지배구조 우려 관련 확인할 점",
+              "topic": "엔비디아 신용등급 강등 검토",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "국제 신용 평가사 스탠더드앤드푸어스(S&P)가 젠슨 황 엔비디아 최고경영자(CEO)의 퇴진과 복귀 과정에서 불거진 기업 지배구조 문제를 이유로 엔비디아 의 신용등급 강등 을 검토 하고 나섰다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "엔비디아 신용등급 강등 경고받아 인공지능(AI) 반도체 기업 엔비디아 가 국제 신용 평가사 S&P로부터 신용등급 강등 경고를 받았습니다. 채권 신용등급 인 'AA'를 '부정적 관찰 대상'에 올렸다고 밝혔습니다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.news1.kr/world/usa-canada/6366299",
+                "press": "뉴스1"
+              },
+              {
+                "url": "https://www.nocutnews.co.kr/news/6612739?utm_source=naver&utm_medium=article&utm_campaign=20261126065422",
+                "press": "노컷뉴스"
+              }
+            ],
+            "images": [
+              "https://i3n.news1.kr/system/photos/2026/11/24/8230293/high.jpg"
+            ],
+            "press": [
+              "뉴스1",
+              "노컷뉴스"
+            ],
+            "headlines": [
+              "S&P, 엔비디아 신용등급 강등 검토…젠슨 황 복귀에 지배구조 우려",
+              "'조희대 탄핵' 속도전에 사법부 첫 회의… 엔비디아 신용등급 강등 경고..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "daum-9",
+          "rank": 9,
           "keyword": "청룡영화제",
           "title": "청룡영화제",
           "rawKeyword": "청룡영화제",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 100,
+          "priority": 92,
           "source": "daum",
           "expansions": [
             "2026 청룡영화제 mc",
@@ -656,139 +1195,13 @@
           }
         },
         {
-          "id": "daum-2",
-          "rank": 2,
-          "keyword": "나인 투 식스",
-          "title": "나인 투 식스",
-          "rawKeyword": "나인 투 식스",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "daum",
-          "expansions": [
-            "나인 투 식스 드라마",
-            "드라마 나인 투 식스",
-            "나인 투 식스 ott",
-            "나인 투 식스 뜻",
-            "나인 투 식스 ost",
-            "나인 투 식스 재방송시간",
-            "나인 투 식스 제목의 뜻",
-            "나인 투 식스2 몇부작"
-          ],
-          "expansionSeed": "나인 투 식스",
-          "insight": {
-            "titles": {
-              "seo": "나인 투 식스 출연진 고수·박민영·육성재, SBS 수목드라마 제작발표회",
-              "home": "나인 투 식스 첫 제작발표회, 고수·박민영 조합에 많이들 궁금해한 점",
-              "topic": "나인 투 식스",
-              "topicGroup": "다음 실시간 검색어",
-              "summary": "SBS 새 수목드라마 '나인 투 식스' 제작발표회가 25일 목동 SBS사옥에서 열렸다. 고수, 박민영, 육성재가 참석해 포즈를 취했다.",
-              "aiTitled": true
-            },
-            "facts": [
-              {
-                "text": "배우 박민영이 25일 오후 서울 양천구 SBS 사옥에서 SBS 새 수목드라마 ' 나인 투 식스 ' 제작발표회에서 포즈를 취하고 있다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "SBS ' 나인 투 식스 ' 제작발표회가 25일 서울 목동 SBS사옥에서 열렸다. 고수, 박민영, 육성재가 포토타임을 갖고 있다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/PYH20261125135800013?input=1196m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.sportschosun.com/entertainment/2026-11-25/202611250100153920014157",
-                "press": "스포츠조선"
-              }
-            ],
-            "images": [
-              "https://img6.yna.co.kr/photo/yna/YH/2026/11/25/PYH2026112513580001300_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "스포츠조선"
-            ],
-            "headlines": [
-              "'나인 투 식스' 주연 맡은 박민영",
-              "[포토] 고수-박민영-육성재, 나인 투 식스"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
-          }
-        },
-        {
-          "id": "daum-3",
-          "rank": 3,
-          "keyword": "최재림 동물 발성법 시연",
-          "title": "최재림 동물 발성법 시연",
-          "rawKeyword": "최재림 동물 발성법 시연",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 98,
-          "source": "daum",
-          "expansions": [
-            "최재림 뮤지컬",
-            "최재림 나무위키",
-            "최재림 더쿠",
-            "시카고 최재림",
-            "최재림 시카고",
-            "더쿠 최재림",
-            "시연 뜻",
-            "시연하다"
-          ],
-          "expansionSeed": "최재림",
-          "insight": {
-            "titles": {
-              "seo": "최재림 동물 발성법 시연 최신 이슈와 핵심 내용 정리",
-              "home": "최재림 동물 발성법 시연, \"비명에 깜짝 놀라\"…최재림, 박칼린과 야간 산책 중 무슨 일? (라스) 관련 확인할 점",
-              "topic": "최재림 동물 발성법 시연",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "뮤지컬 배우 최재림이 MBC '라디오스타'에 출연해 논문까지 작성하며 연구한 자신만의 발성 훈련법을 공개한다. '개구리 자세'를 비롯해 매미 소리와 사자의 하품에서 아이디어를 얻은 독특한 연습법을 직접 시연하고, 압도적인 성량을 활용한 케이크 촛불 끄기에도 도전한다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "뮤지컬 배우 최재림 과 가수 이무진이 동물 발성 훈련법을 적용한 '신호등' 듀엣 무대를 공개한다. 그는 매미 소리와 사자가 하품하는 모습에서 착안한 이 발성법 을 설명하며 직접 시연 에 나선다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "http://enews.imbc.com/News/RetrieveNewsInfo/525996",
-                "press": "MBC연예"
-              },
-              {
-                "url": "https://mhnse.com/news/articleView.html?idxno=1710330",
-                "press": "MHN스포츠"
-              }
-            ],
-            "images": [
-              "https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2026/11/25/093a504e-2d11-46fc-a7fd-56ffe4c2a03a.jpg"
-            ],
-            "press": [
-              "MBC연예",
-              "MHN스포츠"
-            ],
-            "headlines": [
-              "\"비명에 깜짝 놀라\"…최재림, 박칼린과 야간 산책 중 무슨 일? (라스)",
-              "최재림 , 논문 기반 매미·사자 발성법 시연 …이무진과 '신호등' 듀엣 무..."
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
-          }
-        },
-        {
-          "id": "daum-4",
-          "rank": 4,
+          "id": "daum-10",
+          "rank": 10,
           "keyword": "가능한 사랑",
           "title": "가능한 사랑",
           "rawKeyword": "가능한 사랑",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 97,
+          "priority": 91,
           "source": "daum",
           "expansions": [
             "가능한 사랑 해석",
@@ -842,371 +1255,6 @@
             "extraction": "playwright",
             "collectedAt": "2026-11-25T21:09:24.583Z"
           }
-        },
-        {
-          "id": "daum-5",
-          "rank": 5,
-          "keyword": "설경구 남우주연상 수상",
-          "title": "설경구 남우주연상 수상",
-          "rawKeyword": "설경구 남우주연상 수상",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 96,
-          "source": "daum",
-          "expansions": [
-            "설경구 송윤아",
-            "설경구 나무위키",
-            "설경구 전도연",
-            "설경구 영화",
-            "설경구 와이프",
-            "전도연 설경구",
-            "송윤아 설경구",
-            "설경구 프로필"
-          ],
-          "expansionSeed": "설경구",
-          "insight": {
-            "titles": {
-              "seo": "설경구 남우주연상 수상 최신 이슈와 핵심 내용 정리",
-              "home": "설경구 남우주연상 수상, 청룡영화 작품상에 ‘호프’... 주연상은 설경구·전도연 관련 확인할 점",
-              "topic": "설경구 남우주연상 수상",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "25일 개최된 제47회 청룡영화상에서 영화 호프가 최우수작품상을 받았으며, 가능한 사랑은 4관왕을 차지했다. 설경구와 전도연이 남녀 주연상을, 구교환과 조여정이 조연상을 수상했다. 고 안성기 배우에게는 공로상이 수여되었으며, 신인상과 음악상 등 주요",
-                "sourceIndex": 0
-              },
-              {
-                "text": "설경구 는 4번째 청룡 남우주연상 수상 으로 '최초'의 기록을 세웠고, 전도연도 3번째 청룡 여우 주연상 수상 이다. 25일 서울 여의도 KBS홀에서 제47회 청룡영화상 시상식이 열렸다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.chosun.com/culture-life/culture_general/2026/11/25/EUJITRT7J5FWRC6B7KRHJBJ3IQ/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
-                "press": "조선일보"
-              },
-              {
-                "url": "https://www.hankyung.com/article/2026112506727",
-                "press": "한국경제"
-              }
-            ],
-            "images": [
-              "https://www.chosun.com/resizer/v2/OBGRW5D4KNBEVPGZYQHKBZJ4P4.jpg?auth=84133dd3ea5a9cfa20f5f4bbe228aba185a0d6411e078cb47a7d4b4a71e10dfe&width=1200&height=630&focal=1918,825"
-            ],
-            "press": [
-              "조선일보",
-              "한국경제"
-            ],
-            "headlines": [
-              "청룡영화 작품상에 ‘호프’... 주연상은 설경구·전도연",
-              "청룡영화상 남녀 주연상 …'가능한 사랑' 설경구 ·전도연 수상"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
-          }
-        },
-        {
-          "id": "daum-6",
-          "rank": 6,
-          "keyword": "전이경 항암",
-          "title": "전이경 항암",
-          "rawKeyword": "전이경 항암",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "daum",
-          "expansions": [
-            "전이경 나무위키",
-            "쇼트트랙 전이경",
-            "항암배추",
-            "항암치료",
-            "항암에 좋은 음식",
-            "항암치료비용",
-            "항암치료 고통",
-            "항암 부작용"
-          ],
-          "expansionSeed": "전이경",
-          "insight": {
-            "titles": {
-              "seo": "전이경 항암 최신 이슈와 핵심 내용 정리",
-              "home": "전이경 항암, 전이경 “최근 항암 끝내고 제2의 인생사는 느낌으로 출연 결정” (스피드퀸) 관련 확인할 점",
-              "topic": "전이경 항암",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "전이경 은 “최근에 제가 항암 을 끝내서 어떻게 보면 제2의 인생을 사는 듯한 느낌으로 살고 있다. 새로운 게 필요하다는 생각이 들어서 출연을 결정하게 됐다”고 출연 이유를 말했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "쇼트트랙 레전드 선수 전이경 이 최근 항암 치료를 마쳤다고 고백하며 감독으로 새로운 도전에 나섰다. 25일 첫 방송된 TV조선 '스피드퀸'에서는 트라이아웃을 앞두고 빙상장에 가장 먼저 모습을 드러낸 전 쇼트트랙 국가대표 전이경 이 감독으로 합류하는 장면이 전파를 탔다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.newsen.com/news_view.php?uid=202611252325291710",
-                "press": "뉴스엔"
-              },
-              {
-                "url": "https://www.xportsnews.com/article/2223181",
-                "press": "엑스포츠뉴스"
-              }
-            ],
-            "images": [
-              "https://photo.newsen.com/news_photo/2026/11/25/202611252325291710_1.jpg"
-            ],
-            "press": [
-              "뉴스엔",
-              "엑스포츠뉴스"
-            ],
-            "headlines": [
-              "전이경 “최근 항암 끝내고 제2의 인생사는 느낌으로 출연 결정” (스피드퀸)",
-              "'올림픽 4관왕' 전이경 , 항암 치료 마쳤다…\"제2의 인생\" 감독 도전 (스..."
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
-          }
-        },
-        {
-          "id": "daum-7",
-          "rank": 7,
-          "keyword": "데블스 플랜 3 우승자",
-          "title": "데블스 플랜 3 우승자",
-          "rawKeyword": "데블스 플랜 3 우승자",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 94,
-          "source": "daum",
-          "expansions": [
-            "데블스플랜3 우승자",
-            "데블스플랜3 우승자 스포",
-            "데블스플랜3 우승자 누구",
-            "데블스플랜3 우승자 현경렬",
-            "데블스플랜3 우승자 스포 디시",
-            "데블스플랜3 우승자 예상",
-            "데블스플랜3 우승자 디씨",
-            "데블스플랜3 우승자 상금"
-          ],
-          "expansionSeed": "데블스 플랜 3 우승자",
-          "insight": {
-            "titles": {
-              "seo": "데블스 플랜 3 우승자 최신 이슈와 핵심 내용 정리",
-              "home": "데블스 플랜 3 우승자, Attention Required! 관련 확인할 점",
-              "topic": "데블스 플랜 3 우승자",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "데블스플랜3 우승자 현경렬…첫판 내주고 두 판 연속 승리1회전 '카드 장기'에서는 장동민이 앞섰다. 현경렬은 2회전 '컬러 링크'를 잡아 균형을 맞췄다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "치열한 생존 경쟁 끝에 누적된 최종 상금을 거머쥘 우승자 에게도 관심이 쏠린다. ' 데블스 플랜 : 데드 어게인'은 지난 10일 첫 공개된 이후 더 진화한 게임 속 더 격렬해진 두뇌 공방전과 심리전으로 전 세계 시청자들을 사로잡았다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.bntnews.co.kr/article/view/bnt202611250057",
-                "press": "bnt뉴스"
-              },
-              {
-                "url": "http://enews.imbc.com/News/RetrieveNewsInfo/525789",
-                "press": "MBC연예"
-              }
-            ],
-            "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F5191%2F2026%2F11%2F25%2F536830.jpg&type=fface200_200&expire=2&refresh=true"
-            ],
-            "press": [
-              "bnt뉴스",
-              "MBC연예"
-            ],
-            "headlines": [
-              "Attention Required!",
-              "장오 연합 붕괴했다…' 데블스 플랜3 ' 우승자 오늘(24일) 공개"
-            ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
-          }
-        },
-        {
-          "id": "daum-8",
-          "rank": 8,
-          "keyword": "왕과 사는 남자",
-          "title": "왕과 사는 남자",
-          "rawKeyword": "왕과 사는 남자",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 93,
-          "source": "daum",
-          "expansions": [
-            "왕과 사는 남자들 ott",
-            "왕과 사는 남자들 왕",
-            "왕과 사는 남자들 ost",
-            "왕과 사는 남자들 ott 무료",
-            "왕과 사는 남자들",
-            "왕과 사는 남자들 노래",
-            "왕과 사는 남자들 ott 넷플",
-            "왕과 사는 남자들 역사 배경"
-          ],
-          "expansionSeed": "왕과 사는 남자",
-          "insight": {
-            "titles": {
-              "seo": "왕과 사는 남자 최신 이슈와 핵심 내용 정리",
-              "home": "왕과 사는 남자, [사진]유해진, '암살자(들)'-'왕과 사는 남자' 뜨거운 배우 관련 확인할 점",
-              "topic": "왕과 사는 남자",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "제47회 청룡영화상 레드카펫 행사가 25일 오후 서울 영등포구 여의도동 KBS홀 인근에서 열렸다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "최우수작품상 후보에는 '군체', '세계의 주인', '암살자(들)', ' 왕과 사는 남자 ', '호프' 등 5편이 올랐으며, 전체 후보 지명에서는 '호프'가 10개 부문으로 최다를 기록했다. 한 해 동안 관객과 만난 영화들의 성취를 돌아보고 최종 수상작(자)을 발표한다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "http://www.osen.co.kr/article/G1112914943",
-                "press": "OSEN"
-              },
-              {
-                "url": "http://www.osen.co.kr/article/G1112915070",
-                "press": "OSEN"
-              }
-            ],
-            "images": [
-              "http://file.osen.co.kr/article_thumb/2026/11/25/202611251953775709_6b06be4003cf3_300x.jpg"
-            ],
-            "press": [
-              "OSEN"
-            ],
-            "headlines": [
-              "[사진]유해진, '암살자(들)'-'왕과 사는 남자' 뜨거운 배우",
-              "[사진]박지훈, ' 왕과 사는 남자 '로 청룡에"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
-          }
-        },
-        {
-          "id": "daum-9",
-          "rank": 9,
-          "keyword": "데이비스컵 테니스 대회",
-          "title": "데이비스컵 테니스 대회",
-          "rawKeyword": "데이비스컵 테니스 대회",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 92,
-          "source": "daum",
-          "expansions": [
-            "데이비스컵 테니스 대회 일정",
-            "데이비스컵 테니스 대회 채널"
-          ],
-          "expansionSeed": "데이비스컵 테니스 대회",
-          "insight": {
-            "titles": {
-              "seo": "데이비스컵 테니스 대회 최신 이슈와 핵심 내용 정리",
-              "home": "데이비스컵 테니스 대회, 한국 테니스, 사상 첫 데이비스컵 8강 도전…이탈리아 상대로 새 역사 쓸까 - 메디컬투데이 관련 확인할 점",
-              "topic": "데이비스컵 테니스 대회",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "[mdtoday = 최민석 기자] 한국 남자 테니스 대표팀이 사상 처음 진출한 데이비스컵 파이널8에서 세계 최강 이탈리아를 상대로 또 한 번의 이변에 도전한다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "강한 팀'으로 66년 만의 새 역사를 쓴 한국 남자 테니스 대표팀이 대회 4연패를 노리는 개최국 이탈리아를 상대로 4강 진출에 도전한다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627287",
-                "press": "메디컬투데이"
-              },
-              {
-                "url": "https://www.sportschosun.com/sports-news/2026-11-25/202611250100152850014083",
-                "press": "스포츠조선"
-              }
-            ],
-            "images": [
-              "https://cdn.mdtoday.co.kr/news/photo/202611/627287_337032_745.jpg"
-            ],
-            "press": [
-              "메디컬투데이",
-              "스포츠조선"
-            ],
-            "headlines": [
-              "한국 테니스, 사상 첫 데이비스컵 8강 도전…이탈리아 상대로 새 역사 쓸까 - 메디컬투데이",
-              "한국 남자 테니스 , 66년 만의 데이비스컵 8강 격돌, 26일 자정 '디펜딩 ..."
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
-          }
-        },
-        {
-          "id": "daum-10",
-          "rank": 10,
-          "keyword": "서수빈 신인여우상 수상",
-          "title": "서수빈 신인여우상 수상",
-          "rawKeyword": "서수빈 신인여우상 수상",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 91,
-          "source": "daum",
-          "expansions": [
-            "서수빈 배우",
-            "수상한 파트너",
-            "수상 뜻",
-            "수상구조사",
-            "수상한pt샵",
-            "mma 수상",
-            "마마 수상",
-            "mama 수상"
-          ],
-          "expansionSeed": "서수빈",
-          "insight": {
-            "titles": {
-              "seo": "서수빈 신인여우상 수상 최신 이슈와 핵심 내용 정리",
-              "home": "서수빈 신인여우상 수상, 청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권 관련 확인할 점",
-              "topic": "서수빈 신인여우상 수상",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "(서울=연합뉴스) 박원희 기자 = 나홍진 감독의 '호프'가 올해 청룡영화상 최우수작품상의 영예를 안았다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "청룡영화 작품상에 ‘호프’... 주연상은 설경구·전도연",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261125187600005?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.chosun.com/culture-life/culture_general/2026/11/25/EUJITRT7J5FWRC6B7KRHJBJ3IQ/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
-                "press": "조선일보"
-              }
-            ],
-            "images": [
-              "https://img2.yna.co.kr/photo/yna/YH/2026/11/25/PYH2026112521750001300_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "조선일보"
-            ],
-            "headlines": [
-              "청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권",
-              "청룡영화 작품상에 ‘호프’... 주연상은 설경구·전도연"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
-          }
         }
       ]
     },
@@ -1217,313 +1265,301 @@
         {
           "id": "nate-1",
           "rank": 1,
-          "keyword": "나인 투 식스",
-          "title": "나인 투 식스",
-          "rawKeyword": "나인 투 식스",
+          "keyword": "관세 15% 유지",
+          "title": "관세 15% 유지",
+          "rawKeyword": "관세 15% 유지",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "nate",
           "expansions": [
-            "나인 투 식스 드라마",
-            "드라마 나인 투 식스",
-            "나인 투 식스 ott",
-            "나인 투 식스 뜻",
-            "나인 투 식스 ost",
-            "나인 투 식스 재방송시간",
-            "나인 투 식스 제목의 뜻",
-            "나인 투 식스2 몇부작"
+            "관세청",
+            "관세계산기",
+            "관세청 통관번호",
+            "관세사",
+            "관세 기준",
+            "일본 관세 계산기",
+            "관세 계산",
+            "관세청 유니패스"
           ],
-          "expansionSeed": "나인 투 식스",
+          "expansionSeed": "관세",
           "insight": {
             "titles": {
-              "seo": "나인 투 식스 출연진 고수·박민영·육성재, SBS 수목드라마 제작발표회",
-              "home": "나인 투 식스 첫 제작발표회, 고수·박민영 조합에 많이들 궁금해한 점",
-              "topic": "나인 투 식스",
-              "topicGroup": "네이트 실시간 검색어",
-              "summary": "SBS 새 수목드라마 '나인 투 식스' 제작발표회가 25일 목동 SBS사옥에서 열렸다. 고수, 박민영, 육성재가 참석해 포즈를 취했다.",
-              "aiTitled": true
+              "seo": "관세 15% 유지 최신 이슈와 핵심 내용 정리",
+              "home": "관세 15% 유지, 美USTR, 14개 경제주체에 과잉생산 관세…韓 15% 상한 유지(종합) 관련 확인할 점",
+              "topic": "관세 15% 유지",
+              "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "배우 박민영이 25일 오후 서울 양천구 SBS 사옥에서 SBS 새 수목드라마 ' 나인 투 식스 ' 제작발표회에서 포즈를 취하고 있다.",
+                "text": "(워싱턴=연합뉴스) 백나리 특파원 = 미국이 한국을 포함해 14개 경제주체에 과잉생산을 문제 삼는 관세를 예고했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "SBS ' 나인 투 식스 ' 제작발표회가 25일 서울 목동 SBS사옥에서 열렸다. 고수, 박민영, 육성재가 포토타임을 갖고 있다.",
+                "text": "교역 상대국에 대한 전체 관세 율을 초기에는 15% 이하로 유지 하겠다고 밝혔다. 반면 중국산 제품에는 기존 관세 에 더해 20%의 추가 관세 를 부과하는 방안을 제안했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/PYH20261125135800013?input=1196m",
+                "url": "https://www.yna.co.kr/view/AKR20261125185751071?input=1195m",
                 "press": "연합뉴스"
               },
               {
-                "url": "https://www.sportschosun.com/entertainment/2026-11-25/202611250100153920014157",
-                "press": "스포츠조선"
+                "url": "https://www.newsis.com/view/NISX20261125_0003883569",
+                "press": "뉴시스"
               }
             ],
             "images": [
-              "https://img6.yna.co.kr/photo/yna/YH/2026/11/25/PYH2026112513580001300_P4.jpg"
+              "https://img1.yna.co.kr/etc/inner/KR/2026/11/25/AKR20261125185751071_01_i_P4.jpg"
             ],
             "press": [
               "연합뉴스",
-              "스포츠조선"
+              "뉴시스"
             ],
             "headlines": [
-              "'나인 투 식스' 주연 맡은 박민영",
-              "[포토] 고수-박민영-육성재, 나인 투 식스"
+              "美USTR, 14개 경제주체에 과잉생산 관세…韓 15% 상한 유지(종합)",
+              "美, 14개국에 과잉생산 관세 …\"한국 15% 상한 유지 \"(종합)"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
+            "collectedAt": "2026-11-25T22:09:24.040Z"
           }
         },
         {
           "id": "nate-2",
           "rank": 2,
-          "keyword": "엔비디아 주가",
-          "title": "엔비디아 주가",
-          "rawKeyword": "엔비디아 주가",
+          "keyword": "가능한 사랑 전도연",
+          "title": "가능한 사랑 전도연",
+          "rawKeyword": "가능한 사랑 전도연",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 99,
           "source": "nate",
           "expansions": [
-            "엔비디아 주가 원화 가격",
-            "엔비디아 주가 전망",
-            "엔비디아 주가 원화",
-            "미국 엔비디아 주가",
-            "엔비디아 주가 급락",
-            "엔비디아 주가 하락 원인",
-            "엔비디아 주가 토스",
-            "엔비디아 주가 하락"
+            "가능한 사랑 전도연 아역",
+            "가능한 사랑 전도연 조인성",
+            "가능한 사랑 전도연 대역"
           ],
-          "expansionSeed": "엔비디아 주가",
+          "expansionSeed": "가능한 사랑 전도연",
           "insight": {
             "titles": {
-              "seo": "엔비디아 주가 최신 이슈와 핵심 내용 정리",
-              "home": "엔비디아 주가, 뉴욕증시, AI·기술주 반락 속 혼조…엔비디아 5.9%↓(종합) 관련 확인할 점",
-              "topic": "엔비디아 주가",
+              "seo": "가능한 사랑 전도연 최신 이슈와 핵심 내용 정리",
+              "home": "가능한 사랑 전도연, 청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권 관련 확인할 점",
+              "topic": "가능한 사랑 전도연",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "(뉴욕=연합뉴스) 임수정 특파원 = 미국 뉴욕증시의 3대 주요",
+                "text": "(서울=연합뉴스) 박원희 기자 = 나홍진 감독의 '호프'가 올해 청룡영화상 최우수작품상의 영예를 안았다.",
                 "sourceIndex": 0
               },
               {
-                "text": "앨리스 황은 스캔들이 불거진 뒤 공개석상에 나타나거나 성명을 낸 적이 없다. 복귀 소식이 전해진 날 엔비디아 주가 는 장 초반 30% 넘게 올랐다.",
+                "text": "여우주연상 후보에는 고아성(파반느), 문가영(만약에 우리), 신민아(눈동자), 이정은(경주기행), 전도연 ( 가능한 사랑 )이 이름을 올렸고, 트로피는 전도연 에게 돌아갔다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261125011251072?input=1195m",
+                "url": "https://www.yna.co.kr/view/AKR20261125187600005?input=1195m",
                 "press": "연합뉴스"
               },
               {
-                "url": "https://www.hankyung.com/article/202611259755H",
+                "url": "https://www.hankyung.com/article/2026112506727",
                 "press": "한국경제"
               }
             ],
             "images": [
-              "https://img7.yna.co.kr/photo/reuters/2026/11/25/PRU20261125022801009_P4.jpg"
+              "https://img2.yna.co.kr/photo/yna/YH/2026/11/25/PYH2026112521750001300_P4.jpg"
             ],
             "press": [
               "연합뉴스",
               "한국경제"
             ],
             "headlines": [
-              "뉴욕증시, AI·기술주 반락 속 혼조…엔비디아 5.9%↓(종합)",
-              "젠슨 황은 돌아왔는데…앨리스 황은 스캔들 터진 뒤 어디로 갔나"
+              "청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권",
+              "청룡영화상 남녀주연상…' 가능한 사랑 ' 설경구· 전도연 수상"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
+            "collectedAt": "2026-11-25T22:09:24.040Z"
           }
         },
         {
           "id": "nate-3",
           "rank": 3,
-          "keyword": "故 안성기 공로상",
-          "title": "故 안성기 공로상",
-          "rawKeyword": "故 안성기 공로상",
+          "keyword": "나는 솔로",
+          "title": "나는 솔로",
+          "rawKeyword": "나는 솔로",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 98,
           "source": "nate",
           "expansions": [
-            "안성기 별세",
-            "공로상 뜻",
-            "추미애 공로상",
-            "공로상장",
-            "공로상패",
-            "공로상 기준",
-            "공로상 상패",
-            "공로상 문구"
+            "나는 SOLO <나는 솔로>",
+            "나는 솔로 34기",
+            "나는 솔로 영철",
+            "나는 솔로 갤러리",
+            "나는 솔로 16기",
+            "나는 솔로 34기 영철",
+            "나는 솔로 ott",
+            "나는 솔로 편성표"
           ],
-          "expansionSeed": "안성기",
+          "expansionSeed": "나는 솔로",
           "insight": {
             "titles": {
-              "seo": "故 안성기 공로상 최신 이슈와 핵심 내용 정리",
-              "home": "故 안성기 공로상, 청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권 관련 확인할 점",
-              "topic": "故 안성기 공로상",
+              "seo": "나는 솔로 최신 이슈와 핵심 내용 정리",
+              "home": "나는 솔로, Attention Required! 관련 확인할 점",
+              "topic": "나는 솔로",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "(서울=연합뉴스) 박원희 기자 = 나홍진 감독의 '호프'가 올해 청룡영화상 최우수작품상의 영예를 안았다.",
+                "text": "나는솔로 34기 '나는 SOLO'( 나는 솔로 ) 34기 4일 차 로맨스 현장을 공개했다. 25일 밤 10시 30분 방송되는 리얼 데이팅 프로그램 ' 나는 솔로 ' 34기 영호가 '랜덤 데이트'를 통해 순자와 처음으로 '1:1 데이트'를 하며 알아가는 모습이 펼쳐진다.",
                 "sourceIndex": 0
               },
               {
-                "text": "'국민 배우' 故 안성기 가 2026 청룡영화상에서 공로상 을 받았다. 25일 서울 여의도 KBS홀에서 제47회 청룡영화상 시상식이 열렸다.",
+                "text": "' 나는 솔로 ' 34기 영수와 영숙이 랜덤 데이트에서 묘한 핑크빛 기류를 형성한다. 이때 형제자매와의 우애를 확인하는 '가족 통화 미션'까지 펼쳐지는데, 영수는 여섯째 누나에게 \"나 망한 것 같은데 어떡해?",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261125187600005?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.bntnews.co.kr/article/view/bnt202611250176",
+                "press": "bnt뉴스"
               },
               {
-                "url": "https://www.hankyung.com/article/2026112506457",
-                "press": "한국경제"
+                "url": "https://www.news1.kr/entertain/broadcast-tv/6363810",
+                "press": "뉴스1"
               }
             ],
             "images": [
-              "https://img2.yna.co.kr/photo/yna/YH/2026/11/25/PYH2026112521750001300_P4.jpg"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F5191%2F2026%2F11%2F25%2F536938.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "연합뉴스",
-              "한국경제"
+              "bnt뉴스",
+              "뉴스1"
             ],
             "headlines": [
-              "청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권",
-              "故 안성기 , 청룡영화상 ' 공로상 ' 수상…子 \"영화는 곧 삶이었다\""
+              "Attention Required!",
+              "' 나는솔로 ' 34기 영수♥영숙, 8남매·8자매 공감대 통했나…티격태격하..."
             ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
+            "extraction": "search-card",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
           }
         },
         {
           "id": "nate-4",
           "rank": 4,
-          "keyword": "가족관계증명서",
-          "title": "가족관계증명서",
-          "rawKeyword": "가족관계증명서",
+          "keyword": "젠슨 황",
+          "title": "젠슨 황",
+          "rawKeyword": "젠슨 황",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 97,
           "source": "nate",
           "expansions": [
-            "가족관계증명서 발급",
-            "가족관계증명서 인터넷발급",
-            "가족관계증명서 몇부작",
-            "가족관계증명서 등장인물",
-            "가족관계증명서 모바일 발급",
-            "가족관계증명서 재방송",
-            "가족관계증명서 상세",
-            "가족관계증명서 후속"
+            "젠슨 황 복귀",
+            "젠슨 황 배우자",
+            "젠슨 황 폭로",
+            "젠슨 황 프로필",
+            "젠슨 황 나무위키",
+            "젠슨 황 이사회",
+            "젠슨 황 중국",
+            "젠슨 황 복귀 청원"
           ],
-          "expansionSeed": "가족관계증명서",
+          "expansionSeed": "젠슨 황",
           "insight": {
             "titles": {
-              "seo": "가족관계증명서 최신 이슈와 핵심 내용 정리",
-              "home": "가족관계증명서, 403 Forbidden 관련 확인할 점",
-              "topic": "가족관계증명서",
-              "topicGroup": "네이트 실시간 검색어"
+              "seo": "젠슨 황 복귀 하루 만에 사과, 승계계획 없이 경영체제 유지",
+              "home": "젠슨 황 복귀 하루 만에 직원 앞 사과, 승계계획엔 의외의 입장",
+              "topic": "젠슨 황",
+              "topicGroup": "네이트 실시간 검색어",
+              "summary": "젠슨 황 엔비디아 CEO가 복귀 하루 만에 전 직원 앞에서 사과했다. 전사회의에선 별도 승계계획 없이 기존 경영체제를 유지하겠다고 밝혔다.",
+              "aiTitled": true
             },
             "facts": [
               {
-                "text": "배우 서도영이 MBC 일일드라마 ‘ 가족관계증명서 ’에서 동생을 위한 복수극에 나섰다가 예기치 못한 참극으로 체포되며 극의 긴장감을 최고조로 끌어올렸다.",
+                "text": "베선트 장관은 젠슨 황 복귀에 비판적이었으나, 최근 이같은 입장에서 한발 물러난 것으로 보인다.",
                 "sourceIndex": 0
               },
               {
-                "text": "불법 채권추심 과정에서 피해자들의 가족·지인 주소와 연락처, 주민등록 등·초본, 가족관계증명서 등을 확보한 뒤 이를 이용해 피해자들이 수사기관에 신고하지 못하도록 했다. 대출금을 갚지 못한 피해자에게 알몸 사진을 요구하거나 딸을 납치하겠다고 협박하기도 했다.",
+                "text": "젠슨 황 엔비디아 최고경영자(CEO)가 복귀 뒤 전사회의(All-Hands Meeting)에서 별도 승계 계획은 필요하지 않으며 기존 경영체제를 유지하겠다는 강한 의지를 밝힌 것으로 현지시간 24일 전해졌습니다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://sports.khan.co.kr/article/202611240924003?pt=nv",
-                "press": "스포츠경향"
+                "url": "https://www.yna.co.kr/view/AKR20261126002900071?input=1195m",
+                "press": "연합뉴스"
               },
               {
-                "url": "https://www.newsis.com/view/NISX20261124_0003880369",
-                "press": "뉴시스"
+                "url": "http://mbn.mk.co.kr/pages/news/newsView.php?category=mbn00008&news_seq_no=5232813",
+                "press": "MBN"
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F144%2F2026%2F11%2F24%2F1151386.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://img8.yna.co.kr/photo/etc/af/2026/11/16/PAF20261116065001009_P4.jpg"
             ],
             "press": [
-              "스포츠경향",
-              "뉴시스"
+              "연합뉴스",
+              "MBN"
             ],
             "headlines": [
-              "403 Forbidden",
-              "연이율 '8만%'에 '알몸사진· 가족 납치' 협박…불법 사채업자 등 22명 검..."
+              "美무역대표, 젠슨황 복귀에 \"트럼프, 경제·안보 균형 맞춰\"",
+              "젠슨 황 , 경영쇄신 요구 일축…\"별도 승계계획 필요없다\""
             ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
           }
         },
         {
           "id": "nate-5",
           "rank": 5,
-          "keyword": "세계의 윤가은 감독상",
-          "title": "세계의 윤가은 감독상",
-          "rawKeyword": "세계의 윤가은 감독상",
+          "keyword": "조희대 탄핵",
+          "title": "조희대 탄핵",
+          "rawKeyword": "조희대 탄핵",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 96,
           "source": "nate",
           "expansions": [
-            "세계의 주인",
-            "감독상1등",
-            "윤가은",
-            "세계지도",
-            "세계시간",
-            "세계 GDP 순위",
-            "세계 인구 순위",
-            "도깨비의 세계"
+            "민주당 조희대 탄핵"
           ],
-          "expansionSeed": "세계",
+          "expansionSeed": "조희대 탄핵",
           "insight": {
             "titles": {
-              "seo": "세계의 윤가은 감독상 최신 이슈와 핵심 내용 정리",
-              "home": "세계의 윤가은 감독상, 청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권 관련 확인할 점",
-              "topic": "세계의 윤가은 감독상",
+              "seo": "조희대 탄핵 최신 이슈와 핵심 내용 정리",
+              "home": "조희대 탄핵, 창원지법 전체 판사회의 \"법관 탄핵 추진은 헌법가치 훼손\"(종합) 관련 확인할 점",
+              "topic": "조희대 탄핵",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "(서울=연합뉴스) 박원희 기자 = 나홍진 감독의 '호프'가 올해 청룡영화상 최우수작품상의 영예를 안았다.",
+                "text": "대상 판사 69명 중 약 60명 참석…\"사법제도 근간 흔들어\" 강경 입장 여권이 조희대 대법원장 탄핵 을 추진하는 상황에서 창원지방법원이 일선 법원 중 처음으로 사법부 독립이 보장돼야 한다는 강경한 입장을 표명했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "청룡영화상 최우수작품상에 나홍진 '호프'…'가능한 사랑' 4관왕 석권",
+                "text": "무소속 한동훈 의원은 25일 더불어민주당의 조희대 대법원장 탄핵 추진과 관련해 탄핵 소추안이 헌법재판소에서 인용된다면 자신이 의원직을 사퇴하겠다며, 반대로 기각될 경우 국회 법제사법위원장인 더불어민주당 서영교 의원과 박선원 의원 등도 사퇴하라고 압박했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261125187600005?input=1195m",
+                "url": "https://www.yna.co.kr/view/AKR20261125054551052?input=1195m",
                 "press": "연합뉴스"
               },
               {
-                "url": "https://www.fnnews.com/news/202611260015548609",
-                "press": "파이낸셜뉴스"
+                "url": "https://www.chosun.com/politics/assembly/2026/11/25/5UZFQACYLVAPBMNDO6V7SQS5Y4/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+                "press": "조선일보"
               }
             ],
             "images": [
-              "https://img2.yna.co.kr/photo/yna/YH/2026/11/25/PYH2026112521750001300_P4.jpg"
+              "https://img0.yna.co.kr/photo/yna/YH/2026/11/25/PYH2026112502510005200_P4.jpg"
             ],
             "press": [
               "연합뉴스",
-              "파이낸셜뉴스"
+              "조선일보"
             ],
             "headlines": [
-              "청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권",
-              "청룡영화상 최우수작품상에 나홍진 '호프'…'가능한 사랑' 4관왕 석권"
+              "창원지법 전체 판사회의 \"법관 탄핵 추진은 헌법가치 훼손\"(종합)",
+              "한동훈 “ 조희대 탄핵 , 인용되면 의원직 사퇴... 與 서영교·박선원도 직..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
+            "collectedAt": "2026-11-25T22:09:24.040Z"
           }
         }
       ]
@@ -2030,7 +2066,7 @@
               "403 Forbidden"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
+            "collectedAt": "2026-11-25T22:09:24.040Z"
           }
         },
         {
@@ -2095,7 +2131,7 @@
               "[공식발표] ' 손흥민 선발 명단 제외 ' LAFC, 콜로라도전 'BEST 11' 공개!…..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
+            "collectedAt": "2026-11-25T22:09:24.040Z"
           }
         },
         {
@@ -2315,7 +2351,7 @@
               "안세영이 돌아왔다! 압승, 쾌승!…유럽 최강자 블리치펠트 43분 만에 2-0 완파→세계선수권 8강행 성공"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
+            "collectedAt": "2026-11-25T22:09:24.040Z"
           }
         },
         {
@@ -2788,7 +2824,7 @@
               "고혈압 · 당뇨병 환자 의료비 지원 52억 전액 삭감 직전...\"예산 복원하라..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
+            "collectedAt": "2026-11-25T22:09:24.040Z"
           }
         },
         {
@@ -3030,11 +3066,359 @@
         {
           "id": "issue-1",
           "rank": 1,
+          "keyword": "이무진, '라스' 1000회 기념 CM송 선물..20년 역사 담은 가사 극찬",
+          "title": "이무진, '라스' 1000회 기념 CM송 선물..20년 역사 담은 가사 극찬",
+          "rawKeyword": "이무진, '라스' 1000회 기념 CM송 선물..20년 역사 담은 가사 극찬",
+          "description": "스타뉴스 최신 기사 · 이무진, '라스' 1000회 기념 CM송 선물..20년 역사 담은 가사 극찬",
+          "priority": 100,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/26/2026112523425454039",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "극찬 뜻",
+            "고기극찬",
+            "조개극찬",
+            "오이도 조개극찬",
+            "제육극찬",
+            "극찬하다",
+            "극찬하다뜻",
+            "극찬 식혜"
+          ],
+          "expansionSeed": "이무진",
+          "ago": "7분 전",
+          "agoMinutes": 7,
+          "publishedLabel": "2026-11-25T22:00:00.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112523425454039_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "이무진, '라스' 1000회 기념 CM송 선물..20년 역사 담은 가사 극찬 최신 이슈와 핵심 내용 정리",
+              "home": "이무진, '라스' 1000회 기념 CM송 선물..20년 역사 담은 가사 극찬, 이무진, '라스' 1000회 기념 CM송 선물..20년 역사 담은 가사 극찬 관련 확인할 점",
+              "topic": "이무진, '라스' 1000회 기념 CM송 선물..20년 역사 담은 가사 극찬",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 이무진, '라스' 1000회 기념 CM송 선물..20년 역사 담은 가사 극찬",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/broadcast-show/2026/11/26/2026112523425454039",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112523425454039_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "이무진, '라스' 1000회 기념 CM송 선물..20년 역사 담은 가사 극찬"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "issue-2",
+          "rank": 2,
+          "keyword": "이종혁·전희철, 겹사돈이 코 앞..준수♥지우 거침없는 러브라인",
+          "title": "이종혁·전희철, 겹사돈이 코 앞..준수♥지우 거침없는 러브라인",
+          "rawKeyword": "이종혁·전희철, 겹사돈이 코 앞..준수♥지우 거침없는 러브라인",
+          "description": "스타뉴스 최신 기사 · 이종혁·전희철, 겹사돈이 코 앞..준수♥지우 거침없는 러브라인",
+          "priority": 99,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/26/2026112600321519208",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "환상의 러브라인",
+            "제타 러브라인",
+            "닥터x 러브라인",
+            "제타 러브라인에 변화",
+            "거침없는 하이킥",
+            "겹사돈 뜻",
+            "겹사돈 불법",
+            "겹사돈 반대 이유"
+          ],
+          "expansionSeed": "겹사돈",
+          "ago": "12분 전",
+          "agoMinutes": 12,
+          "publishedLabel": "2026-11-25T21:55:00.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112600321519208_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "이종혁·전희철, 겹사돈이 코 앞..준수♥지우 거침없는 러브라인 최신 이슈와 핵심 내용 정리",
+              "home": "이종혁·전희철, 겹사돈이 코 앞..준수♥지우 거침없는 러브라인, 이종혁·전희철, 겹사돈이 코 앞..준수♥지우 거침없는 러브라인 관련 확인할 점",
+              "topic": "이종혁·전희철, 겹사돈이 코 앞..준수♥지우 거침없는 러브라인",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 이종혁·전희철, 겹사돈이 코 앞..준수♥지우 거침없는 러브라인",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/broadcast-show/2026/11/26/2026112600321519208",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112600321519208_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "이종혁·전희철, 겹사돈이 코 앞..준수♥지우 거침없는 러브라인"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "issue-3",
+          "rank": 3,
+          "keyword": "황신혜, 유리상자 등장에 팬심 폭발..낭만 가득한 남양주 나들이",
+          "title": "황신혜, 유리상자 등장에 팬심 폭발..낭만 가득한 남양주 나들이",
+          "rawKeyword": "황신혜, 유리상자 등장에 팬심 폭발..낭만 가득한 남양주 나들이",
+          "description": "스타뉴스 최신 기사 · 황신혜, 유리상자 등장에 팬심 폭발..낭만 가득한 남양주 나들이",
+          "priority": 98,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/26/2026112521073114487",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "남양주 날씨",
+            "남양주 가볼만한곳",
+            "남양주 카페",
+            "남양주 맛집",
+            "남양주 현대아울렛",
+            "남양주 물의정원",
+            "남양주시청",
+            "남양주 수종사"
+          ],
+          "expansionSeed": "황신혜",
+          "ago": "23분 전",
+          "agoMinutes": 23,
+          "publishedLabel": "2026-11-25T21:44:00.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112521073114487_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "황신혜, 유리상자 등장에 팬심 폭발..낭만 가득한 남양주 나들이 최신 이슈와 핵심 내용 정리",
+              "home": "황신혜, 유리상자 등장에 팬심 폭발..낭만 가득한 남양주 나들이, 황신혜, 유리상자 등장에 팬심 폭발..낭만 가득한 남양주 나들이 관련 확인할 점",
+              "topic": "황신혜, 유리상자 등장에 팬심 폭발..낭만 가득한 남양주 나들이",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 황신혜, 유리상자 등장에 팬심 폭발..낭만 가득한 남양주 나들이",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/broadcast-show/2026/11/26/2026112521073114487",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112521073114487_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "황신혜, 유리상자 등장에 팬심 폭발..낭만 가득한 남양주 나들이"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "issue-4",
+          "rank": 4,
+          "keyword": "환희·브라이언, \"사귀진 않았다\"더니..24년 된 우정팔찌 인증",
+          "title": "환희·브라이언, \"사귀진 않았다\"더니..24년 된 우정팔찌 인증",
+          "rawKeyword": "환희·브라이언, \"사귀진 않았다\"더니..24년 된 우정팔찌 인증",
+          "description": "스타뉴스 최신 기사 · 환희·브라이언, \"사귀진 않았다\"더니..24년 된 우정팔찌 인증",
+          "priority": 97,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/26/2026112522315218586",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "네이버인증서",
+            "현대인증중고차",
+            "기아인증중고차",
+            "bmw 인증중고차",
+            "한국정보인증",
+            "네이버인증",
+            "kc인증",
+            "금융인증서 발급"
+          ],
+          "expansionSeed": "인증",
+          "ago": "24분 전",
+          "agoMinutes": 24,
+          "publishedLabel": "2026-11-25T21:43:00.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112522315218586_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "환희·브라이언, \"사귀진 않았다\"더니..24년 된 우정팔찌 인증 최신 이슈와 핵심 내용 정리",
+              "home": "환희·브라이언, \"사귀진 않았다\"더니..24년 된 우정팔찌 인증, 환희·브라이언, \"사귀진 않았다\"더니..24년 된 우정팔찌 인증 관련 확인할 점",
+              "topic": "환희·브라이언, \"사귀진 않았다\"더니..24년 된 우정팔찌 인증",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 환희·브라이언, \"사귀진 않았다\"더니..24년 된 우정팔찌 인증",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/broadcast-show/2026/11/26/2026112522315218586",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112522315218586_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "환희·브라이언, \"사귀진 않았다\"더니..24년 된 우정팔찌 인증"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "issue-5",
+          "rank": 5,
+          "keyword": "방탄소년단 정국, '2026 아시아 태평양 U30 젊은 리더' 선정..'글로벌 뮤직 아이콘' 존재감 빛냈다",
+          "title": "방탄소년단 정국, '2026 아시아 태평양 U30 젊은 리더' 선정..'글로벌 뮤직 아이콘' 존재감 빛냈다",
+          "rawKeyword": "방탄소년단 정국, '2026 아시아 태평양 U30 젊은 리더' 선정..'글로벌 뮤직 아이콘' 존재감 빛냈다",
+          "description": "스타뉴스 최신 기사 · 방탄소년단 정국, '2026 아시아 태평양 U30 젊은 리더' 선정..'글로벌 뮤직 아이콘' 존재감 빛냈다",
+          "priority": 96,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/music/2026/11/26/2026112606375053288",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "방탄소년단 진",
+            "방탄소년단 뷔",
+            "방탄소년단 나무위키",
+            "방탄소년단 지민",
+            "방탄소년단 정국",
+            "방탄소년단 슈가",
+            "방탄소년단 rm",
+            "방탄소년단 제이홉"
+          ],
+          "expansionSeed": "방탄소년단",
+          "ago": "27분 전",
+          "agoMinutes": 27,
+          "publishedLabel": "2026-11-25T21:40:19.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112606375053288_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "방탄소년단 정국, '2026 아시아 태평양 U30 젊은 리더' 선정..'글로벌 뮤직 아이콘' 존재감 빛냈다 최신 이슈와 핵심 내용 정리",
+              "home": "방탄소년단 정국, '2026 아시아 태평양 U30 젊은 리더' 선정..'글로벌 뮤직 아이콘' 존재감 빛냈다, 방탄소년단 정국, '2026 아시아 태평양 U30 젊은 리더' 선정..'글로벌 뮤직 아이콘' 존재감 빛냈다 관련 확인할 점",
+              "topic": "방탄소년단 정국, '2026 아시아 태평양 U30 젊은 리더' 선정..'글로벌 뮤직 아이콘' 존재감 빛냈다",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 방탄소년단 정국, '2026 아시아 태평양 U30 젊은 리더' 선정..'글로벌 뮤직 아이콘' 존재감 빛냈다",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/music/2026/11/26/2026112606375053288",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112606375053288_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "방탄소년단 정국, '2026 아시아 태평양 U30 젊은 리더' 선정..'글로벌 뮤직 아이콘' 존재감 빛냈다"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "issue-6",
+          "rank": 6,
+          "keyword": "'6주 연속 정상' 방탄소년단 진, 아이돌픽 11월 3주차 남돌 1위..누적 78회 1위",
+          "title": "'6주 연속 정상' 방탄소년단 진, 아이돌픽 11월 3주차 남돌 1위..누적 78회 1위",
+          "rawKeyword": "'6주 연속 정상' 방탄소년단 진, 아이돌픽 11월 3주차 남돌 1위..누적 78회 1위",
+          "description": "스타뉴스 최신 기사 · '6주 연속 정상' 방탄소년단 진, 아이돌픽 11월 3주차 남돌 1위..누적 78회 1위",
+          "priority": 95,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/music/2026/11/26/2026112606324281083",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "1위안",
+            "1위안 환율",
+            "1위안 한국돈",
+            "뮤직뱅크 1위",
+            "인기가요 1위",
+            "쇼음악중심 1위",
+            "음중 1위",
+            "더쇼 1위"
+          ],
+          "expansionSeed": "6주",
+          "ago": "33분 전",
+          "agoMinutes": 33,
+          "publishedLabel": "2026-11-25T21:34:52.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112606324281083_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "'6주 연속 정상' 방탄소년단 진, 아이돌픽 11월 3주차 남돌 1위..누적 78회 1위 최신 이슈와 핵심 내용 정리",
+              "home": "'6주 연속 정상' 방탄소년단 진, 아이돌픽 11월 3주차 남돌 1위..누적 78회 1위, '6주 연속 정상' 방탄소년단 진, 아이돌픽 11월 3주차 남돌 1위..누적 78회 1위 관련 확인할 점",
+              "topic": "'6주 연속 정상' 방탄소년단 진, 아이돌픽 11월 3주차 남돌 1위..누적 78회 1위",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · '6주 연속 정상' 방탄소년단 진, 아이돌픽 11월 3주차 남돌 1위..누적 78회 1위",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/music/2026/11/26/2026112606324281083",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112606324281083_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "'6주 연속 정상' 방탄소년단 진, 아이돌픽 11월 3주차 남돌 1위..누적 78회 1위"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T22:09:24.040Z"
+          }
+        },
+        {
+          "id": "issue-7",
+          "rank": 7,
           "keyword": "설경구 사진에 송윤아 태그..변요한, ♥티파니와 신혼집서 즐기는 시상식",
           "title": "설경구 사진에 송윤아 태그..변요한, ♥티파니와 신혼집서 즐기는 시상식",
           "rawKeyword": "설경구 사진에 송윤아 태그..변요한, ♥티파니와 신혼집서 즐기는 시상식",
           "description": "스타뉴스 최신 기사 · 설경구 사진에 송윤아 태그..변요한, ♥티파니와 신혼집서 즐기는 시상식",
-          "priority": 100,
+          "priority": 94,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/11/26/2026112601110646594",
           "sourceLabel": "스타뉴스",
@@ -3049,8 +3433,8 @@
             "px송윤아크림"
           ],
           "expansionSeed": "송윤아",
-          "ago": "3분 전",
-          "agoMinutes": 3,
+          "ago": "1시간 전",
+          "agoMinutes": 60,
           "publishedLabel": "2026-11-25T21:05:00.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112601110646594_1.jpg",
           "insight": {
@@ -3086,13 +3470,13 @@
           }
         },
         {
-          "id": "issue-2",
-          "rank": 2,
+          "id": "issue-8",
+          "rank": 8,
           "keyword": "\"합의 이혼 발표\" 원현주→양홍원은 왜 말이 없나?..혼자서만 '의미심장'",
           "title": "\"합의 이혼 발표\" 원현주→양홍원은 왜 말이 없나?..혼자서만 '의미심장'",
           "rawKeyword": "\"합의 이혼 발표\" 원현주→양홍원은 왜 말이 없나?..혼자서만 '의미심장'",
           "description": "스타뉴스 최신 기사 · \"합의 이혼 발표\" 원현주→양홍원은 왜 말이 없나?..혼자서만 '의미심장'",
-          "priority": 99,
+          "priority": 93,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/11/26/2026112601482090966",
           "sourceLabel": "스타뉴스",
@@ -3107,8 +3491,8 @@
             "의미심장하다"
           ],
           "expansionSeed": "이혼",
-          "ago": "8분 전",
-          "agoMinutes": 8,
+          "ago": "1시간 전",
+          "agoMinutes": 60,
           "publishedLabel": "2026-11-25T21:00:00.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112601482090966_1.jpg",
           "insight": {
@@ -3144,13 +3528,13 @@
           }
         },
         {
-          "id": "issue-3",
-          "rank": 3,
+          "id": "issue-9",
+          "rank": 9,
           "keyword": "손예진은 정해인, 현빈은 정려원..'빈진 부부', 청룡 수상 1년 후",
           "title": "손예진은 정해인, 현빈은 정려원..'빈진 부부', 청룡 수상 1년 후",
           "rawKeyword": "손예진은 정해인, 현빈은 정려원..'빈진 부부', 청룡 수상 1년 후",
           "description": "스타뉴스 최신 기사 · 손예진은 정해인, 현빈은 정려원..'빈진 부부', 청룡 수상 1년 후",
-          "priority": 98,
+          "priority": 92,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/11/26/2026112600503448859",
           "sourceLabel": "스타뉴스",
@@ -3165,8 +3549,8 @@
             "딱 1년만 미쳐라"
           ],
           "expansionSeed": "손예진",
-          "ago": "8분 전",
-          "agoMinutes": 8,
+          "ago": "1시간 전",
+          "agoMinutes": 60,
           "publishedLabel": "2026-11-25T21:00:00.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112600503448859_1.jpg",
           "insight": {
@@ -3202,13 +3586,13 @@
           }
         },
         {
-          "id": "issue-4",
-          "rank": 4,
+          "id": "issue-10",
+          "rank": 10,
           "keyword": "이정재, 논란 속..수척한 모습으로 오른 청룡 무대 \"많이 망설였다\"",
           "title": "이정재, 논란 속..수척한 모습으로 오른 청룡 무대 \"많이 망설였다\"",
           "rawKeyword": "이정재, 논란 속..수척한 모습으로 오른 청룡 무대 \"많이 망설였다\"",
           "description": "스타뉴스 최신 기사 · 이정재, 논란 속..수척한 모습으로 오른 청룡 무대 \"많이 망설였다\"",
-          "priority": 97,
+          "priority": 91,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/11/26/2026112600154376708",
           "sourceLabel": "스타뉴스",
@@ -3223,8 +3607,8 @@
             "마마 무대 순서"
           ],
           "expansionSeed": "이정재",
-          "ago": "1시간 전",
-          "agoMinutes": 60,
+          "ago": "2시간 전",
+          "agoMinutes": 120,
           "publishedLabel": "2026-11-25T20:06:00.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112600154376708_1.jpg",
           "insight": {
@@ -3258,183 +3642,9 @@
             "extraction": "playwright",
             "collectedAt": "2026-11-25T21:09:24.583Z"
           }
-        },
-        {
-          "id": "issue-5",
-          "rank": 5,
-          "keyword": "딘딘, '네모의 꿈' 피해자→첫사랑은 신현빈? \"영상 보니 웃고 있더라\"",
-          "title": "딘딘, '네모의 꿈' 피해자→첫사랑은 신현빈? \"영상 보니 웃고 있더라\"",
-          "rawKeyword": "딘딘, '네모의 꿈' 피해자→첫사랑은 신현빈? \"영상 보니 웃고 있더라\"",
-          "description": "스타뉴스 최신 기사 · 딘딘, '네모의 꿈' 피해자→첫사랑은 신현빈? \"영상 보니 웃고 있더라\"",
-          "priority": 96,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/26/2026112600525460674",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "신현빈 딘딘",
-            "신현빈 나무위키",
-            "딘딘 신현빈",
-            "군체 신현빈",
-            "신현빈 정우성",
-            "신현빈 군체",
-            "신현빈 향수",
-            "신현빈 장겨울"
-          ],
-          "expansionSeed": "신현빈",
-          "ago": "4시간 전",
-          "agoMinutes": 240,
-          "publishedLabel": "2026-11-25T16:09:10.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112600525460674_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "딘딘, '네모의 꿈' 피해자→첫사랑은 신현빈? \"영상 보니 웃고 있더라\" 최신 이슈와 핵심 내용 정리",
-              "home": "딘딘, '네모의 꿈' 피해자→첫사랑은 신현빈? \"영상 보니 웃고 있더라\", 딘딘, '네모의 꿈' 피해자→첫사랑은 신현빈? \"영상 보니 웃고 있더라\" 관련 확인할 점",
-              "topic": "딘딘, '네모의 꿈' 피해자→첫사랑은 신현빈? \"영상 보니 웃고 있더라\"",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 딘딘, '네모의 꿈' 피해자→첫사랑은 신현빈? \"영상 보니 웃고 있더라\"",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/broadcast-show/2026/11/26/2026112600525460674",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112600525460674_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "딘딘, '네모의 꿈' 피해자→첫사랑은 신현빈? \"영상 보니 웃고 있더라\""
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
-          }
-        },
-        {
-          "id": "issue-6",
-          "rank": 6,
-          "keyword": "딘딘, 올데프 타잔 되고 싶었나..\"'연애대상' 기대해\"",
-          "title": "딘딘, 올데프 타잔 되고 싶었나..\"'연애대상' 기대해\"",
-          "rawKeyword": "딘딘, 올데프 타잔 되고 싶었나..\"'연애대상' 기대해\"",
-          "description": "스타뉴스 최신 기사 · 딘딘, 올데프 타잔 되고 싶었나..\"'연애대상' 기대해\"",
-          "priority": 95,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/26/2026112523142343940",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "올데프 타잔",
-            "올데프 애니",
-            "올데프 영서",
-            "올데프 나무위키",
-            "올데프 백댄서",
-            "애니 올데프",
-            "올데프 crash",
-            "올데프 베일리"
-          ],
-          "expansionSeed": "딘딘",
-          "ago": "5시간 전",
-          "agoMinutes": 300,
-          "publishedLabel": "2026-11-25T15:52:25.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112523142343940_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "딘딘, 올데프 타잔 되고 싶었나..\"'연애대상' 기대해\" 최신 이슈와 핵심 내용 정리",
-              "home": "딘딘, 올데프 타잔 되고 싶었나..\"'연애대상' 기대해\", 딘딘, 올데프 타잔 되고 싶었나..\"'연애대상' 기대해\" 관련 확인할 점",
-              "topic": "딘딘, 올데프 타잔 되고 싶었나..\"'연애대상' 기대해\"",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 딘딘, 올데프 타잔 되고 싶었나..\"'연애대상' 기대해\"",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/broadcast-show/2026/11/26/2026112523142343940",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112523142343940_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "딘딘, 올데프 타잔 되고 싶었나..\"'연애대상' 기대해\""
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
-          }
-        },
-        {
-          "id": "issue-7",
-          "rank": 7,
-          "keyword": "'성량 깡패' 최재림, 발성 위해 논문까지 썼다..개구리 자세로 열창",
-          "title": "'성량 깡패' 최재림, 발성 위해 논문까지 썼다..개구리 자세로 열창",
-          "rawKeyword": "'성량 깡패' 최재림, 발성 위해 논문까지 썼다..개구리 자세로 열창",
-          "description": "스타뉴스 최신 기사 · '성량 깡패' 최재림, 발성 위해 논문까지 썼다..개구리 자세로 열창",
-          "priority": 94,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/26/2026112522232533743",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "열창 뜻",
-            "최재림 뮤지컬",
-            "최재림 나무위키",
-            "최재림 더쿠",
-            "시카고 최재림",
-            "최재림 시카고",
-            "더쿠 최재림",
-            "성량 뜻"
-          ],
-          "expansionSeed": "최재림",
-          "ago": "5시간 전",
-          "agoMinutes": 300,
-          "publishedLabel": "2026-11-25T15:50:54.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112522232533743_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "'성량 깡패' 최재림, 발성 위해 논문까지 썼다..개구리 자세로 열창 최신 이슈와 핵심 내용 정리",
-              "home": "'성량 깡패' 최재림, 발성 위해 논문까지 썼다..개구리 자세로 열창, '성량 깡패' 최재림, 발성 위해 논문까지 썼다..개구리 자세로 열창 관련 확인할 점",
-              "topic": "'성량 깡패' 최재림, 발성 위해 논문까지 썼다..개구리 자세로 열창",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · '성량 깡패' 최재림, 발성 위해 논문까지 썼다..개구리 자세로 열창",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/26/2026112522232533743",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112522232533743_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "'성량 깡패' 최재림, 발성 위해 논문까지 썼다..개구리 자세로 열창"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T21:09:24.583Z"
-          }
         }
       ]
     }
   ],
-  "updatedAt": "2026-11-25T21:11:42.537Z"
+  "updatedAt": "2026-11-25T22:10:46.133Z"
 }
