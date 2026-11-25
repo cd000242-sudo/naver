@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T16:21:59.628Z",
+ "builtAt": "2026-11-25T16:32:03.157Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "관세 15% 유지",
    "sources": [
     "nate"
    ],
-   "articles90": 30,
+   "articles90": 28,
    "recent20": 8,
-   "press": 21,
-   "firstArticleAt": "2026-11-25T14:52:00.000Z",
+   "press": 19,
+   "firstArticleAt": "2026-11-25T15:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美, 과잉생산 관세 추가…15% 상한은 유지",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T16:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929957?sid=104"
+     "title": "미국, 과잉 생산 관세 근거로 '한국 정부 지원·인프라 계획' 지목...'메...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T16:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438141?sid=104"
     },
     {
-     "title": "美, 과잉생산 301조 한국에 관세 15% 제안…한미 합의 수준 유지",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-25T16:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159563?sid=101"
+     "title": "뉴욕 증시, AI 매도세·관세 우려에 급락세...엔비디아 8% 넘게 하락",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T16:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438140?sid=104"
     },
     {
-     "title": "美, 한국산에 301조 관세 합산 15% 제안…김정관 “최종 15% 유지하면 선...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-25T16:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415609?sid=101"
+     "title": "美 USTR, '과잉생산 관세' 한국 15% 제안…산업부 \"이익균형 노력\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T16:27:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261126000018"
     }
    ]
   },
@@ -47,30 +47,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 29,
-   "recent20": 7,
-   "press": 20,
-   "firstArticleAt": "2026-11-25T14:52:00.000Z",
+   "articles90": 27,
+   "recent20": 8,
+   "press": 19,
+   "firstArticleAt": "2026-11-25T15:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美, 과잉생산 관세 추가…15% 상한은 유지",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T16:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929957?sid=104"
+     "title": "미국, 과잉 생산 관세 근거로 '한국 정부 지원·인프라 계획' 지목...'메...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T16:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438141?sid=104"
     },
     {
-     "title": "美, 과잉생산 301조 한국에 관세 15% 제안…한미 합의 수준 유지",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-25T16:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159563?sid=101"
+     "title": "뉴욕 증시, AI 매도세·관세 우려에 급락세...엔비디아 8% 넘게 하락",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T16:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438140?sid=104"
     },
     {
-     "title": "美, 한국산에 301조 관세 합산 15% 제안…김정관 “최종 15% 유지하면 선...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-25T16:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415609?sid=101"
+     "title": "美 USTR, '과잉생산 관세' 한국 15% 제안…산업부 \"이익균형 노력\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T16:27:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261126000018"
+    }
+   ]
+  },
+  {
+   "keyword": "가능한 사랑",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-25T15:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'청룡영화상' 나홍진 '호프' 최우수작품상…'가능한 사랑' 4관왕[종합]",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-25T16:20:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305782"
+    },
+    {
+     "title": "청룡영화상 작품상에 '호프'…'가능한 사랑' 남녀주연상 등 4관왕",
+     "press": "idaegu.co.kr",
+     "publishedAt": "2026-11-25T16:08:00.000Z",
+     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566539"
+    },
+    {
+     "title": "“그게 진짜 사랑” vs “찝찝해”⋯부부끼리 발톱 깎아줘도 ‘이것’은...",
+     "press": "kormedi.com",
+     "publishedAt": "2026-11-25T16:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/296/0000107823?sid=103"
     }
    ]
   },
@@ -80,7 +112,7 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-25T15:04:00.000Z",
    "exclusive": false,
@@ -105,44 +137,12 @@
      "link": "https://n.news.naver.com/mnews/article/025/0003568021?sid=110"
     }
    ]
-  },
-  {
-   "keyword": "젠슨 황 후계자 필요없다",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T15:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨황 \"승계 계획 필요 없다\"…기존 경영체제 유지",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-25T15:34:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1795620773693601276"
-    },
-    {
-     "title": "젠슨 황 '1극 체제' 그대로…\"중국 공산당 닮았다\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-25T15:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405859?sid=104"
-    },
-    {
-     "title": "돌아온 황 ‘마이웨이’… “승계 계획 필요 없다”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-25T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887486?sid=101"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1505,
-  "matched": 769,
+  "flagged": 1504,
+  "matched": 768,
   "avgLeadMin": 500,
   "recent": [
    {
