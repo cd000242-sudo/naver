@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T01:39:52.338Z",
+ "builtAt": "2026-11-25T01:49:56.261Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 21,
  "candidates": [
   {
    "keyword": "현대차그룹 완속충전기 공개",
    "sources": [
     "nate"
    ],
-   "articles90": 61,
-   "recent20": 18,
-   "press": 57,
-   "firstArticleAt": "2026-11-25T00:10:00.000Z",
+   "articles90": 58,
+   "recent20": 15,
+   "press": 54,
+   "firstArticleAt": "2026-11-25T00:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "현대차그룹이 찾은 전동화 공통분모…충전 경험의 표준화",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-25T01:38:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=756405"
+     "title": "[산업계 동향] 현대차그룹ㆍ한국타이어ㆍHJ중공업(11.25)",
+     "press": "weeklytoday.com",
+     "publishedAt": "2026-11-25T01:48:00.000Z",
+     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=803364"
     },
     {
-     "title": "현대차그룹, 3대 브랜드 통합 완속충전기 공개…내년 출시",
-     "press": "sateconomy.co.kr",
-     "publishedAt": "2026-11-25T01:36:00.000Z",
-     "link": "https://sateconomy.co.kr/news/view/1065576183074312"
+     "title": "현대차그룹, 현대차·기아·제네시스 ‘완속충전기’ 하나로 통합",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-25T01:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685943?sid=101"
     },
     {
-     "title": "현대차그룹, 글로벌 통합 완속충전기 공개...2027년 국내 출시",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-25T01:36:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566350"
+     "title": "현대차·기아·제네시스 완속충전기 하나로…'HMG 글로벌 완속충전기' 공...",
+     "press": "socialvalue.kr",
+     "publishedAt": "2026-11-25T01:42:00.000Z",
+     "link": "https://www.socialvalue.kr/news/view/1065577176853432"
     }
    ]
   },
@@ -47,30 +47,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 49,
-   "recent20": 8,
-   "press": 44,
+   "articles90": 54,
+   "recent20": 7,
+   "press": 50,
    "firstArticleAt": "2026-11-25T00:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"증거 사라질라\"…수능 시험지 '1년→5년 보관' 추진",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-25T01:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979772?sid=102"
+     "title": "교육부, 수능 시험지 보관기간 1년→5년 연장 추진…부정행위 끝까지 추...",
+     "press": "pointe.co.kr",
+     "publishedAt": "2026-11-25T01:44:00.000Z",
+     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=88419"
     },
     {
-     "title": "교육부, 수능 시험지 보관기간 5년으로 연장 추진",
-     "press": "kado.net",
-     "publishedAt": "2026-11-25T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213317?sid=102"
+     "title": "수능 부정행위 끝까지 추적…시험지 보관 기간 1년→5년",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-25T01:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685942?sid=102"
     },
     {
-     "title": "‘리트냥이’, ‘수능냥이’ 활개 친 영향?…수능시험지 보관 1년→5년...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-25T01:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005768576?sid=100"
+     "title": "수능 시험지 보관 기간 1년→5년으로 대폭 연장",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-25T01:42:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456511"
+    }
+   ]
+  },
+  {
+   "keyword": "국민은행",
+   "sources": [
+    "google"
+   ],
+   "articles90": 51,
+   "recent20": 7,
+   "press": 50,
+   "firstArticleAt": "2026-11-25T00:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국민은행, 공공금융 입지 확대...서울 구금고 점유율 20%→44%",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-25T01:48:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122639"
+    },
+    {
+     "title": "KB국민은행, 서울 구금고 11곳 확보…시중은행 최다",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-25T01:46:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=729337"
+    },
+    {
+     "title": "KB국민은행, 서울 자치구 금고 11곳 확보…시중은행 최대 점유율 달성",
+     "press": "queen.co.kr",
+     "publishedAt": "2026-11-25T01:36:00.000Z",
+     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466886"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 탄핵 5당 연대 제안",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 53,
+   "recent20": 19,
+   "press": 46,
+   "firstArticleAt": "2026-11-25T00:49:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "혁신당 신장식 \"김민석 조희대 신속탄핵 연대 제안 환영\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T01:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437733?sid=100"
+    },
+    {
+     "title": "김민석, 진보야당에 '탄핵 연대' 제안...\"완전한 내란 청산\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T01:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437732?sid=100"
+    },
+    {
+     "title": "김민석, ‘조희대 탄핵’ 5당 연대 공식 제안…신장식 “환영”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-25T01:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728172?sid=100"
     }
    ]
   },
@@ -79,144 +143,79 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 4,
-   "press": 20,
+   "articles90": 23,
+   "recent20": 5,
+   "press": 22,
    "firstArticleAt": "2026-11-25T00:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전, 고객정보 유출 2차 피해 차단 총력…전 고객 대상 3단계 보호대책...",
-     "press": "worktoday.co.kr",
-     "publishedAt": "2026-11-25T01:38:00.000Z",
-     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=92633"
+     "title": "한전, 고객정보 유출 2차피해 막는다..'3단계 선제적 보호대책' 가동",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T01:46:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125000329"
     },
     {
-     "title": "한전, 개인정보 유출 추가 피해 예방 총력…금융권과 공동 대응",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-25T01:32:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023093"
+     "title": "한전, 개인정보 유출 고객에 보안서비스 무상 제공…금융사기땐 최대 1...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-25T01:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207188?sid=101"
     },
     {
-     "title": "한전, 고객정보 유출 2차 피해 막는다…신용보호 서비스 1년 무료 제공",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-25T01:22:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026112509415524431d2373fc0f_1"
+     "title": "[메가이슈] 한전, 152만명분 개인정보 유출에 3단계 보호대책…과징금·...",
+     "press": "megaeconomy.co.kr",
+     "publishedAt": "2026-11-25T01:40:00.000Z",
+     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065576616170086"
     }
    ]
   },
   {
-   "keyword": "국민연금",
+   "keyword": "서울 지하철 정상 운영",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 19,
-   "recent20": 7,
-   "press": 19,
-   "firstArticleAt": "2026-11-25T00:10:00.000Z",
+   "articles90": 14,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-25T00:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "유족연금 중복수급권자 4년 새 68%↑…국민연금공단, 중복지급률 상향 ...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-25T01:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002249835?sid=101"
+     "title": "서울교통공사 노사 합의…지하철 1~8호선 정상 운행",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-25T01:28:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=410885"
     },
     {
-     "title": "국민연금공단, 유족연금 추가 지급률 50% 인상에 신중…내년 재정추계",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-25T01:34:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261125506177?OutUrl=naver"
-    },
-    {
-     "title": "국민연금 68세부터 받는다?…복지장관 직접 해명",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-25T01:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545756?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "정년연장",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 24,
-   "recent20": 8,
-   "press": 18,
-   "firstArticleAt": "2026-11-25T00:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "양대노총 \"정년연장, 당정 결단해야…해 넘기면 정부·국회 책임\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-25T01:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609427?sid=101"
-    },
-    {
-     "title": "중소기업 10곳 중 8곳 \"정년연장보다 재고용 선호\"",
-     "press": "issuenbiz.com",
-     "publishedAt": "2026-11-25T01:36:00.000Z",
-     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=82003"
-    },
-    {
-     "title": "중소기업 10곳 중 8곳 \"정년연장보다 퇴직 후 재고용 원해\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-25T01:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609425?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "주주",
-   "sources": [
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-25T01:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[특징주] 다올투자증권 '최대주주 경영권 매각 추진' 보도에 22%↑",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-25T01:34:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904316"
-    },
-    {
-     "title": "가상자산사업자 28개 신고 제출...대주주 적격성도 심사, 부채비율은 20...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-25T01:30:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104954"
-    },
-    {
-     "title": "\"지배주주 '먼저 팔 기회'는 주주가 부여해야\"…의결권 자문사도 선행매...",
-     "press": "view.asiae.co.kr",
+     "title": "서울지하철 임단협 타결,파업 철회…'출근길 대란' 피했다",
+     "press": "seouleconews.com",
      "publishedAt": "2026-11-25T01:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847494?sid=101"
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95233"
+    },
+    {
+     "title": "서울 지하철 총파업 극적 철회…'구조조정 보류·신규 채용·임금 3.5% 인...",
+     "press": "widedaily.com",
+     "publishedAt": "2026-11-25T01:04:00.000Z",
+     "link": "https://www.widedaily.com/news/articleView.html?idxno=304627"
     }
    ]
   },
   {
    "keyword": "김종철 경찰청장 첫 행보",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 5,
+   "recent20": 1,
    "press": 8,
    "firstArticleAt": "2026-11-25T00:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "취임 첫 행보로 영등포역 새벽 순찰… 김종철 경찰청장 \"피해자 보호는...",
+     "title": "김종철 경찰청장, 취임 첫 행보로 새벽 순찰… \"피해자 보호는 제1원칙...",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-25T01:38:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000967617?sid=102"
@@ -228,55 +227,22 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009308724?sid=102"
     },
     {
-     "title": "김종철 경찰청장, 취임 후 첫 행보로 영등포역 일대 도보 순찰",
+     "title": "김종철 신임 경찰청장, 영등포역 일대 도보 순찰",
      "press": "news1.kr",
      "publishedAt": "2026-11-25T01:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308722?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "양홍원 원현주 이혼",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T00:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "하루 사이 두 커플 마침표…이도현·임지연 결별→양홍원·원현주 이혼...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-25T01:18:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795566483531481006"
-    },
-    {
-     "title": "\"행복만 해라\"…양홍원과 1달만 '파경', 원현주에 쏟아진 응원 [MHN:피드...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-25T00:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000493006"
-    },
-    {
-     "title": "김새롬, 이혼 9년 만 재혼....\"법적 짝꿍 생겼다\"",
-     "press": "raonnews.com",
-     "publishedAt": "2026-11-25T00:48:00.000Z",
-     "link": "https://www.raonnews.com/news/article.html?no=63049"
+     "link": "https://n.news.naver.com/mnews/article/421/0009308723?sid=102"
     }
    ]
   },
   {
    "keyword": "스트레이 키즈 새해 고척돔",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T00:17:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-25T00:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -299,141 +265,13 @@
      "link": "https://m.entertain.naver.com/article/030/0003489468"
     }
    ]
-  },
-  {
-   "keyword": "빅테크",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T00:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"한국에 또 '돈벼락' 떨어지나\"…美 빅테크들 '발동동'",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-25T01:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357928?sid=101"
-    },
-    {
-     "title": "美 전력망 병목에 AI 인프라 빌리는 빅테크…韓 데이터센터 수주 기회",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-25T01:12:00.000Z",
-     "link": "https://www.ajunews.com/view/20261125100922575"
-    },
-    {
-     "title": "은행·빅테크 스테이블코인 합종연횡 재점화 vs 안갯속?",
-     "press": "news.bizwatch.co.kr",
-     "publishedAt": "2026-11-25T01:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/648/0000052958?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "음바페 골 레알 5-1 대승",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T00:14:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "무리뉴의 레알, 미친 10연승 행진! 음바페 멀티골로 챔스에서 PSV 5-1 대파",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-25T01:05:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/477/0000640705"
-    },
-    {
-     "title": "‘후반에만 5골’…무리뉴 ‘용병술’ 힘입은 레알 마드리드, UCL 5연승",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-25T00:20:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611250023"
-    },
-    {
-     "title": "'음바페 멀티골' 레알 마드리드,에인트호번 잡고 공식전 10연승 질주",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-25T00:14:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/469/0000967603"
-    }
-   ]
-  },
-  {
-   "keyword": "국무회의",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T00:31:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "남원, 국립의전원법 시행령 제정안, 국무회의 의결",
-     "press": "news.lghellovision.net",
-     "publishedAt": "2026-11-25T01:16:00.000Z",
-     "link": "http://news.lghellovision.net/news/articleView.html?idxno=563639"
-    },
-    {
-     "title": "\"토론의 장이라면서\"…국무회의 발언 불발에 오세훈측 '불만'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T01:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014343640?sid=102"
-    },
-    {
-     "title": "남원 국립의전원 설립 시행령 국무회의 의결",
-     "press": "jtv.co.kr",
-     "publishedAt": "2026-11-25T00:32:00.000Z",
-     "link": "https://www.jtv.co.kr/news/article.php?id=72311"
-    }
-   ]
-  },
-  {
-   "keyword": "박지훈 변호사",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T00:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박지훈, 폐암으로 떠난 父에 그리움 고백 \"돌아가시기 직전에 사랑 알아...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-25T01:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000493021"
-    },
-    {
-     "title": "한승훈 변호사, 자작곡 13곡 발표했는데…\"월 저작권료 1500원\"",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T00:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083685"
-    },
-    {
-     "title": "진시몬, 미국 변호사 아들이 부른 노래 듣더니...\"목소리가 저랑 똑같더...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T00:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083684"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1359,
-  "matched": 721,
-  "avgLeadMin": 509,
+  "flagged": 1361,
+  "matched": 720,
+  "avgLeadMin": 507,
   "recent": [
    {
     "keyword": "김동완 SNS 중단",
