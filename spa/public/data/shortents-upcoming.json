@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T15:01:20.442Z",
+ "builtAt": "2026-11-25T15:11:24.028Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "관세 15% 유지",
    "sources": [
     "nate"
    ],
-   "articles90": 67,
-   "recent20": 9,
-   "press": 48,
-   "firstArticleAt": "2026-11-25T13:33:00.000Z",
+   "articles90": 68,
+   "recent20": 14,
+   "press": 47,
+   "firstArticleAt": "2026-11-25T13:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美USTR(무역대표부) '과잉생산 관세' 예고 발표…\"한국 관세 15% 상한 유...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-25T15:00:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630749"
+     "title": "美, 14개 교역국에 과잉생산 관세 추진…韓 15% 상한 유지",
+     "press": "bloter.net",
+     "publishedAt": "2026-11-25T15:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/293/0000093832?sid=101"
     },
     {
-     "title": "미 USTR, '과잉생산 관세' 발표...\"한국, 일본, EU 등 관세 15% 유지\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T14:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438111?sid=104"
+     "title": "미국 과잉생산 관세, 도대체 무슨 뜻인가",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T15:08:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286320"
     },
     {
-     "title": "뉴욕증시, AI 매도세·관세 우려에 하락 출발",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-25T14:58:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446553"
+     "title": "美USTR, 14개 경제주체에 과잉생산 관세…韓 15% 상한 유지(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T15:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016463973?sid=104"
     }
    ]
   },
@@ -47,160 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 63,
-   "recent20": 11,
+   "articles90": 65,
+   "recent20": 14,
    "press": 46,
-   "firstArticleAt": "2026-11-25T13:33:00.000Z",
+   "firstArticleAt": "2026-11-25T13:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美USTR(무역대표부) '과잉생산 관세' 예고 발표…\"한국 관세 15% 상한 유...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-25T15:00:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630749"
+     "title": "美, 14개 교역국에 과잉생산 관세 추진…韓 15% 상한 유지",
+     "press": "bloter.net",
+     "publishedAt": "2026-11-25T15:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/293/0000093832?sid=101"
     },
     {
-     "title": "뉴욕증시, AI 매도세·관세 우려에 하락 출발",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-25T14:58:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446553"
-    },
-    {
-     "title": "미 USTR, '과잉생산 관세' 발표...\"한국, 일본, EU 등 관세 15% 유지\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T14:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438111?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "전도연, 청룡 여우주연상 수상",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 61,
-   "recent20": 10,
-   "press": 40,
-   "firstArticleAt": "2026-11-25T13:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[TOP영상] 설경구, 최초로 남우주연상 4회 수상에 빛나는 대배우(제47회...",
+     "title": "미국 과잉생산 관세, 도대체 무슨 뜻인가",
      "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T15:00:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286312"
+     "publishedAt": "2026-11-25T15:08:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286320"
     },
     {
-     "title": "47회 청룡영화상 주연상 수상한 전도연과 설경구",
+     "title": "美USTR, 14개 경제주체에 과잉생산 관세…韓 15% 상한 유지(종합)",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T14:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/001/0016463969"
-    },
-    {
-     "title": "47회 청룡영화상 여우주연상 수상한 전도연",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T14:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/001/0016463967"
-    }
-   ]
-  },
-  {
-   "keyword": "청룡영화상 2026",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 41,
-   "recent20": 4,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T13:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 2026 청룡영화상 구교환, 에너지 넘침",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-25T14:58:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/25/2026112550402.html"
-    },
-    {
-     "title": "[포토] 2026 청룡영화상, 레드카펫 오른 이민호",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-25T14:58:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/25/2026112550403.html"
-    },
-    {
-     "title": "[포토] 2026 청룡영화상 서현우, 부드러운 카리스마",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-25T14:44:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/25/2026112550401.html"
-    }
-   ]
-  },
-  {
-   "keyword": "u-17 월드컵",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T14:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[IN REVIEW] 새로운 韓 황금세대 등장...'남이안 골' 한국 U-17, 에콰도르...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-25T15:00:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/413/0000227153"
-    },
-    {
-     "title": "U17 축구대표팀, 에콰도르 꺾고 3전 전승…조 1위로 월드컵 32강행",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T14:50:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/421/0009310578"
-    },
-    {
-     "title": "김지호 맹활약 U-17 대표팀, 에콰도르 3-2 제압…조별리그 3전 전승 32강...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T14:42:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286310"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 스파이 의혹",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T13:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "시골 간호학교 출신에서 젠슨 황 옆자리까지…‘中 스파이 의혹’ 앨리...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-25T14:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686218?sid=104"
-    },
-    {
-     "title": "젠슨 황 복귀 비판 봇물…중국 스파이 의혹 수면 위로",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-25T13:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301337?sid=104"
-    },
-    {
-     "title": "젠슨황, 엔비디아 전사회의 열고 사과...\"심리치료 받고 있다\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T13:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438077?sid=104"
+     "publishedAt": "2026-11-25T15:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016463973?sid=104"
     }
    ]
   },
@@ -209,39 +79,39 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
    "firstArticleAt": "2026-11-25T14:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "[사설] 여당의 대법원장 탄핵 열차 급가속, 정당성 없는 권한 남용",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-25T15:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967810?sid=110"
+    },
+    {
+     "title": "조희대 탄핵 카운트다운…연말 정국 급랭",
+     "press": "ksilbo.co.kr",
+     "publishedAt": "2026-11-25T15:04:00.000Z",
+     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073604"
+    },
+    {
      "title": "‘진보 연대’로 탄핵 밀어붙이는 여…장외 여론전에 집중하는 야",
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-25T14:38:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012301350?sid=100"
-    },
-    {
-     "title": "[사설] “6개 사유 뭉뚱그리면 충분”… 명분 없는 탄핵 자인한 꼴",
-     "press": "segye.com",
-     "publishedAt": "2026-11-25T14:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178167?sid=110"
-    },
-    {
-     "title": "[투나잇이슈] 與, '조희대 탄핵' 연대 제안…野 \"죄 나누기\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T14:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929940?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1522,
-  "matched": 785,
-  "avgLeadMin": 501,
+  "flagged": 1515,
+  "matched": 779,
+  "avgLeadMin": 499,
   "recent": [
    {
     "keyword": "도로공사 6연승 선두 질주",
