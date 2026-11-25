@@ -47,8 +47,23 @@ export function textFlagsOf(image: ThumbnailTextFlags | null | undefined): Requi
 export interface PublishOverlayContext {
   /** The post's "put copy on the thumbnail" setting at publish time. */
   readonly includeThumbnailText: boolean;
-  /** Shopping-connect thumbnails keep the product photo untouched. */
+  /** Shopping-connect post: the copy may go only on the collected product photo used as the thumbnail. */
   readonly shoppingConnect: boolean;
+}
+
+/** Providers of an untouched collected product photo (no copy in the pixels). */
+const SHOPPING_COPY_PHOTO_PROVIDERS = new Set(['collected-image', 'collected', 'shopping']);
+
+/**
+ * A shopping thumbnail that is the collected product photo itself. Main's image whitelist keeps only
+ * `provider`/`isThumbnail`, so the provider is the signal that survives to the editor.
+ */
+export function isShoppingProductPhotoForCopy(
+  image: (ThumbnailTextFlags & { provider?: unknown; isShoppingRepresentativeThumbnail?: boolean }) | null | undefined,
+): boolean {
+  if (!image || image.textRendered === true) return false;
+  return image.isShoppingRepresentativeThumbnail === true
+    || SHOPPING_COPY_PHOTO_PROVIDERS.has(String(image.provider || ''));
 }
 
 /**
@@ -58,11 +73,18 @@ export interface PublishOverlayContext {
  * overlay, so it is left alone — a missing copy is visible and fixable, a doubled one ruins the card.
  */
 export function publishOverlayDecision(
-  image: (ThumbnailTextFlags & { preserveOriginal?: boolean }) | null | undefined,
+  image: (ThumbnailTextFlags & { preserveOriginal?: boolean; provider?: unknown; isShoppingRepresentativeThumbnail?: boolean }) | null | undefined,
   context: PublishOverlayContext,
 ): { apply: boolean; reason: string } {
   if (!context.includeThumbnailText) return { apply: false, reason: '썸네일 문구 설정 꺼짐' };
-  if (context.shoppingConnect) return { apply: false, reason: '쇼핑커넥트 원본 유지' };
+  // [2026-11-25 owner decision] Shopping keeps the product photo and, with the setting ON, gets the copy on top once.
+  if (context.shoppingConnect) {
+    if (image?.textRendered === true) return { apply: false, reason: '이미 이미지에 문구가 있음' };
+    if (!isShoppingProductPhotoForCopy(image)) {
+      return { apply: false, reason: '쇼핑 대표가 수집 상품 사진이 아님 — 겹칠 수 있어 그리지 않음' };
+    }
+    return { apply: true, reason: '쇼핑 대표 상품 사진 위에 문구 1회' };
+  }
   if (image?.preserveOriginal === true) return { apply: false, reason: '원본 유지 표시' };
   const state = thumbnailTextState(image);
   if (state === 'TEXT_IN_IMAGE') return { apply: false, reason: '이미 이미지에 문구가 있음' };

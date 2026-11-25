@@ -4101,7 +4101,8 @@ async function initMultiAccountPublishModal() {
                             generatedImages: publishImages,
                         } : null,
                         keepBrowserOpen: true,
-                        includeThumbnailText: queueItem.includeThumbnailText ?? false,
+                        // [2026-11-25] Same OR this item's image generation uses (thumbnailTextInclude above).
+                        includeThumbnailText: queueItem.includeThumbnailText === true || itemPipelineCfg.image.thumbnailTextInclude === true,
                         contentMode: queueItem.contentMode,
                         affiliateLink: queueItem.affiliateLink,
                         videoOption: queueItem.videoOption,

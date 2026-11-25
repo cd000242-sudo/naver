@@ -851,7 +851,8 @@ export async function generateThumbnailWithTitle(
 export async function generateThumbnailWithTextOverlay(
   productImagePath: string,
   title: string,
-  outputDir?: string
+  outputDir?: string,
+  options?: { requireSourceImage?: boolean }
 ): Promise<string> {
   const safeTitle = escapeHtmlForBanner(title || '상품 리뷰');
 
@@ -920,6 +921,11 @@ export async function generateThumbnailWithTextOverlay(
       console.error('[Thumbnail Overlay] ⚠️ 로컬 파일 읽기 실패, 그라데이션 폴백:', e);
       imageUrl = '';
     }
+  }
+
+  // A product thumbnail without the product is worse than no copy: let the caller keep the original.
+  if (!imageUrl && options?.requireSourceImage === true) {
+    throw new Error('상품 사진을 불러오지 못해 문구 합성을 하지 않음');
   }
 
   // 배경 스타일: 이미지가 있으면 이미지, 없으면 그라데이션

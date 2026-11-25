@@ -1225,7 +1225,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         });
         if (overlayDecision.apply) {
           // ✅ 나노바나나프로 외 엔진: AI 이미지 위에 SVG 텍스트 오버레이 적용
-          self.log(`   🎨 AI 생성 썸네일에 SVG 텍스트 오버레이 적용 중... (엔진: ${imageProvider})`);
+          self.log(`   🎨 AI 생성 썸네일에 SVG 텍스트 오버레이 적용 중... (엔진: ${imageProvider}) · 발행 문구: ${overlayDecision.reason}`);
           try {
             const { generateThumbnailWithTextOverlay } = await import('../image/tableImageGenerator.js');
             const blogTitle = resolved.title || structured.selectedTitle || '';
@@ -1233,7 +1233,13 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
             if (imagePath && blogTitle) {
               // [SPEC-NAVER-IMAGE-2026 V1 §9] A short phrase, never the whole title.
-              const overlayPath = await generateThumbnailWithTextOverlay(imagePath, resolveThumbnailOverlayText(blogTitle));
+              // Shopping: the product photo must load, otherwise fail and keep the original (no gradient card).
+              const overlayPath = await generateThumbnailWithTextOverlay(
+                imagePath,
+                resolveThumbnailOverlayText(blogTitle),
+                undefined,
+                { requireSourceImage: isShoppingConnectModeGlobal === true },
+              );
               if (overlayPath) {
                 self.log(`   ✅ 텍스트 오버레이 썸네일 생성 완료`);
                 // [2026-08-17] AI 생성 썸네일 → provenance 전달로 AI 마크 대상에 포함
@@ -1279,6 +1285,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             if ((overlayError as Error)?.message?.startsWith('IMAGE_INSERTION_FAILED:')) throw overlayError;
             self.log(`   ⚠️ 텍스트 오버레이 실패: ${(overlayError as Error).message} → 원본 삽입`);
             await self.insertImagesAtCurrentCursor(introImages, page, frame, resolved.affiliateLink);
+            thumbnailInsertedInIntro = true;
+            introImages.forEach((img: any) => { const p = img?.filePath || img?.url; if (p) usedImagePaths.add(p); });
           }
         } else {
           // ✅ 나노바나나프로: AI가 직접 한글 텍스트 포함 → 그대로 삽입

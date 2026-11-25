@@ -19,6 +19,8 @@ function recovery(name: string) {
     self: { log: vi.fn(), insertImagesAtCurrentCursor: vi.fn(async () => undefined) },
     introImages: [{ filePath: '/fixture/one.png' }, { filePath: '/fixture/two.png' }],
     page: {}, frame: {}, resolved: { affiliateLink: undefined }, recordSilentFailure: vi.fn(),
+    // [2026-11-25] The overlay fallback now also marks the intro thumbnail as inserted.
+    usedImagePaths: new Set<string>(), thumbnailInsertedInIntro: false,
   };
   const compiled = ts.transpileModule(`async function recover(${name}: unknown) ${clause.block.getText(source)}`, {
     compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },

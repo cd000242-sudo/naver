@@ -2742,6 +2742,8 @@ export async function handleSemiAutoPublish(options: { ldbAutoDraft?: boolean } 
     categoryName: UnifiedDOMCache.getRealCategoryName(), // ✅ [2026-02-11 FIX] 카테고리 이름(text) 전달
     // ✅ [2026-02-19] 반자동: 제휴링크 자동 감지 (URL 필드에서 자동 감지)
     affiliateLink: semiAutoAffiliateLink || '',
+    // [2026-11-25] Same "thumbnail copy" setting full-auto reads (pipelineCfg.image.thumbnailTextInclude).
+    includeThumbnailText: semiPipelineCfg.image.thumbnailTextInclude,
     contentMode: semiAutoContentMode
   };
 

@@ -3050,7 +3050,7 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
         thumbnailFromStorage ??
         thumbnailTextCheckbox?.checked ?? false);
     if (isShoppingConnect) {
-        console.log(`[AI Images] ✅ 쇼핑커넥트 모드: 대표 상품 원본을 썸네일로 보존 (텍스트 합성 없음)`);
+        console.log(`[AI Images] ✅ 쇼핑커넥트 모드: 대표 상품 원본을 썸네일로 보존 (썸네일 문구 설정이 켜져 있으면 발행 때 사진 위에 1회)`);
     }
     let collectedImages = isShoppingConnect
         ? (formData.collectedImages || imageContent.collectedImages || imageContent.images || [])

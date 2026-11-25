@@ -617,6 +617,9 @@ export async function executePublishing(
             collectedImages: payload.collectedImages, // ✅ [2026-01-19] 수집된 제품 이미지 전달 (썸네일용)
             publishMode: payload.publishMode,
             skipImages: payload.skipImages,
+            // [2026-11-25] The "thumbnail copy" setting was never forwarded here, so every publish logged
+            //   "썸네일 문구 설정 꺼짐". Same field every renderer path already sends.
+            includeThumbnailText: (payload as any).includeThumbnailText === true,
             // ✅ [2026-05-25 v2.10.355] 반자동 모드 시 봇 감지 백오프 우회 (payload.skipBotBackoff → automation.run runOptions)
             skipBotBackoff: (payload as any).skipBotBackoff === true,
             // [2026-10-08 사장님] Only a semi-auto publish the user pressed may re-check a stale account stop
