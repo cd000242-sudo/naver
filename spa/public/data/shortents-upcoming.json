@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T01:49:56.261Z",
+ "builtAt": "2026-11-25T02:00:00.055Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 23,
  "candidates": [
-  {
-   "keyword": "현대차그룹 완속충전기 공개",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 58,
-   "recent20": 15,
-   "press": 54,
-   "firstArticleAt": "2026-11-25T00:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[산업계 동향] 현대차그룹ㆍ한국타이어ㆍHJ중공업(11.25)",
-     "press": "weeklytoday.com",
-     "publishedAt": "2026-11-25T01:48:00.000Z",
-     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=803364"
-    },
-    {
-     "title": "현대차그룹, 현대차·기아·제네시스 ‘완속충전기’ 하나로 통합",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-25T01:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685943?sid=101"
-    },
-    {
-     "title": "현대차·기아·제네시스 완속충전기 하나로…'HMG 글로벌 완속충전기' 공...",
-     "press": "socialvalue.kr",
-     "publishedAt": "2026-11-25T01:42:00.000Z",
-     "link": "https://www.socialvalue.kr/news/view/1065577176853432"
-    }
-   ]
-  },
   {
    "keyword": "수능 시험지 폐기",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 54,
-   "recent20": 7,
-   "press": 50,
+   "articles90": 61,
+   "recent20": 11,
+   "press": 56,
    "firstArticleAt": "2026-11-25T00:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "교육부, 수능 시험지 보관기간 1년→5년 연장 추진…부정행위 끝까지 추...",
-     "press": "pointe.co.kr",
-     "publishedAt": "2026-11-25T01:44:00.000Z",
-     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=88419"
+     "title": "수능 시험지 보관기간 5년으로 연장…교육부 규정 개선",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-25T01:58:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611250076"
     },
     {
-     "title": "수능 부정행위 끝까지 추적…시험지 보관 기간 1년→5년",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-25T01:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685942?sid=102"
+     "title": "수능 시험지 보관 기관 1년→5년 연장 “부정행위 끝까지 추적”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-25T01:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765018?sid=102"
     },
     {
-     "title": "수능 시험지 보관 기간 1년→5년으로 대폭 연장",
-     "press": "goodmorningcc.com",
-     "publishedAt": "2026-11-25T01:42:00.000Z",
-     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456511"
-    }
-   ]
-  },
-  {
-   "keyword": "국민은행",
-   "sources": [
-    "google"
-   ],
-   "articles90": 51,
-   "recent20": 7,
-   "press": 50,
-   "firstArticleAt": "2026-11-25T00:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국민은행, 공공금융 입지 확대...서울 구금고 점유율 20%→44%",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-25T01:48:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122639"
-    },
-    {
-     "title": "KB국민은행, 서울 구금고 11곳 확보…시중은행 최다",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-25T01:46:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=729337"
-    },
-    {
-     "title": "KB국민은행, 서울 자치구 금고 11곳 확보…시중은행 최대 점유율 달성",
-     "press": "queen.co.kr",
-     "publishedAt": "2026-11-25T01:36:00.000Z",
-     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466886"
+     "title": "'AI 이용 부정행위 논란'에 교육부, 수능 시험지 보관기간 5년 연장 추진",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-25T01:56:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244137"
     }
    ]
   },
@@ -111,30 +47,94 @@
    "sources": [
     "nate"
    ],
-   "articles90": 53,
-   "recent20": 19,
-   "press": 46,
+   "articles90": 59,
+   "recent20": 10,
+   "press": 52,
    "firstArticleAt": "2026-11-25T00:49:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "혁신당 신장식 \"김민석 조희대 신속탄핵 연대 제안 환영\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T01:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437733?sid=100"
+     "title": "김민석 \"조희대 대법원장 탄핵 위한 5당 연대 공식 제안\"",
+     "press": "busan.com",
+     "publishedAt": "2026-11-25T01:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001408857?sid=100"
     },
     {
-     "title": "김민석, 진보야당에 '탄핵 연대' 제안...\"완전한 내란 청산\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T01:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437732?sid=100"
+     "title": "조국에 손 내민 김민석 “조희대 탄핵 연대 제안···완전한 내란 청산...",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-25T01:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053631?sid=100"
     },
     {
-     "title": "김민석, ‘조희대 탄핵’ 5당 연대 공식 제안…신장식 “환영”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-25T01:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728172?sid=100"
+     "title": "김민석, 진보야당에 '조희대 탄핵 연대' 제안…\"시민사회와도 연대 넓혀...",
+     "press": "goodkyung.com",
+     "publishedAt": "2026-11-25T01:54:00.000Z",
+     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293850"
+    }
+   ]
+  },
+  {
+   "keyword": "국민은행",
+   "sources": [
+    "google"
+   ],
+   "articles90": 50,
+   "recent20": 8,
+   "press": 49,
+   "firstArticleAt": "2026-11-25T00:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "KB국민은행, 서울시 11개 구금고 유치..시중은행 최다",
+     "press": "smarttoday.co.kr",
+     "publishedAt": "2026-11-25T01:56:00.000Z",
+     "link": "https://www.smarttoday.co.kr/ko-kr/articles/114048"
+    },
+    {
+     "title": "KB국민은행, 서울 구금고 11곳 확보… 자치구 금고 점유율 44%로 확대",
+     "press": "koreaittimes.com",
+     "publishedAt": "2026-11-25T01:56:00.000Z",
+     "link": "https://www.koreaittimes.com/news/articleView.html?idxno=159441"
+    },
+    {
+     "title": "KB국민은행, 서울시 11개 구금고 유치…점유율 선두",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-25T01:56:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611250064"
+    }
+   ]
+  },
+  {
+   "keyword": "현대차그룹 완속충전기 공개",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 53,
+   "recent20": 6,
+   "press": 49,
+   "firstArticleAt": "2026-11-25T00:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "현대차그룹, 글로벌 통합 완속충전기 공개…2027년 국내 출시",
+     "press": "weekly.hankooki.com",
+     "publishedAt": "2026-11-25T01:58:00.000Z",
+     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7195639"
+    },
+    {
+     "title": "현대자동차그룹, 'HMG 글로벌 완속충전기' 공개",
+     "press": "cnbnews.com",
+     "publishedAt": "2026-11-25T01:50:00.000Z",
+     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1025201"
+    },
+    {
+     "title": "[산업계 동향] 현대차그룹ㆍ한국타이어ㆍHJ중공업(11.25)",
+     "press": "weeklytoday.com",
+     "publishedAt": "2026-11-25T01:48:00.000Z",
+     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=803364"
     }
    ]
   },
@@ -143,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 5,
-   "press": 22,
-   "firstArticleAt": "2026-11-25T00:22:00.000Z",
+   "articles90": 21,
+   "recent20": 3,
+   "press": 20,
+   "firstArticleAt": "2026-11-25T00:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한전, 개인정보 유출 고객에 최대 1000만원 보험…“피해방지에 역량 집...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-25T01:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728183?sid=101"
+    },
     {
      "title": "한전, 고객정보 유출 2차피해 막는다..'3단계 선제적 보호대책' 가동",
      "press": "newspim.com",
@@ -161,12 +167,6 @@
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-25T01:41:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001207188?sid=101"
-    },
-    {
-     "title": "[메가이슈] 한전, 152만명분 개인정보 유출에 3단계 보호대책…과징금·...",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-25T01:40:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065576616170086"
     }
    ]
   },
@@ -175,10 +175,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 14,
+   "articles90": 9,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-25T00:22:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-25T00:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,14 +203,46 @@
    ]
   },
   {
+   "keyword": "급여 지원",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T00:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "건보공단 특사경 도입에 간호협회도 협력⋯“적극 지원”",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-25T01:48:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2652707"
+    },
+    {
+     "title": "KT&G, 고립·보호종료 청년 겨울나기 지원… 성동구 300가구에 김장김치...",
+     "press": "ilyoseoul.co.kr",
+     "publishedAt": "2026-11-25T01:44:00.000Z",
+     "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=525534"
+    },
+    {
+     "title": "강릉시 ‘2027년 청년어촌정착지원사업’ 대상자 모집",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-25T01:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001233265?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "김종철 경찰청장 첫 행보",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T00:28:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-25T00:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -227,10 +259,10 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009308724?sid=102"
     },
     {
-     "title": "김종철 신임 경찰청장, 영등포역 일대 도보 순찰",
+     "title": "김종철 경찰청장, 취임 후 첫 행보로 영등포역 일대 도보 순찰",
      "press": "news1.kr",
      "publishedAt": "2026-11-25T01:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308723?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/421/0009308722?sid=102"
     }
    ]
   },
@@ -239,10 +271,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T00:22:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-25T00:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -269,7 +301,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1361,
+  "flagged": 1362,
   "matched": 720,
   "avgLeadMin": 507,
   "recent": [
