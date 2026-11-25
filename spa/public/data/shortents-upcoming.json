@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T10:10:08.621Z",
+ "builtAt": "2026-11-25T10:20:12.316Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,147 +8,18 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 3,
  "candidates": [
-  {
-   "keyword": "청해부대 임무 확대",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 32,
-   "recent20": 7,
-   "press": 29,
-   "firstArticleAt": "2026-11-25T08:43:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 “청해부대 임무 넓히되 전쟁 불개입 원칙 지킬 것…호르무즈...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-25T10:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133810?sid=100"
-    },
-    {
-     "title": "李, 청해부대 작전구역 확대에 \"전쟁 불개입 분명히 지킬 것\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-25T10:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261125182954424"
-    },
-    {
-     "title": "李 “청해부대 작전범위 확대…전쟁 불개입 원칙 분명히 지킬 것”",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-25T09:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415561?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "창원지법 법관 탄핵 헌법 훼손",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 24,
-   "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-25T08:44:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "창원지법 전체판사회의 \"법관 탄핵 추진, 사법권 독립·헌법 가치 훼손...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T10:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438015?sid=102"
-    },
-    {
-     "title": "조희대 탄핵 추진에 창원지법 판사들 들고 일어났다",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-25T10:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887448?sid=102"
-    },
-    {
-     "title": "창원지법 \"법관 탄핵, 헌법가치 훼손\"…일선 법원 첫 성명",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-25T10:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000555603?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "산업장관 52시간 특례",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 23,
-   "recent20": 2,
-   "press": 22,
-   "firstArticleAt": "2026-11-25T08:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "산업장관 “52시간 특례, 당장 내일도 늦다”",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-25T10:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061197?sid=101"
-    },
-    {
-     "title": "김정관, 초광역특구법 R&D 인력 52시간 근무 예외 필요 재차 강조…“초...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-25T09:54:00.000Z",
-     "link": "https://www.viva100.com/article/20261125501389"
-    },
-    {
-     "title": "산업장관, 반도체 R&D 주52시간 특례 촉구",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-25T09:50:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001845"
-    }
-   ]
-  },
-  {
-   "keyword": "발언하는 이재명 대통령",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 21,
-   "recent20": 1,
-   "press": 20,
-   "firstArticleAt": "2026-11-25T08:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령 “공적임대, 중산층도 선택하는 주거사다리로 바꿔야”",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-25T09:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485040?sid=100"
-    },
-    {
-     "title": "李대통령 \"공적임대주택, 중산층도 선택할 수 있어야…2030년까지 매년 ...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-25T09:44:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328484"
-    },
-    {
-     "title": "李 대통령 “2030년까지 매년 공적주택 24만호 공급할 것”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-25T09:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887430?sid=100"
-    }
-   ]
-  },
   {
    "keyword": "베트남전 국군전사자 유해봉환식",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 18,
+   "articles90": 15,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-25T08:41:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-25T08:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -169,103 +40,6 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-25T09:26:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004213914?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 복귀와 논란",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-25T08:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "하루천하로 끝난 ‘젠슨황 효과’…트럼프 입김, 리스크만 키웠다",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-25T10:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415565?sid=101"
-    },
-    {
-     "title": "\"자본주의 아닌 마오주의\"…트럼프 '젠슨 황 구하기' 역풍",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-25T10:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415567?sid=104"
-    },
-    {
-     "title": "파랗게 질린 코스피 4697 마감… “바닥 안 보여” 개미들 패닉 [‘젠슨...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-25T10:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178092?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "태국",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T08:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한화오션, 6800억원 태국 호위함 사업 우협 지위 상실… “현지 조달 취...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-25T10:02:00.000Z",
-     "link": "https://www.viva100.com/article/20261125501392"
-    },
-    {
-     "title": "한화오션, 6833억 태국 호위함 수주 원점…우협 지위 상실",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-25T09:38:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122703"
-    },
-    {
-     "title": "한화오션, 태국 해군 호위함 사업 수주 결국 백지화",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-25T09:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000555594?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "부산 인재개발원장 명퇴",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T08:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'9급 공무원 시험 고졸 수준' 발언 부산인재개발원장 명퇴 신청",
-     "press": "kado.net",
-     "publishedAt": "2026-11-25T10:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213430?sid=102"
-    },
-    {
-     "title": "‘공무원 자질 비하’ 인재개발원장, 결국 명퇴",
-     "press": "busan.com",
-     "publishedAt": "2026-11-25T09:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001409012?sid=102"
-    },
-    {
-     "title": "\"9급 시험 고졸 수준\" 발언 논란… 부산시 인재개발원장 명퇴 신청",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-25T09:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967784?sid=102"
     }
    ]
   },
@@ -298,38 +72,6 @@
      "press": "kyeonggi.com",
      "publishedAt": "2026-11-25T09:00:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/666/0000133790"
-    }
-   ]
-  },
-  {
-   "keyword": "이형일 부총리 임금체계 방문",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T08:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“노동에 정당한 보상”…이형일 부총리가 찾아간 이 기업, 어디?",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-25T09:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415543?sid=101"
-    },
-    {
-     "title": "이형일 부총리 “노사 협력해 기업 여건 맞는 자율 임금체계 도입해야”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-25T08:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005769019?sid=101"
-    },
-    {
-     "title": "이형일 부총리 \"직무·능력 중심 임금체계 확산해야\"",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-25T08:50:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=173098"
     }
    ]
   }
