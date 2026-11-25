@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T06:38:48.673Z",
+ "builtAt": "2026-11-25T10:30:15.041Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,557 +8,269 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "허서홍 사장 승진",
+   "keyword": "청해부대 임무 확대",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 67,
-   "recent20": 11,
-   "press": 59,
-   "firstArticleAt": "2026-11-25T05:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "허서홍 GS리테일 대표, 사장 승진...취임 약 2년 만",
-     "press": "womentimes.co.kr",
-     "publishedAt": "2026-11-25T06:36:00.000Z",
-     "link": "https://www.womentimes.co.kr/news/articleView.html?idxno=108253"
-    },
-    {
-     "title": "GS 오너 4세 전진 배치…허서홍 사장, 허주홍·허치홍 부사장 승진",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-25T06:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002249907?sid=101"
-    },
-    {
-     "title": "'본질 경영'으로 실적 반등 이끈 허서홍 GS리테일 대표, 사장 승진",
-     "press": "asiaa.co.kr",
-     "publishedAt": "2026-11-25T06:30:00.000Z",
-     "link": "https://www.asiaa.co.kr/news/articleView.html?idxno=272862"
-    }
-   ]
-  },
-  {
-   "keyword": "리트 만점자 과외교사",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 43,
-   "recent20": 5,
-   "press": 34,
-   "firstArticleAt": "2026-11-25T05:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경찰 출석한 고 이진우 과외교사 \"진실 묻어선 안 되기에\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-25T06:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979811?sid=102"
-    },
-    {
-     "title": "‘리트만점’ 이진우 과외교사 “공소권 없다고 진실 묻어선 안 돼”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-25T06:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728410?sid=102"
-    },
-    {
-     "title": "'리트 만점자' 과외교사 \"진실 묻어선 안돼⋯수사 협조\" 경찰 출석",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-25T06:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078331?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "과외 교사 참고인 조사",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 37,
-   "recent20": 4,
+   "articles90": 32,
+   "recent20": 2,
    "press": 30,
-   "firstArticleAt": "2026-11-25T05:11:00.000Z",
+   "firstArticleAt": "2026-11-25T09:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경찰 출석한 고 이진우 과외교사 \"진실 묻어선 안 되기에\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-25T06:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979811?sid=102"
+     "title": "이재명 대통령 \"청해부대 임무 넓히되 전쟁불개입 지킬 것\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-25T10:28:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452093"
     },
     {
-     "title": "‘리트만점’ 이진우 과외교사 “공소권 없다고 진실 묻어선 안 돼”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-25T06:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728410?sid=102"
-    },
-    {
-     "title": "'리트 만점' 고 이진우 과외교사 참고인 조사…\"애도하지만 진실 묻어선...",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T06:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929809?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김건희 매관매직 상고심 선고",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 31,
-   "recent20": 13,
-   "press": 27,
-   "firstArticleAt": "2026-11-25T05:45:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'尹 비상계엄 2년' 내달 3일 김건희 '매관매직' 상고심 선고(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T06:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016463160?sid=102"
-    },
-    {
-     "title": "대법, 김건희 '매관매직 의혹' 다음 달 3일 선고…2심 징역 5년",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-25T06:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165618?sid=102"
-    },
-    {
-     "title": "김건희 '매관매직' 혐의 내달 3일 대법 선고…2심서 징역 5년",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T06:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014344865?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "GH 전세사기 피해 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 21,
-   "recent20": 1,
-   "press": 21,
-   "firstArticleAt": "2026-11-25T05:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경기도시공사, 사전 검증도 없이 잔금 건냈다 2억 전세 사기 당해 … 임...",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-25T06:30:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/25/2026112550250.html"
-    },
-    {
-     "title": "추미애, GH 전세금 1억6000만원 사고 긴급 조사",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-25T06:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609627?sid=102"
-    },
-    {
-     "title": "추미애, GH 전세사기 원인 규명·전수조사 긴급 지시",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-25T06:02:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627660"
-    }
-   ]
-  },
-  {
-   "keyword": "금융당국 디지털 뱅크런 훈련",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 17,
-   "recent20": 0,
-   "press": 16,
-   "firstArticleAt": "2026-11-25T05:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "스마트폰으로 순식간에 예금 인출… 금융당국 첫 합동 대응훈련",
-     "press": "m.skyedaily.com",
-     "publishedAt": "2026-11-25T06:16:00.000Z",
-     "link": "https://m.skyedaily.com/news_view.html?ID=315209"
-    },
-    {
-     "title": "금융당국·5대 금융, 디지털 뱅크런 첫 모의 합동훈련",
+     "title": "李대통령 \"청해부대 작전범위 넓히되 전쟁 불개입…호르무즈 제외\"",
      "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-25T06:02:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446497"
+     "publishedAt": "2026-11-25T10:12:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446540"
     },
     {
-     "title": "사이버 공격에 디지털뱅크런까지…금융당국, 위기대응 첫 합동훈련",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-25T06:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394806?sid=101"
+     "title": "李 대통령 \"청해부대 임무 넓히되 전쟁 불개입 원칙 지킬 것\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-25T10:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358251?sid=100"
     }
    ]
   },
   {
-   "keyword": "대만",
-   "sources": [
-    "google"
-   ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-25T05:22:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "‘충주사과’ 16년 연속 대만 수출…누적 508만 달러 돌파",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-25T06:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078350?sid=102"
-    },
-    {
-     "title": "운용사 설립·대만 자금 기대감···성장 노리는 유안타證, '신사업'이...",
-     "press": "sisajournal-e.com",
-     "publishedAt": "2026-11-25T06:32:00.000Z",
-     "link": "https://www.sisajournal-e.com/news/articleView.html?idxno=425312"
-    },
-    {
-     "title": "마이크론, HBM4 증설 속 대만 신공장 차질…삼성·SK 추격 변수",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-25T06:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078338?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "북한 스위스 외교사무소 폐쇄",
+   "keyword": "창원지법 법관 탄핵 헌법 훼손",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-25T05:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "북한, 지난달 개설했던 스위스 외교사무소 전격폐쇄…\"48시간 내 떠나라...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-25T06:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522396?sid=100"
-    },
-    {
-     "title": "북한, 평양 주재 스위스 외교사무소 개설 한달 만에 폐쇄···도대체 무...",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-25T06:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053637?sid=100"
-    },
-    {
-     "title": "북, 스위스 평양 주재 외교사무소 폐쇄…대북제재 철회 않자 ‘맞불’",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-25T06:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833906?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "허영지, DSP와 전속계약",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-25T05:10:00.000Z",
+   "articles90": 26,
+   "recent20": 5,
+   "press": 23,
+   "firstArticleAt": "2026-11-25T09:02:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "허영지, 다시 DSP 품으로…친정 복귀 [공식]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T06:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083828"
+     "title": "“화면에 띄우고 토론”…377자 ‘사법 독립’ 창원지법 집단성명 이렇...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-25T10:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567938?sid=102"
     },
     {
-     "title": "[가요소식] 카라 허영지, DSP미디어와 전속계약",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T06:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016463086?sid=103"
+     "title": "창원지법 판사 60명 \"재판 받을 권리 위태해져\" 거세지는 반발",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-25T10:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979854?sid=102"
     },
     {
-     "title": "허영지, 친정 DSP미디어 복귀…전속계약 체결",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T05:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014344741"
+     "title": "“법관 탄핵 추진, 헌법 가치 훼손”…판사들 첫 집단 성명",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-25T10:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368695?sid=102"
     }
    ]
   },
   {
-   "keyword": "교보문고 음반 철수",
+   "keyword": "발언하는 이재명 대통령",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T05:15:00.000Z",
+   "articles90": 19,
+   "recent20": 5,
+   "press": 17,
+   "firstArticleAt": "2026-11-25T09:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "교보문고, 핫트랙스 음반 사업 내년 1월 1일 종료…시장 축소 여파",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-25T06:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609655?sid=103"
+     "title": "李 대통령 \"공적임대주택, 중산층도 선택하는 '주거 사다리'로 대전환\"...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-25T10:27:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749241"
     },
     {
-     "title": "아이돌팬 줄세우던 교보문고 ‘핫트랙스’ 34년만에 문닫는다",
-     "press": "donga.com",
-     "publishedAt": "2026-11-25T06:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765080?sid=102"
+     "title": "李대통령 “임대 주택서 공적 주택으로, 2030년까지 매년 24만호 공급”",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-25T10:24:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261125518216?OutUrl=naver"
     },
     {
-     "title": "CD 한 장 사던 추억도 이제 사라진다…교보문고 “음반사업 종료”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-25T06:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178017?sid=103"
+     "title": "李대통령 \"보편형 공공임대, 분양전환 불가 법에 명시해야\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-25T10:20:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446542"
     }
    ]
   },
   {
-   "keyword": "젠슨 황 스캔들 의혹",
+   "keyword": "베트남전 국군전사자 유해봉환식",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 13,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T05:39:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-25T09:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 복귀에도… 美 캘리포니아주, 엔비디아 조사 계속",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-25T06:18:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001804"
+     "title": "베트남전 국군전사자, 59년 만에 고국 품으로[노컷네컷]",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T09:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213921?sid=100"
     },
     {
-     "title": "中 알리바바 자회사, ‘젠슨 황 스캔들’ 메가스피드 등에 42억달러 선지...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-25T06:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207271?sid=104"
+     "title": "베트남전 전사자 故안규태 병장 유해, 59년 만에 고국 품으로",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-25T09:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847846?sid=100"
     },
     {
-     "title": "‘유퀴즈’서 애처가 행세하더니…불륜 복귀 젠슨 황 “아내와의 대화...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-25T05:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127962"
+     "title": "베트남전 국군전사자 유해봉환식",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T09:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213914?sid=100"
     }
    ]
   },
   {
-   "keyword": "선저우 24호 발사",
+   "keyword": "태국",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T05:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "中, 첫 외국인 우주인 탑승 선저우 24호 발사…톈궁 도킹 성공(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T06:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014344861?sid=104"
-    },
-    {
-     "title": "中 우주굴기 이정표 '선저우 24호' 발사… 첫 외국인 우주비행사 탑승",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-25T06:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042270?sid=104"
-    },
-    {
-     "title": "중국, 선저우 24호 발사 성공…최초 외국 우주인 파키스탄 무함마드 지...",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-25T06:26:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904384"
-    }
-   ]
-  },
-  {
-   "keyword": "핫트랙스",
-   "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 5,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T05:15:00.000Z",
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T09:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "교보문고, 핫트랙스 음반 사업 내년 1월 1일 종료…시장 축소 여파",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-25T06:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609655?sid=103"
+     "title": "한화오션, 6800억원 태국 호위함 사업 우협 지위 상실… “현지 조달 취...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-25T10:02:00.000Z",
+     "link": "https://www.viva100.com/article/20261125501392"
     },
     {
-     "title": "아이돌팬 줄세우던 교보문고 ‘핫트랙스’ 34년만에 문닫는다",
-     "press": "donga.com",
-     "publishedAt": "2026-11-25T06:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765080?sid=102"
+     "title": "한화오션, 6833억 태국 호위함 수주 원점…우협 지위 상실",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-25T09:38:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122703"
     },
     {
-     "title": "교보문고 \"음반사업 부문 핫트랙스, 내년 1월 1일부로 종료\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-25T06:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415411?sid=103"
+     "title": "한화오션, 태국 해군 호위함 사업 수주 결국 백지화",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-25T09:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000555594?sid=101"
     }
    ]
   },
   {
-   "keyword": "송경희 위원장 회의 주재",
+   "keyword": "남태현, 음주운전 상고 5일 만에",
    "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T05:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "송경희 위원장, 개인정보보호위원회 전체회의 주재",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T06:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009309734?sid=100"
-    },
-    {
-     "title": "발언하는 송경희 개인정보보호위원장",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T05:36:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125000911"
-    },
-    {
-     "title": "개인정보보호위원회 전체회의",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T05:36:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125000912"
-    }
-   ]
-  },
-  {
-   "keyword": "코리아 핀테크 위크 열린다",
-   "sources": [
-    "signal.bz",
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-25T05:28:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-25T09:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "카카오페이, AI코치·스테이블코인 다음은?…핀테크 위크서 체험",
-     "press": "ftoday.co.kr",
-     "publishedAt": "2026-11-25T05:30:00.000Z",
-     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=370529"
+     "title": "‘마약 집유 중 음주운전’ 남태현, 법정구속 5일만 대법원 상고",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-25T09:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543501"
     },
     {
-     "title": "토스, '코리아 핀테크 위크' 참가…보험금 청구·금리인하 서비스 선보...",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-25T05:28:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=154648"
+     "title": "’마약 집유 중 음주운전’ 남태현, 대법원 간다..법정구속 5일 만에 상...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-25T09:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005645086"
     },
     {
-     "title": "토스, '코리아 핀테크 위크 2026' 참가…내 돈 찾는 금융 서비스",
-     "press": "ftoday.co.kr",
-     "publishedAt": "2026-11-25T05:28:00.000Z",
-     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=370528"
+     "title": "'마약 집유 중 음주운전' 남태현, 결국 대법원 간다...2심 판결 불복 '상...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-25T09:14:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61394"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1423,
-  "matched": 725,
-  "avgLeadMin": 469,
+  "flagged": 1494,
+  "matched": 764,
+  "avgLeadMin": 506,
   "recent": [
    {
-    "keyword": "양홍원 이혼",
-    "hitKeyword": "양홍원 원현주 이혼",
-    "hitAt": "2026-11-25T15:30:00+09:00",
-    "leadMin": 31
+    "keyword": "음악실 방화 20대 징역 2년",
+    "hitKeyword": "모친 흉기 20대 남성 징역",
+    "hitAt": "2026-11-25T19:00:00+09:00",
+    "leadMin": 4876
    },
    {
-    "keyword": "양홍원 원현주 이혼",
-    "hitKeyword": "양홍원 원현주 이혼",
-    "hitAt": "2026-11-25T15:30:00+09:00",
-    "leadMin": 21
+    "keyword": "초등학교 방화 20대 징역 2년",
+    "hitKeyword": "모친 흉기 20대 남성 징역",
+    "hitAt": "2026-11-25T19:00:00+09:00",
+    "leadMin": 4856
    },
    {
-    "keyword": "음주운전 김대범 부르면 될",
-    "hitKeyword": "직장 동료 음주운전",
-    "hitAt": "2026-11-25T15:00:00+09:00",
-    "leadMin": 331
+    "keyword": "삼성증권 8241명 정보 유출",
+    "hitKeyword": "앨리스 황 정보 유출",
+    "hitAt": "2026-11-25T19:00:00+09:00",
+    "leadMin": 3153
    },
    {
-    "keyword": "수능 시험지 5년 보관 추진",
-    "hitKeyword": "수능 시험지 보관 연장",
-    "hitAt": "2026-11-25T15:00:00+09:00",
-    "leadMin": 173
+    "keyword": "김민솔 3관왕",
+    "hitKeyword": "김민솔 3관왕 달성",
+    "hitAt": "2026-11-25T19:00:00+09:00",
+    "leadMin": 10
    },
    {
-    "keyword": "합석 거절 강제추행 의혹",
-    "hitKeyword": "경찰 강제추행 의혹",
-    "hitAt": "2026-11-25T14:30:00+09:00",
-    "leadMin": 2
+    "keyword": "증안 펀드",
+    "hitKeyword": "증안펀드 확대 추진",
+    "hitAt": "2026-11-25T19:00:00+09:00",
+    "leadMin": 10
    },
    {
-    "keyword": "반도체",
-    "hitKeyword": "반도체 계약학과 지원 증가",
-    "hitAt": "2026-11-25T14:00:00+09:00",
-    "leadMin": 52
+    "keyword": "이장우 조혜원 결혼 1주년 사진 공개",
+    "hitKeyword": "이세영 학창시절 사진 공개",
+    "hitAt": "2026-11-25T18:30:00+09:00",
+    "leadMin": 2880
    },
    {
-    "keyword": "양홍원 원현주 이혼",
-    "hitKeyword": "양홍원 원현주 이혼",
-    "hitAt": "2026-11-25T13:30:00+09:00",
-    "leadMin": 52
+    "keyword": "황인범 포르투 UCL 2연승",
+    "hitKeyword": "황인범 페예노르트 환대",
+    "hitAt": "2026-11-25T18:30:00+09:00",
+    "leadMin": 601
    },
    {
-    "keyword": "양홍원 이혼",
-    "hitKeyword": "양홍원 원현주 이혼",
-    "hitAt": "2026-11-25T13:30:00+09:00",
-    "leadMin": 32
+    "keyword": "황인범 교체 승리 1-0",
+    "hitKeyword": "황인범 페예노르트 환대",
+    "hitAt": "2026-11-25T18:30:00+09:00",
+    "leadMin": 581
    },
    {
-    "keyword": "노소영, 최태원 화해 요청 거부",
-    "hitKeyword": "노소영 최태원 화해권고 거부",
-    "hitAt": "2026-11-25T13:00:00+09:00",
-    "leadMin": 53
+    "keyword": "황인범 포르투 2연승",
+    "hitKeyword": "황인범 페예노르트 환대",
+    "hitAt": "2026-11-25T18:30:00+09:00",
+    "leadMin": 541
    },
    {
-    "keyword": "노소영 최태원 화해 요청 거부",
-    "hitKeyword": "노소영 최태원 화해권고 거부",
-    "hitAt": "2026-11-25T13:00:00+09:00",
-    "leadMin": 32
+    "keyword": "하이닉스",
+    "hitKeyword": "삼성전자 SK하이닉스 급락",
+    "hitAt": "2026-11-25T18:30:00+09:00",
+    "leadMin": 42
    }
   ]
  }
