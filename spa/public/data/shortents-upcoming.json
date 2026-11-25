@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T08:57:59.326Z",
+ "builtAt": "2026-11-25T09:08:03.882Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,50 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "창원지법 법관 탄핵 우려",
+   "keyword": "창원지법 법관 탄핵",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 47,
-   "recent20": 5,
-   "press": 43,
-   "firstArticleAt": "2026-11-25T07:30:00.000Z",
+   "articles90": 48,
+   "recent20": 7,
+   "press": 44,
+   "firstArticleAt": "2026-11-25T07:42:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "범여권 ‘12·3 탄핵’ 꺼내자…“헌법질서 위태” 판사들 첫 집단행동",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-25T08:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686138?sid=102"
+     "title": "법관대표회의, 일주일 당겨 개최…'조희대 탄핵' 관련 결의안 나올까",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-25T09:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979836?sid=102"
     },
     {
-     "title": "창원지법, 조희대 탄핵 추진에 첫 반발…“권력분립·헌법질서 위태롭게...",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-25T08:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162251?sid=102"
+     "title": "창원지법 판사회의 \"법관 탄핵 추진은 헌법가치 훼손\"",
+     "press": "gndomin.com",
+     "publishedAt": "2026-11-25T09:05:00.000Z",
+     "link": "http://www.gndomin.com/news/articleView.html?idxno=498293"
     },
     {
-     "title": "창원지법 판사들 “법관 탄핵, 헌법가치 훼손”…30일 법관대표회의 주...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-25T08:44:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652986"
+     "title": "창원지법, 조희대 탄핵 반대 첫 공식화…법조계 \"사법부 스스로 자성해...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-25T09:04:00.000Z",
+     "link": "https://www.ajunews.com/view/20261125170110079"
     }
    ]
   },
   {
    "keyword": "코스피 6%대 급락",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 27,
-   "recent20": 4,
-   "press": 27,
-   "firstArticleAt": "2026-11-25T07:28:00.000Z",
+   "articles90": 19,
+   "recent20": 2,
+   "press": 19,
+   "firstArticleAt": "2026-11-25T07:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,41 +75,41 @@
    ]
   },
   {
-   "keyword": "이재명 대통령 현장 방문",
+   "keyword": "장동혁 대표, 탈옥법 규탄",
    "sources": [
     "nate"
    ],
-   "articles90": 32,
-   "recent20": 11,
-   "press": 25,
-   "firstArticleAt": "2026-11-25T08:08:00.000Z",
+   "articles90": 29,
+   "recent20": 3,
+   "press": 18,
+   "firstArticleAt": "2026-11-25T07:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李, 한 달 새 세 차례 주택 현장행…\"재정 부족해 공급 못하는 일 없게...",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-25T08:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005446451?sid=100"
+     "title": "국민의힘, 경주서 조작기소 특검법 규탄…이 대통령 재판 재개 촉구",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-25T09:02:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=154701"
     },
     {
-     "title": "李대통령 “중산층도 선택할 공공임대”…2030년까지 공적주택 119만호 ...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-25T08:54:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652989"
+     "title": "장동혁 대표 찾은 경주 서천둔치…당원 2000여명 운집",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T08:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014345379?sid=102"
     },
     {
-     "title": "이 대통령 \"공적주택, '영세민 주택' 이미지 벗어나야…연 24만호 공급\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-25T08:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979832?sid=100"
+     "title": "조희대 고향 간 장동혁…\"이재명 탄핵이 먼저\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-25T08:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653384?sid=100"
     }
    ]
   },
   {
    "keyword": "이형일 부총리 임금체계 방문",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 23,
    "recent20": 2,
@@ -132,42 +131,42 @@
      "link": "http://www.iminju.net/news/articleView.html?idxno=173098"
     },
     {
-     "title": "노사정 협력 상생밸브 체결식 함께한 이형일 부총리",
+     "title": "임금체계 개편 우수기업 둘러보는 이형일 부총리",
      "press": "newspim.com",
      "publishedAt": "2026-11-25T08:30:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125001235"
+     "link": "https://www.newspim.com/news/view/20261125001233"
     }
    ]
   },
   {
-   "keyword": "증안 펀드",
+   "keyword": "출생아 수 증가율",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 7,
-   "press": 12,
-   "firstArticleAt": "2026-11-25T07:30:00.000Z",
-   "exclusive": true,
+   "articles90": 14,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-25T07:48:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "산은, 금융사 '증안펀드' 추가 출자 여력 파악나서…몸집 키우나",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-25T08:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545900?sid=101"
+     "title": "\"응애\" 소리 커졌다… 올 출생아 증가율 최고",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-25T09:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609768?sid=101"
     },
     {
-     "title": "10조원대 증안펀드 확대 추진…증권사 대상 추가 출자 규모 파악",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T08:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014345346?sid=101"
+     "title": "올해 출생아 21만명 돌파…증가율 '역대 최고'",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-25T08:44:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026112517131898982"
     },
     {
-     "title": "코스피 6% 폭락한 날…산은, 증권사에 '증안펀드 추가 출자' 공문",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-25T08:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273972?sid=101"
+     "title": "올 출생아 21.9만명 … 증가율 14% '최고'",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-25T08:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005768998?sid=102"
     }
    ]
   },
@@ -176,168 +175,280 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
+   "articles90": 14,
+   "recent20": 5,
+   "press": 13,
    "firstArticleAt": "2026-11-25T08:08:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "삼성전자 공매도 105% 급증…SK하이닉스도 64% 증가",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T08:56:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286124"
+     "title": "반도체주 급락 속…SK하이닉스, '100조 주주환원' 재확인",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-25T09:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078464?sid=105"
     },
     {
-     "title": "SK하이닉스 \"3D D램 첫 제품은 100층부터, 4~5년 내 양산 목표\"",
-     "press": "thelec.kr",
-     "publishedAt": "2026-11-25T08:46:00.000Z",
-     "link": "https://www.thelec.kr/news/articleView.html?idxno=65900"
+     "title": "SK하이닉스, 주주환원 35조 더 남았다…매 분기 자사주 매입·소각",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T09:03:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125001253"
     },
     {
-     "title": "美 AI 기술주 급락에 삼성전자·SK하이닉스 10%대 급락… 코스피 6% 넘게...",
-     "press": "mediawatch.kr",
-     "publishedAt": "2026-11-25T08:44:00.000Z",
-     "link": "https://www.mediawatch.kr/news/article.html?no=261881"
+     "title": "SK하이닉스, 100조원 규모 주주환원 추진…현금배당 30조원·자사주 매입...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-25T09:02:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630695"
     }
    ]
   },
   {
-   "keyword": "장동혁 특검법 저지",
+   "keyword": "이재명 공적임대주택",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-25T08:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 \"공적임대주택, 중산층도 선택하는 주거 사다리로\"",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-25T08:54:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=756509"
+    },
+    {
+     "title": "이 대통령 \"공적임대주택, 중산층도 선택하는 주거사다리 역할\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-25T08:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405786?sid=100"
+    },
+    {
+     "title": "이 대통령 \"공적임대주택, 중산층도 선택하는 주거 사다리 역할해야\"",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-25T08:46:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1140076"
+    }
+   ]
+  },
+  {
+   "keyword": "러시아 폭격기 울릉도 비행",
    "sources": [
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 0,
+   "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-25T07:28:00.000Z",
+   "firstArticleAt": "2026-11-25T07:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“대법원장보다 李대통령 탄핵이 먼저”…조희대 고향 경주 간 장동혁",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-25T08:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005768961?sid=100"
+     "title": "울릉도 근접 러시아 전폭기, 극동지역으로 재배치…한반도 주변 핵 전력...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-25T09:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967775?sid=100"
     },
     {
-     "title": "장동혁 대표, \"조희대 보다 이재명 탄핵이 먼저\"…국힘 경주서 장외집회",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-25T08:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042334?sid=100"
+     "title": "[사설] 러 核폭격기 울릉도 근접, 예사롭지 않은 영공 위협",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-25T09:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165653?sid=110"
     },
     {
-     "title": "장동혁 “대법원장 탄핵 막아야”…국힘, ‘조희대 고향’ 경주에서 장...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-25T08:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061160?sid=100"
+     "title": "울릉도 1㎞ 앞까지 와놓고…러시아 “계획된 비행”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-25T08:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686128?sid=100"
     }
    ]
   },
   {
-   "keyword": "박민영 육성재 고수, 혼성그룹 결성",
+   "keyword": "정찬성 스승 별세",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T07:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정찬성, '스승 비보' 접하고 미국行→한국계 지도자 에디 차 '향년 53세...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-25T08:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409566"
+    },
+    {
+     "title": "‘정찬성 스승’ 에디 차, 갑작스러운 별세..‘올인’ 실제 모델 아들[...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-25T08:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003814406"
+    },
+    {
+     "title": "'정찬성 스승' 에디 차, 갑작스러운 별세…향년 53세",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-25T08:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005446436?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "한-오만 외교장관 회담",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 18,
    "recent20": 0,
    "press": 5,
-   "firstArticleAt": "2026-11-25T07:51:00.000Z",
+   "firstArticleAt": "2026-11-25T08:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'나인 투 식스' 박민영 \"시청률 6.9% 넘으면 혼성그룹 데뷔\" 공약",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T08:32:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286072"
-    },
-    {
-     "title": "육성재, '턱 봉합수술' 마스크로 가렸다..\"기립성 저혈압 정말 무서워\"[...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-25T08:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005645068"
-    },
-    {
-     "title": "[핌in현장] '나인 투 식스' 박민영·육성재·고수 \"시청률 6.9% 넘으면 혼...",
+     "title": "악수하는 한-오만 외교장관",
      "press": "newspim.com",
-     "publishedAt": "2026-11-25T08:25:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125000949"
+     "publishedAt": "2026-11-25T08:29:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125001222"
+    },
+    {
+     "title": "한-오만 외교장관 회담, 발언하는 조현 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T08:29:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125001226"
+    },
+    {
+     "title": "한-오만 외교장관 회담",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T08:29:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125001225"
     }
    ]
   },
   {
-   "keyword": "선저우 24호 발사",
+   "keyword": "행동",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 5,
-   "recent20": 2,
+   "articles90": 4,
+   "recent20": 4,
    "press": 4,
-   "firstArticleAt": "2026-11-25T07:37:00.000Z",
+   "firstArticleAt": "2026-11-25T08:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "中 유인우주선 '선저우 24호' 발사 성공",
-     "press": "the-today.com",
-     "publishedAt": "2026-11-25T08:50:00.000Z",
-     "link": "https://www.the-today.com/news/articleView.html?idxno=94093"
+     "title": "[청소년뉴스] 배우는 AI에서 행동하는 AI로… 인천 청소년이 지역사회를...",
+     "press": "ibabynews.com",
+     "publishedAt": "2026-11-25T09:06:00.000Z",
+     "link": "https://www.ibabynews.com/news/articleView.html?idxno=157295"
     },
     {
-     "title": "중 선저우 24호, 우주정거장 도킹 성공",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-25T08:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405784?sid=104"
+     "title": "“과격한 행동은 적당히”… 이정효, 슈퍼매치 앞두고 팬에게 이렇게 말...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-25T09:01:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/396/0000761969"
     },
     {
-     "title": "中선저우 24호, 우주정거장 도킹 성공…톈궁 첫 외국인 방문(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T08:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016463517?sid=104"
+     "title": "11월 25일 세계여성폭력추방의날…춘천 포함 전국공동행동 열려",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-25T08:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001233414?sid=102"
     }
    ]
   },
   {
-   "keyword": "삼성디스플레이 마이크로 LED 승부수",
+   "keyword": "젠슨 황 논란 계속돼",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T07:28:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-25T07:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성디스플레이, 오스람 최대주주 등극…3000억 투자, 마이크로 LED '승부...",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-25T08:06:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904412"
+     "title": "[증시 프리즘] '젠슨 황 랠리' 하루 만에 증발…코스피 6.16% 급락, 4,697로...",
+     "press": "moneystorm.kr",
+     "publishedAt": "2026-11-25T08:04:00.000Z",
+     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8842"
     },
     {
-     "title": "삼성디스플레이, 3000억 투자해 오스람 최대주주로…마이크로 LED 승부수",
-     "press": "donga.com",
-     "publishedAt": "2026-11-25T07:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765111?sid=101"
+     "title": "트럼프 \"젠슨 황 내가 복귀시켜\"...정작 젠슨 황은 부인? [이슈ON]",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T07:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437960?sid=104"
     },
     {
-     "title": "삼성디스플레이, ams오스람 최대주주로…마이크로 LED ‘승부수’",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-25T07:30:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321842&inflow=N"
+     "title": "일일천하로 끝난 젠슨 황 효과···코스피 6% 급락, 4700선 무너져",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-25T07:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485009?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1467,
-  "matched": 746,
-  "avgLeadMin": 491,
+  "flagged": 1476,
+  "matched": 754,
+  "avgLeadMin": 490,
   "recent": [
+   {
+    "keyword": "육성재 기립성 저혈압으로 넘어져",
+    "hitKeyword": "육성재 턱 봉합 수술",
+    "hitAt": "2026-11-25T18:00:00+09:00",
+    "leadMin": 1390
+   },
+   {
+    "keyword": "육성재, 기립성 저혈압으로 넘어져",
+    "hitKeyword": "육성재 턱 봉합 수술",
+    "hitAt": "2026-11-25T18:00:00+09:00",
+    "leadMin": 1359
+   },
+   {
+    "keyword": "나인 투 식스 박민영과 육성재 케미",
+    "hitKeyword": "육성재 턱 봉합 수술",
+    "hitAt": "2026-11-25T18:00:00+09:00",
+    "leadMin": 131
+   },
+   {
+    "keyword": "박민영 육성재 고수 삼각 로맨스",
+    "hitKeyword": "육성재 턱 봉합 수술",
+    "hitAt": "2026-11-25T18:00:00+09:00",
+    "leadMin": 91
+   },
+   {
+    "keyword": "박민영 육성재 고수의 나인 투 식스",
+    "hitKeyword": "육성재 턱 봉합 수술",
+    "hitAt": "2026-11-25T18:00:00+09:00",
+    "leadMin": 71
+   },
+   {
+    "keyword": "박민영 육성재 고수의 사무실 로맨스",
+    "hitKeyword": "육성재 턱 봉합 수술",
+    "hitAt": "2026-11-25T18:00:00+09:00",
+    "leadMin": 50
+   },
+   {
+    "keyword": "증안 펀드",
+    "hitKeyword": "증안펀드 확대 추진",
+    "hitAt": "2026-11-25T18:00:00+09:00",
+    "leadMin": 12
+   },
+   {
+    "keyword": "박민영 육성재 고수, 혼성그룹 결성",
+    "hitKeyword": "육성재 턱 봉합 수술",
+    "hitAt": "2026-11-25T18:00:00+09:00",
+    "leadMin": 12
+   },
    {
     "keyword": "김도규, 연간 MVP 선정!",
     "hitKeyword": "삼성화재 호키 1R MVP",
@@ -349,54 +460,6 @@
     "hitKeyword": "삼성화재 호키 1R MVP",
     "hitAt": "2026-11-25T17:30:00+09:00",
     "leadMin": 1723
-   },
-   {
-    "keyword": "롯데 수비 캠프 MVP 나승엽, 김기준",
-    "hitKeyword": "삼성화재 호키 1R MVP",
-    "hitAt": "2026-11-25T17:30:00+09:00",
-    "leadMin": 202
-   },
-   {
-    "keyword": "롯데 수비 캠프 MVP 나승엽 김기준",
-    "hitKeyword": "삼성화재 호키 1R MVP",
-    "hitAt": "2026-11-25T17:30:00+09:00",
-    "leadMin": 182
-   },
-   {
-    "keyword": "롯데 캠프 MVP 나승엽",
-    "hitKeyword": "삼성화재 호키 1R MVP",
-    "hitAt": "2026-11-25T17:30:00+09:00",
-    "leadMin": 121
-   },
-   {
-    "keyword": "롯데 캠프 MVP 나승엽 김기준",
-    "hitKeyword": "삼성화재 호키 1R MVP",
-    "hitAt": "2026-11-25T17:30:00+09:00",
-    "leadMin": 91
-   },
-   {
-    "keyword": "대만",
-    "hitKeyword": "대만 전국민 AI 보너스",
-    "hitAt": "2026-11-25T17:00:00+09:00",
-    "leadMin": 142
-   },
-   {
-    "keyword": "교보문고 음반 철수",
-    "hitKeyword": "교보문고 핫트랙스 철수",
-    "hitAt": "2026-11-25T17:00:00+09:00",
-    "leadMin": 81
-   },
-   {
-    "keyword": "핫트랙스",
-    "hitKeyword": "교보문고 핫트랙스 철수",
-    "hitAt": "2026-11-25T17:00:00+09:00",
-    "leadMin": 81
-   },
-   {
-    "keyword": "경찰 참고인 조사",
-    "hitKeyword": "이진우 과외교사 경찰 조사",
-    "hitAt": "2026-11-25T17:00:00+09:00",
-    "leadMin": 71
    }
   ]
  }
