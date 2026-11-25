@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T07:09:06.518Z",
+ "builtAt": "2026-11-25T07:19:11.404Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "허서홍 사장 승진",
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 52,
-   "recent20": 6,
-   "press": 49,
-   "firstArticleAt": "2026-11-25T05:40:00.000Z",
+   "articles90": 46,
+   "recent20": 5,
+   "press": 44,
+   "firstArticleAt": "2026-11-25T05:50:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[인사] 실적 반등 이끈 허서홍 GS리테일 대표, 사장 승진",
-     "press": "fashionbiz.co.kr",
-     "publishedAt": "2026-11-25T07:04:00.000Z",
-     "link": "https://www.fashionbiz.co.kr/article/231353"
+     "title": "\"본업 강화·실적 개선\"…허서홍 GS리테일 대표, 2년 만에 사장 승진",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-25T07:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394820?sid=101"
     },
     {
-     "title": "GS리테일 실적 반등 이끈 허서홍 대표, 사장 승진",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-25T06:58:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2497011"
+     "title": "허서홍 GS리테일 대표, 사장 승진…본업 강화·실적 개선 성과",
+     "press": "byline.network",
+     "publishedAt": "2026-11-25T07:16:00.000Z",
+     "link": "https://byline.network/?p=9004111222629163"
     },
     {
-     "title": "GS리테일 허서홍 사장 시대 개막…GS그룹, 안정 속 세대교체 가속",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-25T06:54:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848432"
+     "title": "[오늘Who] GS리테일 허서홍 사장 승진, 역대 최대 실적 발판으로 오너4세...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-25T07:16:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452896"
     }
    ]
   },
@@ -49,12 +49,18 @@
     "daum"
    ],
    "articles90": 44,
-   "recent20": 6,
+   "recent20": 2,
    "press": 38,
-   "firstArticleAt": "2026-11-25T05:45:00.000Z",
-   "exclusive": true,
+   "firstArticleAt": "2026-11-25T05:54:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김건희 '매관매직 의혹' 상고심, 12월3일 선고…원심 '징역 5년'",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-25T07:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143028?sid=102"
+    },
     {
      "title": "김건희 '매관매직' 상고심 선고…내달 3일 오전 진행",
      "press": "daily.hankooki.com",
@@ -66,44 +72,38 @@
      "press": "jasm.co.kr",
      "publishedAt": "2026-11-25T06:58:00.000Z",
      "link": "https://www.jasm.co.kr/news/view/326476/?sc=Naver"
-    },
-    {
-     "title": "김건희 '매관매직' 내달 3일 대법원 선고",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-25T06:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162242?sid=102"
     }
    ]
   },
   {
-   "keyword": "박민영과 나인투식스",
+   "keyword": "나인 투 식스",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 56,
-   "recent20": 9,
-   "press": 23,
-   "firstArticleAt": "2026-11-25T06:02:00.000Z",
+   "articles90": 61,
+   "recent20": 12,
+   "press": 24,
+   "firstArticleAt": "2026-11-25T06:06:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "'나인 투 식스' 이형민 감독, \"능력 있는 여성이 햇살 연하 만나는 건 판...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-25T07:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490068"
+     "title": "[HD포토] 육성재-박민영, '기대되는 커플 케미스트리' (나인 투 식스 제...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T07:18:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286005"
     },
     {
-     "title": "박민영X육성재X고수, \"'나인 투 식스'는 한국판 '섹스 앤 더시티'다\" [영...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-25T07:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490069"
+     "title": "[HD포토] 고수-박민영, '일잘러 본부장과 법무팀 차장' (나인 투 식스 제...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T07:18:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286007"
     },
     {
-     "title": "박민영X육성재X고수, '시청률 공약? 제2의 코요태 '나인 투 식스'로 데뷔...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-25T07:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490065"
+     "title": "[HD포토] 고수-박민영, '고비드 소원성취 커플하트' (나인 투 식스 제작...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T07:18:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286006"
     }
    ]
   },
@@ -112,30 +112,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 16,
+   "articles90": 21,
+   "recent20": 5,
+   "press": 18,
    "firstArticleAt": "2026-11-25T05:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 ‘중국 혈통’ 꺼낸 트럼프…‘이중 충성심’ 편견 논란",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-25T07:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887383?sid=104"
+     "title": "젠슨 황 복귀가 끝내 풀지 못한 숙제…승계·트럼프·AI 투자 위험",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-25T07:16:00.000Z",
+     "link": "https://www.ajunews.com/view/20261125160339905"
     },
     {
-     "title": "美정보당국 \"앨리스황, 젠슨과 만남 중 中에 정보 넘겨\" 의회 보고",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T06:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016463219?sid=104"
+     "title": "트럼프, 의회 청문회 앞둔 젠슨 황 CEO 사면 시사",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-25T07:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609695?sid=104"
     },
     {
-     "title": "젠슨 황 사면까지 시사한 트럼프…“마오주의” “도덕적 해이 부추겨”...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-25T06:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833920?sid=104"
+     "title": "젠슨 황 \"트럼프가 이사회 압박? 사실 아냐\"...정경유착설도 일축",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-25T07:12:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106508"
     }
    ]
   },
@@ -144,10 +144,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T05:42:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-25T05:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -176,10 +176,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
+   "articles90": 9,
    "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T05:41:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-25T05:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,12 +204,44 @@
    ]
   },
   {
+   "keyword": "젠슨 황 관련 스캔들",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 4,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T05:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"앨리스황, 젠슨 황과 만남 중 중국에 정보 넘겨\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T07:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437921?sid=104"
+    },
+    {
+     "title": "젠슨 황 돌아왔는데 … 앨리스 황은 어디에",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-25T07:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358059?sid=104"
+    },
+    {
+     "title": "\"앨리스 황, 젠슨과 만남 중 중국에 정보 넘겨\"…미 정보당국 의회 보고",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-25T07:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405748?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "코리아 핀테크 위크 시작",
    "sources": [
     "nate"
    ],
    "articles90": 10,
-   "recent20": 4,
+   "recent20": 1,
    "press": 8,
    "firstArticleAt": "2026-11-25T05:52:00.000Z",
    "exclusive": false,
@@ -236,44 +268,12 @@
    ]
   },
   {
-   "keyword": "젠슨 황 관련 스캔들",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T05:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美정보당국 \"앨리스황, 젠슨과 만남 중 中에 정보 넘겨\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T07:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929818?sid=104"
-    },
-    {
-     "title": "美정보당국 \"앨리스황, 젠슨과 만남 중 中에 정보 넘겨\" 의회 보고",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T06:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016463219?sid=104"
-    },
-    {
-     "title": "中 알리바바 자회사, ‘젠슨 황 스캔들’ 메가스피드 등에 42억달러 선지...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-25T06:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207271?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "이혼",
    "sources": [
     "google"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-25T05:59:00.000Z",
    "exclusive": false,
@@ -304,10 +304,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T05:40:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-25T05:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -328,6 +328,39 @@
      "press": "newsworks.co.kr",
      "publishedAt": "2026-11-25T06:26:00.000Z",
      "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904384"
+    }
+   ]
+  },
+  {
+   "keyword": "예멘",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T06:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "후티, 예멘 임시수도 아덴 턱밑까지 진격…국제유가 급등 우려",
+     "press": "donga.com",
+     "publishedAt": "2026-11-25T07:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765097?sid=104"
+    },
+    {
+     "title": "예멘서 공습에 26명 사망…사우디 고층 건물 또 피격",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-25T06:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300919?sid=104"
+    },
+    {
+     "title": "과감해진 후티‥사우디 또 피격·예멘 풍전등화",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-25T06:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537962?sid=104"
     }
    ]
   },
