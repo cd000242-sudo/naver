@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T01:19:45.363Z",
+ "builtAt": "2026-11-25T01:29:48.775Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,40 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
+  {
+   "keyword": "현대차그룹 완속충전기 공개",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 51,
+   "recent20": 12,
+   "press": 51,
+   "firstArticleAt": "2026-11-25T00:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "현대차그룹, 현대차·기아·제네시스 통합 'HMG 글로벌 완속충전기' 공개",
+     "press": "e-science.co.kr",
+     "publishedAt": "2026-11-25T01:26:00.000Z",
+     "link": "https://www.e-science.co.kr/news/articleView.html?idxno=140670"
+    },
+    {
+     "title": "현대차그룹, HMG 글로벌 완속충전기 개발",
+     "press": "hbnpress.com",
+     "publishedAt": "2026-11-25T01:26:00.000Z",
+     "link": "https://hbnpress.com/news/view/1065575661316859"
+    },
+    {
+     "title": "현대차그룹, 통합 'HMG 글로벌 완속충전기' 공개…충전 생태계 일원화",
+     "press": "popcornnews.net",
+     "publishedAt": "2026-11-25T01:26:00.000Z",
+     "link": "http://www.popcornnews.net/news/articleView.html?idxno=141424"
+    }
+   ]
+  },
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
@@ -18,27 +50,27 @@
    "articles90": 29,
    "recent20": 9,
    "press": 28,
-   "firstArticleAt": "2026-11-24T23:54:00.000Z",
+   "firstArticleAt": "2026-11-25T00:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美, 이르면 오늘 '과잉생산' 관세 발표…韓 총관세율 15% 상한 넘지 않을...",
-     "press": "widedaily.com",
-     "publishedAt": "2026-11-25T01:18:00.000Z",
-     "link": "https://www.widedaily.com/news/articleView.html?idxno=304645"
+     "title": "트럼프 과잉 생산 관세 임박 … K반도체, 美 현지 생산 압박 커지나",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-25T01:28:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/25/2026112550074.html"
+    },
+    {
+     "title": "트럼프, '무역법 301조' 추가 관세 초읽기…中·EU·韓 등 16개 경제권 겨...",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-25T01:20:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001761"
     },
     {
      "title": "美 '과잉생산 관세' 이르면 오늘 발표…\"韓 15% 유지 예상\"",
      "press": "m-i.kr",
      "publishedAt": "2026-11-25T01:18:00.000Z",
      "link": "https://www.m-i.kr/news/articleView.html?idxno=2023028"
-    },
-    {
-     "title": "[뉴스초점] 美 ‘과잉생산’ 관세 예고…'젠슨황 효과' 제동",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T01:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929703?sid=104"
     }
    ]
   },
@@ -47,30 +79,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 3,
-   "press": 21,
-   "firstArticleAt": "2026-11-24T23:51:00.000Z",
+   "articles90": 24,
+   "recent20": 7,
+   "press": 24,
+   "firstArticleAt": "2026-11-25T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수출 1조 달러의 역설…역대 최대 무역흑자, 복잡해진 통상 셈법",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-25T01:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887310?sid=101"
+     "title": "수출 1조달러 넘은 한국..2020년대 경제성장 절반, 수출이 이끌었다",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-25T01:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609412?sid=101"
     },
     {
-     "title": "한국 수출 1조 달러 돌파…65년간 세계 평균 2배 속도로 성장",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-25T01:04:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611250030"
+     "title": "수출 1조달러 돌파한 한국…65년간 세계 평균 2배 성장 견인",
+     "press": "queen.co.kr",
+     "publishedAt": "2026-11-25T01:26:00.000Z",
+     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466891"
     },
     {
-     "title": "韓 경제성장 절반 이끈 수출…반도체 쏠림은 과제",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-25T01:00:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887009"
+     "title": "수출 1조달러 시대의 명암…대기업 쏠림 속 K소비재서 찾은 中企 돌파구",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-25T01:26:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611250053"
+    }
+   ]
+  },
+  {
+   "keyword": "정년연장",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 20,
+   "recent20": 4,
+   "press": 17,
+   "firstArticleAt": "2026-11-25T00:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한국·민주, 양대 노총 \"65세 법정 정년 연장, 연내 입법 완료하라\"",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-25T01:28:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120744"
+    },
+    {
+     "title": "양대 노총 \"정년 연장 올해 처리하라\" 최후통첩",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-25T01:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653258?sid=101"
+    },
+    {
+     "title": "중소기업 10곳 중 8곳 \"정년연장보다 재고용 선호\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T01:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213592?sid=101"
     }
    ]
   },
@@ -79,30 +143,63 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 25,
-   "recent20": 1,
+   "articles90": 28,
+   "recent20": 5,
    "press": 16,
    "firstArticleAt": "2026-11-25T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김종철 첫 행보는 영등포역…\"국민 일상에서 시작\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T01:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929702?sid=102"
+     "title": "김종철 신임 경찰청장, 취임 후 첫 행보로 영등포역 일대 도보 순찰",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T01:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009308724?sid=102"
     },
     {
-     "title": "새벽 도보순찰·야간당직 회의 주재…김종철 경찰청장 취임 후 첫 현장...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-25T00:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728097?sid=102"
+     "title": "김종철 경찰청장, 취임 후 첫 행보로 영등포역 일대 도보 순찰",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T01:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009308722?sid=102"
     },
     {
-     "title": "김종철 경찰청장, 첫 현장 행보서 “피해자 보호는 수사 제1원칙”",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-25T00:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484888?sid=102"
+     "title": "김종철 신임 경찰청장, 영등포역 일대 도보 순찰",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T01:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009308723?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "주주",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 5,
+   "press": 9,
+   "firstArticleAt": "2026-11-25T01:00:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[특징주] 다올투자증권, 최대주주 경영권 매각 추진.. '급등'",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-25T01:24:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=20261125101432149244093b5d4e_1"
+    },
+    {
+     "title": "\"지배주주 '먼저 팔 기회'는 주주가 부여해야\"…의결권 자문사도 선행매...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-25T01:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847494?sid=101"
+    },
+    {
+     "title": "정부, 거래소 대주주 지분 20% 제한 추진",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-25T01:16:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=410879"
     }
    ]
   },
@@ -111,10 +208,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-24T23:50:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-25T00:06:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -139,49 +236,15 @@
    ]
   },
   {
-   "keyword": "주주",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 7,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T00:46:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "정부, 거래소 대주주 지분 20% 제한 추진",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-25T01:16:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=410879"
-    },
-    {
-     "title": "[김형균의 주주자본주의] 지배권에도 경쟁이 필요하다",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-25T01:12:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446412"
-    },
-    {
-     "title": "대신증권, 주주환원·고배당 금융상품 매수 이벤트 진행",
-     "press": "inthenews.co.kr",
-     "publishedAt": "2026-11-25T01:10:00.000Z",
-     "link": "https://www.inthenews.co.kr/news/article.html?no=94973"
-    }
-   ]
-  },
-  {
    "keyword": "스트레이 키즈, 새해 고척돔 공연",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-24T23:50:00.000Z",
-   "exclusive": true,
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T00:17:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
@@ -205,13 +268,45 @@
    ]
   },
   {
+   "keyword": "음바페 골 레알 5-1 대승",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T00:06:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "무리뉴의 레알, 미친 10연승 행진! 음바페 멀티골로 챔스에서 PSV 5-1 대파",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-25T01:05:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/477/0000640705"
+    },
+    {
+     "title": "‘후반에만 5골’…무리뉴 ‘용병술’ 힘입은 레알 마드리드, UCL 5연승",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-25T00:20:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611250023"
+    },
+    {
+     "title": "'음바페 멀티골' 레알 마드리드,에인트호번 잡고 공식전 10연승 질주",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-25T00:14:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/469/0000967603"
+    }
+   ]
+  },
+  {
    "keyword": "빅테크",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-25T00:06:00.000Z",
    "exclusive": false,
@@ -243,14 +338,14 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-25T00:31:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "남원 국립의전원법 시행령 제정안, 국무회의 의결",
+     "title": "남원, 국립의전원법 시행령 제정안, 국무회의 의결",
      "press": "news.lghellovision.net",
      "publishedAt": "2026-11-25T01:16:00.000Z",
      "link": "http://news.lghellovision.net/news/articleView.html?idxno=563639"
@@ -304,8 +399,8 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1362,
-  "matched": 711,
+  "flagged": 1357,
+  "matched": 710,
   "avgLeadMin": 496,
   "recent": [
    {
