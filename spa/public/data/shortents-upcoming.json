@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T11:20:30.118Z",
+ "builtAt": "2026-11-25T11:30:32.892Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,23 +11,17 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "이재명 대통령, 공적주택 방문",
+   "keyword": "이재명 공적주택 중산층",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 30,
-   "recent20": 5,
-   "press": 23,
-   "firstArticleAt": "2026-11-25T09:57:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-25T10:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "붕어빵 사며 민생물가 살핀 李대통령…은평구 전통시장 깜짝 방문",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-25T11:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728514?sid=100"
-    },
     {
      "title": "李 대통령 \"공공임대 '영세민 이미지' 벗고 중산층 주거 사다리로\"",
      "press": "jnilbo.com",
@@ -39,6 +33,12 @@
      "press": "korea.kr",
      "publishedAt": "2026-11-25T11:05:00.000Z",
      "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148976503&call_from=naver_news"
+    },
+    {
+     "title": "李, 공적주택 현장 점검…\"발표한 공급 계획 반드시 지켜라\"",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-25T11:02:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466652"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T09:52:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-25T10:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "맹승지, 의사 남친과 본격 새출발 \"결혼식 D-305\"",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-25T11:28:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110093672822"
+    },
     {
      "title": "맹승지, ♥의사 연인과 결혼 305일 전…\"대문자 J 남친, 예식장 뚝딱 예...",
      "press": "xportsnews.com",
@@ -65,44 +71,39 @@
      "press": "mhnse.com",
      "publishedAt": "2026-11-25T10:28:00.000Z",
      "link": "https://m.entertain.naver.com/article/445/0000493283"
-    },
-    {
-     "title": "‘개그우먼 은퇴’ 맹승지, ♥의사 남친과 결혼 준비 돌입 “예식장 예...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-25T10:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543527"
     }
    ]
   },
   {
-   "keyword": "호재성 기사 주식 선행매매 과징금",
+   "keyword": "숲",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T09:54:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T10:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "선행매매 후 기사 보도…금융위, 언론사 기자 등에 50억 과징금",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-25T10:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847865?sid=101"
+     "title": "정읍시, 내장산서 2000여 명과 웰니스 축제…백패킹·숲 체험 즐겨",
+     "press": "newsmaker.or.kr",
+     "publishedAt": "2026-11-25T11:22:00.000Z",
+     "link": "http://www.newsmaker.or.kr/news/articleView.html?idxno=186443"
     },
     {
-     "title": "주식 미리 사놓고 '호재성 기사' 출고…금융당국, 언론사 기자 고발",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T10:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213928?sid=101"
+     "title": "기고/숲에서 배우는 양성평등",
+     "press": "dynews.co.kr",
+     "publishedAt": "2026-11-25T10:38:00.000Z",
+     "link": "https://www.dynews.co.kr/news/articleView.html?idxno=875548"
     },
     {
-     "title": "‘기사 정보로 주식거래’ 전직 한국경제 기자들에 과징금 50억 원…부...",
+     "title": "다시 붉게 물드는 제주 소나무숲…재선충병 비상",
      "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-25T09:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301036?sid=101"
+     "publishedAt": "2026-11-25T10:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301042?sid=102"
     }
    ]
   },
@@ -142,7 +143,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1499,
+  "flagged": 1500,
   "matched": 768,
   "avgLeadMin": 504,
   "recent": [
