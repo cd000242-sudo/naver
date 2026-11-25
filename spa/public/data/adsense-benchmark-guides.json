@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T01:01:25.631Z",
+  "generatedAt": "2026-11-25T01:16:00.573Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -2895,78 +2895,6 @@
           "views": 190,
           "answers": 3,
           "askedAt": "2022.02.06"
-        }
-      ]
-    },
-    {
-      "id": "473b2a1e4cf9342d",
-      "urls": [
-        "https://bookshelf-journey.tistory.com/entry/%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%B1%85%ED%81%AC-AI-%EC%83%9D%EA%B0%81%ED%95%98%EB%8A%94-%ED%80%B4%EC%A6%88-%EC%A0%95%EB%8B%B5-%ED%80%B4%EC%A6%88-%ED%92%80%EA%B3%A0-%ED%98%84%EA%B8%88-%EB%B0%9B%EA%B8%B0",
-        "https://3040-lifeanswer.tistory.com/entry/2026-%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%B1%85%ED%81%AC-OX-%ED%80%B4%EC%A6%88-11%EC%9B%94-24%EC%9D%BC-%EC%A0%95%EB%8B%B5-ft-%EC%A2%85%EC%9D%B4%EC%B1%85",
-        "https://3040-lifeanswer.tistory.com/entry/2026-%ED%95%98%EB%82%98-%EC%9B%90%ED%81%90-%EC%B6%95%EA%B5%AC-%ED%80%B4%EC%A6%88-11%EC%9B%94-24%EC%9D%BC-%EC%A0%95%EB%8B%B5-ft-%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%A7%80-5%EC%B0%A8%EC%A0%84",
-        "https://pro-gramming.tistory.com/entry/%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%B1%85%ED%81%AC-AI-%EC%9D%B4%EB%AA%A8%EC%A7%80-%ED%80%B4%EC%A6%88-%EC%A0%95%EB%8B%B5-%EC%98%A4%EB%8A%98",
-        "https://pro-gramming.tistory.com/entry/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%8E%98%EC%9D%B4-%ED%80%B4%EC%A6%88-%EC%A0%95%EB%8B%B5-%EC%98%A4%EB%8A%98",
-        "https://pro-gramming.tistory.com/entry/%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%B1%85%ED%81%AC-OX-%ED%80%B4%EC%A6%88-%EC%A0%95%EB%8B%B5-%EC%98%A4%EB%8A%98"
-      ],
-      "guide": {
-        "direction": "① 지식인에는 이모지 퀴즈 정답이 매번 바뀌어 단정하기 어렵다는 질문, '크립토' 같은 헷갈리는 정답 입력 팁을 묻는 질문이 있고 OX퀴즈 알림을 끄고 싶어하는 수요도 있다. ② 고수 글들은 모두 '오늘 정답'에만 초점을 맞추고 알림 끄는법이나 날짜별 정답 아카이브는 다루지 않았다. ③ 이 글은 11월24일자 정답과 날짜별 정답 모음, 헷갈리는 입력 팁, 알림 끄는법까지 한 번에 정리해 끝낸다.",
-        "searchTargets": [
-          "카카오뱅크 ox퀴즈 알림 끄는법",
-          "카카오뱅크ox퀴즈11월18일",
-          "카카오뱅크ox퀴즈11월17일",
-          "카카오뱅크ox퀴즈정답11월1일"
-        ],
-        "mustInclude": [
-          "11월24일 기준 이모지 퀴즈 문제·정답(매일 업데이트) 명시",
-          "정답은 매번 바뀌어 단정 어렵다는 점 - 날짜별 업데이트 구조로 안내",
-          "'크립토' 등 헷갈리는 정답 입력 팁 (지식인 질문 반영)",
-          "퀴즈 보상(포인트) 규모 설명 (확인 필요: 카카오뱅크 공식 공지)",
-          "OX퀴즈 알림이 자주 와서 끄고 싶은 사용자를 위한 알림 끄는법 안내"
-        ],
-        "mustAvoid": [
-          "이모지 퀴즈와 OX퀴즈·하나원큐 축구퀴즈·카카오페이 퀴즈를 섞어서 정답을 혼동해서 안내",
-          "매일 바뀌는 정답을 날짜 표기 없이 과거 정답처럼 단정적으로 서술",
-          "포인트 보상을 과장해서 '돈 벌이'처럼 포장"
-        ],
-        "checkBefore": [
-          "11월24일자 실제 이모지 퀴즈 문제와 정답 (카카오뱅크 앱 공식 화면)",
-          "'크립토' 등 특정 키워드 정답 인정 여부 (카카오뱅크 앱 내 공지)",
-          "OX퀴즈 알림 끄는 경로가 최신 앱 버전에서도 동일한지 (카카오뱅크 앱 설정)"
-        ],
-        "solves": [
-          "오늘(11/24) 이모지 퀴즈 정답이 뭔지 모름 → 날짜별 정답 정리로 바로 확인",
-          "정답은 매번 바뀌어 단정하기 어렵다는 혼란 → 매일 업데이트 구조로 날짜별 안내",
-          "OX퀴즈 알림이 자주 와서 귀찮음 → 알림 끄는법 안내로 해결"
-        ],
-        "actionTitles": [
-          "카카오뱅크 AI 이모지 퀴즈 정답 11월24일, 오늘 바로 확인하기",
-          "카카오뱅크 ox퀴즈 알림 끄는법, 퀴즈 피곤할 때 바로 해결하기"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "카카오뱅크 AI 이모지 퀴즈, 이번엔 뭐가 나올....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1020203&docId=491938706&answerNo=3&qb=7Lm07Lm07Jik67GF7YGsb3jtgLTspog=",
-          "views": 552,
-          "answers": 4,
-          "askedAt": "2026.09.10"
-        },
-        {
-          "title": "카카오뱅크 AI 이모지 퀴즈, 정답률 높은 문제....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50606&docId=492046242&answerNo=4&qb=7Lm07Lm07Jik67GF7YGsb3jtgLTspog=",
-          "views": 522,
-          "answers": 4,
-          "askedAt": "2026.10.16"
-        },
-        {
-          "title": "카뱅 이모지 퀴즈 정답",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110211&docId=493193858&answerNo=1&qb=7Lm07Lm07Jik67GF7YGsb3jtgLTspog=",
-          "views": 298,
-          "answers": 1,
-          "askedAt": "2026.05.01"
         }
       ]
     },
@@ -73348,47 +73276,6 @@
       "provider": "claude"
     },
     {
-      "id": "c683b568220f6036",
-      "urls": [
-        "https://wvnco.co.kr/entry/%EC%BD%94%EC%8A%A4%ED%94%BC-5000%EC%84%A0-%ED%95%98%EB%A3%A8-%EB%A7%8C%EC%97%90-%ED%9A%8C%EB%B3%B5-632-%EA%B8%89%EB%93%B1-%EB%92%A4-%EC%A7%80%EA%B8%88-%EC%82%AC%EB%8F%84-%EB%90%A0%EA%B9%8C",
-        "https://benefitscoop.tistory.com/entry/%EC%BD%94%EC%8A%A4%ED%94%BC-%ED%95%98%EB%A3%A8-%EB%A7%8C%EC%97%90-632-%EA%B8%89%EB%93%B1-5000%EC%84%A0-%ED%9A%8C%EB%B3%B5%EF%BD%9C%EC%A6%9D%EC%95%88%ED%8E%80%EB%93%9C%EB%B3%B4%EB%8B%A4-%EC%8B%9C%EC%9E%A5%EC%9D%84-%EC%9B%80%EC%A7%81%EC%9D%B8-%EA%B2%83%EC%9D%80"
-      ],
-      "guide": {
-        "direction": "검색자는 6.32% 급등과 5000선 회복이라는 결과는 알지만 그날 거래대금·거래량이 평소보다 얼마나 늘었는지, 역대급 수준인지는 알지 못한다. 고수 글은 급등 원인(증안펀드 등)과 투자 판단에만 집중해 거래대금·거래량 수치 비교는 비어 있다. 이 글은 당일 거래대금·거래량·상승률을 과거 평균과 비교한 표로 끝낸다.",
-        "searchTargets": [
-          "코스피 하루 거래대금",
-          "코스피 하루 거래량",
-          "코스피 하루 상승률"
-        ],
-        "mustInclude": [
-          "당일 상승률 6.32%(고수 제목 근거)",
-          "5000선 회복 수치(고수 제목 근거)",
-          "당일 거래대금 수치 (확인 필요: 한국거래소 KRX)",
-          "당일 거래량 수치 (확인 필요: 한국거래소 KRX)",
-          "과거 급등일 대비 거래대금·거래량 비교"
-        ],
-        "mustAvoid": [
-          "당일 급등을 전날 급락 누적분과 섞어 누적 상승률로 오인시키기"
-        ],
-        "checkBefore": [
-          "한국거래소(KRX) 공시로 해당 날짜·거래대금·거래량 수치 확인"
-        ],
-        "solves": [
-          "코스피 하루 거래대금이 평소보다 얼마나 늘었나? → 당일 거래대금을 과거 평균과 비교",
-          "코스피 하루 거래량 역대급인지 궁금 → 거래량 수치를 과거 급등일과 비교",
-          "코스피 하루 상승률 6.32%가 어느 정도 수준인지 → 과거 급등 사례와 비교해 위치 설명"
-        ],
-        "actionTitles": [
-          "코스피 하루 거래대금 얼마나 늘었는지 바로 확인하는 법",
-          "코스피 하루 거래량 평소 대비 몇 배 늘었는지 비교",
-          "코스피 하루 상승률 6.32%, 역대급 수준인지 확인하기"
-        ]
-      },
-      "at": "2026-11-25T00:35:23.007Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
       "id": "0567c0d9ee0669df",
       "urls": [
         "https://insuranceplant.tistory.com/657",
@@ -86877,6 +86764,1875 @@
           "askedAt": "2010.02.19"
         }
       ]
+    },
+    {
+      "id": "759e4b32f36a5860",
+      "urls": [
+        "https://3040-lifeanswer.tistory.com/entry/2026-%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%B1%85%ED%81%AC-OX-%ED%80%B4%EC%A6%88-11%EC%9B%94-25%EC%9D%BC-%EC%A0%95%EB%8B%B5-%ED%95%A8%EA%BB%98-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%8F%85%EC%84%9C-%EC%8A%B5%EA%B4%80",
+        "https://moneyinftong.tistory.com/entry/%ED%95%A8%EA%BB%98-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%8F%85%EC%84%9C-%EC%8A%B5%EA%B4%80%EC%97%90%EC%84%9C%EB%8A%94-%EC%A0%95%EA%B8%B0%EC%A0%81%EC%9C%BC%EB%A1%9C-%EB%82%B4-%EC%B7%A8%ED%96%A5%EC%97%90-%EB%A7%9E%EB%8A%94-%EB%8F%84%EC%84%9C%EB%A5%BC-%EC%A7%91%EC%97%90%EC%84%9C-%EB%B0%9B%EC%95%84%EB%B3%BC-%EC%88%98-%EC%9E%88%EB%8B%A4",
+        "https://pro-gramming.tistory.com/entry/%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%B1%85%ED%81%AC-AI-%EC%9D%B4%EB%AA%A8%EC%A7%80-%ED%80%B4%EC%A6%88-%EC%A0%95%EB%8B%B5-%EC%98%A4%EB%8A%98",
+        "https://pro-gramming.tistory.com/entry/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%8E%98%EC%9D%B4-%ED%80%B4%EC%A6%88-%EC%A0%95%EB%8B%B5-%EC%98%A4%EB%8A%98",
+        "https://pro-gramming.tistory.com/entry/%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%B1%85%ED%81%AC-OX-%ED%80%B4%EC%A6%88-%EC%A0%95%EB%8B%B5-%EC%98%A4%EB%8A%98",
+        "https://pro-gramming.tistory.com/entry/%ED%95%98%EB%82%98-%EC%9B%90%ED%81%90-OX-%ED%80%B4%EC%A6%88-%EC%A0%95%EB%8B%B5-%EC%98%A4%EB%8A%98"
+      ],
+      "guide": {
+        "direction": "검색자는 오늘(11월25일) OX 퀴즈 정답과 함께 매일 뜨는 알림을 끄는 법을 같이 찾고 있다. 고수 블로그들은 날짜별 정답만 나열했고 알림 끄는 경로나 독서습관 이벤트의 실제 내용은 다루지 않았다. 이 글은 최근 날짜별 정답표와 알림 설정 위치를 함께 정리해 재검색을 막는다.",
+        "searchTargets": [
+          "카카오뱅크ox퀴즈11월20일",
+          "카카오뱅크ox퀴즈11월18일",
+          "카카오뱅크 ox퀴즈 알림 끄는법",
+          "카카오뱅크ox퀴즈11월17일"
+        ],
+        "mustInclude": [
+          "최근 날짜별 OX 퀴즈 정답 정리표(11월 11~20일 등)",
+          "앱 내 알림 끄는 경로(설정 위치, 확인 필요: 카카오뱅크 앱)",
+          "'함께 만드는 독서 습관' 이벤트 참여 조건·혜택 설명",
+          "포인트·보상 적립 금액(확인 필요: 이벤트 공지)"
+        ],
+        "mustAvoid": [
+          "지난 날짜 정답을 오늘 정답인 것처럼 혼용 표기",
+          "카카오페이 퀴즈·하나원큐 퀴즈 등 비슷한 다른 이벤트와 섞어 쓰기"
+        ],
+        "checkBefore": [
+          "카카오뱅크 앱 이벤트 페이지에서 당일 정답과 이벤트 종료일 확인"
+        ],
+        "solves": [
+          "오늘 퀴즈 정답을 모르겠다 → 날짜별 정답표로 바로 확인",
+          "매일 뜨는 퀴즈 알림이 귀찮다 → 알림 끄는 경로 안내",
+          "정답 맞혀도 보상이 뭔지 모르겠다 → 이벤트 혜택 설명"
+        ],
+        "actionTitles": [
+          "카카오뱅크 OX퀴즈 11월 25일 정답 확인하고 알림 끄는법까지",
+          "카카오뱅크 OX퀴즈 11월 날짜별 정답 한번에 확인하는 법"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "카카오뱅크 AI 이모지 퀴즈, 이번엔 뭐가 나올....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1020203&docId=491938706&answerNo=3&qb=7Lm07Lm07Jik67GF7YGsb3jtgLTspog=",
+          "views": 553,
+          "answers": 4,
+          "askedAt": "2026.09.10"
+        },
+        {
+          "title": "카카오뱅크 AI 이모지 퀴즈, 정답률 높은 문제....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50606&docId=492046242&answerNo=4&qb=7Lm07Lm07Jik67GF7YGsb3jtgLTspog=",
+          "views": 529,
+          "answers": 4,
+          "askedAt": "2026.10.16"
+        },
+        {
+          "title": "카뱅 이모지 퀴즈 정답",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110211&docId=493193858&answerNo=1&qb=7Lm07Lm07Jik67GF7YGsb3jtgLTspog=",
+          "views": 299,
+          "answers": 1,
+          "askedAt": "2026.05.01"
+        }
+      ]
+    },
+    {
+      "id": "473b2a1e4cf9342d",
+      "urls": [
+        "https://bookshelf-journey.tistory.com/entry/%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%B1%85%ED%81%AC-AI-%EC%83%9D%EA%B0%81%ED%95%98%EB%8A%94-%ED%80%B4%EC%A6%88-%EC%A0%95%EB%8B%B5-%ED%80%B4%EC%A6%88-%ED%92%80%EA%B3%A0-%ED%98%84%EA%B8%88-%EB%B0%9B%EA%B8%B0",
+        "https://3040-lifeanswer.tistory.com/entry/2026-%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%B1%85%ED%81%AC-AI-%EC%9D%B4%EB%AA%A8%EC%A7%80-%ED%80%B4%EC%A6%88-11%EC%9B%94-23%EC%9D%BC-%EC%A0%95%EB%8B%B5-ft-%EA%BC%AD%EB%A9%A4%EB%B2%84%EC%8B%AD-%EC%9B%94-%EC%9D%B4%EC%9A%A9%EB%A3%8C-2900",
+        "https://soyblog.co.kr/%ec%9c%a0%ed%94%8c%ed%88%ac%ec%81%a0-%ec%9c%a0%ed%94%8c%eb%9f%ac%ec%8a%a4-%eb%a9%a4%eb%b2%84%ec%8b%ad-11%ec%9b%94-%ed%80%b4%ec%a6%88-%ec%a0%95%eb%8b%b5/"
+      ],
+      "guide": {
+        "direction": "검색자는 이모지만 보고 캠프·캠핑, 자전거도로처럼 비슷한 단어 중 정확한 표기를 못 골라 막혀있다. 고수 블로그들은 날짜별 정답만 올렸고 왜 그 단어가 정답인지 유사 오답과의 구분 기준은 설명하지 않았다. 이 글은 이모지-정답 매칭표에 유사 단어 비교를 더해 추측 없이 끝내게 한다.",
+        "searchTargets": [
+          "카카오뱅크 ai 이모지 퀴즈",
+          "카카오뱅크 ai퀴즈 정답",
+          "카카오뱅크 ai퀴즈 오늘",
+          "카카오뱅크 ai퀴즈 23일"
+        ],
+        "mustInclude": [
+          "날짜별 이모지-정답 매칭표",
+          "캠프/캠핑, 자전거도로 등 유사 단어 비교와 정답 선택 이유",
+          "정답 입력 시 띄어쓰기·맞춤법 유의사항(확인 필요: 앱 입력창)"
+        ],
+        "mustAvoid": [
+          "지난 날짜 정답을 오늘 것처럼 혼용 표기",
+          "카카오페이·하나원큐 등 다른 사의 비슷한 퀴즈와 섞어 설명"
+        ],
+        "checkBefore": [
+          "카카오뱅크 앱 이벤트 페이지에서 당일 이모지와 정답 입력 표기 방식 확인"
+        ],
+        "solves": [
+          "이모지 보고도 정확한 단어를 못 고르겠다 → 유사 단어 비교표로 구분 기준 제시",
+          "오늘 퀴즈 정답이 뭔지 모르겠다 → 날짜별 정답표 제공",
+          "정답 입력해도 틀렸다고 나온다 → 띄어쓰기·표기 유의사항 안내(확인 필요)"
+        ],
+        "actionTitles": [
+          "카카오뱅크 AI 이모지 퀴즈, 캠프냐 캠핑이냐 헷갈릴 때 확인",
+          "카카오뱅크 AI퀴즈 오늘 정답, 이모지 문제별 정리로 확인",
+          "카카오뱅크 AI 이모지 퀴즈, 정답 틀리는 이유까지 확인하기"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "카카오뱅크 AI 이모지 퀴즈, 정답 맞히기 어렵....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1060113&docId=492894943&answerNo=1&qb=7Lm07Lm07Jik67GF7YGsYWk=",
+          "views": 572,
+          "answers": 1,
+          "askedAt": "2026.04.11"
+        },
+        {
+          "title": "카카오뱅크 AI 이모지 퀴즈, 난이도 어떤가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1060801&docId=492170003&answerNo=1&qb=7Lm07Lm07Jik67GF7YGsYWk=",
+          "views": 331,
+          "answers": 1,
+          "askedAt": "2026.02.26"
+        },
+        {
+          "title": "카카오뱅크 AI 이모지 퀴즈, 정답 유추 팁이 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50606&docId=492551151&answerNo=1&qb=7Lm07Lm07Jik67GF7YGsYWk=",
+          "views": 327,
+          "answers": 1,
+          "askedAt": "2026.03.20"
+        }
+      ]
+    },
+    {
+      "id": "5a52fbc4f8cce66e",
+      "urls": [
+        "https://mypost.tistory.com/entry/%EC%8B%A4%EC%97%85%EA%B8%89%EC%97%AC-%EC%A7%80%EA%B8%89%EC%9D%BC-2026",
+        "https://axles.kr/entry/%EC%8B%A4%EC%97%85%EA%B8%89%EC%97%AC-%EC%8B%A4%EC%97%85%EC%9D%B8%EC%A0%95-%EC%8B%A0%EC%B2%AD-%EA%B3%A0%EC%9A%A924%EC%97%90%EC%84%9C-%EC%A7%81%EC%A0%91-%ED%95%B4-%EB%B3%B4%EB%8B%88-5%EB%B6%84%EC%9D%B4%EB%A9%B4-%EB%81%9D"
+      ],
+      "guide": {
+        "direction": "검색자는 실업인정일 당일 몇시에 입금되는지, 이직확인서 처리가 늦으면 언제 들어오는지가 궁금해 막혀있다. 고수 글 제목들은 '언제 들어올까'라는 일반적 틀만 제시했고 최초·2차 실업인정일별 지연 사유 구분은 다루지 않았다. 이 글은 회차별 지급 간격표와 지연 시 확인 순서를 제시해 재검색을 막는다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "실업인정일-지급일 간격(통상 당일~익일, 확인 필요: 고용24)",
+          "최초 실업인정일과 2차 실업인정일 지급 차이표",
+          "이직확인서 미접수 시 지연되는 사례와 접수 확인 방법",
+          "지급 시간대 사례(오전~오후 5시 이후, 확인 필요: 고용24 공지)"
+        ],
+        "mustAvoid": [
+          "실업급여와 다른 고용 관련 지원금(예: 고용안정지원금)을 혼동해서 서술"
+        ],
+        "checkBefore": [
+          "고용24 홈페이지에서 실업인정일별 지급 기준 공지 확인",
+          "관할 고용센터 공지사항에서 최근 지연 사례 여부 확인"
+        ],
+        "solves": [
+          "실업인정일인데 몇시에 들어오는지 모르겠다 → 회차별 지급 시간대 패턴 정리",
+          "2차 실업인정일인데 하루 늦게 들어온다 → 지연 원인과 확인 순서 제시",
+          "이직확인서 처리됐는지 모르겠는데 급여가 안 들어온다 → 접수 확인 절차 안내"
+        ],
+        "actionTitles": [
+          "실업급여 지급일 2026, 실업인정일마다 몇시 들어오는지 확인",
+          "2차 실업인정일 실업급여 하루 늦을 때 원인 확인하는 법",
+          "이직확인서 미접수로 실업급여 지연될 때 확인 순서 정리"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "실업급여 2차실업인정일",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6080402&docId=145408456&answerNo=1&qb=7Iuk7JeF6riJ7JesIOyLpOyXheyduOygleydvOuniOuLpCDrk6TslrTsmKzquYw=",
+          "views": 2796,
+          "answers": 1,
+          "askedAt": "2012.02.11"
+        },
+        {
+          "title": "오늘 실업인정일 입니다 실업급여 몇시쯤들....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6080402&docId=276414842&answerNo=1&qb=7Iuk7JeF6riJ7JesIOyLpOyXheyduOygleydvOuniOuLpCDrk6TslrTsmKzquYw=",
+          "views": 2122,
+          "answers": 1,
+          "askedAt": "2017.05.11"
+        },
+        {
+          "title": "최초실업인정일 출석 후 이직확인서를 보내....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6080402&docId=193628395&answerNo=1&qb=7Iuk7JeF6riJ7JesIOyLpOyXheyduOygleydvOuniOuLpCDrk6TslrTsmKzquYw=",
+          "views": 1351,
+          "answers": 1,
+          "askedAt": "2014.03.17"
+        }
+      ]
+    },
+    {
+      "id": "fa87ae7e45bbe70c",
+      "urls": [
+        "https://4050s.tistory.com/342",
+        "https://traunerjung.tistory.com/entry/%EA%B3%84%EC%95%BD%EA%B8%B0%EA%B0%84-%EB%A7%8C%EB%A3%8C%EC%99%80-%EC%9E%84%EB%8C%80%EB%A3%8C-%EC%9D%B8%EC%83%81-%EB%AC%B8%EC%A0%9C-%EC%A0%95%EB%A6%AC-%ED%86%B5%EC%A7%80-%EC%8B%9C%EC%A0%90%EA%B3%BC-5%ED%8D%BC%EC%84%BC%ED%8A%B8-%EC%83%81%ED%95%9C-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EB%AC%B5%EC%8B%9C%EC%A0%81-%EA%B0%B1%EC%8B%A0%EA%B9%8C%EC%A7%80"
+      ],
+      "guide": {
+        "direction": "상가 임차인은 10년 갱신요구권이 최초 계약부터인지 갱신 때마다 새로 생기는지, 5% 상한이 내 보증금에 얼마인지 헷갈려 지식인에 계약기간 만료 전후 대응을 묻는다. 고수 글들은 통지 시점·5%·묵시적 갱신을 나열만 하고 금액 계산과 기한 체크리스트를 안 준다. 이 글은 기산점 정리, 금액별 인상액 계산 예시, 통지 기한 체크리스트로 끝낸다.",
+        "searchTargets": [
+          "계약기간 만료 통보",
+          "계약기간 만료일",
+          "계약기간 만료 전 이사",
+          "계약기간 만료 기간"
+        ],
+        "mustInclude": [
+          "10년 갱신요구권 기산점(최초 계약일부터인지 갱신마다인지) 정리(확인 필요: 상가임대차보호법 제10조 원문)",
+          "5% 상한 계산 예시(보증금·월세별 인상 가능액 숫자)(확인 필요: 구체 사례)",
+          "환산보증금 초과 상가에 5% 상한·갱신요구권 적용 여부 표(확인 필요: 법제처/국토부 공지)",
+          "갱신요구 통지 기한(만료 몇 개월 전~몇 개월 전)(확인 필요: 상가임대차보호법 원문)",
+          "묵시적 갱신 시 임대료 인상 가능 여부(확인 필요: 법원 판례/법제처 해석)"
+        ],
+        "mustAvoid": [
+          "주택임대차보호법(전월세) 5% 상한과 혼동해서 적용 대상을 섞어 쓰지 말 것",
+          "개별 분쟁 사례를 일반화해 법적 자문처럼 단정하지 말 것"
+        ],
+        "checkBefore": [
+          "상가임대차보호법 제10조·제11조 원문(국가법령정보센터)에서 10년 기산점과 5% 상한 조문 재확인",
+          "환산보증금 기준 금액(지역별)과 적용 예외를 법제처 또는 상가임대차 분쟁조정위원회 공지에서 확인"
+        ],
+        "solves": [
+          "10년 갱신요구권이 최초 계약부터인지 갱신마다 새로 생기는지 헷갈림 → 기산점 정리표로 해결",
+          "5% 상한이 내 보증금 기준 얼마 인상인지 계산 안 됨 → 금액별 계산 예시로 해결",
+          "갱신요구 통지를 언제까지 해야 하는지 모름 → 통지 기한 체크리스트로 해결"
+        ],
+        "actionTitles": [
+          "상가임대차 5% 인상 상한 계산법, 내 보증금 얼마 올릴 수 있나",
+          "상가 10년 갱신요구권 기산점 확인하는 법, 언제부터 세나",
+          "상가 갱신요구 통지 기한 체크리스트, 계약기간 만료 전 확인할 것"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "전세 계약 기간 만료 전 이사 시 복비 등",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4020201&docId=495850587&answerNo=3&qb=6rOE7JW96riw6rCE66eM66OM",
+          "views": 317,
+          "answers": 4,
+          "askedAt": "2026.11.06"
+        },
+        {
+          "title": "인터넷(폰 통신사) 계약기간 만료",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070201&docId=495450957&answerNo=6&qb=6rOE7JW96riw6rCE66eM66OM",
+          "views": 140,
+          "answers": 6,
+          "askedAt": "2026.11.24"
+        },
+        {
+          "title": "부당노동행위 복직 구제명령 확정 전 계약기....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60802&docId=496033847&answerNo=1&qb=6rOE7JW96riw6rCE66eM66OM",
+          "views": 57,
+          "answers": 1,
+          "askedAt": "2026.11.20"
+        }
+      ]
+    },
+    {
+      "id": "488aada48c179ccd",
+      "urls": [
+        "https://heyjoyworld.com/entry/%EB%B0%98%EB%8F%84%EC%B2%B4%EC%A3%BC-%EB%B0%98%EB%93%B1-%EC%9D%B4%ED%9B%84-%EB%8C%80%EC%9D%91-%ED%8F%AC%EC%9D%B8%ED%8A%B8%EC%99%80-%EB%8B%A8%EA%B3%84%EB%B3%84-%EC%A0%90%EA%B2%80",
+        "https://tak78.tistory.com/326",
+        "https://heyjoyworld.com/entry/%EC%95%84%EB%82%98%EB%B0%B0%ED%8B%B1%EC%84%B8%EB%AF%B8-BMS-%EB%B0%98%EB%8F%84%EC%B2%B4-%EA%B5%AD%EC%82%B0%ED%99%94-%EB%8F%84%EC%A0%84-%EB%8B%A8%EA%B3%84%EB%B3%84-%EC%A0%95%EB%A6%AC"
+      ],
+      "guide": {
+        "direction": "투자자는 반도체주가 반등했는데 바닥인지 추가 하락이 올지 몰라 지식인에 폭락 이유와 매도 시점을 묻는다. 고수 글들은 당일 마감 시황과 반등 소식만 전하고 반등 이후 비중별 대응 기준을 안 준다. 이 글은 보유 비중별 체크리스트와 조심할 신호로 다음 행동을 정리해 끝낸다.",
+        "searchTargets": [
+          "반도체주 반등 전망",
+          "반도체주 반등"
+        ],
+        "mustInclude": [
+          "2026년 11월 24일 코스피 5000선 회복·반도체 동반 반등 언급(확인 필요: 당일 종가)",
+          "17년 8개월 만의 최대 하락률이었던 이전 폭락과 현재 반등 국면 비교(확인 필요: 당시 하락률 수치)",
+          "반도체 비중이 과도한 포트폴리오의 단계별 조정 기준(확인 필요: 전문가 코멘트 출처)",
+          "매수 시점~보유 기간별 반등 수혜 시나리오 예시(확인 필요: 실제 수치)"
+        ],
+        "mustAvoid": [
+          "\"집 팔고 대출 풀로 줍줍\" 식 투자 권유성 단정 표현을 쓰지 말 것",
+          "특정 종목의 급등을 확정적으로 예측하지 말고 가능성으로만 쓸 것",
+          "폭락 당시 공포 심리를 지금 반등 국면과 구분 없이 섞어 쓰지 말 것"
+        ],
+        "checkBefore": [
+          "2026년 11월 24일 코스피 종가·반도체 대형주 등락률을 거래소 공시 또는 증권사 리포트에서 재확인",
+          "\"17년 8개월 만의 최대 하락률\" 비교 시점과 수치를 원문 기사에서 재확인"
+        ],
+        "solves": [
+          "반도체주 반등이 진짜 바닥인지 추가 하락 올지 몰라 못 삼 → 단계별 대응 기준으로 해결",
+          "보유 비중이 너무 커서 손절할지 더 살지 혼란 → 비중별 체크리스트로 해결",
+          "폭락 이유만 알고 다음 행동을 모름 → 반등 이후 단계별 점검으로 해결"
+        ],
+        "actionTitles": [
+          "반도체주 반등 전망, 지금 비중 늘릴지 줄일지 단계별 확인",
+          "반도체주 반등 전망 체크, 보유 비중별 대응 기준 정리"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "주식 폭락 이유",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494006826&answerNo=5&qb=67CY64+E7LK07KO8IOuwmOuTsSDsnbTtm4Qg64uo6rOE67OE",
+          "views": 1442,
+          "answers": 11,
+          "askedAt": "2026.06.24"
+        },
+        {
+          "title": "한국에서 2026년 10월 2일 매입해서 6개월 후 매....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=495386250&answerNo=3&qb=67CY64+E7LK07KO8IOuwmOuTsSDsnbTtm4Qg64uo6rOE67OE",
+          "views": 361,
+          "answers": 5,
+          "askedAt": "2026.10.02"
+        },
+        {
+          "title": "지금이야말로 집 팔고 대출 풀로 땡겨 줍줍할....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494514644&answerNo=1&qb=67CY64+E7LK07KO8IOuwmOuTsSDsnbTtm4Qg64uo6rOE67OE",
+          "views": 328,
+          "answers": 8,
+          "askedAt": "2026.07.29"
+        }
+      ]
+    },
+    {
+      "id": "6713766dd7133b24",
+      "urls": [
+        "https://pro-gramming.tistory.com/entry/%ED%95%98%EB%82%98-%EC%9B%90%ED%81%90-%EC%B6%95%EA%B5%AC-%ED%80%B4%EC%A6%88-%EC%A0%95%EB%8B%B5-%EC%98%A4%EB%8A%98",
+        "https://3040-lifeanswer.tistory.com/entry/2026-%ED%95%98%EB%82%98-%EC%9B%90%ED%81%90-%EC%B6%95%EA%B5%AC-%ED%80%B4%EC%A6%88-11%EC%9B%94-24%EC%9D%BC-%EC%A0%95%EB%8B%B5-ft-%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%A7%80-5%EC%B0%A8%EC%A0%84",
+        "https://3040-lifeanswer.tistory.com/entry/2026-%ED%86%A0%EC%8A%A4%ED%96%89%EC%9A%B4%ED%80%B4%EC%A6%88-11%EC%9B%94-23%EC%9D%BC-%EC%A0%95%EB%8B%B5-ft-%EC%95%84%EC%BB%A4%EB%A7%8C%EC%8B%9C%EC%95%84"
+      ],
+      "guide": {
+        "direction": "검색자는 오늘(11/25)자 하나원큐 축구퀴즈 정답을 바로 알고 참여하려는 급한 목적으로 들어온다. 고수 글들은 날짜별 정답만 매일 바꿔 올리고 참여 방법·혜택을 반복 설명하지 않아 날짜 지난 글과 헷갈리게 한다. 이 글은 오늘 날짜 정답, 참여 경로, 혜택을 한 번에 정리해 전날 글과 구분해 끝낸다.",
+        "searchTargets": [
+          "하나원큐 축구퀴즈",
+          "하나원큐퀴즈",
+          "하나원큐 정답"
+        ],
+        "mustInclude": [
+          "11월 25일 하나원큐 축구퀴즈 문제와 정답 본문(확인 필요: 하나은행 하나원큐 앱 이벤트 페이지)",
+          "퀴즈 참여 방법(앱 내 진입 경로, 참여 횟수 제한)(확인 필요: 앱 이벤트 공지)",
+          "정답 제출 시 받는 혜택·경품 내용(확인 필요: 이벤트 공지)",
+          "전날(11월 24일) 정답과 비교해 날짜별 패턴 정리(확인 필요: 전날 정답)"
+        ],
+        "mustAvoid": [
+          "하나원큐 앱 비밀번호 오류·대출 연장 오류 등 퀴즈와 무관한 앱 장애 문의를 같은 글에 섞지 말 것",
+          "토스행운퀴즈 등 다른 회사 퀴즈 이벤트와 정답을 혼동해서 쓰지 말 것",
+          "지난 날짜 정답을 오늘 정답처럼 날짜 오표기하지 말 것"
+        ],
+        "checkBefore": [
+          "하나은행 하나원큐 앱 이벤트 탭에서 11월 25일자 실제 퀴즈 문항과 정답 확인",
+          "이벤트 참여 조건(기간·대상·경품)을 하나은행 공식 공지에서 확인"
+        ],
+        "solves": [
+          "오늘(11/25) 하나원큐 축구퀴즈 정답을 몰라 못 참여함 → 해당 날짜 정답으로 해결",
+          "퀴즈를 앱 어디서 푸는지 모름 → 참여 방법 안내로 해결",
+          "정답 맞혀도 혜택이 뭔지 모름 → 경품·혜택 안내로 해결"
+        ],
+        "actionTitles": [
+          "하나원큐 축구퀴즈 정답 11월 25일, 오늘자 바로 확인하는 법",
+          "하나원큐퀴즈 참여 방법과 정답 받는 법 한번에 정리",
+          "하나원큐 정답 오늘자 확인, 축구퀴즈 참여 순서 정리"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "하나원큐 앱 비밀번호 5회 오류",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40107&docId=485707881&answerNo=4&qb=7ZWY64KY7JuQ7YGQ",
+          "views": 1102,
+          "answers": 4,
+          "askedAt": "2026.07.04"
+        },
+        {
+          "title": "하나원큐 비상금 대출",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010506&docId=494966852&answerNo=7&qb=7ZWY64KY7JuQ7YGQ",
+          "views": 355,
+          "answers": 7,
+          "askedAt": "2026.09.22"
+        },
+        {
+          "title": "하나원큐 비상금 대출 연장 오류 질문입니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010506&docId=495956719&answerNo=5&qb=7ZWY64KY7JuQ7YGQ",
+          "views": 122,
+          "answers": 5,
+          "askedAt": "2026.11.16"
+        }
+      ]
+    },
+    {
+      "id": "f9e21ea7fb1b97ad",
+      "urls": [
+        "https://onblanc.com/kospi-5006-jensen-huang-return-rebound-check/",
+        "https://inve-tech-simple.tistory.com/289"
+      ],
+      "guide": {
+        "direction": "검색자는 하루 만에 6% 급등한 코스피가 거래대금·거래량 근거로 볼 때 실속 있는 반등인지, 다음날도 이어질지 궁금해 들어온다. 고수 블로그들은 젠슨 황 복귀와 엔비디아 31% 급등이라는 배경만 설명하고, 반등 신뢰도를 보여줄 당일 거래대금·거래량·상승률 수치나 다음날 꺾인 이유는 짚지 않았다. 11월 24일 코스피 거래대금·거래량·상승률을 전일 대비로 정리해 반등의 실체를 판단할 기준을 준다.",
+        "searchTargets": [
+          "코스피 하루 거래대금",
+          "코스피 하루 거래량",
+          "코스피 하루 상승률"
+        ],
+        "mustInclude": [
+          "11월 24일 코스피 5,006 기록, 전장 대비 6% 급등 마감(확인 필요: 거래소 공시)",
+          "엔비디아 31% 급등과 젠슨 황 CEO 복귀 소식의 시간 순서",
+          "당일 코스피 거래대금·거래량 수치(확인 필요: 한국거래소)",
+          "반등이 다음날 꺾인 경우 차익실현 등 원인 정리"
+        ],
+        "mustAvoid": [
+          "급등을 특정 종목 매수 신호처럼 단정하지 않기",
+          "미국 증시와 한국 증시 반응 시점을 혼동하지 않기",
+          "하루 급등락을 장기 전망처럼 과장하지 않기"
+        ],
+        "checkBefore": [
+          "코스피 종가 5,006, 상승률 6% 정확한 수치 - 한국거래소/증권사 공시",
+          "엔비디아 31% 급등 발생 일자와 젠슨 황 복귀 보도 원문"
+        ],
+        "solves": [
+          "주식·비트코인 전망이 궁금하다 → 하루 급등락의 거래량·거래대금 근거로 반등 신뢰도 판단 기준 제공",
+          "미국 증시 폭락 후 폭등 이유가 뭔가 → 엔비디아 31% 급등과 젠슨 황 복귀 연결 구조 설명",
+          "젠슨 황 효과가 하루 만에 꺾인 이유 → 차익실현 등 다음날 변동 원인 정리"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "표현의 자유",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=495646170&answerNo=16&qb=7L2U7Iqk7ZS8IO2VmOujqCDquInrk7Eg7KCg7IqoIOuzteq3gA==",
+          "views": 32094,
+          "answers": 18,
+          "askedAt": "2026.11.07"
+        },
+        {
+          "title": "주식시장이나 비트코인시장 전망 어떻게 보....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=496076070&answerNo=6&qb=7L2U7Iqk7ZS8IO2VmOujqCDquInrk7Eg7KCg7IqoIOuzteq3gA==",
+          "views": 164,
+          "answers": 8,
+          "askedAt": "2026.11.24"
+        },
+        {
+          "title": "미국주식시장 폭락했다가 폭등한이유가 무엇....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=496076169&answerNo=10&qb=7L2U7Iqk7ZS8IO2VmOujqCDquInrk7Eg7KCg7IqoIOuzteq3gA==",
+          "views": 114,
+          "answers": 12,
+          "askedAt": "2026.11.24"
+        }
+      ]
+    },
+    {
+      "id": "a780d341bf1de808",
+      "urls": [
+        "https://techtrends.kr/genesis-g80-hybrid/",
+        "https://blog.carlab.kr/2026/11/20/genesis-g80-hybrid-%ec%b5%9c%ec%b4%88%ea%b3%b5%ea%b0%9c-g80-%ed%95%98%ec%9d%b4%eb%b8%8c%eb%a6%ac%eb%93%9c/"
+      ],
+      "guide": {
+        "direction": "검색자는 '14.1km/L가 정부 공인연비인지', G80 하이브리드와 GV80 하이브리드가 뭐가 다른지 헷갈려서 들어온다. 고수 블로그들은 휠베이스 130mm 연장, 연비 14.1km/L 같은 공개 스펙만 나열하고, 그 수치가 공인연비가 아니라는 점과 GV80과의 구체적 차이를 구분해 풀지 않았다. 공인연비 여부와 G80 하이브리드·GV80 하이브리드·G80 전동화 수치를 표로 나눠 혼동을 끝낸다.",
+        "searchTargets": [
+          "제네시스 g80 하이브리드",
+          "제네시스 g80 가격",
+          "제네시스 g80 연비",
+          "제네시스 g80 풀체인지"
+        ],
+        "mustInclude": [
+          "휠베이스 130mm 연장, 연비 14.1km/L는 공인연비가 아닌 연구소 측정치라는 점",
+          "G80 하이브리드와 GV80 하이브리드의 구체적 차이(확인 필요: 제네시스 공식 자료)",
+          "출시일·가격(확인 필요: 제네시스 공식 발표)",
+          "G80 하이브리드와 G80 전동화(전기차) 모델 구분표"
+        ],
+        "mustAvoid": [
+          "14.1km/L를 국내 공인연비처럼 서술하지 않기",
+          "G80 전동화(전기차) 모델 수치를 하이브리드 수치와 혼동하지 않기",
+          "출시일·가격을 추측해 확정적으로 쓰지 않기"
+        ],
+        "checkBefore": [
+          "국내 공인연비 인증 여부 - 환경부/제네시스 공식 발표",
+          "G80 하이브리드와 GV80 하이브리드의 세부 차이 - 제네시스 공식 공개 자료"
+        ],
+        "solves": [
+          "연비 13km/L 넘는다는데 정말인가 → 14.1km/L가 공인연비가 아닌 연구소 측정치임을 구분해 정리",
+          "기존 모델과 차이점이 뭔가 → 휠베이스 130mm 연장 등 변경점을 표로 정리",
+          "G80 하이브리드와 GV80 하이브리드 뭐가 다른가 → 두 모델 스펙을 나란히 비교"
+        ],
+        "actionTitles": [
+          "제네시스 G80 하이브리드 가격·연비, GV80과 차이 비교",
+          "제네시스 G80 풀체인지 하이브리드 출시일 확인하는 법",
+          "G80 하이브리드 연비 14.1km/L, 공인연비 맞는지 확인"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "제네시스 G80 하이브리드, 연비 정말 13km/L 넘....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50703&docId=496030820&answerNo=1&qb=7KCc64Sk7Iuc7IqkZzgw",
+          "views": 130,
+          "answers": 3,
+          "askedAt": "2026.11.21"
+        },
+        {
+          "title": "제네시스 G80 전기차, 정말 600km 주행 가능할까....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50702&docId=495806496&answerNo=1&qb=7KCc64Sk7Iuc7IqkZzgw",
+          "views": 110,
+          "answers": 1,
+          "askedAt": "2026.11.03"
+        },
+        {
+          "title": "제네시스 g80 후방 카메라 에러",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=811&docId=495831052&answerNo=1&qb=7KCc64Sk7Iuc7IqkZzgw",
+          "views": 97,
+          "answers": 2,
+          "askedAt": "2026.11.05"
+        }
+      ]
+    },
+    {
+      "id": "244eb132a4e3f575",
+      "urls": [
+        "https://modu-total.tistory.com/292"
+      ],
+      "guide": {
+        "direction": "검색자는 사진을 못 낸 경우 지원금을 환수당하는지, 사진 유무로 금액이 얼마나 달라지는지가 걱정돼 들어온다. 고수 블로그 제목은 '환수당하나?'라는 불안만 건드리고, 사진 없을 때 실제 금액 차이와 환수 대상 확인 순서는 구체적으로 풀지 않았다. 사진 제출 여부별 지원금 금액과 환수 대상 확인 순서를 체크리스트로 정리해 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "중증 탈모 치료 지원금 사진 제출 여부별 금액 차이표(확인 필요: 보건복지부/지자체 공지)",
+          "환수 대상 여부를 가르는 기준과 확인 순서(확인 필요: 원문 공고)",
+          "지원금 신청·환수 관련 담당 기관 및 문의처(확인 필요: 공식 공지)"
+        ],
+        "mustAvoid": [
+          "정확한 금액을 추측해 확정적으로 쓰지 않기",
+          "건강보험 지원 등 다른 탈모 관련 지원 제도와 혼동하지 않기"
+        ],
+        "checkBefore": [
+          "사진 제출 여부별 지원금 금액 차이 - 보건복지부/지자체 공식 공고"
+        ],
+        "solves": [
+          "사진 없으면 환수당하나 → 사진 유무별 금액 차이와 환수 기준을 표로 정리",
+          "내가 환수 대상인지 어떻게 확인하나 → 확인 순서를 체크리스트로 제공"
+        ],
+        "actionTitles": [
+          "중증 탈모 지원금 환수 대상인지 확인하는 순서",
+          "탈모 치료 지원금 사진 없을 때 금액 차이 확인법",
+          "탈모 지원금 환수 피하는 법, 신청 전 확인할 것"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "762e489f42990b51",
+      "urls": [
+        "https://flameleaf.tistory.com/entry/%ED%9C%B4%EB%A9%B4%EA%B3%84%EC%A2%8C-%ED%99%95%EC%9D%B8%ED%95%98%EB%8A%94-%EB%B2%95-%ED%95%9C-%EA%B3%B3%EC%97%90%EC%84%9C-%EC%A1%B0%ED%9A%8C%ED%95%98%EB%8A%94-%ED%86%B5%ED%95%A9%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%99%84%EB%B2%BD-%EA%B0%80%EC%9D%B4%EB%93%9C"
+      ],
+      "guide": {
+        "direction": "지식인에는 '휴면계좌 통합조회를 했는데 돈을 못 찾았다'는 질문이 많아, 검색자는 조회 이후 지급 신청 단계에서 막힌다. 고수 블로그 제목은 '조회 방법'까지만 다루고 비활동성 계좌와 서민금융진흥원 출연 휴면예금의 구분, 지급 신청 순서는 빠져 있다. 이 글은 어카운트인포(payinfo.or.kr) 조회→구분→지급신청 순서를 표로 정리해 한 번에 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "금융결제원 계좌정보통합관리서비스 '어카운트인포'(payinfo.or.kr) 공식 명칭·주소 명시",
+          "비활동성 계좌와 서민금융진흥원 출연 휴면예금의 구분 기준표",
+          "조회 → 본인확인 → 지급 신청 순서 정리",
+          "통장 개설 지점 직접 방문이 필요 없다는 점 명시",
+          "휴면계좌에 추가 입금은 불가하다는 점 명시"
+        ],
+        "mustAvoid": [
+          "특정 은행 이름을 거론해 그 은행이 돈을 가로챈다는 식으로 오해 조장",
+          "일반 비활동성 계좌와 실제 '휴면예금'을 같은 것으로 혼동해 서술"
+        ],
+        "checkBefore": [
+          "payinfo.or.kr 서비스명·절차가 최신인지 금융결제원 공지로 확인",
+          "서민금융진흥원 출연 휴면예금 지급 기준 최신 공지 확인"
+        ],
+        "solves": [
+          "'휴면계좌 조회했는데 돈 못 찾음' → 비활동계좌와 휴면예금 구분 기준·지급신청 단계로 해결",
+          "'통장 개설 지점 찾아가야 하나' → 어카운트인포에서 비대면으로 끝낼 수 있음을 안내",
+          "'휴면계좌에 입금도 되나' → 입금 불가, 지급신청만 가능하다는 점 정리"
+        ],
+        "actionTitles": [
+          "휴면계좌 통합조회 하는 법부터 지급 신청까지 한 번에",
+          "어카운트인포 휴면예금 조회, 비활동계좌와 구분하는 법"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "휴면계좌통합조회를했는데요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40101&docId=33746396&answerNo=8&qb=7Zy066m06rOE7KKMIO2Gte2VqeyEnOu5hOyKpA==",
+          "views": 94443,
+          "answers": 8,
+          "askedAt": "2026.10.09"
+        },
+        {
+          "title": "휴면계좌통합조회에서 휴면계좌 입금도 가능....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40612&docId=410929014&answerNo=6&qb=7Zy066m06rOE7KKMIO2Gte2VqeyEnOu5hOyKpA==",
+          "views": 7504,
+          "answers": 6,
+          "askedAt": "2026.10.02"
+        },
+        {
+          "title": "계좌통합관리서비스? 홈페이지에서 휴면계좌....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40107&docId=375293984&answerNo=12&qb=7Zy066m06rOE7KKMIO2Gte2VqeyEnOu5hOyKpA==",
+          "views": 6399,
+          "answers": 12,
+          "askedAt": "2026.10.02"
+        }
+      ]
+    },
+    {
+      "id": "36b50bd24a3532ee",
+      "urls": [
+        "https://informoneybox.tistory.com/entry/%EC%BF%A0%ED%8C%A1%EC%9D%B4%EC%B8%A0-%ED%95%A0%EC%9D%B8-%EB%B0%9B%EB%8A%94-%EB%B0%A9%EB%B2%95-2026-%EC%99%84%EB%B2%BD%EC%A0%95%EB%A6%AC%EF%BD%9C%EC%99%80%EC%9A%B0%ED%9A%8C%EC%9B%90-%EB%AC%B4%EB%A3%8C%EB%B0%B0%EB%8B%AC%C2%B7%ED%95%A0%EC%9D%B8%EC%BF%A0%ED%8F%B0%C2%B7%ED%8F%AC%EC%9E%A5-%EC%A3%BC%EB%AC%B8%C2%B7%EB%B0%B0%EB%8B%AC%EB%B9%84-%EC%A0%88%EC%95%BD-%EA%BF%80%ED%8C%81"
+      ],
+      "guide": {
+        "direction": "지식인에는 '와우회원 쿠폰이 왜 적용 안되냐', '시크릿 쿠폰이 뭐냐'는 질문이 몰려, 검색자는 쿠폰이 상시혜택인지 랜덤노출 혜택인지 헷갈려 막힌다. 고수 블로그 제목은 '할인받는법 총정리'지만 쿠폰 미적용 원인별 체크리스트와 재발급 여부는 다루지 않는다. 이 글은 상시혜택 조건, 미적용 원인 체크리스트, 재발급 불가 여부를 정리해 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "와우회원 무료배달 기본 조건 (확인 필요: 쿠팡이츠 공식 공지)",
+          "쿠폰 미적용 시 체크 항목: 앱버전, 특정 매장 제외, 결제수단 제한, 재주문 여부",
+          "'시크릿 쿠폰'은 와우회원 전체 상시혜택이 아니라 일부에게 랜덤 노출되는 혜택이라는 점",
+          "쿠폰 만료 시 재발급 불가, 다른 이벤트에서 재노출 가능성 언급",
+          "포장 주문 시 배달비 절약 여부 정리"
+        ],
+        "mustAvoid": [
+          "개인 레퍼럴 공유 쿠폰 링크를 공식 혜택처럼 소개해 어뷰징 유도",
+          "쿠팡이츠 혜택과 쿠팡(로켓배송) 혜택을 혼동해서 서술"
+        ],
+        "checkBefore": [
+          "와우회원 무료배달·할인 조건 최신 기준을 쿠팡이츠 공식 앱 내 혜택 페이지로 확인",
+          "시크릿 쿠폰 노출 기준(신규가입자 한정 여부)을 쿠팡이츠 고객센터 공지로 확인"
+        ],
+        "solves": [
+          "'와우회원 쿠폰 왜 적용 안되나' → 앱버전·매장제외 등 원인별 체크리스트로 해결",
+          "'쿠팡이츠 시크릿 쿠폰 받는법' → 상시혜택과 랜덤노출 혜택을 구분해 혼동 방지",
+          "'쿠폰 만료되면 재발급 되나' → 재발급 불가, 재노출 조건 안내"
+        ],
+        "actionTitles": [
+          "쿠팡이츠 와우회원 쿠폰 적용 안될 때 원인 체크리스트",
+          "쿠팡이츠 시크릿 쿠폰 받는 법과 와우회원 상시 할인 구분",
+          "쿠팡이츠 할인 받는 법, 배달비 포장비까지 한번에 정리"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "쿠팡이츠 시크릿 쿠폰 와우회원",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=20122&docId=477523572&answerNo=10&qb=7L+g7Yyh7J207LigIOyZhOuyveygleumrOyZgOyasO2ajOybkCDrrLTro4zrsLDri6wg7ZWg7J247L+g7Y+wIO2PrOyepQ==",
+          "views": 6771,
+          "answers": 10,
+          "askedAt": "2025.05.20"
+        },
+        {
+          "title": "쿠팡이츠 와우회원 쿠폰 왜 적용이 안되나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10612&docId=482035923&answerNo=1&qb=7L+g7Yyh7J207LigIOyZhOuyveygleumrOyZgOyasO2ajOybkCDrrLTro4zrsLDri6wg7ZWg7J247L+g7Y+wIO2PrOyepQ==",
+          "views": 6174,
+          "answers": 2,
+          "askedAt": "2025.02.24"
+        },
+        {
+          "title": "쿠팡 이츠 와우 회원 쿠폰",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10612&docId=494804243&answerNo=1&qb=7L+g7Yyh7J207LigIOyZhOuyveygleumrOyZgOyasO2ajOybkCDrrLTro4zrsLDri6wg7ZWg7J247L+g7Y+wIO2PrOyepQ==",
+          "views": 141,
+          "answers": 1,
+          "askedAt": "2026.08.20"
+        }
+      ]
+    },
+    {
+      "id": "eac34dfffd8e9645",
+      "urls": [
+        "https://infoarounds.com/%ea%b2%bd%ec%a0%9c%ec%a0%95%eb%b3%b4/2026-11-25-physical-gold-vat-and-receipt/"
+      ],
+      "guide": {
+        "direction": "지식인에는 '금에 왜 부가세가 붙냐', '현물시장에서 산 금은 면제인데 인출하면 과세된다'는 질문이 있어, 검색자는 과세 원리와 거래 방식별 차이를 헷갈려 막힌다. 고수 블로그 제목은 '왜 붙는지'는 설명하지만 금은방과 KRX 금시장의 비교, 현금영수증 소득공제 적용 여부는 다루지 않는다. 이 글은 과세 구조, 구매 경로별 비교표, 소득공제 여부를 정리해 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "금은방·주얼리 등 일반 금 구매 시 부가가치세 10% 부과 명시",
+          "KRX 금현물시장 거래 시 부가세 면제, 실물 인출 시 부가세 부과되는 차이 비교",
+          "금 구매 현금영수증 발급 시 소득공제 적용 여부 (확인 필요: 국세청 지침)",
+          "금은방 구매 시 부가세+공임비+세공비 추가 비용 구조",
+          "금은방 vs KRX 금시장 구매 경로별 장단점 비교표"
+        ],
+        "mustAvoid": [
+          "부가가치세와 양도소득세 등 다른 세목을 혼동해서 설명"
+        ],
+        "checkBefore": [
+          "금 구매 시 현금영수증 소득공제 적용 여부를 국세청 또는 세무 전문가 자료로 확인",
+          "KRX 금현물시장 실물 인출 시 부가세 부과 기준을 한국거래소 공지로 확인"
+        ],
+        "solves": [
+          "'금에 왜 부가세 붙냐' → 일반 소비재 과세 원칙과 10% 부과 구조로 설명",
+          "'금 현물시장에서 산 금 인출하면 부가세?' → 거래 시 면제, 인출 시 과세 차이 비교로 해결",
+          "'금 살때 방법, 금은방 vs 다른 방법' → 경로별 비용(부가세·공임비) 비교표로 정리"
+        ],
+        "actionTitles": [
+          "금 살 때 부가세 왜 붙나, 현금영수증 소득공제까지 확인",
+          "금은방 금 vs KRX 금시장, 부가세 차이 비교하는 법",
+          "금 구매 부가가치세 계산법과 현금영수증 공제 여부 정리"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "부가가치세와 법인세에 대하여......",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40304&docId=33866810&answerNo=2&qb=7Iuk66y8IOu2gOqwgOyEuCDquIjsnYQg67aA6rCA6rCA7LmY7IS4IOu2meycvOupsA==",
+          "views": 6675,
+          "answers": 2,
+          "askedAt": "2007.03.27"
+        },
+        {
+          "title": "금에 부가세 붙는 이유가뭔가요? 부가세 없이....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40304&docId=487319632&answerNo=1&qb=7Iuk66y8IOu2gOqwgOyEuCDquIjsnYQg67aA6rCA6rCA7LmY7IS4IOu2meycvOupsA==",
+          "views": 3046,
+          "answers": 4,
+          "askedAt": "2025.07.22"
+        },
+        {
+          "title": "이벤트로받은 경품에 부가가치세도 적용되나....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40304&docId=137387418&answerNo=1&qb=7Iuk66y8IOu2gOqwgOyEuCDquIjsnYQg67aA6rCA6rCA7LmY7IS4IOu2meycvOupsA==",
+          "views": 1835,
+          "answers": 1,
+          "askedAt": "2011.09.22"
+        }
+      ]
+    },
+    {
+      "id": "a805963bd443f8f4",
+      "urls": [
+        "https://muramara.com/entry/%EC%84%9C%EC%9A%B8%EC%A7%80%ED%95%98%EC%B2%A0-%ED%8C%8C%EC%97%85-%EC%B2%A0%ED%9A%8C-%EC%83%88%EB%B2%BD-%ED%83%80%EA%B2%B0-%ED%95%A9%EC%9D%98-%EB%82%B4%EC%9A%A9-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0"
+      ],
+      "guide": {
+        "direction": "검색자는 내가 타는 노선(1·2·4·5·7호선 등)이 오늘 정상 운행되는지 알고 싶어하는데, 서울교통공사와 코레일(1호선 일부·경의중앙선·수인분당선)이 별개 주체라 혼동한다. 고수 블로그 제목은 '새벽 타결 합의 내용'만 다뤄 노선별 정상화 여부를 표로 안 준다. 이 글은 서울교통공사 타결 시각(12월 6일 새벽 2시경)과 코레일 타결 시각(12월 11일 철회, 12월 12일 첫차 정상화)을 노선별로 나눠 표로 정리해 바로 확인하게 한다.",
+        "searchTargets": [
+          "서울지하철 파업 철회",
+          "서울 지하철 파업 1호선",
+          "서울 지하철 파업 경의중앙선",
+          "서울 지하철 파업 시간표"
+        ],
+        "mustInclude": [
+          "서울교통공사 노사 타결 시각(12월 6일 새벽 2시경), 파업 철회",
+          "서울교통공사 운영 노선과 코레일 운영 노선(1호선 일부·경의중앙선·수인분당선) 구분표",
+          "코레일(철도노조) 파업 철회: 12월 11일 오후 7시, 12월 12일 첫차부터 정상 운행",
+          "서울 시내버스 파업도 같은 새벽(1시 50분경) 타결·철회 — 지하철과 별개 사안",
+          "(확인 필요: 합의 내용 상세 — 서울교통공사 공식 보도자료)"
+        ],
+        "mustAvoid": [
+          "서울교통공사와 코레일(철도노조)을 같은 주체로 섞어 노선별 정상화 시점을 틀리게 쓰기",
+          "같은 새벽에 타결된 서울 시내버스 파업 철회 이슈와 지하철 파업을 혼동해서 쓰기"
+        ],
+        "checkBefore": [
+          "서울교통공사 공식 보도자료·서울시 공지에서 타결 시각 및 합의 내용 확인",
+          "코레일(철도노조) 파업 철회 시점(12/11, 12/12) 뉴스 재확인",
+          "노선별 운영주체(1호선, 경의중앙선, 수인분당선 포함) 공식 자료 확인"
+        ],
+        "solves": [
+          "내일도 지하철 파업 되나요? → 12월 6일 새벽 2시 타결로 철회, 정상운행 여부 명시",
+          "지하철 파업 1호선 4호선 → 노선별 운영주체 구분해 정상화 여부 표로 안내",
+          "수인분당선 파업 언제 끝나나요? → 코레일 별도 파업으로 12/11 철회, 12/12 첫차 정상화 설명"
+        ],
+        "actionTitles": [
+          "서울지하철 파업 철회, 내 노선 정상 운행 확인하기",
+          "지하철 파업 1·4·7호선 정상화 시점 한눈에 확인하기",
+          "코레일·서울교통공사 지하철 파업 철회 시점 비교 정리"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "지하철 파업1호선 4호선",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=81203&docId=478778416&answerNo=2&qb=7ISc7Jq47KeA7ZWY7LKgIO2MjOyXhSDssqDtmowg7IOI67K9IO2DgOqysA==",
+          "views": 5828,
+          "answers": 12,
+          "askedAt": "2024.12.06"
+        },
+        {
+          "title": "수인분당선 파업 언제 끝나나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=81203&docId=479543835&answerNo=1&qb=7ISc7Jq47KeA7ZWY7LKgIO2MjOyXhSDssqDtmowg7IOI67K9IO2DgOqysA==",
+          "views": 480,
+          "answers": 3,
+          "askedAt": "2024.12.24"
+        },
+        {
+          "title": "지하철 파업 6호선",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=81203&docId=478817413&answerNo=3&qb=7ISc7Jq47KeA7ZWY7LKgIO2MjOyXhSDssqDtmowg7IOI67K9IO2DgOqysA==",
+          "views": 218,
+          "answers": 5,
+          "askedAt": "2024.12.07"
+        }
+      ]
+    },
+    {
+      "id": "0ad83ebafd2725be",
+      "urls": [
+        "https://apt-view.com/%ec%9a%b8%ec%82%b0-%eb%8f%84%ec%8b%9c%ea%b0%80%ec%8a%a4-%ec%a0%84%ec%9e%85%ec%8b%a0%ea%b3%a0%eb%b6%80%ed%84%b0-%ec%a0%84%ec%b6%9c-%ec%b2%a0%ea%b1%b0%ea%b9%8c%ec%a7%80-%ec%9d%b4%ec%82%ac-%ec%8b%a0/"
+      ],
+      "guide": {
+        "direction": "검색자는 울산 이사 시 도시가스 전출(철거)과 전입(사용개시) 신청을 어디로 해야 하는지, 지역별 고객센터 번호가 달라 헷갈려 한다. 고수 블로그 제목은 '전입신고부터 전출 철거까지'를 다룬다 했지만 지역센터별 전화번호 목록을 구체적으로 안 준다. 이 글은 경동도시가스 고객센터(1577-8181)와 남울산센터 등 지역번호, 전출→전입 신청 순서를 체크리스트로 정리해 바로 전화하게 한다.",
+        "searchTargets": [
+          "울산 도시가스 전입신고",
+          "울산도시가스전입신고 전화번호",
+          "울산 도시가스 고객센터",
+          "울산 도시가스 전출"
+        ],
+        "mustInclude": [
+          "경동도시가스 고객서비스센터(민원신고/이사문의) 1577-8181",
+          "남울산센터 283-0250~5 등 지역별 센터 연락처(확인 필요: 경동도시가스 공식 홈페이지)",
+          "전출(철거) 신청과 전입(사용개시) 신청 순서 — 이사 전 철거 예약, 이사 후 사용신청",
+          "(확인 필요: 신청 시 필요서류 및 안전점검 일정 — 경동도시가스 공식 공지)"
+        ],
+        "mustAvoid": [
+          "타지역(서울 등) 도시가스사와 혼동해서 적지 않기 — 울산은 경동도시가스 관할",
+          "지역센터 전화번호를 오래된 정보로 그대로 쓰지 않기(개편 가능성)"
+        ],
+        "checkBefore": [
+          "경동도시가스 공식 홈페이지·고객센터에서 지역별 센터 연락처 최신본 확인",
+          "전입·전출 신청 시 필요서류, 안전점검 일정 공식 공지 확인"
+        ],
+        "solves": [
+          "울산 도시가스 전화번호를 몰라 이사 신청을 못함 → 고객센터·지역센터 번호 제공",
+          "전출·입 시 가스사용시설 조치는 어떻게 하나 → 철거 신청→사용개시 신청 순서로 정리",
+          "울산 도시가스 전입신고 어디서 하나 → 신청 방법과 순서를 체크리스트로 안내"
+        ],
+        "actionTitles": [
+          "울산 도시가스 전입신고 전화번호와 신청 순서 확인하기",
+          "울산 도시가스 전출 철거 신청, 이렇게 하면 끝난다",
+          "울산 도시가스 고객센터 지역별 번호 한눈에 확인하기"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "전출·입 시 가스사용시설은 어떻게 조치를 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60105&docId=419205847&answerNo=1&qb=7Jq47IKwIOuPhOyLnOqwgOyKpCDsoITsnoXsi6Dqs6Ag7KCE7LacIOyyoOqxsA==",
+          "views": 507,
+          "answers": 1,
+          "askedAt": "2022.05.11"
+        }
+      ]
+    },
+    {
+      "id": "5450694f9e85e5ca",
+      "urls": [
+        "https://maruara-story.tistory.com/entry/MySQL-ERROR-1045-28000-%ED%95%B4%EA%B2%B0-%EB%B9%84%EB%B2%88-%EB%A7%9E%EC%95%84%EB%8F%84-%EA%B1%B0%EB%B6%80%EB%90%A0-%EB%95%8C"
+      ],
+      "guide": {
+        "direction": "검색자는 비밀번호를 맞게 입력했는데도 ERROR 1045 (28000)가 떠서 뭐가 틀렸는지 못 찾는다. 지식인 답변들은 '사용자 없음'·'비밀번호 타입 불일치' 등 원인을 흩어서 말해 어떤 경우인지 스스로 구분하기 어렵다. 이 글은 mysql.user 조회로 계정·호스트 확인, 인증 플러그인(caching_sha2_password vs mysql_native_password) 차이까지 원인별 체크리스트와 조치 쿼리로 끝내게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "ERROR 1045 (28000): Access denied for user 'xxx'@'host' 메시지 형태와 원인 분류",
+          "SELECT user,host FROM mysql.user; 로 계정·호스트 불일치 확인",
+          "caching_sha2_password vs mysql_native_password 인증 플러그인 차이로 인한 거부 사례",
+          "ALTER USER ... IDENTIFIED WITH 'mysql_native_password' BY '비번'; + FLUSH PRIVILEGES 조치",
+          "(확인 필요: 사용 중인 MySQL 버전별 기본 인증 플러그인 — 공식 매뉴얼)"
+        ],
+        "mustAvoid": [
+          "root 계정 비밀번호를 빈 값으로 두거나 권한을 과도하게 부여하는 걸 해결책처럼 안내하지 않기",
+          "skip-grant-tables 우회를 영구 해결책처럼 안내하지 않기(보안 위험)"
+        ],
+        "checkBefore": [
+          "사용 중인 MySQL 버전과 기본 인증 플러그인 공식 문서 확인",
+          "mysql.user 테이블 구조가 버전별로 다를 수 있어 공식 매뉴얼 확인"
+        ],
+        "solves": [
+          "비밀번호가 맞는데 ERROR 1045 뜬다 → 호스트 불일치/인증플러그인 차이 원인 분류와 조치법 제시",
+          "DB 사용자가 있는데도 접속이 안 된다 → mysql.user 조회로 계정·호스트 확인하는 법 안내",
+          "쿼리는 맞는데 연결이 안 된다 → 접속 정보(호스트/계정/비번) 체크리스트로 원인 분리"
+        ],
+        "actionTitles": [
+          "MySQL ERROR 1045 비번 맞는데 거부될 때 해결법",
+          "mysql.user 계정·호스트 조회로 1045 오류 확인하기",
+          "ERROR 1045 (28000) 원인별 해결 체크리스트 정리"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "MySQL-DB Connect Error!!! 오류",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=105&docId=64299745&answerNo=1&qb=bXlzcWwgZXJyb3Ig67mE67KIIOunnuyVhA==",
+          "views": 16774,
+          "answers": 2,
+          "askedAt": "2007.10.27"
+        },
+        {
+          "title": "php 게시판 글 수정시 비밀번호 오류",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1040203&docId=65509243&answerNo=2&qb=bXlzcWwgZXJyb3Ig67mE67KIIOunnuyVhA==",
+          "views": 1488,
+          "answers": 2,
+          "askedAt": "2005.11.21"
+        },
+        {
+          "title": "쿼리 오류 해결점;;",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10205&docId=67954526&answerNo=1&qb=bXlzcWwgZXJyb3Ig67mE67KIIOunnuyVhA==",
+          "views": 930,
+          "answers": 1,
+          "askedAt": "2008.08.26"
+        }
+      ]
+    },
+    {
+      "id": "773512438656407d",
+      "urls": [
+        "https://showmethetime.tistory.com/375"
+      ],
+      "guide": {
+        "direction": "검색자는 넘어진 후 당장 안 아프다고 넘겨도 되는지, 머리·손목·엉덩이·무릎 중 어디가 위험 신호인지 구분을 못 해 막혀 있다. 고수 글 제목은 '부위별 기준'만 내세울 뿐 실제로 두통·구토·체중 못 디딤 같은 즉시 병원행 신호와 멍이 안 빠질 때 지켜볼 기간을 표로 정리하지 않았을 가능성이 크다. 부위별 위험 신호 체크리스트와 멍 색 변화 단계·찜질 전환 시점을 한 표로 주면 글을 보고 바로 판단이 끝난다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "부위별(머리/손목/엉덩이·꼬리뼈/무릎/어깨) 즉시 병원 가야 하는 위험 신호 표",
+          "두통·구토·의식저하 시 즉시 응급실 기준(확인 필요: 국가건강정보포털)",
+          "골절 의심(모양 변형, 체중 못 디딤) 시 자가진단 대신 병원행 기준"
+        ],
+        "mustAvoid": [
+          "특정 병원·정형외과 추천처럼 읽히는 광고성 문구"
+        ],
+        "checkBefore": [
+          "두부 손상 응급 증상 기준(국가건강정보포털·질병관리청 자료)",
+          "골절 의심 증상과 RICE 요법 적용 기준(공식 의료정보 사이트)"
+        ],
+        "solves": [
+          "넘어졌는데 안 아프면 괜찮은 건지 → 부위별 24~48시간 관찰 포인트와 즉시 병원행 경고 신호 구분",
+          "멍이 왜 안 빠지는지, 언제까지 지켜봐야 하는지 → 멍 색 변화 단계와 기간별 대처법 정리",
+          "손목·엉덩이가 부었는데 멍인지 골절인지 → 부위별 골절 의심 체크리스트로 판단"
+        ],
+        "actionTitles": [
+          "빙판에 넘어졌을 때 병원 가야 할 증상 부위별로 확인하기",
+          "빙판 낙상 멍 대처법, 색깔별 기간과 온찜질 시점 확인하기",
+          "빙판 낙상 후 머리 손목 엉덩이 통증 병원행 기준 체크하기"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "8b2193fe04e32f8c",
+      "urls": [
+        "https://mingyu2100.tistory.com/713"
+      ],
+      "guide": {
+        "direction": "검색자는 본인 국세 체납을 어디서 조회하는지, 체납내역서에 뜨는 세목·가산금·압류 같은 항목이 뭔지 몰라 막혀 있다. 고수 글 제목은 '조회방법과 7개 항목'만 던질 뿐 국세 체납관리단 같은 민간업체가 공식기관인지, 소멸제도 조건이 뭔지는 못 풀었을 가능성이 크다. 홈택스 조회 절차와 7개 항목 해설표, 소멸시효 조건을 한 글에 묶으면 검색자가 다른 글을 더 찾지 않아도 된다.",
+        "searchTargets": [
+          "국세 체납 확인",
+          "국세 체납액 조회",
+          "국세 체납 소멸제도",
+          "국세 체납관리단"
+        ],
+        "mustInclude": [
+          "홈택스 로그인 후 조회/발급→체납내역 조회까지 단계별 경로",
+          "체납내역 7개 항목(세목, 과세기간, 납부기한, 체납액, 가산금, 압류여부 등) 뜻 표(확인 필요: 국세청)",
+          "국세 체납 소멸시효 5년/10년 적용 기준(확인 필요: 국세기본법)",
+          "국세 체납관리단은 민간 사설업체이며 국세청 공식기관이 아니라는 점 명시",
+          "체납증명서 발급 절차와 용도 구분"
+        ],
+        "mustAvoid": [
+          "국세 체납관리단을 공식 정부기관처럼 소개하는 표현",
+          "소멸시효를 '그냥 기다리면 사라진다'는 식으로 단순화해 오해 유발",
+          "타인의 체납내역을 무단으로 조회할 수 있다는 암시"
+        ],
+        "checkBefore": [
+          "홈택스 공식 체납내역 조회 절차와 항목명(국세청 홈택스 공지)",
+          "국세 체납 소멸시효 법적 기준(국세기본법 조문)",
+          "국세 체납관리단의 실체와 공식 여부(언론보도 또는 국세청 공식 발표)"
+        ],
+        "solves": [
+          "내 국세 체납 여부를 어떻게 확인하는지 → 홈택스에서 체납 조회하는 절차를 단계별로 안내",
+          "체납내역서 항목(세목, 가산금, 압류 등)이 뭔지 → 7개 항목을 표로 정리해 뜻 설명",
+          "국세 체납관리단이 공식기관인지 믿을 수 있는지 → 민간업체 여부를 구분해 설명"
+        ],
+        "actionTitles": [
+          "국세 체납 확인하는 법, 홈택스 체납내역 조회 바로 하기",
+          "국세 체납액 조회하고 체납내역 7개 항목 뜻 확인하기",
+          "국세 체납 소멸제도 조건 확인하고 소멸시효 계산하기"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "d3c6e301413f0d18",
+      "urls": [
+        "https://moduuri1004.tistory.com/11843723"
+      ],
+      "guide": {
+        "direction": "검색자는 대법원 선고68다2462 판결 원문을 찾지 못해 막혀 있고, 토지가 제자리환지되면 구분소유적 공유관계가 지분비율 공유로 자동 전환되는지도 헷갈려 한다. 고수 글 제목은 법리 결론만 적어 판결 원문이나 환지 전후 상태 비교 그림 없이 끝났을 가능성이 크다. 판결 요지 원문과 환지 전/후 소유관계 비교표, 상호명의신탁관계 유지 조건 체크리스트를 주면 검색자가 더 찾아보지 않아도 된다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "대법원 선고68다2462 판결 요지 원문(확인 필요: 대법원 종합법률정보)",
+          "환지 전/후 소유관계 비교표(구분소유적 공유 → 지분비율 공유 전환 여부)",
+          "상호명의신탁관계가 유지되는 예외 조건(특정 부분을 특정해 소유하기로 한 사정)",
+          "제자리환지와 다른 환지(교환환지 등)의 구분(확인 필요: 관련 법령)"
+        ],
+        "mustAvoid": [
+          "구분소유적 공유관계를 다룬 다른 대법원 판결과 섞어서 혼동을 주는 서술",
+          "개별 사건의 법률관계를 자문처럼 단정적으로 결론 내리는 표현"
+        ],
+        "checkBefore": [
+          "대법원 선고68다2462 판결 원문과 정확한 선고일자(대법원 종합법률정보 또는 법원도서관 판례검색)",
+          "구분소유적 공유관계·상호명의신탁 관련 최신 판례 변경 여부(국가법령정보센터)"
+        ],
+        "solves": [
+          "대법원 68다2462 판결을 찾는데 원문을 못 찾겠다 → 판결 요지 원문과 핵심 문장을 바로 확인 가능하게 정리",
+          "환지되면 구분소유적 공유관계가 자동으로 없어지는지 → 환지 전후 소유관계 변화를 표로 비교",
+          "상호명의신탁관계가 계속 유지되는 경우는 언제인지 → 유지 조건을 체크리스트로 정리"
+        ],
+        "actionTitles": [
+          "대법원 68다2462 판결 원문, 요지 바로 확인하기",
+          "제자리환지 후 구분소유적 공유관계 유지 여부 확인하기",
+          "상호명의신탁관계가 유지되는 조건 체크리스트로 판단하기"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "대법원 선고68다 2462 판결을 찾아주세요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60211&docId=148575775&answerNo=1&qb=7IiY7J24IOq1rOu2hOyGjOycoOyggSDqs7XsnKDqtIDqs4Qg7Yag7KeAIOygnOyekOumrA==",
+          "views": 3643,
+          "answers": 1,
+          "askedAt": "2012.03.29"
+        }
+      ]
+    },
+    {
+      "id": "92c93e7580d4b3cd",
+      "urls": [
+        "https://edgeo.gong24.kr/104"
+      ],
+      "guide": {
+        "direction": "검색자는 조정 신청 방법보다 '조정결정서를 받은 뒤 기한 계산', '송달 주소 노출', '불성립 시 민사소송 전환 판단'에서 막혀 있다. 고수 블로그의 '신청 방법' 제목은 신청 단계만 다루고 결정 이후 절차는 비워둔다. 이 글은 신청부터 조정결정서 수락·거부 기한, 송달장소 변경, 불성립 후 대응까지 단계별로 끝내준다.",
+        "searchTargets": [
+          "소비자분쟁조정위원회 접수",
+          "소비자분쟁조정 신청",
+          "소비자분쟁조정위원회 결과",
+          "소비자 분쟁 해결"
+        ],
+        "mustInclude": [
+          "조정결정서 수락·거부 기한 계산법(수신일 기준, 상대방 열람 여부와 무관)",
+          "송달장소를 직장 등 제3의 장소로 변경 신청하는 방법",
+          "조정조서가 집행권원이 되는 경우와 안 되는 경우 구분",
+          "조정 불성립 시 민사소송(지급명령 포함) 전환 판단 기준",
+          "미용실 탈색·염색 피해처럼 손해배상 성격 분쟁의 처리 흐름"
+        ],
+        "mustAvoid": [
+          "개별 분쟁 사례의 당사자(판매자·소비자) 신원을 추측하거나 특정하는 서술",
+          "한국소비자원 민원 접수와 소비자분쟁조정위원회 조정 절차를 같은 절차처럼 혼동",
+          "위원회 결정을 법원 판결과 같은 강제력으로 단정하는 서술"
+        ],
+        "checkBefore": [
+          "소비자분쟁조정 기한·송달 관련 조항은 소비자기본법과 한국소비자원 공식 안내에서 확인",
+          "조정조서의 집행권원 인정 여부는 실제 조정 사례의 법률 해석(원문 답변) 재확인"
+        ],
+        "solves": [
+          "조정결정서 받은 뒤 뭘 해야 하는지 몰라 방치함 → 기한 계산과 수락·거부별 다음 단계 정리",
+          "송달 주소가 상대방에게 노출될까 걱정됨 → 송달장소 변경 신청 방법 안내",
+          "조정이 끝나도 상대방이 안 지키면 어떻게 하는지 모름 → 집행권원 여부와 민사소송 전환 기준 제공"
+        ],
+        "actionTitles": [
+          "소비자분쟁조정 신청 시 꼭 확인해야 할 서류 체크리스트",
+          "소비자분쟁조정위원회 결과 통보받은 후 대응 방법 정리"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "소비자원 분쟁 조정 합의서 주소 숨기는 법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60207&docId=495547962&answerNo=1&qb=7IaM67mE7J6QIOu2hOyfgSDsobDsoJU=",
+          "views": 232,
+          "answers": 2,
+          "askedAt": "2026.10.14"
+        },
+        {
+          "title": "소비자분쟁조정위원회 조정결정서",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60207&docId=493324283&answerNo=1&qb=7IaM67mE7J6QIOu2hOyfgSDsobDsoJU=",
+          "views": 191,
+          "answers": 2,
+          "askedAt": "2026.05.09"
+        },
+        {
+          "title": "미용실 탈색·염색 후 두피 통증, 치료까지… ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8030207&docId=495210828&answerNo=1&qb=7IaM67mE7J6QIOu2hOyfgSDsobDsoJU=",
+          "views": 122,
+          "answers": 4,
+          "askedAt": "2026.09.18"
+        }
+      ]
+    },
+    {
+      "id": "12a5c599abc199f4",
+      "urls": [
+        "https://today000000.tistory.com/532"
+      ],
+      "guide": {
+        "direction": "검색자는 상한요율의 '뜻'과 '차이'는 알지만 자기 거래금액을 넣어 실제 얼마를 내는지, 그리고 상한요율은 협의 범위일 뿐 고정 요율이 아니라는 점에서 막혀 있다. 고수 블로그의 '계산기' 제목은 숫자만 넣게 하고, 중개사가 상한보다 높게 청구했을 때 대응법이나 오피스텔·상가 등 주택 이외 부동산의 다른 요율은 다루지 않는다. 이 글은 구간별 요율표와 계산 예시, 주택 이외 부동산 요율 비교, 초과 청구 시 대응법까지 한 번에 정리해 끝내준다.",
+        "searchTargets": [
+          "중개보수 상한요율",
+          "중개보수 상한요율 뜻",
+          "중개보수 상한요율 차이"
+        ],
+        "mustInclude": [
+          "거래금액 구간별 매매·전월세 상한요율표와 계산 예시(거래금액×요율)",
+          "상한요율은 상한선일 뿐 공인중개사와 협의로 결정되는 것이 원칙이라는 점",
+          "오피스텔 전용면적 85㎡ 초과 0.9%, 이하 0.4% 등 주택 외 적용 차이",
+          "상가(상가건물) 등 주택 이외 부동산은 거래금액의 0.9% 이내 협의 적용"
+        ],
+        "mustAvoid": [
+          "특정 중개사와의 개별 수수료 분쟁을 모든 거래에 일반화하는 서술",
+          "지자체별 중개보수 조례 차이를 전국 공통 요율처럼 서술",
+          "상한요율을 '반드시 내야 하는 고정 금액'처럼 오해시키는 서술"
+        ],
+        "checkBefore": [
+          "2026년 기준 중개보수 요율·조례 개정 여부는 국토부 및 지자체 공고에서 재확인",
+          "오피스텔·상가 등 주택 외 부동산 요율 기준은 최신 공인중개사법 시행규칙 재확인"
+        ],
+        "solves": [
+          "상한요율 뜻은 알아도 내 거래금액으로 얼마인지 계산 못함 → 구간별 계산 예시 제공",
+          "중개수수료가 상한요율보다 높게 청구됨 → 협의 원칙과 대응 방법 안내",
+          "오피스텔·상가도 주택과 같은 요율인지 혼동 → 주택 외 부동산 요율 비교표 제공"
+        ],
+        "actionTitles": [
+          "2026년 중개보수 상한요율 뜻과 거래금액별 계산법 정리",
+          "중개보수 상한요율 차이 오피스텔·상가 요율 비교 정리",
+          "중개보수 상한요율보다 높게 청구됐을 때 대응법 확인"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "아파트 전세 계약 시 중개수수료 계산법과 상....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4020201&docId=486285988&answerNo=2&qb=7KSR6rCc67O07IiYIOyDge2VnOyalOycqCDso7ztg50g66ek66ekIOyghOyblOyEuA==",
+          "views": 1372,
+          "answers": 3,
+          "askedAt": "2025.06.18"
+        },
+        {
+          "title": "부동산중개수수료가 상한요율보다 높습니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4020202&docId=429329044&answerNo=2&qb=7KSR6rCc67O07IiYIOyDge2VnOyalOycqCDso7ztg50g66ek66ekIOyghOyblOyEuA==",
+          "views": 1357,
+          "answers": 2,
+          "askedAt": "2022.09.28"
+        },
+        {
+          "title": "부동산중개수수료",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=402&docId=439600053&answerNo=3&qb=7KSR6rCc67O07IiYIOyDge2VnOyalOycqCDso7ztg50g66ek66ekIOyghOyblOyEuA==",
+          "views": 313,
+          "answers": 4,
+          "askedAt": "2023.02.16"
+        }
+      ]
+    },
+    {
+      "id": "90bef9358058276e",
+      "urls": [
+        "https://edget.gong24.kr/101"
+      ],
+      "guide": {
+        "direction": "검색자는 '분실 보상 신청 방법' 자체보다 '보상금을 구매자가 받을 수 있는지 판매자에게만 가는지', '택배사마다(CJ·한진·롯데·CU) 신고 창구가 다른지'에서 막혀 있다. 고수 블로그의 '보상 신청' 제목은 일반 절차만 다루고 택배사별 차이와 보상금 수령 주체는 비워둔다. 이 글은 택배사별 신고 채널과 보상금 수령 주체 구분표로 바로 어디에 연락할지 끝내준다.",
+        "searchTargets": [
+          "택배 분실 보상 cj",
+          "롯데택배 분실 보상",
+          "한진택배 분실 보상",
+          "택배 분실 보상 기간"
+        ],
+        "mustInclude": [
+          "CJ대한통운·한진택배·롯데택배·CU편의점택배별 분실 신고 채널 구분",
+          "보상금은 원칙적으로 구매자가 아닌 판매자(발송인)에게 지급되는 구조 설명",
+          "분실 보상 신청 시 필요한 증빙(운송장번호·구매내역 등)(확인 필요: 각 택배사 고객센터 공지)",
+          "택배사별 분실 보상 처리 기간(확인 필요: 각 택배사 고객센터 공지)"
+        ],
+        "mustAvoid": [
+          "특정 택배 기사나 지점을 비난하거나 책임을 단정하는 서술",
+          "반값택배·당근택배처럼 중개 플랫폼 택배를 일반 택배사와 동일한 보상 절차로 서술",
+          "변호사 상담 사례의 법적 대응을 모든 분실 건에 적용 가능한 것처럼 일반화"
+        ],
+        "checkBefore": [
+          "CJ대한통운·한진택배·롯데택배·CU편의점택배 공식 고객센터의 분실 보상 규정 재확인",
+          "반값택배 등 중개 플랫폼은 운송사와 별도 약관이 있는지 공식 안내로 재확인"
+        ],
+        "solves": [
+          "택배 분실됐는데 보상금을 구매자·판매자 중 누가 받는지 혼란 → 수령 주체 구분 설명",
+          "CJ·한진·롯데 등 택배사마다 신고 방법이 달라 헷갈림 → 택배사별 신고 채널 정리",
+          "CU 등 편의점택배 분실 시 어디로 연락해야 하는지 모름 → 창구별 절차 안내"
+        ],
+        "actionTitles": [
+          "택배 분실 보상 기간과 cj 신청 절차 한번에 확인",
+          "한진택배·롯데택배 분실 보상 신청 방법과 수령자 구분"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "cj대한통운 택배분실 보상",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=81302&docId=488915659&answerNo=4&qb=7YOd67CwIOu2hOyLpCDrs7Tsg4E=",
+          "views": 6514,
+          "answers": 6,
+          "askedAt": "2025.09.26"
+        },
+        {
+          "title": "cu택배 분실 보상금",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40701&docId=492572903&answerNo=1&qb=7YOd67CwIOu2hOyLpCDrs7Tsg4E=",
+          "views": 1218,
+          "answers": 2,
+          "askedAt": "2026.03.20"
+        },
+        {
+          "title": "택배 분실 보상 받을 수 있을까요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=81302&docId=494640762&answerNo=1&qb=7YOd67CwIOu2hOyLpCDrs7Tsg4E=",
+          "views": 223,
+          "answers": 1,
+          "askedAt": "2026.08.07"
+        }
+      ]
+    },
+    {
+      "id": "8cb36e969d1c86ef",
+      "urls": [
+        "https://hanuhyunu2025x4.hanuhyunu.pw/entry/%EC%9E%85%EB%B2%95%EB%B6%80-%EC%82%AC%EB%B2%95%EB%B6%80-%ED%96%89%EC%A0%95%EB%B6%80"
+      ],
+      "guide": {
+        "direction": "검색자는 입법부·사법부·행정부의 뜻은 알아도 수장이 누구인지, 서로 어떻게 다르고 견제하는지, 어떻게 외워야 할지에서 막힌다. 고수 글 제목들은 키워드만 나열했을 뿐 수장·역할·견제장치를 한 번에 비교하지 못했다. 이 글은 기관-수장-역할-견제장치를 한 장 표로 묶고 암기법까지 붙여 검색을 끝낸다.",
+        "searchTargets": [
+          "입법부 사법부 행정부 뜻",
+          "입법부 사법부 행정부 수장",
+          "입법부 사법부 행정부 차이",
+          "입법부 사법부 행정부 외우는 법"
+        ],
+        "mustInclude": [
+          "입법부(국회)·사법부(법원)·행정부(정부) 대응 표",
+          "기관별 수장 비교 — 국회의장·대법원장·대통령(확인 필요: 명칭·임기 헌법 조항)",
+          "삼권분립 상호 견제 장치 예시(법률안 거부권, 위헌법률심판 등)",
+          "외우는 법 니모닉 예시(확인 필요: 실제 통용되는 암기법)"
+        ],
+        "mustAvoid": [
+          "현재 정치 이슈(국회·법원 갈등)로 확대해 논쟁적으로 다루기",
+          "'사법부' 발음 트리비아 등 지엽적 내용만 나열하고 핵심 비교표 빠뜨리기"
+        ],
+        "checkBefore": [
+          "각 기관 수장의 정확한 명칭·임기 — 헌법 조항 원문 확인"
+        ],
+        "solves": [
+          "'입법부 사법부 행정부 뜻이 헷갈린다' → 기관-수장-역할 한 장 비교표로 정리",
+          "'외우는 법을 모르겠다' → 니모닉 암기법 제시",
+          "'차이와 견제 관계를 모르겠다' → 상호 견제 장치 표로 설명"
+        ],
+        "actionTitles": [
+          "입법부 사법부 행정부 뜻, 한 장 비교표로 외우는 법"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "입법부 행정부 사법부 역할",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61401&docId=170251074&answerNo=1&qb=7J6F67KV67aAIOyCrOuyleu2gCDtlonsoJXrtoA=",
+          "views": 7059,
+          "answers": 1,
+          "askedAt": "2013.04.05"
+        },
+        {
+          "title": "입법부,행정부,사법부가 맡는곳과 하는일이 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61401&docId=46888139&answerNo=1&qb=7J6F67KV67aAIOyCrOuyleu2gCDtlonsoJXrtoA=",
+          "views": 4108,
+          "answers": 2,
+          "askedAt": "2005.08.12"
+        },
+        {
+          "title": "행정부, 입법부, 사법부에 대해서..",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61401&docId=61867321&answerNo=1&qb=7J6F67KV67aAIOyCrOuyleu2gCDtlonsoJXrtoA=",
+          "views": 3528,
+          "answers": 3,
+          "askedAt": "2007.09.26"
+        }
+      ]
+    },
+    {
+      "id": "1af48e2728b11ee3",
+      "urls": [
+        "https://mhsci.tistory.com/1735",
+        "https://mhsci.tistory.com/1733",
+        "https://mhsci.tistory.com/1732",
+        "https://mhsci.tistory.com/1729"
+      ],
+      "guide": {
+        "direction": "검색자는 초등저학년 교내체험학습으로 '광주 교실속 과학축전'이 어떤 프로그램이고 신청 가능한지에서 막혀 있다. 제공된 고수 제목들은 지역·소재만 바꿔 나열될 뿐 신청 방법·대상·일정 같은 실제 결정 정보를 담지 못한다. 이 글은 대상 학년·체험 내용·신청 절차를 정리해 교사·학부모가 신청 여부를 바로 결정하게 한다. (참고: 제공된 지식인 자료는 이 소재와 무관해 참고하지 않음)",
+        "searchTargets": [],
+        "mustInclude": [
+          "대상 학년 명시 — 초등저학년",
+          "체험 프로그램 구성 — 교실속 과학축전·창의 과학 체험 내용",
+          "신청 방법·기간(확인 필요: 체험누리 공식 신청 페이지)",
+          "체험 비용 및 진행 장소·일정(확인 필요: 주최 측 공지)"
+        ],
+        "mustAvoid": [
+          "전북 과학의달·다문화주간 등 다른 지역·소재 체험학습과 내용 혼동"
+        ],
+        "checkBefore": [
+          "체험누리 공식 홈페이지/블로그에서 신청 기간·비용·대상 확인",
+          "광주 교실속 과학축전 주최 측(교육청 등) 공지 확인"
+        ],
+        "solves": [
+          "'교내체험학습으로 뭘 신청해야 할지 모르겠다' → 과학축전 프로그램 구성과 대상 학년 정리",
+          "'초등저학년에게 적합한지 모르겠다' → 대상 연령·학년 명시"
+        ],
+        "actionTitles": [
+          "광주 교실속 과학축전 체험학습, 신청 전 확인할 것",
+          "초등저학년 교내체험학습, 과학축전 신청 방법 정리",
+          "창의 과학 체험학습 신청 전 대상·비용 확인하기"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "부산의 역사적 인물과 사건",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=111001&docId=59716594&answerNo=2&qb=7LK07ZeY64iE66asIOq0keyjvCDqtZDsi6Tsho0g6rO87ZWZ7LaV7KCEIOywvuyVhOyYpA==",
+          "views": 180670,
+          "answers": 5,
+          "askedAt": "2008.04.19"
+        }
+      ]
+    },
+    {
+      "id": "edec15ef1e5b3b07",
+      "urls": [
+        "https://mway2.tistory.com/6372"
+      ],
+      "guide": {
+        "direction": "검색자는 야후재팬 쇼핑이 한국까지 직배송되는지, 안 되면 어떻게 받아야 하는지에서 막혀 있고 실제로 결제자 이름 때문에 취소된 경험까지 묻는다. 고수 글 제목은 '스토어별 확인법과 Buyee·배대지 고르는 기준'을 걸었지만 스토어별로 직배송 가능/불가를 구분하는 실제 방법과 취소 사례 회피법은 비어 있다. 이 글은 스토어별 확인 절차, 가입 시 필요한 정보, Buyee·배대지 선택 기준을 묶어 끝내게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "야후재팬 쇼핑은 기본적으로 한국 직배송 불가, 배대지 경유 필요(지식인 답변 근거)",
+          "회원가입 시 일본 주소·연락처 등 일본 정보 필요(지식인 답변 근거)",
+          "야후재팬 '쇼핑'과 '옥션(경매)'의 구분 — 입찰대행 필요 여부 차이"
+        ],
+        "mustAvoid": [
+          "야후재팬 쇼핑과 야후옥션(경매)을 같은 서비스로 혼동해서 서술",
+          "특정 배대지 업체(조이포스트·비드샵·카이몬스터 등)를 검증 없이 추천처럼 서술",
+          "모든 스토어가 동일하게 배송 가능/불가능하다고 일반화"
+        ],
+        "checkBefore": [
+          "스토어별 해외배송 가능 여부 — 해당 야후쇼핑 상품 페이지 공지 확인",
+          "Buyee·배대지 업체별 수수료·정책 — 각 업체 공식 홈페이지 확인"
+        ],
+        "solves": [
+          "'야후재팬 쇼핑이 한국까지 배송되는지 모르겠다' → 스토어별 배송 가능 여부 확인법 제시",
+          "'회원가입에 일본 정보가 필요해서 막힌다' → 배대지 이용 시 우회 방법 안내",
+          "'Buyee랑 배대지 중 뭘 써야 할지 모르겠다' → 선택 기준 비교"
+        ],
+        "actionTitles": [
+          "야후쇼핑 직구 한국 배송, 스토어별 확인법 정리",
+          "야후재팬 직구 배대지 vs Buyee, 고르는 기준 비교",
+          "야후쇼핑 직구 전 꼭 확인할 배송·결제 주의사항"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "야후재팬 쇼핑 이용방법 문의",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=5&docId=220938705&answerNo=1&qb=7JW87ZuE7Ie87ZWRIOyngeq1rOyVvO2bhCDsnqztjKwg7Ie87ZWRIO2VnOq1rQ==",
+          "views": 2834,
+          "answers": 1,
+          "askedAt": "2015.03.26"
+        },
+        {
+          "title": "야후 재팬 직구",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=511&docId=481834204&answerNo=1&qb=7JW87ZuE7Ie87ZWRIOyngeq1rOyVvO2bhCDsnqztjKwg7Ie87ZWRIO2VnOq1rQ==",
+          "views": 738,
+          "answers": 2,
+          "askedAt": "2025.02.14"
+        },
+        {
+          "title": "야후재팬 옥션 직구방법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=512&docId=343664732&answerNo=1&qb=7JW87ZuE7Ie87ZWRIOyngeq1rOyVvO2bhCDsnqztjKwg7Ie87ZWRIO2VnOq1rQ==",
+          "views": 122,
+          "answers": 1,
+          "askedAt": "2019.12.30"
+        }
+      ]
+    },
+    {
+      "id": "486bc6781b558720",
+      "urls": [
+        "https://lab.stock-insight.app/358"
+      ],
+      "guide": {
+        "direction": "검색자는 '준감위 검토'가 확정 발표인지 아닌지부터 헷갈려 들어온다. 고수 글 제목은 규모(75조)만 강조해 검토 단계와 확정 집행의 차이, 세금 영향을 안 다룬다. 이 글은 검토→공시→집행까지 단계별 표와 배당소득세 계산 예시로 끝내준다.",
+        "searchTargets": [
+          "삼성전자 주주환원 뜻",
+          "삼성전자 주주환원 일정",
+          "삼성전자 주주환원 세금",
+          "삼성전자 주주환원 규모"
+        ],
+        "mustInclude": [
+          "75조원 규모의 실행 시점과 방식(배당·소각 비중) (확인 필요: 삼성전자 공시/IR)",
+          "준감위(준법감시위원회) 검토의 구속력 여부 (확인 필요: 준법감시위원회 발표)",
+          "검토 단계 → 이사회 결의 → 공시까지 절차 표"
+        ],
+        "mustAvoid": [
+          "검토 단계를 확정 지급 일정처럼 단정하는 표현",
+          "자사주 소각과 현금배당을 구분 없이 '주주환원'으로 뭉뚱그리기"
+        ],
+        "checkBefore": [
+          "삼성전자 DART 공시 확인 여부",
+          "이사회 결의 날짜 확정 여부"
+        ],
+        "solves": [
+          "준감위 검토가 뜻하는 게 뭔지 모름 → 검토·결의·공시 단계를 표로 구분",
+          "세금이 얼마나 나오는지 모름 → 배당소득세 계산 예시 제공",
+          "규모·일정이 확정인지 예상인지 헷갈림 → 확정/미확정 구간을 명시한 일정표"
+        ],
+        "actionTitles": [
+          "삼성전자 주주환원 일정 확인하는 법 정리",
+          "삼성전자 주주환원 세금 계산해보기"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "2474153b6574f4ae",
+      "urls": [
+        "https://bookshelf-journey.tistory.com/entry/%EC%BC%80%EC%9D%B4%EB%B1%85%ED%81%AC-AI-%ED%80%B4%EC%A6%88-%EC%B1%8C%EB%A6%B0%EC%A7%80-%EC%A0%95%EB%8B%B5-%EC%B4%9D-1%EC%B2%9C%EB%A7%8C%EC%9B%90-%EC%83%81%EA%B8%88%EC%9D%98-%EC%A3%BC%EC%9D%B8%EA%B3%B5%EC%9D%80",
+        "https://bookshelf-journey.tistory.com/entry/KB-Pay-%EC%98%A4%EB%8A%98%EC%9D%98-%ED%80%B4%EC%A6%88-%EC%98%A4%EC%A0%84-10%EC%8B%9C-%EC%A0%95%EB%8B%B5%EC%9D%84-%EB%A7%9E%EC%B6%94%EA%B3%A0-10%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EC%A0%81%EB%A6%BD",
+        "https://bookshelf-journey.tistory.com/entry/%EC%8B%A0%ED%95%9C-%EC%8A%88%ED%8D%BC-SOL-%EC%B6%9C%EC%84%9D-%ED%80%B4%EC%A6%88-%EA%B9%9C%EC%A7%9D-%EB%B0%B0%EC%88%98%EB%A7%8C%ED%81%BC-%EB%8D%94-%EC%BB%A4%EC%A7%80%EB%8A%94-%EC%8A%88%ED%8D%BC-%ED%8F%AC%EC%9D%B8%ED%8A%B8%EB%8D%B0%EC%9D%B4",
+        "https://bookshelf-journey.tistory.com/entry/%EA%B8%B0%ED%9B%84%ED%96%89%EB%8F%99-%EA%B8%B0%ED%9A%8C%EC%86%8C%EB%93%9D-%EC%98%A4%EB%8A%98%EC%9D%98-%ED%80%B4%EC%A6%88-%ED%80%B4%EC%A6%88%EB%A5%BC-%ED%92%80%EA%B3%A0-%EA%B8%B0%ED%9A%8C%EC%86%8C%EB%93%9D%EB%A6%AC%EC%9B%8C%EB%93%9C",
+        "https://bookshelf-journey.tistory.com/entry/%EB%B9%84%ED%8A%B8%EB%B2%84%EB%8B%88-%EC%98%A4%EB%8A%98%EC%9D%98-%ED%80%B4%EC%A6%88-%EB%8B%A4%EC%96%91%ED%95%9C-%ED%80%B4%EC%A6%88-%ED%92%80%EA%B3%A0-%EC%A7%80%EA%B8%88%EB%B0%94%EB%A1%9C-%EC%BD%94%EC%9D%B8-%EB%B0%9B%EA%B8%B0",
+        "https://bookshelf-journey.tistory.com/entry/%ED%86%A0%EC%8A%A4-%ED%96%89%EC%9A%B4%ED%80%B4%EC%A6%88-%ED%80%B4%EC%A6%88-%ED%92%80%EA%B3%A0-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EB%B0%9B%EC%95%84%EA%B0%80%EC%84%B8%EC%9A%94"
+      ],
+      "guide": {
+        "direction": "검색자는 날짜별로 바뀌는 오늘 문제의 정답과 상금 지급 시기를 가장 궁금해한다. 고수 글 제목들은 '정답·해설'만 내세워 날짜별 정답이 과거 글과 섞여 혼동되는 문제, 지급 시기 불명확 문제를 안 짚는다. 이 글은 날짜별 정답표와 지급 기준을 함께 줘서 혼동을 끝낸다.",
+        "searchTargets": [
+          "케이뱅크 ai퀴즈 오늘",
+          "케이뱅크 ai퀴즈챌린지",
+          "케이뱅크 ai퀴즈 11월19일",
+          "케이뱅크 ai퀴즈 답"
+        ],
+        "mustInclude": [
+          "날짜별 정답(11월19일, 11월14일 등) 표, 최신 날짜 상단 고정",
+          "총상금 1천만원의 지급 구조·시기 (확인 필요: 케이뱅크 공식 이벤트 공지)",
+          "다 맞췄을 때 받는 포인트·보상 규모 (확인 필요: 이벤트 페이지)",
+          "참여 방법(앱 내 위치)과 매일 참여 시 포인트 적립 방식"
+        ],
+        "mustAvoid": [
+          "과거 날짜 정답을 오늘 정답처럼 섞어 쓰는 것",
+          "KB Pay·신한 슈퍼SOL·토스 등 타사 퀴즈 이벤트와 혼동"
+        ],
+        "checkBefore": [
+          "케이뱅크 앱 공식 이벤트 페이지의 당일 문제",
+          "상금 지급 기준·시기 공지 여부"
+        ],
+        "solves": [
+          "매일 바뀌는 정답을 못 찾음 → 날짜별 정답 표로 즉시 확인",
+          "상금 언제 받는지 모름 → 지급 시기·조건 안내",
+          "매일 참여 시 포인트가 얼마인지 궁금 → 적립 구조 정리"
+        ],
+        "actionTitles": [
+          "케이뱅크 AI퀴즈 오늘 정답 확인하는 법",
+          "케이뱅크 AI퀴즈챌린지 상금 받는 법 정리"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "케이뱅크AI챌린지 이벤트 문의드립니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40107&docId=477487603&answerNo=1&qb=7LyA7J2067GF7YGsYWntgLTspog=",
+          "views": 205,
+          "answers": 1,
+          "askedAt": "2024.11.04"
+        },
+        {
+          "title": "토마토를 이탈리아어로 뭐라고 하나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110810&docId=476692490&answerNo=1&qb=7LyA7J2067GF7YGsYWntgLTspog=",
+          "views": 119,
+          "answers": 1,
+          "askedAt": "2024.10.16"
+        },
+        {
+          "title": "케이뱅크 AI퀴즈, 환절기 관련 문제 어렵지 않....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1060113&docId=492847900&answerNo=1&qb=7LyA7J2067GF7YGsYWntgLTspog=",
+          "views": 115,
+          "answers": 1,
+          "askedAt": "2026.04.08"
+        }
+      ]
+    },
+    {
+      "id": "995ed740008059b4",
+      "urls": [
+        "https://refininfo.com/samsung-electronics-ex-dividend-date/"
+      ],
+      "guide": {
+        "direction": "검색자는 배당기준일·배당락일·지급일이 각각 다른 날인 걸 몰라 '언제까지 사야 받냐'는 질문에서 막힌다. 고수 글 제목은 12월 일정만 강조해 분기별 비교, 매도해도 배당 받는 조건을 안 짚는다. 이 글은 분기별 기준일·락일·지급일 비교표로 실질 매수 마감일까지 끝내준다.",
+        "searchTargets": [
+          "삼성전자 배당락일 2026년",
+          "삼성전자 배당락일 지급일",
+          "삼성전자 배당락 일정",
+          "삼성전자 배당락일 매도"
+        ],
+        "mustInclude": [
+          "2026년 4분기 배당기준일·배당락일·지급 예정일 (확인 필요: 삼성전자 공시)",
+          "분기별(1~4분기) 기준일·락일·지급일 비교표",
+          "배당락일 당일 매도해도 배당금 받는 원리 설명",
+          "특별배당 포함 여부 (확인 필요: 삼성전자 IR 발표)"
+        ],
+        "mustAvoid": [
+          "배당기준일과 배당락일을 같은 날로 혼동",
+          "작년 분기 일정과 2026년 일정을 섞어 쓰는 것",
+          "특별배당을 정기배당처럼 단정"
+        ],
+        "checkBefore": [
+          "삼성전자 DART·IR 공시의 배당 일정",
+          "거래소(한국거래소) 배당락 공지"
+        ],
+        "solves": [
+          "언제까지 사야 배당 받는지 모름 → 실질 매수 마감일 표로 제공",
+          "배당기준일·배당락일 구분이 안 됨 → 용어·날짜 분리 설명",
+          "지급까지 얼마나 기다리는지 궁금 → 지급 예정일 안내"
+        ],
+        "actionTitles": [
+          "삼성전자 배당락일 2026년 12월 일정 확인",
+          "삼성전자 배당기준일·지급일 한눈에 비교",
+          "삼성전자 4분기 배당금 받는 법 정리"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "삼성전자 배당금 지급일",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40201&docId=421565067&answerNo=10&qb=7IK87ISx7KCE7J6QIOuwsOuLueudveydvCDrsLDri7nquLDspIDsnbwg67Cw64u56riIIOyngOq4iQ==",
+          "views": 1213,
+          "answers": 10,
+          "askedAt": "2026.09.27"
+        },
+        {
+          "title": "삼성전자 배당금",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=492648979&answerNo=9&qb=7IK87ISx7KCE7J6QIOuwsOuLueudveydvCDrsLDri7nquLDspIDsnbwg67Cw64u56riIIOyngOq4iQ==",
+          "views": 781,
+          "answers": 9,
+          "askedAt": "2026.07.18"
+        },
+        {
+          "title": "삼성전자 특별배당금 4분기꺼 받나요? 1분기....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=492703156&answerNo=4&qb=7IK87ISx7KCE7J6QIOuwsOuLueudveydvCDrsLDri7nquLDspIDsnbwg67Cw64u56riIIOyngOq4iQ==",
+          "views": 765,
+          "answers": 8,
+          "askedAt": "2026.03.29"
+        }
+      ]
+    },
+    {
+      "id": "d6a0ac9e98ca2e63",
+      "urls": [
+        "https://seojintimes.tistory.com/136"
+      ],
+      "guide": {
+        "direction": "'심층분석'을 검색하는 사람은 뜻과 쓰는 법이 궁금한 것인데, 고수 글은 그린슈·가격안정화 수학이라는 특정 사례만 다뤄 일반 정의를 못 채워준다. 이 글은 그린슈옵션·공모가 방어 구조를 예시로 삼아 '심층분석 뜻'과 '하는법'을 단계별로 보여주는 것으로 끝낸다.",
+        "searchTargets": [
+          "심층분석",
+          "심층분석 뜻",
+          "심층분석 하는법"
+        ],
+        "mustInclude": [
+          "그린슈옵션(초과배정옵션) 뜻과 작동 구조 정의(확인 필요: 금융감독원 공시자료)",
+          "가격안정화(그린슈) 수식 예시: 공모가 대비 매수·매도 조건 계산",
+          "'심층분석' 용어 정의와 일반 분석 글과의 차이 설명",
+          "심층분석 하는법 체크리스트(자료 수집→가설→검증→결론 순)",
+          "그린슈 사례를 적용한 심층분석 실습 표(확인 필요: 실제 공모 사례 데이터)"
+        ],
+        "mustAvoid": [
+          "특정 공모주를 지목해 투자 유인하는 서술",
+          "그린슈옵션을 시세조작처럼 묘사해 오해 유발",
+          "심층분석을 전문 리서치 보고서와 동일시해 과장"
+        ],
+        "checkBefore": [
+          "그린슈옵션 실제 조항과 초과배정 비율은 금융감독원 전자공시(DART)에서 확인",
+          "최근 공모주 적용 사례는 해당 기업 공시자료로 확인"
+        ],
+        "solves": [
+          "'심층분석 뜻'이 헷갈림 → 그린슈옵션 사례로 정의와 적용 예시를 함께 제시",
+          "'심층분석 하는법'을 모름 → 공모가 방어 메커니즘 분석 단계를 체크리스트로 제공"
+        ],
+        "actionTitles": [
+          "심층분석 뜻과 하는법, 그린슈옵션 사례로 완전 정리"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "0bc3981083f16adc",
+      "urls": [
+        "https://insuranceplant.tistory.com/658"
+      ],
+      "guide": {
+        "direction": "'평촌 향촌롯데 가구수'·'리모델링'을 검색하는 사람은 사업승인 신청 보도만 보고 진행단계·가구수·일정이 궁금한데, 고수 글 제목은 '먼저 챙길 것들'만 던지고 구체 수치는 못 채운다. 이 글은 현재·예정 가구수와 조합 공지 확인 경로를 표로 정리하고, 집주인·세입자가 지금 할 일을 단계별 체크리스트로 끝낸다.",
+        "searchTargets": [
+          "평촌 향촌롯데",
+          "평촌 향촌롯데 리모델링",
+          "평촌 향촌롯데 가구수",
+          "평촌 향촌 롯데아파트"
+        ],
+        "mustInclude": [
+          "사업승인 신청 일자와 승인권자(확인 필요: 안양시청 또는 조합 공식 공지)",
+          "현재 가구수와 리모델링 후 예정 가구수 비교표(확인 필요: 조합·시공사 발표)",
+          "리모델링추진위원회/조합 공식 명칭과 현재 추진 단계(확인 필요: 조합 공지)",
+          "세입자 계약 만료 시점별 대응 체크리스트(이주 시기 등)",
+          "집주인이 확인할 분담금·이주비 관련 체크리스트(확인 필요: 조합 설명회 자료)"
+        ],
+        "mustAvoid": [
+          "인근 다른 평촌 재건축·리모델링 단지와 가구수·일정 혼동",
+          "사업승인 신청을 곧 이주·착공 확정으로 단정"
+        ],
+        "checkBefore": [
+          "사업승인 신청 사실 여부는 안양시청 또는 조합 공식 공지에서 확인",
+          "가구수·추진 단계는 리모델링조합 공식 발표 자료로 확인"
+        ],
+        "solves": [
+          "'가구수' 궁금함 → 현재·예정 가구수 비교표 제공(확인 필요 표기)",
+          "집주인·세입자가 뭘 먼저 해야할지 모름 → 계약 만료·이주 시점별 체크리스트 제공",
+          "'리모델링'인지 다른 사업인지 혼동 → 추진 단계와 용어를 표로 구분"
+        ],
+        "actionTitles": [
+          "평촌 향촌롯데 가구수, 리모델링 단계부터 확인하기",
+          "평촌 향촌 롯데아파트 사업승인, 집주인 체크리스트"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "f84b2d203cb84c0d",
+      "urls": [
+        "https://info-247.kr/blog/living/land-use-plan-confirmation/"
+      ],
+      "guide": {
+        "direction": "'토지이용계획확인원 열람 방법'을 검색하는 사람은 열람(토지이음)과 발급(정부24)이 같은 절차인지, 발급 후 즉시 받을 수 있는지가 궁금한데, 고수 글 제목은 경로만 나눠놓고 즉시발급 여부·도시계획확인원과의 차이는 못 채운다. 이 글은 열람·발급 경로 비교표와 간편인증 후 처리 소요를 체크리스트로 정리해 끝낸다.",
+        "searchTargets": [
+          "토지이용계획확인원 열람",
+          "토지이용계획확인원 열람 방법"
+        ],
+        "mustInclude": [
+          "토지이음에서 주소 입력 후 무료·즉시 열람하는 절차",
+          "정부24 민원명 '토지이용계획확인신청', 서류명 '토지이용계획확인서' 명칭 정리",
+          "간편인증 후 신청시 즉시발급과 별도 심사대기 가능성 비교(확인 필요: 정부24 처리기한 공지)",
+          "도시계획확인원(과거 명칭)과 토지이용계획확인원(현재 서류명) 차이 설명",
+          "열람(토지이음)·발급(정부24) 경로 한눈 비교표"
+        ],
+        "mustAvoid": [
+          "토지이용계획확인원을 등기부등본·건축물현황도 등 다른 서류와 혼동",
+          "발급과 열람을 동일한 절차로 단정해 서술"
+        ],
+        "checkBefore": [
+          "정부24 실제 처리기한과 즉시발급 가능 여부는 정부24 민원 페이지 공지로 확인",
+          "토지이음 열람 가능 범위·업데이트 주기는 토지이음 공식 공지로 확인"
+        ],
+        "solves": [
+          "열람과 발급을 어디서 하는지 헷갈림 → 토지이음(열람)·정부24(발급) 경로 비교표로 정리",
+          "발급 후 바로 받을 수 있는지 불확실 → 간편인증 후 처리 소요를 설명",
+          "도시계획확인원과 같은 건지 혼동 → 명칭 차이와 현재 서류명을 정리"
+        ],
+        "actionTitles": [
+          "토지이용계획확인원 열람 방법, 토지이음·정부24 비교",
+          "토지이용계획확인원 발급, 정부24 신청 순서 정리",
+          "도시계획확인원과 토지이용계획확인원, 차이 한번에 정리"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "토지이용계획확인원 열람 방법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40306&docId=414893907&answerNo=12&qb=7Yag7KeA7J207Jqp6rOE7ZqN7ZmV7J247JuQIOyXtOuejCDthqDsp4DsnbTsnYwg7KCV67aAMjQ=",
+          "views": 2330,
+          "answers": 12,
+          "askedAt": "2026.06.01"
+        },
+        {
+          "title": "토지이용계획확인원, 필요한 이유는?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60103&docId=374584339&answerNo=7&qb=7Yag7KeA7J207Jqp6rOE7ZqN7ZmV7J247JuQIOyXtOuejCDthqDsp4DsnbTsnYwg7KCV67aAMjQ=",
+          "views": 1594,
+          "answers": 13,
+          "askedAt": "2024.12.26"
+        },
+        {
+          "title": "양평토지이용계획확인원",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40201&docId=376510867&answerNo=9&qb=7Yag7KeA7J207Jqp6rOE7ZqN7ZmV7J247JuQIOyXtOuejCDthqDsp4DsnbTsnYwg7KCV67aAMjQ=",
+          "views": 967,
+          "answers": 10,
+          "askedAt": "2024.12.26"
+        }
+      ]
+    },
+    {
+      "id": "731b28429d5c8cd5",
+      "urls": [
+        "https://economybeginner.com/462"
+      ],
+      "guide": {
+        "direction": "검색자는 전고점이 정확히 언제·얼마였고 지금 시세가 거기서 얼마나 떨어져 있는지부터 막혀서 들어온다. 고수 글 제목은 '일곱 번 뛰고 못 넘었다'는 기록만 던지고, 왜 매번 못 넘었는지와 지금이 몇 번째 도전인지는 안 보여준다. 이 글은 7차례 상승 구간별 고점·전고점 대비 괴리율 표와 최근 호재·거래소 상황을 묶어 지금 상황을 바로 판단하게 한다.",
+        "searchTargets": [
+          "엘프 코인 전망",
+          "엘프 코인 호재",
+          "엘프 코인 거래소",
+          "엘프 코인 김프"
+        ],
+        "mustInclude": [
+          "7차례 상승 구간별 고점 시세와 전고점 대비 괴리율 표 (확인 필요: 거래소 차트)",
+          "현재가가 전고점 대비 몇 % 수준인지 (확인 필요: 실시간 시세)",
+          "국내 거래소 상장 여부 및 김프 발생 여부 (확인 필요: 거래소 공시)"
+        ],
+        "mustAvoid": [
+          "다음 상승도 전고점 돌파가 확실하다는 식의 투자 확정 표현 쓰지 않기",
+          "엘프 코인을 비슷한 명칭의 다른 ELF 계열 토큰과 혼동하지 않기",
+          "과거 공시를 현재 거래소 상장 상태처럼 쓰지 않기"
+        ],
+        "checkBefore": [
+          "전고점 정확한 날짜·가격 — 거래소(업비트·빗썸 등) 차트 데이터 확인",
+          "최근 호재 발표 여부 — 프로젝트 공식 채널 공지 확인",
+          "국내 거래소 상장 상태 — 각 거래소 공시 확인"
+        ],
+        "solves": [
+          "전고점이 언제·얼마였는지 모르겠다 → 7차례 상승의 고점 시세와 괴리율 표로 정리",
+          "지금 사도 되는 호재가 있나 → 최근 호재·거래소 동향 체크리스트 제공",
+          "엘프 코인이 어느 나라 코인인지 모르겠다 → 프로젝트 배경·거래소 상장 현황 정리"
+        ],
+        "actionTitles": [
+          "엘프 코인 호재·거래소 상황 한눈에 비교해서 확인하는 법",
+          "엘프 코인 김프 발생 여부, 거래소별로 확인하는 법"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "e6885081f710c3b3",
+      "urls": [
+        "https://daynote.blog/%ea%b9%8d%eb%91%90%ea%b8%b0-%eb%a7%8c%eb%93%a4%ea%b8%b0-%ec%a0%88%ec%9d%b4%eb%8a%94-%ec%8b%9c%ea%b0%84%ec%97%90-%eb%94%b0%eb%9d%bc-%eb%ac%bc%eb%9f%ac%ec%a7%80%ea%b3%a0-%ec%8b%b1%ea%b1%b0%ec%9b%8c/"
+      ],
+      "guide": {
+        "direction": "검색자는 무를 분명 절였는데 왜 깍두기가 물러지거나 싱거워지는지, 얼마나 절여야 적당한지에서 막힌다. 고수 글 제목은 '절이는 시간에 따라 물러지고 싱거워진다'는 원인만 짚고, 무 크기·계절별 정확한 절임 시간과 이미 실패했을 때 되살리는 법은 안 준다. 이 글은 무 크기별 절임 시간·소금 비율 표와 물러짐·싱거움 응급 교정법까지 묶어 한 번에 끝낸다.",
+        "searchTargets": [
+          "깍두기 만들기",
+          "깍두기 만들기 레시피",
+          "무우 깍두기 만들기"
+        ],
+        "mustInclude": [
+          "무 크기(중간/큰 무)별 절이는 시간 기준표 (확인 필요: 레시피 출처)",
+          "소금 비율(무 대비 %)과 절이는 시간의 관계 (확인 필요: 레시피)",
+          "이미 물러진 깍두기 살리는 법(물기 제거·추가 절임) (확인 필요)",
+          "싱거워졌을 때 간 맞추는 법(젓갈·소금 추가량) (확인 필요)"
+        ],
+        "mustAvoid": [
+          "아기·유아용 저염 레시피와 일반 어른용 레시피의 절임 시간을 섞어 쓰지 않기",
+          "어린이집 체험용 깍두기 키트 레시피와 집에서 담그는 정통 레시피를 혼동하지 않기"
+        ],
+        "checkBefore": [
+          "무 크기·계절별 정확한 절임 시간 — 공신력 있는 레시피 자료 확인",
+          "소금 비율 기준 — 농촌진흥청 등 공식 김치 레시피 확인"
+        ],
+        "solves": [
+          "절였는데 왜 깍두기가 물러지나 → 무 크기별 절임 시간 초과 기준과 적정 시간표로 해결",
+          "간이 싱거운데 왜 그런가 → 소금 비율과 절이는 시간의 관계, 간 맞추는 법 제공",
+          "아기·유아용은 얼마나 절여야 하나 → 저염 버전 절임 시간 별도 안내"
+        ],
+        "actionTitles": [
+          "깍두기 물러짐·싱거움 바로 잡는 법, 레시피로 확인하기"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "지역별로 즐겨먹는 김치",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020112&docId=29306873&answerNo=1&qb=6rmN65GQ6riwIOunjOuTpOq4sCDsoIjsnbQg7Iuc6rCEIOuUsOudvA==",
+          "views": 44892,
+          "answers": 3,
+          "askedAt": "2003.12.12"
+        },
+        {
+          "title": "지역에 따른 김치의 특징",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=13050401&docId=37112226&answerNo=25&qb=6rmN65GQ6riwIOunjOuTpOq4sCDsoIjsnbQg7Iuc6rCEIOuUsOudvA==",
+          "views": 14955,
+          "answers": 25,
+          "askedAt": "2008.04.01"
+        },
+        {
+          "title": "계절에 따라 먹는김치",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=38377429&answerNo=3&qb=6rmN65GQ6riwIOunjOuTpOq4sCDsoIjsnbQg7Iuc6rCEIOuUsOudvA==",
+          "views": 9180,
+          "answers": 4,
+          "askedAt": "2008.04.01"
+        }
+      ]
+    },
+    {
+      "id": "53db5cb94240c1e7",
+      "urls": [
+        "https://bodyandwell.com/demaf-%ec%95%b0%ed%94%8c%eb%b6%80%ed%84%b0-%ec%84%a0%ed%81%ac%eb%a6%bc%ea%b9%8c%ec%a7%80-%eb%8c%80%ed%91%9c-%ec%a0%9c%ed%92%88-3%ec%a2%85%ea%b3%bc-%eb%a7%a4%ec%9e%a5-%ec%a0%95%eb%b3%b4-%ed%95%9c/"
+      ],
+      "guide": {
+        "direction": "검색자는 DEMAF 앰플을 사기 전에 성분·가격과 선크림 등 다른 제품과 함께 쓸 때 효과가 있는지를 지식인에서 묻는다. 고수 글 제목은 '대표 제품 3종과 매장 정보'만 던져놓고 정작 성분·가격 비교와 구매처 접근 방법은 못 채웠다. 제품 3종 비교표와 매장 찾는 경로를 한 번에 정리해 주면 검색이 이 글에서 끝난다.",
+        "searchTargets": [
+          "demaf 앰플"
+        ],
+        "mustInclude": [
+          "DEMAF 대표 제품 3종(앰플·선크림·나머지 1종) 명칭과 용도 비교(확인 필요: 공식 홈페이지/SNS)",
+          "앰플 핵심 성분과 피부 타입별 적합 여부(확인 필요: 제품 패키지/공식 홈페이지)",
+          "제품별 용량·가격(확인 필요: 공식 쇼핑몰)",
+          "오프라인 매장 위치 및 입점 매장 리스트(확인 필요: 공식 매장 찾기 페이지)"
+        ],
+        "mustAvoid": [
+          "앰플 효과를 피부과 시술급으로 과장하는 표현",
+          "비슷한 이름의 타 브랜드 앰플·매장과 혼동해서 적는 것"
+        ],
+        "checkBefore": [
+          "제품 3종의 정확한 제품명·성분·가격은 DEMAF 공식 홈페이지 또는 공식 SNS 공지에서 확인",
+          "매장 위치·입점 리스트는 공식 매장 찾기 페이지 또는 공식 계정 공지에서 확인"
+        ],
+        "solves": [
+          "DEMAF 앰플 성분을 몰라 구매를 주저 → 핵심 성분·피부 타입별 적합도 정리로 해결",
+          "어디서 사야 하는지 몰라 못 산다 → 매장 위치·구매 경로 정리로 해결",
+          "제품 3종 중 뭐가 다른지 모른다 → 비교표로 한 번에 정리"
+        ],
+        "actionTitles": [
+          "데마프 앰플 성분·가격·매장 한눈에 비교 정리",
+          "DEMAF 앰플 선크림 등 대표 3종 구매 전 체크리스트",
+          "데마프 앰플 매장 위치 확인하고 바로 구매하는 법"
+        ]
+      },
+      "at": "2026-11-25T01:12:19.500Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
     }
   ],
   "misses": [
@@ -86915,6 +88671,10 @@
     {
       "id": "49fb92460b24431f",
       "at": "2026-11-25T00:35:22.273Z"
+    },
+    {
+      "id": "e9a151230db5b0ba",
+      "at": "2026-11-25T01:12:18.780Z"
     }
   ]
 }
