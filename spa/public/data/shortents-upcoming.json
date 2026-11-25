@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T23:04:07.249Z",
+ "builtAt": "2026-11-25T23:14:09.989Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 35,
-   "recent20": 5,
-   "press": 30,
-   "firstArticleAt": "2026-11-25T21:36:00.000Z",
+   "articles90": 32,
+   "recent20": 1,
+   "press": 27,
+   "firstArticleAt": "2026-11-25T21:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -50,10 +50,16 @@
    "articles90": 7,
    "recent20": 2,
    "press": 7,
-   "firstArticleAt": "2026-11-25T21:42:00.000Z",
+   "firstArticleAt": "2026-11-25T22:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "나홍진 '호프' 청룡 최우수작품상…\"칸에서 주시지\"",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T23:06:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286527"
+    },
     {
      "title": "대이변이다… 1600만 장항준·나홍진 제치고 '트로피' 거머쥔 감독 정체",
      "press": "wikitree.co.kr",
@@ -65,52 +71,14 @@
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-25T22:49:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003703320?sid=103"
-    },
-    {
-     "title": "‘호프’ 작품상…설경구, 청룡영화상 역대 최다 남우주연상",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-25T22:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728576?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "조희대 탄핵 연대",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T21:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'탄핵 동력' 부진에 김민석 \"5당 연대 추진\"…정점식 \"죄 나눠갖기 꼼수...",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-25T22:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653445?sid=100"
-    },
-    {
-     "title": "조희대 탄핵해도... 남은 '52명의 재판'이 진짜 문제다 [소셜 코리아]",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-25T22:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002537277?sid=100"
-    },
-    {
-     "title": "판사들 조희대 탄핵 반발에 한겨레 \"법관회의 자성하라\", 조선일보는 서...",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-25T22:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138951?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1490,
-  "matched": 747,
+  "flagged": 1488,
+  "matched": 746,
   "avgLeadMin": 506,
   "recent": [
    {
