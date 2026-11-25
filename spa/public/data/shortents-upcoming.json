@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T05:08:10.868Z",
+ "builtAt": "2026-11-25T05:18:15.208Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "술",
    "sources": [
     "google"
    ],
-   "articles90": 13,
+   "articles90": 16,
    "recent20": 6,
-   "press": 12,
+   "press": 14,
    "firstArticleAt": "2026-11-25T03:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“기억 못 한다” 술 취해 지인 살해한 50대 징역 25년 선고",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-25T05:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484942?sid=102"
+     "title": "술집서 합석 거절당하자 강제추행…현직 경찰관 입건 전 조사",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-25T05:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133737?sid=102"
     },
     {
-     "title": "\"술은 관계와 관계없다\"…음주폐해 예방의 달 기념식",
+     "title": "'술 취해 난동' 피의자 제압하려다 상해입힌 경찰관 징역형 집유",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T05:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016462692?sid=102"
+     "publishedAt": "2026-11-25T05:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016462737?sid=102"
     },
     {
-     "title": "모임·회식 많아지는 연말연시…\"술은 관계와 관계없어요\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T05:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014344444?sid=102"
+     "title": "집유기간 술 취해 주점서 난동·경찰관 폭행 30대 항소심도 '징역 2년'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T05:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009309314?sid=102"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 4,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T03:40:00.000Z",
+   "articles90": 22,
+   "recent20": 7,
+   "press": 13,
+   "firstArticleAt": "2026-11-25T04:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[현장] AI 로봇이 송금 하고 투자 상담까지…'코리아핀테크 2026' 가보니",
-     "press": "insightkorea.co.kr",
-     "publishedAt": "2026-11-25T05:04:00.000Z",
-     "link": "https://www.insightkorea.co.kr/news/articleView.html?idxno=259727"
+     "title": "금융 경계 허무는 AI·디지털자산…핀테크 기술 한자리에",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-25T05:16:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087683"
     },
     {
-     "title": "손바닥만 대면 결제부터 보험금 청구까지…핀테크 기술 한자리에",
-     "press": "cwn.kr",
-     "publishedAt": "2026-11-25T05:04:00.000Z",
-     "link": "https://www.cwn.kr/news/articleView.html?idxno=62594"
+     "title": "카카오페이, AI 금융·스테이블코인 사업 확대…코리아 핀테크 위크 202...",
+     "press": "megaeconomy.co.kr",
+     "publishedAt": "2026-11-25T05:16:00.000Z",
+     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065590072739561"
     },
     {
-     "title": "AI 상담부터 자산 관리까지…금융위원장이 체험한 핀테크 혁신",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-25T05:02:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321787&inflow=N"
+     "title": "코리아 핀테크 위크 부스 돌아보는 참가자들",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T05:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016462763?sid=101"
     }
    ]
   },
@@ -79,9 +79,9 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 6,
-   "press": 9,
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
    "firstArticleAt": "2026-11-25T03:52:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -163,10 +163,10 @@
      "link": "https://n.news.naver.com/mnews/article/030/0003489637?sid=105"
     },
     {
-     "title": "우주청, 우주신기술 4건 지정… 우주바이오 분야 첫 포함",
-     "press": "biz.chosun.com",
+     "title": "위성·발사체 넘어 우주바이오까지…우주청, 신기술 4건 지정",
+     "press": "news1.kr",
      "publishedAt": "2026-11-25T04:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207231?sid=105"
+     "link": "https://n.news.naver.com/mnews/article/421/0009309177?sid=105"
     }
    ]
   },
@@ -176,12 +176,18 @@
     "google"
    ],
    "articles90": 7,
-   "recent20": 0,
+   "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-25T03:42:00.000Z",
+   "firstArticleAt": "2026-11-25T04:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한화투자증권, 타사 채권 이전 고객에 최대 50만원 지급",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-25T05:14:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=154642"
+    },
     {
      "title": "한화투자증권, '채권투자에 혜택 더하기' 비대면 행사",
      "press": "cnbnews.com",
@@ -193,12 +199,6 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-25T04:46:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005609551?sid=101"
-    },
-    {
-     "title": "\"채권도 이사하면 돈 된다\"…한화투자증권, 최대 50만원 지급",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-25T04:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159319?sid=101"
     }
    ]
   },
@@ -208,17 +208,17 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 4,
+   "recent20": 2,
    "press": 5,
    "firstArticleAt": "2026-11-25T04:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "안방 휩쓴 '신병' 영화로 만난다…연말 극장가 출격",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-25T05:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273915?sid=103"
+     "title": "'폐병원'서 촬영… 감독마저 가위눌렸다는 역대급 한국 공포 영화 온다",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-25T05:08:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1177629"
     },
     {
      "title": "유정연과 신병즈가 만났다, K군텐츠 '신병' [SQ현장]",
@@ -231,38 +231,6 @@
      "press": "heraldmuse.com",
      "publishedAt": "2026-11-25T04:55:00.000Z",
      "link": "https://m.entertain.naver.com/article/112/0003814356"
-    }
-   ]
-  },
-  {
-   "keyword": "손정의 대구 방문",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T04:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "손정의 日 소프트뱅크 회장, 대구 방문해 선대 묘소 참배(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T05:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009309286?sid=102"
-    },
-    {
-     "title": "손정의 대구 방문, 선대 묘소 3곳 비공개 참배…앤트로픽 투자 놓친 일...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-25T04:54:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630586"
-    },
-    {
-     "title": "손정의 회장, ‘대구 선대 묘소’ 비공개 방문",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-25T04:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686003?sid=102"
     }
    ]
   },
@@ -291,10 +259,10 @@
      "link": "https://www.newspim.com/news/view/20261125000771"
     },
     {
-     "title": "\"여러 번 가위 눌려\"..'신병 더 무비', 류경수·정연 품고 스크린으로 [...",
-     "press": "starnewskorea.com",
+     "title": "시즌4까지 간 '신병', 이번엔 영화다…트와이스 정연 스크린 데뷔 [종합...",
+     "press": "tenasia.co.kr",
      "publishedAt": "2026-11-25T04:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490008"
+     "link": "https://m.entertain.naver.com/article/312/0000786110"
     }
    ]
   },
@@ -329,11 +297,43 @@
      "link": "https://n.news.naver.com/mnews/article/032/0003484932?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "가계대출 금리 5% 이상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T04:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "가계대출 금리 6개월 연속 올라 5.02%…예금금리는 더 뛰어",
+     "press": "newskr.kr",
+     "publishedAt": "2026-11-25T05:16:00.000Z",
+     "link": "http://www.newskr.kr/news/articleView.html?idxno=108299"
+    },
+    {
+     "title": "[포커스] 주담대 연 5% 턱밑까지…'5%이상 금리' 가계대출 1년새 4배 껑충",
+     "press": "startuptoday.co.kr",
+     "publishedAt": "2026-11-25T05:12:00.000Z",
+     "link": "https://www.startuptoday.co.kr/news/articleView.html?idxno=820068"
+    },
+    {
+     "title": "은행 가계대출 금리 5% 돌파…5개월 연속 상승세",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-25T04:20:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887090"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1387,
+  "flagged": 1388,
   "matched": 720,
   "avgLeadMin": 472,
   "recent": [
