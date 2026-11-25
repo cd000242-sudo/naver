@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-11-25T19:06:12.277Z",
+  "publishedAt": "2026-11-25T21:44:31.927Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
-    "issues": 18,
+    "issues": 17,
     "candidates": 240,
-    "niche": 1,
-    "preemption": 2,
+    "niche": 2,
+    "preemption": 6,
     "pending": 0
   },
   "freeSample": {
@@ -49,7 +49,7 @@
       },
       "documentCount": 129,
       "documentCountMeasured": true,
-      "searchVolume": 300,
+      "searchVolume": 370,
       "searchVolumeLt10": false,
       "hasLiveDemand": true,
       "demandStatus": "stable",
@@ -59,7 +59,7 @@
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 300",
+        "검색량 370",
         "문서수 129",
         "데이터랩 실측 수요",
         "블로그탭 상위 10 정면글 0건 — 자리 있음"
@@ -71,7 +71,7 @@
         },
         {
           "code": "traffic",
-          "text": "검색광고 월 검색량 300 실측 — 트래픽 하한 통과"
+          "text": "검색광고 월 검색량 370 실측 — 트래픽 하한 통과"
         },
         {
           "code": "demand",
@@ -87,15 +87,20 @@
         }
       ],
       "whySearch": {
-        "text": "젠슨 황 복귀로 폐쇄형·오픈형 AI 진영 냉전이 부각",
+        "text": "오픈AI 상장 추진이 앤트로픽에도 부담이 되고 있다",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
+        "seo": {
+          "text": "오픈ai 김정원 프로필과 경력, 어떤 인물인지 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
         "home": {
-          "text": "오픈ai 김정원 이름이 요즘 왜 자꾸 눈에 띄나 했더니 이런 거더라고요",
+          "text": "오픈ai 김정원 프로필 찾다가 경력에서 눈이 멈췄어요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -140,12 +145,308 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-11-25T19:03:30.625Z",
+      "measuredAt": "2026-11-25T21:38:18.047Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null
+    },
+    {
+      "keyword": "김가영 기자",
+      "issue": "김가영",
+      "topic": "김가영",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "김가영·스롱 피아비, 휴온스 LPBA 8강서 재대결…김가영은 지난 결승 패배를 설욕할까?",
+          "“40만원이 필요해서 나간 대회”, 4시간 연습하고 우승… 당구여제 김가영은 처음부터 좀 이상했다",
+          "재혼황후 리뷰 '별궁 장면 어땠길래', 소비에슈를 보는 시선이 갈린 진짜 이유",
+          "세계 챔피언이 한순간에 등록 말소.. 김가영 당구선수 3쿠션 10억 문턱까지 온 길",
+          "김가영 아나운서, 연봉 400억 프로듀서와 결별? 그런데 8kg 감량했어요!",
+          "[스포츠 비하인드] 우승해도 칭찬은 엄마 통해 들었다…당구 여제 김가영의 뜻밖의 뒷이야기",
+          "\"이별이 명답\" 피독, 악플 피해…'故오요안나 괴롭힘 의혹' 김가영 탓?",
+          "김가영 기상캐스터, 직장 내 괴롭힘 가해자 의혹→파주 홍보대사 해촉도 논의",
+          "“경성의 김유정은 어디 갔어?”…‘100일의 거짓말’ 찍던 그녀, 밤거리에서 완전히 달라졌다",
+          "프로 당구 선수 김가영 김민아 프로필 2026 우리금융캐피탈 LPBA 챔피언십 결승전 우승상금"
+        ],
+        "measuredAt": "2026-11-25T21:42:12.749Z"
+      },
+      "documentCount": 11393,
+      "documentCountMeasured": true,
+      "searchVolume": 390,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.2277666091711967,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 390",
+        "문서수 11,393",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 390 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.2배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "당구선수 김가영이 경기에서 스트로크와 뱅킹을 선보였다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김가영 기자 오도희와 뱅킹 초구 장면 각도 계산까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김가영 기자가 김가영 당구선수 프로필 보다가 큐 잡는 손 모양에서 멈칫했던 게 있더라고",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "김가영 당구선수",
+          "searchVolume": 8010,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김가영 프로필",
+          "searchVolume": 730,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김가영 당구",
+          "searchVolume": 530,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김가영 당구선수",
+          "searchVolume": 8010,
+          "documentCount": 12164,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김가영 프로필",
+          "searchVolume": 730,
+          "documentCount": 4955,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김가영 당구",
+          "searchVolume": 530,
+          "documentCount": 13343,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김가영 선수",
+          "searchVolume": 90,
+          "documentCount": 16257,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김가영 오도희",
+          "searchVolume": 20,
+          "documentCount": 664,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": {
+        "series": [
+          26,
+          52,
+          96,
+          65,
+          43,
+          0,
+          52,
+          52,
+          70,
+          39,
+          91,
+          35,
+          30,
+          52,
+          74,
+          52,
+          39,
+          78,
+          35,
+          43,
+          70,
+          70,
+          61,
+          78,
+          0,
+          0,
+          26,
+          87,
+          100
+        ]
+      },
+      "kinCount": 11,
+      "kinTop": [
+        {
+          "title": "김가영으로 삼행시",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80702&docId=51386989&answerNo=6",
+          "views": 1632,
+          "answers": 4
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-25T21:38:18.047Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null
     }
   ],
   "observations": [
+    {
+      "keyword": "윤이나 쐐기 3점",
+      "issue": "윤이나",
+      "topic": "윤이나",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 64,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 64",
+        "선점 후보 — 경쟁 문서 64건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "윤이나가 WTGL 데뷔전에서 장타로 보스턴 승리를 견인했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "윤이나 쐐기 3점으로 WTGL 데뷔전 보스턴 첫 승 견인",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "윤이나 쐐기 3점 나온 WTGL 데뷔전에서 홀인원 놓친 장면이 더 아쉽더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "윤이나 WTGL",
+          "searchVolume": 2350,
+          "frame": "generic"
+        },
+        {
+          "keyword": "윤이나 WTGL 데뷔전",
+          "searchVolume": 160,
+          "frame": "generic"
+        },
+        {
+          "keyword": "윤이나 보스턴",
+          "searchVolume": 60,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "윤이나 WTGL",
+          "searchVolume": 2350,
+          "documentCount": 524,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "윤이나 WTGL 데뷔전",
+          "searchVolume": 160,
+          "documentCount": 178,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "윤이나 보스턴",
+          "searchVolume": 60,
+          "documentCount": 591,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "윤이나 스크린골프",
+          "searchVolume": 30,
+          "documentCount": 1144,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-25T21:38:18.047Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "시루도 깃허브",
       "issue": "시루도",
@@ -154,7 +455,7 @@
       "issueType": "fresh",
       "isDerived": true,
       "origin": "next-wave",
-      "originReason": "오픈소스 공개",
+      "originReason": "소스 확보 수요",
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
@@ -176,7 +477,7 @@
       "evidence": [
         {
           "code": "next-wave",
-          "text": "다음 물결 — 오픈소스 공개"
+          "text": "다음 물결 — 소스 확보 수요"
         },
         {
           "code": "empty-field",
@@ -184,7 +485,7 @@
         }
       ],
       "whySearch": {
-        "text": "오픈AI·시스코가 리눅스 지키는 오픈소스 보안 AI '시루도' 공개",
+        "text": "오픈AI·시스코가 리눅스 보호 오픈소스 보안 '시루도'를 공개했다",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -192,12 +493,12 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "시루도 깃허브 소스 공개, 오픈AI·시스코 리눅스 보안 설치",
+          "text": "시루도 깃허브 오픈소스 코드 다운로드와 시스코 발표 내용",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "시루도 깃허브만 찾다가 패치 전에 공격 막는 원리를 놓치더라고요",
+          "text": "시루도 깃허브 오픈소스가 패치 전 공격을 막는다는데 어디까지 되나",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -208,7 +509,118 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-11-25T19:03:30.625Z",
+      "measuredAt": "2026-11-25T21:38:18.047Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "윤이나 인성 논란",
+      "issue": "윤이나",
+      "topic": "윤이나",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 89,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 3,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 89",
+        "선점 후보 — 경쟁 문서 89건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 3건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "윤이나가 WTGL 데뷔전에서 장타로 보스턴 승리를 견인했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "윤이나 인성 논란 오구 사건부터 WTGL 데뷔전까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "윤이나 인성 논란 이후 WTGL 데뷔전 홀인원 놓친 장면에서 갈리네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "윤이나 WTGL",
+          "searchVolume": 2350,
+          "frame": "generic"
+        },
+        {
+          "keyword": "윤이나 보스턴",
+          "searchVolume": 60,
+          "frame": "generic"
+        },
+        {
+          "keyword": "윤이나 나이",
+          "searchVolume": 60,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "윤이나 WTGL",
+          "searchVolume": 2350,
+          "documentCount": 524,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "윤이나 보스턴",
+          "searchVolume": 60,
+          "documentCount": 591,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "윤이나 나이",
+          "searchVolume": 60,
+          "documentCount": 3010,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "윤이나 LPGA",
+          "searchVolume": 60,
+          "documentCount": 12765,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-25T21:38:18.047Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -250,7 +662,7 @@
         }
       ],
       "whySearch": {
-        "text": "LGU+가 '유독'에서 유튜브 프리미엄 구독료를 반값 할인",
+        "text": "LGU+가 유독에서 유튜브 프리미엄을 반값 할인하고 가족 보호 알리미를 출시했다",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "거래",
@@ -258,12 +670,12 @@
       "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
       "titles": {
         "seo": {
-          "text": "lgu+ 도어캠 비용 설치비 월정액 해지까지 요금 정리",
+          "text": "lgu+ 도어캠 비용 설치비·월 요금·약정 조건 비교",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "lgu+ 도어캠 비용 설치비만 보다가 월정액에서 잠깐 멈칫했어요",
+          "text": "lgu+ 도어캠 비용 설치할 때랑 약정 끝날 때랑 좀 다르더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -276,12 +688,196 @@
         {
           "title": "lg 유플러스 도어캠 말고 더 있나요?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=107040202&docId=490687170&answerNo=1",
-          "views": 493,
+          "views": 496,
           "answers": 2
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-11-25T19:03:30.625Z",
+      "measuredAt": "2026-11-25T21:38:18.047Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "윤이나 WTGL 순위",
+      "issue": "윤이나",
+      "topic": "윤이나",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "팀 성적 확인",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 217,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 217",
+        "선점 후보 — 경쟁 문서 217건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 팀 성적 확인"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "윤이나가 WTGL 데뷔전에서 장타로 보스턴 승리를 견인했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "윤이나 WTGL 순위 데뷔전 보스턴 8대3 승리 기록",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "윤이나 WTGL 순위 보려다 윤이나 보스턴 어쩌다 나온 건지 한참 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "윤이나 보스턴",
+          "searchVolume": 60,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "윤이나 보스턴",
+          "searchVolume": 60,
+          "documentCount": 591,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-25T21:38:18.047Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "윤이나 홀인원 아쉬움",
+      "issue": "윤이나",
+      "topic": "윤이나",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 287,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 287",
+        "선점 후보 — 경쟁 문서 287건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "윤이나가 WTGL 데뷔전에서 장타로 보스턴 승리를 견인했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "윤이나 홀인원 아쉬움, WTGL 데뷔전 보스턴 승리 장면",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "윤이나 홀인원 아쉬움에 가려졌는데 WTGL 데뷔전 장타는 많이들 놓치더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "윤이나 WTGL",
+          "searchVolume": 2350,
+          "frame": "generic"
+        },
+        {
+          "keyword": "윤이나 보스턴",
+          "searchVolume": 60,
+          "frame": "generic"
+        },
+        {
+          "keyword": "윤이나 스크린골프",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "윤이나 WTGL",
+          "searchVolume": 2350,
+          "documentCount": 524,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "윤이나 보스턴",
+          "searchVolume": 60,
+          "documentCount": 591,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "윤이나 스크린골프",
+          "searchVolume": 30,
+          "documentCount": 1144,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-25T21:38:18.047Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1497,98 +2093,72 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "북남고속철도 구간",
-      "issue": "북남고속철도",
-      "topic": "북남고속철도",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 288,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 288",
-        "선점 후보 — 경쟁 문서 288건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "한국 참여 컨소시엄이 95조 베트남 북남 고속철도 설계용역 5600억 수주",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "북남고속철도 구간 95조 베트남 고속철 한국 5600억 수주",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "북남고속철도 구간 한국이 따낸 게 95조 사업의 시작일 뿐이더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-23T21:30:05.981Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "미국 과잉생산 관세",
+      "issue": "관세 15% 유지",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "미국이 한국 관세 15% 상한을 유지하되 25% 인상 여지를 남겼다",
+      "headlines": [
+        {
+          "title": "미, 한국 관세 15% 유지…25% 인상 여지 남겨",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-11-25T21:07:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001405886?sid=104"
+        },
+        {
+          "title": "美, 14개국에 과잉생산 관세…\"한국 15% 상한 유지\"(종합)",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-25T14:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014345596?sid=104"
+        },
+        {
+          "title": "美USTR, 14개 경제주체에 과잉생산 관세…\"韓 15% 상한 유지\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-25T13:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016463953?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "관세",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "미국 PCE 물가",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "美가 14개국에 과잉생산 관세 부과, 한국은 15% 상한 유지",
+      "why": "미 10월 PCE 물가 3.8% 상승으로 12월 금리 인상 전망이 굳어졌다",
       "headlines": [
         {
-          "title": "美 “과잉생산 관세 부과, 韓 15% 상한 유지”",
-          "press": "donga.com",
-          "publishedAt": "2026-11-25T09:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003765158?sid=104"
+          "title": "미국 PCE 물가 3.8%↑...12월 금리 인상 전망 굳어져",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-11-25T16:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002438135?sid=104"
         },
         {
-          "title": "美, '과잉생산' 추가 관세 발표…한국은 합의대로 15% 상한 유지",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-25T13:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009310564?sid=104"
+          "title": "美 PCE 물가 들썩… 12월 금리 인상 전망 굳어져",
+          "press": "segye.com",
+          "publishedAt": "2026-11-25T15:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004178170?sid=104"
         },
         {
-          "title": "미국, ‘과잉생산 관세’ 예고…“한국은 15% 상한 유지”",
-          "press": "hani.co.kr",
-          "publishedAt": "2026-11-25T15:04:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/028/0002834005?sid=104"
+          "title": "美 10월 PCE 물가 전년比 3.8%↑…예상치 부합",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-11-25T14:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001207350?sid=104"
         }
       ],
       "concentrated": [
@@ -1602,12 +2172,12 @@
       "rowCount": 0
     },
     {
-      "issue": "전도연",
+      "issue": "가능한 사랑 전도연",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "stable",
+      "issueStatus": "declining",
       "isHot": true,
-      "why": "전도연이 청룡영화상 여우주연상 수상, 작품상은 '호프'",
+      "why": "청룡영화상에서 전도연·설경구가 남녀주연상을 석권했다",
       "headlines": [
         {
           "title": "청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권",
@@ -1628,64 +2198,39 @@
           "link": "https://n.news.naver.com/mnews/article/023/0004011721?sid=103"
         }
       ],
-      "concentrated": [
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "조희대 탄핵 추진",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "조희대 대법원장 탄핵 추진에 창원지법 판사들이 반발했다",
+      "headlines": [
         {
-          "keyword": "전도연 영화",
-          "searchVolume": null,
-          "origin": "autocomplete"
+          "title": "창원지법 전체 판사회의 \"법관 탄핵 추진은 헌법가치 훼손\"(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-25T07:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016463372?sid=102"
         },
         {
-          "keyword": "전도연 자녀",
-          "searchVolume": null,
-          "origin": "autocomplete"
+          "title": "신장식, 창원지법 판사들 '曺 탄핵' 우려에 \"논리적 오류 점철\"",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-25T13:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009310555?sid=100"
         },
         {
-          "keyword": "전도연 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전도연 조인성",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전도연 설경구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전도연 리즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전도연 강시규",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전도연 오스카",
-          "searchVolume": null,
-          "origin": "autocomplete"
+          "title": "'조희대 탄핵' 추진에 \"깊은 우려\"…일선지법 첫 입장",
+          "press": "news.jtbc.co.kr",
+          "publishedAt": "2026-11-25T11:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/437/0000522450?sid=102"
         }
       ],
-      "nextWave": [
-        {
-          "keyword": "전도연 차기작",
-          "reason": "다음 작품 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "전도연 패션",
-          "reason": "드레스 화제",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
+      "concentrated": [],
+      "nextWave": [],
       "rowCount": 0
     },
     {
@@ -1694,7 +2239,7 @@
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "빗썸이 해킹 피해 추가 확인, 보름간 해킹 사실 몰랐다",
+      "why": "빗썸이 보름 넘게 모른 채 개인정보 추가 유출을 확인했다",
       "headlines": [
         {
           "title": "빗썸, 해킹 피해 추가 확인…보름 동안 해킹 사실 몰랐다",
@@ -1703,16 +2248,16 @@
           "link": "https://n.news.naver.com/mnews/article/001/0016463744?sid=101"
         },
         {
-          "title": "[단독] 피해자도, 유출 기간도 늘어…빗썸 해킹 추가 피해 확인",
-          "press": "sedaily.com",
-          "publishedAt": "2026-11-25T09:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004686197?sid=101"
-        },
-        {
           "title": "빗썸, 그룹웨어 해킹 후속 점검서 개인정보 추가 유출 확인",
           "press": "nocutnews.co.kr",
           "publishedAt": "2026-11-25T11:47:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/079/0004213932?sid=101"
+        },
+        {
+          "title": "보름넘게 개인정보 빼가는데도 몰랐다니…빗썸, 해킹피해 추가 확인",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-11-25T11:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005769089?sid=101"
         }
       ],
       "concentrated": [
@@ -1731,300 +2276,137 @@
       "rowCount": 0
     },
     {
-      "issue": "조희대 탄핵 논의",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "전국법원장회의 내달 4일 개최, 조희대 탄핵 대응 논의",
-      "headlines": [
-        {
-          "title": "전국법원장회의도 내달 4일 개최 확정…'조희대 탄핵' 논의하나",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-25T09:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014345395?sid=102"
-        },
-        {
-          "title": "조희대 탄핵 혼란 속 법관대표회의 이어 내달 4일 법원장회의",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-25T08:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016463437?sid=102"
-        },
-        {
-          "title": "[단독]다음달 4일 전국 법원장들도 모인다…‘조희대 탄핵’ 대응 논의...",
-          "press": "khan.co.kr",
-          "publishedAt": "2026-11-25T06:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/032/0003484975?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "젠슨 황은",
+      "issue": "나는 솔로",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "미 정보당국, 앨리스 황이 젠슨 황과 불륜 중 中에 정보 전달 보고",
+      "why": "나는솔로 34기가 최종선택을 앞두고 러브라인이 격화됐다",
       "headlines": [
         {
-          "title": "젠슨 황은 돌아왔는데…앨리스 황은 스캔들 터진 뒤 어디로 갔나",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-25T07:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005358059?sid=104"
+          "title": "'나는솔로' 34기 영철 최종 선택 발언",
+          "press": "bntnews.co.kr",
+          "publishedAt": "2026-11-25T00:36:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202611250176"
         },
         {
-          "title": "美정보당국 \"앨리스황, 젠슨과 만남 중 中에 정보넘겨\" 의회보고(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-25T10:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016463723?sid=104"
-        },
-        {
-          "title": "美 정보당국 \"앨리스 황, 젠슨 황과 불륜 중 中에 정보 전달\"",
+          "title": "'나는솔로' 34기 광수, 최종 선택 고민…\"정숙이 질투로 미치게 만들어...",
           "press": "news1.kr",
-          "publishedAt": "2026-11-25T11:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009310441?sid=104"
+          "publishedAt": "2026-11-25T00:48:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009308572"
+        },
+        {
+          "title": "'나는 솔로' 34기 영호ㆍ순자, 1:1 데이트서 질문 공세⋯러브라인 대격...",
+          "press": "etoday.co.kr",
+          "publishedAt": "2026-11-25T08:54:00.000Z",
+          "link": "https://www.etoday.co.kr/news/view/2652990"
         }
       ],
-      "concentrated": [],
+      "concentrated": [
+        {
+          "keyword": "나는 솔로 34기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나는 솔로 영철",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나는 솔로 갤러리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나는 솔로 16기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나는 솔로 ott",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나는 솔로 편성표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나는 솔로 영자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
       "nextWave": [],
       "rowCount": 0
     },
     {
-      "issue": "도로공사 6연승 선두!",
+      "issue": "사과",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "unknown",
+      "issueStatus": "stable",
       "isHot": true,
-      "why": "도로공사가 IBK 꺾고 6연승, 여자배구 단독 선두 등극",
+      "why": "엔비디아 젠슨 황이 전사회의를 열고 심리치료 중이라며 사과했다",
       "headlines": [
         {
-          "title": "모마 주춤해도 문제없다…도로공사, IBK 꺾고 6연승 '단독 선두'",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-25T12:17:00.000Z",
-          "link": "https://m.sports.naver.com/volleyball/article/055/0001405844"
-        },
-        {
-          "title": "“IBK, L을 가져가!” 도로공사, 6연승 질주하며 선두 등극 [MK현장]",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-25T11:35:00.000Z",
-          "link": "https://m.sports.naver.com/volleyball/article/410/0001148340"
-        },
-        {
-          "title": "도로공사, 6연승 질주하며 선두 탈환…현대캐피탈 2위 도약(종합)",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-25T13:12:00.000Z",
-          "link": "https://m.sports.naver.com/volleyball/article/003/0014345573"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "매일경제",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "국방홍보원과 매일경제가 국방·안보 콘텐츠 협력 MOU 체결",
-      "headlines": [
-        {
-          "title": "[손정의 회장 관심 쇄도] 매일신문 단독 보도…전국 언론도 주목",
-          "press": "imaeil.com",
-          "publishedAt": "2026-11-25T06:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/088/0001042240?sid=102"
-        },
-        {
-          "title": "[부고] 신지윤(매일경제신문 기자)씨 조부상",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-24T01:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016459812?sid=102"
-        },
-        {
-          "title": "국방홍보원·매일경제 손잡았다…국방·안보 콘텐츠 협력 강화",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-20T07:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005766739?sid=100"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "아침 & 매일경제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "매일경제 구독",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "매일경제 서포터즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "매일경제 주간지",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "매일경제 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "매일경제 시험 일정",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "매일경제 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "매일경제 오늘의 운세",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "매일경제 운세",
-          "reason": "오늘의 운세",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "매일경제 서포터즈",
-          "reason": "모집 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "정부",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "정부가 코스피 급락에 증안펀드 확대에 나섰다",
-      "headlines": [
-        {
-          "title": "양대노총, 정년연장 입법 촉구…\"해 넘기면 정부와 국회 책임\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-25T01:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016461985?sid=102"
-        },
-        {
-          "title": "[단독] 코스피 다시 급락하자…정부 '증안펀드' 확대 나섰다",
+          "title": "사과에 땅콩버터 대신 '이것' 곁들였더니…'놀라운 결과'",
           "press": "hankyung.com",
-          "publishedAt": "2026-11-25T08:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005358175?sid=101"
+          "publishedAt": "2026-11-25T10:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005358250?sid=103"
         },
         {
-          "title": "경찰, 인터폴 전산망 정부기관에 개방…국외도피사범 추적 강화",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-25T07:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014345005?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "정부 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "재혼황후 정부 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "정부 빚탕감",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "정부 영어로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "정부 환급금 신청",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "정부 첩",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "정부 개각",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "정부 대책",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "정부 환급금 조회",
-          "reason": "환급 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "이란 호르무즈 통행료",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "이란이 호르무즈 안전통항 대가로 암호화폐 위장 보험료 징수",
-      "headlines": [
-        {
-          "title": "\"이란, 호르무즈 안전통항 대가로 암호화폐 '위장 보험료' 징수\"",
+          "title": "젠슨황, 엔비디아 전사회의 열고 사과…\"심리치료 받고 있다\"",
           "press": "yna.co.kr",
-          "publishedAt": "2026-11-25T10:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016463717?sid=104"
+          "publishedAt": "2026-11-24T20:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016461577?sid=104"
         },
         {
-          "title": "\"이란, 호르무즈 통행료 징수 중…암호화폐로 '위장 보험료' 받아\"",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-25T10:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001405804?sid=104"
-        },
-        {
-          "title": "\"이란, 호르무즈 해협 통행료 징수…암호화폐로 제재 우회\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-25T16:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014345645?sid=104"
+          "title": "남의 결혼식 버진로드 걸은 '민폐 하객'…유시은·이관희 결국 사과",
+          "press": "news.tvchosun.com",
+          "publishedAt": "2026-11-25T00:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/448/0000653249?sid=102"
         }
       ],
       "concentrated": [
         {
-          "keyword": "이란",
+          "keyword": "사과 반뜻식품",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "이란 속보",
+          "keyword": "사과 부작용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사과 효능",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사과 철",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사과 갈변",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사과 감기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사과 감홍",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사과 그림",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -2033,99 +2415,301 @@
       "rowCount": 0
     },
     {
-      "issue": "데이비스컵",
+      "issue": "김가영",
       "issueType": "fresh",
       "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "당구선수 김가영이 경기에서 스트로크와 뱅킹을 선보였다",
+      "headlines": [
+        {
+          "title": "[ST포토] 김가영 '빈쿠션 치기 시도'",
+          "press": "stoo.com",
+          "publishedAt": "2026-11-25T07:04:00.000Z",
+          "link": "http://www.stoo.com/article.php?aid=110081149163"
+        },
+        {
+          "title": "[B&포토] \"초구를 잡아라\" 뱅킹하는 김가영과 오도희",
+          "press": "thebilliards.kr",
+          "publishedAt": "2026-11-25T07:56:00.000Z",
+          "link": "https://www.thebilliards.kr/news/articleView.html?idxno=32575"
+        },
+        {
+          "title": "[ST포토] 김가영 '신중하게 초크칠'",
+          "press": "stoo.com",
+          "publishedAt": "2026-11-25T06:44:00.000Z",
+          "link": "http://www.stoo.com/article.php?aid=110080576572"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김가영 당구선수",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김가영 아나운서",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "리센느 김가영",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김가영 기상캐스터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김가영 치어리더",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "당구 김가영",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "당구선수 김가영",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김가영 당구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "김가영 경기결과",
+          "reason": "당일 승패 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김가영 PBA 순위",
+          "reason": "랭킹 변동 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김가영 다음경기",
+          "reason": "일정 체크",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김가영 상대",
+          "reason": "대진 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
+      "issue": "윤이나",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "윤이나가 WTGL 데뷔전에서 장타로 보스턴 승리를 견인했다",
+      "headlines": [
+        {
+          "title": "스크린골프에서도 ‘윤이나네’",
+          "press": "sports.khan.co.kr",
+          "publishedAt": "2026-11-25T13:00:00.000Z",
+          "link": "https://m.sports.naver.com/golf/article/144/0001151701"
+        },
+        {
+          "title": "윤이나 WTGL 데뷔전에서 홀인원 할 뻔 했다 ... 팀 8대3 승리 견인",
+          "press": "chosun.com",
+          "publishedAt": "2026-11-25T07:07:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004011676?sid=104"
+        },
+        {
+          "title": "장타에 정교한 웨지샷 … 보스턴 승리 이끈 윤이나",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-11-25T08:27:00.000Z",
+          "link": "https://m.sports.naver.com/golf/article/009/0005768938"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "윤이나 프로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "윤이나 wtgl",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "윤이나 강백호",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "wtgl 윤이나",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강백호 윤이나",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "윤이나 키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "윤이나 근황",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "윤이나 나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "윤이나 다음경기",
+          "reason": "일정 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "윤이나 WTGL 순위",
+          "reason": "팀 성적 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "윤이나 LPGA 복귀",
+          "reason": "진출 시점 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "윤이나 상금",
+          "reason": "대회 보상 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "앤트로픽",
+      "issueType": "fresh",
+      "lane": "tech",
       "issueStatus": "rising",
       "isHot": true,
-      "why": "한국 남자 테니스 66년 만에 8강 진출, 이탈리아와 격돌",
+      "why": "앤트로픽이 상장 나흘 만에 공모가 밑으로 추락했다",
       "headlines": [
         {
-          "title": "역사적 데이비스컵 앞둔 한국 테니스 출사표 \"한번 해보자\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-24T01:28:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/001/0016459884"
+          "title": "앤트로픽, 상장 나흘 만에 공모가 아래서 마감",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-11-24T23:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001405615?sid=104"
         },
         {
-          "title": "사상 첫 데이비스컵 파이널8 앞둔 남자 테니스 \"한번 해보자!\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-24T02:20:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/003/0014341778"
+          "title": "앤트로픽, 상장 나흘 만에 공모가 밑으로…고점 대비 29%↓",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-11-25T00:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001207152?sid=105"
         },
         {
-          "title": "데이비스컵 8강 앞둔 韓 테니스 \"최고의 경기력 보여주겠다\"",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-24T01:57:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/421/0009306685"
+          "title": "\"다들 앤트로픽 사더니\" 사흘 만에 공모가 붕괴...최고가 대비 28% 하락",
+          "press": "economist.co.kr",
+          "publishedAt": "2026-11-25T05:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/243/0000106277?sid=101"
         }
       ],
       "concentrated": [
         {
-          "keyword": "데이비스컵 8강 일정",
+          "keyword": "앤트로픽 상장",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "데이비스컵 한국",
+          "keyword": "앤트로픽 주가",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "데이비스컵 중계",
+          "keyword": "앤트로픽 상장일",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "2026 데이비스컵",
+          "keyword": "앤트로픽 뜻",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "테니스 데이비스컵",
+          "keyword": "앤트로픽 클로드",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "데이비스컵 일정",
+          "keyword": "앤트로픽 공모가",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "데이비스컵 8강",
+          "keyword": "앤트로픽 ipo",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "데이비스컵 파이널",
+          "keyword": "앤트로픽 ceo",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "데이비스컵 중계 채널",
-          "reason": "시청 방법",
+          "keyword": "앤트로픽 반등",
+          "reason": "저가매수 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "데이비스컵 출전선수",
-          "reason": "선수 명단",
+          "keyword": "앤트로픽 주가 전망",
+          "reason": "향후 흐름 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "데이비스컵 8강 대진",
-          "reason": "대진 확인",
+          "keyword": "앤트로픽 실적",
+          "reason": "하락 원인 확인",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "데이비스컵 4강",
-          "reason": "다음 라운드",
+          "keyword": "앤트로픽 락업",
+          "reason": "물량 출회 우려",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -2139,7 +2723,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "울릉도에 러 군용기 접근 재난문자·사이렌 울렸으나 오발송 확인",
+      "why": "울릉도에 러시아 군용기가 접근해 주민 대피 사이렌이 울렸다",
       "headlines": [
         {
           "title": "(영상)“구급차 길 막은 마라톤 참가자들?”…사이렌 울려도 달렸다 [이...",
@@ -2206,106 +2790,12 @@
       "rowCount": 0
     },
     {
-      "issue": "앤트로픽",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "앤트로픽이 상장 나흘 만에 공모가 밑으로, 고점 대비 29% 하락",
-      "headlines": [
-        {
-          "title": "앤트로픽, 상장 나흘 만에 공모가 아래서 마감",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-24T23:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001405615?sid=104"
-        },
-        {
-          "title": "앤트로픽, 상장 나흘 만에 공모가 밑으로…고점 대비 29%↓",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-11-25T00:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001207152?sid=105"
-        },
-        {
-          "title": "\"다들 앤트로픽 사더니\" 사흘 만에 공모가 붕괴...최고가 대비 28% 하락",
-          "press": "economist.co.kr",
-          "publishedAt": "2026-11-25T05:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/243/0000106277?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "앤트로픽 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 상장일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 공모가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ipo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "앤트로픽 매수 방법",
-          "reason": "지금 살까",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 전망",
-          "reason": "향후 주가",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 실적",
-          "reason": "실적 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
       "issue": "최첨단 AI",
       "issueType": "fresh",
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "보령 웅천에 AI 데이터센터 사업부지 매매계약 체결",
+      "why": "보령 웅천 AI 데이터센터 부지 매매계약이 체결됐다",
       "headlines": [
         {
           "title": "보령 웅천 AI 데이터센터 사업부지 매매계약 체결",
@@ -2336,8 +2826,14 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "젠슨 황 복귀로 폐쇄형·오픈형 AI 진영 냉전이 부각",
+      "why": "오픈AI 상장 추진이 앤트로픽에도 부담이 되고 있다",
       "headlines": [
+        {
+          "title": "앤트로픽 '일장춘몽'?…\"오픈AI 상장에도 부담\"",
+          "press": "biz.sbs.co.kr",
+          "publishedAt": "2026-11-25T19:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/374/0000545934?sid=104"
+        },
         {
           "title": "[손정의 회장 관심 쇄도] 소프트뱅크 AI 투자 거물에 쏠린 눈",
           "press": "imaeil.com",
@@ -2349,12 +2845,6 @@
           "press": "yna.co.kr",
           "publishedAt": "2026-11-25T00:03:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/001/0016461766?sid=101"
-        },
-        {
-          "title": "크래프톤, 경량 AI '라온-1 미니' 정식 출시…수능 평가서 국내 모델 1위",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-25T05:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014344751?sid=105"
         }
       ],
       "concentrated": [
@@ -2380,7 +2870,7 @@
         },
         {
           "keyword": "오픈ai 김정원",
-          "searchVolume": 300,
+          "searchVolume": 370,
           "origin": "autocomplete"
         },
         {
@@ -2401,15 +2891,22 @@
       ],
       "nextWave": [
         {
-          "keyword": "오픈ai 상장일",
-          "reason": "상장 시점",
+          "keyword": "오픈AI 상장일",
+          "reason": "청약 준비 수요",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "오픈ai 청약",
-          "reason": "청약 방법",
+          "keyword": "오픈AI 공모가",
+          "reason": "밸류 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "오픈AI 적자",
+          "reason": "수익성 우려",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -2423,7 +2920,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "오픈AI·시스코가 리눅스 지키는 오픈소스 보안 AI '시루도' 공개",
+      "why": "오픈AI·시스코가 리눅스 보호 오픈소스 보안 '시루도'를 공개했다",
       "headlines": [
         {
           "title": "AI 공격보다 느린 패치…오픈AI·시스코의 해법 '시루도' [보안 아웃룩]",
@@ -2448,28 +2945,28 @@
       "nextWave": [
         {
           "keyword": "시루도 설치",
-          "reason": "적용 방법",
+          "reason": "도입 방법 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
           "keyword": "시루도 깃허브",
-          "reason": "오픈소스 공개",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "시루도 원리",
-          "reason": "작동 방식",
+          "reason": "소스 확보 수요",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
           "keyword": "시루도 성능",
-          "reason": "실효성 궁금",
+          "reason": "효과 검증 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "시루도 라이선스",
+          "reason": "사용 조건 확인",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -2483,7 +2980,7 @@
       "lane": "tech",
       "issueStatus": "declining",
       "isHot": false,
-      "why": "MS가 사상 최악 장애에 '코드 레드'를 발령",
+      "why": "MS가 사상 최악의 장애에 '코드레드'를 발령했다",
       "headlines": [
         {
           "title": "\"MS, 사상 최악 장애에 '코드레드' 발령\"",
@@ -2512,12 +3009,12 @@
         },
         {
           "keyword": "ms 오피스",
-          "searchVolume": 39900,
+          "searchVolume": 40000,
           "origin": "autocomplete"
         },
         {
           "keyword": "ms 오피스 365",
-          "searchVolume": 14910,
+          "searchVolume": 14780,
           "origin": "autocomplete"
         },
         {
@@ -2536,12 +3033,12 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "MS 혼내는 방법",
-          "searchVolume": null,
+          "keyword": "ms office",
+          "searchVolume": 8030,
           "origin": "autocomplete"
         },
         {
-          "keyword": "ms 로그아웃 방법",
+          "keyword": "MS 혼내는 방법",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -2549,21 +3046,21 @@
       "nextWave": [
         {
           "keyword": "MS 장애 복구",
-          "reason": "복구 시점",
+          "reason": "복구 여부 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "MS 먹통 서비스",
-          "reason": "영향 범위",
+          "keyword": "MS 해킹 피해",
+          "reason": "침해 범위 확인",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "MS 장애 보상",
-          "reason": "보상 여부",
+          "keyword": "MS 주가",
+          "reason": "시장 반응 주목",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -2577,7 +3074,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "머스크 떠난 xAI 창립 멤버 3명, 미래 예측 AI '에포칼' 출범",
+      "why": "머스크 떠난 xAI 창립 멤버 3명이 미래예측 AI 스타트업을 출범했다",
       "headlines": [
         {
           "title": "머스크 떠난 xAI 창립 멤버 3명…'미래 예측 AI' 선보여",
@@ -2601,7 +3098,7 @@
       "concentrated": [
         {
           "keyword": "xai",
-          "searchVolume": 1500,
+          "searchVolume": 1490,
           "origin": "autocomplete"
         }
       ],
@@ -2614,7 +3111,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "LGU+가 '유독'에서 유튜브 프리미엄 구독료를 반값 할인",
+      "why": "LGU+가 유독에서 유튜브 프리미엄을 반값 할인하고 가족 보호 알리미를 출시했다",
       "headlines": [
         {
           "title": "LGU+, '유독'서 유튜브프리미엄 구독료 반값 할인",
@@ -2653,7 +3150,7 @@
         },
         {
           "keyword": "lg u+ 인터넷",
-          "searchVolume": 4610,
+          "searchVolume": 4590,
           "origin": "autocomplete"
         },
         {
@@ -2679,15 +3176,8 @@
       ],
       "nextWave": [
         {
-          "keyword": "가족 보호 알리미",
-          "reason": "설정 방법",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "LGU+ 블프 혜택",
-          "reason": "행사 내용",
+          "keyword": "LGU+ 블프 이벤트",
+          "reason": "프로모션 기간 확인",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -2955,44 +3445,6 @@
         }
       ],
       "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "북남고속철도",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "한국 참여 컨소시엄이 95조 베트남 북남 고속철도 설계용역 5600억 수주",
-      "headlines": [
-        {
-          "title": "韓기업 참여한 컨소, 베트남 고속철도 설계용역 5600억 수주",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-22T02:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005356675?sid=101"
-        },
-        {
-          "title": "'95조' 베트남 북남 고속철…한국 참여 컨소시엄 설계 수주",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-11-22T01:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004212402?sid=101"
-        },
-        {
-          "title": "韓 참여 컨소시엄, 5600억원 규모 베트남 고속철도 기본설계 수주",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-11-23T06:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000652844?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "베트남 북남고속철도",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
       "nextWave": [],
       "rowCount": 0,
       "carried": true
