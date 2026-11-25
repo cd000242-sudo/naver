@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T16:52:10.156Z",
+ "builtAt": "2026-11-25T17:02:13.288Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 19,
+ "measured": 18,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 27,
-   "recent20": 7,
-   "press": 21,
+   "articles90": 33,
+   "recent20": 9,
+   "press": 23,
    "firstArticleAt": "2026-11-25T15:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "USTR \"韓 과잉생산 관세 15%\"…산업부 \"기존 관세 합의 존중 재확인\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T16:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009310587?sid=101"
+     "title": "USTR \"한국과 협의 불만족스러울 경우 25%로 관세 인상\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T16:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438145?sid=104"
     },
     {
-     "title": "미 과잉생산 관세 15% 제안에, 김정관 “15% 유지하면 선방”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-25T16:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301364?sid=101"
+     "title": "정부 \"美, 최종 관세도 한미 합의 존중키로…15% 유지 땐 선방 이상의 선...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-25T16:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847892?sid=101"
     },
     {
-     "title": "美 '과잉생산 관세' 예고… 한국은 15% 기본안",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-25T16:44:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=562221"
+     "title": "USTR \"한국과의 협의 불만족 시 25%로 관세 인상\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T16:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438144?sid=104"
     }
    ]
   },
@@ -47,30 +47,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 26,
-   "recent20": 5,
-   "press": 19,
-   "firstArticleAt": "2026-11-25T15:31:00.000Z",
+   "articles90": 31,
+   "recent20": 8,
+   "press": 20,
+   "firstArticleAt": "2026-11-25T15:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "USTR \"韓 과잉생산 관세 15%\"…산업부 \"기존 관세 합의 존중 재확인\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T16:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009310587?sid=101"
+     "title": "USTR \"한국과 협의 불만족스러울 경우 25%로 관세 인상\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T16:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438145?sid=104"
     },
     {
-     "title": "미 과잉생산 관세 15% 제안에, 김정관 “15% 유지하면 선방”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-25T16:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301364?sid=101"
+     "title": "USTR \"한국과의 협의 불만족 시 25%로 관세 인상\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T16:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438144?sid=104"
     },
     {
-     "title": "김정관 “美 관세 상한 15%, 선방 이상의 선방”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-25T16:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703229?sid=101"
+     "title": "정부 \"美, 최종 관세도 한미 합의 존중키로…15% 유지 땐 선방 이상의 선...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-25T16:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847892?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "설경구 남우주연상 수상",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 9,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T15:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘호프’ 청룡영화상 최우수작품상…설경구, 역대 최초 남우주연상 4회",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-25T16:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003159564"
+    },
+    {
+     "title": "청룡영화상 최우수작품상에 나홍진 '호프'… 주연상에는 설경구·전도연",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-25T16:54:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=562222"
+    },
+    {
+     "title": "설경구, '청룡' 최초 4번째 남우주연상 수상 \"영원한 동지 송윤아에 감...",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-25T16:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329189"
     }
    ]
   },
@@ -79,10 +111,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T15:27:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-25T15:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -109,7 +141,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1504,
+  "flagged": 1505,
   "matched": 768,
   "avgLeadMin": 500,
   "recent": [
