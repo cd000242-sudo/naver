@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T10:50:21.217Z",
+ "builtAt": "2026-11-25T11:00:23.916Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,46 @@
  "measured": 10,
  "candidates": [
   {
+   "keyword": "산업장관 52시간 특례",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-25T09:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김정관 \"中에 R&D 시간 밀려\"…주 52시간 특례도 촉구",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-25T10:56:00.000Z",
+     "link": "https://www.ajunews.com/view/20261125194630596"
+    },
+    {
+     "title": "산업부장관 \"주52시간 특례, 내일부터라도…중국에 R&D 밀려\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T10:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213927?sid=103"
+    },
+    {
+     "title": "산업장관 “52시간 특례, 당장 내일도 늦다”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-25T10:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061197?sid=101"
+    }
+   ]
+  },
+  {
    "keyword": "발언하는 이재명 대통령",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-25T09:27:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-25T09:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -29,7 +61,7 @@
      "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904464"
     },
     {
-     "title": "李대통령 \"공적주택, 중산층 선택하는 '주거사다리' 대전환\"…정부, 203...",
+     "title": "[이슈] 李대통령 \"공적주택, 중산층 선택하는 '주거사다리' 대전환\"…정...",
      "press": "polinews.co.kr",
      "publishedAt": "2026-11-25T10:27:00.000Z",
      "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749241"
@@ -43,46 +75,14 @@
    ]
   },
   {
-   "keyword": "산업장관 52시간 특례",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-25T09:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "산업부장관 \"주52시간 특례, 내일부터라도…중국에 R&D 밀려\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T10:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213927?sid=103"
-    },
-    {
-     "title": "산업장관 “52시간 특례, 당장 내일도 늦다”",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-25T10:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061197?sid=101"
-    },
-    {
-     "title": "김정관, 초광역특구법 R&D 인력 52시간 근무 예외 필요 재차 강조…“초...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-25T09:54:00.000Z",
-     "link": "https://www.viva100.com/article/20261125501389"
-    }
-   ]
-  },
-  {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T09:26:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-25T09:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -103,39 +103,6 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-25T09:46:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014345471?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "베트남전 국군전사자 유해봉환식",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T09:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "베트남전 국군전사자, 59년 만에 고국 품으로[노컷네컷]",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T09:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213921?sid=100"
-    },
-    {
-     "title": "베트남전 전사자 故안규태 병장 유해, 59년 만에 고국 품으로",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-25T09:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847846?sid=100"
-    },
-    {
-     "title": "베트남전 국군전사자 유해봉환식",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T09:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213914?sid=100"
     }
    ]
   }
