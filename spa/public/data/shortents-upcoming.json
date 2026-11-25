@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T22:03:50.287Z",
+ "builtAt": "2026-11-25T22:13:53.563Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "공공",
@@ -19,21 +19,21 @@
    "articles90": 11,
    "recent20": 5,
    "press": 11,
-   "firstArticleAt": "2026-11-25T21:02:00.000Z",
+   "firstArticleAt": "2026-11-25T21:06:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "해양수산 혁신기술 공공시장 활로 연다…'중소기업기술마켓' 맞춤 지원",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009310712?sid=101"
+     "title": "이재명 대통령, 서울 공공주택 혁신 행보…신혼부부 위한 2만 가구 공급...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-25T22:06:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887307"
     },
     {
-     "title": "한국주택금융공사, 금융 공공기관 브랜드평판 1위…서민금융진흥원 45%...",
-     "press": "pinpointnews.co.kr",
+     "title": "한국수자원공사, 중기부 '윈윈 아너스 프로젝트' 3년 연속 선정…공공기...",
+     "press": "cstimes.com",
      "publishedAt": "2026-11-25T22:00:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=508178"
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=729445"
     },
     {
      "title": "[기자수첩] 공공기관 이전, 명분 넘어 실행으로",
@@ -44,12 +44,108 @@
    ]
   },
   {
+   "keyword": "조희대 탄핵 연대 제안",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주당·진보야당 ‘조희대 탄핵’ 추진에…판사들 “헌법질서 위태”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-25T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686284?sid=102"
+    },
+    {
+     "title": "조희대 탄핵 속도 내는 민주당…범여권 5당 연대 추진에 사법부 내 우려...",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-25T21:44:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=102039"
+    },
+    {
+     "title": "'조희대 탄핵' 속도전에 사법부 첫 회의…엔비디아 신용등급 강등 경고...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T21:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213953?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 26일 목요일 띠별 운세… 닭띠 '대길' 개띠 '...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-25T22:12:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3084266"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 26일 띠별 운세",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-25T21:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003490015?sid=103"
+    },
+    {
+     "title": "[오늘의 운세] 26일 목요일 나의 운세는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-25T21:36:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194720"
+    }
+   ]
+  },
+  {
+   "keyword": "가능한 사랑 전도연",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 5,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T21:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "설경구·전도연, 청룡영화상 남여 주연상…작품상은 '호프'",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-25T22:06:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326516/?sc=Naver"
+    },
+    {
+     "title": "'청룡영화상' 설경구·전도연 남녀주연상…'호프' 최우수작품상",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-25T22:04:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261126010010108"
+    },
+    {
+     "title": "설경구는 4번째, 전도연은 3번째 주연상…'가능한 사랑' 4관왕·'호프' 최...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-25T22:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786217"
+    }
+   ]
+  },
+  {
    "keyword": "네타냐후 부패 공소취하",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-25T21:09:00.000Z",
    "exclusive": false,
@@ -74,77 +170,13 @@
      "link": "https://n.news.naver.com/mnews/article/025/0003568077?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "가능한 사랑 전도연",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T20:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "설경구는 4번째, 전도연은 3번째 주연상…'가능한 사랑' 4관왕·'호프' 최...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-25T22:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786217"
-    },
-    {
-     "title": "청룡영화상 시청률 3.4%…설경구·전도연 주연상 석권",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T21:58:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286449"
-    },
-    {
-     "title": "'제47회 청룡영화상' 설경구·전도연 주연상→서수빈·박지훈 신인상…...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-25T21:58:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784855"
-    }
-   ]
-  },
-  {
-   "keyword": "세계의 주인",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T20:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'세계의 주인' 윤가은 감독상…서수빈 신인상까지",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-25T21:48:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611260025"
-    },
-    {
-     "title": "[헐크 이만수의 힘] 조력자의 퇴장과 주인의 탄생… 라오스 유급 코치 ...",
-     "press": "nbntv.co.kr",
-     "publishedAt": "2026-11-25T21:00:00.000Z",
-     "link": "https://www.nbntv.co.kr/news/articleView.html?idxno=4027984"
-    },
-    {
-     "title": "1600만 장항준·나홍진 다 꺾었다!…'세계의 주인' 윤가은, 감독상 대이...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-25T20:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128156"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1502,
-  "matched": 758,
-  "avgLeadMin": 500,
+  "flagged": 1494,
+  "matched": 752,
+  "avgLeadMin": 496,
   "recent": [
    {
     "keyword": "美 관세 발표, 韓 15% 유지?",
