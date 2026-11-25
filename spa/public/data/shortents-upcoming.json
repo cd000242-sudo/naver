@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T03:57:42.043Z",
+ "builtAt": "2026-11-25T04:07:44.963Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "노소영, 최태원 화해권고 거부",
+   "keyword": "조희대 탄핵 5당 연대하자",
    "sources": [
     "nate"
    ],
-   "articles90": 47,
-   "recent20": 8,
-   "press": 46,
-   "firstArticleAt": "2026-11-25T02:28:00.000Z",
-   "exclusive": false,
+   "articles90": 25,
+   "recent20": 3,
+   "press": 24,
+   "firstArticleAt": "2026-11-25T02:39:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "노소영 측 \"최태원, 상고취하하라\"…화해권고 거부",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T03:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929756?sid=102"
+     "title": "김민석 민주당 대표 \"조희대 탄핵, 5당 연대 제안\"…혁신당 \"환영\"",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-25T04:06:00.000Z",
+     "link": "http://www.breaknews.com/1253794"
     },
     {
-     "title": "노소영 \"최태원 화해권고 요청 동의 못 해…즉시 상고 취하해야\"",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-25T03:54:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261125508804?OutUrl=naver"
+     "title": "[성기노의 뉴스 피처링] 김민석, '5당 연대' 띄웠지만…조희대 탄핵 앞...",
+     "press": "ntoday.co.kr",
+     "publishedAt": "2026-11-25T04:00:00.000Z",
+     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131118"
     },
     {
-     "title": "노소영, 최태원 화해권고 요청 거부…\"진정성 있다면 상고 취하하길\"",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-25T03:50:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=173061"
+     "title": "민주당 김민석 '조희대 탄핵' 신속 추진 위한 5당 연대 제안, \"완전한 내...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-25T03:48:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452881"
     }
    ]
   },
   {
-   "keyword": "CJ프레시웨이 심의",
+   "keyword": "CJ프레시웨이 심의 착수",
    "sources": [
     "daum"
    ],
-   "articles90": 41,
-   "recent20": 5,
-   "press": 38,
+   "articles90": 26,
+   "recent20": 3,
+   "press": 22,
    "firstArticleAt": "2026-11-25T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "식자재 납품하려고 복지시설에 기부금…CJ프레시웨이, 제재 착수(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T03:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016462579?sid=102"
+    },
     {
      "title": "공정위, CJ프레시웨이 '기부금 영업' 제재 착수…사측 \"부당 유인 사실...",
      "press": "news.tf.co.kr",
@@ -61,60 +67,87 @@
      "link": "https://n.news.naver.com/mnews/article/629/0000555405?sid=101"
     },
     {
-     "title": "공정위 \"CJ프레시웨이, 기부금·상품권으로 고객 유인\"...CJ \"납품 대가 ...",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-25T03:56:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191418"
-    },
-    {
-     "title": "CJ프레시웨이, 부당 고객 유인 혐의로 공정위 심의-과징금 최대 200억원...",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-25T03:52:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95911"
+     "title": "공정위, CJ프레시웨이 심의 착수…\"복지시설 부당유인 사실 아냐\"",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-25T03:50:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904352"
     }
    ]
   },
   {
-   "keyword": "조희대 탄핵 5당 연대",
+   "keyword": "반도체",
    "sources": [
-    "nate"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 34,
-   "recent20": 2,
-   "press": 30,
-   "firstArticleAt": "2026-11-25T02:28:00.000Z",
+   "articles90": 21,
+   "recent20": 8,
+   "press": 19,
+   "firstArticleAt": "2026-11-25T03:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "반도체 메가 프로젝트 시동 걸렸는데 '지을 사람'이 없다…정부, 26만 인...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-25T04:06:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328385"
+    },
+    {
+     "title": "반도체팹 건설인력 2030년까지 25만명 필요",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-25T04:02:00.000Z",
+     "link": "https://www.naeil.com/news/read/609984?ref=naver"
+    },
+    {
+     "title": "연세대학교 김관표 교수팀, AI로 비정질 반도체 원자 구조 분석 기술 개...",
+     "press": "lecturernews.com",
+     "publishedAt": "2026-11-25T04:00:00.000Z",
+     "link": "https://www.lecturernews.com/news/articleView.html?idxno=214476"
+    }
+   ]
+  },
+  {
+   "keyword": "발언하는 김민석 대표",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 16,
+   "recent20": 7,
+   "press": 15,
+   "firstArticleAt": "2026-11-25T02:38:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "민주당 김민석 '조희대 탄핵' 신속 추진 위한 5당 연대 제안, \"완전한 내...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-25T03:48:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452881"
+     "title": "[국민의 시선] 취임 100일 맞은 김민석 더불어민주당 대표...당내 갈등 ...",
+     "press": "newsworker.co.kr",
+     "publishedAt": "2026-11-25T04:06:00.000Z",
+     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=516005"
     },
     {
-     "title": "與, 진보 4당과 '曺탄핵' 연대 속도전…혁신당 \"일정 先확정\" 압박",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-25T03:44:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784697"
+     "title": "김민석, 당내 갈등 수습 고심…27일 이후 수습책 전망",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-25T04:02:00.000Z",
+     "link": "https://www.naeil.com/news/read/610022?ref=naver"
     },
     {
-     "title": "김민석, ‘조희대 탄핵’ 5당 연대 공식 제안…조국혁신당 “환영”",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-25T03:22:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261125500191"
+     "title": "[성기노의 뉴스 피처링] 김민석, '5당 연대' 띄웠지만…조희대 탄핵 앞...",
+     "press": "ntoday.co.kr",
+     "publishedAt": "2026-11-25T04:00:00.000Z",
+     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131118"
     }
    ]
   },
   {
-   "keyword": "정년연장",
+   "keyword": "65세 정년연장 입법 촉구",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 34,
+   "articles90": 27,
    "recent20": 1,
-   "press": 19,
-   "firstArticleAt": "2026-11-25T02:30:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-25T02:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -125,10 +158,10 @@
      "link": "https://www.ilyosisa.co.kr/news/article.html?no=259189"
     },
     {
-     "title": "[포토] 양대노총 '65세 정년연장 당장 입법하라!'",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-25T03:20:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261125010009803"
+     "title": "[이로운체크] 정년 65세, 어디까지 왔나...27일 특위 앞두고 '연장 방식...",
+     "press": "eroun.net",
+     "publishedAt": "2026-11-25T03:36:00.000Z",
+     "link": "https://www.eroun.net/news/articleView.html?idxno=96452"
     },
     {
      "title": "[포토] \"65세 법정 정년 연장하라\" 구호 외치는 민주노총-한국노총",
@@ -139,56 +172,17 @@
    ]
   },
   {
-   "keyword": "발언하는 김민석 대표",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-25T02:31:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최민희 징계, 김민석도 심판받나",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T03:52:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285779"
-    },
-    {
-     "title": "민주당 최고위서 또 신천지 공방…친청계, 재차 '김민석 징계' 요구",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-25T03:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002467462?sid=100"
-    },
-    {
-     "title": "\"김민석 대표님, 우리 만납시다!\" 홈플러스 노동자들 민주당사 앞 노숙...",
-     "press": "worknworld.kctu.org",
-     "publishedAt": "2026-11-25T03:22:00.000Z",
-     "link": "http://worknworld.kctu.org/news/articleView.html?idxno=510380"
-    }
-   ]
-  },
-  {
-   "keyword": "유정연 스크린 첫 도전",
+   "keyword": "유정연 첫 영화 도전",
    "sources": [
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-25T02:29:00.000Z",
+   "articles90": 13,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-25T02:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "안방극장 달군 '신병', 스크린으로… 호러 코미디로 돌아온 '신병 더 무...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-25T03:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000967657"
-    },
     {
      "title": "‘신병’ 세계관에 트와이스 ‘충돌’‥유정연, 칼각 경례로 배우 데뷔...",
      "press": "newsen.com",
@@ -200,103 +194,44 @@
      "press": "mhnse.com",
      "publishedAt": "2026-11-25T03:30:00.000Z",
      "link": "https://m.entertain.naver.com/article/445/0000493082"
+    },
+    {
+     "title": "[포토]영화에 첫 도전하는 트와이스 정연",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-25T03:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001283324"
     }
    ]
   },
   {
-   "keyword": "LG 케네디와 재계약",
+   "keyword": "삼성SDI 울산사업장, 우수기업 수상",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-25T02:34:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG, 아시아쿼터 투수 존 케네디 20만 달러 재계약",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-25T03:22:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139929"
-    },
-    {
-     "title": "프로야구 LG, 케네디 재계약으로 2027시즌 불펜 강화",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-25T03:16:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566464"
-    },
-    {
-     "title": "[공식발표] LG, '좌타 킬러 203cm 거인' 케네디와 20만 달러 재계약...외...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-25T03:03:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005644948"
-    }
-   ]
-  },
-  {
-   "keyword": "퇴장하는 최민희 최고위원",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
+   "articles90": 6,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T02:54:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-25T02:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최민희 징계, 김민석도 심판받나",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T03:52:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285779"
+     "title": "[ESG] 삼성SDI 울산사업장, 27년 연속 녹색기업 자격 유지...환경경영 성...",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-25T04:06:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566388"
     },
     {
-     "title": "최민희·박선원, 또 최고위 퇴장… 중진 15명 내일 회동",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-25T02:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002835444?sid=100"
+     "title": "삼성SDI 울산사업장, '녹색경영 우수기업' 대상 수상",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213703?sid=101"
     },
     {
-     "title": "친청계, 최민희 징계 앞두고 '신천지' 공세 지속...\"결자해지\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-25T02:54:00.000Z",
-     "link": "https://www.ajunews.com/view/20261125112729034"
-    }
-   ]
-  },
-  {
-   "keyword": "폭설",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T02:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "영화 폭설, 1위에도 웃지 못하는 이유",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T03:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285760"
-    },
-    {
-     "title": "'폭설' 김윤석·박수영, 28일 관객 만난다…2주차 무대인사 확정",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-25T03:04:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784684"
-    },
-    {
-     "title": "양양군, 폭설·한파 대비 재난 예·경보시설 40곳 전수점검…겨울철 안...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-25T02:28:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611250092"
+     "title": "삼성SDI 울산사업장, 녹색경영 대상…'27년 연속' 친환경 역량 입증",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-25T03:00:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023214"
     }
    ]
   },
@@ -306,12 +241,18 @@
     "daum"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-25T02:37:00.000Z",
+   "firstArticleAt": "2026-11-25T02:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "손정의 소프트뱅크 회장, 대구 선대 묘소 비공개 방문-내년 초 재방한 ...",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-25T04:00:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95912"
+    },
     {
      "title": "소프트뱅크 손정의 선대 고향 대구 동구 방문 뒤늦게 알려져",
      "press": "kmib.co.kr",
@@ -323,86 +264,40 @@
      "press": "munhwa.com",
      "publishedAt": "2026-11-25T02:47:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002835411?sid=102"
-    },
-    {
-     "title": "손정의 소프트뱅크그룹 회장, 대구 비공개 방문",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T02:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213690?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "조국 혁신정책연구원장",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 17,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-25T02:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "토론회 참석하는 조국 혁신정책연구원장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014344225?sid=100"
-    },
-    {
-     "title": "토론회 입장하는 조국 혁신정책연구원장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T02:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014344161?sid=100"
-    },
-    {
-     "title": "토론회 기념촬영하는 조국 연구원장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T02:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014344159?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "양홍원 이혼",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-25T02:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'절친' 양홍원 이혼 소식 전해진 날…스윙스 \"내일 청룡 가는데\" 엇갈린...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T03:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083755"
-    },
-    {
-     "title": "양홍원 저격→악플 받은 변호사, 한 달 만 밝혀진 원현주와 접점…\"실제...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-25T02:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409517"
-    },
-    {
-     "title": "'이혼 엔딩' 양홍원, 2세 딸 얼굴도 공개해놓고…50만 유튜브 '육아일기...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T02:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083722"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1367,
-  "matched": 713,
-  "avgLeadMin": 476,
+  "flagged": 1372,
+  "matched": 717,
+  "avgLeadMin": 473,
   "recent": [
+   {
+    "keyword": "노소영, 최태원 화해 요청 거부",
+    "hitKeyword": "노소영 최태원 화해권고 거부",
+    "hitAt": "2026-11-25T13:00:00+09:00",
+    "leadMin": 53
+   },
+   {
+    "keyword": "노소영 최태원 화해 요청 거부",
+    "hitKeyword": "노소영 최태원 화해권고 거부",
+    "hitAt": "2026-11-25T13:00:00+09:00",
+    "leadMin": 32
+   },
+   {
+    "keyword": "LG 케네디와 재계약",
+    "hitKeyword": "LG 케네디 재계약",
+    "hitAt": "2026-11-25T13:00:00+09:00",
+    "leadMin": 22
+   },
+   {
+    "keyword": "노소영, 최태원 화해권고 거부",
+    "hitKeyword": "노소영 최태원 화해권고 거부",
+    "hitAt": "2026-11-25T13:00:00+09:00",
+    "leadMin": 12
+   },
    {
     "keyword": "디트로이트 타이거스",
     "hitKeyword": "김하성 디트로이트 영입",
@@ -438,30 +333,6 @@
     "hitKeyword": "시험지 보관 5년 예정",
     "hitAt": "2026-11-25T11:30:00+09:00",
     "leadMin": 20
-   },
-   {
-    "keyword": "연금",
-    "hitKeyword": "국민연금 유족연금",
-    "hitAt": "2026-11-25T11:00:00+09:00",
-    "leadMin": 1696
-   },
-   {
-    "keyword": "국민연금",
-    "hitKeyword": "국민연금 유족연금",
-    "hitAt": "2026-11-25T11:00:00+09:00",
-    "leadMin": 20
-   },
-   {
-    "keyword": "양홍원 원현주 이혼",
-    "hitKeyword": "양홍원 원현주 이혼",
-    "hitAt": "2026-11-25T11:00:00+09:00",
-    "leadMin": 20
-   },
-   {
-    "keyword": "김동완 SNS 중단",
-    "hitKeyword": "이도현 SNS 의미심장 글",
-    "hitAt": "2026-11-25T10:30:00+09:00",
-    "leadMin": 3742
    }
   ]
  }
