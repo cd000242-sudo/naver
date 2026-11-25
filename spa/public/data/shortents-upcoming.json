@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T00:19:20.126Z",
+ "builtAt": "2026-11-25T00:29:23.903Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 42,
+   "articles90": 38,
    "recent20": 12,
-   "press": 33,
-   "firstArticleAt": "2026-11-24T22:50:00.000Z",
+   "press": 31,
+   "firstArticleAt": "2026-11-24T23:14:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "코스피, 美 반도체 삭풍에 4%대 급락…매도 사이드카 발동",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-25T00:18:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1732905"
+     "title": "美 반도체주 투매…삼전닉스 반등 하루 만에 7%대 급락[핫종목]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T00:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009308488?sid=101"
     },
     {
-     "title": "[개장시황] 코스피, 다시 4800선 아래로…외인 매도에 반도체株 '휘청'",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-25T00:16:00.000Z",
-     "link": "https://www.ajunews.com/view/20261125091047180"
+     "title": "미 반도체주 급반락에 코스피 4%대 급락",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-25T00:24:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321753&inflow=N"
     },
     {
-     "title": "美 반도체주 급락에 코스피 3.9% 하락 출발…다시 4800선",
-     "press": "newsquest.co.kr",
-     "publishedAt": "2026-11-25T00:14:00.000Z",
-     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=305777"
+     "title": "[속보] 코스피 4%대 급락·4,800선 붕괴…반도체 투매에 ‘매도 사이드카...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-25T00:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133678?sid=101"
     }
    ]
   },
@@ -48,29 +48,29 @@
     "signal.bz"
    ],
    "articles90": 30,
-   "recent20": 6,
+   "recent20": 5,
    "press": 30,
-   "firstArticleAt": "2026-11-24T22:58:00.000Z",
+   "firstArticleAt": "2026-11-24T23:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미 '과잉생산 관세' 오늘 발표…\"한국 15% 유지 예상\"",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-25T00:16:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544889"
+     "title": "젠슨 황 효과 되돌림에 美 관세까지…코스피, 4700대로 후퇴",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-25T00:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005446016?sid=101"
     },
     {
-     "title": "美 '과잉생산 관세' 발표 임박…한국 15% 상한 유지 전망",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-25T00:14:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=154569"
+     "title": "美 '과잉생산 관세' 발표 임박…한국 '15% 방어선' 지켜낼까",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-25T00:24:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026112509161950938"
     },
     {
-     "title": "미 '과잉생산 관세' 이르면 오늘 발표…\"한국 15% 유지 예상\"",
-     "press": "womennews.co.kr",
-     "publishedAt": "2026-11-25T00:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/310/0000142032?sid=104"
+     "title": "美 ‘과잉생산’ 추가 관세 초읽기… 韓 ‘15% 상한선’ 위태",
+     "press": "donga.com",
+     "publishedAt": "2026-11-25T00:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764995?sid=104"
     }
    ]
   },
@@ -79,62 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
+   "articles90": 20,
    "recent20": 6,
-   "press": 21,
-   "firstArticleAt": "2026-11-24T22:52:00.000Z",
+   "press": 19,
+   "firstArticleAt": "2026-11-24T23:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "韓 수출 65년간 연평균 16.6% 성장···대한상의 \"반도체 이을 차세대 ...",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-25T00:26:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=160510"
+    },
+    {
+     "title": "대한상의 \"최근 경제성장 절반 이상 수출이 견인\"…반도체 편중은 과제",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-25T00:20:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1732903"
+    },
     {
      "title": "1조 달러 한국 수출, 세계 속도 2배로 성장…경제 기여 27%",
      "press": "dt.co.kr",
      "publishedAt": "2026-11-25T00:16:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/029/0003061010?sid=101"
-    },
-    {
-     "title": "수출 1조달러 찍은 韓…반도체 쏠림·품목 다변화는 과제",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-25T00:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159105?sid=101"
-    },
-    {
-     "title": "65년간 세계 2배 속도로 질주한 韓수출 ... 최근 경제성장 절반 이상 견...",
-     "press": "efnews.co.kr",
-     "publishedAt": "2026-11-25T00:10:00.000Z",
-     "link": "http://www.efnews.co.kr/news/articleView.html?idxno=134280"
-    }
-   ]
-  },
-  {
-   "keyword": "김주애 사치품 반입 금지",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-24T22:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 국무부, 北 김주애 '명품스키'는 \"대북 반입 금지 사치품\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-25T00:08:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023015"
-    },
-    {
-     "title": "北과 거래 없다는데…김주애가 탄 명품 스키, 美국무부도 입 열었다",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-25T00:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042152?sid=104"
-    },
-    {
-     "title": "김주애의 순백 스키복 사진…미 국무부 \"대북 반입 금지 사치품\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-24T23:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979756?sid=104"
     }
    ]
   },
@@ -143,62 +111,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-24T22:53:00.000Z",
+   "articles90": 17,
+   "recent20": 5,
+   "press": 16,
+   "firstArticleAt": "2026-11-24T23:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이도현, 임지연과 결별 암시했나? “당신을 더 사랑했다” 의미심장 SNS",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-25T00:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190896"
+     "title": "이도현, 임지연과 결별 후 SNS 게시물 재조명… 뭐길래?",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-25T00:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000967604"
     },
     {
-     "title": "\"당신을 더 사랑했어\" 이도현, 이별 심경이었나…SNS에 의미심장 문구",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-25T00:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000640695"
+     "title": "\"이미 이별했었나\"…이도현, 결별 후 과거 SNS 재조명",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-25T00:22:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795564852531478005"
     },
     {
-     "title": "임지연-이도현 결별, \"당신을 더 사랑했어요\" SNS 재조명",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-24T23:58:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285506"
+     "title": "“당신을 더 사랑했어요”…‘임지연과 결별’ 이도현 SNS 눈길",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-25T00:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/016/0002728070"
     }
    ]
   },
   {
-   "keyword": "정준하 아들 4개 국어",
+   "keyword": "주주",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-24T22:56:00.000Z",
+   "articles90": 15,
+   "recent20": 6,
+   "press": 14,
+   "firstArticleAt": "2026-11-24T23:50:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "엘앤씨바이오, 150억원 규모 CB 취득·소각...주주지분 희석 및 오버행 ...",
+     "press": "paxetv.com",
+     "publishedAt": "2026-11-25T00:26:00.000Z",
+     "link": "http://www.paxetv.com/news/articleView.html?idxno=287804"
+    },
+    {
+     "title": "RBC \"테슬라 주주, 높은 프리미엄 없이 스페이스X와 합병 수용할 듯\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-25T00:24:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446389"
+    },
+    {
+     "title": "대신증권, 고배당·주주환원 상품 매수 이벤트…\"최대 40만원 혜택\"",
+     "press": "newsdream.kr",
+     "publishedAt": "2026-11-25T00:24:00.000Z",
+     "link": "http://www.newsdream.kr/news/articleView.html?idxno=122957"
+    }
+   ]
+  },
+  {
+   "keyword": "김주애 명품 스키복 반입 금지",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-24T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정준하, ‘동상이몽2’서 와이프 말투 완벽 재현 \"돈 아끼십시오\"",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-25T00:06:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305744"
+     "title": "김주애의 명품 스키복과 고가 장비에 쏠린 시선…美 \"직접 판매·우회 반...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-25T00:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847412?sid=100"
     },
     {
-     "title": "정준하, ♥재일교포 아내와 낳은 아들 자랑…훈훈 외모·4개 국어까지 (...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-24T23:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083667"
+     "title": "김주애 스키 장비 사치품 논란…美 대북 반입 금지 대상, 저격총 조준 모...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-25T00:26:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630466"
     },
     {
-     "title": "정준하 \"국제학교 다니는 13년생子, 4개 국어해..원어민 수준\"",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-24T23:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005644868"
+     "title": "美 국무부, 北 김주애 '명품스키'는 \"대북 반입 금지 사치품\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-25T00:08:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023015"
     }
    ]
   },
@@ -207,13 +207,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 10,
+   "articles90": 12,
+   "recent20": 1,
+   "press": 11,
    "firstArticleAt": "2026-11-24T23:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[날씨] 아침 영하권 추위 계속…수도권·강원 곳곳 비·눈",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-25T00:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522331?sid=103"
+    },
     {
      "title": "영하권 추위...내일 낮부터 다시 영상권으로",
      "press": "news.bbsi.co.kr",
@@ -225,181 +231,175 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-25T00:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016461747?sid=102"
-    },
-    {
-     "title": "[굿모닝 날씨]종일 겨울 추위...내일 아침까지 이어져",
-     "press": "tbc.co.kr",
-     "publishedAt": "2026-11-24T23:46:00.000Z",
-     "link": "https://www.tbc.co.kr/news/view?pno=20261125073442AE09083&id=213754"
     }
    ]
   },
   {
-   "keyword": "에이티즈 빌보드 200",
+   "keyword": "황인범 포르투 2연승",
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-24T22:50:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-24T23:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "에이티즈, 빌보드 200 네 번째 1위…'핫 100' 90위",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-25T00:10:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250402"
+     "title": "황인범, 친정팀 상대 35분 활약⋯포르투 UCL 2연승",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-25T00:24:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2652611"
     },
     {
-     "title": "에이티즈, ‘빌보드 200’ 정상 찍고 ‘핫 100’까지 뚫었다",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-24T23:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005768526"
+     "title": "[챔피언스리그] 포르투, 페예노르트 1-0 꺾고 2연승…황인범, 친정팀 상...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-25T00:20:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1139863"
+    },
+    {
+     "title": "황인범, 친정팀 페예노르트 상대 30분 활약-포르투 UCL 2연승",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-25T00:06:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95882"
+    }
+   ]
+  },
+  {
+   "keyword": "에이티즈, 빌보드 석권",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-24T23:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "에이티즈, 美 빌보드 '핫100' 90위…세 번째 차트 진입",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T00:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009308486"
     },
     {
      "title": "진정한 '월클' 에이티즈, 미 빌보드 양대 메인 차트 동시 석권…통산 네...",
      "press": "cbci.co.kr",
      "publishedAt": "2026-11-24T23:52:00.000Z",
      "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630439"
+    },
+    {
+     "title": "에이티즈, 美 ‘빌보드 200’ 1위·‘핫 100’ 90위..메인 차트 동시 석...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-24T23:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005644864"
     }
    ]
   },
   {
-   "keyword": "황인범 포르투 UCL 2연승",
+   "keyword": "음주운전 김대범 부르면 될",
    "sources": [
     "nate"
    ],
    "articles90": 5,
    "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-24T22:50:00.000Z",
+   "firstArticleAt": "2026-11-24T23:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "황인범, 친정팀 페예노르트 상대 30분 활약-포르투 UCL 2연승",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-25T00:06:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95882"
+     "title": "\"대리만 부르면 될 것을\"…김대범, '음주운전' 고경표에 쓴소리",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-25T00:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/417/0001165554"
     },
     {
-     "title": "친정팀 상대로 ‘교체 출전’ 황인범…포르투, 페예노르트에 1-0 신승, ...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-24T23:22:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/144/0001151541"
+     "title": "\"대리만 부르면 될 것을\"…김대범, '음주운전' 고경표에 일침",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-24T23:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445977?sid=102"
     },
     {
-     "title": "‘35분’ 황인범, 친정팀 페예노르트전 교체출전…포르투, UCL 2연승",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-24T23:21:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/396/0000761880"
+     "title": "김대범, '음주운전' 고경표 공개 비판 \"대리만 부르면 될 것을\"",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-24T23:20:00.000Z",
+     "link": "http://www.joynews24.com/view/2030045"
     }
    ]
   },
   {
-   "keyword": "박지훈 변호사",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T23:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이돈호 변호사 母 \"아들 용돈, 이미 일시불로 연금에 다 부어놔\" (아침마...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T00:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083674"
-    },
-    {
-     "title": "박지훈 변호사 \"IQ 두 자릿수에 충격\"…법대 차석 합격한 비결 보니 (아...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T00:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083673"
-    },
-    {
-     "title": "박지훈 변호사 “IQ 두자릿수에 충격, 남들보다 열배 노력해 법대 차석...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-25T00:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190891"
-    }
-   ]
-  },
-  {
-   "keyword": "김영훈 장관 논의",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T22:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "반도체 공장 지을 숙련공 부족…노동장관 \"인력 적기 공급 지원\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T00:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929674?sid=102"
-    },
-    {
-     "title": "김영훈 장관, 반도체팹 건설업계와 간담회",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T23:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308327?sid=102"
-    },
-    {
-     "title": "건설업계와 반도체팹 인력 양성 논의하는 김영훈 장관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T23:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308326?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 효과 하루만에 종료",
+   "keyword": "젠슨 황 효과 하루 만에 소멸",
    "sources": [
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
+   "firstArticleAt": "2026-11-24T23:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "비트코인 8143만 원대 하락, '젠슨 황 복귀 효과' 상승분 하루 만에 반납",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-25T00:04:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452843"
+    },
+    {
+     "title": "[AI MY 증시전망] 젠슨 황 복귀 효과 하루 만에 소멸…코스피 약세 전망",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-24T23:27:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125000087"
+    },
+    {
+     "title": "[마켓 프리뷰] 젠슨 황 복귀 효과 하루 만에 소멸…반도체株 약세·외국...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-24T23:18:00.000Z",
+     "link": "https://www.ajunews.com/view/20261125081501932"
+    }
+   ]
+  },
+  {
+   "keyword": "김영훈 장관 모두발언",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 0,
+   "press": 2,
    "firstArticleAt": "2026-11-24T23:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 효과 하루 만에 끝…금리·반도체 이익에 '촉각'",
-     "press": "ebn.co.kr",
+     "title": "반도체 건설업계 만난 김영훈 고용노동부 장관",
+     "press": "news1.kr",
      "publishedAt": "2026-11-24T23:26:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1732895"
+     "link": "https://n.news.naver.com/mnews/article/421/0009308351?sid=102"
     },
     {
-     "title": "젠슨 복귀 효과 하루 만에 꺾여⋯美 반도체 8%↓ [뉴욕증시 무버]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-24T23:22:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652531"
+     "title": "반도체 건설기능인력 양성 간담회 주재하는 김영훈 장관",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T23:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009308336?sid=102"
     },
     {
-     "title": "[뉴욕증시] 젠슨 황 효과 하루 만에 반납…AI 수익성 우려에 반도체株 ...",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-24T23:16:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087414"
+     "title": "간담회에서 모두발언하는 김영훈 노동부장관",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T23:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016461704?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1369,
-  "matched": 707,
-  "avgLeadMin": 516,
+  "flagged": 1370,
+  "matched": 706,
+  "avgLeadMin": 517,
   "recent": [
    {
     "keyword": "서울 지하철 노조 임단협 타결",
