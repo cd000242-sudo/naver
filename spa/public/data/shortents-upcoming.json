@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T09:08:03.882Z",
+ "builtAt": "2026-11-25T09:18:08.334Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 48,
-   "recent20": 7,
-   "press": 44,
-   "firstArticleAt": "2026-11-25T07:42:00.000Z",
+   "articles90": 47,
+   "recent20": 8,
+   "press": 43,
+   "firstArticleAt": "2026-11-25T07:52:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "법관대표회의, 일주일 당겨 개최…'조희대 탄핵' 관련 결의안 나올까",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-25T09:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979836?sid=102"
+     "title": "“재판 이유로 한 법관 탄핵에 깊은 우려”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-25T09:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178071?sid=102"
     },
     {
-     "title": "창원지법 판사회의 \"법관 탄핵 추진은 헌법가치 훼손\"",
-     "press": "gndomin.com",
-     "publishedAt": "2026-11-25T09:05:00.000Z",
-     "link": "http://www.gndomin.com/news/articleView.html?idxno=498293"
+     "title": "창원지법 판사들 \"재판 이유로 법관 탄핵, 사법권 독립 훼손\"",
+     "press": "idomin.com",
+     "publishedAt": "2026-11-25T09:16:00.000Z",
+     "link": "https://www.idomin.com/news/articleView.html?idxno=2020598"
     },
     {
-     "title": "창원지법, 조희대 탄핵 반대 첫 공식화…법조계 \"사법부 스스로 자성해...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-25T09:04:00.000Z",
-     "link": "https://www.ajunews.com/view/20261125170110079"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 6%대 급락",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-25T07:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "AI 투심 재위축, 코스피 6%대 급락",
-     "press": "thereport.co.kr",
-     "publishedAt": "2026-11-25T08:56:00.000Z",
-     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93736"
-    },
-    {
-     "title": "코스피, 전날 급등분 모두 반납…6% 급락 마감",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T08:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929862?sid=101"
-    },
-    {
-     "title": "美 AI 기술주 급락에 삼성전자·SK하이닉스 10%대 급락… 코스피 6% 넘게...",
-     "press": "mediawatch.kr",
-     "publishedAt": "2026-11-25T08:44:00.000Z",
-     "link": "https://www.mediawatch.kr/news/article.html?no=261881"
+     "title": "조희대 탄핵 추진에 일선 법원 반발…30일 전국법관대표회의 주목",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-25T09:10:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=921247"
     }
    ]
   },
@@ -79,10 +47,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 29,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-25T07:40:00.000Z",
+   "articles90": 27,
+   "recent20": 2,
+   "press": 16,
+   "firstArticleAt": "2026-11-25T07:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -111,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 2,
-   "press": 15,
+   "articles90": 24,
+   "recent20": 1,
+   "press": 16,
    "firstArticleAt": "2026-11-25T08:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“노동에 정당한 보상”…이형일 부총리가 찾아간 이 기업, 어디?",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-25T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006415543?sid=101"
+    },
     {
      "title": "이형일 부총리 “노사 협력해 기업 여건 맞는 자율 임금체계 도입해야”",
      "press": "mk.co.kr",
@@ -129,12 +103,102 @@
      "press": "iminju.net",
      "publishedAt": "2026-11-25T08:50:00.000Z",
      "link": "http://www.iminju.net/news/articleView.html?idxno=173098"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 6%대 급락",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 15,
+   "recent20": 0,
+   "press": 15,
+   "firstArticleAt": "2026-11-25T07:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "AI 투심 재위축, 코스피 6%대 급락",
+     "press": "thereport.co.kr",
+     "publishedAt": "2026-11-25T08:56:00.000Z",
+     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93736"
     },
     {
-     "title": "임금체계 개편 우수기업 둘러보는 이형일 부총리",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T08:30:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125001233"
+     "title": "코스피, 전날 급등분 모두 반납…6% 급락 마감",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T08:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929862?sid=101"
+    },
+    {
+     "title": "美 AI 기술주 급락에 삼성전자·SK하이닉스 10%대 급락… 코스피 6% 넘게...",
+     "press": "mediawatch.kr",
+     "publishedAt": "2026-11-25T08:44:00.000Z",
+     "link": "https://www.mediawatch.kr/news/article.html?no=261881"
+    }
+   ]
+  },
+  {
+   "keyword": "하이닉스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 14,
+   "recent20": 7,
+   "press": 14,
+   "firstArticleAt": "2026-11-25T08:20:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "SK하이닉스 용인 사업장 공사 현장서 근로자 추락사…사고 경위 조사",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-25T09:10:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=230328"
+    },
+    {
+     "title": "SK하이닉스, 올해 100조 주주환원 추진…배당만 30조",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-25T09:10:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122698"
+    },
+    {
+     "title": "SK하이닉스, 올해 100조원 주주환원 추진…밸류업 이행 현황 공시",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-25T09:08:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261125500596"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 공적임대주택",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-25T08:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 \"공적임대주택, 중산층도 선택할 수 있어야⋯주거사다리 역할...",
+     "press": "goodkyung.com",
+     "publishedAt": "2026-11-25T09:16:00.000Z",
+     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293883"
+    },
+    {
+     "title": "이 대통령 \"공적임대주택, 중산층도 선택하는 주거사다리 역할 중요\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T09:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929868?sid=100"
+    },
+    {
+     "title": "李 \"공적임대주택, 중산층도 선택하는 주거 사다리로\"",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-25T08:54:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=756509"
     }
    ]
   },
@@ -143,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 13,
    "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-25T07:48:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-25T07:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,86 +235,22 @@
    ]
   },
   {
-   "keyword": "하이닉스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 14,
-   "recent20": 5,
-   "press": 13,
-   "firstArticleAt": "2026-11-25T08:08:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "반도체주 급락 속…SK하이닉스, '100조 주주환원' 재확인",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-25T09:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078464?sid=105"
-    },
-    {
-     "title": "SK하이닉스, 주주환원 35조 더 남았다…매 분기 자사주 매입·소각",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T09:03:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125001253"
-    },
-    {
-     "title": "SK하이닉스, 100조원 규모 주주환원 추진…현금배당 30조원·자사주 매입...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-25T09:02:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630695"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 공적임대주택",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-25T08:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李 \"공적임대주택, 중산층도 선택하는 주거 사다리로\"",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-25T08:54:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=756509"
-    },
-    {
-     "title": "이 대통령 \"공적임대주택, 중산층도 선택하는 주거사다리 역할\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-25T08:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405786?sid=100"
-    },
-    {
-     "title": "이 대통령 \"공적임대주택, 중산층도 선택하는 주거 사다리 역할해야\"",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-25T08:46:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1140076"
-    }
-   ]
-  },
-  {
    "keyword": "러시아 폭격기 울릉도 비행",
    "sources": [
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 3,
    "press": 9,
-   "firstArticleAt": "2026-11-25T07:46:00.000Z",
+   "firstArticleAt": "2026-11-25T07:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "울릉도 근접 러시아 전폭기, 극동지역으로 재배치…한반도 주변 핵 전력...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-25T09:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967775?sid=100"
+     "title": "울릉도 턱밑까지 온 '블랙잭'...러 무력시위 의도는?",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T09:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437990?sid=100"
     },
     {
      "title": "[사설] 러 核폭격기 울릉도 근접, 예사롭지 않은 영공 위협",
@@ -259,10 +259,42 @@
      "link": "https://n.news.naver.com/mnews/article/417/0001165653?sid=110"
     },
     {
-     "title": "울릉도 1㎞ 앞까지 와놓고…러시아 “계획된 비행”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-25T08:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686128?sid=100"
+     "title": "울릉도 근접 러시아 전폭기, 극동지역으로 재배치…한반도 주변 핵 전력...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-25T09:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967775?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "행동",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 4,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T08:53:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[특별기고] 행동하는 국민들을 보고 싶다",
+     "press": "pennmike.com",
+     "publishedAt": "2026-11-25T09:14:00.000Z",
+     "link": "https://www.pennmike.com/news/articleView.html?idxno=132777"
+    },
+    {
+     "title": "'무개념 행동' 이관희♥유시은, 사과보단 구구절절 '변명문'[MD이슈]",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-25T09:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128046"
+    },
+    {
+     "title": "[청소년뉴스] 배우는 AI에서 행동하는 AI로… 인천 청소년이 지역사회를...",
+     "press": "ibabynews.com",
+     "publishedAt": "2026-11-25T09:06:00.000Z",
+     "link": "https://www.ibabynews.com/news/articleView.html?idxno=157295"
     }
    ]
   },
@@ -272,12 +304,18 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-25T07:46:00.000Z",
+   "firstArticleAt": "2026-11-25T07:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'정찬성 스승' 에디 차, 53세 돌연 별세…비보 접한 '코리안 좀비' 美 급...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-25T09:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000493237"
+    },
     {
      "title": "정찬성, '스승 비보' 접하고 미국行→한국계 지도자 에디 차 '향년 53세...",
      "press": "tvreport.co.kr",
@@ -289,12 +327,6 @@
      "press": "heraldmuse.com",
      "publishedAt": "2026-11-25T08:54:00.000Z",
      "link": "https://m.entertain.naver.com/article/112/0003814406"
-    },
-    {
-     "title": "'정찬성 스승' 에디 차, 갑작스러운 별세…향년 53세",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-25T08:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005446436?sid=102"
     }
    ]
   },
@@ -311,54 +343,22 @@
    "capped": false,
    "samples": [
     {
+     "title": "기념촬영하는 한-오만 외교장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T08:29:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125001227"
+    },
+    {
+     "title": "오만 외교장관 만난 조현 외교부 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T08:29:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125001223"
+    },
+    {
      "title": "악수하는 한-오만 외교장관",
      "press": "newspim.com",
      "publishedAt": "2026-11-25T08:29:00.000Z",
      "link": "https://www.newspim.com/news/view/20261125001222"
-    },
-    {
-     "title": "한-오만 외교장관 회담, 발언하는 조현 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T08:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125001226"
-    },
-    {
-     "title": "한-오만 외교장관 회담",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T08:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125001225"
-    }
-   ]
-  },
-  {
-   "keyword": "행동",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 4,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T08:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[청소년뉴스] 배우는 AI에서 행동하는 AI로… 인천 청소년이 지역사회를...",
-     "press": "ibabynews.com",
-     "publishedAt": "2026-11-25T09:06:00.000Z",
-     "link": "https://www.ibabynews.com/news/articleView.html?idxno=157295"
-    },
-    {
-     "title": "“과격한 행동은 적당히”… 이정효, 슈퍼매치 앞두고 팬에게 이렇게 말...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-25T09:01:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/396/0000761969"
-    },
-    {
-     "title": "11월 25일 세계여성폭력추방의날…춘천 포함 전국공동행동 열려",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-25T08:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001233414?sid=102"
     }
    ]
   },
