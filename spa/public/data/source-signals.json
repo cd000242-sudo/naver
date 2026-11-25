@@ -36,47 +36,109 @@
             },
             "facts": [
               {
-                "text": "(워싱턴=연합뉴스) 백나리 특파원 = 미국 무역대표부(USTR)는 한국을 포함해 14개 경제주체에 '과잉생산 관세'를 예고했다.",
+                "text": "(워싱턴=연합뉴스) 백나리 특파원 = 미국이 한국을 포함해 14개 경제주체에 과잉생산을 문제 삼는 관세를 예고했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "◀ 앵커 ▶ 트럼프 행정부가 한국을 포함한 14개 주요 교역국을 대상으로 ' 과잉생산 '을 명목으로 한 관세 부과를 예고했습니다.",
+                "text": "[기자] 미국 무역대표부가 ' 과잉 생산 관세 ' 조사 결과를 이르면 이번 주 발표할 것으로 보인다고 미국 일간 월스트리트저널이 보도했습니다. 조사 는 유럽연합, 그리고 한국, 중국, 일본 등 15개 나라를 상대로 무역법 301조에 따라 3월부터 진행됐습니다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261125185700071?input=1195m",
+                "url": "https://www.yna.co.kr/view/AKR20261125185751071?input=1195m",
                 "press": "연합뉴스"
               },
               {
-                "url": "https://imnews.imbc.com/replay/2026/nw2500/article/6868605_36989.html",
-                "press": "MBC"
+                "url": "https://www.ytn.co.kr/_ln/0104_202611250446439724",
+                "press": "YTN"
               }
             ],
             "images": [
-              "https://img5.yna.co.kr/etc/inner/KR/2026/11/25/AKR20261125185700071_01_i_P4.jpg"
+              "https://img1.yna.co.kr/etc/inner/KR/2026/11/25/AKR20261125185751071_01_i_P4.jpg"
             ],
             "press": [
               "연합뉴스",
-              "MBC"
+              "YTN"
             ],
             "headlines": [
-              "美USTR, 14개 경제주체에 과잉생산 관세…\"韓 15% 상한 유지\"",
-              "美, 한국 등에 ' 과잉생산 ' 관세 ‥상한 15%는 유지"
+              "美USTR, 14개 경제주체에 과잉생산 관세…韓 15% 상한 유지(종합)",
+              "한국 '디지털 규제'에 보복?... 관세 '15% 상한'에 변수"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
           "id": "naver-2",
           "rank": 2,
+          "keyword": "전도연 청룡상 3관왕",
+          "title": "전도연 청룡상 3관왕",
+          "rawKeyword": "전도연 청룡상 3관왕",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "naver",
+          "expansions": [
+            "전도연 영화",
+            "전도연 자녀",
+            "전도연 나무위키",
+            "전도연 조인성",
+            "전도연 설경구",
+            "전도연 리즈",
+            "전도연 강시규",
+            "전도연 오스카"
+          ],
+          "expansionSeed": "전도연",
+          "insight": {
+            "titles": {
+              "seo": "전도연 청룡상 3관왕 최신 이슈와 핵심 내용 정리",
+              "home": "전도연 청룡상 3관왕, 404 - Page Not Found 관련 확인할 점",
+              "topic": "전도연 청룡상 3관왕",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "송강호는 영화 ‘우아한 세계’로 청룡영화상과 영평상 남우주연상을 수상한 데 이어 대한민국 영화대상에서는 ‘밀양’으로 남우 주연상을 거머쥐어 3관왕 의 위업을 달성했다. 이어 여우 주연상을 수상한 전도연 은 “감사합니다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "이날 윤정희와 수애는 김윤진(하모니), 서영희(김복남 살인사건의 전말), 전도연 (하녀)과 함께 여우주연상 후보에 올라 경합을 펼쳤다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "http://osen.co.kr/news/Enter_View.asp?gisano=G0712010201&code=230100",
+                "press": "OSEN"
+              },
+              {
+                "url": "http://www.newsen.com/news_view.php?uid=201011262119261003",
+                "press": "뉴스엔"
+              }
+            ],
+            "images": [
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Fthumb140%2F109%2F2007%2F12%2F01%2F99890.jpg&type=fface200_200&expire=2&refresh=true"
+            ],
+            "press": [
+              "OSEN",
+              "뉴스엔"
+            ],
+            "headlines": [
+              "404 - Page Not Found",
+              "‘이변 많은’ 청룡상 ..‘의형제’ 작품상, 윤정희·수애 공동수상(종합..."
+            ],
+            "extraction": "search-card",
+            "collectedAt": "2026-11-25T19:18:50.938Z"
+          }
+        },
+        {
+          "id": "naver-3",
+          "rank": 3,
           "keyword": "빗썸 해킹 추가 피해",
           "title": "빗썸 해킹 추가 피해",
           "rawKeyword": "빗썸 해킹 추가 피해",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 99,
+          "priority": 98,
           "source": "naver",
           "expansions": [
             "빗썸 해킹",
@@ -100,171 +162,171 @@
             },
             "facts": [
               {
-                "text": "지난달 가상화폐거래소 빗썸에서 발생한 해킹 사고의 개인정보 유출 피해자가 당초 발표된 7159명보다 늘어난 것으로 확인됐다. 개인정보 유출 기간도 당초 알려진 1시간에서 보름 이상으로 늘어났으며 직장 정보 등까지 외부로 유출된 것으로 드러났다.",
+                "text": "(서울=연합뉴스) 박수현 기자 = 가상자산 거래소 빗썸에서 해킹으로 정보가 유출된 피해자가 당초 알려진 7천159명보다",
                 "sourceIndex": 0
               },
               {
-                "text": "국내 디지털자산(가상자산) 거래소 빗썸 이 지난달 발생한 사내 그룹웨어 해킹 사고와 관련해 추가 개인정보 유출 사실을 확인했다. 개인별 유출 항목은 다르며 구체적인 피해 규모는 공개되지 않았다.",
+                "text": "유출 피해 자가 당초 발표된 7159명보다 늘어난 것으로 확인됐다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.sedaily.com/article/20119031?ref=naver",
-                "press": "서울경제"
-              },
-              {
-                "url": "https://www.news1.kr/finance/blockchain-fintech/6366210",
-                "press": "뉴스1"
-              }
-            ],
-            "images": [
-              "https://wimg.sedaily.com/news/cms/2026/11/25/news-p.v1.20261125.b66aa2a20aa24869a79ad47630ec6f84_Z1.jpg"
-            ],
-            "press": [
-              "서울경제",
-              "뉴스1"
-            ],
-            "headlines": [
-              "[단독] 피해자도, 유출 기간도 늘어…빗썸 해킹 추가 피해 확인",
-              "빗썸 , 그룹웨어 해킹 후속 점검서 개인정보 추가 유출 확인"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
-          }
-        },
-        {
-          "id": "naver-3",
-          "rank": 3,
-          "keyword": "전도연 청룡 여우주연상",
-          "title": "전도연 청룡 여우주연상",
-          "rawKeyword": "전도연 청룡 여우주연상",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 98,
-          "source": "naver",
-          "expansions": [
-            "전도연 여우주연상",
-            "청룡 여우주연상",
-            "전도연 영화",
-            "전도연 자녀",
-            "전도연 나무위키",
-            "전도연 조인성",
-            "전도연 설경구",
-            "전도연 리즈"
-          ],
-          "expansionSeed": "전도연",
-          "insight": {
-            "titles": {
-              "seo": "전도연 청룡 여우주연상 최신 이슈와 핵심 내용 정리",
-              "home": "전도연 청룡 여우주연상, 청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권 관련 확인할 점",
-              "topic": "전도연 청룡 여우주연상",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "(서울=연합뉴스) 박원희 기자 = 나홍진 감독의 '호프'가 올해 청룡영화상 최우수작품상의 영예를 안았다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "설경구는 4번째 청룡 남우 주연상 수상으로 '최초'의 기록을 세웠고, 전도연 도 3번째 청룡 여우주연상 수상이다. 25일 서울 여의도 KBS홀에서 제47회 청룡 영화상 시상식이 열렸다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261125187600005?input=1195m",
+                "url": "https://www.yna.co.kr/view/AKR20261125176100002?input=1195m",
                 "press": "연합뉴스"
               },
               {
-                "url": "https://www.hankyung.com/article/2026112506727",
-                "press": "한국경제"
+                "url": "https://www.sedaily.com/article/20119031?ref=naver",
+                "press": "서울경제"
               }
             ],
             "images": [
-              "https://img2.yna.co.kr/photo/yna/YH/2026/11/25/PYH2026112521750001300_P4.jpg"
+              "https://img9.yna.co.kr/photo/yna/YH/2026/10/28/PYH2026102812140001300_P4.jpg"
             ],
             "press": [
               "연합뉴스",
-              "한국경제"
+              "서울경제"
             ],
             "headlines": [
-              "청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권",
-              "청룡 영화상 남녀 주연상 …'가능한 사랑' 설경구· 전도연 수상"
+              "빗썸, 해킹 피해 추가 확인…보름 동안 해킹 사실 몰랐다",
+              "[단독] 피해자도, 유출 기간도 늘어… 빗썸 해킹 추가 피해 확인"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
           "id": "naver-4",
           "rank": 4,
-          "keyword": "김민솔 대상 수상",
-          "title": "김민솔 대상 수상",
-          "rawKeyword": "김민솔 대상 수상",
+          "keyword": "도로공사 6연승 선두",
+          "title": "도로공사 6연승 선두",
+          "rawKeyword": "도로공사 6연승 선두",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 97,
           "source": "naver",
           "expansions": [
-            "김민솔프로",
-            "김민솔 나무위키",
-            "김민솔 치어리더",
-            "김민솔 프로필",
-            "김민솔 서교림",
-            "김민솔프로 신장",
-            "김민솔프로 고향",
-            "수상한 파트너"
+            "한국도로공사",
+            "한국도로공사 배구단",
+            "한국도로공사 채용",
+            "한국도로공사 통행료",
+            "한국도로공사 영업소",
+            "도로공사배구단",
+            "도로공사 모마",
+            "한국도로공사 감독"
           ],
-          "expansionSeed": "김민솔",
+          "expansionSeed": "도로공사",
           "insight": {
             "titles": {
-              "seo": "김민솔 대상 수상 최신 이슈와 핵심 내용 정리",
-              "home": "김민솔 대상 수상, 김민솔, 2026시즌 KLPGA 대상 등 3관왕…\"잊지 못할 한 해\"(종합) 관련 확인할 점",
-              "topic": "김민솔 대상 수상",
+              "seo": "도로공사 6연승 선두 최신 이슈와 핵심 내용 정리",
+              "home": "도로공사 6연승 선두, 모마 주춤해도 문제없다…도로공사, IBK 꺾고 6연승 '단독 선두' 관련 확인할 점",
+              "topic": "도로공사 6연승 선두",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "",
+                "text": "모마 주춤해도 문제없다…도로공사, IBK 꺾고 6연승 '단독 선두' 김진우 기자 Seoul 작성 2026.11.25 21:17 조회 조회수 ▲ 득점 후 기뻐하는 도로공사 선수단 여자 프로배구 한국도로공사가 6연승 신바람과 함께 리그 1위로 올라섰습니다. 도로공사는 오늘(25일) 경기도 화성체육관에서 열린 2026-2027 HK흥국금융 V리그 여자부 방문 경기에서 IBK기업은행을 상대로 세트 점수 3-0(25-23 25-16 25-22) 완승을 거뒀습니다. 개막전에서 GS칼텍스에 0-3으로 패배한 뒤 5연승을 질주하며 1라운드를 마쳤던 도로공사는 2라운드 첫 경기에서도 승리하며 GS칼텍스를 제치고 6승 1패(승점 18)로 단독 선두에 올랐습니다.",
                 "sourceIndex": 0
               },
               {
-                "text": "25일 서울 강남구의 한 호텔에서 열린 2026 KLPGA 대상 시상식에서 김민솔 이 상금왕을 수상 하고 있다.",
+                "text": "여자 프로배구 한국 도로공사 가 IBK기업은행을 완파하고 선두 자리에 복귀했다. 한국 도로공사 는 25일 화성체육관에서 열린 HK흥국금융 2026~2027 V리그 여자부 원정 경기에서 IBK기업은행을 세트 점수 3-0(25-23 25-16 25-22)으로 제압했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.newsis.com/view/NISX20261125_0003883413",
-                "press": "뉴시스"
+                "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008863644&plink=ORI&cooper=NAVER",
+                "press": "SBS"
               },
               {
-                "url": "https://www.yna.co.kr/view/PYH20261125193700013?input=1196m",
-                "press": "연합뉴스"
+                "url": "https://www.newsis.com/view/NISX20261125_0003883511",
+                "press": "뉴시스"
               }
             ],
             "images": [
-              "https://img1.newsis.com/2026/11/25/NISI20261125_0021545409_web.jpg"
+              "https://img.sbs.co.kr/newimg/news/20261125/202244313_1280.jpg"
             ],
             "press": [
-              "뉴시스",
-              "연합뉴스"
+              "SBS",
+              "뉴시스"
             ],
             "headlines": [
-              "김민솔, 2026시즌 KLPGA 대상 등 3관왕…\"잊지 못할 한 해\"(종합)",
-              "김민솔 , 상금왕 수상"
+              "모마 주춤해도 문제없다…도로공사, IBK 꺾고 6연승 '단독 선두'",
+              "도로공사 , 6연승 질주하며 선두 탈환…현대캐피탈 2위 도약(종합)"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
           "id": "naver-5",
           "rank": 5,
-          "keyword": "젠슨 황 영향력 사라짐",
-          "title": "젠슨 황 영향력 사라짐",
-          "rawKeyword": "젠슨 황 영향력 사라짐",
+          "keyword": "나는 솔로",
+          "title": "나는 솔로",
+          "rawKeyword": "나는 솔로",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 96,
+          "source": "naver",
+          "expansions": [
+            "나는 SOLO <나는 솔로>",
+            "나는 솔로 34기",
+            "나는 솔로 영철",
+            "나는 솔로 갤러리",
+            "나는 솔로 16기",
+            "나는 솔로 34기 영철",
+            "나는 솔로 ott",
+            "나는 솔로 편성표"
+          ],
+          "expansionSeed": "나는 솔로",
+          "insight": {
+            "titles": {
+              "seo": "나는 솔로 최신 이슈와 핵심 내용 정리",
+              "home": "나는 솔로, Attention Required! 관련 확인할 점",
+              "topic": "나는 솔로",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "나는솔로 34기 '나는 SOLO'( 나는 솔로 ) 34기 4일 차 로맨스 현장을 공개했다. 25일 밤 10시 30분 방송되는 리얼 데이팅 프로그램 ' 나는 솔로 ' 34기 영호가 '랜덤 데이트'를 통해 순자와 처음으로 '1:1 데이트'를 하며 알아가는 모습이 펼쳐진다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "' 나는 솔로 ' 34기 광수가 정숙과의 최종 선택을 두고 고민에 빠진다. 25일 오후 10시 30분 방송되는 SBS플러스·ENA ' 나는 솔로 '에서는 '랜덤 데이트'와 '슈퍼 데이트권'으로 또 한 번 요동치는 34기의 러브라인이 공개된다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.bntnews.co.kr/article/view/bnt202611250176",
+                "press": "bnt뉴스"
+              },
+              {
+                "url": "https://www.news1.kr/entertain/broadcast-tv/6365141",
+                "press": "뉴스1"
+              }
+            ],
+            "images": [
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F5191%2F2026%2F11%2F25%2F536938.jpg&type=fface200_200&expire=2&refresh=true"
+            ],
+            "press": [
+              "bnt뉴스",
+              "뉴스1"
+            ],
+            "headlines": [
+              "Attention Required!",
+              "' 나는솔로 ' 34기 광수, 최종 선택 고민…\"정숙이 질투로 미치게 만들어..."
+            ],
+            "extraction": "search-card",
+            "collectedAt": "2026-11-25T19:18:50.938Z"
+          }
+        },
+        {
+          "id": "naver-6",
+          "rank": 6,
+          "keyword": "젠슨 황 필요없다 고집 유지",
+          "title": "젠슨 황 필요없다 고집 유지",
+          "rawKeyword": "젠슨 황 필요없다 고집 유지",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 95,
           "source": "naver",
           "expansions": [
             "젠슨황",
@@ -276,16 +338,171 @@
             "젠슨황 스파이",
             "젠슨 황 배우자"
           ],
-          "expansionSeed": "젠슨"
+          "expansionSeed": "젠슨",
+          "insight": {
+            "titles": {
+              "seo": "젠슨 황 필요없다 고집 유지 최신 이슈와 핵심 내용 정리",
+              "home": "젠슨 황 필요없다 고집 유지, “내 후계자는 없다”…불륜 스캔들에 드러난 젠슨 황의 ‘위험한 고집’ 관련 확인할 점",
+              "topic": "젠슨 황 필요없다 고집 유지",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "엔비디아가 젠슨 황 최고경영자(CEO)의 불륜 스캔들로 위기를 맞은 상황에서, 황 CEO가 과거 후계자 구도를 세우는 일을 거부했었던 일이 다시 세간의 주목을 받고 있다. 미 일간 뉴욕타임스(NYT)는 11일(현지시간) 과거 수년간 엔비디아 사내에서 후계 구도 수립이 필요",
+                "sourceIndex": 0
+              },
+              {
+                "text": "' 젠슨 황 (黃仁勳)'처럼 병기하면 검색 편의와 한자음의 연결고리를 모두 잡을 수 있다. 중요한 것은 모든 이름을 한자음으로 되돌리는 것이 아니다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://biz.heraldcorp.com/article/10934302?ref=naver",
+                "press": "헤럴드경제"
+              },
+              {
+                "url": "https://www.thereport.co.kr/news/articleView.html?idxno=93371",
+                "press": "더리포트"
+              }
+            ],
+            "images": [
+              "https://wimg.heraldcorp.com/news/cms/2026/11/12/news-p.v1.20261112.d7d796c56864485ead3897cd72858517_P1.jpg"
+            ],
+            "press": [
+              "헤럴드경제",
+              "더리포트"
+            ],
+            "headlines": [
+              "“내 후계자는 없다”…불륜 스캔들에 드러난 젠슨 황의 ‘위험한 고집’",
+              "[신동립 잡기노트]왜 젠슨 황 은 되고 '황인훈'은 안 되나"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T19:18:50.938Z"
+          }
         },
         {
-          "id": "naver-6",
-          "rank": 6,
+          "id": "naver-7",
+          "rank": 7,
+          "keyword": "조희대 탄핵 논의 활발",
+          "title": "조희대 탄핵 논의 활발",
+          "rawKeyword": "조희대 탄핵 논의 활발",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "naver",
+          "expansions": [
+            "조희대 탄핵",
+            "민주당 조희대 탄핵",
+            "조희대 대법원장",
+            "조희대 임기",
+            "조희대고향",
+            "조희대 직무정지",
+            "활발하다",
+            "태동 활발"
+          ],
+          "expansionSeed": "조희대",
+          "insight": {
+            "titles": {
+              "seo": "조희대 탄핵 논의 활발 최신 이슈와 핵심 내용 정리",
+              "home": "조희대 탄핵 논의 활발, KBS 뉴스 관련 확인할 점",
+              "topic": "조희대 탄핵 논의 활발",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "요청하신 페이지를 찾을 수 없습니다.",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8721089&ref=A",
+                "press": "KBS"
+              }
+            ],
+            "images": [
+              "https://news.kbs.co.kr/resource/image/common/img_meta.png"
+            ],
+            "press": [
+              "KBS"
+            ],
+            "headlines": [
+              "KBS 뉴스"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T19:18:50.938Z"
+          }
+        },
+        {
+          "id": "naver-8",
+          "rank": 8,
+          "keyword": "다나와",
+          "title": "다나와",
+          "rawKeyword": "다나와",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "naver",
+          "expansions": [
+            "다나와 pc",
+            "다나와 자동차",
+            "다나와 가격비교",
+            "다나와 pc견적",
+            "다나와 컴퓨터",
+            "다나와 타이어",
+            "샵다나와",
+            "다나와 노트북"
+          ],
+          "expansionSeed": "다나와",
+          "insight": {
+            "titles": {
+              "seo": "다나와 최신 이슈와 핵심 내용 정리",
+              "home": "다나와, \"10만원 이하 난방기 찾아줘\"…다나와, 챗GPT로 AI 쇼핑 확대 관련 확인할 점",
+              "topic": "다나와",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "클로드 이어 챗GPT 연동…예산·용도 입력하면 가격·사양 비교 생성형 AI 경유 유입 74% 챗GPT서…생활 서비스로 연계 확대 커넥트웨이브(119860)의 가격비교 서비스 다나와가 챗GPT에 실시간 상품 정보를 연결하며 대화형 쇼핑 시장 공략에 나섰다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "10월 다나와 판매량 순위 상위 5개 중 4개가 탄소매트였다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.news1.kr/industry/sb-founded/6365520",
+                "press": "뉴스1"
+              },
+              {
+                "url": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886761",
+                "press": "한스경제"
+              }
+            ],
+            "images": [
+              "https://i3n.news1.kr/system/photos/2026/11/25/8231934/high.jpg"
+            ],
+            "press": [
+              "뉴스1",
+              "한스경제"
+            ],
+            "headlines": [
+              "\"10만원 이하 난방기 찾아줘\"…다나와, 챗GPT로 AI 쇼핑 확대",
+              "겨울철 보온 가전, 다나와 가격비교로 꼼꼼하게 비교"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T19:18:50.938Z"
+          }
+        },
+        {
+          "id": "naver-9",
+          "rank": 9,
           "keyword": "매일경제",
           "title": "매일경제",
           "rawKeyword": "매일경제",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 95,
+          "priority": 92,
           "source": "naver",
           "expansions": [
             "매일경제신문",
@@ -337,255 +554,69 @@
               "[부고] 신지윤( 매일경제 신문 기자)씨 조부상"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
-          }
-        },
-        {
-          "id": "naver-7",
-          "rank": 7,
-          "keyword": "정부24",
-          "title": "정부",
-          "rawKeyword": "정부",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 94,
-          "source": "naver",
-          "expansions": [
-            "정부24",
-            "정부 뜻",
-            "재혼황후 정부 뜻",
-            "정부24시",
-            "정부지원대출",
-            "2026 정부지원금",
-            "정부 빚탕감",
-            "정분"
-          ],
-          "expansionSeed": "정부",
-          "insight": {
-            "titles": {
-              "seo": "정부24 최신 이슈와 핵심 내용 정리",
-              "home": "정부24, 선박·어선 검사증서 34종, 내일부터 '정부24'서 발급 - 머니투데이 관련 확인할 점",
-              "topic": "정부24",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "선박·어선 검사증서 34종, 내일부터 '정부24'서 발급 /사진제공=행정안전부 행정안전부와 해양수산부는 선박 소유자와 어업인이 선박·어선 검사증서 등 주요 서류를 편리하게 발급받을 수 있도록 오는 26일부터 '정부24'를 통해 관련 서비스를 통합 제공한다고 25일 밝혔다. 그동안 한국해양교통안전공단에서 선박·어선 검사를 받은 소유자는 검사증서나 사실증명원을 발급받기 위해 별도 시스템인 '전자증서정보시스템'에 접속해야 했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "대만은 24 일 정부 기금인 국안기금의 운용 한도를 5천억대만달러에서 1조대만달러(약 40조원)로 두 배 늘리는 방안을 검토한다고 밝혔다. 정부 는 아직 말을 아끼고 있다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.mt.co.kr/policy/2026/11/25/2026112508115116855",
-                "press": "머니투데이"
-              },
-              {
-                "url": "http://www.wowtv.co.kr/NewsCenter/News/Read?articleId=A202611250189&t=NN",
-                "press": "한국경제TV"
-              }
-            ],
-            "images": [
-              "https://thumb.mt.co.kr/cdn-cgi/image/w=1200,h=295,fit=cover,bg=white,f=auto,quality=high,sharpen=2,g=face/21/2026/11/2026112508115116855_1.jpg"
-            ],
-            "press": [
-              "머니투데이",
-              "한국경제TV"
-            ],
-            "headlines": [
-              "선박·어선 검사증서 34종, 내일부터 '정부24'서 발급 - 머니투데이",
-              "\"10조원으론 부족\"…증시 폭락에 정부 움직였다"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
-          }
-        },
-        {
-          "id": "naver-8",
-          "rank": 8,
-          "keyword": "이란 호르무즈 통행료",
-          "title": "이란 호르무즈 통행료",
-          "rawKeyword": "이란 호르무즈 통행료",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 93,
-          "source": "naver",
-          "expansions": [
-            "이란 호르무즈",
-            "미국 이란 전쟁",
-            "이란 미국",
-            "미국 이란 협상",
-            "미국 이란 종전",
-            "이란 전쟁",
-            "미국 이란",
-            "이란 속보"
-          ],
-          "expansionSeed": "이란",
-          "insight": {
-            "titles": {
-              "seo": "이란 호르무즈 통행료 최신 이슈와 핵심 내용 정리",
-              "home": "이란 호르무즈 통행료, \"이란, 호르무즈 안전통항 대가로 암호화폐 '위장 보험료' 징수\" 관련 확인할 점",
-              "topic": "이란 호르무즈 통행료",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "",
-                "sourceIndex": 0
-              },
-              {
-                "text": "25일(현지 시간) 아라비안 걸프 비즈니스 인사이트(AGBI)에 따르면 해운업계 관계자와 유조선 추적·위험정보 전문가들은 이란 이 호르무즈 해협을 사실상 통행료 징수 수단으로 활용하고 있다고 밝혔다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261125171400079?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.newsis.com/view/NISX20261126_0003883586",
-                "press": "뉴시스"
-              }
-            ],
-            "images": [
-              "https://img5.yna.co.kr/photo/etc/af/2026/11/22/PAF20261122084401009_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "뉴시스"
-            ],
-            "headlines": [
-              "\"이란, 호르무즈 안전통항 대가로 암호화폐 '위장 보험료' 징수\"",
-              "\" 이란 , 호르무즈 해협 통행료 징수…암호화폐로 제재 우회\""
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
-          }
-        },
-        {
-          "id": "naver-9",
-          "rank": 9,
-          "keyword": "나는 솔로",
-          "title": "나는 솔로",
-          "rawKeyword": "나는 솔로",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 92,
-          "source": "naver",
-          "expansions": [
-            "나는 SOLO <나는 솔로>",
-            "나는 솔로 34기",
-            "나는 솔로 영철",
-            "나는 솔로 갤러리",
-            "나는 솔로 16기",
-            "나는 솔로 34기 영철",
-            "나는 솔로 ott",
-            "나는 솔로 편성표"
-          ],
-          "expansionSeed": "나는 솔로",
-          "insight": {
-            "titles": {
-              "seo": "나는 솔로 최신 이슈와 핵심 내용 정리",
-              "home": "나는 솔로, Attention Required! 관련 확인할 점",
-              "topic": "나는 솔로",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "나는솔로 34기 '나는 SOLO'( 나는 솔로 ) 34기 4일 차 로맨스 현장을 공개했다. 25일 밤 10시 30분 방송되는 리얼 데이팅 프로그램 ' 나는 솔로 ' 34기 영호가 '랜덤 데이트'를 통해 순자와 처음으로 '1:1 데이트'를 하며 알아가는 모습이 펼쳐진다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "' 나는 솔로 ' 34기 영수와 영숙이 랜덤 데이트에서 묘한 핑크빛 기류를 형성한다. 이때 형제자매와의 우애를 확인하는 '가족 통화 미션'까지 펼쳐지는데, 영수는 여섯째 누나에게 \"나 망한 것 같은데 어떡해?",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.bntnews.co.kr/article/view/bnt202611250176",
-                "press": "bnt뉴스"
-              },
-              {
-                "url": "https://www.news1.kr/entertain/broadcast-tv/6363810",
-                "press": "뉴스1"
-              }
-            ],
-            "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F5191%2F2026%2F11%2F25%2F536938.jpg&type=fface200_200&expire=2&refresh=true"
-            ],
-            "press": [
-              "bnt뉴스",
-              "뉴스1"
-            ],
-            "headlines": [
-              "Attention Required!",
-              "' 나는솔로 ' 34기 영수♥영숙, 8남매·8자매 공감대 통했나…티격태격하..."
-            ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
           "id": "naver-10",
           "rank": 10,
-          "keyword": "성시경",
-          "title": "성시경",
-          "rawKeyword": "성시경",
+          "keyword": "출생아 수 증가율",
+          "title": "출생아 수 증가율",
+          "rawKeyword": "출생아 수 증가율",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 91,
           "source": "naver",
           "expansions": [
-            "성시경 콘서트",
-            "성시경 고막남친",
-            "성시경 문가영",
-            "성시경 나무위키",
-            "성시경 하지원",
-            "성시경 노래",
-            "성시경 미요시",
-            "성시경의 고막남친"
+            "출생아수",
+            "연도별 출생아수",
+            "년도별 출생아수",
+            "26년 출생아수",
+            "2025년 출생아수",
+            "25년 출생아수",
+            "2020년 출생아수",
+            "2026년 출생아수"
           ],
-          "expansionSeed": "성시경",
+          "expansionSeed": "출생아",
           "insight": {
             "titles": {
-              "seo": "성시경 최신 이슈와 핵심 내용 정리",
-              "home": "성시경, 성시경 '22세 연하' 채령에 \"나도 미혼남인데\"...비난 '폭주' 관련 확인할 점",
-              "topic": "성시경",
+              "seo": "출생아 수 증가율 최신 이슈와 핵심 내용 정리",
+              "home": "출생아 수 증가율, 올해 1∼9월 태어난 아기 21만9천명…증가율 역대 최고 관련 확인할 점",
+              "topic": "출생아 수 증가율",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "가수 성시경이 22세 연하의 여자 아이돌에게 한 말들을 두고 네티즌들이 비난을 쏟아냈다. 최근 성시경의 유튜브 채널에 여성 아이돌 그룹 있지(ITZY)의 멤버 채령이 게스트로 출연한 영상이 공개됐다.",
+                "text": "(세종=연합뉴스) 송정은 기자 = 올해 들어 3분기까지 태어난 아기가 작년보다 14% 넘게 증가하며 21만명을 넘었다.",
                 "sourceIndex": 0
               },
               {
-                "text": "방송인 신동엽과 가수 성시경 이 '2026 KBS 연예대상' MC로 나선다. 오랜 친분을 이어온 두 사람이 연말 시상식에서 어떤 호흡을 보여줄지 관심이 쏠린다.",
+                "text": "올해 1~9월 출생아 수 가 전년 동기 대비 14% 넘게 늘어나며 역대 최고 증가율 을 기록했다. 이는 올해 9월 출생아 수 (2만5113명)가 1년 전보다",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "http://www.wowtv.co.kr/NewsCenter/News/Read?articleId=A202611240020&t=NN",
-                "press": "한국경제TV"
+                "url": "https://www.yna.co.kr/view/AKR20261125087700002?input=1195m",
+                "press": "연합뉴스"
               },
               {
-                "url": "https://www.tenasia.co.kr/article/2026112344234",
-                "press": "텐아시아"
+                "url": "https://www.hani.co.kr/arti/economy/economy_general/1289002.html",
+                "press": "한겨레"
               }
             ],
             "images": [
-              "https://img.wowtv.co.kr/nrcs/production/images/20261124/20261124_9529268a428041c78dce260c9c2a3af9.jpg"
+              "https://img0.yna.co.kr/photo/yna/YH/2026/11/25/PYH2026112509480001300_P4.jpg"
             ],
             "press": [
-              "한국경제TV",
-              "텐아시아"
+              "연합뉴스",
+              "한겨레"
             ],
             "headlines": [
-              "성시경 '22세 연하' 채령에 \"나도 미혼남인데\"...비난 '폭주'",
-              "[단독] '절친' 신동엽· 성시경 , 12년 만에 연말 시상식서 재회…'2026 KBS..."
+              "올해 1∼9월 태어난 아기 21만9천명…증가율 역대 최고",
+              "1~9월 출생아 14.3% 늘어 ‘역대 최고’…7년 만에 최대"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         }
       ]
@@ -654,7 +685,7 @@
               "설경구, 청룡 남우주연상에 \"영원한 동지 송윤아에 감사\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -718,7 +749,7 @@
               "[포토] 고수-박민영-육성재, 나인 투 식스"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -780,7 +811,7 @@
               "최재림 , 논문 기반 매미·사자 발성법 시연 …이무진과 '신호등' 듀엣 무..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -842,7 +873,7 @@
               "청룡영화상 최우수작품상에 나홍진 '호프'…' 가능한 사랑 ' 4관왕 석권"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -904,7 +935,7 @@
               "청룡영화상 남녀 주연상 …'가능한 사랑' 설경구 ·전도연 수상"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -966,7 +997,7 @@
               "2년간 암투병한 금메달리스트 전이경 \"반평생 고비, 도전하고팠다\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -1028,7 +1059,7 @@
               "장오 연합 붕괴했다…' 데블스 플랜3 ' 우승자 오늘(24일) 공개"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -1089,7 +1120,7 @@
               "[사진]박지훈, ' 왕과 사는 남자 '로 청룡에"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -1145,7 +1176,7 @@
               "한국 남자 테니스 , 66년 만의 데이비스컵 8강 격돌, 26일 자정 '디펜딩 ..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -1181,7 +1212,7 @@
                 "sourceIndex": 0
               },
               {
-                "text": "25일 오후 서울 여의도 KBS홀에서 열린 제47회 청룡영화상 시상식에서 박지훈과 서수빈 이 각각 신인 남우상과 신인여우상 을 수상 했다.",
+                "text": "청룡영화 작품상에 ‘호프’... 주연상은 설경구·전도연",
                 "sourceIndex": 1
               }
             ],
@@ -1191,8 +1222,8 @@
                 "press": "연합뉴스"
               },
               {
-                "url": "https://www.mk.co.kr/article/12218684",
-                "press": "매일경제"
+                "url": "https://www.chosun.com/culture-life/culture_general/2026/11/25/EUJITRT7J5FWRC6B7KRHJBJ3IQ/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+                "press": "조선일보"
               }
             ],
             "images": [
@@ -1200,14 +1231,14 @@
             ],
             "press": [
               "연합뉴스",
-              "매일경제"
+              "조선일보"
             ],
             "headlines": [
               "청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권",
-              "박지훈· 서수빈 , 생애 한 번뿐인 신인 상 영예 [2026 청룡영화상]"
+              "청룡영화 작품상에 ‘호프’... 주연상은 설경구·전도연"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         }
       ]
@@ -1219,197 +1250,130 @@
         {
           "id": "nate-1",
           "rank": 1,
-          "keyword": "빗썸 해킹 보름",
-          "title": "빗썸 해킹 보름",
-          "rawKeyword": "빗썸 해킹 보름",
+          "keyword": "관세 15% 유지",
+          "title": "관세 15% 유지",
+          "rawKeyword": "관세 15% 유지",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "nate",
           "expansions": [
-            "빗썸 해킹",
-            "빗썸 이벤트",
-            "빗썸 출금방법",
-            "빗썸 출금제한",
-            "빗썸 비트코인",
-            "빗썸테더",
-            "빗썸 이더리움",
-            "빗썸 점검"
+            "관세청",
+            "관세계산기",
+            "관세청 통관번호",
+            "관세사",
+            "관세 기준",
+            "일본 관세 계산기",
+            "관세 계산",
+            "관세청 유니패스"
           ],
-          "expansionSeed": "빗썸",
+          "expansionSeed": "관세",
           "insight": {
             "titles": {
-              "seo": "빗썸 해킹 보름 최신 이슈와 핵심 내용 정리",
-              "home": "빗썸 해킹 보름, 빗썸, 해킹 피해 추가 확인…보름 동안 해킹 사실 몰랐다 관련 확인할 점",
-              "topic": "빗썸 해킹 보름",
+              "seo": "관세 15% 유지 최신 이슈와 핵심 내용 정리",
+              "home": "관세 15% 유지, 美USTR, 14개 경제주체에 과잉생산 관세…韓 15% 상한 유지(종합) 관련 확인할 점",
+              "topic": "관세 15% 유지",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "(서울=연합뉴스) 박수현 기자 = 가상자산 거래소 빗썸에서 해킹으로 정보가 유출된 피해자가 당초 알려진 7천159명보다",
+                "text": "(워싱턴=연합뉴스) 백나리 특파원 = 미국이 한국을 포함해 14개 경제주체에 과잉생산을 문제 삼는 관세를 예고했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "해킹 이 이뤄진 기간 역시 애초 알려졌던 1시간에서 보름 으로 크게 늘었습니다. [기자] 국내 양대 가상자산 거래소 중 하나인 빗썸 이 최근 발생한 '개인정보 유출 사고' 피해 내용을 추가로 공개했습니다.",
+                "text": "한국과 대만, 인도, 인도네시아 등에 대해서는 최고 25%의 관세 가 제시됐으며 미국과 무역 합의를 맺은 한국과 일본, EU, 대만 등에 대해서는 15% 관세 상한이 유지 된다고 로이터통신이 전했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261125176100002?input=1195m",
+                "url": "https://www.yna.co.kr/view/AKR20261125185751071?input=1195m",
                 "press": "연합뉴스"
               },
               {
-                "url": "https://www.ytn.co.kr/_ln/0102_202611260115010324",
-                "press": "YTN"
+                "url": "https://www.hani.co.kr/arti/international/international_general/1289144.html",
+                "press": "한겨레"
               }
             ],
             "images": [
-              "https://img9.yna.co.kr/photo/yna/YH/2026/10/28/PYH2026102812140001300_P4.jpg"
+              "https://img1.yna.co.kr/etc/inner/KR/2026/11/25/AKR20261125185751071_01_i_P4.jpg"
             ],
             "press": [
               "연합뉴스",
-              "YTN"
+              "한겨레"
             ],
             "headlines": [
-              "빗썸, 해킹 피해 추가 확인…보름 동안 해킹 사실 몰랐다",
-              "빗썸 , 해킹 피해 추가 확인... 보름 동안 해킹 사실 몰라"
+              "美USTR, 14개 경제주체에 과잉생산 관세…韓 15% 상한 유지(종합)",
+              "미, 14개국에 과잉생산 관세 …“한국 15% 상한 유지 ”"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
           "id": "nate-2",
           "rank": 2,
-          "keyword": "윤호중 장관",
-          "title": "윤호중 장관",
-          "rawKeyword": "윤호중 장관",
+          "keyword": "가능한 사랑 전도연",
+          "title": "가능한 사랑 전도연",
+          "rawKeyword": "가능한 사랑 전도연",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 99,
           "source": "nate",
           "expansions": [
-            "교육부장관",
-            "장관 뜻",
-            "국방부장관",
-            "통일부장관",
-            "행안부장관",
-            "법무부장관",
-            "문체부장관",
-            "국토부장관"
+            "가능한 사랑 전도연 아역",
+            "가능한 사랑 전도연 조인성",
+            "가능한 사랑 전도연 대역"
           ],
-          "expansionSeed": "장관",
+          "expansionSeed": "가능한 사랑 전도연",
           "insight": {
             "titles": {
-              "seo": "윤호중 장관 최신 이슈와 핵심 내용 정리",
-              "home": "윤호중 장관, 축사하는 윤호중 장관 관련 확인할 점",
-              "topic": "윤호중 장관",
+              "seo": "가능한 사랑 전도연 최신 이슈와 핵심 내용 정리",
+              "home": "가능한 사랑 전도연, 청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권 관련 확인할 점",
+              "topic": "가능한 사랑 전도연",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "윤호중 행정안전부 장관이 25일 인천 송도 컨벤시아에서 열린 '제10회 UNPOG 아시아·태평양 리저널 심포지엄 개회식'에서 축사하고 있다.",
+                "text": "(서울=연합뉴스) 박원희 기자 = 나홍진 감독의 '호프'가 올해 청룡영화상 최우수작품상의 영예를 안았다.",
                 "sourceIndex": 0
               },
               {
-                "text": "= 윤호중 행정안전부 장관 이 25일 오후 경기도 고양시 덕양구 용두1터널(가칭)에서 열린 ‘READY Korea 4차 훈련(터널 다중추돌사고)’을 참관한 뒤 훈련 강평을 하고 있다.",
+                "text": "여우주연상 후보에는 고아성(파반느), 문가영(만약에 우리), 신민아(눈동자), 이정은(경주기행), 전도연 ( 가능한 사랑 )이 이름을 올렸고, 트로피는 전도연 에게 돌아갔다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.newsis.com/view/NISI20261125_0021544888",
-                "press": "뉴시스"
+                "url": "https://www.yna.co.kr/view/AKR20261125187600005?input=1195m",
+                "press": "연합뉴스"
               },
               {
-                "url": "https://www.news1.kr/photos/8233126",
-                "press": "뉴스1"
+                "url": "https://www.hankyung.com/article/2026112506727",
+                "press": "한국경제"
               }
             ],
             "images": [
-              "https://img1.newsis.com/2026/11/25/NISI20261125_0021544888_web.jpg"
+              "https://img2.yna.co.kr/photo/yna/YH/2026/11/25/PYH2026112521750001300_P4.jpg"
             ],
             "press": [
-              "뉴시스",
-              "뉴스1"
+              "연합뉴스",
+              "한국경제"
             ],
             "headlines": [
-              "축사하는 윤호중 장관",
-              "윤호중 장관 , 터널 다중추돌사고 점검"
+              "청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권",
+              "청룡영화상 남녀주연상…' 가능한 사랑 ' 설경구· 전도연 수상"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
           "id": "nate-3",
           "rank": 3,
-          "keyword": "전북 0-3 완패",
-          "title": "전북 0-3 완패",
-          "rawKeyword": "전북 0-3 완패",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 98,
-          "source": "nate",
-          "expansions": [
-            "전북현대",
-            "전북대학교",
-            "전북 가볼만한곳",
-            "전북은행",
-            "전북대",
-            "전북 축제",
-            "전북현대모터스",
-            "에버그린 전북"
-          ],
-          "expansionSeed": "전북",
-          "insight": {
-            "titles": {
-              "seo": "전북 0-3 완패 최신 이슈와 핵심 내용 정리",
-              "home": "전북 0-3 완패, 전북, 가시마에 0-3 완패…공식전 3연패 부진 관련 확인할 점",
-              "topic": "전북 0-3 완패",
-              "topicGroup": "네이트 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "전북 은 25일 일본 이바라키현 가시마의 메루카리 스타디움에서 열린 2026-27 ACLE 리그 스테이지 5라운드에서 0-3 으로 완패 했다. 최근 공식전에서 3경기 연속 패배를 당한 전북 은 ACLE에서 2승 1무 2패(승점 7)로 동부 지역 11위에 머물렀다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "이번 A매치 기간 첫 평가전에선 호주에 0-3 으로 완패 했다. 10월 기준 국제축구연맹(FIFA) 랭킹에서 한국은 32위, 카타르는 60위로 격차가 크다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.news1.kr/sports/soccer/6366239",
-                "press": "뉴스1"
-              },
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261118002151007?input=1195m",
-                "press": "연합뉴스"
-              }
-            ],
-            "images": [
-              "https://i3n.news1.kr/system/photos/2026/11/25/8233254/high.jpg"
-            ],
-            "press": [
-              "뉴스1",
-              "연합뉴스"
-            ],
-            "headlines": [
-              "전북, 가시마에 0-3 완패…공식전 3연패 부진",
-              "한국축구 올해 마지막 평가전서 카타르에 1- 0 승…오세훈 결승골(종합)"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
-          }
-        },
-        {
-          "id": "nate-4",
-          "rank": 4,
           "keyword": "나는 솔로",
           "title": "나는 솔로",
           "rawKeyword": "나는 솔로",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 97,
+          "priority": 98,
           "source": "nate",
           "expansions": [
             "나는 SOLO <나는 솔로>",
@@ -1435,7 +1399,7 @@
                 "sourceIndex": 0
               },
               {
-                "text": "' 나는 솔로 ' 34기 영수와 영숙이 랜덤 데이트에서 묘한 핑크빛 기류를 형성한다. 이때 형제자매와의 우애를 확인하는 '가족 통화 미션'까지 펼쳐지는데, 영수는 여섯째 누나에게 \"나 망한 것 같은데 어떡해?",
+                "text": "' 나는 솔로 ' 34기 광수가 정숙과의 최종 선택을 두고 고민에 빠진다. 25일 오후 10시 30분 방송되는 SBS플러스·ENA ' 나는 솔로 '에서는 '랜덤 데이트'와 '슈퍼 데이트권'으로 또 한 번 요동치는 34기의 러브라인이 공개된다.",
                 "sourceIndex": 1
               }
             ],
@@ -1445,7 +1409,7 @@
                 "press": "bnt뉴스"
               },
               {
-                "url": "https://www.news1.kr/entertain/broadcast-tv/6363810",
+                "url": "https://www.news1.kr/entertain/broadcast-tv/6365141",
                 "press": "뉴스1"
               }
             ],
@@ -1458,72 +1422,135 @@
             ],
             "headlines": [
               "Attention Required!",
-              "' 나는솔로 ' 34기 영수♥영숙, 8남매·8자매 공감대 통했나…티격태격하..."
+              "' 나는솔로 ' 34기 광수, 최종 선택 고민…\"정숙이 질투로 미치게 만들어..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
-          "id": "nate-5",
-          "rank": 5,
-          "keyword": "시즌 첫 연승",
-          "title": "시즌 첫 연승",
-          "rawKeyword": "시즌 첫 연승",
+          "id": "nate-4",
+          "rank": 4,
+          "keyword": "젠슨 황",
+          "title": "젠슨 황",
+          "rawKeyword": "젠슨 황",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 96,
+          "priority": 97,
           "source": "nate",
           "expansions": [
-            "티니핑 시즌7",
-            "시그널 시즌2",
-            "비서진 시즌2",
-            "원더독스 시즌2",
-            "더시즌즈",
-            "대탈출 시즌6",
-            "가족계획 시즌2",
-            "꿀알바 시즌2"
+            "젠슨 황 복귀",
+            "젠슨 황 배우자",
+            "젠슨 황 폭로",
+            "젠슨 황 프로필",
+            "젠슨 황 나무위키",
+            "젠슨 황 이사회",
+            "젠슨 황 중국",
+            "젠슨 황 복귀 청원"
           ],
-          "expansionSeed": "시즌",
+          "expansionSeed": "젠슨 황",
           "insight": {
             "titles": {
-              "seo": "시즌 첫 연승 최신 이슈와 핵심 내용 정리",
-              "home": "시즌 첫 연승, 여자농구 KB, 우리은행 잡고 시즌 첫 연승…허예은 21점 관련 확인할 점",
-              "topic": "시즌 첫 연승",
-              "topicGroup": "네이트 실시간 검색어"
+              "seo": "젠슨 황 복귀 하루 만에 사과, 승계계획 없이 경영체제 유지",
+              "home": "젠슨 황 복귀 하루 만에 직원 앞 사과, 승계계획엔 의외의 입장",
+              "topic": "젠슨 황",
+              "topicGroup": "네이트 실시간 검색어",
+              "summary": "젠슨 황 엔비디아 CEO가 복귀 하루 만에 전 직원 앞에서 사과했다. 전사회의에선 별도 승계계획 없이 기존 경영체제를 유지하겠다고 밝혔다.",
+              "aiTitled": true
             },
             "facts": [
               {
-                "text": "(서울=연합뉴스) 안홍석 기자 = 여자프로농구 '디펜딩 챔피언' 청주 KB가 허예은과 박지수의 쌍포를 앞세워 시즌 첫 연승을 기록했다.",
+                "text": "\"별도 승계계획은 불필요한 위계질서 만들 수 있다\" 임원 수십명 직보하는 중앙집권적 경영방식 유지 방침 젠슨 황 엔비디아 최고경영자(CEO)가 복귀 뒤 전사회의(All-Hands Meeting)에서 별도 승계 계획은 필요하지 않으며 기존 경영체제를 유지하겠다는 강한 의지를 밝힌 것으로 24일(현지시간) 전해졌다.",
                 "sourceIndex": 0
               },
               {
-                "text": "여자프로농구 KB가 역대 최다 더블더블 기록을 작성한 박지수의 활약을 앞세워 우리은행을 62대 51로 물리치고 시즌 첫 연승 을 기록했습니다.",
+                "text": "베선트 장관은 젠슨 황 복귀에 비판적이었으나, 최근 이같은 입장에서 한발 물러난 것으로 보인다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261125179500007?input=1195m",
+                "url": "https://www.yna.co.kr/view/AKR20261125031600009?input=1195m",
                 "press": "연합뉴스"
               },
               {
-                "url": "https://www.ytn.co.kr/_ln/0107_202611252320193850",
-                "press": "YTN"
+                "url": "https://www.yna.co.kr/view/AKR20261126002900071?input=1195m",
+                "press": "연합뉴스"
               }
             ],
             "images": [
-              "https://img5.yna.co.kr/etc/inner/KR/2026/11/25/AKR20261125179500007_01_i_P4.jpg"
+              "https://img3.yna.co.kr/photo/reuters/2026/11/25/PRU20261125153701009_P4.jpg"
             ],
             "press": [
-              "연합뉴스",
-              "YTN"
+              "연합뉴스"
             ],
             "headlines": [
-              "여자농구 KB, 우리은행 잡고 시즌 첫 연승…허예은 21점",
-              "박지수, 역대 최다 더블더블...KB, 첫 연승"
+              "젠슨황 \"승계계획 필요없다\"…기존 경영체제 고수 의지",
+              "美무역대표, 젠슨황 복귀에 \"트럼프, 경제·안보 균형 맞춰\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
+          }
+        },
+        {
+          "id": "nate-5",
+          "rank": 5,
+          "keyword": "전북 0-3 완패",
+          "title": "전북 0-3 완패",
+          "rawKeyword": "전북 0-3 완패",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "nate",
+          "expansions": [
+            "전북현대",
+            "전북대학교",
+            "전북 가볼만한곳",
+            "전북은행",
+            "전북대",
+            "전북 축제",
+            "전북현대모터스",
+            "에버그린 전북"
+          ],
+          "expansionSeed": "전북",
+          "insight": {
+            "titles": {
+              "seo": "전북 0-3 완패 최신 이슈와 핵심 내용 정리",
+              "home": "전북 0-3 완패, 전북, 가시마에 0-3 완패…공식전 3연패 부진 관련 확인할 점",
+              "topic": "전북 0-3 완패",
+              "topicGroup": "네이트 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "전북 은 25일 일본 이바라키현 가시마의 메루카리 스타디움에서 열린 2026-27 ACLE 리그 스테이지 5라운드에서 0-3 으로 완패 했다. 최근 공식전에서 3경기 연속 패배를 당한 전북 은 ACLE에서 2승 1무 2패(승점 7)로 동부 지역 11위에 머물렀다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "▲ 헤더를 시도하는 전북 현대의 모따 프로축구 K리그1 전북 현대가 가시마 앤틀러스(일본)와 아시아축구연맹(AFC) 챔피언스리그 엘리트(ACLE) 5차전에서 완패 하며 연승 도전에 실패했습니다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.news1.kr/sports/soccer/6366239",
+                "press": "뉴스1"
+              },
+              {
+                "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008863663&plink=ORI&cooper=NAVER",
+                "press": "SBS"
+              }
+            ],
+            "images": [
+              "https://i3n.news1.kr/system/photos/2026/11/25/8233254/high.jpg"
+            ],
+            "press": [
+              "뉴스1",
+              "SBS"
+            ],
+            "headlines": [
+              "전북, 가시마에 0-3 완패…공식전 3연패 부진",
+              "전북 , ACLE 가시마 상대 0대 3 완패 …원정서 1무 2패 '무승'"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         }
       ]
@@ -1593,7 +1620,7 @@
               "“ 전세사기 보증금 3분의1은 구제” 13일부터 ‘최소보장제’ 시행 [부..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -1657,7 +1684,7 @@
               "[단독] 책무구조도 도입했지만 금융사고 203건 … 6237억 사고 에도 임원..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -1721,7 +1748,7 @@
               "K-샴푸, 수출 2억달러 돌파… 10월 미국 수출 5배 급증"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -1785,7 +1812,7 @@
               "LH 임대주택 150만호 돌파…하자관리·화재안전 대책 강화"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -1819,37 +1846,37 @@
             },
             "facts": [
               {
-                "text": "오는 26일 한국은행 금융통화위원회의 올해 마지막 기준금리 결정을 앞두고 전문가 전원이 금리 인상(연 3.",
+                "text": "[포인트데일리 조혜승 기자] 한국은행 금융통화위원회가 26일 올해 마지막 통화정책방향 결정회의에서 기준금리를 인상할 것이란 전망이 지배적이다.금융시장의 시선은 인상 여부 그 자체보다",
                 "sourceIndex": 0
               },
               {
-                "text": "인상 기조 한은 이 신경 쓰지 않을 수 없는 미국 연준의 금리 움직임도 ‘위’를 가리키고 있다.",
+                "text": "실제 메모리 가격을 모니터링하는 것이 훨씬 더 중요하다고 거듭 강조한 만큼, 이달 금리 인상 이 이뤄질 것\"이라고 짚었다. 강화했다\"며 \"신현송 한은 총재 가 실물 경제를 평가할 때 메모리 반도체 관련 주가를 추적하는 것보다",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://view.asiae.co.kr/article/2026112210490320195",
-                "press": "아시아경제"
+                "url": "https://www.pointdaily.co.kr/news/articleView.html?idxno=327368",
+                "press": "포인트데일리"
               },
               {
-                "url": "https://www.chosun.com/economy/economy_general/2026/11/22/SX5RO4DKQ5AVNK5MXEHFCFPHJQ/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
-                "press": "조선일보"
+                "url": "https://view.asiae.co.kr/article/2026112210490320195",
+                "press": "아시아경제"
               }
             ],
             "images": [
-              "https://cphoto.asiae.co.kr/listimglink/1/2026112210394918547_1795311589.jpg"
+              "https://cdn.pointdaily.co.kr/news/thumbnail/202611/327368_324574_3740_v150.jpg"
             ],
             "press": [
-              "아시아경제",
-              "조선일보"
+              "포인트데일리",
+              "아시아경제"
             ],
             "headlines": [
-              "[금통위poll]①11월 금리 인상…향후 관건은 \"점도표 3.75%\" 주목",
-              "물가·성장 모두 ↑…시장은 힘겨워도 “ 한은 금리 는 올라간다”"
+              "한은, 이달 기준금리 3.25% 유력…최종금리 눈높이 촉각",
+              "[금통위poll]①11월 금리 인상 …향후 관건은 \"점도표 3.75%\" 주목"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         }
       ]
@@ -1910,7 +1937,7 @@
               "'강정호도 아니라는데' 키움은 또 틀렸고 NC는 옳았다...데이비슨, 확실히 하락세, 키움 2용타 완전 실패"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -1975,7 +2002,7 @@
               "'韓 수비 에이스 ' 김민재 미쳤다 , 독일 생활 마침표 찍고 EPL 입성할까....."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -2030,7 +2057,7 @@
               "403 Forbidden"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -2095,7 +2122,7 @@
               "[공식발표] ' 손흥민 선발 명단 제외 ' LAFC, 콜로라도전 'BEST 11' 공개!…..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -2150,7 +2177,7 @@
               "\"와, 대박이다!\" 7번 물려준 그리즈만도 환호성...'데뷔전 데뷔골' 이강인 '후계자 자격' 완벽 증명"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -2205,7 +2232,7 @@
               "'와' 한국 야구 대박 터지나! 17억 이도류 유망주 156km '쾅'→2이닝 4K 무실점 호투...\"정말 인상적\" 美 극찬 이어져"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -2260,7 +2287,7 @@
               "[오피셜] 이럴수가, 배지환 ML 생존 벼랑 끝 몰렸다! 30개 구단 모두 외면…웨이버 통과→트리플A 이관 \"FA 선택할 듯\" 美 전망"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -2315,7 +2342,7 @@
               "안세영이 돌아왔다! 압승, 쾌승!…유럽 최강자 블리치펠트 43분 만에 2-0 완파→세계선수권 8강행 성공"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -2370,7 +2397,7 @@
               "[오피셜] '충격' 아슬아슬했던 전북현대 끝내 무너졌다...디펜딩 챔피언 코리아컵 16강 탈락, K3 당진 '자이언트 킬링' 성공→8개 팀 생존"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -2435,7 +2462,7 @@
               "아직도 ' 손흥민 공백' 메우지 못한 토트넘 …현지 매체는 '日 에이스 영입 ..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         }
       ]
@@ -2475,7 +2502,7 @@
             },
             "facts": [
               {
-                "text": "방문진료 의뢰서 면제·산후도우미 유연근무하천변 시설 설치·수계관리기금 용도 확대 [서울=뉴시스] 서울시가 시민 불편을 초래하는 생활규제를 개선해달라는 건의를 국무조정실에 전달했다고 25일 밝혔다. (자료=서울시 제공) 2026.11.25. photo@newsis.com *재판매 및 DB 금지 [서울=뉴시스]권혜인 기자 = 서울시가 시민 불편을 초래하는 생활규제를 개선해달라는 건의를 국무조정실에 전달했다고 25일 밝혔다.",
+                "text": "아이돌봄서비스 신청 가구는 2021년 7만8000가구에서 지난해 18만4000가구로 늘었다. 같은 기간 평균 대기 일수는 19일에서 39일로 두 배 넘게 증가했다.",
                 "sourceIndex": 0
               },
               {
@@ -2505,7 +2532,7 @@
               "옥천군 “내년에도 24시 어린이집 운영”… 돌봄 공백 최소화"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -2567,7 +2594,7 @@
               "[전남광주 통합 교통 시험대] 농어촌 교통 실효성 논란"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -2622,7 +2649,7 @@
               "복지부-23개 장애인 단체, 정책 현안 논의를 위한 대규모 소통의 장 마련"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -2674,7 +2701,7 @@
               "서영석 의원, 의료급여 수급권자 장기 요양비 국가 80% 부담 법안 발의"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -2733,7 +2760,7 @@
               "'벌 대신 일자리 를'…공소청, 발달 장애인 생계 범죄에 기소유예"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -2788,7 +2815,7 @@
               "고혈압 · 당뇨병 환자 의료비 지원 52억 전액 삭감 직전...\"예산 복원하라..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -2843,7 +2870,7 @@
               "포항시, 고용위기 선제대응지역 1년 연장…철강업 고용 안정 지원 확대"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -2898,7 +2925,7 @@
               "민경선 고양시장, 시민과 함께한 주거 복지 결실... 주거 복지문화대상 수..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -2954,7 +2981,7 @@
               "아이 맞춤형 보육 성과 인정… '부영 사랑으로 어린이집' 교육부장관상..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -3007,18 +3034,18 @@
               }
             ],
             "images": [
-              "https://img.hankyung.com/photo/202611/AA.46545133.1.jpg"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F015%2F2026%2F11%2F25%2F5358177.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
               "한국경제",
               "동아일보"
             ],
             "headlines": [
-              "역세권 임대 등 30조 투입…'공급가뭄' 해소",
+              "Attention Required!",
               "李 “보편형 공공 임대 분양 전환 금지…주거 사다리 사유화 안돼”"
             ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "extraction": "search-card",
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         }
       ]
@@ -3049,8 +3076,8 @@
             "신현빈 장겨울"
           ],
           "expansionSeed": "신현빈",
-          "ago": "2시간 전",
-          "agoMinutes": 120,
+          "ago": "3시간 전",
+          "agoMinutes": 180,
           "publishedLabel": "2026-11-25T16:09:10.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112600525460674_1.jpg",
           "insight": {
@@ -3082,7 +3109,7 @@
               "딘딘, '네모의 꿈' 피해자→첫사랑은 신현빈? \"영상 보니 웃고 있더라\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -3107,8 +3134,8 @@
             "올데프 베일리"
           ],
           "expansionSeed": "딘딘",
-          "ago": "2시간 전",
-          "agoMinutes": 120,
+          "ago": "3시간 전",
+          "agoMinutes": 180,
           "publishedLabel": "2026-11-25T15:52:25.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112523142343940_1.jpg",
           "insight": {
@@ -3140,7 +3167,7 @@
               "딘딘, 올데프 타잔 되고 싶었나..\"'연애대상' 기대해\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -3165,8 +3192,8 @@
             "성량 뜻"
           ],
           "expansionSeed": "최재림",
-          "ago": "2시간 전",
-          "agoMinutes": 120,
+          "ago": "3시간 전",
+          "agoMinutes": 180,
           "publishedLabel": "2026-11-25T15:50:54.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112522232533743_1.jpg",
           "insight": {
@@ -3198,7 +3225,7 @@
               "'성량 깡패' 최재림, 발성 위해 논문까지 썼다..개구리 자세로 열창"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -3255,7 +3282,7 @@
               "'재혼 발표' 김새롬, 188cm ♥연하 남편 자랑 \"외모도 이상형\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -3296,7 +3323,7 @@
                 "sourceIndex": 0
               },
               {
-                "text": "그룹 스트레이키즈(Stray Kids) 방찬, 리노, 창빈, 한, 필릭스, 현진, 승민, 아이엔이 일본 팬미팅 일정을 마치고 25일 오후 김포국제공항을 통해 입국하고 있다. 2026.11.25 브리핑그룹 스트레이키즈 멤버들이 일본 팬미팅 일정을 마치고 25일 오후 김포국제공항을 통해 입국했다. 입국한 멤버는 방찬, 리노, 창빈, 한, 필릭스, 현진, 승민, 아이엔이다.",
+                "text": "그룹 스트레이키즈(Stray Kids) 방찬, 리노, 창빈, 한, 필릭스, 현진, 승민, 아이엔이 일본 팬미팅 일정을 마치고 25일 오후 김포국제공항을 통해 입국하고 있다.",
                 "sourceIndex": 1
               },
               {
@@ -3330,7 +3357,7 @@
               "스트레이키즈 '수고했어요! 잘들어가세요!' [★영상]"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -3387,7 +3414,7 @@
               "구교환, 수상소감으로 \"메리 크리스마스\"..아내 이옥섭 감독 언급 '無'"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         },
         {
@@ -3444,78 +3471,11 @@
               "카리나, 새까만 칼단발로 변신?..독보적 냉미녀 비주얼"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
-          }
-        },
-        {
-          "id": "issue-8",
-          "rank": 8,
-          "keyword": "브아걸 가인 \"연예인 너무 하고 싶었다\"..'활동 중단' 4년 심경",
-          "title": "브아걸 가인 \"연예인 너무 하고 싶었다\"..'활동 중단' 4년 심경",
-          "rawKeyword": "브아걸 가인 \"연예인 너무 하고 싶었다\"..'활동 중단' 4년 심경",
-          "description": "스타뉴스 최신 기사 · 브아걸 가인 \"연예인 너무 하고 싶었다\"..'활동 중단' 4년 심경",
-          "priority": 93,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/25/2026112522465328246",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "브아걸 가인",
-            "브아걸 제아",
-            "브아걸 love",
-            "브아걸 미료",
-            "브아걸갤",
-            "브아걸 나무위키",
-            "브아걸 나르샤",
-            "브아걸 어쩌다"
-          ],
-          "expansionSeed": "브아걸",
-          "ago": "2026.11.25 ・ 23:09",
-          "publishedLabel": "2026-11-25T14:09:31.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112522465328246_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "브아걸 가인 \"연예인 너무 하고 싶었다\"..'활동 중단' 4년 심경 최신 이슈와 핵심 내용 정리",
-              "home": "브아걸 가인 \"연예인 너무 하고 싶었다\"..'활동 중단' 4년 심경, 브아걸 가인 \"연예인 너무 하고 싶었다\"..'활동 중단' 4년 심경 관련 확인할 점",
-              "topic": "브아걸 가인 \"연예인 너무 하고 싶었다\"..'활동 중단' 4년 심경",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 브아걸 가인 \"연예인 너무 하고 싶었다\"..'활동 중단' 4년 심경",
-                "sourceIndex": 0
-              },
-              {
-                "text": "이투데이=한은수 | 그룹 브라운아이드걸스 가인 이 오랜 활동 공백기 동안 연예계 복귀를 간절히 바랐다고 털어놨다. 특히 가인 은 활동 을 중단 했던 시기를 떠올리며 “ 4년 을 쉬었다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/25/2026112522465328246",
-                "press": "스타뉴스"
-              },
-              {
-                "url": "https://www.etoday.co.kr/news/view/2653026",
-                "press": "이투데이"
-              }
-            ],
-            "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F5003%2F2026%2F11%2F25%2F2235520.jpg&type=fface200_200&expire=2&refresh=true"
-            ],
-            "press": [
-              "스타뉴스",
-              "이투데이"
-            ],
-            "headlines": [
-              "브아걸 가인 \"연예인 너무 하고 싶었다\"..'활동 중단' 4년 심경",
-              "' 브아걸 ' 가인 , 4년 자숙 심경 ⋯\" 연예인 너무 하고 싶었다 \""
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-25T18:10:59.838Z"
+            "collectedAt": "2026-11-25T19:18:50.938Z"
           }
         }
       ]
     }
   ],
-  "updatedAt": "2026-11-25T18:13:25.255Z"
+  "updatedAt": "2026-11-25T19:21:16.000Z"
 }
