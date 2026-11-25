@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T11:30:32.892Z",
+ "builtAt": "2026-11-25T11:40:35.831Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,115 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 9,
  "candidates": [
   {
-   "keyword": "이재명 공적주택 중산층",
+   "keyword": "빗썸 해킹 추가 피해",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
+   "articles90": 24,
+   "recent20": 7,
+   "press": 23,
+   "firstArticleAt": "2026-11-25T10:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "빗썸, 해킹 피해 추가 확인…보름 동안 해킹 사실 몰랐다",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-25T11:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405829?sid=101"
+    },
+    {
+     "title": "빗썸, 개인정보 추가 유출 확인…주민등록번호·거래내역 등 포함",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T11:33:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125001302"
+    },
+    {
+     "title": "빗썸 해킹 '1시간' 아닌 보름…피해 규모 확대",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-25T11:32:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733015"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 대통령 현장 방문",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 23,
+   "recent20": 1,
+   "press": 20,
    "firstArticleAt": "2026-11-25T10:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "이 대통령 “공적 임대주택, 청년·신혼부부·무주택자 웬만하면 이용 ...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-25T11:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301181?sid=100"
+    },
+    {
+     "title": "붕어빵 사며 민생물가 살핀 李대통령…은평구 전통시장 깜짝 방문",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-25T11:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728514?sid=100"
+    },
+    {
      "title": "李 대통령 \"공공임대 '영세민 이미지' 벗고 중산층 주거 사다리로\"",
      "press": "jnilbo.com",
      "publishedAt": "2026-11-25T11:07:00.000Z",
      "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000086672"
-    },
-    {
-     "title": "이 대통령 \"공적주택, 주거사다리·주거안전매트…공급 최대한 확대\"",
-     "press": "korea.kr",
-     "publishedAt": "2026-11-25T11:05:00.000Z",
-     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148976503&call_from=naver_news"
-    },
-    {
-     "title": "李, 공적주택 현장 점검…\"발표한 공급 계획 반드시 지켜라\"",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-25T11:02:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466652"
     }
    ]
   },
   {
-   "keyword": "맹승지, 의사 남친과 결혼 준비",
+   "keyword": "최우제",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 6,
+   "articles90": 15,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-25T10:12:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] '제우스' 최우제 'T1 복귀했습니다'",
+     "press": "dailyesports.com",
+     "publishedAt": "2026-11-25T11:14:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/347/0000196827"
+    },
+    {
+     "title": "[포토] T1 '제우스' 최우제의 시그니처 포즈",
+     "press": "dailyesports.com",
+     "publishedAt": "2026-11-25T11:11:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/347/0000196826"
+    },
+    {
+     "title": "[포토] T1 '제우스' 최우제의 시선",
+     "press": "dailyesports.com",
+     "publishedAt": "2026-11-25T11:09:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/347/0000196825"
+    }
+   ]
+  },
+  {
+   "keyword": "맹승지 의사 남친 결혼 준비",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T10:01:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-25T10:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -73,80 +139,20 @@
      "link": "https://m.entertain.naver.com/article/445/0000493283"
     }
    ]
-  },
-  {
-   "keyword": "숲",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T10:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정읍시, 내장산서 2000여 명과 웰니스 축제…백패킹·숲 체험 즐겨",
-     "press": "newsmaker.or.kr",
-     "publishedAt": "2026-11-25T11:22:00.000Z",
-     "link": "http://www.newsmaker.or.kr/news/articleView.html?idxno=186443"
-    },
-    {
-     "title": "기고/숲에서 배우는 양성평등",
-     "press": "dynews.co.kr",
-     "publishedAt": "2026-11-25T10:38:00.000Z",
-     "link": "https://www.dynews.co.kr/news/articleView.html?idxno=875548"
-    },
-    {
-     "title": "다시 붉게 물드는 제주 소나무숲…재선충병 비상",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-25T10:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301042?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "검사",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T10:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "AI 부정 막으려 중·고교도 금속탐지기 검사.. 수능보다 더 강화?",
-     "press": "jmbc.co.kr",
-     "publishedAt": "2026-11-25T11:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/659/0000049027?sid=102"
-    },
-    {
-     "title": "에이아이매틱스, CES 2027서 AI 비전검사 플랫폼 공개…\"3μm급 미세 결함...",
-     "press": "digitalchosun.dizzo.com",
-     "publishedAt": "2026-11-25T10:24:00.000Z",
-     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/25/2026112580019.html"
-    },
-    {
-     "title": "광주동부경찰서, 검사 사칭 보이스피싱 막은 은행원에 감사장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T10:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014345485?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1500,
-  "matched": 768,
+  "flagged": 1503,
+  "matched": 769,
   "avgLeadMin": 504,
   "recent": [
+   {
+    "keyword": "젠슨 황 효과 하루 만에 소멸",
+    "hitKeyword": "젠슨 황 효과 코스피 급락",
+    "hitAt": "2026-11-25T20:30:00+09:00",
+    "leadMin": 241
+   },
    {
     "keyword": "코스피 급락 매도 사이드카",
     "hitKeyword": "반도체주 급락 코스피",
@@ -200,12 +206,6 @@
     "hitKeyword": "증안펀드 확대 추진",
     "hitAt": "2026-11-25T19:00:00+09:00",
     "leadMin": 10
-   },
-   {
-    "keyword": "이장우 조혜원 결혼 1주년 사진 공개",
-    "hitKeyword": "이세영 학창시절 사진 공개",
-    "hitAt": "2026-11-25T18:30:00+09:00",
-    "leadMin": 2880
    }
   ]
  }
