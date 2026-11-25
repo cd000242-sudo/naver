@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T22:54:04.637Z",
+ "builtAt": "2026-11-25T23:04:07.249Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,115 +11,55 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "김정은, 핵시설 현지지도",
+   "keyword": "김정은 전술핵 활용 주목",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 33,
-   "recent20": 7,
-   "press": 28,
-   "firstArticleAt": "2026-11-25T21:25:00.000Z",
+   "articles90": 35,
+   "recent20": 5,
+   "press": 30,
+   "firstArticleAt": "2026-11-25T21:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김정은, 핵시설 현지지도…“전술핵 다영역 활용화 주목해야”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-25T22:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301418?sid=100"
+     "title": "김정은, 핵시설 현지지도‥\"다영역 활용화 주목해야\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-25T22:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538141?sid=104"
     },
     {
-     "title": "김정은, 핵시설 현지지도…\"전술핵 다영역 활용화 주목해야\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T22:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016464120?sid=100"
+     "title": "김정은, 핵시설 현지지도...\"핵보유국 지위 불가침, 전술핵 다영역 활용...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T22:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438193?sid=100"
     },
     {
-     "title": "김정은, 핵시설 찾아 핵보유 재천명…지위 부정 땐 '선전포고'",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-25T22:42:00.000Z",
-     "link": "https://www.ajunews.com/view/20261126070710882"
-    }
-   ]
-  },
-  {
-   "keyword": "이강인 아틀레티코 2-0 승리",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 20,
-   "recent20": 4,
-   "press": 18,
-   "firstArticleAt": "2026-11-25T21:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이강인 웃었고, 김민재 울었다",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-25T22:52:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650023.html"
-    },
-    {
-     "title": "[UCL] 아! 이강인, 슈퍼세이브에 막힌 왼발 슈팅...평점 7.4점",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T22:48:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261126000046"
-    },
-    {
-     "title": "이강인 선발 출전·평점 7.2…아틀레티코, 비킹에 2-0 승리",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-25T22:44:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784891"
-    }
-   ]
-  },
-  {
-   "keyword": "조희대 탄핵 연대 제안",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T21:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조희대 탄핵해도... 남은 '52명의 재판'이 진짜 문제다 [소셜 코리아]",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-25T22:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002537277?sid=100"
-    },
-    {
-     "title": "경향신문 \"비상계엄 침묵한 법관회의, 조희대 탄핵엔 '독립 침해'\"",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-25T22:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138951?sid=102"
-    },
-    {
-     "title": "혁신당에 손 내민 김민석 \"조희대 탄핵 5당 연대\"…\"환영\" 속 신경전도",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-25T22:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979889?sid=100"
+     "title": "김정은, 핵시설 시찰…\"전술핵 다영역 활용\" 강조",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T22:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929994?sid=100"
     }
    ]
   },
   {
    "keyword": "호프 최우수작품상 나홍진",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 2,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-25T21:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "대이변이다… 1600만 장항준·나홍진 제치고 '트로피' 거머쥔 감독 정체",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-25T23:02:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1177845"
+    },
     {
      "title": "“칸에서 주시지” 청룡 작품상에 나홍진 ‘호프’…남녀주연상은 설경...",
      "press": "seoul.co.kr",
@@ -131,54 +71,54 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-25T22:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002728576?sid=103"
-    },
-    {
-     "title": "설경구·전도연, 청룡영화상 남여 주연상…작품상은 '호프'",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-25T22:06:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326516/?sc=Naver"
     }
    ]
   },
   {
-   "keyword": "모두의카드 청소년 확대",
+   "keyword": "조희대 탄핵 연대",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T21:30:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-25T21:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "다음달 1일부터 청소년도 ‘모두의카드’ 이용…대중교통비 20% 환급",
-     "press": "gosiweek.com",
-     "publishedAt": "2026-11-25T22:48:00.000Z",
-     "link": "https://www.gosiweek.com/article/1065566628850852"
+     "title": "'탄핵 동력' 부진에 김민석 \"5당 연대 추진\"…정점식 \"죄 나눠갖기 꼼수...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-25T22:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653445?sid=100"
     },
     {
-     "title": "'모두의카드' 13세도 이용 가능…12월부터 확대",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-25T22:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405912?sid=102"
+     "title": "조희대 탄핵해도... 남은 '52명의 재판'이 진짜 문제다 [소셜 코리아]",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-25T22:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002537277?sid=100"
     },
     {
-     "title": "12월부터 13~18세 청소년도 ‘모두의카드’ 이용…교통비 환급 혜택 확대",
-     "press": "fntimes.com",
-     "publishedAt": "2026-11-25T21:30:00.000Z",
-     "link": "https://www.fntimes.com/html/view.php?ud=202611251605241887dd55077bc2_18"
+     "title": "판사들 조희대 탄핵 반발에 한겨레 \"법관회의 자성하라\", 조선일보는 서...",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-25T22:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138951?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1489,
-  "matched": 746,
+  "flagged": 1490,
+  "matched": 747,
   "avgLeadMin": 506,
   "recent": [
+   {
+    "keyword": "이강인 아틀레티코 2-0 승리",
+    "hitKeyword": "아틀레티코 비킹 승리",
+    "hitAt": "2026-11-26T08:00:00+09:00",
+    "leadMin": 26
+   },
    {
     "keyword": "김민재 뮌헨 1-1",
     "hitKeyword": "김민재 바이에른 선발",
@@ -232,12 +172,6 @@
     "hitKeyword": "도로공사 6연승 1위",
     "hitAt": "2026-11-25T23:30:00+09:00",
     "leadMin": 99
-   },
-   {
-    "keyword": "강남",
-    "hitKeyword": "가수 비 강남 빌딩",
-    "hitAt": "2026-11-25T23:30:00+09:00",
-    "leadMin": 89
    }
   ]
  }
