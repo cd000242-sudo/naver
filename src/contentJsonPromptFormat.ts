@@ -11,6 +11,7 @@ import { resolveBusinessIndustry } from './content/businessIndustryDetector.js';
 import { preprocessLongKeyword } from './contentKeywordHelpers';
 import { buildVoiceProfileBlock, sampleVoiceProfile } from './contentVoiceProfile.js';
 import { annotateSearchOnlyCompounds } from './content/searchOnlyCompoundKeyword.js';
+import { buildRequestedLengthContract, parseRequestedBodyLength } from './contentRequestedLength.js';
 
 type ContentJsonPromptSource = {
   previousTitles?: string[];
@@ -405,6 +406,8 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
   } = options;
 
   const isHomefeed = mode === 'homefeed';
+  // [2026-11-25] A body length typed in the request field replaces the "length is a result" sentence for this post.
+  const requestedLength = parseRequestedBodyLength(source?.customPrompt);
   /**
    * [2026-09-15 사장님 요청] 맨 앞 요약표 끄기.
    * 표는 프롬프트 문장이 아니라 **스키마 필드**로 강제된다(summaryTable.ts 머리말) — 그래서 끄는 것도 스키마에서 뺀다.
@@ -545,7 +548,7 @@ ${rawText}
 
 ══════════════════════════════════════════
 ⚠️ [최종 강제 조건 — 위반 시 0점]
-══════════════════════════════════════════${minChars && minChars > 0 ? `
+══════════════════════════════════════════${requestedLength ? buildRequestedLengthContract(requestedLength) : minChars && minChars > 0 ? `
 1. 분량은 목표가 아니라 결과다(seo R0-5). 채워야 할 글자수는 없다 — 약속한 질문에 근거를 갖고 답했으면 거기서 끝낸다.
    같은 말을 반복하거나 배경 설명을 붙여 늘리지 말고, 답이 남아 있는데 멈추지도 마라.` : ''}
 2. 메인 주제는 제목에 자연스럽게 1회 포함하고, 소제목·서론·결론에 강제로 반복하지 않는다.

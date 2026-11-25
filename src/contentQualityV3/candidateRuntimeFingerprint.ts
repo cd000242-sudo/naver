@@ -461,6 +461,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/contentQualityV3/titleContract.ts',
   'src/contentRecentWinnersBlock.ts',
   'src/contentRequestSections.ts',
+  'src/contentRequestedLength.ts',
   'src/contentRetryPromptPolicy.ts',
   'src/contentReviewAnalysisPrompt.ts',
   'src/contentReviewHelpers.ts',

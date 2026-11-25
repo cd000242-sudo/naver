@@ -282,7 +282,7 @@ describe('Content Quality V3 evidence attestation', () => {
         //   contentGenerator · contentVoiceProfile · content/homefeedPlainRegister(신규)도 함께 바뀜
         // [2026-11-16] 홈판 주제 장치 블록(9개 주제, content/homefeedTopicCraft) 배선 — promptLoader 로 재계산
         // [2026-11-17] 홈판 제목 규칙 한 줄(숫자에는 대상을 붙인다) — homefeed/base.prompt 로 재계산
-        '8355979c00a9186feb5dfd082e1689af31424c68ef9af5ae0315e0c269bf36dc',
+        'b09331db2d23f7d931ef4300f0863fb39f6d907ac7edbab3a4549315724f6610',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

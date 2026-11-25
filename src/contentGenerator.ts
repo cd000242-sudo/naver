@@ -185,6 +185,7 @@ import {
 } from './contentGenerationFailurePolicy.js';
 import { assessCustomPromptAdherence } from './contentPromptAdherence.js';
 import { buildCustomPromptReminderBlock, buildRequestChecklistBlock } from './contentRequestSections.js';
+import { appendRequestedLengthReminder, raiseMinCharsForRequest } from './contentRequestedLength.js';
 import {
   buildOpenAiGenerationFailureMessage,
   classifyOpenAiFailure,
@@ -3355,7 +3356,8 @@ export function buildModeBasedPrompt(
   // [2026-10-22] 구간형 요청사항 점검표 — 요청 원문은 수천 자 원본 앞에 묻히므로 끝에서 항목을 다시 보인다.
   const requestChecklist = buildRequestChecklistBlock(source.customPrompt);
   // [2026-11-03] 자유 문장 개인 프롬프트는 점검표가 비어 끝에 다시 안 보였다 — 원문을 근거 계약 바로 앞에 한 번 더.
-  const customPromptReminder = buildCustomPromptReminderBlock(source.customPrompt);
+  // [2026-11-25] A body length the user typed ("1500~2000자 이상") is stated once more, last, as a number.
+  const customPromptReminder = appendRequestedLengthReminder(buildCustomPromptReminderBlock(source.customPrompt), source.customPrompt);
   // This contract must be last so category and JSON-output rules cannot override evidence safety.
   return `${systemPrompt}\n\n${jsonOutputFormat}\n\n${situationDepth}${situationTitle ? `\n\n${situationTitle}` : ''}${requestChecklist ? `\n\n${requestChecklist}` : ''}${customPromptReminder ? `\n\n${customPromptReminder}` : ''}${finalContract ? `\n\n${finalContract}` : ''}`.trim();
 }
@@ -6380,6 +6382,12 @@ async function generateStructuredContentInternal(
   const userSelectedProvider = provider; // ✅ [2026-04-11] 사용자가 선택한 원래 엔진 보존 (폴백 방지용)
   // ✅ 기본 글자수: 3000자 (풍부한 내용 + 최적 분량, 양보다 질 최극상)
   let minChars = options.minChars ?? 2500; // ✅ [v1.4.14] 3000→2500 (출력 토큰 -15%, SEO 안전 1500자 이상 유지)
+  // [2026-11-25] A body length the user typed in the request field raises the working target (time limit, output budget).
+  const requestRaisedMinChars = raiseMinCharsForRequest(minChars, source.customPrompt);
+  if (requestRaisedMinChars > minChars) {
+    console.log(`[ContentGenerator] 📏 요청사항의 본문 분량 반영: ${minChars} → ${requestRaisedMinChars}자`);
+    minChars = requestRaisedMinChars;
+  }
   if (source.contentMode === 'affiliate') {
     const evidenceSizedTarget = resolveAffiliateContentLengthTarget(source, minChars);
     if (evidenceSizedTarget < minChars) {
