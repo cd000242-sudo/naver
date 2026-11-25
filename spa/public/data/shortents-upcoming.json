@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T23:14:09.989Z",
+ "builtAt": "2026-11-25T23:24:13.332Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 20,
  "candidates": [
   {
-   "keyword": "김정은 전술핵 활용 주목",
+   "keyword": "김정은, 전술핵 활용 주목",
    "sources": [
     "nate"
    ],
    "articles90": 32,
    "recent20": 1,
    "press": 27,
-   "firstArticleAt": "2026-11-25T21:54:00.000Z",
+   "firstArticleAt": "2026-11-25T21:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김정은, 핵시설 현지지도…\"전술핵 다영역 활용화 주목해야\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-25T23:20:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023589"
+    },
     {
      "title": "김정은, 핵시설 현지지도‥\"다영역 활용화 주목해야\"",
      "press": "imnews.imbc.com",
@@ -33,12 +39,134 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-25T22:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002438193?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "이강인",
+   "sources": [
+    "google"
+   ],
+   "articles90": 26,
+   "recent20": 5,
+   "press": 23,
+   "firstArticleAt": "2026-11-25T21:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'다 계획이 있었구나' \"시메오네, 상대 에이스 막기 위해 이강인 활용\"....",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-25T23:16:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/109/0005645456"
     },
     {
-     "title": "김정은, 핵시설 시찰…\"전술핵 다영역 활용\" 강조",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T22:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929994?sid=100"
+     "title": "\"이강인, 세 번째 골 넣을 뻔했다\" 스페인 현지도 아쉬워한 득점 기회.....",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-25T23:09:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/108/0003490321"
+    },
+    {
+     "title": "'이강인 선발' 아틀레티코, UCL 5차전서 비킹에 2대 0 승리",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-25T23:08:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/055/0001405923"
+    }
+   ]
+  },
+  {
+   "keyword": "뉴욕증시 AI 불안 혼조 마감",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 23,
+   "recent20": 3,
+   "press": 22,
+   "firstArticleAt": "2026-11-25T21:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "AI 불안 지속...미국증시 '또 혼조', 장초반 대비 정규장 후반엔 '호전'",
+     "press": "choicenews.co.kr",
+     "publishedAt": "2026-11-25T23:22:00.000Z",
+     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173510"
+    },
+    {
+     "title": "[증시전망대] 코스피, AI 신용불안·트럼프 관세 공포 속 '롤러코스터'…...",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-25T23:18:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68474"
+    },
+    {
+     "title": "뉴욕증시, 추수감사절 연휴 앞두고 혼조 [글로벌마켓 모닝 브리핑]",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-25T23:12:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653087"
+    }
+   ]
+  },
+  {
+   "keyword": "김새롬 재혼 2세 계획",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T22:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'깜짝 재혼' 김새롬, 2세 계획 밝히며 남편 소개 \"키 188㎝, 덩치 좋아\"",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-25T23:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054240"
+    },
+    {
+     "title": "“이 정도 키면 눈 안 높네” 김새롬, 재혼한 남편 정체 공개→이상형 ...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-25T23:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001283529"
+    },
+    {
+     "title": "'재혼' 김새롬, 2세 위해 혼인신고 서둘렀다…\"나이가 있기 때문에 법적...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-25T23:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786224"
+    }
+   ]
+  },
+  {
+   "keyword": "유튜버 진우 해티 이혼",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 4,
+   "press": 7,
+   "firstArticleAt": "2026-11-25T22:43:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "구독자 1010만·방송까지 출연했는데… 돌연 '이혼' 발표한 커플 유튜버",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-25T23:22:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1177855"
+    },
+    {
+     "title": "'구독자 1010만명·연소득 63억설' 국제 부부 이혼..진우와 해티 \"쉽게 내...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-25T23:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490324"
+    },
+    {
+     "title": "‘1010만 유튜버’ 진우와 해티, 결혼 4년 만에 파경 “각자 삶 살기로”",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-25T23:14:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795648389531545006"
     }
    ]
   },
@@ -48,7 +176,7 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-25T22:01:00.000Z",
    "exclusive": false,
@@ -77,9 +205,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1488,
-  "matched": 746,
-  "avgLeadMin": 506,
+  "flagged": 1491,
+  "matched": 744,
+  "avgLeadMin": 505,
   "recent": [
    {
     "keyword": "이강인 아틀레티코 2-0 승리",
