@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T10:40:17.960Z",
+ "builtAt": "2026-11-25T10:50:21.217Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,18 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "발언하는 이재명 대통령",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-25T09:16:00.000Z",
+   "articles90": 14,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-25T09:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -30,7 +29,7 @@
      "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904464"
     },
     {
-     "title": "李 대통령 \"공적임대주택, 중산층도 선택하는 '주거 사다리'로 대전환\"...",
+     "title": "李대통령 \"공적주택, 중산층 선택하는 '주거사다리' 대전환\"…정부, 203...",
      "press": "polinews.co.kr",
      "publishedAt": "2026-11-25T10:27:00.000Z",
      "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749241"
@@ -44,35 +43,34 @@
    ]
   },
   {
-   "keyword": "베트남전 국군전사자 유해봉환식",
+   "keyword": "산업장관 52시간 특례",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 12,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T09:12:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-25T09:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "베트남전 국군전사자, 59년 만에 고국 품으로[노컷네컷]",
+     "title": "산업부장관 \"주52시간 특례, 내일부터라도…중국에 R&D 밀려\"",
      "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T09:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213921?sid=100"
+     "publishedAt": "2026-11-25T10:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213927?sid=103"
     },
     {
-     "title": "베트남전 전사자 故안규태 병장 유해, 59년 만에 고국 품으로",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-25T09:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847846?sid=100"
+     "title": "산업장관 “52시간 특례, 당장 내일도 늦다”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-25T10:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061197?sid=101"
     },
     {
-     "title": "베트남전 국군전사자 유해봉환식",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T09:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213914?sid=100"
+     "title": "김정관, 초광역특구법 R&D 인력 52시간 근무 예외 필요 재차 강조…“초...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-25T09:54:00.000Z",
+     "link": "https://www.viva100.com/article/20261125501389"
     }
    ]
   },
@@ -81,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T09:20:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-25T09:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -105,6 +103,39 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-25T09:46:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014345471?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "베트남전 국군전사자 유해봉환식",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T09:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "베트남전 국군전사자, 59년 만에 고국 품으로[노컷네컷]",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T09:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213921?sid=100"
+    },
+    {
+     "title": "베트남전 전사자 故안규태 병장 유해, 59년 만에 고국 품으로",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-25T09:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847846?sid=100"
+    },
+    {
+     "title": "베트남전 국군전사자 유해봉환식",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T09:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213914?sid=100"
     }
    ]
   }
