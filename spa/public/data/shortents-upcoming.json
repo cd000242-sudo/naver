@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T04:07:44.963Z",
+ "builtAt": "2026-11-25T04:17:47.848Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,55 @@
  "measured": 25,
  "candidates": [
   {
+   "keyword": "CJ프레시웨이 심의",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 46,
+   "recent20": 5,
+   "press": 41,
+   "firstArticleAt": "2026-11-25T03:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "공정위, CJ프레시웨이 부당 고객유인 혐의 심의…4990억원 매출 쟁점",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-25T04:12:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=303036"
+    },
+    {
+     "title": "CJ프레시웨이, 복지시설에 기부금 주고 식자재 납품…공정위 제재 착수",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-25T04:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001042207?sid=101"
+    },
+    {
+     "title": "'프로핏 부스트'가 뭐길래…공정위·CJ프레시웨이 공방전",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-25T04:08:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446477"
+    }
+   ]
+  },
+  {
    "keyword": "조희대 탄핵 5당 연대하자",
    "sources": [
     "nate"
    ],
-   "articles90": 25,
+   "articles90": 20,
    "recent20": 3,
-   "press": 24,
-   "firstArticleAt": "2026-11-25T02:39:00.000Z",
+   "press": 20,
+   "firstArticleAt": "2026-11-25T02:50:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "민주당, '조희대 대법원장 탄핵' 추진 5당 연대 제안",
+     "press": "newspost.kr",
+     "publishedAt": "2026-11-25T04:10:00.000Z",
+     "link": "https://www.newspost.kr/news/articleView.html?idxno=227766"
+    },
     {
      "title": "김민석 민주당 대표 \"조희대 탄핵, 5당 연대 제안\"…혁신당 \"환영\"",
      "press": "breaknews.com",
@@ -33,44 +71,6 @@
      "press": "ntoday.co.kr",
      "publishedAt": "2026-11-25T04:00:00.000Z",
      "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131118"
-    },
-    {
-     "title": "민주당 김민석 '조희대 탄핵' 신속 추진 위한 5당 연대 제안, \"완전한 내...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-25T03:48:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452881"
-    }
-   ]
-  },
-  {
-   "keyword": "CJ프레시웨이 심의 착수",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 26,
-   "recent20": 3,
-   "press": 22,
-   "firstArticleAt": "2026-11-25T03:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "식자재 납품하려고 복지시설에 기부금…CJ프레시웨이, 제재 착수(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T03:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016462579?sid=102"
-    },
-    {
-     "title": "공정위, CJ프레시웨이 '기부금 영업' 제재 착수…사측 \"부당 유인 사실...",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-25T03:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000555405?sid=101"
-    },
-    {
-     "title": "공정위, CJ프레시웨이 심의 착수…\"복지시설 부당유인 사실 아냐\"",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-25T03:50:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904352"
     }
    ]
   },
@@ -80,30 +80,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 21,
-   "recent20": 8,
-   "press": 19,
-   "firstArticleAt": "2026-11-25T03:02:00.000Z",
-   "exclusive": false,
+   "articles90": 20,
+   "recent20": 7,
+   "press": 18,
+   "firstArticleAt": "2026-11-25T03:16:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "반도체 메가 프로젝트 시동 걸렸는데 '지을 사람'이 없다…정부, 26만 인...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-25T04:06:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328385"
+     "title": "[특징주] 반도체주 줄줄이 급락하는데…삼성바이오·셀트리온 3~4%대 강...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-25T04:16:00.000Z",
+     "link": "https://www.ajunews.com/view/20261125131453257"
     },
     {
-     "title": "반도체팹 건설인력 2030년까지 25만명 필요",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-25T04:02:00.000Z",
-     "link": "https://www.naeil.com/news/read/609984?ref=naver"
+     "title": "‘의대 올인’ 공식 흔들리나⋯최상위권 반도체로 몰린다",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-25T04:14:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2652792"
     },
     {
-     "title": "연세대학교 김관표 교수팀, AI로 비정질 반도체 원자 구조 분석 기술 개...",
-     "press": "lecturernews.com",
-     "publishedAt": "2026-11-25T04:00:00.000Z",
-     "link": "https://www.lecturernews.com/news/articleView.html?idxno=214476"
+     "title": "엔비디아 수장 복귀에도 대중 반도체 수출 규제 강화 움직임",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-25T04:08:00.000Z",
+     "link": "https://www.tokenpost.kr/news/economy/443892"
     }
    ]
   },
@@ -112,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 7,
-   "press": 15,
-   "firstArticleAt": "2026-11-25T02:38:00.000Z",
+   "articles90": 15,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-25T02:48:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -140,46 +140,14 @@
    ]
   },
   {
-   "keyword": "65세 정년연장 입법 촉구",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 27,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-25T02:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 양대노총 \"법으로 보장하는 65세 정년 연장이어야\"",
-     "press": "ilyosisa.co.kr",
-     "publishedAt": "2026-11-25T03:52:00.000Z",
-     "link": "https://www.ilyosisa.co.kr/news/article.html?no=259189"
-    },
-    {
-     "title": "[이로운체크] 정년 65세, 어디까지 왔나...27일 특위 앞두고 '연장 방식...",
-     "press": "eroun.net",
-     "publishedAt": "2026-11-25T03:36:00.000Z",
-     "link": "https://www.eroun.net/news/articleView.html?idxno=96452"
-    },
-    {
-     "title": "[포토] \"65세 법정 정년 연장하라\" 구호 외치는 민주노총-한국노총",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-25T03:20:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451959"
-    }
-   ]
-  },
-  {
    "keyword": "유정연 첫 영화 도전",
    "sources": [
     "nate"
    ],
-   "articles90": 13,
+   "articles90": 11,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T02:42:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-25T02:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,17 +172,55 @@
    ]
   },
   {
+   "keyword": "65세 정년연장 입법 촉구",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T02:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 양대노총 \"법으로 보장하는 65세 정년 연장이어야\"",
+     "press": "ilyosisa.co.kr",
+     "publishedAt": "2026-11-25T03:52:00.000Z",
+     "link": "https://www.ilyosisa.co.kr/news/article.html?no=259189"
+    },
+    {
+     "title": "[이로운체크] 정년 65세, 어디까지 왔나...27일 특위 앞두고 '연장 방식...",
+     "press": "eroun.net",
+     "publishedAt": "2026-11-25T03:36:00.000Z",
+     "link": "https://www.eroun.net/news/articleView.html?idxno=96452"
+    },
+    {
+     "title": "[포토] 양대노총 '65세 정년연장 당장 입법하라!'",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-25T03:20:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261125010009803"
+    }
+   ]
+  },
+  {
    "keyword": "삼성SDI 울산사업장, 우수기업 수상",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T02:40:00.000Z",
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-25T02:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "삼성SDI 울산사업장, '녹색경영 우수기업' 대상 수상",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-25T04:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002446847?sid=105"
+    },
     {
      "title": "[ESG] 삼성SDI 울산사업장, 27년 연속 녹색기업 자격 유지...환경경영 성...",
      "press": "joongangenews.com",
@@ -222,48 +228,10 @@
      "link": "https://www.joongangenews.com/news/articleView.html?idxno=566388"
     },
     {
-     "title": "삼성SDI 울산사업장, '녹색경영 우수기업' 대상 수상",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213703?sid=101"
-    },
-    {
      "title": "삼성SDI 울산사업장, 녹색경영 대상…'27년 연속' 친환경 역량 입증",
      "press": "m-i.kr",
      "publishedAt": "2026-11-25T03:00:00.000Z",
      "link": "https://www.m-i.kr/news/articleView.html?idxno=2023214"
-    }
-   ]
-  },
-  {
-   "keyword": "손정의 대구 방문",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T02:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "손정의 소프트뱅크 회장, 대구 선대 묘소 비공개 방문-내년 초 재방한 ...",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-25T04:00:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95912"
-    },
-    {
-     "title": "소프트뱅크 손정의 선대 고향 대구 동구 방문 뒤늦게 알려져",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-25T02:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887333?sid=102"
-    },
-    {
-     "title": "대구 선영 찾았던 손정의 “내년초 다시 올것”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-25T02:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002835411?sid=102"
     }
    ]
   }
