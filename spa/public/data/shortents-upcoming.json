@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T21:23:39.377Z",
+ "builtAt": "2026-11-25T21:33:42.070Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,18 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 10,
  "candidates": [
-  {
-   "keyword": "관세 15% 유지",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 27,
-   "recent20": 15,
-   "press": 20,
-   "firstArticleAt": "2026-11-25T20:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美, 한국 등 14개 경제주체에 과잉생산 관세…韓 15% 상한 유지",
-     "press": "moneystorm.kr",
-     "publishedAt": "2026-11-25T21:18:00.000Z",
-     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8845"
-    },
-    {
-     "title": "美 ‘호남 반도체 사업’ 관세 근거로 명시...“약속 어기면 25%” 압박...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-25T21:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568075?sid=104"
-    },
-    {
-     "title": "美, 中 등 14개 경제주체에 과잉생산 관세…韓은 ‘15% 상한’ 일단 유지",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-25T21:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728550?sid=104"
-    }
-   ]
-  },
   {
    "keyword": "조희대 탄핵 연대 추진",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-25T20:00:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-25T20:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -67,25 +36,64 @@
      "link": "https://n.news.naver.com/mnews/article/055/0001405889?sid=102"
     },
     {
-     "title": "대법원장 탄핵에 '5당 연대'까지, 다수의 힘으로 사법부를 포위하려는가",
-     "press": "gokorea.kr",
+     "title": "[뉴스분석] 與, 조희대 탄핵 서두르지만…헌재 기각·여론 역풍 우려 해...",
+     "press": "newspim.com",
      "publishedAt": "2026-11-25T21:00:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887269"
+     "link": "https://www.newspim.com/news/view/20261125001196"
     }
    ]
   },
   {
-   "keyword": "가능한 사랑 전도연 여우주연상",
+   "keyword": "김새롬, 남편과 혼인신고",
    "sources": [
-    "signal.bz"
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T20:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "10년만에 재혼 김새롬 \"2세 계획 중…남편 188㎝ 듬직\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T21:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014345746"
+    },
+    {
+     "title": "'재혼' 김새롬, 188cm ♥연하 남편과 혼인신고만 한 진짜 이유..\"2세 계획...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-25T21:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004469879"
+    },
+    {
+     "title": "'재혼' 김새롬 \"연하 남편 키 188㎝\"…혼인신고 서두른 이유?",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-25T20:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005446556"
+    }
+   ]
+  },
+  {
+   "keyword": "전도연 여우주연상 수상",
+   "sources": [
+    "signal.bz",
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 2,
-   "firstArticleAt": "2026-11-25T20:25:00.000Z",
+   "firstArticleAt": "2026-11-25T20:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "손예진은 정해인, 현빈은 정려원..'빈진 부부', 청룡 수상 1년 후 [스타...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-25T21:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490295"
+    },
     {
      "title": "전도연 19년 만의 청룡…조여정·구교환도 수상",
      "press": "bntnews.co.kr",
@@ -93,26 +101,44 @@
      "link": "https://www.bntnews.co.kr/article/view/bnt202611260007"
     },
     {
-     "title": "'가능한 사랑' 청룡 4관왕…연기상 싹쓸이",
+     "title": "설경구 남우주연상…청룡 최초 4회 수상",
      "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-25T20:42:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611260006"
-    },
-    {
-     "title": "청룡영화상 작품상에 '호프'...주연상은 설경구·전도연",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T20:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438165?sid=103"
+     "publishedAt": "2026-11-25T20:40:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611260005"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1503,
-  "matched": 763,
-  "avgLeadMin": 504,
+  "flagged": 1502,
+  "matched": 764,
+  "avgLeadMin": 505,
   "recent": [
+   {
+    "keyword": "美 관세 발표, 韓 15% 유지?",
+    "hitKeyword": "미국 한국 관세 15%",
+    "hitAt": "2026-11-26T06:30:00+09:00",
+    "leadMin": 1381
+   },
+   {
+    "keyword": "뉴욕증시 혼조 마감",
+    "hitKeyword": "뉴욕증시 일제히 급락",
+    "hitAt": "2026-11-26T06:30:00+09:00",
+    "leadMin": 1371
+   },
+   {
+    "keyword": "관세 15% 유지",
+    "hitKeyword": "미국 한국 관세 15%",
+    "hitAt": "2026-11-26T06:30:00+09:00",
+    "leadMin": 389
+   },
+   {
+    "keyword": "15% 관세 유지",
+    "hitKeyword": "미국 한국 관세 15%",
+    "hitAt": "2026-11-26T06:30:00+09:00",
+    "leadMin": 97
+   },
    {
     "keyword": "미국 과잉생산 관세 조사",
     "hitKeyword": "한국 미국 관세 압박",
@@ -148,30 +174,6 @@
     "hitKeyword": "이진우 과외교사 경찰 출석",
     "hitAt": "2026-11-25T23:00:00+09:00",
     "leadMin": 471
-   },
-   {
-    "keyword": "빗썸 해킹 추가 피해",
-    "hitKeyword": "빗썸 해킹 피해 확대",
-    "hitAt": "2026-11-25T23:00:00+09:00",
-    "leadMin": 139
-   },
-   {
-    "keyword": "빗썸 해킹 추가 피해 확인",
-    "hitKeyword": "빗썸 해킹 피해 확대",
-    "hitAt": "2026-11-25T23:00:00+09:00",
-    "leadMin": 49
-   },
-   {
-    "keyword": "배당",
-    "hitKeyword": "삼성전자 배당금 지급",
-    "hitAt": "2026-11-25T22:00:00+09:00",
-    "leadMin": 922
-   },
-   {
-    "keyword": "나인 투 식스",
-    "hitKeyword": "나인투식스 첫방송",
-    "hitAt": "2026-11-25T22:00:00+09:00",
-    "leadMin": 502
    }
   ]
  }
