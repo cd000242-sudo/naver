@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T02:30:11.946Z",
+ "builtAt": "2026-11-25T03:07:25.856Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,294 +8,455 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "김민석 조희대 탄핵 제안",
+   "keyword": "조희대 탄핵 5당 연대 제안",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 70,
-   "recent20": 12,
-   "press": 63,
-   "firstArticleAt": "2026-11-25T01:04:00.000Z",
+   "articles90": 55,
+   "recent20": 8,
+   "press": 44,
+   "firstArticleAt": "2026-11-25T01:38:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "김민석 \"조희대 대법원장 탄핵 추진 위한 5당 연대 제안\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-25T02:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357952?sid=100"
-    },
-    {
-     "title": "김민석 \"조희대 탄핵 신속 추진 위한 '5당 연대' 공식 제안\"…여론조사...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-25T02:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522357?sid=100"
-    },
-    {
-     "title": "김민석, '조희대 탄핵' 진보5당 연대 제안...\"시민사회와도 연대\"",
+     "title": "창원지법, 오늘 전체 판사회의…'대법원장 탄핵' 관련 입장 나오나",
      "press": "joseilbo.com",
-     "publishedAt": "2026-11-25T02:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394781?sid=100"
+     "publishedAt": "2026-11-25T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394785?sid=100"
+    },
+    {
+     "title": "서두르는 민주… 진보 4당에 ‘탄핵 공동추진’ 제안",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-25T02:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835428?sid=100"
+    },
+    {
+     "title": "김민석, 조희대 탄핵 '5당 연대' 제안…금주 소추안 윤곽 전망",
+     "press": "hg-times.com",
+     "publishedAt": "2026-11-25T02:56:00.000Z",
+     "link": "https://www.hg-times.com/news/articleView.html?idxno=307334"
     }
    ]
   },
   {
-   "keyword": "지속가능성 연속 수상",
+   "keyword": "노소영, 최태원 화해 요청 거부",
    "sources": [
     "nate"
    ],
-   "articles90": 47,
-   "recent20": 10,
-   "press": 41,
-   "firstArticleAt": "2026-11-25T01:02:00.000Z",
+   "articles90": 44,
+   "recent20": 12,
+   "press": 43,
+   "firstArticleAt": "2026-11-25T02:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한샘, 지속가능성보고서상 2년 연속 수상…ESG 공시 기준 반영",
-     "press": "newslock.co.kr",
-     "publishedAt": "2026-11-25T02:28:00.000Z",
-     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=140912"
+     "title": "노소영, 최태원 '9440억원 화해 카드' 거부…\"즉각 상고 취하하라\"",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-25T03:06:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=730936"
     },
     {
-     "title": "[카드] 교보증권, 대한민국 지속가능성대회 '우수 보고서상' 5년 연속 수...",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-25T02:26:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=756430"
+     "title": "노소영 관장 최태원 회장 화해권고 거부..\"진정성 있으면 상고 취하하라...",
+     "press": "kpenews.com",
+     "publishedAt": "2026-11-25T03:02:00.000Z",
+     "link": "https://kpenews.com/View.aspx?No=4328493"
     },
     {
-     "title": "교보증권, 5년 연속 대한민국 지속가능성보고서상 영예…ESG 공시 투명성...",
-     "press": "widedaily.com",
-     "publishedAt": "2026-11-25T02:20:00.000Z",
-     "link": "https://www.widedaily.com/news/articleView.html?idxno=304722"
+     "title": "노소영, 최태원 ‘9440억원 화해권고요청’ 거부…“진정성 있다면 상고...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-25T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833867?sid=102"
     }
    ]
   },
   {
-   "keyword": "국민은행",
+   "keyword": "정년연장",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 50,
+   "recent20": 2,
+   "press": 27,
+   "firstArticleAt": "2026-11-25T01:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "노동계 “정년연장 연내 입법 관철 때까지 투쟁”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-25T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835452?sid=102"
+    },
+    {
+     "title": "연말 코앞인데 '정년연장' 노사 평행선...'연내 입법' 접점 찾을까",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-25T02:50:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=316174"
+    },
+    {
+     "title": "양대노총, 65세 법정 정년연장 연내 입법 처리 촉구 기자회견",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T02:46:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125000621"
+    }
+   ]
+  },
+  {
+   "keyword": "김민석 대표 발언",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 51,
+   "recent20": 4,
+   "press": 26,
+   "firstArticleAt": "2026-11-25T01:39:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "與 친청계, 김민석에 \"신천지 3자 연합 의혹 매듭지어야\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-25T02:56:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=173044"
+    },
+    {
+     "title": "김민석, 조희대 탄핵 추진 5당 연대 공식 제안",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-25T02:54:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=368032"
+    },
+    {
+     "title": "박선원 \"최고위 단결 노력\" 사과에도…친청계 \"대표가 결자해지\"",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-25T02:54:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321773&inflow=N"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 시험지 5년 보관 추진",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-25T01:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "교육부, 수능 시험지 보관기한 1년 → 5년 추진",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-25T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835448?sid=102"
+    },
+    {
+     "title": "세무냥이, 리트냥이에 결국…교욱부, 수능 관련 '이것' 5년으로 늘린다",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-25T02:54:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1177606"
+    },
+    {
+     "title": "'작년 수능 시험지 보존' 긴급 지시했지만…17.8%는 이미 '폐기'",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-25T02:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142999?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "디트로이트 타이거스",
    "sources": [
     "google"
    ],
-   "articles90": 41,
-   "recent20": 10,
-   "press": 40,
-   "firstArticleAt": "2026-11-25T01:04:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-25T01:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "KB국민은행, 국내 수출기업 금융 지원···'Korea Grand Sourcing Fair' 참...",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-25T02:26:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244146"
+     "title": "김하성, MLB 디트로이트에 새 둥지… 1년 500만달러에 합의",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-25T03:06:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451926"
     },
     {
-     "title": "국민은행, 12조 규모 서울 구금고 품었다…우리은행 8곳 내줘",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-25T02:26:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904337"
+     "title": "김하성 디트로이트 계약, 왜 수락했나",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T02:42:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285725"
     },
     {
-     "title": "[더밸류 브리핑] 오늘의 은행 소식...KB국민은행·IBK기업은행·SC제일은...",
-     "press": "thevaluenews.co.kr",
-     "publishedAt": "2026-11-25T02:24:00.000Z",
-     "link": "http://www.thevaluenews.co.kr/news/view.php?idx=203631"
+     "title": "최악 부진에도 살아남은 김하성…디트로이트서 부활의 날개 펼까",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T02:33:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/003/0014344097"
     }
    ]
   },
   {
-   "keyword": "수능 시험지 보관 5년 추진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 27,
-   "recent20": 3,
-   "press": 27,
-   "firstArticleAt": "2026-11-25T01:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "교육부, 수능 시험지 보관기간 1년→5년 연장 추진",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-25T02:18:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=543234"
-    },
-    {
-     "title": "작년 수능 시험지 상당수 이미 폐기.. 강원은 전량 폐기",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-25T02:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000087050?sid=102"
-    },
-    {
-     "title": "수능 시험지 보관 5년으로 늘린다··· 교육부, 부정행위 사후 조사 강...",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-25T02:14:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=562044"
-    }
-   ]
-  },
-  {
-   "keyword": "LG 케네디와 재계약",
+   "keyword": "원전 공론화 중단하라!",
    "sources": [
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 3,
-   "press": 24,
-   "firstArticleAt": "2026-11-25T01:03:00.000Z",
+   "articles90": 23,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-25T01:38:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "'2만달러 단기 알바'에서 '20만달러 필승조'로…LG, 케네디와 재계약",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T02:24:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/079/0004213683"
+     "title": "갈길 바쁜 원전 공론화…첫 행사부터 찬반 토론 무산",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-25T02:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005768673?sid=101"
     },
     {
-     "title": "LG, 아시아쿼터 선수 케네디와 재계약...좌타 스페셜리스트 지켰다",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-25T02:20:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/241/0003543391"
+     "title": "원전 공론화 첫 공개토론회…전력수급 해법 놓고 확대·감축 측 시각차",
+     "press": "electimes.com",
+     "publishedAt": "2026-11-25T02:44:00.000Z",
+     "link": "https://www.electimes.com/news/articleView.html?idxno=375263"
     },
     {
-     "title": "LG, 아시아쿼터 케네디와 재계약",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T02:12:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/052/0002437754"
+     "title": "원전 공론화, 찬성 불참에 토론 무산…기후장관 \"원전 안 쓴 유럽, 전기...",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-25T02:42:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446456"
     }
    ]
   },
   {
-   "keyword": "정청래 송영길 공개 경고",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 20,
-   "recent20": 5,
-   "press": 20,
-   "firstArticleAt": "2026-11-25T01:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정청래 \"입 싼 송영길과 말 섞고 싶지 않아… 李 관련 입 조심하라\"",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-25T02:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193493?sid=100"
-    },
-    {
-     "title": "송영길 “정청래 억울함 원 없이 얘기”…정청래 “입싼 송영길 입조심...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-25T02:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702997?sid=100"
-    },
-    {
-     "title": "정청래 송영길 공개 경고 \"입조심\"…이 대통령 사이비 종교 해산 방침 ...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-25T02:18:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630543"
-    }
-   ]
-  },
-  {
-   "keyword": "한전 고객정보 유출 대책",
+   "keyword": "선저우 24호 발사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 2,
-   "press": 20,
-   "firstArticleAt": "2026-11-25T01:01:00.000Z",
+   "articles90": 14,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-25T01:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전, 정보유출 고객에 최대 1천만원 금융사기 보상보험 제공",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T02:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016462378?sid=102"
+     "title": "‘中 우주굴기 집합’ 선저우 24호 발사… 외국인 우주비행사 첫 탑승",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-25T02:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835421?sid=104"
     },
     {
-     "title": "한전, 고객정보 유출 사고 관련 3단계 보호 대책 가동",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-25T02:18:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1428789"
+     "title": "선저우 24호 유인우주선 발사 성공",
+     "press": "kr.people.com.cn",
+     "publishedAt": "2026-11-25T02:36:00.000Z",
+     "link": "http://kr.people.com.cn/n3/2026/1125/c207467-20522844.html"
     },
     {
-     "title": "한전, 개인정보 유출 2차피해 막는다…금융사기 최대 1000만원 보상",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-25T02:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165577?sid=101"
+     "title": "중국, 외국인 태운 선저우 24호 발사 성공…톈궁 첫 방문",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-25T02:28:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627608"
     }
    ]
   },
   {
    "keyword": "급여 지원",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 10,
-   "recent20": 4,
-   "press": 9,
-   "firstArticleAt": "2026-11-25T01:32:00.000Z",
+   "articles90": 11,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-25T01:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "복지 문턱 낮추는 정부…2030년 생계급여 수급 대상 27만명 확대 전망",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-25T02:28:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848412"
+     "title": "남양주시, 생활·교통·복지 현안 국비 지원 요청…국회에 제도 개선 건...",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-25T02:58:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=770601"
     },
     {
-     "title": "국회 예결위원장 만난 남양주시, 주요사업 국비지원 요청",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T02:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014344054?sid=102"
+     "title": "최현덕 남양주시장, 이광재 예결위원장 만나 국비 지원 요청",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T02:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009309064?sid=102"
     },
     {
-     "title": "남양주시, 복지·교통·재정 현안 해결 지원 요청",
-     "press": "newstown.co.kr",
-     "publishedAt": "2026-11-25T02:14:00.000Z",
-     "link": "http://www.newstown.co.kr/news/articleView.html?idxno=723293"
+     "title": "2027년 중위소득 얼마? 생계급여·의료급여·주거급여 급여지원 확대…...",
+     "press": "christiantoday.co.kr",
+     "publishedAt": "2026-11-25T02:48:00.000Z",
+     "link": "https://www.christiantoday.co.kr/news/378869"
     }
    ]
   },
   {
-   "keyword": "김종철 청장, 영등포 첫 행보",
+   "keyword": "인천 보복살인 송치",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T01:14:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-25T01:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김종철 경찰청장 “범죄 피해자 보호가 제1원칙”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-25T02:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833856?sid=102"
+     "title": "옛 연인 둔기로 살해한 60대 남성...보복살인 혐의로 송치",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-25T02:40:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3042053"
     },
     {
-     "title": "김종철, 취임 첫 현장 행보는 영등포서…'피해자 보호' 강조",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-25T02:06:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321776&inflow=N"
+     "title": "접근금지 풀린 전 연인 살해한 60대…경찰, 보복살인죄 적용",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T02:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009309050?sid=102"
     },
     {
-     "title": "김종철 경찰청장, 취임 첫 행보로 새벽 순찰… \"피해자 보호는 제1원칙...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-25T01:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967617?sid=102"
+     "title": "\"나를 고소해?\" 접근 금지 풀리자 옛 연인 살해…'보복살인' 적용해 송치",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T02:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929731?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 심리치료 중",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T01:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "11일만의 컴백 젠슨 황 “후계자 안키워”… ‘1인 엔비디아’ 고수",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-25T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835434?sid=104"
+    },
+    {
+     "title": "\"매일 1시간 반 심리치료\" 젠슨 황, 심경 고백...승계 계획은 선 그어",
+     "press": "economist.co.kr",
+     "publishedAt": "2026-11-25T02:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/243/0000106270?sid=101"
+    },
+    {
+     "title": "'젠슨 황 효과' 하루 만에 증발...한미 증시 '흔들' [뉴스퀘어10]",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T02:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437745?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "서훈",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-25T01:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 \"가정폭력 처벌, 불원해도 책임 묻도록\"…5·18 서훈 박탈엔 \"당연\"",
+     "press": "hg-times.com",
+     "publishedAt": "2026-11-25T02:58:00.000Z",
+     "link": "https://www.hg-times.com/news/articleView.html?idxno=307336"
+    },
+    {
+     "title": "이 대통령 \" 5·18 진압경찰 등 서훈 박탈 당연, 마지막 한 명까지 역사...",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-25T02:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162215?sid=100"
+    },
+    {
+     "title": "李, 5·18 진압 경찰관 서훈 취소에 “당연한 조치”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-25T01:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207194?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "3기 신도시",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T01:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[아유경제_부동산] 대광위, 신도시 교통 대책 38개 사업 집중 관리…\"광...",
+     "press": "areyou.co.kr",
+     "publishedAt": "2026-11-25T02:52:00.000Z",
+     "link": "http://www.areyou.co.kr/news/articleView.html?idxno=96458"
+    },
+    {
+     "title": "교통·일자리가 ‘신도시 효과’ 갈랐다",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-25T02:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728264?sid=101"
+    },
+    {
+     "title": "철도가 가른 3기 신도시 청약… 부천대장 129대 1, 바로 옆 계양은 미달",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-25T02:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207201?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "연금 개혁",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T01:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“국민연금 3년 더 늦게 받는다” 소문 퍼지자… 정부가 직접 밝힌 내용",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-25T02:50:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1177611"
+    },
+    {
+     "title": "[100세 칼럼] 유족연금 재정 분석도 안 하고 신중론…나태하고 안이한 ...",
+     "press": "newsquest.co.kr",
+     "publishedAt": "2026-11-25T02:04:00.000Z",
+     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=305809"
+    },
+    {
+     "title": "국민연금 수령 나이 68세로 늦춰진다?…정은경 \"검토도 안 해\"",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-25T01:42:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=730917"
     }
    ]
   },
@@ -304,13 +465,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T01:16:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'폭설' 김윤석·박수영, 28일 관객 만난다…2주차 무대인사 확정",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-25T03:04:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784684"
+    },
     {
      "title": "양양군, 폭설·한파 대비 재난 예·경보시설 40곳 전수점검…겨울철 안...",
      "press": "kukinews.com",
@@ -322,22 +489,40 @@
      "press": "job-post.co.kr",
      "publishedAt": "2026-11-25T02:16:00.000Z",
      "link": "https://www.job-post.co.kr/news/articleView.html?idxno=240760"
-    },
-    {
-     "title": "양구군 기습 폭설 대비 실전 대응능력 높인다",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-25T01:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001233259?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1371,
-  "matched": 722,
-  "avgLeadMin": 503,
+  "flagged": 1365,
+  "matched": 719,
+  "avgLeadMin": 487,
   "recent": [
+   {
+    "keyword": "김윤석·구교환 폭설 1위 기록",
+    "hitKeyword": "틈만나면 1위 기록",
+    "hitAt": "2026-11-25T12:00:00+09:00",
+    "leadMin": 3038
+   },
+   {
+    "keyword": "LG 케네디와 재계약",
+    "hitKeyword": "LG 케네디 재계약",
+    "hitAt": "2026-11-25T12:00:00+09:00",
+    "leadMin": 30
+   },
+   {
+    "keyword": "수능 시험지 폐기",
+    "hitKeyword": "시험지 보관 5년 예정",
+    "hitAt": "2026-11-25T11:30:00+09:00",
+    "leadMin": 50
+   },
+   {
+    "keyword": "수능 시험지 보관 5년 추진",
+    "hitKeyword": "시험지 보관 5년 예정",
+    "hitAt": "2026-11-25T11:30:00+09:00",
+    "leadMin": 20
+   },
    {
     "keyword": "연금",
     "hitKeyword": "국민연금 유족연금",
@@ -373,30 +558,6 @@
     "hitKeyword": "이도현 SNS 의미심장 글",
     "hitAt": "2026-11-25T10:30:00+09:00",
     "leadMin": 3682
-   },
-   {
-    "keyword": "김명민 슬픈 열대",
-    "hitKeyword": "슬픈 열대 개봉",
-    "hitAt": "2026-11-25T10:30:00+09:00",
-    "leadMin": 2583
-   },
-   {
-    "keyword": "젠슨 황 복귀 효과",
-    "hitKeyword": "하루짜리 젠슨 황 효과",
-    "hitAt": "2026-11-25T10:30:00+09:00",
-    "leadMin": 151
-   },
-   {
-    "keyword": "젠슨 황 효과 하루 만에 끝",
-    "hitKeyword": "하루짜리 젠슨 황 효과",
-    "hitAt": "2026-11-25T10:30:00+09:00",
-    "leadMin": 131
-   },
-   {
-    "keyword": "젠슨 황 복귀 이틀만에 효과 감소",
-    "hitKeyword": "하루짜리 젠슨 황 효과",
-    "hitAt": "2026-11-25T10:30:00+09:00",
-    "leadMin": 111
    }
   ]
  }
