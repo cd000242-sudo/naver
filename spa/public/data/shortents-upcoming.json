@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T04:17:47.848Z",
+ "builtAt": "2026-11-25T04:27:50.715Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "CJ프레시웨이 심의",
+   "keyword": "CJ프레시웨이 기부금 심의",
    "sources": [
     "daum"
    ],
-   "articles90": 46,
-   "recent20": 5,
-   "press": 41,
+   "articles90": 49,
+   "recent20": 6,
+   "press": 44,
    "firstArticleAt": "2026-11-25T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "공정위, CJ프레시웨이 부당 고객유인 혐의 심의…4990억원 매출 쟁점",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-25T04:12:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=303036"
+     "title": "공정위, '복지시설 리베이트 의혹' CJ프레시웨이 제재 착수… CJ \"사실무...",
+     "press": "nbntv.co.kr",
+     "publishedAt": "2026-11-25T04:26:00.000Z",
+     "link": "https://www.nbntv.co.kr/news/articleView.html?idxno=4027953"
     },
     {
-     "title": "CJ프레시웨이, 복지시설에 기부금 주고 식자재 납품…공정위 제재 착수",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-25T04:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042207?sid=101"
+     "title": "CJ프레시웨이, 공정위 '기부금 영업' 제재에 반박",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-25T04:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165584?sid=101"
     },
     {
-     "title": "'프로핏 부스트'가 뭐길래…공정위·CJ프레시웨이 공방전",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-25T04:08:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446477"
-    }
-   ]
-  },
-  {
-   "keyword": "조희대 탄핵 5당 연대하자",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 20,
-   "recent20": 3,
-   "press": 20,
-   "firstArticleAt": "2026-11-25T02:50:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "민주당, '조희대 대법원장 탄핵' 추진 5당 연대 제안",
-     "press": "newspost.kr",
-     "publishedAt": "2026-11-25T04:10:00.000Z",
-     "link": "https://www.newspost.kr/news/articleView.html?idxno=227766"
-    },
-    {
-     "title": "김민석 민주당 대표 \"조희대 탄핵, 5당 연대 제안\"…혁신당 \"환영\"",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-25T04:06:00.000Z",
-     "link": "http://www.breaknews.com/1253794"
-    },
-    {
-     "title": "[성기노의 뉴스 피처링] 김민석, '5당 연대' 띄웠지만…조희대 탄핵 앞...",
-     "press": "ntoday.co.kr",
-     "publishedAt": "2026-11-25T04:00:00.000Z",
-     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131118"
+     "title": "CJ프레시웨이, 부당유인 혐의로 과징금 위기…공정위 심의 착수",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-25T04:20:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087669"
     }
    ]
   },
@@ -80,30 +48,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 20,
+   "articles90": 21,
    "recent20": 7,
-   "press": 18,
-   "firstArticleAt": "2026-11-25T03:16:00.000Z",
+   "press": 20,
+   "firstArticleAt": "2026-11-25T03:36:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[특징주] 반도체주 줄줄이 급락하는데…삼성바이오·셀트리온 3~4%대 강...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-25T04:16:00.000Z",
-     "link": "https://www.ajunews.com/view/20261125131453257"
+     "title": "가스공사, 국산 AI 반도체 탑재 CCTV로 안전관리 고도화",
+     "press": "energy-news.co.kr",
+     "publishedAt": "2026-11-25T04:26:00.000Z",
+     "link": "https://www.energy-news.co.kr/news/articleView.html?idxno=230078"
     },
     {
-     "title": "‘의대 올인’ 공식 흔들리나⋯최상위권 반도체로 몰린다",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-25T04:14:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652792"
+     "title": "기계연, 반도체 원자층 제어… 차세대 AI 소자 구현",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-25T04:24:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456532"
     },
     {
-     "title": "엔비디아 수장 복귀에도 대중 반도체 수출 규제 강화 움직임",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-25T04:08:00.000Z",
-     "link": "https://www.tokenpost.kr/news/economy/443892"
+     "title": "조정식 국회의장, 일본서 반도체 협력·기업 애로 해소 '세일즈 외교'",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-25T04:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847621?sid=100"
     }
    ]
   },
@@ -112,13 +80,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-25T02:48:00.000Z",
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-25T03:12:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "‘5당 연대’ 띄운 취임 100일 김민석… 당내선 징계 요구에 사퇴 집회...",
+     "press": "mediawatch.kr",
+     "publishedAt": "2026-11-25T04:24:00.000Z",
+     "link": "https://www.mediawatch.kr/news/article.html?no=261870"
+    },
     {
      "title": "[국민의 시선] 취임 100일 맞은 김민석 더불어민주당 대표...당내 갈등 ...",
      "press": "newsworker.co.kr",
@@ -130,32 +104,58 @@
      "press": "naeil.com",
      "publishedAt": "2026-11-25T04:02:00.000Z",
      "link": "https://www.naeil.com/news/read/610022?ref=naver"
-    },
-    {
-     "title": "[성기노의 뉴스 피처링] 김민석, '5당 연대' 띄웠지만…조희대 탄핵 앞...",
-     "press": "ntoday.co.kr",
-     "publishedAt": "2026-11-25T04:00:00.000Z",
-     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131118"
     }
    ]
   },
   {
-   "keyword": "유정연 첫 영화 도전",
+   "keyword": "현대모비스 유럽 수주",
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-25T02:57:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-25T03:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘신병’ 세계관에 트와이스 ‘충돌’‥유정연, 칼각 경례로 배우 데뷔...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-25T03:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190971"
+     "title": "현대모비스, 올해 해외 수주 58% 증가 전망",
+     "press": "autotimes.co.kr",
+     "publishedAt": "2026-11-25T04:22:00.000Z",
+     "link": "http://autotimes.co.kr/detail.php?number=690118&thread=27"
+    },
+    {
+     "title": "현대모비스, 해외수주 20조원 전망…제동·조향·섀시 '글로벌 영토 확...",
+     "press": "megaeconomy.co.kr",
+     "publishedAt": "2026-11-25T04:12:00.000Z",
+     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065585945295434"
+    },
+    {
+     "title": "현대모비스, 유럽·북미서 1조원대 제동·조향장치 공급…올해 수주 20조...",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-25T04:06:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=729365"
+    }
+   ]
+  },
+  {
+   "keyword": "유정연 첫 영화 영광, 많이 부족해",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T03:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "류경수x유정연 합류한 '신병 더 무비', 드라마 인기 이을까[종합]",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-25T04:20:00.000Z",
+     "link": "http://www.joynews24.com/view/2030217"
     },
     {
      "title": "무대→스크린으로…트와이스 정연·더보이즈 영훈·장규리, 첫 영화 동...",
@@ -164,10 +164,74 @@
      "link": "https://m.entertain.naver.com/article/445/0000493082"
     },
     {
-     "title": "[포토]영화에 첫 도전하는 트와이스 정연",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-25T03:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001283324"
+     "title": "‘신병 더 무비’ 유정연, 건강 되찾고 첫 연기 도전…“오래전부터 해...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-25T03:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543399"
+    }
+   ]
+  },
+  {
+   "keyword": "장윤기 사건 징역 3년 구형",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T03:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "공소청, '장윤기 사건' 부실 수사 경찰 팀장에 징역 3년 구형",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T04:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929764?sid=102"
+    },
+    {
+     "title": "'장윤기 부실수사' 전 강력팀장 징역 3년 구형",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-25T04:18:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451966"
+    },
+    {
+     "title": "공소청, ‘장윤기 사건 은폐 의혹’ 경찰에 징역 3 구형",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-25T04:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833875?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "채권",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-25T03:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한은 점도표에 3.75%가 찍힌다면…채권시장 흔들 개수는",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-25T04:26:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2652797"
+    },
+    {
+     "title": "한화투자증권, 채권투자 비대면 이벤트...\"MZ세대 실질 혜택 이벤트에 ...",
+     "press": "thebigdata.co.kr",
+     "publishedAt": "2026-11-25T04:22:00.000Z",
+     "link": "https://www.thebigdata.co.kr/view.php?ud=202611251318343125d0a8833aad_23"
+    },
+    {
+     "title": "피치 \"연준 12월 인상 뒤 내년 동결…채권 금리, 올해 고점보다 완화\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-25T04:02:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446474"
     }
    ]
   },
@@ -176,10 +240,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T02:50:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-25T03:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -196,49 +260,49 @@
      "link": "https://www.eroun.net/news/articleView.html?idxno=96452"
     },
     {
-     "title": "[포토] 양대노총 '65세 정년연장 당장 입법하라!'",
-     "press": "asiatoday.co.kr",
+     "title": "[포토] \"65세 법정 정년 연장하라\" 구호 외치는 민주노총-한국노총",
+     "press": "newscj.com",
      "publishedAt": "2026-11-25T03:20:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261125010009803"
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451959"
     }
    ]
   },
   {
-   "keyword": "삼성SDI 울산사업장, 우수기업 수상",
+   "keyword": "이종석 정보위원회 출석",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T02:50:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-25T03:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성SDI 울산사업장, '녹색경영 우수기업' 대상 수상",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-25T04:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002446847?sid=105"
+     "title": "이종석 국가정보원장, 정보위원회 전체회의 출석",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014344234?sid=100"
     },
     {
-     "title": "[ESG] 삼성SDI 울산사업장, 27년 연속 녹색기업 자격 유지...환경경영 성...",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-25T04:06:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566388"
+     "title": "정보위원회 전체회의 출석하는 이종석 국가정보원장",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014344233?sid=100"
     },
     {
-     "title": "삼성SDI 울산사업장, 녹색경영 대상…'27년 연속' 친환경 역량 입증",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-25T03:00:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023214"
+     "title": "정보위원회 전체회의 출석한 이종석 국가정보원장",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014344230?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1372,
+  "flagged": 1378,
   "matched": 717,
   "avgLeadMin": 473,
   "recent": [
