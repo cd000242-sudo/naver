@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T05:18:15.208Z",
+ "builtAt": "2026-11-25T05:28:19.807Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,66 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "술",
+   "keyword": "허서홍 사장 승진",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 16,
-   "recent20": 6,
-   "press": 14,
-   "firstArticleAt": "2026-11-25T03:50:00.000Z",
+   "articles90": 76,
+   "recent20": 14,
+   "press": 65,
+   "firstArticleAt": "2026-11-25T04:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "술집서 합석 거절당하자 강제추행…현직 경찰관 입건 전 조사",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-25T05:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133737?sid=102"
+     "title": "'오너 4세' 허서홍 GS리테일 사장 승진…에너지·발전 자회사 새 대표 내...",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-25T05:26:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82732"
     },
     {
-     "title": "'술 취해 난동' 피의자 제압하려다 상해입힌 경찰관 징역형 집유",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T05:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016462737?sid=102"
+     "title": "‘오너 4세’ 허서홍 GS리테일 사장 승진…주요 계열사 대표이사 유임",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-25T05:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484951?sid=101"
     },
     {
-     "title": "집유기간 술 취해 주점서 난동·경찰관 폭행 30대 항소심도 '징역 2년'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T05:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009309314?sid=102"
+     "title": "허서홍·허주홍·허치홍 승진…GS, 오너 4세 경영 본격화·에너지 CEO 교...",
+     "press": "delighti.co.kr",
+     "publishedAt": "2026-11-25T05:24:00.000Z",
+     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125596"
     }
    ]
   },
   {
-   "keyword": "코리아 핀테크 위크",
+   "keyword": "술",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 22,
+   "articles90": 19,
    "recent20": 7,
-   "press": 13,
-   "firstArticleAt": "2026-11-25T04:00:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-25T04:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "금융 경계 허무는 AI·디지털자산…핀테크 기술 한자리에",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-25T05:16:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087683"
+     "title": "술 취해 지인 살해 후 \"심신상실\" 주장 50대, 징역 25년 선고",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T05:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929791?sid=102"
     },
     {
-     "title": "카카오페이, AI 금융·스테이블코인 사업 확대…코리아 핀테크 위크 202...",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-25T05:16:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065590072739561"
+     "title": "현직 경찰관 술집서 합석 거절당한 뒤 강제추행 의혹…경찰, 내사 착수",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-25T05:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159354?sid=102"
     },
     {
-     "title": "코리아 핀테크 위크 부스 돌아보는 참가자들",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T05:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016462763?sid=101"
+     "title": "'술타기 수법' 직전 술병 낚아챈 경찰...\"꼼수, 통하지 않는다\" [앵커리...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T05:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437840?sid=102"
     }
    ]
   },
@@ -79,40 +79,72 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-25T03:52:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-25T04:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "양대노총 ‘정년 연장’ 압박...“연내 입법 안 되면 대화 없다”",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-25T05:24:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326457/?sc=Naver"
+    },
+    {
+     "title": "양대노총, 정년연장 입법 촉구‥\"해 넘기면 정부와 국회 책임\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-25T05:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537940?sid=102"
+    },
     {
      "title": "노후 소득 공백 우려…노동계 \"정년 65세로 늘려달라\"",
      "press": "shinailbo.co.kr",
      "publishedAt": "2026-11-25T05:06:00.000Z",
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087704"
-    },
-    {
-     "title": "정년연장, 국민연금 68세설의 진실",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T05:02:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285837"
-    },
-    {
-     "title": "연금은 65세, 정년은 60세…정년연장 공백 두고 노사 충돌",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-25T05:00:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3762650"
     }
    ]
   },
   {
-   "keyword": "롯데 수비 캠프 MVP 나승엽, 김기준",
+   "keyword": "신병 더 무비 류경수 호러 코미디",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-25T04:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "스크린으로 무대 넓힌 '신병'…\"실제 병원서 찍다 가위 눌려\"",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-25T05:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273915?sid=103"
+    },
+    {
+     "title": "유정연과 신병즈가 만났다, K군텐츠 '신병' [SQ현장]",
+     "press": "newsq.co.kr",
+     "publishedAt": "2026-11-25T05:04:00.000Z",
+     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=501041"
+    },
+    {
+     "title": "군대가 이렇게 무서울 일? ‘신병 더 무비’, 류경수X유정연과 손잡고 ...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-25T04:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003814356"
+    }
+   ]
+  },
+  {
+   "keyword": "롯데 수비 캠프 MVP 나승엽 김기준",
    "sources": [
     "nate"
    ],
    "articles90": 9,
-   "recent20": 4,
+   "recent20": 0,
    "press": 9,
    "firstArticleAt": "2026-11-25T03:59:00.000Z",
    "exclusive": false,
@@ -163,10 +195,10 @@
      "link": "https://n.news.naver.com/mnews/article/030/0003489637?sid=105"
     },
     {
-     "title": "위성·발사체 넘어 우주바이오까지…우주청, 신기술 4건 지정",
-     "press": "news1.kr",
+     "title": "경량화한 ‘극저온 복합재 추진제 탱크’ 등 4건 ‘우주신기술’ 지정",
+     "press": "dt.co.kr",
      "publishedAt": "2026-11-25T04:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009309177?sid=105"
+     "link": "https://n.news.naver.com/mnews/article/029/0003061067?sid=105"
     }
    ]
   },
@@ -203,38 +235,6 @@
    ]
   },
   {
-   "keyword": "유정연 첫 영화 도전",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T04:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'폐병원'서 촬영… 감독마저 가위눌렸다는 역대급 한국 공포 영화 온다",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-25T05:08:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1177629"
-    },
-    {
-     "title": "유정연과 신병즈가 만났다, K군텐츠 '신병' [SQ현장]",
-     "press": "newsq.co.kr",
-     "publishedAt": "2026-11-25T05:04:00.000Z",
-     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=501041"
-    },
-    {
-     "title": "군대가 이렇게 무서울 일? ‘신병 더 무비’, 류경수X유정연과 손잡고 ...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-25T04:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003814356"
-    }
-   ]
-  },
-  {
    "keyword": "유정연의 스크린 데뷔",
    "sources": [
     "signal.bz"
@@ -242,10 +242,16 @@
    "articles90": 6,
    "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-25T03:55:00.000Z",
+   "firstArticleAt": "2026-11-25T04:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트와이스 유정연, 스크린 데뷔",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T05:20:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285845"
+    },
     {
      "title": "\"알아서 잘해\" 정연, 공승연 응원 갔다 스크린 데뷔..새 '배우 자매' 탄...",
      "press": "starnewskorea.com",
@@ -257,12 +263,38 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-25T04:31:00.000Z",
      "link": "https://www.newspim.com/news/view/20261125000771"
+    }
+   ]
+  },
+  {
+   "keyword": "합석 거절 강제추행 의혹",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T04:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "현직 경찰관 술집서 합석 거절당한 뒤 강제추행 의혹…경찰, 내사 착수",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-25T05:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159354?sid=102"
     },
     {
-     "title": "시즌4까지 간 '신병', 이번엔 영화다…트와이스 정연 스크린 데뷔 [종합...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-25T04:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786110"
+     "title": "술집 합석 거절당하자 강제추행 의혹...현직 경찰 내사",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T04:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437822?sid=102"
+    },
+    {
+     "title": "술집서 합석 거절당하자 강제추행 의혹… 현직 경찰 내사",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-25T04:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967663?sid=102"
     }
    ]
   },
@@ -272,7 +304,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-25T04:04:00.000Z",
    "exclusive": false,
@@ -299,41 +331,41 @@
    ]
   },
   {
-   "keyword": "가계대출 금리 5% 이상",
+   "keyword": "작가 서울시립미술관 이슬기",
    "sources": [
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T04:20:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-25T04:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "가계대출 금리 6개월 연속 올라 5.02%…예금금리는 더 뛰어",
-     "press": "newskr.kr",
-     "publishedAt": "2026-11-25T05:16:00.000Z",
-     "link": "http://www.newskr.kr/news/articleView.html?idxno=108299"
+     "title": "\"사물과 사람의 다정한 교감\"…이슬기 '요모조모 이슬기' 展",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T05:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009309273?sid=103"
     },
     {
-     "title": "[포커스] 주담대 연 5% 턱밑까지…'5%이상 금리' 가계대출 1년새 4배 껑충",
-     "press": "startuptoday.co.kr",
-     "publishedAt": "2026-11-25T05:12:00.000Z",
-     "link": "https://www.startuptoday.co.kr/news/articleView.html?idxno=820068"
+     "title": "익숙한 사물의 새로운 발견…서울시립미술관 '요모조모 이슬기'展",
+     "press": "newswhoplus.com",
+     "publishedAt": "2026-11-25T05:00:00.000Z",
+     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=75341"
     },
     {
-     "title": "은행 가계대출 금리 5% 돌파…5개월 연속 상승세",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-25T04:20:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887090"
+     "title": "속담을 누비고 책에 스파게티를 꽂은 '요모조모 이슬기' 전",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-25T04:18:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=721239"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1388,
+  "flagged": 1393,
   "matched": 720,
   "avgLeadMin": 472,
   "recent": [
