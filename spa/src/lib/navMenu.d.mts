@@ -4,13 +4,14 @@ export const NAV_LOGIN_PATH: string;
 export const LOGIN_EVENT: string;
 
 /** `icon` names one of the eight menu icons (see MenuIcon); the community boards have none. */
-export type NavChild = Readonly<{ key: string; label: string; to: string; icon?: string; desc: string; short?: string; badge?: boolean; silver?: boolean }>;
+/** `boardId` (community rows) names the board the row opens, so a NEW! mark can be put on it. */
+export type NavChild = Readonly<{ key: string; label: string; to: string; icon?: string; desc: string; short?: string; boardId?: string; silver?: boolean }>;
 /** `accent: 'buy'` = the green, gently moving 구매하기 button (a display field, like `featured`). */
 export type NavAccent = 'buy';
 export type NavLinkItem = Readonly<{ type: 'link'; key: string; label: string; to: string; badge?: boolean; featured?: boolean; accent?: NavAccent }>;
 export type NavGroupItem = Readonly<{ type: 'group'; key: string; label: string; badge?: boolean; accent?: NavAccent; items: readonly NavChild[] }>;
 export type NavItem = NavLinkItem | NavGroupItem;
-export type NavSheetRow = Readonly<{ key: string; label: string; to: string; small?: string; badge?: boolean; featured?: boolean; icon?: string; accent?: NavAccent; silver?: boolean }>;
+export type NavSheetRow = Readonly<{ key: string; label: string; to: string; small?: string; boardId?: string; featured?: boolean; icon?: string; accent?: NavAccent; silver?: boolean }>;
 export type NavSheetSection = Readonly<{ title: string | null; badge?: boolean; items: readonly NavSheetRow[] }>;
 
 export const NAV_ITEMS: readonly NavItem[];

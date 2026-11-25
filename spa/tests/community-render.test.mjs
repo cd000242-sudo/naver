@@ -309,6 +309,45 @@ test('sidebar: my activity (nickname, grade badge, score bar, counts), board men
     for (const range of ['0~299점', '300~1,499점', '1,500~4,999점', '5,000~14,999점', '15,000점~']) assert.match(text(html), new RegExp(range));
 });
 
+// [2026-11-25 사장님] 새 글이 올라온 게시판은 목록에서 노란 NEW! — 글 수 왼쪽, 지금 열어 둔 게시판은 제외.
+const rowOfBoard = (html, id) => {
+    const tag = tags(html, 'a').find((candidate) => new RegExp(`board=${id}(?![a-z])`).test(attr(candidate, 'href') || ''));
+    assert.ok(tag, `a row for ${id}`);
+    const from = html.indexOf(tag);
+    return html.slice(from, html.indexOf('</a>', from));
+};
+const markCount = (html) => (html.match(/class="new-mark"/g) || []).length;
+
+test('sidebar: boards with a new post wear NEW! just left of the post count; the open board and quiet boards do not', () => {
+    const { model } = load();
+    const props = { profile: profileOf(), boards: model.boardList(null), boardId: 'free', counts: { free: 3, qna: 2, notice: 4, news: 1 } };
+    const html = render('../../src/components/community/CommunitySidebar.tsx', { ...props, newBoards: { free: true, qna: true, notice: true, secret: true } });
+    assert.equal(markCount(html), 3, 'qna, notice and secret; the open free board is left out');
+    assert.match(rowOfBoard(html, 'qna'), /<span class="cm-tab-end"><span class="new-mark"><span aria-hidden="true">NEW!<\/span><span class="new-mark-sr">새 글 있음<\/span><\/span><em>2<\/em>/);
+    assert.match(rowOfBoard(html, 'notice'), /새 글 있음<\/span><\/span><em>4<\/em>/);
+    assert.equal(markCount(rowOfBoard(html, 'free')), 0);
+    assert.equal(markCount(rowOfBoard(html, 'news')), 0);
+    assert.match(rowOfBoard(html, 'secret'), /시크릿 클래스[\s\S]*new-mark[\s\S]*NEW!/, 'the silver row keeps its lock and gets the mark');
+    assert.equal(markCount(render('../../src/components/community/CommunitySidebar.tsx', props)), 0, 'no news given, no mark');
+    assert.equal(markCount(render('../../src/components/community/CommunitySidebar.tsx', { ...props, newBoards: {} })), 0);
+});
+
+test('sidebar: a NEW! board with no count yet still shows the mark', () => {
+    const { model } = load();
+    const html = render('../../src/components/community/CommunitySidebar.tsx', { profile: profileOf(), boards: model.boardList(null), boardId: 'all', counts: {}, newBoards: { inquiry: true } });
+    assert.match(rowOfBoard(html, 'inquiry'), /NEW!/);
+    assert.doesNotMatch(rowOfBoard(html, 'inquiry'), /<em>/);
+});
+
+test('phone board tabs: a board with a new post wears NEW!, the open tab does not', () => {
+    const { model } = load();
+    const html = render('../../src/components/community/CommunitySidebar.tsx', { boards: model.boardList(null), boardId: 'free', newBoards: { qna: true, free: true, promo: true } }, 'BoardTabs');
+    assert.equal(markCount(html), 2);
+    assert.match(rowOfBoard(html, 'qna'), /질문하기<span class="new-mark"><span aria-hidden="true">NEW!<\/span>/);
+    assert.equal(markCount(rowOfBoard(html, 'free')), 0);
+    assert.equal(markCount(render('../../src/components/community/CommunitySidebar.tsx', { boards: model.boardList(null), boardId: 'free' }, 'BoardTabs')), 0);
+});
+
 test('sidebar: no nickname yet asks for one; a hostile nickname is text', () => {
     const { model } = load();
     const html = render('../../src/components/community/CommunitySidebar.tsx', { profile: profileOf({ nickname: '', needsNickname: true }), boards: model.boardList(null), boardId: 'all', counts: {} });

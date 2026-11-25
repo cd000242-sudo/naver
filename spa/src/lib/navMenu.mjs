@@ -41,11 +41,13 @@ const BOARD_DESC = Object.freeze({
     secret: '올인원 1년 이상 이용자 전용',
 });
 
-/** The new-notice count is about one board: its row carries the badge too, so the reader sees where the news is. */
-const NOTICE_BOARD_ID = 'notice';
+/**
+ * Every board row names its board (`boardId`): the yellow NEW! mark of a board with an unseen post goes by it
+ * (2026-11-25; it replaced the number circle on the 공지사항 row).
+ */
 const boardEntry = (board) => Object.freeze({
     ...entry(`community-${board.id}`, board.label, communityPath({ board: board.id }), undefined, BOARD_DESC[board.id], undefined),
-    ...(board.id === NOTICE_BOARD_ID ? { badge: true } : {}),
+    boardId: board.id,
     // The locked board (시크릿 클래스) wears the silver look everywhere it is listed.
     ...(board.locked ? { silver: true } : {}),
 });
@@ -56,8 +58,8 @@ const boardEntry = (board) => Object.freeze({
  */
 const COMMUNITY_ENTRIES = Object.freeze(boardList(null).flatMap((board) => (board.id === 'promo'
     ? [
-        entry('community-promo', '내 글 홍보 · 네이버', communityPath({ board: 'promo' }), undefined, BOARD_DESC.promo, undefined),
-        entry('community-promo-google', '내 글 홍보 · 구글', communityPath({ board: 'promo', platform: 'google' }), undefined, '구글 블로그 글 알리기', undefined),
+        Object.freeze({ ...entry('community-promo', '내 글 홍보 · 네이버', communityPath({ board: 'promo' }), undefined, BOARD_DESC.promo, undefined), boardId: 'promo' }),
+        Object.freeze({ ...entry('community-promo-google', '내 글 홍보 · 구글', communityPath({ board: 'promo', platform: 'google' }), undefined, '구글 블로그 글 알리기', undefined), boardId: 'promo' }),
     ]
     : [boardEntry(board)])));
 
@@ -111,10 +113,10 @@ export const NAV_MOBILE_SECTIONS = Object.freeze([
         ]),
     }),
     Object.freeze({ title: '함께하기', items: Object.freeze([row('reviews', '수익 후기', '/reviews'), row('qna', '질문하기', QNA_PATH)]) }),
-    // The seven boards sit under the community heading; the new-notice badge rides on the heading.
+    // The seven boards sit under the community heading; the new-notice number rides on the heading, NEW! marks on the rows.
     Object.freeze({
         title: '커뮤니티', badge: true,
-        items: Object.freeze(COMMUNITY_ENTRIES.map((child) => row(child.key, child.label, child.to, undefined, { ...(child.badge ? { badge: true } : {}), ...(child.silver ? { silver: true } : {}) }))),
+        items: Object.freeze(COMMUNITY_ENTRIES.map((child) => row(child.key, child.label, child.to, undefined, { boardId: child.boardId, ...(child.silver ? { silver: true } : {}) }))),
     }),
 ]);
 

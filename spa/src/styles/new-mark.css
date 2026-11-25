@@ -1,0 +1,32 @@
+/*
+ * "NEW!" pill (2026-11-25): the yellow of the 무료체험 button, dark ink on it (about 9.8:1), a small rounded shape.
+ * It must not blink or move: it only stands still where a board holds a post the reader has not seen yet.
+ * The yellow comes from the top bar's token or the community page's token; the literal is the same value.
+ */
+.new-mark {
+    display: inline-flex;
+    align-items: center;
+    flex: none;
+    vertical-align: middle;
+    height: 22px;
+    margin-left: 8px;
+    padding: 0 8px;
+    border-radius: 999px;
+    background: var(--sn-cta, var(--lp-cta, #f5b40a));
+    color: var(--sn-on-cta, var(--lp-on-cta, #1d1605));
+    font-size: 13px;
+    font-weight: 800;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+.new-mark-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Phone list: the mark sits at the right edge, where the number circle used to be. */
+.site-nav-sheet-item .new-mark { margin-left: auto; }
+
+/* Board list: the mark and the post count share the right end, the mark on the left of the count. */
+.cm-tab-end { display: inline-flex; align-items: center; gap: 8px; flex: none; }
+.cm-tab-end .new-mark { margin-left: 0; }
+.cm-tab > span:first-child { min-width: 0; }

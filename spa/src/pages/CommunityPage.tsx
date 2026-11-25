@@ -28,6 +28,7 @@ import { authorOf } from '../lib/communityOutbox';
 import { visibleOutbox } from '../lib/communityPostOutbox';
 import { reportAction } from '../lib/communityReport.mjs';
 import { useBoardFeed } from '../lib/useBoardFeed';
+import { useBoardNewTracking, useNewBoards } from '../lib/useNewBoards';
 import { usePostOutbox } from '../lib/usePostOutbox';
 import { loginPath } from '../lib/siteAuthModel.mjs';
 import { useSiteSession } from '../lib/useSiteSession';
@@ -76,6 +77,12 @@ function CommunityPage() {
         () => (view.post ? [...feed.pinned, ...feed.posts].find((post) => post.id === view.post) ?? findKnownPost(view.post) : null),
         [view.post, feed.pinned, feed.posts],
     );
+
+    // The yellow NEW! marks: this screen reports the rows it received and marks the open board as read (nothing is asked of the server).
+    const newBoards = useNewBoards();
+    const onList = !view.write && !view.post && !editing && !isReportsView(location.search) && !isRewardsView(location.search)
+        && (view.board !== SECRET_BOARD || (profile !== null && secretAccess(profile).allowed));
+    useBoardNewTracking({ board: view.board, listing: onList, feed });
 
     useEffect(() => {
         const previous = document.title;
@@ -148,9 +155,9 @@ function CommunityPage() {
                 </div>
             </header>
             <div className="lp-wrap cm-wrap">
-                <CommunitySidebar profile={profile} boards={boards} boardId={view.board} counts={feed.counts} grades={grades} scoreRules={scoreRules} />
+                <CommunitySidebar profile={profile} boards={boards} boardId={view.board} counts={feed.counts} newBoards={newBoards} grades={grades} scoreRules={scoreRules} />
                 <div className="cm-main">
-                    <BoardTabs boards={boards} boardId={view.board} />
+                    <BoardTabs boards={boards} boardId={view.board} newBoards={newBoards} />
                     {notice ? <p className={`cm-notice${notice.tone === 'info' ? ' is-info' : ''}`} role="status">{notice.text}</p> : null}
                     {levelOpen ? <LevelUpCard profile={profile} hint={writeState.message || '등업 후 쓸 수 있어요.'} onDone={refresh} onClose={() => setLevelOpen(false)} /> : null}
                     {view.board === 'promo' && showList ? <PromoTabs platform={view.platform} sort={view.sort} /> : null}

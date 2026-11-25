@@ -1,8 +1,10 @@
 import { useRef, type Dispatch, type KeyboardEvent, type FocusEvent, type PointerEvent, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { isNavPathActive, isNavGroupActive, type MenuAction, type NavGroupItem } from '../lib/navMenu.mjs';
+import type { BoardNewMap } from '../lib/boardNew.mjs';
 import MenuIcon from './MenuIcon';
 import NewBadge from './NewBadge';
+import NewMark from './NewMark';
 
 function Chevron() {
     return (
@@ -73,10 +75,10 @@ export function NavDropdownShell({ dropKey, open, dispatch, className, triggerCl
     );
 }
 
-type GroupProps = { item: NavGroupItem; pathname: string; search: string; unseenNotices: number; open: boolean; dispatch: Dispatch<MenuAction> };
+type GroupProps = { item: NavGroupItem; pathname: string; search: string; unseenNotices: number; newBoards?: BoardNewMap; open: boolean; dispatch: Dispatch<MenuAction> };
 
 /** A "Product ▾" / "Buy ▾" / "Community ▾" group of the desktop bar. */
-function NavDropdown({ item, pathname, search, unseenNotices, open, dispatch }: GroupProps) {
+function NavDropdown({ item, pathname, search, unseenNotices, newBoards = {}, open, dispatch }: GroupProps) {
     return (
         <NavDropdownShell
             dropKey={item.key}
@@ -98,7 +100,7 @@ function NavDropdown({ item, pathname, search, unseenNotices, open, dispatch }: 
                     >
                         <MenuIcon name={child.icon} />
                         <span>
-                            <b>{child.label}{child.badge ? <NewBadge count={unseenNotices} size="md" /> : null}</b>
+                            <b>{child.label}{child.boardId && newBoards[child.boardId] ? <NewMark /> : null}</b>
                             <small>{child.desc}</small>
                         </span>
                     </Link>

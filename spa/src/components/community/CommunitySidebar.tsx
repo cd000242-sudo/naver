@@ -4,10 +4,12 @@ import { isAssociate } from '../../lib/communityLevel.mjs';
 import type { CommunityProfile } from '../../lib/communitySession';
 import { GRADE_GUIDE, SCORE_RULES, communityPath, gradeProgress, type BoardConfig } from '../../lib/communityModel.mjs';
 import type { GradeEntry } from '../../lib/communityGrades.mjs';
+import type { BoardNewMap } from '../../lib/boardNew.mjs';
 import { useAvatars } from '../../lib/useAvatars';
 import Avatar from './Avatar';
 import { GradeBadge } from './Badges';
 import LockMark from './LockMark';
+import NewMark from '../NewMark';
 
 type Props = {
     /** null = a guest: `guestCard` takes the place of my activity. */
@@ -19,6 +21,8 @@ type Props = {
     boardId: string;
     /** Post counts per board id, as far as they are known. */
     counts: Record<string, number>;
+    /** Boards with a post the reader has not seen: they wear the yellow NEW! mark (the open board never does). */
+    newBoards?: BoardNewMap;
     /** The grade scale (server grades when it sent them); the built-in table when not given. */
     grades?: readonly GradeEntry[];
     /** The score sentence drawn from the server's numbers; the default sentence when not given. */
@@ -66,22 +70,25 @@ function boardEntries(boards: readonly BoardConfig[]) {
 }
 
 /** Desktop side column: my activity, the board menu, the grade guide. */
-function CommunitySidebar({ profile, guestCard = null, hrefOf, boards, boardId, counts, grades = GRADE_GUIDE, scoreRules = SCORE_RULES }: Props) {
+function CommunitySidebar({ profile, guestCard = null, hrefOf, boards, boardId, counts, newBoards = {}, grades = GRADE_GUIDE, scoreRules = SCORE_RULES }: Props) {
     return (
         <aside className="cm-side">
             {profile ? <MyActivity profile={profile} /> : guestCard}
             <nav className="lp-box cm-menu" aria-label="게시판">
                 <h2>게시판</h2>
                 <ul>
-                    {boardEntries(boards).map((entry) => (
-                        <li key={entry.id}>
-                            <Link className={`cm-tab${entry.id === boardId ? ' on' : ''}${entry.locked ? ' cm-silver' : ''}`} to={hrefOf ? hrefOf(entry.id) : communityPath({ board: entry.id })}
-                                aria-current={entry.id === boardId ? 'page' : undefined}>
-                                <span>{entry.label}{entry.locked ? <LockMark /> : null}</span>
-                                {typeof counts[entry.id] === 'number' ? <em>{counts[entry.id]}</em> : null}
-                            </Link>
-                        </li>
-                    ))}
+                    {boardEntries(boards).map((entry) => {
+                        const count = typeof counts[entry.id] === 'number' ? <em>{counts[entry.id]}</em> : null;
+                        return (
+                            <li key={entry.id}>
+                                <Link className={`cm-tab${entry.id === boardId ? ' on' : ''}${entry.locked ? ' cm-silver' : ''}`} to={hrefOf ? hrefOf(entry.id) : communityPath({ board: entry.id })}
+                                    aria-current={entry.id === boardId ? 'page' : undefined}>
+                                    <span>{entry.label}{entry.locked ? <LockMark /> : null}</span>
+                                    {newBoards[entry.id] && entry.id !== boardId ? <span className="cm-tab-end"><NewMark />{count}</span> : count}
+                                </Link>
+                            </li>
+                        );
+                    })}
                 </ul>
             </nav>
             <section className="lp-box cm-guide" aria-labelledby="cm-guide-title">
@@ -108,12 +115,12 @@ function CommunitySidebar({ profile, guestCard = null, hrefOf, boards, boardId, 
 }
 
 /** Phone / narrow screens: the boards as a row of round tabs above the list. */
-export function BoardTabs({ boards, boardId, hrefOf }: { boards: readonly BoardConfig[]; boardId: string; hrefOf?: (id: string) => string }) {
+export function BoardTabs({ boards, boardId, hrefOf, newBoards = {} }: { boards: readonly BoardConfig[]; boardId: string; hrefOf?: (id: string) => string; newBoards?: BoardNewMap }) {
     return (
         <nav className="cm-htabs" aria-label="게시판 바로가기">
             {boardEntries(boards).map((entry) => (
                 <Link key={entry.id} className={`cm-htab${entry.id === boardId ? ' on' : ''}${entry.locked ? ' cm-silver' : ''}`} to={hrefOf ? hrefOf(entry.id) : communityPath({ board: entry.id })}
-                    aria-current={entry.id === boardId ? 'page' : undefined}>{entry.label}{entry.locked ? <LockMark /> : null}</Link>
+                    aria-current={entry.id === boardId ? 'page' : undefined}>{entry.label}{entry.locked ? <LockMark /> : null}{newBoards[entry.id] && entry.id !== boardId ? <NewMark /> : null}</Link>
             ))}
         </nav>
     );

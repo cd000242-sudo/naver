@@ -95,6 +95,15 @@ test('guest list: login card in the side column, private boards link to the logi
     assert.ok(!/href="\/community\?board=free"/.test(html), 'a private board never opens as a list for a guest');
 });
 
+// [2026-11-25 사장님] 손님 화면의 게시판 목록(옆 칸과 휴대폰 탭)에도 같은 노란 NEW!.
+test('guest list: the board menu and the phone tabs carry the NEW! marks they are given', () => {
+    const view = { board: 'all', sort: 'latest', page: 1 };
+    const html = render('../../src/components/community/GuestCommunityView.tsx', { ...viewProps(view), newBoards: { news: true, notice: true } });
+    assert.equal((html.match(/class="new-mark"/g) || []).length, 4, 'two boards, each in the side menu and in the phone tabs');
+    assert.match(html, /공지사항<\/span><span class="cm-tab-end"><span class="new-mark"/);
+    assert.equal((render('../../src/components/community/GuestCommunityView.tsx', viewProps(view)).match(/new-mark/g) || []).length, 0);
+});
+
 test('guest on a private board or the write form: the login screen of today', () => {
     for (const view of [{ board: 'free', sort: 'latest', page: 1 }, { board: 'news', write: true, sort: 'latest', page: 1 }]) {
         const words = text(render('../../src/components/community/GuestCommunityView.tsx', viewProps(view)));

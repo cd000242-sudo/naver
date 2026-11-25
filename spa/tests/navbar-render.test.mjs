@@ -22,6 +22,7 @@ function load(path, hooks, env) {
         if (id.endsWith('.svg')) return { default: id };
         if (id.endsWith('lib/siteOps')) return { GAS_URL: 'https://gas.invalid/exec' };
         if (id.endsWith('lib/useNoticeAlerts')) return { useUnseenNoticeCount: () => env.unseen };
+        if (id.endsWith('lib/useNewBoards')) return { useNewBoards: () => env.newBoards };
         if (id.startsWith('.')) {
             for (const extension of ['', '.tsx', '.ts', '.mjs', '.js']) {
                 const resolved = new URL(`${id}${extension}`, sourceUrl);
@@ -34,7 +35,7 @@ function load(path, hooks, env) {
 }
 
 /** Render the real Navbar at `path`; `forced` pre-sets the reducer state, `session` fakes the stored login. */
-function render(path, { forced = {}, unseen = 0, session = null, community = null } = {}) {
+function render(path, { forced = {}, unseen = 0, session = null, community = null, newBoards = {} } = {}) {
     const hooks = { ...React, useReducer: (reducer, init, initFn) => React.useReducer(reducer, { ...(initFn ? initFn(init) : init), ...forced }) };
     globalThis.localStorage = {
         getItem: (key) => {
@@ -45,7 +46,7 @@ function render(path, { forced = {}, unseen = 0, session = null, community = nul
         setItem() {}, removeItem() {},
     };
     try {
-        const { default: Navbar } = load('../src/components/Navbar.tsx', hooks, { unseen });
+        const { default: Navbar } = load('../src/components/Navbar.tsx', hooks, { unseen, newBoards });
         const { MemoryRouter } = require('react-router-dom');
         return renderToStaticMarkup(React.createElement(MemoryRouter, { initialEntries: [path] }, React.createElement(Navbar)));
     } finally {
@@ -201,6 +202,48 @@ test('new-notice badge sits on the Community group (bar button, sheet heading), 
         assert.doesNotMatch(region.slice(from, region.indexOf('</a>', from)), /role="status"/);
     }
     assert.doesNotMatch(render('/', { unseen: 0 }), /role="status"/);
+});
+
+/** The markup of the first link of `kind` that points at `href` (a part of it, e.g. `?board=free`), up to its closing tag. */
+function rowOf(html, kind, href) {
+    const tag = tagsOf(html, 'a').find((candidate) => candidate.includes(kind) && (attr(candidate, 'href') || '').includes(href));
+    assert.ok(tag, `a ${kind} row for ${href}`);
+    const from = html.indexOf(tag);
+    return html.slice(from, html.indexOf('</a>', from));
+}
+const marks = (html) => (html.match(/class="new-mark"/g) || []).length;
+
+// [2026-11-25 사장님] 새 글이 올라온 게시판 줄에 노란 NEW! — 윗 메뉴 드롭다운과 휴대폰 목록.
+test('NEW! mark: only the rows of boards with a new post wear it, in the dropdown and on the phone list', () => {
+    const { bar, sheet } = regions(render('/', { newBoards: { notice: true, free: true, promo: true } }));
+    for (const [region, kind] of [[bar, 'site-nav-drop-item'], [sheet, 'site-nav-sheet-item']]) {
+        const worn = ['?board=notice', '?board=free', '?board=promo&amp;platform=google'].map((href) => rowOf(region, kind, href));
+        for (const row of worn) assert.match(row, /class="new-mark"><span aria-hidden="true">NEW!<\/span><span class="new-mark-sr">새 글 있음<\/span><\/span>/);
+        const plainPromo = rowOf(region, kind, '?board=promo');
+        assert.equal(marks(plainPromo), 1, 'both promo sub-tabs belong to the promo board');
+        for (const href of ['?board=news', '?board=greeting', '?board=levelup', '?board=qna', '?board=request', '?board=inquiry', '?board=secret']) {
+            assert.equal(marks(rowOf(region, kind, href)), 0, href);
+        }
+        assert.equal(marks(region), 4, 'notice, free and the two promo rows');
+    }
+    assert.match(rowOf(bar, 'site-nav-drop-item', '?board=free'), /자유게시판<span class="new-mark"/, 'right after the name, inside the bold line');
+});
+
+test('NEW! mark: no news on any board, no mark anywhere', () => {
+    assert.equal(marks(render('/', { newBoards: {} })), 0);
+    assert.doesNotMatch(render('/'), /NEW!/);
+});
+
+// [2026-11-25 사장님] 공지사항 줄의 숫자 동그라미는 같은 노란 NEW! 로 — 윗 메뉴 `커뮤니티` 탭의 숫자는 그대로.
+test('the 공지사항 row shows NEW! instead of the number, while the Community tab keeps its number', () => {
+    const { bar, sheet } = regions(render('/', { unseen: 3, newBoards: { notice: true } }));
+    for (const [region, kind] of [[bar, 'site-nav-drop-item'], [sheet, 'site-nav-sheet-item']]) {
+        const row = rowOf(region, kind, '?board=notice');
+        assert.equal(marks(row), 1);
+        assert.doesNotMatch(row, /role="status"|새 소식/, 'no number circle on the row');
+    }
+    assert.match(bar.slice(bar.indexOf('aria-controls="site-nav-drop-community"')).slice(0, 900), /role="status"[^>]*aria-label="새 소식 3건"/);
+    assert.match(sheet.slice(sheet.indexOf('site-nav-sheet-group">커뮤니티')).slice(0, 700), /role="status"[^>]*aria-label="새 소식 3건"/);
 });
 
 // [2026-11-25 사장님] 구매하기 단추는 녹색 강조(클래스 하나), 시크릿 클래스 줄은 은빛 — 다른 곳엔 붙지 않는다.

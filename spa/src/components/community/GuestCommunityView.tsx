@@ -6,6 +6,7 @@ import type { PostItem } from '../../lib/communityData';
 import { guestBoardHref, guestScreen, isLoginReply } from '../../lib/communityGuest.mjs';
 import { ALL_BOARD, boardLabel, communityPath, showWriteButton, type BoardConfig, type CommunityView } from '../../lib/communityModel.mjs';
 import { reportAction } from '../../lib/communityReport.mjs';
+import type { BoardNewMap } from '../../lib/boardNew.mjs';
 import { loginPath } from '../../lib/siteAuthModel.mjs';
 import type { Feed } from '../../lib/useBoardFeed';
 import CommunitySidebar, { BoardTabs } from './CommunitySidebar';
@@ -33,6 +34,8 @@ type Props = {
     /** A post said "members only": the login screen takes the page. */
     blocked?: boolean;
     onBlocked?: () => void;
+    /** Boards with a post the reader has not seen: the board menu and the phone tabs mark them with the yellow NEW!. */
+    newBoards?: BoardNewMap;
 };
 
 const ALL_NOTE = '전체글은 게시판마다 최신 글 20개씩 모아 보여 드려요.';
@@ -42,7 +45,7 @@ const nothing = () => undefined;
  * /community for a visitor who is not logged in: the 공지사항 / 최근 소식 lists and posts, read only. Writing, the other
  * boards and an old members-only server (LOGIN_REQUIRED) show the login screen of today.
  */
-function GuestCommunityView({ view, feed, boards, next, legacy, blocked = false, onBlocked = nothing }: Props) {
+function GuestCommunityView({ view, feed, boards, next, legacy, blocked = false, onBlocked = nothing, newBoards = {} }: Props) {
     const navigate = useNavigate();
     const grades = useMemo(() => gradeGuide(feed.config), [feed.config]);
     const scoreRules = useMemo(() => scoreRulesText(feed.config?.scoreRules), [feed.config]);
@@ -75,9 +78,9 @@ function GuestCommunityView({ view, feed, boards, next, legacy, blocked = false,
             </header>
             <div className="lp-wrap cm-wrap">
                 <CommunitySidebar profile={null} guestCard={<GuestSideCard next={next} />} hrefOf={guestBoardHref}
-                    boards={boards} boardId={view.board} counts={feed.counts} grades={grades} scoreRules={scoreRules} />
+                    boards={boards} boardId={view.board} counts={feed.counts} newBoards={newBoards} grades={grades} scoreRules={scoreRules} />
                 <div className="cm-main">
-                    <BoardTabs boards={boards} boardId={view.board} hrefOf={guestBoardHref} />
+                    <BoardTabs boards={boards} boardId={view.board} hrefOf={guestBoardHref} newBoards={newBoards} />
                     {locked ? <SecretLockCard /> : view.post ? (
                         <GuestPostDetail key={view.post} id={view.post} boards={boards} boardId={view.board} preview={preview} onBlocked={onBlocked} />
                     ) : (

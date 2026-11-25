@@ -119,11 +119,17 @@ test('new-notice badge moved from Home to the Community group', () => {
     assert.deepEqual(flagged, ['community']);
 });
 
-test('the new-notice badge also marks WHERE the news is: the 공지사항 row, in the dropdown and on the phone', () => {
+// [2026-11-25 사장님] 새 글이 있는 게시판 줄에 노란 NEW! — 줄이 어느 게시판인지 알아야 붙일 수 있다. 공지사항 줄의 숫자 동그라미는 NEW! 로 바뀐다.
+test('every community row names its board (the NEW! mark goes by it); the 공지사항 row no longer carries the number badge', () => {
+    const boards = ['notice', 'news', 'greeting', 'levelup', 'qna', 'request', 'inquiry', 'free', 'promo', 'promo', 'secret'];
     const group = NAV_ITEMS.find((item) => item.key === 'community');
-    assert.deepEqual(group.items.filter((child) => child.badge).map((child) => child.key), ['community-notice']);
+    assert.deepEqual(group.items.map((child) => child.boardId), boards, 'both promo sub-tabs belong to the promo board');
+    assert.deepEqual(group.items.filter((child) => child.badge).map((child) => child.key), []);
     const sheet = NAV_MOBILE_SECTIONS.find((section) => section.title === '커뮤니티');
-    assert.deepEqual(sheet.items.filter((row) => row.badge).map((row) => row.key), ['community-notice']);
+    assert.deepEqual(sheet.items.map((row) => row.boardId), boards);
+    assert.deepEqual(sheet.items.filter((row) => row.badge).map((row) => row.key), []);
+    const others = NAV_MOBILE_SECTIONS.filter((section) => section.title !== '커뮤니티').flatMap((section) => section.items);
+    assert.deepEqual(others.filter((row) => row.boardId).map((row) => row.key), [], 'rows outside the community list have no board');
 });
 
 test('mobile sheet lists every destination once, under headed groups, nothing collapsed', () => {

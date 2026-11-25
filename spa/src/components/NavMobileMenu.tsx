@@ -1,8 +1,10 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { NAV_CTA, NAV_MOBILE_SECTIONS, isNavPathActive } from '../lib/navMenu.mjs';
+import type { BoardNewMap } from '../lib/boardNew.mjs';
 import MenuIcon from './MenuIcon';
 import NewBadge from './NewBadge';
+import NewMark from './NewMark';
 import { NavSheetAccount, NavSheetWho, type NavAccountApi } from './NavAccount';
 
 type Props = {
@@ -10,6 +12,8 @@ type Props = {
     pathname: string;
     search: string;
     unseenNotices: number;
+    /** Boards with a post the reader has not seen: their rows wear the yellow NEW! mark. */
+    newBoards?: BoardNewMap;
     account: NavAccountApi;
     /** Close the sheet (every row and button calls this, even when the page does not change). */
     onClose: () => void;
@@ -20,7 +24,7 @@ type Props = {
  * headings — nothing collapsed. It is `position: fixed` (see navbar.css), so none of its ancestors may use
  * filter / backdrop-filter / transform, which would clip it to the bar's box.
  */
-function NavMobileMenu({ open, pathname, search, unseenNotices, account, onClose }: Props) {
+function NavMobileMenu({ open, pathname, search, unseenNotices, newBoards = {}, account, onClose }: Props) {
     return (
         <nav className="site-nav-sheet" id="site-nav-sheet" aria-label="전체 메뉴" hidden={!open}>
             <div className="site-nav-sheet-in">
@@ -49,7 +53,7 @@ function NavMobileMenu({ open, pathname, search, unseenNotices, account, onClose
                                 <MenuIcon name={row.icon} small />
                                 <span>{row.label}</span>
                                 {row.small && <small>{row.small}</small>}
-                                {row.badge && <NewBadge count={unseenNotices} size="md" />}
+                                {row.boardId && newBoards[row.boardId] ? <NewMark /> : null}
                             </Link>
                         ))}
                     </Fragment>

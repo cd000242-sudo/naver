@@ -5,6 +5,7 @@ import {
     isNavPathActive, menuReducer, type NavLinkItem,
 } from '../lib/navMenu.mjs';
 import { useUnseenNoticeCount } from '../lib/useNoticeAlerts';
+import { useNewBoards } from '../lib/useNewBoards';
 import NavDropdown from './NavDropdown';
 import NavMobileMenu from './NavMobileMenu';
 import { NavAccountBar, useNavAccount } from './NavAccount';
@@ -25,6 +26,7 @@ function Navbar() {
     const burgerRef = useRef<HTMLButtonElement>(null);
     const { pathname, search } = useLocation();
     const unseenNotices = useUnseenNoticeCount();
+    const newBoards = useNewBoards();
     const account = useNavAccount(pathname);
 
     useEffect(() => { dispatch({ type: 'route-change' }); }, [pathname]);
@@ -87,7 +89,7 @@ function Navbar() {
                         {NAV_ITEMS.map((item) => (
                             <li key={item.key}>
                                 {item.type === 'group' ? (
-                                    <NavDropdown item={item} pathname={pathname} search={search} unseenNotices={unseenNotices} open={state.dropdown === item.key} dispatch={dispatch} />
+                                    <NavDropdown item={item} pathname={pathname} search={search} unseenNotices={unseenNotices} newBoards={newBoards} open={state.dropdown === item.key} dispatch={dispatch} />
                                 ) : (
                                     <NavBarLink item={item} pathname={pathname} search={search} unseenNotices={unseenNotices} onNavigate={closeAll} />
                                 )}
@@ -117,7 +119,7 @@ function Navbar() {
                 </div>
             </div>
 
-            <NavMobileMenu open={state.mobileOpen} pathname={pathname} search={search} unseenNotices={unseenNotices} account={account} onClose={closeAll} />
+            <NavMobileMenu open={state.mobileOpen} pathname={pathname} search={search} unseenNotices={unseenNotices} newBoards={newBoards} account={account} onClose={closeAll} />
         </header>
     );
 }
