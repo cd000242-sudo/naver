@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T12:30:53.980Z",
+ "builtAt": "2026-11-25T12:40:57.010Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 35,
+   "articles90": 29,
    "recent20": 3,
-   "press": 35,
-   "firstArticleAt": "2026-11-25T11:01:00.000Z",
+   "press": 29,
+   "firstArticleAt": "2026-11-25T11:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "빗썸, 해킹 사고 기간 1시간이라더니…2주 동안 털렸다",
+     "press": "insightkorea.co.kr",
+     "publishedAt": "2026-11-25T12:34:00.000Z",
+     "link": "https://www.insightkorea.co.kr/news/articleView.html?idxno=259784"
+    },
     {
      "title": "빗썸 정보유출 피해 늘어…해킹 보름 넘게 파악 못 해",
      "press": "daejonilbo.com",
@@ -33,27 +39,28 @@
      "press": "itdaily.kr",
      "publishedAt": "2026-11-25T12:22:00.000Z",
      "link": "https://www.itdaily.kr/news/articleView.html?idxno=243208"
-    },
-    {
-     "title": "빗썸 해킹 피해 더 컸다…보름 넘게 뚫리고도 몰랐다",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-25T12:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609887?sid=101"
     }
    ]
   },
   {
-   "keyword": "이재명 대통령 방문한 공적주택",
+   "keyword": "대림골목시장 이재명 대통령",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 19,
-   "recent20": 4,
-   "press": 16,
-   "firstArticleAt": "2026-11-25T11:01:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T11:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이재명 대통령, 은평서 공적주택 현장 간담회 가져",
+     "press": "news.lghellovision.net",
+     "publishedAt": "2026-11-25T12:34:00.000Z",
+     "link": "http://news.lghellovision.net/news/articleView.html?idxno=563776"
+    },
     {
      "title": "이 대통령, 은평 대림골목시장 깜짝 방문…장바구니 물가 점검",
      "press": "etoday.co.kr",
@@ -61,29 +68,22 @@
      "link": "https://www.etoday.co.kr/news/view/2653033"
     },
     {
-     "title": "이재명 대통령, 공적임대주택 대개편 예고…중산층 선택지로 개선",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-25T12:24:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3763208"
-    },
-    {
-     "title": "李대통령 \"재원 부족해 공적주택 못 짓는 일 없을 것…문제는 택지\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T12:16:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125001318"
+     "title": "李대통령, 은평 대림골목시장 깜짝 방문…체감 경기 청취",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-25T12:06:00.000Z",
+     "link": "https://www.ajunews.com/view/20261125205859672"
     }
    ]
   },
   {
    "keyword": "전광훈 구속영장 청구",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T11:09:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-25T11:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,50 +140,23 @@
    ]
   },
   {
-   "keyword": "청룡영화상",
+   "keyword": "맹승지 의사 남친 결혼 준비",
    "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 17,
-   "recent20": 17,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T12:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[청룡영화상] '가능한 사랑' 이창동-오정미, 각본상 \"설경구→전도연, ...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-25T12:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004469661"
-    },
-    {
-     "title": "음문석·조인성, 청룡영화상 짝꿍",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T12:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009310509"
-    },
-    {
-     "title": "청룡영화상 참석한 유해진",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T12:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/001/0016463906"
-    }
-   ]
-  },
-  {
-   "keyword": "맹승지, 의사 남친과 결혼 준비 중",
-   "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-25T11:07:00.000Z",
+   "firstArticleAt": "2026-11-25T11:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "맹승지, 의사 남친과 결혼…예식장 예약 완료",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T12:34:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286249"
+    },
     {
      "title": "맹승지 결혼 준비 돌입…예비 신랑과 다정한 투샷",
      "press": "mk.co.kr",
@@ -195,22 +168,46 @@
      "press": "stoo.com",
      "publishedAt": "2026-11-25T11:28:00.000Z",
      "link": "http://www.stoo.com/article.php?aid=110093672822"
-    },
-    {
-     "title": "맹승지, ♥의사 연인과 결혼 305일 전…\"대문자 J 남친, 예식장 뚝딱 예...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T11:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084038"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1510,
-  "matched": 771,
-  "avgLeadMin": 504,
+  "flagged": 1511,
+  "matched": 776,
+  "avgLeadMin": 502,
   "recent": [
+   {
+    "keyword": "코리아 핀테크 위크 2026",
+    "hitKeyword": "청룡영화상 2026",
+    "hitAt": "2026-11-25T21:30:00+09:00",
+    "leadMin": 402
+   },
+   {
+    "keyword": "이정효 감독 질문 답변",
+    "hitKeyword": "이정효 수원 1부 승격",
+    "hitAt": "2026-11-25T21:30:00+09:00",
+    "leadMin": 281
+   },
+   {
+    "keyword": "핀테크 위크 2026 개막",
+    "hitKeyword": "청룡영화상 2026",
+    "hitAt": "2026-11-25T21:30:00+09:00",
+    "leadMin": 271
+   },
+   {
+    "keyword": "이정효 감독의 수원 삼성 변화",
+    "hitKeyword": "이정효 수원 1부 승격",
+    "hitAt": "2026-11-25T21:30:00+09:00",
+    "leadMin": 182
+   },
+   {
+    "keyword": "청룡영화상",
+    "hitKeyword": "청룡영화상 2026",
+    "hitAt": "2026-11-25T21:30:00+09:00",
+    "leadMin": 29
+   },
    {
     "keyword": "주주",
     "hitKeyword": "반도체주 주가 폭락",
@@ -240,36 +237,6 @@
     "hitKeyword": "반도체주 급락 코스피",
     "hitAt": "2026-11-25T20:00:00+09:00",
     "leadMin": 170
-   },
-   {
-    "keyword": "코스피 6%대 급락",
-    "hitKeyword": "반도체주 급락 코스피",
-    "hitAt": "2026-11-25T20:00:00+09:00",
-    "leadMin": 132
-   },
-   {
-    "keyword": "부산 인재개발원장 명퇴",
-    "hitKeyword": "인재개발원장 명퇴 신청",
-    "hitAt": "2026-11-25T20:00:00+09:00",
-    "leadMin": 50
-   },
-   {
-    "keyword": "음악실 방화 20대 징역 2년",
-    "hitKeyword": "모친 흉기 20대 남성 징역",
-    "hitAt": "2026-11-25T19:00:00+09:00",
-    "leadMin": 4876
-   },
-   {
-    "keyword": "초등학교 방화 20대 징역 2년",
-    "hitKeyword": "모친 흉기 20대 남성 징역",
-    "hitAt": "2026-11-25T19:00:00+09:00",
-    "leadMin": 4856
-   },
-   {
-    "keyword": "삼성증권 8241명 정보 유출",
-    "hitKeyword": "앨리스 황 정보 유출",
-    "hitAt": "2026-11-25T19:00:00+09:00",
-    "leadMin": 3153
    }
   ]
  }
