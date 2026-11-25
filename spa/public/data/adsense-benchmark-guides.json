@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T20:24:14.359Z",
+  "generatedAt": "2026-11-25T20:36:41.042Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -1841,44 +1841,6 @@
           "askedAt": "2026.02.21"
         }
       ]
-    },
-    {
-      "id": "af66329a11bdec65",
-      "urls": [
-        "https://hanoelswould.com/entry/%EA%B3%A8%ED%94%84-%EC%9E%85%EB%AC%B8-%EC%84%B8%ED%8A%B8%EB%B6%80%ED%84%B0-%EB%A0%88%EC%8A%A8-%EB%B9%84%EC%9A%A9%EA%B9%8C%EC%A7%80-%EC%B4%88%EB%B3%B4%EC%9E%90%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%AA%A8%EB%93%A0-%EA%B2%83",
-        "https://luvgg.com/etf-investment-risk-checklist/",
-        "https://infobros.tistory.com/entry/%EA%B8%88-1%EB%83%A5-%EC%8B%9C%EC%84%B8"
-      ],
-      "guide": {
-        "direction": "①검색자는 골프를 처음 시작할 때 세트를 통째로 사야 하는지, 레슨비까지 합쳐 총비용이 얼마나 드는지 몰라 검색한다. ②'모든 것'을 내세운 고수 글들은 포괄적이지만 예산대별 세트 가격이나 레슨 횟수별 비용을 표로 정리해주지 않는다. ③독자는 예산별 입문세트 비교표와 레슨 단계별 비용표, 구매부터 첫 라운딩까지 순서로 글을 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "예산대별 입문 세트 가격 비교표(확인 필요: 골프용품 브랜드·매장 공식가)",
-          "골프연습장 레슨비 1회·월 단위 비용(확인 필요: 연습장 요금표)",
-          "스크린골프와 필드 골프 비용 차이(확인 필요: 업체 공시가)",
-          "세트 구매부터 첫 라운딩까지 단계별 체크리스트"
-        ],
-        "mustAvoid": [
-          "레슨 없이 독학만으로 충분하다고 과장하는 것",
-          "스크린골프와 필드 골프의 비용 구조를 뭉뚱그려 혼동시키는 것"
-        ],
-        "checkBefore": [
-          "골프용품 매장·브랜드 공식 가격표 확인",
-          "골프연습장 레슨 요금 공시 확인",
-          "스크린골프·필드 그린피 비교 자료 확인"
-        ],
-        "solves": [
-          "세트부터 사야 할지 몰라 시작을 망설임 → 예산별 입문세트 구성 비교표로 바로 선택하게 한다",
-          "레슨비가 얼마나 드는지 몰라 비용을 가늠 못 함 → 횟수·기간별 레슨 비용표로 총비용을 계산하게 한다"
-        ],
-        "actionTitles": [
-          "골프 입문 세트 추천과 레슨 비용까지 한 번에 비교하기",
-          "골프 레슨 비용이 얼마나 드는지 궁금하면 이렇게 계산"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "10df54b53b022152",
@@ -4827,47 +4789,6 @@
           "askedAt": "2019.07.07"
         }
       ]
-    },
-    {
-      "id": "dcce97a96949a90b",
-      "urls": [
-        "https://beyond-the-story.tistory.com/entry/%EC%8A%A4%EC%8B%9C%EC%9E%90%EB%A1%9C-%EA%B5%AD%EB%82%B4-%EB%B0%98%EC%9E%85-%ED%97%88%EC%9A%A9-%EA%B8%B0%EC%A4%80%EF%BD%9C%EB%A7%88%EC%9A%B4%EC%9E%90%EB%A1%9C-%EC%B5%9C%EB%8C%80-3%EA%B0%9C%EC%9B%94%EB%B6%84-%EC%A1%B0%EA%B1%B4",
-        "https://bongbong200.com/entry/%EB%8C%80%EB%A7%88%EB%8F%84-%EB%A7%88%EC%9A%B4%EC%9E%90%EB%A1%9C-%EC%B2%98%EB%B0%A9-%EB%B0%8F-%ED%95%9C%EA%B5%AD-%EB%B0%98%EC%9E%85-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%8A%A4%EC%8B%9C%EC%9E%90%EB%A1%9C-%ED%98%84%EC%A7%80-%EC%88%98%EB%A0%B9%EB%B2%95%C2%B7%EC%84%B8%EA%B4%80-%ED%86%B5%EA%B4%80-%EA%B8%B0%EC%A4%80%C2%B7%EB%B9%84%EC%9A%A9-%EC%99%84%EB%B2%BD-%EA%B0%80%EC%9D%B4%EB%93%9C",
-        "https://maccrey.tistory.com/entry/%EC%9D%BC%EB%B3%B8-%EB%A7%88%EC%9A%B4%EC%9E%90%EB%A1%9C-6%EB%A7%8C-%EC%9B%90%EC%9D%B4%EB%9D%BC%EB%8D%94%EB%8B%88%E2%80%A62026%EB%85%84-%ED%95%B4%EC%99%B8-%EB%B0%98%EC%9E%85-%ED%97%88%EC%9A%A9-12%EA%B0%9C%EA%B9%8C%EC%A7%80-%EA%B0%80%EB%8A%A5%ED%95%A0%EA%B9%8C-%EA%B0%80%EA%B2%A9%C2%B7%ED%86%B5%EA%B4%80%C2%B7%EB%B6%80%EC%9E%91%EC%9A%A9-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "스시자로라는 낯선 이름과 3개월분 반입이라는 조건이 뭘 뜻하는지 몰라 검색하는 사람이 많다. 고수 블로그들은 6만원·12개 같은 가격·수량 루머만 던지고 반입 허용 조건과 필요 서류는 명확히 정리하지 못했다. 이 글은 3개월분 반입 조건과 세관 통관 서류를 순서대로 정리해 바로 확인하게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "마운자로 최대 3개월분까지 반입 허용된다는 조건",
-          "스시자로가 정식 제품명인지 현지 별칭인지(확인 필요: 원문 기사)",
-          "세관 통관 시 요구되는 처방전·진단서 등 서류",
-          "6만원·12개라는 가격·수량 보도(확인 필요: 출처 기사)"
-        ],
-        "mustAvoid": [
-          "스시자로를 공식 브랜드명처럼 단정해서 서술",
-          "가격·수량을 확정 사실처럼 써서 오인 구매 유도",
-          "마약류 반입 규정과 혼동되는 표현"
-        ],
-        "checkBefore": [
-          "원문 기사에서 스시자로가 가리키는 정확한 제품·맥락",
-          "식약처·관세청의 자가치료 의약품 3개월분 반입 기준 고시 원문",
-          "6만원·12개 가격·수량 보도 출처"
-        ],
-        "solves": [
-          "스시자로가 뭔지 몰라 검색 → 마운자로와의 관계 설명(확인 필요 표시)",
-          "반입 가능 기간이 3개월인지 헷갈림 → 반입 허용 기준 정리",
-          "세관에서 걸릴까 걱정 → 필요 서류 체크리스트 제공"
-        ],
-        "actionTitles": [
-          "마운자로 국내 반입 3개월분 조건 확인하는 법",
-          "스시자로가 마운자로와 같은지 다른지 확인하기",
-          "마운자로 세관 통관 전 꼭 챙길 서류 체크리스트"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "ddfe16c73c855728",
@@ -14987,72 +14908,6 @@
           "views": 508,
           "answers": 2,
           "askedAt": "2023.03.18"
-        }
-      ]
-    },
-    {
-      "id": "1e4a369abe565a32",
-      "urls": [
-        "https://anotherdifference.tistory.com/2629",
-        "https://theseusm.tistory.com/entry/%EA%B5%AD%ED%99%94%EC%B0%A8-%ED%9A%A8%EB%8A%A5"
-      ],
-      "guide": {
-        "direction": "지식인엔 멍·두통·화상에 효과가 있는지, 스테로이드 성분이 있는지를 묻는 질문이 많지만 고수 글은 종류별 차이와 바르는 법만 다뤄 이 불안을 풀지 못한다. 성분(캄파·박하)이 실제로 작용하는 범위와 화상·상처 등 발라선 안 되는 부위를 구분해 보여주면 끝까지 읽힌다. 멍·두통·화상 각 증상별로 발라도 되는지 아닌지를 표로 정리해 주면 검색자가 한 번에 판단할 수 있다.",
-        "searchTargets": [
-          "호랑이연고 효능 멍",
-          "호랑이 연고 효능 사용법",
-          "호랑이연고 효능 화상"
-        ],
-        "mustInclude": [
-          "성분(캄파·박하 등) 및 스테로이드 함유 여부 (확인 필요: 제품 성분표)",
-          "근육통·관절통·두통·코막힘 등 공식 적응증 범위",
-          "화상·개방성 상처에는 사용하지 말아야 하는 이유",
-          "멍에 대한 효과는 혈액순환 촉진 범위이며 치료 효과 아님을 명시",
-          "피부 자극(붉어짐·화끈거림) 시 비누와 물로 씻어내는 대처법"
-        ],
-        "mustAvoid": [
-          "화상·상처에 발라도 된다는 식의 오해 유발",
-          "두통·만병통치 효과를 과학적 검증된 치료제처럼 과장",
-          "어린이 사용 가능 여부를 근거 없이 일반화"
-        ],
-        "checkBefore": [
-          "스테로이드 함유 여부와 정확한 성분표 - 제품 라벨/제조사 공식자료 확인",
-          "어린이 사용 가능 연령 기준 - 제품 설명서 또는 식약처 자료 확인"
-        ],
-        "solves": [
-          "호랑이연고가 멍에 정말 효과 있는지 → 성분의 혈액순환 촉진 작용 범위를 짚어줌",
-          "스테로이드 성분이 들어있는지 → 성분표 기준으로 포함 여부를 명확히 정리",
-          "화상 부위에 발라도 되는지 → 개방성 상처·화상엔 사용 금지 원칙을 안내"
-        ],
-        "actionTitles": [
-          "호랑이 연고 효능 사용법 스테로이드 성분 여부 확인",
-          "호랑이연고 효능 화상엔 발라도 안전할까 체크하기"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "타이거밤 호랑이연고 효능알고싶어요~~",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=248312227&answerNo=1&qb=7Zi4656R7J207Jew6rOg7Zqo64ql",
-          "views": 40562,
-          "answers": 2,
-          "askedAt": "2016.03.20"
-        },
-        {
-          "title": "호랑이연고 실제로효능이있나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70111&docId=155676997&answerNo=1&qb=7Zi4656R7J207Jew6rOg7Zqo64ql",
-          "views": 29834,
-          "answers": 1,
-          "askedAt": "2012.07.31"
-        },
-        {
-          "title": "호랑이연고 효능",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=366701760&answerNo=1&qb=7Zi4656R7J207Jew6rOg7Zqo64ql",
-          "views": 5538,
-          "answers": 1,
-          "askedAt": "2020.08.31"
         }
       ]
     },
@@ -70742,6 +70597,313 @@
           "askedAt": "2024.09.07"
         }
       ]
+    },
+    {
+      "id": "eb09f78a96ab43af",
+      "urls": [
+        "https://chamchi37.tistory.com/entry/%ED%95%B4%EC%99%B8-%EC%9D%98%EC%95%BD%ED%92%88-%ED%9C%B4%EB%8C%80-%EB%B0%98%EC%9E%85-%ED%97%88%EC%9A%A9-%EA%B8%B0%EC%A4%80-6%EB%B3%91%C2%B73%EA%B0%9C%EC%9B%94%EB%B6%84-%EC%B4%9D%EC%A0%95%EB%A6%AC",
+        "https://maccrey.tistory.com/entry/%EC%9D%BC%EB%B3%B8-%EB%A7%88%EC%9A%B4%EC%9E%90%EB%A1%9C-6%EB%A7%8C-%EC%9B%90%EC%9D%B4%EB%9D%BC%EB%8D%94%EB%8B%88%E2%80%A62026%EB%85%84-%ED%95%B4%EC%99%B8-%EB%B0%98%EC%9E%85-%ED%97%88%EC%9A%A9-12%EA%B0%9C%EA%B9%8C%EC%A7%80-%EA%B0%80%EB%8A%A5%ED%95%A0%EA%B9%8C-%EA%B0%80%EA%B2%A9%C2%B7%ED%86%B5%EA%B4%80%C2%B7%EB%B6%80%EC%9E%91%EC%9A%A9-%EC%B4%9D%EC%A0%95%EB%A6%AC"
+      ],
+      "guide": {
+        "direction": "검색자는 마운자로가 1펜당 4회분이라 3개월분이 몇 펜인지, 6병이면 몇 개월분인지 헷갈려 지식인에 되묻는다. 고수 글은 '1회용 펜 기준 12개'만 쓰고 4회분 펜 환산은 안 짚는다. 이 글은 펜 유형별 환산표와 서류 체크리스트로 반입 가능 수량 계산을 끝내 준다.",
+        "searchTargets": [
+          "일본 마운자로 반입",
+          "일본 마운자로 국내반입",
+          "일본 마운자로 가격",
+          "일본 마운자로 처방전"
+        ],
+        "mustInclude": [
+          "1회용 펜 기준 3개월분=12개, 마운자로처럼 1펜 4회분이면 3개월분≈3펜 환산 계산 방식",
+          "전문의약품 해외 직접구매 반입은 원칙적 금지, 세관 통관시 폐기·법적 문제 가능성 명시",
+          "6병 기준과 3개월분 기준을 나란히 비교한 용량별 환산표",
+          "반입 시 필요한 서류 항목 체크리스트(확인 필요: 식약처 공고 원문)"
+        ],
+        "mustAvoid": [
+          "특정 해외 클리닉(예: 재팬넷클리닉 등)을 추천·홍보성으로 언급하는 것",
+          "성지 병원 가격을 확정된 시세처럼 단정해 쓰는 것",
+          "부작용이나 효과를 보장하는 듯한 1인칭 체험식 서술"
+        ],
+        "checkBefore": [
+          "식약처 자가치료용 의약품 휴대반입 허용 기준 최신 공고",
+          "관세청 통관 절차 및 폐기 기준",
+          "마운자로의 국내 식약처 허가 여부"
+        ],
+        "solves": [
+          "마운자로 몇 개까지 가져올 수 있나 헷갈림 → 1펜 4회분 기준 3개월분 환산표 제공",
+          "해외 직구 반입이 불법인지 모름 → 전문의약품 반입 원칙과 예외 조건 정리",
+          "통관 서류 뭐 필요한지 모름 → 필요 서류 체크리스트 제공"
+        ],
+        "actionTitles": [
+          "일본 마운자로 반입 허용량 계산법, 펜 4회분 환산표",
+          "마운자로 국내반입 전 꼭 챙길 통관 서류 체크리스트",
+          "일본 마운자로 가격·처방전, 반입 기준까지 한번에 확인"
+        ]
+      },
+      "at": "2026-11-25T20:35:02.908Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "일본 마운자로",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=9020101&docId=495326637&answerNo=8&qb=7J2867O466eI7Jq07J6Q",
+          "views": 946,
+          "answers": 15,
+          "askedAt": "2026.11.05"
+        },
+        {
+          "title": "일본 마운자로",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=9020101&docId=495921757&answerNo=2&qb=7J2867O466eI7Jq07J6Q",
+          "views": 695,
+          "answers": 13,
+          "askedAt": "2026.11.12"
+        },
+        {
+          "title": "일본 마운자로",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80304&docId=495948235&answerNo=3&qb=7J2867O466eI7Jq07J6Q",
+          "views": 505,
+          "answers": 8,
+          "askedAt": "2026.11.14"
+        }
+      ]
+    },
+    {
+      "id": "a89a9fc067092b84",
+      "urls": [
+        "https://k-girlband.tistory.com/entry/%EC%97%91%EC%85%80-%EA%B3%84%EC%82%B0-%EC%86%8D%EB%8F%84-%EB%86%92%EC%9D%B4%EB%8A%94-%EB%B0%A9%EB%B2%95%EF%BD%9C%EC%88%98%EC%8B%9D-%EC%B5%9C%EC%A0%81%ED%99%94%C2%B7%EC%9E%90%EB%8F%99-%EA%B3%84%EC%82%B0-%EC%84%A4%EC%A0%95%C2%B7%EB%8C%80%EC%9A%A9%EB%9F%89-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%B2%98%EB%A6%AC"
+      ],
+      "guide": {
+        "direction": "검색자는 '엑셀 속도 개선'을 검색하지만 실제론 OFFSET·IFERROR·VBA 중 뭐가 느린지 구분 못 해 지식인에 따로 묻는다. 고수 글은 '수식 최적화'로 뭉뚱그려 어떤 함수를 바꿔야 느려짐이 줄어드는지 비교하지 않는다. 이 글은 함수별 속도 비교표와 자동계산 설정 순서로 어떤 부분을 고칠지 바로 알려준다.",
+        "searchTargets": [
+          "엑셀 속도",
+          "엑셀 속도 개선",
+          "엑셀 속도 개선방법",
+          "엑셀 속도 올리는법"
+        ],
+        "mustInclude": [
+          "OFFSET(휘발성함수)과 INDEX 조합의 속도 차이 비교",
+          "IFERROR 중첩 사용 시 재계산 부담이 커지는 구조 설명",
+          "VBA 배열(Array) 처리와 셀 반복 참조 방식의 속도 차이",
+          "다중조건 처리 시 SUMIFS 등으로 최적화하는 방법",
+          "자동계산→수동계산 전환 설정 위치와 적용 순서"
+        ],
+        "mustAvoid": [
+          "보안 경고 없이 VBA 매크로 코드를 그냥 복붙하라고 안내하는 것",
+          "엑셀 버전(365·2016 등) 차이를 무시하고 모든 환경에 동일하게 설명하는 것"
+        ],
+        "checkBefore": [
+          "휘발성 함수(OFFSET, INDIRECT 등) 목록 — MS 공식 문서",
+          "엑셀 버전별 계산 옵션 메뉴 위치 차이"
+        ],
+        "solves": [
+          "OFFSET 동적범위가 느린데 대안을 모름 → INDEX 기반 대체 수식과 속도 비교 제공",
+          "IFERROR 쓰면 왜 느려지는지 모름 → 재계산 구조와 개선법 정리",
+          "VBA와 일반함수 중 뭐가 빠른지 모름 → 상황별 비교표 제공"
+        ],
+        "actionTitles": [
+          "엑셀 속도 개선방법, IFERROR 줄이고 계산 설정 바꾸기",
+          "엑셀 속도 올리는법, VBA와 수식 속도 비교로 확인하기"
+        ]
+      },
+      "at": "2026-11-25T20:35:02.908Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "엑셀 OFFSET 동적범위를 사용하는게 속도가 빠....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=102020101&docId=422252330&answerNo=1&qb=7JeR7IWAIOyGjeuPhCDrhpLsnbQg67Cp67KV7IiY7IudIOy1nOygge2ZlA==",
+          "views": 242,
+          "answers": 2,
+          "askedAt": "2022.06.22"
+        },
+        {
+          "title": "엑셀 VBA 사용할 때와 일반 함수 사용 차이 궁....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=102020101&docId=469147674&answerNo=4&qb=7JeR7IWAIOyGjeuPhCDrhpLsnbQg67Cp67KV7IiY7IudIOy1nOygge2ZlA==",
+          "views": 195,
+          "answers": 4,
+          "askedAt": "2024.05.05"
+        },
+        {
+          "title": "엑셀 IFERROR 함수 오류 수정 포인트를 알려주....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=102020101&docId=481635697&answerNo=1&qb=7JeR7IWAIOyGjeuPhCDrhpLsnbQg67Cp67KV7IiY7IudIOy1nOygge2ZlA==",
+          "views": 191,
+          "answers": 1,
+          "askedAt": "2025.02.10"
+        }
+      ]
+    },
+    {
+      "id": "615d684f4c13bb1a",
+      "urls": [
+        "https://semo-gif.tistory.com/entry/%EC%BD%9C%EB%A0%88%EC%8A%A4%ED%85%8C%EB%A1%A4-%EA%B2%80%EC%82%AC-%EC%88%98%EC%B9%98-%ED%95%B4%EC%84%9D%EF%BD%9CLDL%C2%B7HDL%C2%B7%EC%A4%91%EC%84%B1%EC%A7%80%EB%B0%A9-%EC%A0%95%EC%83%81-%EB%B2%94%EC%9C%84%EC%99%80-%EA%B3%A0%EC%A7%80%ED%98%88%EC%A6%9D-%EC%95%BD%EB%AC%BC%EC%B9%98%EB%A3%8C-%EA%B8%B0%EC%A4%80"
+      ],
+      "guide": {
+        "direction": "검색자는 콜레스테롤 수치표를 받고 LDL이 계산값인지 실측값인지, 비율로 봐야 하는지 몰라 지식인에 본인 숫자를 올려 되묻는다. 고수 글은 정상범위만 나열해 본인 수치가 어느 구간인지 판단하는 법은 안 짚는다. 이 글은 Friedewald 계산공식과 비율 해석표로 본인 수치 해석을 끝내게 한다.",
+        "searchTargets": [
+          "콜레스테롤 검사 수치",
+          "콜레스테롤 검사 공복",
+          "보건소 콜레스테롤 검사",
+          "건강검진 콜레스테롤 검사"
+        ],
+        "mustInclude": [
+          "LDL = 총콜레스테롤 − HDL − 중성지방/5 (Friedewald 계산공식) 설명",
+          "중성지방이 높으면 LDL 계산값이 부정확해 직접측정을 요청해야 하는 경우",
+          "총콜레스테롤/HDL 비율로 심혈관 위험을 보는 해석 기준표",
+          "LDL 100mg/dL 미만 이상적, HDL 60 이상 보호적이라는 지질검사 종합 판독 기준표",
+          "보건소·건강검진 검사의 공복 필요 여부 차이"
+        ],
+        "mustAvoid": [
+          "수치 하나만으로 약물치료 시작 여부를 단정짓는 것(나이·혈압·당뇨·흡연 등 종합판단 무시)",
+          "본인 수치를 예시로 특정 약 복용을 권하는 식의 자가진단 유도"
+        ],
+        "checkBefore": [
+          "대한지질동맥경화학회 등 공식 지질관리 가이드라인의 최신 기준수치",
+          "보건소 콜레스테롤 검사 공복시간 기준 공지"
+        ],
+        "solves": [
+          "총콜레스테롤 수치만 보고 정상인지 모름 → LDL·HDL·중성지방 종합판독표 제공",
+          "LDL이 계산값인지 실측값인지 헷갈림 → Friedewald 공식과 직접측정 차이 설명",
+          "HDL40·LDL138이면 어느 정도인지 모름 → 비율 해석 기준으로 판단법 제공"
+        ],
+        "actionTitles": [
+          "콜레스테롤 검사 수치 해석, LDL·HDL 비율로 판단하는 법",
+          "콜레스테롤 검사 결과 LDL 계산값과 실측값 차이 확인하기"
+        ]
+      },
+      "at": "2026-11-25T20:35:02.908Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "건강검진 피검사에서 총콜레스테롤 수치 몇 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010103&docId=495382366&answerNo=2&qb=7L2c66CI7Iqk7YWM66GkIOqygOyCrCDsiJjsuZgg7ZW07ISdbGRsIGhkbA==",
+          "views": 938,
+          "answers": 7,
+          "askedAt": "2026.10.01"
+        },
+        {
+          "title": "총콜레스테롤과 HDL 비율은 어떻게 해석해야 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010106&docId=495359305&answerNo=5&qb=7L2c66CI7Iqk7YWM66GkIOqygOyCrCDsiJjsuZgg7ZW07ISdbGRsIGhkbA==",
+          "views": 812,
+          "answers": 5,
+          "askedAt": "2026.10.13"
+        },
+        {
+          "title": "LDL 수치는 공복 혈액검사로 확인하는 게 정확....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010103&docId=495338665&answerNo=1&qb=7L2c66CI7Iqk7YWM66GkIOqygOyCrCDsiJjsuZgg7ZW07ISdbGRsIGhkbA==",
+          "views": 393,
+          "answers": 1,
+          "askedAt": "2026.09.28"
+        }
+      ]
+    },
+    {
+      "id": "28c397a887f78105",
+      "urls": [
+        "https://hotkim.tistory.com/entry/RSV-%EC%A6%9D%EC%83%81%EA%B3%BC-%EC%A0%84%EC%97%BC-%EA%B8%B0%EA%B0%84%EF%BD%9C%EC%98%81%EC%9C%A0%EC%95%84-%ED%98%B8%ED%9D%A1%EA%B8%B0%EC%84%B8%ED%8F%AC%EC%9C%B5%ED%95%A9%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EA%B2%80%EC%82%AC%C2%B7%EC%B9%98%EB%A3%8C%C2%B7%EC%98%88%EB%B0%A9-%EB%B0%A9%EB%B2%95"
+      ],
+      "guide": {
+        "direction": "검색자는 아이가 RSV 확진을 받은 뒤 '며칠이나 전염되는지'와 '어린이집에 언제부터 다시 보낼 수 있는지'를 가장 궁금해하고, 성인도 옮는지를 함께 찾는다. 고수 블로그의 '증상·검사·치료·예방' 총정리형 제목은 전염 기간을 구체적 날짜 기준으로 짚어주지 못한다. 증상 시작일 기준 전염 기간표와 어린이집 등원 가능 시점 체크리스트를 제시하면 글을 끝까지 읽게 만들 수 있다.",
+        "searchTargets": [
+          "rsv 전염 기간",
+          "rsv 전염성 언제까지",
+          "rsv 전염 어른",
+          "rsv 전염 어린이집"
+        ],
+        "mustInclude": [
+          "전염 기간 수치: 증상 시작일 기준 며칠까지 전염력 있는지 (확인 필요: 질병관리청/의학 자료)",
+          "어린이집 등원 가능 시점 기준 (확인 필요: 보건복지부/어린이집 보건지침)",
+          "영유아와 성인의 증상 차이 및 성인 전염 가능성 설명",
+          "전염 경로(비말·접촉 등) 구체적 설명",
+          "잠복기와 전염 기간의 차이 구분"
+        ],
+        "mustAvoid": [
+          "감기·코로나19와 혼동해서 증상을 뭉뚱그려 서술하지 않기",
+          "검증 안 된 민간요법을 치료법처럼 서술하지 않기"
+        ],
+        "checkBefore": [
+          "RSV 전염 기간 수치 — 질병관리청 또는 소아과 학회 공식 자료 확인",
+          "어린이집 등원 중지·재등원 기준 — 보건복지부/어린이집 보건지침 확인"
+        ],
+        "solves": [
+          "'어린이집 언제부터 다시 보내도 되나요?' → 등원 가능 시점 체크리스트 제공",
+          "'어른도 옮나요?' → 성인 전염 가능성과 증상 차이 설명",
+          "'며칠까지 전염되나요?' → 증상 시작일 기준 전염 기간표 제공"
+        ],
+        "actionTitles": [
+          "RSV 전염성 어른도 전염될까? 증상과 전염 경로 확인",
+          "RSV 전염 기간 며칠까지? 어린이집 등원 시점 체크",
+          "RSV 전염 시기와 전염력 언제까지인지 날짜별로 확인하기"
+        ]
+      },
+      "at": "2026-11-25T20:35:02.908Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "e270eb5ae0d52059",
+      "urls": [
+        "https://smartnano.tistory.com/entry/%EC%A0%88%EC%A0%88%EC%B4%88%EC%83%9D%EC%95%BD%EB%AA%85-%ED%95%84%EA%B4%80%EC%B4%88-%EC%8B%9D%EB%AC%BC%EB%B6%84%EB%A5%98%EC%99%80-%EC%A3%BC%EC%9A%94%EC%84%B1%EB%B6%84-%ED%9A%A8%EB%8A%A5%EB%B6%80%ED%84%B0-%EC%84%AD%EC%B7%A8%C2%B7%EB%B3%B4%EA%B4%80%EB%B0%A9%EB%B2%95%EA%B9%8C%EC%A7%80-%EC%B4%9D%EC%A0%95%EB%A6%AC",
+        "https://smartnano.tistory.com/entry/%EB%B6%80%ED%8F%89%EC%B4%88%EA%B0%9C%EA%B5%AC%EB%A6%AC%EB%B0%A5-%EC%8B%9D%EB%AC%BC%EB%B6%84%EB%A5%98%EB%B6%80%ED%84%B0-%EC%A3%BC%EC%9A%94%EC%84%B1%EB%B6%84%EA%B3%BC-%ED%9A%A8%EB%8A%A5%C2%B7%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD-%EC%B4%9D%EC%A0%95%EB%A6%AC"
+      ],
+      "guide": {
+        "direction": "검색자는 절절초를 어떻게 먹어야 하는지, 보관은 어떻게 하는지, 이름이 비슷한 부평초(개구리밥)와 다른 식물인지 헷갈려서 들어온다. 고수 블로그의 '총정리'형 제목은 식물 분류와 성분은 다루지만 섭취량·부작용·보관 기간 같은 실전 정보가 약하다. 섭취 방법별 용량과 주의사항, 보관 방법을 표로 정리하고 부평초와의 차이를 명확히 구분해 주면 끝까지 읽힌다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "주요 성분과 효능의 근거 (확인 필요: 본초학/한의학 자료)",
+          "섭취 방법별(차·즙·나물 등) 용량과 주의사항 정리"
+        ],
+        "mustAvoid": [
+          "이름이 비슷한 부평초(개구리밥)와 혼동 — 다른 식물이므로 명확히 구분",
+          "검증 안 된 민간요법을 의학적 효능처럼 서술"
+        ],
+        "checkBefore": [
+          "성분·효능 근거와 부작용 정보 — 본초학 자료 또는 식약처 공지 확인"
+        ],
+        "solves": [
+          "'절절초 어떻게 먹어야 하나요?' → 섭취 방법별(차/즙/나물) 용량과 주의사항 정리",
+          "'절절초랑 부평초(개구리밥)가 같은 건가요?' → 식물 분류로 명확히 구분"
+        ],
+        "actionTitles": [
+          "절절초 섭취방법과 보관법, 부작용까지 한번에 확인하기",
+          "절절초와 부평초(개구리밥) 구분하는 법 헷갈리지 않게 정리"
+        ]
+      },
+      "at": "2026-11-25T20:35:02.908Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "598ee7e1634a0deb",
+      "urls": [
+        "https://jackti.tistory.com/3540"
+      ],
+      "guide": {
+        "direction": "검색자는 OpenAI·구글·MS가 지금 각각 무엇을 하고 있는지, 자기 회사나 업무에 DX 대응을 어떻게 적용해야 하는지를 궁금해한다. 고수 블로그의 넓은 제목은 세 기업을 다 다루려다 보니 비교표나 실무 체크리스트 같은 구체적 적용법이 빠지기 쉽다. 세 기업 전략을 표로 비교하고 중소기업·개인이 바로 쓸 수 있는 DX 체크리스트를 제시하면 끝까지 읽게 만들 수 있다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "OpenAI·구글·MS 각각의 최근 전략 방향 비교표 (확인 필요: 각 기업 공식 발표)",
+          "중소기업·개인이 쓸 수 있는 DX 대응 체크리스트",
+          "전략 발표 시기별 타임라인 (확인 필요: 기사 날짜)"
+        ],
+        "mustAvoid": [
+          "투자 자문처럼 특정 기업 주가·실적을 전망하지 않기"
+        ],
+        "checkBefore": [
+          "각 기업 최신 전략 발표 내용 — 공식 블로그·보도자료·최신 기사 날짜 확인"
+        ],
+        "solves": [
+          "'OpenAI, 구글, MS가 지금 뭘 하고 있나요?' → 세 기업 전략을 표로 비교 정리",
+          "'우리 회사는 DX 대응을 어떻게 해야 하나요?' → 실무 체크리스트 제공"
+        ],
+        "actionTitles": [
+          "OpenAI·구글·MS 전략 비교, DX 대응 체크리스트",
+          "OpenAI 구글 MS AI 전략 한눈에 비교 정리하기",
+          "기업 DX 대응 전략, OpenAI 구글 MS 사례로 확인"
+        ]
+      },
+      "at": "2026-11-25T20:35:02.908Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
     }
   ],
   "misses": [
