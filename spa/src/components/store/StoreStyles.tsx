@@ -116,6 +116,8 @@ function StoreStyles() {
             .st-what { margin: 0 0 16px; font-size: ${type.small}px; color: var(--st-dim); flex: 1; word-break: keep-all; overflow-wrap: break-word; }
             .st-incl { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; flex: 1; align-content: flex-start; }
             .st-incl li { padding: 4px 12px; border-radius: ${lightRadius.pill}px; background: var(--st-raised); border: 1px solid var(--st-line); font-size: ${type.small}px; color: var(--st-dim); }
+            .st-incl li.st-incl-plus { color: var(--st-ink); font-weight: 600; border-color: var(--st-ink); }
+            .st-incl li.st-incl-note { flex-basis: 100%; padding: 0; border: 0; background: none; }
 
             .st-price { display: flex; align-items: baseline; gap: 8px; border-top: 1px solid var(--st-line); padding-top: 16px; }
             .st-price s { color: var(--st-mute); font-size: ${type.meta}px; font-variant-numeric: tabular-nums; }

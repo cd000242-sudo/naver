@@ -12,6 +12,7 @@ import SplitWords from '../motion/SplitWords';
 import SlidingInk from '../motion/SlidingInk';
 import InViewClip from '../motion/InViewClip';
 import StoreStyles from './StoreStyles';
+import { bundleTermNote, bundleTermPerks } from '../../lib/bundleTermPerks.mjs';
 
 /**
  * 제품 진열대 — 담고, 합계를 본다.
@@ -245,6 +246,9 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
                                 {product.bundle ? (
                                     <ul className="st-incl">
                                         {product.features.map((feature) => <li key={feature}>{feature}</li>)}
+                                        {/* [2026-11-25 owner] One year and up carries every service; lifetime adds meeting in person. */}
+                                        {bundleTermPerks(term).map((perk) => <li key={perk} className="st-incl-plus">+ {perk}</li>)}
+                                        {bundleTermNote(term) ? <li className="st-incl-note">{bundleTermNote(term)}</li> : null}
                                     </ul>
                                 ) : null}
                                 {/*
