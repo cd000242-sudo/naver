@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T08:47:55.578Z",
+ "builtAt": "2026-11-25T08:57:59.326Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,34 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "조희대 탄핵 추진",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 87,
-   "recent20": 26,
-   "press": 54,
-   "firstArticleAt": "2026-11-25T07:54:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "창원지법 판사들 “법관 탄핵, 헌법가치 훼손”…30일 법관대표회의 주...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-25T08:44:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652986"
-    },
-    {
-     "title": "조희대 탄핵 밀어붙이는 與…여론은 반대가 우세",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-25T08:44:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261125500727"
-    },
-    {
-     "title": "조희대 탄핵 '범여권 연대' 시동…野 \"죄 나눠 갖는 꼼수\"[CBS뉴스룸]",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T08:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213890?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "창원지법 법관 탄핵 우려",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 51,
-   "recent20": 6,
-   "press": 46,
-   "firstArticleAt": "2026-11-25T07:18:00.000Z",
+   "articles90": 47,
+   "recent20": 5,
+   "press": 43,
+   "firstArticleAt": "2026-11-25T07:30:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "범여권 ‘12·3 탄핵’ 꺼내자…“헌법질서 위태” 판사들 첫 집단행동",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-25T08:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686138?sid=102"
+    },
+    {
+     "title": "창원지법, 조희대 탄핵 추진에 첫 반발…“권력분립·헌법질서 위태롭게...",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-25T08:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162251?sid=102"
+    },
     {
      "title": "창원지법 판사들 “법관 탄핵, 헌법가치 훼손”…30일 법관대표회의 주...",
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-25T08:44:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2652986"
-    },
-    {
-     "title": "\"법관 탄핵은 헌법가치 훼손\"…일선 판사들 첫 반발 나왔다",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-25T08:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358163?sid=102"
-    },
-    {
-     "title": "창원지법 판사들 \"법관 탄핵 추진, 사법독립 훼손···재판받을 권리 위...",
-     "press": "todaykorea.co.kr",
-     "publishedAt": "2026-11-25T08:40:00.000Z",
-     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=409216"
     }
    ]
   },
@@ -80,30 +48,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 32,
-   "recent20": 3,
-   "press": 30,
-   "firstArticleAt": "2026-11-25T07:18:00.000Z",
+   "articles90": 27,
+   "recent20": 4,
+   "press": 27,
+   "firstArticleAt": "2026-11-25T07:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "AI 투심 재위축, 코스피 6%대 급락",
+     "press": "thereport.co.kr",
+     "publishedAt": "2026-11-25T08:56:00.000Z",
+     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93736"
+    },
+    {
+     "title": "코스피, 전날 급등분 모두 반납…6% 급락 마감",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T08:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929862?sid=101"
+    },
     {
      "title": "美 AI 기술주 급락에 삼성전자·SK하이닉스 10%대 급락… 코스피 6% 넘게...",
      "press": "mediawatch.kr",
      "publishedAt": "2026-11-25T08:44:00.000Z",
      "link": "https://www.mediawatch.kr/news/article.html?no=261881"
-    },
-    {
-     "title": "코스피, 6% 급락 4697 마감…코스닥 2%↓",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-25T08:38:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026112517140495662"
-    },
-    {
-     "title": "코스피, 하루 만에 6%대 폭락…삼성전자·SK하이닉스 급락에 4700선 붕괴",
-     "press": "goodkyung.com",
-     "publishedAt": "2026-11-25T08:34:00.000Z",
-     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293877"
     }
    ]
   },
@@ -112,30 +80,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 26,
-   "recent20": 13,
-   "press": 20,
+   "articles90": 32,
+   "recent20": 11,
+   "press": 25,
    "firstArticleAt": "2026-11-25T08:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령 \"공적임대주택, 중산층도 선택하는 주거 사다리 역할해야\"",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-25T08:46:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1140076"
+     "title": "李, 한 달 새 세 차례 주택 현장행…\"재정 부족해 공급 못하는 일 없게...",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-25T08:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005446451?sid=100"
     },
     {
-     "title": "두달새 3번 주택 현장 찾은 李 … 공공주도 공급 확대 속도전",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-25T08:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005769006?sid=100"
+     "title": "李대통령 “중산층도 선택할 공공임대”…2030년까지 공적주택 119만호 ...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-25T08:54:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2652989"
     },
     {
-     "title": "오늘은 부동산 현장... 이 대통령 \"공공 임대, 대대적으로 바꿔야\"",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-25T08:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002537255?sid=100"
+     "title": "이 대통령 \"공적주택, '영세민 주택' 이미지 벗어나야…연 24만호 공급\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-25T08:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979832?sid=100"
     }
    ]
   },
@@ -144,30 +112,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 21,
-   "recent20": 8,
-   "press": 13,
+   "articles90": 23,
+   "recent20": 2,
+   "press": 15,
    "firstArticleAt": "2026-11-25T08:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "이형일 부총리 “노사 협력해 기업 여건 맞는 자율 임금체계 도입해야”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-25T08:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769019?sid=101"
+    },
+    {
+     "title": "이형일 부총리 \"직무·능력 중심 임금체계 확산해야\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-25T08:50:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=173098"
+    },
+    {
      "title": "노사정 협력 상생밸브 체결식 함께한 이형일 부총리",
      "press": "newspim.com",
      "publishedAt": "2026-11-25T08:30:00.000Z",
      "link": "https://www.newspim.com/news/view/20261125001235"
-    },
-    {
-     "title": "임금체계 개편 우수기업 찾은 이형일 부총리",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T08:30:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125001234"
-    },
-    {
-     "title": "임금체계 개편 우수기업 방문한 이형일 부총리",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T08:30:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125001232"
     }
    ]
   },
@@ -176,30 +144,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T07:20:00.000Z",
+   "articles90": 13,
+   "recent20": 7,
+   "press": 12,
+   "firstArticleAt": "2026-11-25T07:30:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[단독] 코스피 다시 급락…정부 '증안펀드' 확대 나서",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-25T08:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358175?sid=101"
+     "title": "산은, 금융사 '증안펀드' 추가 출자 여력 파악나서…몸집 키우나",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-25T08:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545900?sid=101"
     },
     {
-     "title": "6년째 10.7조 '증안펀드' 규모 늘리나…산은, 금융권 추가 출자 타진",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T08:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009310208?sid=101"
+     "title": "10조원대 증안펀드 확대 추진…증권사 대상 추가 출자 규모 파악",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T08:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014345346?sid=101"
     },
     {
-     "title": "[단독] 박현주, 코스피 무너진날 “10조 증안펀드, 100조로 키우자” 제...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-25T08:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005769004?sid=101"
+     "title": "코스피 6% 폭락한 날…산은, 증권사에 '증안펀드 추가 출자' 공문",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-25T08:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273972?sid=101"
     }
    ]
   },
@@ -208,13 +176,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T07:54:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-25T08:08:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "삼성전자 공매도 105% 급증…SK하이닉스도 64% 증가",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T08:56:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286124"
+    },
     {
      "title": "SK하이닉스 \"3D D램 첫 제품은 100층부터, 4~5년 내 양산 목표\"",
      "press": "thelec.kr",
@@ -226,12 +200,6 @@
      "press": "mediawatch.kr",
      "publishedAt": "2026-11-25T08:44:00.000Z",
      "link": "https://www.mediawatch.kr/news/article.html?no=261881"
-    },
-    {
-     "title": "코스피, 하루 만에 6%대 폭락…삼성전자·SK하이닉스 급락에 4700선 붕괴",
-     "press": "goodkyung.com",
-     "publishedAt": "2026-11-25T08:34:00.000Z",
-     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293877"
     }
    ]
   },
@@ -241,7 +209,7 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 3,
+   "recent20": 0,
    "press": 9,
    "firstArticleAt": "2026-11-25T07:28:00.000Z",
    "exclusive": false,
@@ -268,44 +236,12 @@
    ]
   },
   {
-   "keyword": "삼성디스플레이 마이크로 LED 승부수",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T07:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성디스플레이, 오스람 최대주주 등극…3000억 투자, 마이크로 LED '승부...",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-25T08:06:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904412"
-    },
-    {
-     "title": "삼성디스플레이, 3000억 투자해 오스람 최대주주로…마이크로 LED 승부수",
-     "press": "donga.com",
-     "publishedAt": "2026-11-25T07:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765111?sid=101"
-    },
-    {
-     "title": "삼성디스플레이, ams오스람 최대주주로…마이크로 LED ‘승부수’",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-25T07:30:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321842&inflow=N"
-    }
-   ]
-  },
-  {
    "keyword": "박민영 육성재 고수, 혼성그룹 결성",
    "sources": [
     "nate"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-25T07:51:00.000Z",
    "exclusive": false,
@@ -336,13 +272,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
    "firstArticleAt": "2026-11-25T07:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "中 유인우주선 '선저우 24호' 발사 성공",
+     "press": "the-today.com",
+     "publishedAt": "2026-11-25T08:50:00.000Z",
+     "link": "https://www.the-today.com/news/articleView.html?idxno=94093"
+    },
     {
      "title": "중 선저우 24호, 우주정거장 도킹 성공",
      "press": "news.sbs.co.kr",
@@ -354,76 +296,38 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-25T08:25:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016463517?sid=104"
-    },
-    {
-     "title": "[영상] '파키스탄 우주인 탑승' 中우주선 발사 성공…톈궁에 첫 외국인",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T08:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016463498?sid=104"
     }
    ]
   },
   {
-   "keyword": "징역 1년 6개월에 집유 3년",
+   "keyword": "삼성디스플레이 마이크로 LED 승부수",
    "sources": [
     "nate"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T07:27:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-25T07:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'대마 재범' 1심 집유…김바다 \"성장하는 계기 됐다\"",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-25T07:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273952?sid=102"
+     "title": "삼성디스플레이, 오스람 최대주주 등극…3000억 투자, 마이크로 LED '승부...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-25T08:06:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904412"
     },
     {
-     "title": "'대마 흡연' 시나위 김바다, 1심서 집유…\"이번 일로 스스로 성장\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-25T07:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979820?sid=102"
+     "title": "삼성디스플레이, 3000억 투자해 오스람 최대주주로…마이크로 LED 승부수",
+     "press": "donga.com",
+     "publishedAt": "2026-11-25T07:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765111?sid=101"
     },
     {
-     "title": "'대마 혐의' 시나위 출신 김바다, 1심 징역형 집유",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-25T07:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405760?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "송영길 정청래 설전",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T07:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[내홍 휩싸인 여야] 민주, ‘신천지’ 징계 공방에 정청래·송영길 설전...",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-25T07:34:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=921190"
-    },
-    {
-     "title": "송영길·정청래, 대통령 만찬 후일담 놓고 설전…宋 \"대통령이 다독여\"...",
-     "press": "ntoday.co.kr",
+     "title": "삼성디스플레이, ams오스람 최대주주로…마이크로 LED ‘승부수’",
+     "press": "newstomato.com",
      "publishedAt": "2026-11-25T07:30:00.000Z",
-     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131109"
-    },
-    {
-     "title": "정청래, 송영길 또 직격 “입 너무 싸다…허풍 세고 믿지 못할 사람”",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-25T07:24:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1177734"
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321842&inflow=N"
     }
    ]
   }
