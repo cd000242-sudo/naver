@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T00:59:36.584Z",
+ "builtAt": "2026-11-25T01:09:41.102Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,15 +8,111 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
+  {
+   "keyword": "미국 과잉생산 관세 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 27,
+   "recent20": 4,
+   "press": 25,
+   "firstArticleAt": "2026-11-24T23:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美, 中·EU 등 추가 관세 추진…기존 무역합의 세율 넘지 않고 국가별 차...",
+     "press": "theguru.co.kr",
+     "publishedAt": "2026-11-25T01:08:00.000Z",
+     "link": "https://www.theguru.co.kr/news/article.html?no=110160"
+    },
+    {
+     "title": "블룸버그 \"美, 中·EU 관세 인상 발표 임박\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-25T01:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006415204?sid=104"
+    },
+    {
+     "title": "닛케이지수 장중 5만7천선 붕괴..美 반도체주 급락·관세 우려",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-25T00:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609376?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "한국 수출 1조 달러",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 20,
+   "recent20": 4,
+   "press": 20,
+   "firstArticleAt": "2026-11-24T23:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한국 수출 1조 달러 돌파…65년간 세계 평균 2배 속도로 성장",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-25T01:04:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611250030"
+    },
+    {
+     "title": "韓 경제성장 절반 이끈 수출…반도체 쏠림은 과제",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-25T01:00:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887009"
+    },
+    {
+     "title": "‘수출 1조달러’ 견인한 K소비재…중소·중견 비중 91%",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-25T00:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207158?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "정년연장",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 18,
+   "recent20": 7,
+   "press": 15,
+   "firstArticleAt": "2026-11-24T23:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "양대노총, 정년연장 입법 촉구…\"해 넘기면 정부와 국회 책임\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T01:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016461985?sid=102"
+    },
+    {
+     "title": "‘65세 정년연장’ 입법 지연에 뿔난 양대노총…“올해 넘기면 더 이상...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-25T01:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728116?sid=101"
+    },
+    {
+     "title": "[속보]“65세 정년연장” 기업 경영 우려",
+     "press": "magazine.hankyung.com",
+     "publishedAt": "2026-11-25T01:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/050/0000113718?sid=101"
+    }
+   ]
+  },
   {
    "keyword": "김종철 경찰청장 첫 현장행보",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 24,
-   "recent20": 3,
+   "recent20": 0,
    "press": 15,
    "firstArticleAt": "2026-11-25T00:00:00.000Z",
    "exclusive": false,
@@ -38,7 +134,7 @@
      "title": "김종철 경찰청장, 취임 후 첫 행보로 영등포역 일대 도보 순찰",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-25T00:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461886?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/001/0016461887?sid=102"
     }
    ]
   },
@@ -47,30 +143,95 @@
    "sources": [
     "daum"
    ],
-   "articles90": 10,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-24T23:31:00.000Z",
+   "articles90": 12,
+   "recent20": 5,
+   "press": 12,
+   "firstArticleAt": "2026-11-24T23:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이관희·유시은 사과문 속 반전 전말…다시 끄집어낸 윤하정도 비판 화...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-25T00:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001283277"
+     "title": "\"버진로드 걸어다녀\"...이관희♥유시은, 윤하정 결혼식 '민폐 하객 논란...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-25T01:08:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61363"
     },
     {
-     "title": "이관희·유시은, 결혼식 '민폐 하객 논란' 일파만파→\"경솔했다\" 사과",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T00:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009308570"
+     "title": "\"아줌마 느낌\"…이관희·유시은, '민폐 하객 논란' 사과에도 여론 싸늘...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-25T01:08:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110071586203"
     },
     {
-     "title": "이관희♥유시은, 민폐 하객 논란 사과…\"버진로드 걸은 건 무지·경솔\"",
-     "press": "ent.sbs.co.kr",
-     "publishedAt": "2026-11-25T00:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/416/0000328280"
+     "title": "이관희·유시은, '민폐 하객' 사과는 했지만…누리꾼 \"돈으로 갚아\"→비...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-25T01:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409493"
+    }
+   ]
+  },
+  {
+   "keyword": "레알 마드리드 UCL 5연승",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-24T23:50:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "무리뉴의 레알, 미친 10연승 행진! 음바페 멀티골로 챔스에서 PSV 5-1 대파",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-25T01:05:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/477/0000640705"
+    },
+    {
+     "title": "'벨링엄 원더골' 레알 마드리드, PSV 5-1 대파⋯UCL 5연승",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-25T00:32:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2652622"
+    },
+    {
+     "title": "‘후반에만 5골’…무리뉴 ‘용병술’ 힘입은 레알 마드리드, UCL 5연승",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-25T00:20:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611250023"
+    }
+   ]
+  },
+  {
+   "keyword": "스트레이 키즈, 새해 고척돔 공연",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-24T23:45:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "스트레이 키즈, 특별한 새해 …\"고척돔서 스페셜 콘서트\"",
+     "press": "dispatch.co.kr",
+     "publishedAt": "2026-11-25T01:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/433/0000132644"
+    },
+    {
+     "title": "스트레이 키즈, 새해 첫 무대는 고척돔…1월 1~2일 스페셜 콘서트",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-25T01:04:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627566"
+    },
+    {
+     "title": "새해 첫날도 스테이와…스트레이 키즈, 고척돔 스페셜 공연",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-25T00:53:00.000Z",
+     "link": "https://m.entertain.naver.com/article/030/0003489468"
     }
    ]
   },
@@ -81,140 +242,51 @@
     "google"
    ],
    "articles90": 9,
-   "recent20": 1,
+   "recent20": 3,
    "press": 9,
-   "firstArticleAt": "2026-11-25T00:14:00.000Z",
+   "firstArticleAt": "2026-11-25T00:24:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "삼성 준감위 \"이재용 증여·주주환원 결정, 이해상충 아니다\"",
-     "press": "bizhankook.com",
-     "publishedAt": "2026-11-25T00:46:00.000Z",
-     "link": "https://bizhankook.com/articles/samsung-compliance-lee-jae-yong-tax.html"
+     "title": "대신증권, 고배당·주주환원 상품 매수 이벤트 연다",
+     "press": "newsmap.co.kr",
+     "publishedAt": "2026-11-25T01:02:00.000Z",
+     "link": "https://www.newsmap.co.kr/news/articleView.html?idxno=5748"
     },
     {
-     "title": "엘앤씨바이오, 150억 규모 전환사채 소각 완료…주주가치 제고",
-     "press": "medicopharma.co.kr",
-     "publishedAt": "2026-11-25T00:34:00.000Z",
-     "link": "https://www.medicopharma.co.kr/news/articleView.html?idxno=70629"
+     "title": "고려아연 최대주주 영풍·MBK \"회사 뒤에 숨어 책임 회피 말라\"…최윤범...",
+     "press": "job-post.co.kr",
+     "publishedAt": "2026-11-25T01:00:00.000Z",
+     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=240686"
     },
     {
-     "title": "엘앤씨바이오, 150억원 규모 CB 취득·소각...주주지분 희석 및 오버행 ...",
-     "press": "paxetv.com",
-     "publishedAt": "2026-11-25T00:26:00.000Z",
-     "link": "http://www.paxetv.com/news/articleView.html?idxno=287804"
-    }
-   ]
-  },
-  {
-   "keyword": "스트레이 키즈, 새해 고척돔 공연",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-24T23:31:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "새해 첫날도 스테이와…스트레이 키즈, 고척돔 스페셜 공연",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-25T00:53:00.000Z",
-     "link": "https://m.entertain.naver.com/article/030/0003489468"
-    },
-    {
-     "title": "1월 1일부터 고척돔 스테이! 스트레이 키즈 스페셜 공연 개최",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-25T00:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001306675"
-    },
-    {
-     "title": "스트레이 키즈, 새해 첫날 고척돔 입성…'런 잇 서울 스페셜' 개최",
-     "press": "nc.press",
-     "publishedAt": "2026-11-25T00:22:00.000Z",
-     "link": "https://www.nc.press/news/articleView.html?idxno=631844"
-    }
-   ]
-  },
-  {
-   "keyword": "서울 지하철 노사 협상 타결",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T23:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서울 지하철 밤샘 협상 끝 타결…출근대란 피해",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T00:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929689?sid=102"
-    },
-    {
-     "title": "서울지하철 노사 밤샘 협상 타결…출근길 정상 운행",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-25T00:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012300651?sid=102"
-    },
-    {
-     "title": "서울지하철 노사 협상 타결...'출근길 대란' 없었다",
-     "press": "hbnpress.com",
-     "publishedAt": "2026-11-25T00:20:00.000Z",
-     "link": "https://hbnpress.com/news/view/1065571950670787"
-    }
-   ]
-  },
-  {
-   "keyword": "박준영 변호사",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T23:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한승훈 변호사, 자작곡 13곡 발표했는데…\"월 저작권료 1500원\"",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T00:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083685"
-    },
-    {
-     "title": "재심 전문 박준영 변호사 “어린시절 저지른 악행 있어” 뒤늦은 고백(...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-25T00:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190903"
-    },
-    {
-     "title": "진시몬, 미국 변호사 아들이 부른 노래 듣더니...\"목소리가 저랑 똑같더...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T00:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083684"
+     "title": "다올투자증권, 최대주주 경영권 매각 추진 소식에 20%대 급등",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-25T01:00:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82718"
     }
    ]
   },
   {
    "keyword": "빅테크",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-24T23:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "은행·빅테크 스테이블코인 합종연횡 재점화 vs 안갯속?",
+     "press": "news.bizwatch.co.kr",
+     "publishedAt": "2026-11-25T01:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/648/0000052958?sid=101"
+    },
     {
      "title": "[美 AI 투자 시험대] ⑤ 세계 AI 투자 70% 쥔 美 빅테크…韓 반도체는 '외...",
      "press": "newspim.com",
@@ -226,54 +298,117 @@
      "press": "platum.kr",
      "publishedAt": "2026-11-25T00:06:00.000Z",
      "link": "https://platum.kr/archives/299398"
-    },
-    {
-     "title": "은행에 발행권, 빅테크에 고객 접점…이재근·진옥동 누가 주도권 쥘까",
-     "press": "peoplewatch.co.kr",
-     "publishedAt": "2026-11-24T23:44:00.000Z",
-     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611250002"
     }
    ]
   },
   {
-   "keyword": "온도",
+   "keyword": "박지훈 변호사",
+   "sources": [
+    "nate",
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T23:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한승훈 변호사, 자작곡 13곡 발표했는데…\"월 저작권료 1500원\"",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-25T00:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083685"
+    },
+    {
+     "title": "진시몬, 미국 변호사 아들이 부른 노래 듣더니...\"목소리가 저랑 똑같더...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-25T00:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083684"
+    },
+    {
+     "title": "박지훈 변호사 \"父, 폐암 3기로 세상 떠나…유언 듣고 눈물\" 뭉클 (아침...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-25T00:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054044"
+    }
+   ]
+  },
+  {
+   "keyword": "국무회의",
    "sources": [
     "google"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-25T00:10:00.000Z",
+   "firstArticleAt": "2026-11-25T00:31:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "與, 범여권 조희대 공동 탄핵 추진단 논의…협의방식엔 온도차",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T00:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308589?sid=100"
+     "title": "\"토론의 장이라면서\"…국무회의 발언 불발에 오세훈측 '불만'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T01:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014343640?sid=102"
     },
     {
-     "title": "[오늘 날씨] 영하권 강추위...강풍에 체감온도 뚝",
-     "press": "newspost.kr",
-     "publishedAt": "2026-11-25T00:26:00.000Z",
-     "link": "https://www.newspost.kr/news/articleView.html?idxno=227752"
+     "title": "남원 국립의전원 설립 시행령 국무회의 의결",
+     "press": "jtv.co.kr",
+     "publishedAt": "2026-11-25T00:32:00.000Z",
+     "link": "https://www.jtv.co.kr/news/article.php?id=72311"
     },
     {
-     "title": "\"오늘도 춥다\" 영하권 출발...찬 바람에 체감온도 뚝",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-25T00:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122136?sid=103"
+     "title": "박홍근, 오세훈에 “대권놀음 위한 정치쇼”…국무회의 상황 공개 비판",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-25T00:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005768538?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1367,
-  "matched": 709,
-  "avgLeadMin": 501,
+  "flagged": 1363,
+  "matched": 712,
+  "avgLeadMin": 498,
   "recent": [
+   {
+    "keyword": "사고",
+    "hitKeyword": "남해고속도로 추돌사고",
+    "hitAt": "2026-11-25T10:00:00+09:00",
+    "leadMin": 1223
+   },
+   {
+    "keyword": "젠슨 황 복귀로 시장 영향",
+    "hitKeyword": "반도체주 젠슨 황 영향",
+    "hitAt": "2026-11-25T10:00:00+09:00",
+    "leadMin": 262
+   },
+   {
+    "keyword": "건설",
+    "hitKeyword": "반도체 팹 건설 인력",
+    "hitAt": "2026-11-25T10:00:00+09:00",
+    "leadMin": 202
+   },
+   {
+    "keyword": "필라델피아 반도체 지수",
+    "hitKeyword": "반도체 팹 건설 인력",
+    "hitAt": "2026-11-25T10:00:00+09:00",
+    "leadMin": 71
+   },
+   {
+    "keyword": "김주애 사치품 반입 금지",
+    "hitKeyword": "김주애 스키 미국 입장",
+    "hitAt": "2026-11-25T10:00:00+09:00",
+    "leadMin": 51
+   },
+   {
+    "keyword": "김주애 명품 스키복 반입 금지",
+    "hitKeyword": "김주애 스키 미국 입장",
+    "hitAt": "2026-11-25T10:00:00+09:00",
+    "leadMin": 31
+   },
    {
     "keyword": "이도현 임지연 결별?",
     "hitKeyword": "임지연 이도현 결별",
@@ -297,42 +432,6 @@
     "hitKeyword": "트럼프 과잉생산 관세",
     "hitAt": "2026-11-25T09:30:00+09:00",
     "leadMin": 51
-   },
-   {
-    "keyword": "전국 영하권 추위",
-    "hitKeyword": "전국 영하권 강추위",
-    "hitAt": "2026-11-25T09:30:00+09:00",
-    "leadMin": 51
-   },
-   {
-    "keyword": "결별 이도현 더 사랑했어요",
-    "hitKeyword": "임지연 이도현 결별",
-    "hitAt": "2026-11-25T09:30:00+09:00",
-    "leadMin": 21
-   },
-   {
-    "keyword": "서울 지하철 노조 임단협 타결",
-    "hitKeyword": "서울지하철 임단협 타결",
-    "hitAt": "2026-11-25T09:00:00+09:00",
-    "leadMin": 81
-   },
-   {
-    "keyword": "날씨",
-    "hitKeyword": "전국 강추위 날씨",
-    "hitAt": "2026-11-25T08:30:00+09:00",
-    "leadMin": 2919
-   },
-   {
-    "keyword": "나스닥 선물",
-    "hitKeyword": "엔비디아 나스닥",
-    "hitAt": "2026-11-25T07:30:00+09:00",
-    "leadMin": 2748
-   },
-   {
-    "keyword": "나스닥 100",
-    "hitKeyword": "엔비디아 나스닥",
-    "hitAt": "2026-11-25T07:30:00+09:00",
-    "leadMin": 1375
    }
   ]
  }
