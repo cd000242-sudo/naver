@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T07:39:19.124Z",
+ "builtAt": "2026-11-25T07:49:23.194Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,44 +16,82 @@
     "signal.bz"
    ],
    "articles90": 86,
-   "recent20": 24,
-   "press": 81,
-   "firstArticleAt": "2026-11-25T06:42:00.000Z",
+   "recent20": 18,
+   "press": 83,
+   "firstArticleAt": "2026-11-25T06:51:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "코스피 6%대 급락…4,600선 후퇴, 전날 상승분 반납",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-25T07:36:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1315982"
+     "title": "코스피 대폭락, 하루 만에 10개월 최저치 기록하며 4,600선 붕괴",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-25T07:48:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887289"
     },
     {
-     "title": "코스피, 하루 만에 5000선 반납···6%대 급락",
-     "press": "finomy.com",
-     "publishedAt": "2026-11-25T07:36:00.000Z",
-     "link": "http://www.finomy.com/news/articleView.html?idxno=267907"
+     "title": "젠슨 황 랠리 하루 만에 끝났다…코스피 6% 급락·5000선 붕괴",
+     "press": "donga.com",
+     "publishedAt": "2026-11-25T07:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765119?sid=101"
     },
     {
-     "title": "'젠슨황 효과' 다했나…코스피, 6%대 급락해 '오천피' 내줘",
-     "press": "pointdaily.co.kr",
-     "publishedAt": "2026-11-25T07:34:00.000Z",
-     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=327419"
+     "title": "[증시 인사이트] 젠슨 황 효과 하루뿐…코스피 5천선 두고 박스권 갇히...",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-25T07:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545871?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "홈플러스 27일 영업 중단",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 68,
+   "recent20": 19,
+   "press": 62,
+   "firstArticleAt": "2026-11-25T06:39:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "홈플러스, 27일부터 전 점포 임시휴업…“상품 매입자금 부족”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-25T07:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567905?sid=101"
+    },
+    {
+     "title": "자금난 못 이긴 홈플러스...전 점포 27일부터 '임시휴업'",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-25T07:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002446937?sid=103"
+    },
+    {
+     "title": "홈플러스, 67개점 문 닫는다",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T07:46:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286033"
     }
    ]
   },
   {
    "keyword": "김바다 대마 집행유예",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 40,
-   "recent20": 7,
-   "press": 38,
-   "firstArticleAt": "2026-11-25T06:11:00.000Z",
+   "articles90": 37,
+   "recent20": 3,
+   "press": 36,
+   "firstArticleAt": "2026-11-25T06:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'대마 재범' 1심 집유…김바다 \"성장하는 계기 됐다\"",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-25T07:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273952?sid=102"
+    },
     {
      "title": "시나위 출신 김바다, 대마 혐의 1심 집행유예",
      "press": "isplus.com",
@@ -65,140 +103,70 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-25T07:30:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286025"
-    },
-    {
-     "title": "'대마 흡연' 시나위 김바다, 1심서 집유…\"이번 일로 스스로 성장\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-25T07:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979820?sid=102"
     }
    ]
   },
   {
-   "keyword": "홈플러스 전 점포 임시휴업",
+   "keyword": "박민영 육성재 고수의 나인 투 식스",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 24,
-   "recent20": 14,
-   "press": 21,
-   "firstArticleAt": "2026-11-25T06:46:00.000Z",
+   "articles90": 68,
+   "recent20": 2,
+   "press": 24,
+   "firstArticleAt": "2026-11-25T06:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "홈플러스, 27일부터 전 점포 임시휴업…“상품 매입자금 부족”",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-25T07:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061137?sid=101"
+     "title": "육성재, '턱 수술' 마스크 투혼 \"기립성 저혈압 정말 무서워\"",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-25T07:48:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61388"
     },
     {
-     "title": "결국 홈플러스 매장도 멈춘다…27일부터 67개점 임시휴업",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-25T07:36:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733005"
-    },
-    {
-     "title": "27일부터 홈플러스 전 점포 임시 휴업...“상품 매입 자금 부족”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-25T07:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011683?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "나인 투 식스",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 54,
-   "recent20": 8,
-   "press": 20,
-   "firstArticleAt": "2026-11-25T06:18:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "고수-박민영 '나인 투 식스'에서 만나요",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-25T07:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003159426"
+     "title": "박민영 \"오피스물과 인연 잘 맞아…고수·육성재 둘 다 설렜죠\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T07:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016463382?sid=103"
     },
     {
      "title": "[HD포토] 이형민 PD, '나인 투 식스 연출' (제작발표회)",
      "press": "topstarnews.net",
      "publishedAt": "2026-11-25T07:26:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286019"
-    },
-    {
-     "title": "'나인 투 식스 파이팅'",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-25T07:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003159423"
     }
    ]
   },
   {
-   "keyword": "박민영 육성재 고수 삼각 로맨스",
+   "keyword": "장동혁 특검법 규탄",
    "sources": [
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-25T06:18:00.000Z",
+   "articles90": 38,
+   "recent20": 6,
+   "press": 11,
+   "firstArticleAt": "2026-11-25T06:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[HD포토] 고수-박민영-육성재, '비주얼 삼각관계' (나인 투 식스 제작발...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T07:22:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286014"
+     "title": "[이슈 60초] \"曺 탄핵 막고 대법원 사수!\" 국힘 '경주 규탄대회' 장동혁...",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-25T07:48:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=230322"
     },
     {
-     "title": "[TV랩]'오피스 퀸' 박민영X'햇살' 육성재X'달빛' 고수…'나인 투 식스', ...",
-     "press": "ent.sbs.co.kr",
-     "publishedAt": "2026-11-25T07:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/416/0000328297"
+     "title": "\"李 탄핵이 먼저\"…국민의힘, 경주서 '이재명 탈옥법' 규탄대회",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T07:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213841?sid=102"
     },
     {
-     "title": "[현장] '나인 투 식스' 박민영, 육성재·고수 사이 행복한 고민 (종합)",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T06:58:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285963"
-    }
-   ]
-  },
-  {
-   "keyword": "코리아 핀테크 위크",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-25T06:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "뱅크샐러드, 코리아 핀테크 위크서 마이데이터 기반 '다중 AI 에이전트'...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-25T07:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042307?sid=101"
-    },
-    {
-     "title": "비자, 코리아 핀테크 위크서 미래 금융 3대 트렌드 제시… “연결성·상...",
-     "press": "digitalchosun.dizzo.com",
-     "publishedAt": "2026-11-25T07:24:00.000Z",
-     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/25/2026112580173.html"
-    },
-    {
-     "title": "국내 최대 핀테크 박람회 개막...이억원 \"금융권 AI 전환\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T07:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437930?sid=101"
+     "title": "경주 향한 장동혁 \"이재명 독재 정권에 맞서 싸우겠다\"",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-25T07:46:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261125500547"
     }
    ]
   },
@@ -207,13 +175,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 12,
+   "articles90": 11,
    "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-25T06:12:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-25T06:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "명청대전 대리전 나선 송영길 “李, 정청래 억울함 들어줘” 정청래 “...",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-25T07:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887398?sid=100"
+    },
     {
      "title": "[내홍 휩싸인 여야] 민주, ‘신천지’ 징계 공방에 정청래·송영길 설전...",
      "press": "kgnews.co.kr",
@@ -225,28 +199,27 @@
      "press": "mdtoday.co.kr",
      "publishedAt": "2026-11-25T07:32:00.000Z",
      "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627694"
-    },
-    {
-     "title": "정청래, 송영길 또 직격 “입 너무 싸다…허풍 세고 믿지 못할 사람”",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-25T07:24:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1177734"
     }
    ]
   },
   {
    "keyword": "김건희 매관매직 대법 선고",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-25T06:11:00.000Z",
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-25T06:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김건희 '매관매직' 사건 다음달 3일 대법 선고",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T07:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929837?sid=102"
+    },
     {
      "title": "김건희 ‘매관매직’ 의혹 내달 3일 대법 선고...2심 징역 5년",
      "press": "sedaily.com",
@@ -258,124 +231,27 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-25T06:52:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006415443?sid=102"
-    },
-    {
-     "title": "[속보] 대법, 김건희 ‘매관매직’ 혐의 상고심 12월3일 선고",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-25T06:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833918?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "정년연장",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T06:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "연내 정년연장 입법 여부 '관심'",
-     "press": "jejunews.com",
-     "publishedAt": "2026-11-25T07:26:00.000Z",
-     "link": "http://www.jejunews.com/news/articleView.html?idxno=2229065"
-    },
-    {
-     "title": "中企 고용 질 하락…중장년 1인 가구, 정년연장 늦장에 '한숨'",
-     "press": "1conomynews.co.kr",
-     "publishedAt": "2026-11-25T07:26:00.000Z",
-     "link": "https://www.1conomynews.co.kr/news/articleView.html?idxno=51556"
-    },
-    {
-     "title": "[영상] 민주노총·한국노총 \"65세 정년 연장 당장 입법하라\"",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-25T07:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002537232?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "점검하는 박남춘 사장",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T06:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박남춘 신임 사장, 첫 행보로 인천국제공항 시설점검",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-25T07:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887392?sid=102"
-    },
-    {
-     "title": "박남춘 사장, 인천공항 2터미널 점검",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T06:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009309758?sid=101"
-    },
-    {
-     "title": "공항 주요시설 점검하는 박남춘 사장",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T06:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009309760?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "이혼",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T06:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "양홍원-원현주 이혼, '스승' 스윙스는 선긋기? \"청룡 간다\" 들뜬 기대감",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-25T07:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004469418"
-    },
-    {
-     "title": "양홍원·원현주, 이혼 발표한 날..폭로자는 막노동 인증하며 브이 포즈",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-25T07:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004469415"
-    },
-    {
-     "title": "이승환에 \"이혼이나 당하고\"…윤서인 \"모욕 의도 없다\" 주장",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-25T06:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005446338?sid=102"
     }
    ]
   },
   {
    "keyword": "젠슨 황 효과 하루 만에 소멸",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-25T06:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'젠슨 황 효과' 소멸에 주저앉은 삼전·닉스…흔들리는 반도체 대세론",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-25T07:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967739?sid=101"
+    },
     {
      "title": "젠슨 황 효과 하루 만에 소멸…엔비디아 발목 잡는 3대 리스크",
      "press": "ajunews.com",
@@ -387,12 +263,38 @@
      "press": "digitaltoday.co.kr",
      "publishedAt": "2026-11-25T07:12:00.000Z",
      "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=718115"
+    }
+   ]
+  },
+  {
+   "keyword": "이혼",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T06:59:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "시누이 반려견 맡았다가... 산책·목욕 나 몰라라 하는 남편과 이혼위기...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-25T07:42:00.000Z",
+     "link": "https://www.insight.co.kr/news/583572"
     },
     {
-     "title": "‘젠슨 황’ 효과 단기 소멸… 진짜 반등 열쇠는 오늘 밤 美 ‘PCE’",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-25T06:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207286?sid=101"
+     "title": "양홍원-원현주 이혼, '스승' 스윙스는 선긋기? \"청룡 간다\" 들뜬 기대감",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-25T07:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004469418"
+    },
+    {
+     "title": "양홍원·원현주, 이혼 발표한 날..폭로자는 막노동 인증하며 브이 포즈",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-25T07:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004469415"
     }
    ]
   },
@@ -429,41 +331,73 @@
    ]
   },
   {
-   "keyword": "핫트랙스",
+   "keyword": "이정효 감독 질문 답변",
    "sources": [
-    "google"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T06:22:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-25T06:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "교보문고, 핫트랙스 음반 사업 내년 1월 1일 종료…시장 축소 여파",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-25T06:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609655?sid=103"
+     "title": "취재진 질의에 답변하는 이정효 감독",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T06:42:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014344914"
     },
     {
-     "title": "아이돌팬 줄세우던 교보문고 ‘핫트랙스’ 34년만에 문닫는다",
-     "press": "donga.com",
-     "publishedAt": "2026-11-25T06:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765080?sid=102"
+     "title": "질문에 답하는 이정효 감독",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T06:38:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016463171"
     },
     {
-     "title": "교보문고 \"음반사업 부문 핫트랙스, 내년 1월 1일부로 종료\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-25T06:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415411?sid=103"
+     "title": "취재진 질문에 답하는 이정효 감독",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T06:37:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016463167"
+    }
+   ]
+  },
+  {
+   "keyword": "손석구 경찰 역할?",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-25T06:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'형사 역할만 네 번째' 손석구 \"이 정도면 명예경찰 시켜줘야\" [N인터뷰...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T07:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009309896"
+    },
+    {
+     "title": "[인터뷰] 한준희 감독 “여백의 미학으로 곱씹는 근대사, 손석구·에이타...",
+     "press": "kstar.kbs.co.kr",
+     "publishedAt": "2026-11-25T07:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/438/0000082431"
+    },
+    {
+     "title": "'푸른길' 손석구 \"김동건 아나운서 말투 연구, 고증보다 캐릭터 설정\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T06:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009309747"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1444,
+  "flagged": 1449,
   "matched": 734,
   "avgLeadMin": 489,
   "recent": [
