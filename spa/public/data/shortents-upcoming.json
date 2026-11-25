@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T15:21:27.982Z",
+ "builtAt": "2026-11-25T15:31:31.681Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
+  {
+   "keyword": "가능한 사랑, 전도연 수상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 50,
+   "recent20": 4,
+   "press": 39,
+   "firstArticleAt": "2026-11-25T14:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[TD영상] 전도연X설경구X조여정X조인성, '4명 다 수상후보?' 분위기부터...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-25T15:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054232"
+    },
+    {
+     "title": "나홍진 '호프' 청룡 최우수작품상… 이창동 '가능한 사랑' 4관왕 [종합]",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-25T15:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000967812"
+    },
+    {
+     "title": "청룡영화상 최우수작품상에 나홍진 '호프'…'가능한 사랑' 4관왕 석권",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-25T15:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609904?sid=103"
+    }
+   ]
+  },
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 57,
-   "recent20": 7,
-   "press": 40,
-   "firstArticleAt": "2026-11-25T13:52:00.000Z",
+   "articles90": 46,
+   "recent20": 0,
+   "press": 35,
+   "firstArticleAt": "2026-11-25T14:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -35,6 +67,38 @@
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286320"
     },
     {
+     "title": "美USTR, 14개 경제주체에 과잉생산 관세…韓 15% 상한 유지(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T15:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016463973?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "관세 15% 유지",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 44,
+   "recent20": 0,
+   "press": 35,
+   "firstArticleAt": "2026-11-25T14:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美, 14개 교역국에 과잉생산 관세 추진…韓 15% 상한 유지",
+     "press": "bloter.net",
+     "publishedAt": "2026-11-25T15:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/293/0000093832?sid=101"
+    },
+    {
+     "title": "美USTR, 14개 경제주체에 과잉생산 관세…韓 15% 상한 유지(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T15:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016463973?sid=104"
+    },
+    {
      "title": "미, '과잉생산 관세' 예고…\"한국 15% 상한 유지\"",
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-25T15:08:00.000Z",
@@ -47,38 +111,38 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 7,
    "recent20": 2,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-25T14:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "[사설] 대법원장 직무정지용 탄핵 추진…명백한 권한 남용이다",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-25T15:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568011?sid=110"
+    },
+    {
+     "title": "조희대 탄핵 몰아치는 민주당…“12월 3일 발의, 9일 처리 검토”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-25T15:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568007?sid=100"
+    },
+    {
      "title": "[사설] 여당의 대법원장 탄핵 열차 급가속, 정당성 없는 권한 남용",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-25T15:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000967810?sid=110"
-    },
-    {
-     "title": "조희대 탄핵 카운트다운…연말 정국 급랭",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-25T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073604"
-    },
-    {
-     "title": "‘진보 연대’로 탄핵 밀어붙이는 여…장외 여론전에 집중하는 야",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-25T14:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301350?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1513,
-  "matched": 777,
+  "flagged": 1511,
+  "matched": 775,
   "avgLeadMin": 499,
   "recent": [
    {
