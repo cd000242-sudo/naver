@@ -9301,7 +9301,11 @@ if (!gotTheLock) {
   if (app.isPackaged && !isE2ETestMode() && process.env.SELF_TEST !== '1') app.setAsDefaultProtocolClient(LDB_CONNECT_SCHEME);
   app.on('open-url', (event, url) => { event.preventDefault(); handleLdbConnectUrl(url); });
   app.on('browser-window-created', (_event, window) => {
-    window.webContents.on('did-finish-load', () => { void resumeLdbConnect().catch(() => console.warn('[LDB 브리지] 로그인 후 연결 준비 실패')); });
+    const resumePendingConnect = (): void => { void resumeLdbConnect().catch(() => console.warn('[LDB 브리지] 로그인 후 연결 준비 실패')); };
+    window.webContents.on('did-finish-load', resumePendingConnect);
+    // did-finish-load can fire while isLoading() is still true (a sub-resource is still coming). resumeLdbConnect returns
+    // early then, and nothing called it again: an app first started by the connect URI never asked (seen 2026-11-25).
+    window.webContents.on('did-stop-loading', resumePendingConnect);
   });
 
   app.on('second-instance', (event, commandLine, workingDirectory) => {

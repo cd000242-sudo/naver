@@ -146,6 +146,15 @@ describe('LDB 확장 연결 동의 창 — main.ts 연결', () => {
     expect(consent).toContain('saveConfig({ ldbBridgeEnabled: true })');
   });
 
+  // 2026-11-25 실측: did-finish-load 때 isLoading() 이 아직 true 라 resumeLdbConnect 가 그냥 돌아갔고,
+  //   그 뒤에는 아무도 다시 부르지 않아 주소로 처음 켠 앱이 끝내 묻지 않았다(릴리즈 게이트 E2E 고정 실패).
+  it('창 로딩이 실제로 끝났을 때도 대기 중인 연결을 이어 간다', () => {
+    const wiring = between("app.on('browser-window-created'", "app.on('second-instance'");
+    expect(wiring).toContain("'did-finish-load'");
+    expect(wiring).toContain("'did-stop-loading'");
+    expect(wiring.match(/resumeLdbConnect\(\)/g)).toHaveLength(1);
+  });
+
   it('[켜기] 뒤에는 설정 스위치와 같은 후처리 함수를 부른다', () => {
     const consent = between('const requestLdbConnectConsent =', 'const resumeLdbConnect =');
     expect(consent).toContain('refreshLdbBridgeAfterConfigChange()');
