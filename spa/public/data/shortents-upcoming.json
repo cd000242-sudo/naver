@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T21:33:42.070Z",
+ "builtAt": "2026-11-25T21:43:44.360Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 12,
  "candidates": [
   {
    "keyword": "조희대 탄핵 연대 추진",
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T20:11:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T20:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'조희대 탄핵' 속도전에 사법부 첫 회의…한은, 오늘 기준금리 결정[오...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T21:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213953?sid=100"
+    },
+    {
+     "title": "‘진보 연대’로 탄핵 밀어붙이는 여…장외 여론전에 집중하는 야",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-25T21:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301387?sid=100"
+    },
     {
      "title": "'조희대 탄핵' 5당 연대 제안‥시점 두고 '온도차'",
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-25T21:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001538098?sid=100"
-    },
-    {
-     "title": "\"법관 탄핵 추진은 헌법가치 훼손\"…일선 법원 첫 입장",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-25T21:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405889?sid=102"
-    },
-    {
-     "title": "[뉴스분석] 與, 조희대 탄핵 서두르지만…헌재 기각·여론 역풍 우려 해...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T21:00:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125001196"
     }
    ]
   },
@@ -107,13 +107,45 @@
      "link": "https://www.bntnews.co.kr/article/view/bnt202611260005"
     }
    ]
+  },
+  {
+   "keyword": "추수감사절",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-25T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 소비자 1.83억명 추수감사절 주간 쇼핑 추정",
+     "press": "yakup.com",
+     "publishedAt": "2026-11-25T21:08:00.000Z",
+     "link": "https://www.yakup.com/news/index.html?mode=view&cat=12&nid=335722"
+    },
+    {
+     "title": "추수감사절 시카고 일대 비•강풍 예보",
+     "press": "koreadaily.com",
+     "publishedAt": "2026-11-25T21:08:00.000Z",
+     "link": "https://www.koreadaily.com/article/20261125130711827"
+    },
+    {
+     "title": "일리노이 주민 415만명 추수감사절 이동",
+     "press": "koreadaily.com",
+     "publishedAt": "2026-11-25T21:00:00.000Z",
+     "link": "https://www.koreadaily.com/article/20261125125841759"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1502,
-  "matched": 764,
-  "avgLeadMin": 505,
+  "flagged": 1499,
+  "matched": 761,
+  "avgLeadMin": 506,
   "recent": [
    {
     "keyword": "美 관세 발표, 韓 15% 유지?",
