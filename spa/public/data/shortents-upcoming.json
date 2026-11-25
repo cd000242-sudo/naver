@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T21:13:35.747Z",
+ "builtAt": "2026-11-25T21:23:39.377Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 8,
+ "measured": 14,
  "candidates": [
   {
-   "keyword": "조희대 탄핵 추진 중",
+   "keyword": "관세 15% 유지",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T20:00:00.000Z",
-   "exclusive": true,
+   "articles90": 27,
+   "recent20": 15,
+   "press": 20,
+   "firstArticleAt": "2026-11-25T20:01:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "창원지법 \"법관 탄핵 추진, 헌법 가치 훼손\"…일선 법원 중 첫 입장 표명...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-25T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159574?sid=102"
+     "title": "美, 한국 등 14개 경제주체에 과잉생산 관세…韓 15% 상한 유지",
+     "press": "moneystorm.kr",
+     "publishedAt": "2026-11-25T21:18:00.000Z",
+     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8845"
     },
     {
-     "title": "김민석 '5당 연대' 제안…조희대 탄핵 '12·3 의결' 가능할까",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T20:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213949?sid=100"
+     "title": "美 ‘호남 반도체 사업’ 관세 근거로 명시...“약속 어기면 25%” 압박...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-25T21:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568075?sid=104"
     },
     {
-     "title": "판사들 첫 집단 반발 나왔다…“법관 탄핵은 헌법가치 훼손”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-25T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703234?sid=102"
+     "title": "美, 中 등 14개 경제주체에 과잉생산 관세…韓은 ‘15% 상한’ 일단 유지",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-25T21:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728550?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 탄핵 연대 추진",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-25T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'조희대 탄핵' 5당 연대 제안‥시점 두고 '온도차'",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-25T21:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538098?sid=100"
+    },
+    {
+     "title": "\"법관 탄핵 추진은 헌법가치 훼손\"…일선 법원 첫 입장",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-25T21:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405889?sid=102"
+    },
+    {
+     "title": "대법원장 탄핵에 '5당 연대'까지, 다수의 힘으로 사법부를 포위하려는가",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-25T21:00:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887269"
     }
    ]
   },
@@ -77,7 +109,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1502,
+  "flagged": 1503,
   "matched": 763,
   "avgLeadMin": 504,
   "recent": [
