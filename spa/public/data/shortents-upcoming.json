@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T09:28:14.041Z",
+ "builtAt": "2026-11-25T09:39:47.787Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,168 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "창원지법 탄핵 추진 헌법 훼손",
+   "keyword": "창원지법 탄핵 헌법 훼손",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 41,
-   "recent20": 8,
-   "press": 37,
-   "firstArticleAt": "2026-11-25T07:59:00.000Z",
+   "articles90": 36,
+   "recent20": 6,
+   "press": 32,
+   "firstArticleAt": "2026-11-25T08:11:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "일선 법원 판사들 첫 '탄핵 우려' 표명...\"탄핵 남용은 법치주의 훼손\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-25T09:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609833?sid=102"
+     "title": "서울변회 \"탄핵, 헌법이 정한 목적과 한계 안에서 행사돼야\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-25T09:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358246?sid=102"
     },
     {
-     "title": "탄핵 격랑에 요동치는 사법부… 창원지법 첫 반발, 법관·법원장 잇따라...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-25T09:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967783?sid=102"
+     "title": "창원지법 판사들, 조희대 탄핵 추진에 첫 집단 입장",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-25T09:36:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261125500746"
     },
     {
-     "title": "창원지법 \"재판을 이유로 법관 탄핵… 헌법 가치 훼손\"",
-     "press": "lawtimes.co.kr",
-     "publishedAt": "2026-11-25T09:20:00.000Z",
-     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=230064"
+     "title": "\"조희대 탄핵 반대\" 판사들 첫 집단성명…30일 법관회의 분수령(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T09:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016463650?sid=102"
     }
    ]
   },
   {
    "keyword": "발언하는 이재명 대통령",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 39,
-   "recent20": 4,
-   "press": 30,
-   "firstArticleAt": "2026-11-25T08:07:00.000Z",
+   "articles90": 37,
+   "recent20": 6,
+   "press": 31,
+   "firstArticleAt": "2026-11-25T08:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, 공적임대주택 두고 \"중산층들도 얼마든지 선택할 수 있는 주...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-25T09:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159537?sid=100"
+     "title": "李대통령 “재원 문제로 공급을 안 하면 안 된다”…공적주택 확대 주문",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-25T09:38:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=209217"
     },
     {
-     "title": "李대통령, 공적주택 119만호 공급 속도 주문…\"재정 부족으로 차질 없게...",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-25T09:20:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=316238"
+     "title": "이 대통령 \"공공임대→공적주택 이름 바꿔...연 평균 24만호 공급\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-25T09:36:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326505/?sc=Naver"
     },
     {
-     "title": "주한中대사, 李대통령 향한 ‘친중’ 비판에 “큰 국가와 잘 지내면 불...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-25T09:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011705?sid=100"
+     "title": "李대통령 \"공적주택, 매년 평균 24만호 공급···주거 사다리 역할\"",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-25T09:29:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=643941"
+    }
+   ]
+  },
+  {
+   "keyword": "청해부대 임무 확대",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 27,
+   "recent20": 10,
+   "press": 21,
+   "firstArticleAt": "2026-11-25T08:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령 \"청해부대 전쟁불개입 원칙 분명히 지킬 것…호르무즈 활동범...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T09:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014345456?sid=100"
+    },
+    {
+     "title": "이 대통령 “청해부대, 전쟁 불개입 원칙 분명히 지킨다”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-25T09:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703200?sid=100"
+    },
+    {
+     "title": "이 대통령 “청해부대 작전범위 확대…전쟁불개입 원칙 지킬 것”",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-25T09:32:00.000Z",
+     "link": "https://www.naeil.com/news/read/610092?ref=naver"
+    }
+   ]
+  },
+  {
+   "keyword": "베트남전 국군전사자 유해봉환식",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 6,
+   "press": 11,
+   "firstArticleAt": "2026-11-25T08:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "베트남전 국군전사자, 59년 만에 고국 품으로[노컷네컷]",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T09:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213921?sid=100"
+    },
+    {
+     "title": "베트남전 전사자 故안규태 병장 유해, 59년 만에 고국 품으로",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-25T09:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847846?sid=100"
+    },
+    {
+     "title": "베트남전 국군전사자 59년 만에 귀환",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T09:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213915?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "출생아 수 증가율",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T08:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "올해 1~9월 태어난 아기 21만9천명…증가율 역대 최고",
+     "press": "idaegu.co.kr",
+     "publishedAt": "2026-11-25T09:34:00.000Z",
+     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566443"
+    },
+    {
+     "title": "대구 1~9월 출생아 11.3% 늘어…3분기 인구 1211명 자연감소",
+     "press": "kyongbuk.co.kr",
+     "publishedAt": "2026-11-25T09:26:00.000Z",
+     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4092136"
+    },
+    {
+     "title": "\"응애\" 소리 커졌다… 올 출생아 증가율 최고",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-25T09:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609768?sid=101"
     }
    ]
   },
@@ -80,10 +179,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-25T08:00:00.000Z",
+   "articles90": 15,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T08:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,174 +207,14 @@
    ]
   },
   {
-   "keyword": "하이닉스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-25T08:20:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "SK하이닉스 용인 사업장 공사 현장서 근로자 추락사…사고 경위 조사",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-25T09:10:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=230328"
-    },
-    {
-     "title": "SK하이닉스, 올해 100조 주주환원 추진…배당만 30조",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-25T09:10:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122698"
-    },
-    {
-     "title": "SK하이닉스, 올해 100조원 주주환원 추진…밸류업 이행 현황 공시",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-25T09:08:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261125500596"
-    }
-   ]
-  },
-  {
-   "keyword": "베트남전 국군전사자 유해봉환식",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 24,
-   "recent20": 9,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T08:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "베트남전 국군전사자 유해봉환식",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T09:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213914?sid=100"
-    },
-    {
-     "title": "베트남전 국군전사자 59년 만에 귀환",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T09:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213915?sid=100"
-    },
-    {
-     "title": "베트남전 국군전사자 유해봉환식 거행",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T09:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014345437?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "출생아 수 증가율",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T08:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대구 1~9월 출생아 11.3% 늘어…3분기 인구 1211명 자연감소",
-     "press": "kyongbuk.co.kr",
-     "publishedAt": "2026-11-25T09:26:00.000Z",
-     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4092136"
-    },
-    {
-     "title": "\"응애\" 소리 커졌다… 올 출생아 증가율 최고",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-25T09:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609768?sid=101"
-    },
-    {
-     "title": "올해 출생아 21만명 돌파…증가율 '역대 최고'",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-25T08:44:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026112517131898982"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 6%대 급락",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T08:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "AI 투심 재위축, 코스피 6%대 급락",
-     "press": "thereport.co.kr",
-     "publishedAt": "2026-11-25T08:56:00.000Z",
-     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93736"
-    },
-    {
-     "title": "코스피, 전날 급등분 모두 반납…6% 급락 마감",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T08:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929862?sid=101"
-    },
-    {
-     "title": "美 AI 기술주 급락에 삼성전자·SK하이닉스 10%대 급락… 코스피 6% 넘게...",
-     "press": "mediawatch.kr",
-     "publishedAt": "2026-11-25T08:44:00.000Z",
-     "link": "https://www.mediawatch.kr/news/article.html?no=261881"
-    }
-   ]
-  },
-  {
-   "keyword": "러시아 폭격기 울릉도 비행",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T08:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "울릉도 초근접한 러시아 전략폭격기…\"동해 안보 위험 지역될 수도\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-25T09:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005446466?sid=100"
-    },
-    {
-     "title": "울릉도 턱밑까지 온 '블랙잭'...러 무력시위 의도는?",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T09:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437990?sid=100"
-    },
-    {
-     "title": "울릉도 근접 러시아 전폭기, 극동지역으로 재배치…한반도 주변 핵 전력...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-25T09:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967775?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "이정효 감독의 수원 삼성 변화",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T08:03:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T08:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -283,7 +222,7 @@
      "title": "[스포츠머그] \"더 과격하면 쫓겨납니다\"…'버럭' 이정효 감독도 꼼짝 못...",
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-25T09:14:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001405794"
+     "link": "https://m.sports.naver.com/kfootball/article/055/0001405794"
     },
     {
      "title": "(일문일답) ‘승격·우승’에도 냉정한 평가, 수원 이정효 감독 “우리...",
@@ -298,110 +237,44 @@
      "link": "https://m.sports.naver.com/kfootball/article/666/0000133790"
     }
    ]
-  },
-  {
-   "keyword": "행동",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T08:53:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[특별기고] 행동하는 국민들을 보고 싶다",
-     "press": "pennmike.com",
-     "publishedAt": "2026-11-25T09:14:00.000Z",
-     "link": "https://www.pennmike.com/news/articleView.html?idxno=132777"
-    },
-    {
-     "title": "'무개념 행동' 이관희♥유시은, 사과보단 구구절절 '변명문'[MD이슈]",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-25T09:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128046"
-    },
-    {
-     "title": "[청소년뉴스] 배우는 AI에서 행동하는 AI로… 인천 청소년이 지역사회를...",
-     "press": "ibabynews.com",
-     "publishedAt": "2026-11-25T09:06:00.000Z",
-     "link": "https://www.ibabynews.com/news/articleView.html?idxno=157295"
-    }
-   ]
-  },
-  {
-   "keyword": "조현 외교부 장관 발언",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T08:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한-오만 외교장관 회담, 발언하는 조현 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T08:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125001226"
-    },
-    {
-     "title": "조현 장관 발언 경청하는 오만 외교 장관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T08:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009310126?sid=100"
-    },
-    {
-     "title": "발언하는 조현 외교부 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T08:28:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125001219"
-    }
-   ]
-  },
-  {
-   "keyword": "위너스 클럽 가입",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-25T08:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[mhn포토] 짜라위 분짠, 위너스 클럽 가입",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-25T08:50:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/445/0000493216"
-    },
-    {
-     "title": "[mhn포토] 마서영, 위너스 클럽 가입",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-25T08:50:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/445/0000493213"
-    },
-    {
-     "title": "[mhn포토] 다승 서교림, 위너스 클럽 가입",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-25T08:50:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/445/0000493214"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1482,
-  "matched": 754,
-  "avgLeadMin": 490,
+  "flagged": 1484,
+  "matched": 759,
+  "avgLeadMin": 493,
   "recent": [
+   {
+    "keyword": "이장우 조혜원 결혼 1주년 사진 공개",
+    "hitKeyword": "이세영 학창시절 사진 공개",
+    "hitAt": "2026-11-25T18:30:00+09:00",
+    "leadMin": 2880
+   },
+   {
+    "keyword": "황인범 포르투 UCL 2연승",
+    "hitKeyword": "황인범 페예노르트 환대",
+    "hitAt": "2026-11-25T18:30:00+09:00",
+    "leadMin": 601
+   },
+   {
+    "keyword": "황인범 교체 승리 1-0",
+    "hitKeyword": "황인범 페예노르트 환대",
+    "hitAt": "2026-11-25T18:30:00+09:00",
+    "leadMin": 581
+   },
+   {
+    "keyword": "황인범 포르투 2연승",
+    "hitKeyword": "황인범 페예노르트 환대",
+    "hitAt": "2026-11-25T18:30:00+09:00",
+    "leadMin": 541
+   },
+   {
+    "keyword": "하이닉스",
+    "hitKeyword": "삼성전자 SK하이닉스 급락",
+    "hitAt": "2026-11-25T18:30:00+09:00",
+    "leadMin": 42
+   },
    {
     "keyword": "육성재 기립성 저혈압으로 넘어져",
     "hitKeyword": "육성재 턱 봉합 수술",
@@ -431,36 +304,6 @@
     "hitKeyword": "육성재 턱 봉합 수술",
     "hitAt": "2026-11-25T18:00:00+09:00",
     "leadMin": 71
-   },
-   {
-    "keyword": "박민영 육성재 고수의 사무실 로맨스",
-    "hitKeyword": "육성재 턱 봉합 수술",
-    "hitAt": "2026-11-25T18:00:00+09:00",
-    "leadMin": 50
-   },
-   {
-    "keyword": "증안 펀드",
-    "hitKeyword": "증안펀드 확대 추진",
-    "hitAt": "2026-11-25T18:00:00+09:00",
-    "leadMin": 12
-   },
-   {
-    "keyword": "박민영 육성재 고수, 혼성그룹 결성",
-    "hitKeyword": "육성재 턱 봉합 수술",
-    "hitAt": "2026-11-25T18:00:00+09:00",
-    "leadMin": 12
-   },
-   {
-    "keyword": "김도규, 연간 MVP 선정!",
-    "hitKeyword": "삼성화재 호키 1R MVP",
-    "hitAt": "2026-11-25T17:30:00+09:00",
-    "leadMin": 4484
-   },
-   {
-    "keyword": "대전 루빅손 K리그1 MVP",
-    "hitKeyword": "삼성화재 호키 1R MVP",
-    "hitAt": "2026-11-25T17:30:00+09:00",
-    "leadMin": 1723
    }
   ]
  }
