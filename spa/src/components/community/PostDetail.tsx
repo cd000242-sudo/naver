@@ -9,6 +9,7 @@ import { mergeServerComments } from '../../lib/communityOutbox';
 import { isQnaPost } from '../../lib/communityQna.mjs';
 import { reportAction } from '../../lib/communityReport.mjs';
 import { buildShareText, sharePost } from '../../lib/communityShare.mjs';
+import { copyWithSelection } from '../../lib/copyWithSelection';
 import { useAcceptAnswer } from '../../lib/useAcceptAnswer';
 import { loginPath } from '../../lib/siteAuthModel.mjs';
 import type { CommunityProfile } from '../../lib/communitySession';
@@ -45,6 +46,7 @@ function PostDetail({ id, boards, boardId, profile, reportConfig, preview = null
     const [message, setMessage] = useState('');
     const [busy, setBusy] = useState(false);
     const [notice, setNotice] = useState('');
+    const [shareNote, setShareNote] = useState('');
     const [report, setReport] = useState<ReportTarget | null>(null);
     const [reportError, setReportError] = useState('');
     const [reportDraft, setReportDraft] = useState<ReportInput | undefined>(undefined);
@@ -110,10 +112,11 @@ function PostDetail({ id, boards, boardId, profile, reportConfig, preview = null
         const outcome = await sharePost(buildShareText(post, window.location.origin), {
             share: touch && typeof navigator.share === 'function' ? (data) => navigator.share(data) : undefined,
             copy: navigator.clipboard ? (text) => navigator.clipboard.writeText(text) : undefined,
+            copyLegacy: copyWithSelection,
         });
-        if (outcome === 'copied') setNotice('글 요약과 주소를 복사했어요. 카톡이나 원하는 곳에 붙여 넣으세요.');
-        else if (outcome === 'failed') setNotice('공유하지 못했어요. 주소창의 주소를 복사해 주세요.');
-        else setNotice('');
+        if (outcome === 'copied') setShareNote('글 요약과 주소를 복사했어요. 카톡이나 원하는 곳에 붙여 넣으세요.');
+        else if (outcome === 'failed') setShareNote('복사하지 못했어요. 주소창의 주소를 복사해 주세요.');
+        else setShareNote('');
     };
 
     // The dialog closes and the thanks shows at once; a refusal opens the dialog again with what was written.
@@ -138,7 +141,7 @@ function PostDetail({ id, boards, boardId, profile, reportConfig, preview = null
             <Link className="cm-back" to={back}>← 목록으로</Link>
             {notice ? <p className="lp-note" role="status">{notice}</p> : null}
             <PostView post={post} boards={boards} busy={busy} onLike={like} onEdit={() => onEdit(post)}
-                onDelete={() => { void remove(); }} onVisit={() => onVisit(post)} onShare={() => { void share(); }} reportMode={reportAction(post, profile)}
+                onDelete={() => { void remove(); }} onVisit={() => onVisit(post)} onShare={() => { void share(); }} shareNote={shareNote} reportMode={reportAction(post, profile)}
                 onReport={() => {
                     // Nobody logged in: the report starts at the login page and comes back here.
                     if (reportAction(post, profile) === 'login') { navigate(loginPath(communityPath({ board: boardId, post: post.id }))); return; }

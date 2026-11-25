@@ -116,3 +116,27 @@ test('post view: no [공유] on someone else\'s post, or when no handler is give
     assert.ok(!buttons(renderPostView({ mine: false }, { onShare() {} })).includes('공유'));
     assert.ok(!buttons(renderPostView({ mine: true })).includes('공유'));
 });
+
+// 2026-11-25: "pressing [공유] does nothing". Two causes: the clipboard call can hang without ever answering,
+// and the answer was written at the top of a long post while the button sits at its bottom.
+test('sharing: a clipboard call that never answers falls back to the older copy after a short wait', async () => {
+    const legacy = [];
+    const outcome = await sharePost({ title: 't', text: '멈춘 복사', url: 'u' }, { copy: () => new Promise(() => {}), copyLegacy: (text) => { legacy.push(text); return true; }, timeoutMs: 30 });
+    assert.equal(outcome, 'copied');
+    assert.deepEqual(legacy, ['멈춘 복사']);
+});
+
+test('sharing: a refused clipboard call also tries the older copy; both failing reports failure', async () => {
+    assert.equal(await sharePost({ title: 't', text: 'x', url: 'u' }, { copy: async () => { throw new Error('denied'); }, copyLegacy: () => true }), 'copied');
+    assert.equal(await sharePost({ title: 't', text: 'x', url: 'u' }, { copy: () => new Promise(() => {}), copyLegacy: () => false, timeoutMs: 30 }), 'failed');
+    assert.equal(await sharePost({ title: 't', text: 'x', url: 'u' }, { copy: () => new Promise(() => {}), timeoutMs: 30 }), 'failed');
+    assert.equal(await sharePost({ title: 't', text: 'x', url: 'u' }, { copyLegacy: () => true }), 'copied');
+});
+
+test('post view: what [공유] did is written right under the buttons, after the body', () => {
+    const html = renderPostView({ mine: true }, { onShare() {}, shareNote: '글 요약과 주소를 복사했어요.' });
+    const note = html.indexOf('글 요약과 주소를 복사했어요.');
+    assert.ok(note > html.indexOf('cm-post-actions'), 'the note comes after the action row');
+    assert.match(html, /<p class="cm-share-note" role="status">글 요약과 주소를 복사했어요\.<\/p>/);
+    assert.ok(!renderPostView({ mine: true }, { onShare() {} }).includes('cm-share-note'));
+});

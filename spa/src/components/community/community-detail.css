@@ -10,6 +10,7 @@
 .cm-post-by .cm-nick { color: var(--lp-text); }
 .cm-body { font-size: 18px; line-height: 1.8; white-space: pre-wrap; overflow-wrap: anywhere; padding: 8px 0 12px; border-top: 1px solid var(--lp-line); padding-top: 18px; }
 .cm-post-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; border-top: 1px solid var(--lp-line); padding-top: 14px; }
+.cm-share-note { margin: 10px 0 0; padding: 12px 14px; border-radius: 10px; background: var(--lp-brand-soft); color: var(--lp-text); font-size: 16px; }
 
 .cm-promo { display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap; padding: 14px 16px; border-radius: 12px; background: var(--lp-accent-soft); }
 .cm-promo-plat { font-size: 14px; font-weight: 800; color: var(--lp-accent); }

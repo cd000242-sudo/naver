@@ -7,6 +7,8 @@ import { parseRichBody, richExcerpt } from './communityRich.mjs';
 const SUMMARY_LINES = 3;
 const EXCERPT_MAX = 120;
 const LOGIN_NOTE = '전체 글 보기(로그인 필요)';
+/** How long the clipboard may take before the older copy is tried. */
+const COPY_TIMEOUT_MS = 1200;
 
 const runText = (runs) => runs.map((run) => run.x).join('').trim();
 
@@ -37,6 +39,8 @@ export function buildShareText(post, origin) {
  * Hands the text to the device share sheet; where there is none (most desktops) or it fails, copies it instead.
  * `env.share` / `env.copy` are the browser functions. Answers 'shared' | 'cancelled' | 'copied' | 'failed', never throws.
  * The address is inside `text`, so no separate `url` is passed: some apps would then show it twice or drop the text.
+ * The clipboard call can stay unanswered for good (seen 2026-11-25: the button looked dead), so it gets `env.timeoutMs`
+ * and then `env.copyLegacy(text)` (the older, synchronous copy; answers true when it worked) is tried.
  */
 export async function sharePost(payload, env = {}) {
     if (typeof env.share === 'function') {
@@ -47,10 +51,21 @@ export async function sharePost(payload, env = {}) {
             if (error && error.name === 'AbortError') return 'cancelled';
         }
     }
-    if (typeof env.copy !== 'function') return 'failed';
+    if (typeof env.copy === 'function') {
+        let timer;
+        const late = new Promise((resolve) => { timer = setTimeout(() => resolve('late'), env.timeoutMs ?? COPY_TIMEOUT_MS); });
+        try {
+            const answer = await Promise.race([Promise.resolve(env.copy(payload.text)).then(() => 'done'), late]);
+            if (answer === 'done') return 'copied';
+        } catch {
+            // refused: the older copy below is the second try
+        } finally {
+            clearTimeout(timer);
+        }
+    }
+    if (typeof env.copyLegacy !== 'function') return 'failed';
     try {
-        await env.copy(payload.text);
-        return 'copied';
+        return env.copyLegacy(payload.text) ? 'copied' : 'failed';
     } catch {
         return 'failed';
     }
