@@ -69,6 +69,10 @@ declare function readUnifiedCtasFromUi(): any[];
 declare function getScheduleDateFromInput(inputId: string): string | undefined;
 declare function generateAutoCTA(title: string, keywords?: string): any;
 declare function resolveAffiliateLink(link1?: string, link2?: string): string | undefined;
+declare function resolveSemiAutoAffiliatePublish(input: {
+  typedAffiliateLink?: string; sourceUrl?: string; uiContentMode?: string; structuredContent?: unknown;
+  savedPost?: { affiliateLink?: string; contentMode?: string } | null;
+}): { affiliateLink?: string; contentMode: string; source: 'input' | 'post' | 'none'; blocked: boolean; plainContentMode: string };
 declare function generateImagesForAutomation(imageSource: string, headings: any[], title: string, options?: any): Promise<any[]>;
 declare function resolveImageProviderFallback(): string;
 declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): { flow: string; resolvedAt: number; image: { headingImageMode: string; thumbnailTextInclude: boolean; textOnlyPublish: boolean; imageSource: string; imageModel: string; imageStyle: string; imageRatio: string; thumbnailImageRatio: string; subheadingImageRatio: string; fallbackPolicy: string }; shopping: { subImageMode: 'ai' | 'collected'; aiImageEngine: string; aiImageModel: string; autoThumbnail: boolean }; disclosure: { enabledSetting: boolean | null; text: string; defaultText: string }; safety: { adbIpChangeEnabled: boolean; adbIpChangeEvery: number } };
@@ -323,6 +327,40 @@ async function generateImagesForAutomationSafely(
       // ignore progress callback errors
     }
     throw error;
+  }
+}
+
+/**
+ * [2026-11-25] Shopping AI image mode keeps collected photos out of the image tab, so the
+ * representative product photo lived only inside the running publish data. A freeze/cancel
+ * before the end lost it, and a later semi-auto re-publish used an AI image as the cover.
+ * Register just that one photo (flagged isThumbnail) in the tab and persist it right away.
+ */
+function registerShoppingRepresentativeInImageTab(representative: any, structuredContent: any, title: string): void {
+  try {
+    if (!representative || typeof representative !== 'object') return;
+    const heading = String(representative.heading || title || '').trim() || '🖼️ 썸네일';
+    const thumbnailEntry = { ...representative, heading, isThumbnail: true };
+    const existing = Array.isArray((window as any).imageManagementGeneratedImages)
+      ? (window as any).imageManagementGeneratedImages
+      : [];
+    (window as any).imageManagementGeneratedImages = [
+      thumbnailEntry,
+      ...existing.filter((img: any) => img?.isThumbnail !== true),
+    ];
+    if (typeof ImageManager !== 'undefined') {
+      ImageManager.addImage(heading, thumbnailEntry);
+      try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
+    }
+    try {
+      displayGeneratedImages((window as any).imageManagementGeneratedImages);
+    } catch (displayErr) {
+      console.warn('[FullAutoPublish] 대표 사진 표시 실패 (무시):', (displayErr as Error).message);
+    }
+    if (structuredContent) saveGeneratedPost(structuredContent, true);
+    appendLog('🖼️ 대표 사진(수집 상품 사진 1장)을 이미지 관리 탭에 등록했습니다.');
+  } catch (error) {
+    console.warn('[FullAutoPublish] 대표 사진 이미지 탭 등록 실패:', (error as Error)?.message || error);
   }
 }
 
@@ -1175,6 +1213,7 @@ export async function handleFullAutoPublish(): Promise<void> {
                 structuredContent.selectedTitle || title,
                 thumbnailPath,
               );
+              registerShoppingRepresentativeInImageTab(generatedImgs[0], structuredContent, structuredContent.selectedTitle || title);
             }
 
             const headingsForAI = selectShoppingBodyHeadingsForMode(
@@ -2600,13 +2639,43 @@ export async function handleSemiAutoPublish(options: { ldbAutoDraft?: boolean } 
    * picker 에서 사라진 것인지 애초에 한 곳만 담긴 것인지 구분할 방법이 없어 추측만 남는다.
    */
   appendLog(`🗺️ [장소 확인] 선택된 장소 ${pickedPlacesForPublish.length}곳${pickedPlacesForPublish.length > 0 ? `: ${pickedPlacesForPublish.map((p) => p.name).join(', ')}` : ''}`);
-  const semiAutoAffiliateLink = resolveAffiliateLink(
-    (document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement)?.value?.trim() || undefined,
-    (document.querySelector('.unified-url-input') as HTMLInputElement)?.value?.trim()
-  );
-  const semiAutoContentMode = semiAutoAffiliateLink
-    ? 'affiliate'
-    : String((document.getElementById('unified-content-mode') as HTMLInputElement)?.value || 'seo').trim() || 'seo';
+  // [2026-11-25] Fields are empty after an app restart — fall back to the link the article carries,
+  //   and stop (never silently go SEO) when a shopping-connect article has no link anywhere.
+  const semiAutoSavedPost = (() => {
+    try {
+      const postId = currentPostId || updatedStructuredContent?._postId;
+      return postId ? (loadGeneratedPosts() || []).find((p: any) => p?.id === postId) || null : null;
+    } catch {
+      return null;
+    }
+  })();
+  const semiAutoAffiliateDecision = resolveSemiAutoAffiliatePublish({
+    typedAffiliateLink: (document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement)?.value,
+    sourceUrl: (document.querySelector('.unified-url-input') as HTMLInputElement)?.value,
+    uiContentMode: (document.getElementById('unified-content-mode') as HTMLInputElement)?.value,
+    structuredContent: updatedStructuredContent,
+    savedPost: semiAutoSavedPost,
+  });
+  if (semiAutoAffiliateDecision.source === 'post') {
+    appendLog(`🔗 글에 저장된 제휴 링크로 발행합니다: ${String(semiAutoAffiliateDecision.affiliateLink).substring(0, 50)}...`);
+  }
+  if (semiAutoAffiliateDecision.blocked) {
+    if (options.ldbAutoDraft) throw new Error('쇼핑커넥트 글인데 제휴 링크가 없어 자동 임시저장을 멈췄습니다.');
+    const publishWithoutLink = window.confirm(
+      '⚠️ 이 글은 쇼핑커넥트(제휴) 모드로 만들어졌는데, 쓸 제휴 링크가 없습니다.\n\n'
+      + '이대로 발행하면 제휴 링크 없이 일반 글로 올라갑니다.\n\n'
+      + '확인 = 링크 없이 일반 글로 발행 / 취소 = 발행 중단 (제휴 링크 칸에 링크를 넣고 다시 발행)',
+    );
+    if (!publishWithoutLink) {
+      appendLog('🛑 발행 중단: 쇼핑커넥트 글인데 제휴 링크가 없습니다. 제휴 링크 칸에 링크를 넣고 다시 발행해주세요.');
+      return;
+    }
+    appendLog('⚠️ 사용자 확인 후 제휴 링크 없이 일반 글로 발행합니다.');
+  }
+  const semiAutoAffiliateLink = semiAutoAffiliateDecision.affiliateLink;
+  const semiAutoContentMode = semiAutoAffiliateDecision.blocked
+    ? semiAutoAffiliateDecision.plainContentMode
+    : semiAutoAffiliateDecision.contentMode;
   const selectedPreviousPost = readSelectedPreviousPostForPublish(
     semiAutoContentMode,
     UnifiedDOMCache.getRealCategoryName?.() || UnifiedDOMCache.getRealCategory?.()

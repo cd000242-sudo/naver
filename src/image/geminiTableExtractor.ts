@@ -19,6 +19,25 @@ export interface ProsConsData {
 }
 
 /**
+ * How long a table side call may take. These calls run in the middle of typing a post: on 2026-11-25 a request that
+ * never answered held the publish at "표 이미지 생성 중..." until the owner closed the app (twice in one day).
+ * Past the limit the table is simply skipped.
+ */
+export const TABLE_EXTRACT_TIMEOUT_MS = 20_000;
+
+/** Rejects when `work` is still pending after `ms`; the timer never keeps the process alive. */
+function withTableExtractTimeout<T>(work: Promise<T>, ms: number = TABLE_EXTRACT_TIMEOUT_MS): Promise<T> {
+    return new Promise<T>((resolve, reject) => {
+        const timer = setTimeout(() => reject(new Error(`응답 없음 (${Math.round(ms / 1000)}초 초과)`)), ms);
+        if (typeof (timer as { unref?: () => void }).unref === 'function') (timer as { unref: () => void }).unref();
+        work.then(
+            (value) => { clearTimeout(timer); resolve(value); },
+            (error) => { clearTimeout(timer); reject(error); },
+        );
+    });
+}
+
+/**
  * Gemini를 사용하여 제품 스펙 추출
  * @param productName 제품명
  * @param crawledData 크롤링된 제품 정보 (선택)
@@ -39,7 +58,7 @@ export async function extractSpecsWithGemini(
 
     try {
         const genAI = new GoogleGenerativeAI(key);
-        const model = genAI.getGenerativeModel({ model: GEMINI_TEXT_MODELS.FLASH });
+        const model = genAI.getGenerativeModel({ model: GEMINI_TEXT_MODELS.FLASH }, { timeout: TABLE_EXTRACT_TIMEOUT_MS });
 
         // ✅ [2026-03-04 FIX] crawledData가 문자열이면 그대로, 객체면 JSON.stringify
         // 기존: 문자열도 JSON.stringify → 이스케이프된 "\\n" 형태로 Gemini에 전달되어 가격 인식 실패
@@ -76,7 +95,7 @@ JSON 배열만 출력하세요:
 ]
 `;
 
-        const result = await model.generateContent(prompt);
+        const result = await withTableExtractTimeout(model.generateContent(prompt));
         const text = result.response.text();
 
         // JSON 추출
@@ -114,7 +133,7 @@ export async function extractProsConsWithGemini(
 
     try {
         const genAI = new GoogleGenerativeAI(key);
-        const model = genAI.getGenerativeModel({ model: GEMINI_TEXT_MODELS.FLASH });
+        const model = genAI.getGenerativeModel({ model: GEMINI_TEXT_MODELS.FLASH }, { timeout: TABLE_EXTRACT_TIMEOUT_MS });
 
         const prompt = `
 당신은 객관적인 제품 리뷰어입니다.
@@ -141,7 +160,7 @@ JSON만 출력하세요:
 }
 `;
 
-        const result = await model.generateContent(prompt);
+        const result = await withTableExtractTimeout(model.generateContent(prompt));
         const text = result.response.text();
 
         // JSON 추출

@@ -172,6 +172,60 @@ export function resolveAffiliateLink(
     return undefined;
 }
 
+/** Input for resolveSemiAutoAffiliatePublish: current fields plus what the article itself carries. */
+export interface SemiAutoAffiliatePublishInput {
+    typedAffiliateLink?: string;
+    sourceUrl?: string;
+    uiContentMode?: string;
+    structuredContent?: unknown;
+    savedPost?: { affiliateLink?: string; contentMode?: string } | null;
+}
+
+export interface SemiAutoAffiliatePublishDecision {
+    affiliateLink?: string;
+    contentMode: string;
+    source: 'input' | 'post' | 'none';
+    /** Article was generated for shopping-connect but no link exists anywhere — caller must stop. */
+    blocked: boolean;
+    /** Mode to use only when the user explicitly chooses to publish as a plain article. */
+    plainContentMode: string;
+}
+
+const semiAutoAffiliateText = (value: unknown): string => (typeof value === 'string' ? value.trim() : '');
+
+/**
+ * Decides the semi-auto publish link and mode.
+ *
+ * Input fields win (unchanged behavior). When they are empty (e.g. after an app restart),
+ * the link stored on the article / saved post is used instead of silently going SEO.
+ * An article generated in shopping-connect mode with no link anywhere is reported as
+ * blocked so the caller can stop and ask, never fall back on its own.
+ */
+export function resolveSemiAutoAffiliatePublish(input: SemiAutoAffiliatePublishInput): SemiAutoAffiliatePublishDecision {
+    const uiMode = semiAutoAffiliateText(input.uiContentMode) || 'seo';
+    const plainContentMode = uiMode === 'affiliate' ? 'seo' : uiMode;
+    const typed = resolveAffiliateLink(semiAutoAffiliateText(input.typedAffiliateLink) || undefined, semiAutoAffiliateText(input.sourceUrl) || undefined);
+    if (typed) {
+        return { affiliateLink: typed, contentMode: 'affiliate', source: 'input', blocked: false, plainContentMode };
+    }
+    const sc = input.structuredContent && typeof input.structuredContent === 'object'
+        ? input.structuredContent as Record<string, any>
+        : {};
+    const storedLink = semiAutoAffiliateText(sc.affiliateLink)
+        || semiAutoAffiliateText(input.savedPost?.affiliateLink);
+    if (storedLink) {
+        return { affiliateLink: storedLink, contentMode: 'affiliate', source: 'post', blocked: false, plainContentMode };
+    }
+    // Same field that content/generationModeStamp.ts writes at generation time.
+    const generatedMode = semiAutoAffiliateText(sc.__generatedMode)
+        || semiAutoAffiliateText(sc.contentMode)
+        || semiAutoAffiliateText(input.savedPost?.contentMode);
+    if (generatedMode === 'affiliate') {
+        return { affiliateLink: undefined, contentMode: 'affiliate', source: 'none', blocked: true, plainContentMode };
+    }
+    return { affiliateLink: undefined, contentMode: uiMode, source: 'none', blocked: false, plainContentMode };
+}
+
 /**
  * Data-based shopping-connect detection.
  *
@@ -284,6 +338,7 @@ export function setShoppingConnectAIEngine(engine: ShoppingConnectAIEngine, sync
 (window as any).isAffiliateUrl = isAffiliateUrl;
 (window as any).classifyShoppingConnectLink = classifyShoppingConnectLink;
 (window as any).resolveAffiliateLink = resolveAffiliateLink;
+(window as any).resolveSemiAutoAffiliatePublish = resolveSemiAutoAffiliatePublish;
 (window as any).isShoppingConnectForCurrentPost = isShoppingConnectForCurrentPost;
 (window as any).getShoppingConnectImagePool = getShoppingConnectImagePool;
 (window as any).shouldBlockEngineForShoppingConnect = shouldBlockEngineForShoppingConnect;
