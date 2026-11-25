@@ -2894,6 +2894,13 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       values: hashtagsToApply,
     });
 
+    // [2026-11-25 owner] Shopping mode: photos, link cards and the banner block (divider, hook line) go to the centre.
+    //   Runs last, after every block is typed, because it rewrites the editor document (the caret is not needed after it).
+    //   Body paragraphs keep the left alignment decided on 2026-09-02.
+    if (resolved.affiliateLink && typeof self.alignShoppingPostCenter === 'function') {
+      try { await self.alignShoppingPostCenter(); } catch { /* layout only: never blocks the publish */ }
+    }
+
     // [SPEC-STABILITY-2026 R2] Stash tail expectations for the pre-publish
     // assertion in publishBlogPost (observation mode — log only).
     try {

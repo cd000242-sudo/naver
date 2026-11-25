@@ -174,6 +174,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/automation/serverSessionFrameProbe.ts',
   'src/automation/serverSessionProbePolicy.ts',
   'src/automation/sessionCookieDiagnostics.ts',
+  'src/automation/shoppingCenterAlign.ts',
   'src/automation/silentFailureCounter.ts',
   'src/automation/structuredHeadingCleanup.ts',
   'src/automation/subtitleRecovery.ts',

@@ -2,6 +2,7 @@ import { fetchNaverBlogWidePreviousPostCandidates, fetchNaverPreviousPostCandida
 import { getDefaultPreviousPostCardHistory, recordPreviousPostCardsAfterPublish } from './main/services/previousPostCardHistory.js';
 import { refreshRuntimePreviousPost, readEditorBlogId, type RuntimePreviousPostCardSources } from './automation/previousPostRuntimePolicy.js';
 import { alignPreviousPostCardsInEditor } from './automation/previousPostCardAlign.js';
+import { alignShoppingPostCenterInEditor } from './automation/shoppingCenterAlign.js';
 import { markAiImageWithRetries, summarizeAiMarkResults, type AiImageMarkResult } from './automation/aiImageMark.js';
 import type { PreviousPostCandidate } from './shared/previousPostPolicy.js';
 // ✅ puppeteer-extra + stealth plugin 적용 (봇 감지 완벽 우회)
@@ -1124,6 +1125,12 @@ export class NaverBlogAutomation {
   private async alignPreviousPostCards(urls: readonly string[]): Promise<void> {
     const frame = await this.getAttachedFrame();
     await alignPreviousPostCardsInEditor(frame as any, urls, { log: (message) => this.log(message), delay: (ms) => this.delay(ms) });
+  }
+
+  /** Shopping mode: photos, link cards and the banner block go to the centre (body paragraphs stay left). Never throws. */
+  private async alignShoppingPostCenter(): Promise<void> {
+    const frame = await this.getAttachedFrame();
+    await alignShoppingPostCenterInEditor(frame as any, ctaHelpers.PREV_POST_HOOKS, { log: (message) => this.log(message), delay: (ms) => this.delay(ms) });
   }
 
   /** Extra sources for up to three previous-post cards (blog-wide fill + recent-card history). */
