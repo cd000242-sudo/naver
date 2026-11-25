@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T12:40:57.010Z",
+ "builtAt": "2026-11-25T12:51:00.140Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,46 +15,83 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 29,
+   "articles90": 25,
    "recent20": 3,
-   "press": 29,
-   "firstArticleAt": "2026-11-25T11:11:00.000Z",
+   "press": 25,
+   "firstArticleAt": "2026-11-25T11:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "빗썸 해킹, 한 시간이라더니 보름간 이어져…추가 피해도 확인",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-25T12:40:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446549"
+    },
+    {
+     "title": "빗썸 해킹 피해 규모 더 커졌다...보름 넘게 침해 사실 몰라",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-25T12:40:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=718231"
+    },
     {
      "title": "빗썸, 해킹 사고 기간 1시간이라더니…2주 동안 털렸다",
      "press": "insightkorea.co.kr",
      "publishedAt": "2026-11-25T12:34:00.000Z",
      "link": "https://www.insightkorea.co.kr/news/articleView.html?idxno=259784"
+    }
+   ]
+  },
+  {
+   "keyword": "도로공사 6연승 선두 질주",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-25T11:35:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "여자배구 한국도로공사, IBK기업은행 완파하고 6연승 질주·선두 도약…...",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-25T12:50:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435962"
     },
     {
-     "title": "빗썸 정보유출 피해 늘어…해킹 보름 넘게 파악 못 해",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-25T12:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193590?sid=102"
+     "title": "도로공사, 6연승으로 1위 도약…'장추안 트리플크라운' 현대캐피탈도 승...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-25T12:48:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110094077206"
     },
     {
-     "title": "빗썸, 그룹웨어 해킹 피해 추가 확인…업무망서 거래내역·지갑주소도 ...",
-     "press": "itdaily.kr",
-     "publishedAt": "2026-11-25T12:22:00.000Z",
-     "link": "https://www.itdaily.kr/news/articleView.html?idxno=243208"
+     "title": "'모마 부진? 4명 두 자릿수 득점' 도로공사, 기업은행 꺾고 6연승 1위 질...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T12:44:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/079/0004213935"
     }
    ]
   },
   {
    "keyword": "대림골목시장 이재명 대통령",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 8,
    "recent20": 2,
    "press": 8,
-   "firstArticleAt": "2026-11-25T11:12:00.000Z",
+   "firstArticleAt": "2026-11-25T11:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이 대통령 “매래 공적주택 24만 호 공급…중산층 선택해야\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-25T12:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522476?sid=102"
+    },
     {
      "title": "이재명 대통령, 은평서 공적주택 현장 간담회 가져",
      "press": "news.lghellovision.net",
@@ -62,48 +99,10 @@
      "link": "http://news.lghellovision.net/news/articleView.html?idxno=563776"
     },
     {
-     "title": "이 대통령, 은평 대림골목시장 깜짝 방문…장바구니 물가 점검",
+     "title": "李 대통령, 은평 대림골목시장 깜짝 방문…장바구니 물가 점검",
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-25T12:26:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2653033"
-    },
-    {
-     "title": "李대통령, 은평 대림골목시장 깜짝 방문…체감 경기 청취",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-25T12:06:00.000Z",
-     "link": "https://www.ajunews.com/view/20261125205859672"
-    }
-   ]
-  },
-  {
-   "keyword": "전광훈 구속영장 청구",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T11:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[자유통일당 성명서] 정권 하수인 인증한 공소청의 전광훈 목사 구속영...",
-     "press": "christiantoday.co.kr",
-     "publishedAt": "2026-11-25T12:08:00.000Z",
-     "link": "https://www.christiantoday.co.kr/news/378889"
-    },
-    {
-     "title": "공소청, '불법 정치자금' 전광훈에 구속영장 청구",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T11:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929913?sid=102"
-    },
-    {
-     "title": "공소청, 교회 돈으로 자유통일당 '불법' 지원한 전광훈 구속영장 신청",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-25T11:40:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887370"
     }
    ]
   },
@@ -112,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T11:14:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T11:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -138,43 +137,11 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000929915?sid=101"
     }
    ]
-  },
-  {
-   "keyword": "맹승지 의사 남친 결혼 준비",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T11:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "맹승지, 의사 남친과 결혼…예식장 예약 완료",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T12:34:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286249"
-    },
-    {
-     "title": "맹승지 결혼 준비 돌입…예비 신랑과 다정한 투샷",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-25T12:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005769094"
-    },
-    {
-     "title": "맹승지, 의사 남친과 본격 새출발 \"결혼식 D-305\"",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-25T11:28:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110093672822"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1511,
+  "flagged": 1512,
   "matched": 776,
   "avgLeadMin": 502,
   "recent": [
