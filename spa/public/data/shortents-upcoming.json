@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T00:39:27.463Z",
+ "builtAt": "2026-11-25T00:49:32.881Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,32 +8,64 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
+  {
+   "keyword": "김종철 경찰청장 첫 현장행보",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 24,
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-25T00:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "새벽 도보순찰·야간당직 회의 주재…김종철 경찰청장 취임 후 첫 현장...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-25T00:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728097?sid=102"
+    },
+    {
+     "title": "김종철 경찰청장, 첫 현장 행보서 “피해자 보호는 수사 제1원칙”",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-25T00:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484888?sid=102"
+    },
+    {
+     "title": "김종철 경찰청장, 취임 후 첫 행보로 영등포역 일대 도보 순찰",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T00:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016461887?sid=102"
+    }
+   ]
+  },
   {
    "keyword": "주주",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 13,
-   "recent20": 5,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T23:58:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-25T00:04:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "삼성 준감위 \"이재용 증여·주주환원 결정, 이해상충 아니다\"",
+     "press": "bizhankook.com",
+     "publishedAt": "2026-11-25T00:46:00.000Z",
+     "link": "https://bizhankook.com/articles/samsung-compliance-lee-jae-yong-tax.html"
+    },
     {
      "title": "엘앤씨바이오, 150억 규모 전환사채 소각 완료…주주가치 제고",
      "press": "medicopharma.co.kr",
      "publishedAt": "2026-11-25T00:34:00.000Z",
      "link": "https://www.medicopharma.co.kr/news/articleView.html?idxno=70629"
-    },
-    {
-     "title": "대신증권, 주주환원 테마 상품 판매 확대…고객 유입 인센티브",
-     "press": "thetracker.co.kr",
-     "publishedAt": "2026-11-25T00:26:00.000Z",
-     "link": "https://thetracker.co.kr/View.aspx?No=4328201"
     },
     {
      "title": "엘앤씨바이오, 150억원 규모 CB 취득·소각...주주지분 희석 및 오버행 ...",
@@ -44,98 +76,34 @@
    ]
   },
   {
-   "keyword": "김종철 현장 행보",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T00:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김종철, 영등포서 격려 방문...취임 첫 현장 행보",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T00:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437694?sid=102"
-    },
-    {
-     "title": "김종철 경찰청장, 첫 행보로 영등포서 방문…“피해자 보호가 제1원칙”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-25T00:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685887?sid=102"
-    },
-    {
-     "title": "취재진 질문에 답하는 김종철 경찰청장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T00:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014343442?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김주애 명품 스키복 반입 금지",
+   "keyword": "스트레이 키즈, 새해 고척돔 공연",
    "sources": [
     "nate"
    ],
    "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T23:17:00.000Z",
-   "exclusive": false,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-24T23:20:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "김주애의 명품 스키복과 고가 장비에 쏠린 시선…美 \"직접 판매·우회 반...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-25T00:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847412?sid=100"
+     "title": "1월 1일부터 고척돔 스테이! 스트레이 키즈 스페셜 공연 개최",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-25T00:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001306675"
     },
     {
-     "title": "김주애 스키 장비 사치품 논란…美 대북 반입 금지 대상, 저격총 조준 모...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-25T00:26:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630466"
+     "title": "스트레이 키즈, 새해 첫날 고척돔 입성…'런 잇 서울 스페셜' 개최",
+     "press": "nc.press",
+     "publishedAt": "2026-11-25T00:22:00.000Z",
+     "link": "https://www.nc.press/news/articleView.html?idxno=631844"
     },
     {
-     "title": "美 국무부, 北 김주애 '명품스키'는 \"대북 반입 금지 사치품\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-25T00:08:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023015"
-    }
-   ]
-  },
-  {
-   "keyword": "황인범 포르투 2연승",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T23:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "황인범, 친정팀 상대 35분 활약⋯포르투 UCL 2연승",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-25T00:24:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652611"
-    },
-    {
-     "title": "[챔피언스리그] 포르투, 페예노르트 1-0 꺾고 2연승…황인범, 친정팀 상...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-25T00:20:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139863"
-    },
-    {
-     "title": "황인범, 친정팀 페예노르트 상대 30분 활약-포르투 UCL 2연승",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-25T00:06:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95882"
+     "title": "스트레이 키즈, 2027년 첫 행보는 고척돔…콘서트로 팬들과 새해맞이",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-25T00:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001148180"
     }
    ]
   },
@@ -145,200 +113,102 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 2,
    "press": 7,
-   "firstArticleAt": "2026-11-24T23:11:00.000Z",
+   "firstArticleAt": "2026-11-24T23:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "서울 지하철 밤샘 협상 끝 타결…출근대란 피해",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T00:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929689?sid=102"
+    },
+    {
+     "title": "서울지하철 노사 밤샘 협상 타결…출근길 정상 운행",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-25T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300651?sid=102"
+    },
     {
      "title": "서울지하철 노사 협상 타결...'출근길 대란' 없었다",
      "press": "hbnpress.com",
      "publishedAt": "2026-11-25T00:20:00.000Z",
      "link": "https://hbnpress.com/news/view/1065571950670787"
-    },
-    {
-     "title": "출근길 '지하철 대란' 피했다...서울지하철 노사 밤샘 협상 타결",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-25T00:14:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61360"
-    },
-    {
-     "title": "서울교통공사 노사 임단협 극적 타결…구조조정 보류·500명 신규채용",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-25T00:04:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026112416494774751d2373fc0f_1"
     }
    ]
   },
   {
-   "keyword": "박지훈 변호사",
+   "keyword": "박준영 변호사",
    "sources": [
     "daum"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-24T23:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박지훈 변호사 \"父, 폐암 3기로 세상 떠나…유언 듣고 눈물\" 뭉클 (아침...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-25T00:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054044"
-    },
-    {
-     "title": "이돈호 변호사 母 \"아들 용돈, 이미 일시불로 연금에 다 부어놔\" (아침마...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T00:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083674"
-    },
-    {
-     "title": "박지훈 변호사 \"IQ 두 자릿수에 충격\"…법대 차석 합격한 비결 보니 (아...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T00:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083673"
-    }
-   ]
-  },
-  {
-   "keyword": "음주운전 김대범 부르면 될",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
+   "articles90": 7,
+   "recent20": 3,
    "press": 4,
-   "firstArticleAt": "2026-11-24T23:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"대리만 부르면 될 것을\"…김대범, '음주운전' 고경표에 쓴소리",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-25T00:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/417/0001165554"
-    },
-    {
-     "title": "\"대리만 부르면 될 것을\"…김대범, '음주운전' 고경표에 일침",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-24T23:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445977?sid=102"
-    },
-    {
-     "title": "김대범, '음주운전' 고경표 공개 비판 \"대리만 부르면 될 것을\"",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-24T23:20:00.000Z",
-     "link": "http://www.joynews24.com/view/2030045"
-    }
-   ]
-  },
-  {
-   "keyword": "한승훈변호사",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
    "firstArticleAt": "2026-11-24T23:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한승훈 변호사, 알고 보니 가수였다 “저작권료 한 달에 1500원”(아침마...",
+     "title": "한승훈 변호사, 자작곡 13곡 발표했는데…\"월 저작권료 1500원\"",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-25T00:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083685"
+    },
+    {
+     "title": "재심 전문 박준영 변호사 “어린시절 저지른 악행 있어” 뒤늦은 고백(...",
      "press": "newsen.com",
-     "publishedAt": "2026-11-25T00:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190899"
+     "publishedAt": "2026-11-25T00:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190903"
     },
     {
-     "title": "'아침마당' 한승훈 변호사 \"6번 떨어지고 33세 고시 합격⋯13번째 노래 ...",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-25T00:10:00.000Z",
-     "link": "http://www.joynews24.com/view/2030067"
-    },
-    {
-     "title": "\"박준영·박지훈·이돈호부터 한승훈 변호사까지\"… 마이크 잡은 유명 ...",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-24T23:32:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3762203"
+     "title": "진시몬, 미국 변호사 아들이 부른 노래 듣더니...\"목소리가 저랑 똑같더...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-25T00:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083684"
     }
    ]
   },
   {
-   "keyword": "젠슨 황 효과 하루 만에 소멸",
+   "keyword": "빅테크",
    "sources": [
-    "signal.bz",
-    "nate"
+    "google"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-24T23:18:00.000Z",
+   "firstArticleAt": "2026-11-24T23:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "비트코인 8143만 원대 하락, '젠슨 황 복귀 효과' 상승분 하루 만에 반납",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-25T00:04:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452843"
-    },
-    {
-     "title": "[AI MY 증시전망] 젠슨 황 복귀 효과 하루 만에 소멸…코스피 약세 전망",
+     "title": "[美 AI 투자 시험대] ⑤ 세계 AI 투자 70% 쥔 美 빅테크…韓 반도체는 '외...",
      "press": "newspim.com",
-     "publishedAt": "2026-11-24T23:27:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125000087"
+     "publishedAt": "2026-11-25T00:45:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125000088"
     },
     {
-     "title": "[마켓 프리뷰] 젠슨 황 복귀 효과 하루 만에 소멸…반도체株 약세·외국...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-24T23:18:00.000Z",
-     "link": "https://www.ajunews.com/view/20261125081501932"
-    }
-   ]
-  },
-  {
-   "keyword": "김영훈 장관 모두발언",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-24T23:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "반도체 건설업계 만난 김영훈 고용노동부 장관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T23:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308351?sid=102"
+     "title": "학회·빅테크 행사에 AI 실시간 통역, 플리토 '보글' 올해 도입 행사 850...",
+     "press": "platum.kr",
+     "publishedAt": "2026-11-25T00:06:00.000Z",
+     "link": "https://platum.kr/archives/299398"
     },
     {
-     "title": "반도체 건설기능인력 양성 간담회 주재하는 김영훈 장관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T23:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308336?sid=102"
-    },
-    {
-     "title": "모두발언하는 김영훈 노동부장관",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T23:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461701?sid=102"
+     "title": "은행에 발행권, 빅테크에 고객 접점…이재근·진옥동 누가 주도권 쥘까",
+     "press": "peoplewatch.co.kr",
+     "publishedAt": "2026-11-24T23:44:00.000Z",
+     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611250002"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1370,
-  "matched": 712,
-  "avgLeadMin": 513,
+  "flagged": 1366,
+  "matched": 709,
+  "avgLeadMin": 501,
   "recent": [
    {
     "keyword": "이도현 임지연 결별?",
