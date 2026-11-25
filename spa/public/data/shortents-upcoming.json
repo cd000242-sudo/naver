@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T07:59:26.854Z",
+ "builtAt": "2026-11-25T08:09:31.466Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,84 +8,90 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "코스피 급락 매도 사이드카",
+   "keyword": "코스피 6.16% 급락",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 88,
-   "recent20": 21,
-   "press": 85,
-   "firstArticleAt": "2026-11-25T06:56:00.000Z",
+   "articles90": 80,
+   "recent20": 23,
+   "press": 71,
+   "firstArticleAt": "2026-11-25T07:10:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "코스피, 6%대 급락하며 4,697선 주저앉아…'삼전닉스' 직격탄에 시총 1천...",
-     "press": "smarttimes.co.kr",
-     "publishedAt": "2026-11-25T07:58:00.000Z",
-     "link": "http://www.smarttimes.co.kr/news/articleView.html?idxno=50914"
+     "title": "코스피 4700선 붕괴…증안펀드 가동 여부에 쏠린 투자자들 이목",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-25T08:06:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784774"
     },
     {
-     "title": "코스피, 6%대 급락해 4700선 밑으로…삼전닉스 9~11%대 폭락",
-     "press": "delighti.co.kr",
-     "publishedAt": "2026-11-25T07:58:00.000Z",
-     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125639"
+     "title": "[모멘트] 코스피, 6%대 급락 4,697…전날 급등분 모두 반납",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T08:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016463453?sid=101"
     },
     {
-     "title": "'잰슨황 랠리' 일일천하?...증시, 하루 만에 급락세로 선회ㆍ투심에 '찬...",
+     "title": "코스피, 6% 급락에 하루 만에 '4천피'로 후퇴... 지수 4,697로 전날 급등...",
      "press": "getnews.co.kr",
-     "publishedAt": "2026-11-25T07:56:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888464"
+     "publishedAt": "2026-11-25T08:04:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888471"
     }
    ]
   },
   {
-   "keyword": "홈플러스 27일 영업 중단",
+   "keyword": "조희대 탄핵 추진",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 74,
-   "recent20": 19,
-   "press": 67,
-   "firstArticleAt": "2026-11-25T06:39:00.000Z",
+   "articles90": 85,
+   "recent20": 35,
+   "press": 60,
+   "firstArticleAt": "2026-11-25T07:18:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "상품 살 돈도 부족한 홈플러스…전국 67개점 다시 휴업",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-25T07:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000143038?sid=101"
+     "title": "조희대 탄핵 혼란 속 법관대표회의 이어 내달 4일 법원장회의",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-25T08:08:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326503/?sc=Naver"
     },
     {
-     "title": "홈플러스, 27일부터 67개 전 점포영업 중단…장기화 가능성",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-25T07:56:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261125500399"
+     "title": "장동혁, 평일 장외 투쟁 돌입…\"이재명 탄핵 먼저\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-25T08:08:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087867"
     },
     {
-     "title": "팔 물건도 못 산다...홈플러스 '임시휴업' 선언 [자막뉴스]",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T07:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437950?sid=101"
+     "title": "[사설] 민주당의 조희대 탄핵 추진, 판결을 표결로 문책하는 '법치 내란...",
+     "press": "lec.co.kr",
+     "publishedAt": "2026-11-25T08:06:00.000Z",
+     "link": "http://www.lec.co.kr/news/articleView.html?idxno=753084"
     }
    ]
   },
   {
    "keyword": "김바다 대마 집행유예",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 36,
-   "recent20": 3,
-   "press": 35,
-   "firstArticleAt": "2026-11-25T06:31:00.000Z",
+   "articles90": 28,
+   "recent20": 2,
+   "press": 28,
+   "firstArticleAt": "2026-11-25T06:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "대마초 흡연 김바다, 실형 피했다…\"성장하는 계기로 삼겠다\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-25T07:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005446393?sid=102"
+    },
     {
      "title": "시나위 출신 김바다, 대마 혐의로 징역형 집행유예",
      "press": "enews.imbc.com",
@@ -97,172 +103,70 @@
      "press": "mhnse.com",
      "publishedAt": "2026-11-25T07:49:00.000Z",
      "link": "https://m.entertain.naver.com/article/445/0000493150"
-    },
-    {
-     "title": "'대마 재범' 1심 집유…김바다 \"성장하는 계기 됐다\"",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-25T07:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273952?sid=102"
     }
    ]
   },
   {
-   "keyword": "박민영 육성재 고수의 나인 투 식스",
+   "keyword": "오세훈 시장, 이용 부부 간담회",
    "sources": [
     "nate"
    ],
-   "articles90": 57,
-   "recent20": 4,
-   "press": 20,
-   "firstArticleAt": "2026-11-25T06:30:00.000Z",
+   "articles90": 7,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T06:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "마스크 투혼 '나인 투 식스' 육성재 “다들 기립성 저혈압 조심하세요”",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-25T07:56:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611250260"
+     "title": "오세훈 시장, '더 아름다운 결혼식' 이용 부부 만남",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T08:06:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286057"
     },
     {
-     "title": "'나인 투 식스' 고수 “육성재가 햇살이라면 나는 달빛남주”",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-25T07:54:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611250259"
+     "title": "오세훈 서울시장, 부부·예비부부 4쌍과 간담회 가져",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-25T07:55:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2497118"
     },
     {
-     "title": "'돌아온 오피스 퀸' 박민영 \"제 나이에 맞는 차장 캐릭터 만났어요\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T07:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014345162"
+     "title": "오세훈 “결혼식장, 합리적 가격 이용토록”…3년새 공공예식 7.5배 ↑",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-25T07:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703118?sid=102"
     }
    ]
   },
   {
-   "keyword": "정년연장",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-25T06:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "중기 83.2% 정년연장보다 재고용 선호…청년 채용 축소 우려 커",
-     "press": "jeonmin.co.kr",
-     "publishedAt": "2026-11-25T07:54:00.000Z",
-     "link": "http://www.jeonmin.co.kr/news/articleView.html?idxno=451120"
-    },
-    {
-     "title": "양대노총, 정년연장 입법 촉구…\"해 넘기면 정부와 국회 책임\"",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-25T07:50:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=543272"
-    },
-    {
-     "title": "양대 노총 \"65세 정년연장, 연내 입법 안 되면 대화 없다\"",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-25T07:42:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611251623089160645"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁 특검법 규탄",
+   "keyword": "김건희 매관매직 12월 3일 선고",
    "sources": [
     "nate"
-   ],
-   "articles90": 39,
-   "recent20": 6,
-   "press": 13,
-   "firstArticleAt": "2026-11-25T06:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국힘, 조작기소 특검 반발 네 번째 장외집회…장동혁 \"목숨 걸고 싸울 ...",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-25T07:58:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321838&inflow=N"
-    },
-    {
-     "title": "국힘, 경주서 '조작기소 특검법' 규탄 장외집회…\"이재명 재판 즉각 재...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T07:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014345155?sid=100"
-    },
-    {
-     "title": "[이슈 60초] \"曺 탄핵 막고 대법원 사수!\" 국힘 '경주 규탄대회' 장동혁...",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-25T07:48:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=230322"
-    }
-   ]
-  },
-  {
-   "keyword": "정청래 송영길 공개 비판",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-25T06:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "명청대전 대리전 나선 송영길 “李, 정청래 억울함 들어줘” 정청래 “...",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-25T07:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887398?sid=100"
-    },
-    {
-     "title": "[내홍 휩싸인 여야] 민주, ‘신천지’ 징계 공방에 정청래·송영길 설전...",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-25T07:34:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=921190"
-    },
-    {
-     "title": "정청래, 대통령과 대화 내용 공개한 송영길에 강력 비판",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-25T07:32:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627694"
-    }
-   ]
-  },
-  {
-   "keyword": "김건희 매관매직 대법 선고",
-   "sources": [
-    "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
-   "firstArticleAt": "2026-11-25T06:32:00.000Z",
+   "firstArticleAt": "2026-11-25T06:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김건희 '매관매직' 사건 다음달 3일 대법 선고",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T07:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929837?sid=102"
+     "title": "김건희 '매관매직' 상고심 12월 3일 선고… 2심 징역 5년",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-25T07:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193518?sid=102"
     },
     {
-     "title": "김건희 ‘매관매직’ 의혹 내달 3일 대법 선고...2심 징역 5년",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-25T06:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686082?sid=102"
+     "title": "김건희 '매관매직' 상고심 다음 달 3일 선고…2심 징역 5년",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-25T07:24:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087824"
     },
     {
-     "title": "귀금속·디올백·시계…김건희 '매관매직' 내달 3일 대법 선고",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-25T06:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415443?sid=102"
+     "title": "김건희 '매관매직 의혹' 상고심, 12월3일 선고…원심 '징역 5년'",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-25T07:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143028?sid=102"
     }
    ]
   },
@@ -272,7 +176,7 @@
     "google"
    ],
    "articles90": 6,
-   "recent20": 3,
+   "recent20": 2,
    "press": 5,
    "firstArticleAt": "2026-11-25T06:59:00.000Z",
    "exclusive": false,
@@ -299,172 +203,80 @@
    ]
   },
   {
-   "keyword": "핀테크 위크 2026 개막",
+   "keyword": "박민영 육성재 고수의 사무실 로맨스",
    "sources": [
     "nate"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T07:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "손바닥 결제부터 AI 금융비서까지…핀테크가 바꾸는 일상",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-25T07:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415487?sid=101"
-    },
-    {
-     "title": "\"다음 금융은 이미 시작됐다\"…코리아 핀테크 위크 2026 개막",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-25T07:52:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888462"
-    },
-    {
-     "title": "비자, 코리아 핀테크 위크서 미래 금융 3대 트렌드 제시… “연결성·상...",
-     "press": "digitalchosun.dizzo.com",
-     "publishedAt": "2026-11-25T07:24:00.000Z",
-     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/25/2026112580173.html"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 효과 하루 만에 소멸",
-   "sources": [
-    "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T06:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'젠슨 황 효과' 소멸에 주저앉은 삼전·닉스…흔들리는 반도체 대세론",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-25T07:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967739?sid=101"
-    },
-    {
-     "title": "젠슨 황 효과 하루 만에 소멸…엔비디아 발목 잡는 3대 리스크",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-25T07:16:00.000Z",
-     "link": "https://www.ajunews.com/view/20261125160339905"
-    },
-    {
-     "title": "'젠슨 황 효과' 하루 만에 소멸...코스피 4600선 추락",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-25T07:12:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=718115"
-    }
-   ]
-  },
-  {
-   "keyword": "질문에 답하는 감독",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 2,
-   "firstArticleAt": "2026-11-25T06:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "질문에 답하는 이종효 감독",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T07:49:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/421/0009310028"
-    },
-    {
-     "title": "질문에 답하는 이종효 삼성 감독",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T07:49:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/421/0009310029"
-    },
-    {
-     "title": "질문에 답하는 이정효 감독",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T06:38:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/001/0016463171"
-    }
-   ]
-  },
-  {
-   "keyword": "이정효 감독 질문 답변",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
    "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-25T06:37:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-25T06:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "취재진 질의에 답변하는 이정효 감독",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T06:42:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014344913"
+     "title": "[현장] '나인 투 식스' 박민영, 육성재·고수 사이 행복한 고민 (종합)",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T06:58:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285963"
     },
     {
-     "title": "질문에 답하는 이정효 감독",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T06:38:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/001/0016463171"
+     "title": "6.9% 시청률 달성시…박민영·고수, 육성재와 혼성그룹 데뷔→파격 공약...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-25T06:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000493140"
     },
     {
-     "title": "취재진 질문에 답하는 이정효 감독",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T06:37:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/001/0016463167"
-    }
-   ]
-  },
-  {
-   "keyword": "손석구 경찰 역할?",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-25T06:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'형사 역할만 네 번째' 손석구 \"이 정도면 명예경찰 시켜줘야\" [N인터뷰...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T07:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009309896"
-    },
-    {
-     "title": "[인터뷰] 한준희 감독 “여백의 미학으로 곱씹는 근대사, 손석구·에이타...",
-     "press": "kstar.kbs.co.kr",
-     "publishedAt": "2026-11-25T07:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/438/0000082431"
-    },
-    {
-     "title": "'푸른길' 손석구 \"김동건 아나운서 말투 연구, 고증보다 캐릭터 설정\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T06:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009309747"
+     "title": "육성재, 벌써 당돌하네…\"고수, 남자가 봐도 멋있어→둘이 잘됐으면 생...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-25T06:53:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000493139"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1451,
-  "matched": 734,
-  "avgLeadMin": 489,
+  "flagged": 1456,
+  "matched": 740,
+  "avgLeadMin": 486,
   "recent": [
+   {
+    "keyword": "대만",
+    "hitKeyword": "대만 전국민 AI 보너스",
+    "hitAt": "2026-11-25T17:00:00+09:00",
+    "leadMin": 142
+   },
+   {
+    "keyword": "교보문고 음반 철수",
+    "hitKeyword": "교보문고 핫트랙스 철수",
+    "hitAt": "2026-11-25T17:00:00+09:00",
+    "leadMin": 81
+   },
+   {
+    "keyword": "핫트랙스",
+    "hitKeyword": "교보문고 핫트랙스 철수",
+    "hitAt": "2026-11-25T17:00:00+09:00",
+    "leadMin": 81
+   },
+   {
+    "keyword": "경찰 참고인 조사",
+    "hitKeyword": "이진우 과외교사 경찰 조사",
+    "hitAt": "2026-11-25T17:00:00+09:00",
+    "leadMin": 71
+   },
+   {
+    "keyword": "홈플러스 전 점포 임시휴업",
+    "hitKeyword": "홈플러스 임시휴업 조치",
+    "hitAt": "2026-11-25T17:00:00+09:00",
+    "leadMin": 21
+   },
+   {
+    "keyword": "홈플러스 27일 영업 중단",
+    "hitKeyword": "홈플러스 임시휴업 조치",
+    "hitAt": "2026-11-25T17:00:00+09:00",
+    "leadMin": 11
+   },
    {
     "keyword": "화재",
     "hitKeyword": "삼성화재 1라운드 2위",
@@ -488,42 +300,6 @@
     "hitKeyword": "65세 정년연장 논의",
     "hitAt": "2026-11-25T16:00:00+09:00",
     "leadMin": 4344
-   },
-   {
-    "keyword": "정년연장",
-    "hitKeyword": "65세 정년연장 논의",
-    "hitAt": "2026-11-25T16:00:00+09:00",
-    "leadMin": 4042
-   },
-   {
-    "keyword": "손정의 대구 방문",
-    "hitKeyword": "손정의 대구 방문",
-    "hitAt": "2026-11-25T16:00:00+09:00",
-    "leadMin": 202
-   },
-   {
-    "keyword": "65세 정년연장 입법 촉구",
-    "hitKeyword": "65세 정년연장 논의",
-    "hitAt": "2026-11-25T16:00:00+09:00",
-    "leadMin": 172
-   },
-   {
-    "keyword": "가계대출 금리 5% 이상",
-    "hitKeyword": "가계대출 금리 5% 돌파",
-    "hitAt": "2026-11-25T16:00:00+09:00",
-    "leadMin": 102
-   },
-   {
-    "keyword": "리트 만점자 과외교사",
-    "hitKeyword": "리트 만점자 과외",
-    "hitAt": "2026-11-25T16:00:00+09:00",
-    "leadMin": 21
-   },
-   {
-    "keyword": "양홍원 이혼",
-    "hitKeyword": "양홍원 원현주 이혼",
-    "hitAt": "2026-11-25T15:30:00+09:00",
-    "leadMin": 31
    }
   ]
  }
