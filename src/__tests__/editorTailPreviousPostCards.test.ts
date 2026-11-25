@@ -1,8 +1,9 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { insertPreviousPostTailBlock, PREVIOUS_POST_SEPARATOR } from '../automation/editorTailActions.js';
 import { getExpectedLinkCardMin, resolvePreviousPostCardList } from '../automation/editorTailPlan.js';
 import { safeKeyboardType } from '../automation/typingUtils.js';
 import { ensureTailTypingReady } from '../automation/richTextPaste.js';
+import { EDITOR_DOCUMENT_REWRITE_ENV } from '../automation/editorDocumentRewriteGate.js';
 
 vi.mock('../automation/ctaHelpers.js', () => ({ PREV_POST_HOOKS: ['hook line'] }));
 vi.mock('../automation/typingUtils.js', () => ({ safeKeyboardType: vi.fn() }));
@@ -38,6 +39,7 @@ beforeEach(() => {
   vi.mocked(safeKeyboardType).mockImplementation(async (_page, text) => { typed.push(String(text)); });
   vi.mocked(ensureTailTypingReady).mockResolvedValue(true);
 });
+afterEach(() => { delete process.env[EDITOR_DOCUMENT_REWRITE_ENV]; });
 
 describe('previous-post card list', () => {
   it('starts with the legacy previous post and adds up to two more same-blog cards', () => {
@@ -73,7 +75,8 @@ describe('insertPreviousPostTailBlock with three cards', () => {
     expect(self.waitForLinkCard).toHaveBeenCalledTimes(3);
     expect(self.waitForLinkCard).toHaveBeenCalledWith(15000, 500);
     expect(self.removeBareUrlTextAfterLinkCard.mock.calls.map((call: unknown[]) => call[0])).toEqual([A, B, C]);
-    expect(self.alignPreviousPostCards).toHaveBeenCalledWith([A, B, C]);
+    // The document rewrite blanked the editor in live runs (2026-11-25): off unless the developer switch is set.
+    expect(self.alignPreviousPostCards).not.toHaveBeenCalled();
     expect(self.__previousPostCardsAttached).toEqual([A, B, C]);
     expect(result).toEqual({ inserted: true, cardReady: true, cardCount: 3, cardUrls: [A, B, C] });
   });
@@ -85,7 +88,17 @@ describe('insertPreviousPostTailBlock with three cards', () => {
     expect(typed).toEqual([PREVIOUS_POST_SEPARATOR, 'hook line', A, B, C]);
     expect(self.removeBareUrlTextAfterLinkCard.mock.calls.map((call: unknown[]) => call[0])).toEqual([A, B, C]);
     expect(result).toMatchObject({ inserted: true, cardReady: true, cardCount: 2, cardUrls: [A, C] });
-    expect(self.alignPreviousPostCards).toHaveBeenCalledWith([A, C]);
+    expect(self.alignPreviousPostCards).not.toHaveBeenCalled();
+  });
+
+  it('hands only the placed cards to the alignment hook when the developer switch is on', async () => {
+    process.env[EDITOR_DOCUMENT_REWRITE_ENV] = '1';
+    const all = makeSelf();
+    await insertPreviousPostTailBlock(all, makePage().page as any, { previousPostUrl: A, previousPostCards: cards }, [], 'unit');
+    expect(all.alignPreviousPostCards).toHaveBeenCalledWith([A, B, C]);
+    const partial = makeSelf([true, false, true]);
+    await insertPreviousPostTailBlock(partial, makePage().page as any, { previousPostUrl: A, previousPostCards: cards }, [], 'unit');
+    expect(partial.alignPreviousPostCards).toHaveBeenCalledWith([A, C]);
   });
 
   it('reports no ready card when every card times out', async () => {
@@ -97,6 +110,7 @@ describe('insertPreviousPostTailBlock with three cards', () => {
   });
 
   it('works without the alignment hook and survives a failing hook', async () => {
+    process.env[EDITOR_DOCUMENT_REWRITE_ENV] = '1';
     const self = makeSelf();
     delete self.alignPreviousPostCards;
     const { page } = makePage();

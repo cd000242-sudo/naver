@@ -99,6 +99,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/automation/ctaHelpers.ts',
   'src/automation/dailyNativeReservation.ts',
   'src/automation/draftSaveConfirmation.ts',
+  'src/automation/editorDocumentRewriteGate.ts',
   'src/automation/editorDraftPopupPolicy.ts',
   'src/automation/editorEntryRecovery.ts',
   'src/automation/editorFrameForensics.ts',

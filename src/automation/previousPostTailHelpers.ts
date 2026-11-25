@@ -1,6 +1,7 @@
 import { Page } from 'puppeteer';
 import { recordSilentFailure } from './silentFailureCounter.js';
 import { ensureTailTypingReady } from './richTextPaste.js';
+import { isEditorDocumentRewriteEnabled } from './editorDocumentRewriteGate.js';
 
 function emitDebug(stage: string, payload: Record<string, unknown>): void {
   try {
@@ -29,8 +30,10 @@ export async function refocusPreviousPostTail(self: any, page: Page): Promise<vo
 /**
  * Optional layout hook (e.g. centring) that runs once after every previous-post card is placed.
  * Absent hook = no-op; a failing hook never blocks the tail.
+ * The hook rewrites the editor document, which blanked the editor in live runs (see editorDocumentRewriteGate): off by default.
  */
 export async function runPreviousPostCardsLayoutHook(self: any, page: Page, urls: readonly string[]): Promise<void> {
+  if (!isEditorDocumentRewriteEnabled()) return;
   if (urls.length === 0 || typeof self.alignPreviousPostCards !== 'function') return;
   try {
     await self.alignPreviousPostCards([...urls]);
