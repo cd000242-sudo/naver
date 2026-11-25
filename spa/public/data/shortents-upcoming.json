@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T05:48:28.040Z",
+ "builtAt": "2026-11-25T05:58:31.958Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 75,
-   "recent20": 19,
-   "press": 66,
-   "firstArticleAt": "2026-11-25T04:45:00.000Z",
+   "articles90": 70,
+   "recent20": 16,
+   "press": 62,
+   "firstArticleAt": "2026-11-25T04:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "GS, 허서홍·이태형 사장 승진…'안정 속 미래사업 강화'",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-25T05:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078295?sid=101"
+     "title": "허서홍 GS리테일 대표, ‘본질 집중’ 경영법 통했다..사장 승진",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-25T05:54:00.000Z",
+     "link": "http://www.breaknews.com/1253851"
     },
     {
-     "title": "GS리테일 성장 이끈 오너가 4세 허서홍, 2년 만에 사장 승진",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-25T05:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967692?sid=101"
+     "title": "GS그룹, 허서홍·이태형 사장 승진…주요 계열사 대표 유임",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-25T05:52:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=20261125135751285924debea800_1"
     },
     {
-     "title": "실적으로 증명한 허서홍, GS리테일 사장 승진…다음 스텝은",
-     "press": "peoplewatch.co.kr",
-     "publishedAt": "2026-11-25T05:42:00.000Z",
-     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611250011"
+     "title": "실적으로 증명한 허서홍 리더십… GS리테일 사장 승진",
+     "press": "pressman.kr",
+     "publishedAt": "2026-11-25T05:50:00.000Z",
+     "link": "https://www.pressman.kr/news/articleView.html?idxno=104663"
     }
    ]
   },
@@ -48,30 +48,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 2,
-   "press": 23,
-   "firstArticleAt": "2026-11-25T04:20:00.000Z",
+   "articles90": 25,
+   "recent20": 4,
+   "press": 25,
+   "firstArticleAt": "2026-11-25T04:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "GH도 전세 사기 당했다…경기도, 전수 조사 나서",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-25T05:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967685?sid=102"
+     "title": "GH 전세임대 실시 오피스텔에서 ‘전세사기’ 의혹…추미애 “유사 피해...",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-25T05:56:00.000Z",
+     "link": "https://www.kyeongin.com/article/1775371"
     },
     {
-     "title": "추미애, GH 전세사기 피해에 긴급 조사 지시…“잔금 선지급 비상식적”",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-25T05:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133739?sid=102"
+     "title": "추미애 \"주택 전문 공기업 GH가 전세사기를 당해...책임 규명\" 지시",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-25T05:54:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3762735"
     },
     {
-     "title": "추미애, GH 전세사기 피해 원인 규명 등 긴급 지시",
+     "title": "GH 사업서 전세사기 발생…추미애 \"중대한 사안\"",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-25T05:52:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544933"
+    }
+   ]
+  },
+  {
+   "keyword": "허영지 전속계약",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 20,
+   "recent20": 3,
+   "press": 19,
+   "firstArticleAt": "2026-11-25T04:37:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "허영지, 친정 DSP미디어 복귀…전속계약 체결",
      "press": "newsis.com",
-     "publishedAt": "2026-11-25T05:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014344637?sid=102"
+     "publishedAt": "2026-11-25T05:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014344741"
+    },
+    {
+     "title": "허영지, DSP미디어와 전속계약…다시 친정으로",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-25T05:50:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6944151"
+    },
+    {
+     "title": "허영지, DSP미디어와 전속계약…특별한 ‘리턴’",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-25T05:44:00.000Z",
+     "link": "https://swtvnews.com/news/newsview.php?ncode=1065591685109772"
     }
    ]
   },
@@ -81,126 +113,94 @@
     "google"
    ],
    "articles90": 21,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-25T04:25:00.000Z",
+   "recent20": 2,
+   "press": 16,
+   "firstArticleAt": "2026-11-25T04:36:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "'술집 합석' 거부당하자 강제추행 의혹으로 현직 경찰 내사 중",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-25T05:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078304?sid=102"
+    },
+    {
+     "title": "'술 취해 난동' 상해 입힌 경찰관 집행유예 구형",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T05:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437867?sid=102"
+    },
     {
      "title": "[단독] 의왕시의원, 외유성 제주 연수 논란, 술자리에 가무(歌舞)까지.....",
      "press": "getnews.co.kr",
      "publishedAt": "2026-11-25T05:38:00.000Z",
      "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888308"
-    },
-    {
-     "title": "현직 경찰관, 술집서 강제추행 혐의로 입건 전 조사",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-25T05:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537943?sid=102"
-    },
-    {
-     "title": "술집서 합석 거절하자 강제추행?…현직 경찰 내사중",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-25T05:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653324?sid=102"
     }
    ]
   },
   {
    "keyword": "코리아 핀테크 위크 2026",
    "sources": [
-    "nate"
+    "nate",
+    "daum"
    ],
-   "articles90": 20,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-25T04:20:00.000Z",
+   "articles90": 21,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-25T04:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "투자 판단부터 주문까지…핀테크 수장들이 그린 AI 시대[르포]",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-25T05:52:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026112514355402246"
+    },
+    {
+     "title": "손바닥 결제부터 AI 자산관리까지…핀테크 신기술 향연",
+     "press": "news.bizwatch.co.kr",
+     "publishedAt": "2026-11-25T05:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/648/0000052970?sid=101"
+    },
     {
      "title": "카카오페이, AI코치·스테이블코인 다음은?…핀테크 위크서 체험",
      "press": "ftoday.co.kr",
      "publishedAt": "2026-11-25T05:30:00.000Z",
      "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=370529"
-    },
-    {
-     "title": "토스, '코리아 핀테크 위크 2026' 참가…내 돈 찾는 금융 서비스",
-     "press": "ftoday.co.kr",
-     "publishedAt": "2026-11-25T05:28:00.000Z",
-     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=370528"
-    },
-    {
-     "title": "토스, '코리아 핀테크 위크' 참가…보험금 청구·금리인하 서비스 선보...",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-25T05:28:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=154648"
     }
    ]
   },
   {
-   "keyword": "손석구 푸른길 인터뷰",
+   "keyword": "대만",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 27,
-   "recent20": 11,
-   "press": 12,
-   "firstArticleAt": "2026-11-25T04:59:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'푸른길' 손석구 \"나가야마 에이타, 강속구 던지는 투수 같아\" [K인터뷰...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-25T05:44:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61381"
-    },
-    {
-     "title": "‘푸른길’ 손석구 “김동건 아나운서 말투 오마주… ‘대한민국 사람...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-25T05:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001151633"
-    },
-    {
-     "title": "'푸른길' 손석구 \"에이타, 日 돈키호테 모델…덕분에 섭외 잘 돼\" [MD인터...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-25T05:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127950"
-    }
-   ]
-  },
-  {
-   "keyword": "신병 더 무비 류경수 호러 코미디",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T04:19:00.000Z",
+   "articles90": 10,
+   "recent20": 5,
+   "press": 9,
+   "firstArticleAt": "2026-11-25T04:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "스크린으로 무대 넓힌 '신병'…\"실제 병원서 찍다 가위 눌려\"",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-25T05:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273915?sid=103"
+     "title": "중국, 트럼프 '대만 독립 지지 안 해' 발언 재확인…미국에 실천 촉구",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-25T05:56:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627657"
     },
     {
-     "title": "유정연과 신병즈가 만났다, K군텐츠 '신병' [SQ현장]",
-     "press": "newsq.co.kr",
-     "publishedAt": "2026-11-25T05:04:00.000Z",
-     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=501041"
+     "title": "대만, 반도체 호황에 전국민 AI보너스…‘1인당 80만원’ 지급",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-25T05:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567854?sid=104"
     },
     {
-     "title": "군대가 이렇게 무서울 일? ‘신병 더 무비’, 류경수X유정연과 손잡고 ...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-25T04:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003814356"
+     "title": "충주사과, 대만 16년 연속 수출…20톤 선적",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-25T05:52:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3761908"
     }
    ]
   },
@@ -237,34 +237,34 @@
    ]
   },
   {
-   "keyword": "대만",
+   "keyword": "양홍원 이혼",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 2,
    "press": 7,
-   "firstArticleAt": "2026-11-25T04:19:00.000Z",
+   "firstArticleAt": "2026-11-25T04:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "AI로 돈 번 대만…전 국민에 81만원 지급 추진 [영상PICK]",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-25T05:42:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261125500339"
+     "title": "양홍원 불륜설 폭로자, 건설 현장 근황 공개",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T05:50:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285895"
     },
     {
-     "title": "중국 \"트럼프, 대만독립 지지 안 한다 말해\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-25T05:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537945?sid=104"
+     "title": "양홍원 원현주 파경, 당첨 파주 집은 누구에게?",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-25T05:46:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95929"
     },
     {
-     "title": "中 “트럼프, 대만독립 지지 안한다 말해…美, 행동으로 옮겨야”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-25T05:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728373?sid=104"
+     "title": "\"양홍원과 이혼\" 원현주, 입장 발표문에 변호사 태그한 이유는",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-25T05:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005446246?sid=102"
     }
    ]
   },
@@ -293,10 +293,10 @@
      "link": "https://www.ajunews.com/view/20261125135639369"
     },
     {
-     "title": "美 CIA·국가정보국 해킹 피해에…안랩 상한가 [종목 NOW]",
-     "press": "fnnews.com",
+     "title": "안랩 장중 상한가 15만7900원…거래대금 2652억원",
+     "press": "job-post.co.kr",
      "publishedAt": "2026-11-25T04:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609563?sid=101"
+     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=240818"
     }
    ]
   },
@@ -329,6 +329,39 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-25T04:57:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004011647?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "신병 더 무비 류경수 호러 코미디",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T04:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "스크린으로 무대 넓힌 '신병'…\"실제 병원서 찍다 가위 눌려\"",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-25T05:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273915?sid=103"
+    },
+    {
+     "title": "유정연과 신병즈가 만났다, K군텐츠 '신병' [SQ현장]",
+     "press": "newsq.co.kr",
+     "publishedAt": "2026-11-25T05:04:00.000Z",
+     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=501041"
+    },
+    {
+     "title": "군대가 이렇게 무서울 일? ‘신병 더 무비’, 류경수X유정연과 손잡고 ...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-25T04:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003814356"
     }
    ]
   },
@@ -367,7 +400,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1401,
+  "flagged": 1403,
   "matched": 721,
   "avgLeadMin": 471,
   "recent": [
