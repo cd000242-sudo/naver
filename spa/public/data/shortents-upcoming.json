@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T09:39:47.787Z",
+ "builtAt": "2026-11-25T09:49:53.329Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,21 +8,90 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
+  {
+   "keyword": "조희대 탄핵 추진",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 84,
+   "recent20": 6,
+   "press": 57,
+   "firstArticleAt": "2026-11-25T08:24:00.000Z",
+   "exclusive": true,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[분석] 조희대 탄핵에 거리두는 청와대…한덕수 판결엔 우려 기류",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-25T09:46:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749238"
+    },
+    {
+     "title": "조희대 고향 찾은 장동혁 “대한민국 법치 사형선고”… “깡통 탄핵”",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-25T09:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368674?sid=100"
+    },
+    {
+     "title": "조희대 탄핵 압박 속 내달 4일 전국법원장회의…입장 표명 주목",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-25T09:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000555598?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "김민솔 3관왕",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 51,
+   "recent20": 10,
+   "press": 31,
+   "firstArticleAt": "2026-11-25T08:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김민솔, 신인왕·대상·상금왕 KLPGA 3관왕…“끊임없이 성장하겠다”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-25T09:46:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/020/0003765159"
+    },
+    {
+     "title": "신인상에 대상·상금왕까지…김민솔, 신지애 이후 20년 만의 3관왕",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-25T09:46:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/028/0002833983"
+    },
+    {
+     "title": "'3관왕' 김민솔, 하얀 드레스만큼 화려한 마무리",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T09:44:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/052/0002438007"
+    }
+   ]
+  },
   {
    "keyword": "창원지법 탄핵 헌법 훼손",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 36,
-   "recent20": 6,
-   "press": 32,
-   "firstArticleAt": "2026-11-25T08:11:00.000Z",
+   "articles90": 32,
+   "recent20": 3,
+   "press": 29,
+   "firstArticleAt": "2026-11-25T08:22:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "조희대 탄핵 추진에 법원 '폭풍전야'…30일 법관대표회의 분수령",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-25T09:44:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466647"
+    },
     {
      "title": "서울변회 \"탄핵, 헌법이 정한 목적과 한계 안에서 행사돼야\"",
      "press": "hankyung.com",
@@ -34,12 +103,6 @@
      "press": "kbmaeil.com",
      "publishedAt": "2026-11-25T09:36:00.000Z",
      "link": "https://www.kbmaeil.com/article/20261125500746"
-    },
-    {
-     "title": "\"조희대 탄핵 반대\" 판사들 첫 집단성명…30일 법관회의 분수령(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T09:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016463650?sid=102"
     }
    ]
   },
@@ -49,30 +112,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 37,
-   "recent20": 6,
-   "press": 31,
-   "firstArticleAt": "2026-11-25T08:10:00.000Z",
+   "articles90": 30,
+   "recent20": 4,
+   "press": 28,
+   "firstArticleAt": "2026-11-25T08:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령 \"공적임대주택, 중산층도 선택할 수 있어야…2030년까지 매년 ...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-25T09:44:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328484"
+    },
+    {
+     "title": "李 대통령 “2030년까지 매년 공적주택 24만호 공급할 것”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-25T09:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887430?sid=100"
+    },
     {
      "title": "李대통령 “재원 문제로 공급을 안 하면 안 된다”…공적주택 확대 주문",
      "press": "tfmedia.co.kr",
      "publishedAt": "2026-11-25T09:38:00.000Z",
      "link": "https://www.tfmedia.co.kr/news/article.html?no=209217"
-    },
-    {
-     "title": "이 대통령 \"공공임대→공적주택 이름 바꿔...연 평균 24만호 공급\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-25T09:36:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326505/?sc=Naver"
-    },
-    {
-     "title": "李대통령 \"공적주택, 매년 평균 24만호 공급···주거 사다리 역할\"",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-25T09:29:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=643941"
     }
    ]
   },
@@ -81,30 +144,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 27,
-   "recent20": 10,
-   "press": 21,
-   "firstArticleAt": "2026-11-25T08:10:00.000Z",
+   "articles90": 29,
+   "recent20": 9,
+   "press": 26,
+   "firstArticleAt": "2026-11-25T08:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령 \"청해부대 전쟁불개입 원칙 분명히 지킬 것…호르무즈 활동범...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T09:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014345456?sid=100"
+     "title": "李대통령 \"청해부대 전쟁불개입 원칙…호르무즈 활동범위 제외\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T09:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016463674?sid=100"
     },
     {
-     "title": "이 대통령 “청해부대, 전쟁 불개입 원칙 분명히 지킨다”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-25T09:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703200?sid=100"
+     "title": "청해부대 파병연장안, 국방소위 의결…이 대통령 \"전쟁 불개입 분명\"",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-25T09:40:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321898&inflow=N"
     },
     {
-     "title": "이 대통령 “청해부대 작전범위 확대…전쟁불개입 원칙 지킬 것”",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-25T09:32:00.000Z",
-     "link": "https://www.naeil.com/news/read/610092?ref=naver"
+     "title": "이 대통령 \"청해부대 오만 남방 외해까지 확대...전쟁불개입 지킬 것\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T09:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438005?sid=100"
     }
    ]
   },
@@ -115,7 +178,7 @@
     "nate"
    ],
    "articles90": 25,
-   "recent20": 6,
+   "recent20": 2,
    "press": 11,
    "firstArticleAt": "2026-11-25T08:34:00.000Z",
    "exclusive": false,
@@ -134,10 +197,42 @@
      "link": "https://n.news.naver.com/mnews/article/277/0005847846?sid=100"
     },
     {
-     "title": "베트남전 국군전사자 59년 만에 귀환",
+     "title": "베트남전 국군전사자 유해봉환식",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-25T09:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213915?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/079/0004213914?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "증안 펀드",
+   "sources": [
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-25T08:22:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"10조 규모 방어막으론 역부족\"…금융권, 증안펀드 추가 출자 여력 파악",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-25T09:48:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904463"
+    },
+    {
+     "title": "한 달째 50선 웃도는 공포지수... 증안펀드, 급락장 변동성 잡나",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-25T09:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609848?sid=101"
+    },
+    {
+     "title": "정부, 증안펀드 실탄 더 채운다… 증권사 출자 여력 타진 [코스피 4700 붕...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-25T09:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609846?sid=101"
     }
    ]
   },
@@ -146,13 +241,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T08:19:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-25T08:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "올 출생아 21.8만명… 年 합계출산율 0.9명대 기대감",
+     "press": "segye.com",
+     "publishedAt": "2026-11-25T09:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178084?sid=101"
+    },
     {
      "title": "올해 1~9월 태어난 아기 21만9천명…증가율 역대 최고",
      "press": "idaegu.co.kr",
@@ -164,45 +265,38 @@
      "press": "kyongbuk.co.kr",
      "publishedAt": "2026-11-25T09:26:00.000Z",
      "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4092136"
-    },
-    {
-     "title": "\"응애\" 소리 커졌다… 올 출생아 증가율 최고",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-25T09:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609768?sid=101"
     }
    ]
   },
   {
-   "keyword": "이형일 부총리 임금체계 방문",
+   "keyword": "행동",
    "sources": [
-    "signal.bz",
-    "nate"
+    "google"
    ],
-   "articles90": 15,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T08:13:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T09:01:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "“노동에 정당한 보상”…이형일 부총리가 찾아간 이 기업, 어디?",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-25T09:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415543?sid=101"
+     "title": "청소년기 뇌 신경회로 발달 장애, 성인기 사회적 행동에 장기적 영향",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-25T09:44:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627715"
     },
     {
-     "title": "이형일 부총리 “노사 협력해 기업 여건 맞는 자율 임금체계 도입해야”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-25T08:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005769019?sid=101"
+     "title": "[특별기고] 행동하는 국민들을 보고 싶다",
+     "press": "pennmike.com",
+     "publishedAt": "2026-11-25T09:14:00.000Z",
+     "link": "https://www.pennmike.com/news/articleView.html?idxno=132777"
     },
     {
-     "title": "이형일 부총리 \"직무·능력 중심 임금체계 확산해야\"",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-25T08:50:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=173098"
+     "title": "'무개념 행동' 이관희♥유시은, 사과보단 구구절절 '변명문'[MD이슈]",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-25T09:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128046"
     }
    ]
   },
@@ -237,11 +331,108 @@
      "link": "https://m.sports.naver.com/kfootball/article/666/0000133790"
     }
    ]
+  },
+  {
+   "keyword": "이형일 부총리 임금체계 방문",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-25T08:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“노동에 정당한 보상”…이형일 부총리가 찾아간 이 기업, 어디?",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-25T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006415543?sid=101"
+    },
+    {
+     "title": "이형일 부총리 “노사 협력해 기업 여건 맞는 자율 임금체계 도입해야”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-25T08:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769019?sid=101"
+    },
+    {
+     "title": "이형일 부총리 \"직무·능력 중심 임금체계 확산해야\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-25T08:50:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=173098"
+    }
+   ]
+  },
+  {
+   "keyword": "서출구 치열함 기억되길",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-25T08:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'데블스 플랜3' 서출구 \"살아남으려 했던 치열함으로 기억되길\"",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-25T09:12:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110086654714"
+    },
+    {
+     "title": "'데블스 플랜3' 서출구, 종영 소감 \"부딪혔던 과정 전부 소중\"",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-25T09:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054110"
+    },
+    {
+     "title": "‘데블스 플랜3’ 서출구 “살아남으려 했던 치열함으로 기억되길” [셀...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-25T08:56:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795595450531530005"
+    }
+   ]
+  },
+  {
+   "keyword": "나인 투 식스",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-25T08:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "육성재, 턱부상에도 '나인 투 식스' 참석",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T08:56:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286121"
+    },
+    {
+     "title": "'나인 투 식스' 박민영 \"시청률 6.9% 넘으면 혼성그룹 데뷔\" 공약",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T08:32:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286072"
+    },
+    {
+     "title": "[핌in현장] '나인 투 식스' 박민영·육성재·고수 \"시청률 6.9% 넘으면 혼...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T08:25:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125000949"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1484,
+  "flagged": 1487,
   "matched": 759,
   "avgLeadMin": 493,
   "recent": [
