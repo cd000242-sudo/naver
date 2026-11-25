@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T23:34:16.212Z",
+ "builtAt": "2026-11-25T23:44:19.122Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,18 +11,23 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "김정은, 전술핵 활용 주목",
+   "keyword": "김정은 핵시설 전술핵",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 28,
+   "articles90": 25,
    "recent20": 3,
-   "press": 25,
-   "firstArticleAt": "2026-11-25T22:10:00.000Z",
+   "press": 22,
+   "firstArticleAt": "2026-11-25T22:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김정은, 핵시설 현지지도…\"전술핵 다영역 활용화 주목해야\"",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-25T23:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162320?sid=100"
+    },
     {
      "title": "김정은, 핵시설 시찰…\"전술핵 절실한 과제\"",
      "press": "yonhapnewstv.co.kr",
@@ -34,28 +39,27 @@
      "press": "sedaily.com",
      "publishedAt": "2026-11-25T23:27:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004686305?sid=100"
-    },
-    {
-     "title": "김정은, 핵시설 현지지도…\"전술핵 다영역 활용화 주목해야\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-25T23:20:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023589"
     }
    ]
   },
   {
    "keyword": "뉴욕증시 AI 불안 혼조 마감",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 5,
-   "press": 22,
-   "firstArticleAt": "2026-11-25T22:11:00.000Z",
+   "articles90": 22,
+   "recent20": 2,
+   "press": 21,
+   "firstArticleAt": "2026-11-25T22:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[뉴욕마켓워치] AI 투매와 저가 매수의 줄다리기…주식 혼조·채권↑달...",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-25T23:40:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446593"
+    },
     {
      "title": "[AI MY 증시전망] 코스피, 반도체주 저가매수세 유입 전망…금통위·증안...",
      "press": "newspim.com",
@@ -67,44 +71,6 @@
      "press": "biz.sbs.co.kr",
      "publishedAt": "2026-11-25T23:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/374/0000545974?sid=101"
-    },
-    {
-     "title": "AI 자금조달 불안에 나스닥 장중 4.64%↓... 0.62% 하락 마감 [뉴욕증시]",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-25T23:24:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023587"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 관세 25% 인상가능성",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 21,
-   "recent20": 7,
-   "press": 21,
-   "firstArticleAt": "2026-11-25T22:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미국, 한국에 '과잉생산' 관세 15% 예고…최대 25% 인상 가능성도 열어놔",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-25T23:32:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120971"
-    },
-    {
-     "title": "美 '과잉생산 관세' 예고…韓 15% 유지에도 25% 인상 여지",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-25T23:30:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887404"
-    },
-    {
-     "title": "美, 한국 제조업 제품에 ‘과잉생산 관세’ 15% 제안…최대 25% 인상 가능...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-25T23:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178232?sid=100"
     }
    ]
   },
@@ -114,13 +80,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 21,
+   "articles90": 22,
    "recent20": 5,
-   "press": 19,
+   "press": 20,
    "firstArticleAt": "2026-11-25T22:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "또 놓친 시즌 3호골! 이강인, 비킹전 선발 출격해 57분 교체…아틀레티...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-25T23:38:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/311/0002084216"
+    },
     {
      "title": "이강인 57분 아틀레티코, 비킹에 2-0 완승",
      "press": "newsis.com",
@@ -132,12 +104,6 @@
      "press": "dailysportshankook.co.kr",
      "publishedAt": "2026-11-25T23:28:00.000Z",
      "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435971"
-    },
-    {
-     "title": "'이강인 선발 출전' AT 마드리드, 비킹 2-0 제압",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T23:27:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/421/0009310766"
     }
    ]
   },
@@ -146,13 +112,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T22:07:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T22:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이틀 만에 15% '뚝'…마이크론 덮친 메모리 가격 정점론",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-25T23:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006415705?sid=101"
+    },
     {
      "title": "美 반도체, 급락 딛고 0.65% 하락으로 선방⋯엔비디아 4%↓[뉴욕증시 무...",
      "press": "etoday.co.kr",
@@ -164,28 +136,27 @@
      "press": "shinailbo.co.kr",
      "publishedAt": "2026-11-25T23:08:00.000Z",
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087946"
-    },
-    {
-     "title": "[속보] 美나스닥 4% 급락후 반등 약보합 ... 저점 다지는 반도체주, 삼전...",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-25T23:02:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/26/2026112650024.html"
     }
    ]
   },
   {
    "keyword": "김새롬 재혼 2세 계획",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 0,
+   "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-25T22:11:00.000Z",
+   "firstArticleAt": "2026-11-25T22:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'재혼' 김새롬 “남편 키 188cm…2세 계획 위해 혼인신고부터”",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-25T23:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000522506"
+    },
     {
      "title": "'깜짝 재혼' 김새롬, 2세 계획 밝히며 남편 소개 \"키 188㎝, 덩치 좋아\"",
      "press": "tvdaily.co.kr",
@@ -197,12 +168,6 @@
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-25T23:06:00.000Z",
      "link": "https://m.entertain.naver.com/article/468/0001283529"
-    },
-    {
-     "title": "'재혼' 김새롬, 2세 위해 혼인신고 서둘렀다…\"나이가 있기 때문에 법적...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-25T23:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786224"
     }
    ]
   },
@@ -213,7 +178,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-25T22:16:00.000Z",
    "exclusive": false,
@@ -242,8 +207,8 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1492,
-  "matched": 741,
+  "flagged": 1488,
+  "matched": 738,
   "avgLeadMin": 500,
   "recent": [
    {
