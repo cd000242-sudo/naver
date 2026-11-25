@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T21:43:44.360Z",
+ "builtAt": "2026-11-25T21:53:47.423Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,21 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 12,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "조희대 탄핵 연대 추진",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
    "firstArticleAt": "2026-11-25T20:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조희대 탄핵 속도 내는 민주당…범여권 5당 연대 추진에 사법부 내 우려...",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-25T21:44:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=102039"
+    },
     {
      "title": "'조희대 탄핵' 속도전에 사법부 첫 회의…한은, 오늘 기준금리 결정[오...",
      "press": "nocutnews.co.kr",
@@ -34,52 +39,77 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-25T21:20:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012301387?sid=100"
-    },
-    {
-     "title": "'조희대 탄핵' 5당 연대 제안‥시점 두고 '온도차'",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-25T21:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538098?sid=100"
     }
    ]
   },
   {
-   "keyword": "김새롬, 남편과 혼인신고",
+   "keyword": "편의점",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T20:39:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T20:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "10년만에 재혼 김새롬 \"2세 계획 중…남편 188㎝ 듬직\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T21:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014345746"
+     "title": "[반려동물] \"사료·간식도 동네 편의점서\"…전용매대 늘리고 매출도 '쑥...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T21:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016464053?sid=101"
     },
     {
-     "title": "'재혼' 김새롬, 188cm ♥연하 남편과 혼인신고만 한 진짜 이유..\"2세 계획...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-25T21:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004469879"
+     "title": "마트·편의점에 치이던 SSM의 반격…즉시배송 타고 실적 ‘쑥’",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-25T21:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2652908"
     },
     {
-     "title": "'재혼' 김새롬 \"연하 남편 키 188㎝\"…혼인신고 서두른 이유?",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-25T20:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005446556"
+     "title": "고물가에 더 잘 팔린다…마트·편의점이 키우는 '초저가'",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-25T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078496?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "윤가은 감독상 부담스럽다",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-25T20:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "47년 청룡에 여성 감독상은 처음이라…쉽게 쓰이지 않은 새역사[이슈S]",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-25T21:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000640976"
+    },
+    {
+     "title": "'세계의 주인' 윤가은 감독상…서수빈 신인상까지",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-25T21:48:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611260025"
+    },
+    {
+     "title": "청룡 감독상, 장항준도 나홍진도 아닌 윤가은-이변 갑론을박",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-25T21:42:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95944"
     }
    ]
   },
   {
    "keyword": "전도연 여우주연상 수상",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
@@ -107,45 +137,13 @@
      "link": "https://www.bntnews.co.kr/article/view/bnt202611260005"
     }
    ]
-  },
-  {
-   "keyword": "추수감사절",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-25T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 소비자 1.83억명 추수감사절 주간 쇼핑 추정",
-     "press": "yakup.com",
-     "publishedAt": "2026-11-25T21:08:00.000Z",
-     "link": "https://www.yakup.com/news/index.html?mode=view&cat=12&nid=335722"
-    },
-    {
-     "title": "추수감사절 시카고 일대 비•강풍 예보",
-     "press": "koreadaily.com",
-     "publishedAt": "2026-11-25T21:08:00.000Z",
-     "link": "https://www.koreadaily.com/article/20261125130711827"
-    },
-    {
-     "title": "일리노이 주민 415만명 추수감사절 이동",
-     "press": "koreadaily.com",
-     "publishedAt": "2026-11-25T21:00:00.000Z",
-     "link": "https://www.koreadaily.com/article/20261125125841759"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1499,
-  "matched": 761,
-  "avgLeadMin": 506,
+  "flagged": 1498,
+  "matched": 758,
+  "avgLeadMin": 500,
   "recent": [
    {
     "keyword": "美 관세 발표, 韓 15% 유지?",
