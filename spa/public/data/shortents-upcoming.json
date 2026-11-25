@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T03:07:25.856Z",
+ "builtAt": "2026-11-25T03:17:28.959Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
-  {
-   "keyword": "조희대 탄핵 5당 연대 제안",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 55,
-   "recent20": 8,
-   "press": 44,
-   "firstArticleAt": "2026-11-25T01:38:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "창원지법, 오늘 전체 판사회의…'대법원장 탄핵' 관련 입장 나오나",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-25T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394785?sid=100"
-    },
-    {
-     "title": "서두르는 민주… 진보 4당에 ‘탄핵 공동추진’ 제안",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-25T02:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002835428?sid=100"
-    },
-    {
-     "title": "김민석, 조희대 탄핵 '5당 연대' 제안…금주 소추안 윤곽 전망",
-     "press": "hg-times.com",
-     "publishedAt": "2026-11-25T02:56:00.000Z",
-     "link": "https://www.hg-times.com/news/articleView.html?idxno=307334"
-    }
-   ]
-  },
   {
    "keyword": "노소영, 최태원 화해 요청 거부",
    "sources": [
     "nate"
    ],
-   "articles90": 44,
-   "recent20": 12,
-   "press": 43,
+   "articles90": 51,
+   "recent20": 14,
+   "press": 49,
    "firstArticleAt": "2026-11-25T02:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "노소영, 최태원 '9440억원 화해 카드' 거부…\"즉각 상고 취하하라\"",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-25T03:06:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=730936"
+     "title": "노소영 \"최태원 화해권고 요청 동의 못 해…즉시 상고 취하해야\"",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-25T03:14:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82730"
     },
     {
-     "title": "노소영 관장 최태원 회장 화해권고 거부..\"진정성 있으면 상고 취하하라...",
-     "press": "kpenews.com",
-     "publishedAt": "2026-11-25T03:02:00.000Z",
-     "link": "https://kpenews.com/View.aspx?No=4328493"
+     "title": "노소영 측, 최태원 화해권고 요청 거부…\"진정성 있다면 즉시 상고 취하...",
+     "press": "econonews.co.kr",
+     "publishedAt": "2026-11-25T03:14:00.000Z",
+     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=447705"
     },
     {
-     "title": "노소영, 최태원 ‘9440억원 화해권고요청’ 거부…“진정성 있다면 상고...",
-     "press": "hani.co.kr",
+     "title": "노소영, 최태원 ‘9440억 원 화해권고’ 요청 두고 “동의 안 해”",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-25T03:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053633?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 탄핵 5당 연대 제안",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 50,
+   "recent20": 3,
+   "press": 39,
+   "firstArticleAt": "2026-11-25T01:50:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주 \"조희대 탄핵, 5당 연대하자\"…국힘 장외로",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T03:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929751?sid=100"
+    },
+    {
+     "title": "민주당, ‘조희대 탄핵’ 진보 연대 제안…국민의힘은 장외 여론전 ‘맞...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-25T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300799?sid=100"
+    },
+    {
+     "title": "창원지법, 오늘 전체 판사회의…'대법원장 탄핵' 관련 입장 나오나",
+     "press": "joseilbo.com",
      "publishedAt": "2026-11-25T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833867?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/123/0002394785?sid=100"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 50,
+   "articles90": 49,
    "recent20": 2,
-   "press": 27,
-   "firstArticleAt": "2026-11-25T01:40:00.000Z",
+   "press": 26,
+   "firstArticleAt": "2026-11-25T01:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[포토] 민주노총-한국노총 \"65세 법정 정년 연장하라\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-25T03:14:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451955"
+    },
     {
      "title": "노동계 “정년연장 연내 입법 관철 때까지 투쟁”",
      "press": "munhwa.com",
@@ -97,12 +103,6 @@
      "press": "straightnews.co.kr",
      "publishedAt": "2026-11-25T02:50:00.000Z",
      "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=316174"
-    },
-    {
-     "title": "양대노총, 65세 법정 정년연장 연내 입법 처리 촉구 기자회견",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T02:46:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125000621"
     }
    ]
   },
@@ -111,30 +111,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 51,
-   "recent20": 4,
-   "press": 26,
-   "firstArticleAt": "2026-11-25T01:39:00.000Z",
+   "articles90": 44,
+   "recent20": 2,
+   "press": 23,
+   "firstArticleAt": "2026-11-25T01:48:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "이성윤 \"취임100일 김민석, 최민희보다 먼저 징계심의해야\" 박선원 사과",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-25T03:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138931?sid=100"
+    },
+    {
+     "title": "송영길 “8월 청와대에서 정청래와 원없이 얘기…저도 김민석도 사과\"",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-25T03:12:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1139928"
+    },
     {
      "title": "與 친청계, 김민석에 \"신천지 3자 연합 의혹 매듭지어야\"",
      "press": "iminju.net",
      "publishedAt": "2026-11-25T02:56:00.000Z",
      "link": "http://www.iminju.net/news/articleView.html?idxno=173044"
+    }
+   ]
+  },
+  {
+   "keyword": "디트로이트 타이거스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-25T01:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김하성, 디트로이트행 확정적…통산 4번째 둥지",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-25T03:12:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566461"
     },
     {
-     "title": "김민석, 조희대 탄핵 추진 5당 연대 공식 제안",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-25T02:54:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=368032"
+     "title": "김하성, MLB 디트로이트에 새 둥지… 1년 500만달러에 합의",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-25T03:06:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451926"
     },
     {
-     "title": "박선원 \"최고위 단결 노력\" 사과에도…친청계 \"대표가 결자해지\"",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-25T02:54:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321773&inflow=N"
+     "title": "김하성 디트로이트 계약, 왜 수락했나",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T02:42:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285725"
     }
    ]
   },
@@ -143,10 +175,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-25T01:42:00.000Z",
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-25T01:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,46 +203,14 @@
    ]
   },
   {
-   "keyword": "디트로이트 타이거스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-25T01:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김하성, MLB 디트로이트에 새 둥지… 1년 500만달러에 합의",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-25T03:06:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451926"
-    },
-    {
-     "title": "김하성 디트로이트 계약, 왜 수락했나",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T02:42:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285725"
-    },
-    {
-     "title": "최악 부진에도 살아남은 김하성…디트로이트서 부활의 날개 펼까",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T02:33:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/003/0014344097"
-    }
-   ]
-  },
-  {
    "keyword": "원전 공론화 중단하라!",
    "sources": [
     "nate"
    ],
-   "articles90": 23,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T01:38:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-25T01:57:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -239,13 +239,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 9,
    "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T01:39:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-25T01:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "중국, 선저우 24호 발사 성공...사상 첫 외국인 탑승",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T03:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437783?sid=104"
+    },
     {
      "title": "‘中 우주굴기 집합’ 선저우 24호 발사… 외국인 우주비행사 첫 탑승",
      "press": "munhwa.com",
@@ -257,44 +263,6 @@
      "press": "kr.people.com.cn",
      "publishedAt": "2026-11-25T02:36:00.000Z",
      "link": "http://kr.people.com.cn/n3/2026/1125/c207467-20522844.html"
-    },
-    {
-     "title": "중국, 외국인 태운 선저우 24호 발사 성공…톈궁 첫 방문",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-25T02:28:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627608"
-    }
-   ]
-  },
-  {
-   "keyword": "급여 지원",
-   "sources": [
-    "google"
-   ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-25T01:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "남양주시, 생활·교통·복지 현안 국비 지원 요청…국회에 제도 개선 건...",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-25T02:58:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=770601"
-    },
-    {
-     "title": "최현덕 남양주시장, 이광재 예결위원장 만나 국비 지원 요청",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009309064?sid=102"
-    },
-    {
-     "title": "2027년 중위소득 얼마? 생계급여·의료급여·주거급여 급여지원 확대…...",
-     "press": "christiantoday.co.kr",
-     "publishedAt": "2026-11-25T02:48:00.000Z",
-     "link": "https://www.christiantoday.co.kr/news/378869"
     }
    ]
   },
@@ -303,10 +271,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-25T01:46:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-25T01:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -331,28 +299,60 @@
    ]
   },
   {
+   "keyword": "급여 지원",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T01:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "남양주시, 생활·교통·복지 현안 국비 지원 요청…국회에 제도 개선 건...",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-25T02:58:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=770601"
+    },
+    {
+     "title": "2027년 중위소득 얼마? 생계급여·의료급여·주거급여 급여지원 확대…...",
+     "press": "christiantoday.co.kr",
+     "publishedAt": "2026-11-25T02:48:00.000Z",
+     "link": "https://www.christiantoday.co.kr/news/378869"
+    },
+    {
+     "title": "최현덕 남양주시장, 이광재 예결위원장 만나 국비 지원 요청",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T02:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009309064?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "젠슨 황 심리치료 중",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
    "firstArticleAt": "2026-11-25T01:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "젠슨 황, 전 직원 앞 사과‥\"심리치료 받는 중\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-25T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537906?sid=104"
+    },
+    {
      "title": "11일만의 컴백 젠슨 황 “후계자 안키워”… ‘1인 엔비디아’ 고수",
      "press": "munhwa.com",
      "publishedAt": "2026-11-25T02:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002835434?sid=104"
-    },
-    {
-     "title": "\"매일 1시간 반 심리치료\" 젠슨 황, 심경 고백...승계 계획은 선 그어",
-     "press": "economist.co.kr",
-     "publishedAt": "2026-11-25T02:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/243/0000106270?sid=101"
     },
     {
      "title": "'젠슨 황 효과' 하루 만에 증발...한미 증시 '흔들' [뉴스퀘어10]",
@@ -363,14 +363,79 @@
    ]
   },
   {
-   "keyword": "서훈",
+   "keyword": "폭설",
    "sources": [
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-25T01:44:00.000Z",
+   "firstArticleAt": "2026-11-25T02:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "영화 폭설, 1위에도 웃지 못하는 이유",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T03:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285760"
+    },
+    {
+     "title": "'폭설' 김윤석·박수영, 28일 관객 만난다…2주차 무대인사 확정",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-25T03:04:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784684"
+    },
+    {
+     "title": "양양군, 폭설·한파 대비 재난 예·경보시설 40곳 전수점검…겨울철 안...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-25T02:28:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611250092"
+    }
+   ]
+  },
+  {
+   "keyword": "연금 개혁",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T02:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국민연금 '68세 수령설' 사실일까?",
+     "press": "ekoreanews.co.kr",
+     "publishedAt": "2026-11-25T03:08:00.000Z",
+     "link": "https://www.ekoreanews.co.kr/news/articleView.html?idxno=89370"
+    },
+    {
+     "title": "“국민연금 3년 더 늦게 받는다” 소문 퍼지자… 정부가 직접 밝힌 내용",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-25T02:50:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1177611"
+    },
+    {
+     "title": "[100세 칼럼] 유족연금 재정 분석도 안 하고 신중론…나태하고 안이한 ...",
+     "press": "newsquest.co.kr",
+     "publishedAt": "2026-11-25T02:04:00.000Z",
+     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=305809"
+    }
+   ]
+  },
+  {
+   "keyword": "서훈",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T01:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -400,10 +465,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
+   "articles90": 3,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-25T01:39:00.000Z",
+   "firstArticleAt": "2026-11-25T02:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -426,77 +491,12 @@
      "link": "https://n.news.naver.com/mnews/article/366/0001207201?sid=101"
     }
    ]
-  },
-  {
-   "keyword": "연금 개혁",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T01:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“국민연금 3년 더 늦게 받는다” 소문 퍼지자… 정부가 직접 밝힌 내용",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-25T02:50:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1177611"
-    },
-    {
-     "title": "[100세 칼럼] 유족연금 재정 분석도 안 하고 신중론…나태하고 안이한 ...",
-     "press": "newsquest.co.kr",
-     "publishedAt": "2026-11-25T02:04:00.000Z",
-     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=305809"
-    },
-    {
-     "title": "국민연금 수령 나이 68세로 늦춰진다?…정은경 \"검토도 안 해\"",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-25T01:42:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=730917"
-    }
-   ]
-  },
-  {
-   "keyword": "폭설",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T02:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'폭설' 김윤석·박수영, 28일 관객 만난다…2주차 무대인사 확정",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-25T03:04:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784684"
-    },
-    {
-     "title": "양양군, 폭설·한파 대비 재난 예·경보시설 40곳 전수점검…겨울철 안...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-25T02:28:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611250092"
-    },
-    {
-     "title": "중랑구, 구리시와 제설 공조체계 구축…겨울철 폭설 대응 강화",
-     "press": "job-post.co.kr",
-     "publishedAt": "2026-11-25T02:16:00.000Z",
-     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=240760"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1365,
-  "matched": 719,
+  "flagged": 1364,
+  "matched": 718,
   "avgLeadMin": 487,
   "recent": [
    {
