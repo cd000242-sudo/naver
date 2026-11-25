@@ -36960,7 +36960,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-24T06:18:54.976Z",
+    "checkedAt": "2026-11-25T05:06:42.622Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -44325,7 +44325,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-08T01:40:21.176Z",
+    "checkedAt": "2026-11-25T05:06:56.117Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -45045,7 +45045,12 @@
    "effectiveVolume": 660,
    "peakConfidence": "",
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-25T05:06:45.321Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -54901,7 +54906,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-08T01:40:22.969Z",
+    "checkedAt": "2026-11-25T05:06:57.920Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -88621,7 +88626,12 @@
    "peakConfidence": "1년치만 봄",
    "effectiveVolume": 780,
    "preemptRank": 3,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-25T05:06:53.407Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -92760,7 +92770,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-08T01:40:17.420Z",
+    "checkedAt": "2026-11-25T05:06:52.527Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -102081,7 +102091,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-24T06:18:55.879Z",
+    "checkedAt": "2026-11-25T05:06:43.547Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -111305,5 +111315,5 @@
    ]
   }
  ],
- "revalidatedAt": "2026-11-24T06:19:15.655Z"
+ "revalidatedAt": "2026-11-25T05:06:57.920Z"
 }
