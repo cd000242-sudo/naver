@@ -126,7 +126,7 @@ function NavBarLink({ item, pathname, search, unseenNotices, onNavigate }: { ite
     // The address query matters for a target like /community?board=qna (a plain page link ignores it).
     const current = isNavPathActive(item.to, pathname, search);
     return (
-        <Link className={`site-nav-link${item.featured ? ' site-nav-link-featured' : ''}`} to={item.to} aria-current={current ? 'page' : undefined} onClick={onNavigate}>
+        <Link className={`site-nav-link${item.featured ? ' site-nav-link-featured' : ''}${item.accent ? ` site-nav-link-${item.accent}` : ''}`} to={item.to} aria-current={current ? 'page' : undefined} onClick={onNavigate}>
             {item.label}
             {item.badge && <NewBadge count={unseenNotices} size="md" />}
         </Link>

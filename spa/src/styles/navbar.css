@@ -24,6 +24,20 @@
     --sn-cta: #f5b40a;
     --sn-cta-hover: #e6a700;
     --sn-on-cta: #1d1605;
+    /* 구매하기: green pill (white text 5.4:1) with a moving sheen and ring. */
+    --sn-buy: #0b7a3e;
+    --sn-buy-hover: #09672f;
+    --sn-on-buy: #ffffff;
+    --sn-buy-sheen: rgba(255, 255, 255, 0.28);
+    --sn-buy-ring: rgba(18, 150, 80, 0.5);
+    --sn-buy-ring-off: rgba(18, 150, 80, 0);
+    /* 시크릿 클래스: cool silver (ink 12:1 on the lightest, 7:1 on the deepest; the grey small line stays above 4.5:1). */
+    --sn-silver-ink: #1c2024;
+    --sn-silver-light: #f6f7f9;
+    --sn-silver-mid: #e1e5ea;
+    --sn-silver-deep: #d0d6dd;
+    --sn-silver-line: #aeb7c1;
+    --sn-silver-line-on: #78838f;
     position: fixed;
     top: 0;
     left: 0;
@@ -83,6 +97,39 @@
 /* Current page — soft fill, bold, 3px underline. A group trigger gets the same mark when a page inside it is open. */
 .site-nav-link[aria-current="page"], .site-nav-link.is-active { background: var(--sn-brand-soft); color: var(--sn-ink); font-weight: 900; }
 .site-nav-link[aria-current="page"]::after, .site-nav-link.is-active::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: -12px; height: 3px; border-radius: 3px; background: var(--sn-brand); }
+
+/* 구매하기 (accent: buy) — a green pill. Every 2.8s a light sweeps across it once and its outline spreads and fades. */
+.site-nav-link.site-nav-link-buy {
+    border-radius: 999px;
+    color: var(--sn-on-buy);
+    font-weight: 700;
+    background-color: var(--sn-buy);
+    background-image: linear-gradient(105deg, transparent 40%, var(--sn-buy-sheen) 50%, transparent 60%);
+    background-repeat: no-repeat;
+    background-size: 260% 100%;
+    background-position: 100% 0;
+    animation: sn-buy-pulse 2.8s ease-in-out infinite;
+}
+.site-nav-link.site-nav-link-buy:hover, .site-nav-item.open > .site-nav-link.site-nav-link-buy { background-color: var(--sn-buy-hover); background-image: none; color: var(--sn-on-buy); animation: none; }
+.site-nav-link-buy.is-active::after { background: var(--sn-buy); }
+@keyframes sn-buy-pulse {
+    0% { background-position: 100% 0; box-shadow: 0 0 0 0 var(--sn-buy-ring); }
+    35% { background-position: 0% 0; }
+    70% { box-shadow: 0 0 0 9px var(--sn-buy-ring-off); }
+    100% { background-position: 0% 0; box-shadow: 0 0 0 9px var(--sn-buy-ring-off); }
+}
+
+/* 시크릿 클래스 row (silver) — pale metal gradient, thin silver line, dark ink. Still: no animation anywhere. */
+.site-nav-drop-item.site-nav-drop-item-silver, .site-nav-sheet-item.site-nav-sheet-item-silver {
+    color: var(--sn-silver-ink);
+    background: linear-gradient(135deg, var(--sn-silver-light) 0%, var(--sn-silver-mid) 55%, var(--sn-silver-light) 100%);
+    box-shadow: inset 0 0 0 1px var(--sn-silver-line);
+}
+.site-nav-drop-item.site-nav-drop-item-silver:hover { background: linear-gradient(135deg, var(--sn-silver-mid) 0%, var(--sn-silver-deep) 55%, var(--sn-silver-mid) 100%); }
+.site-nav-drop-item.site-nav-drop-item-silver[aria-current="page"], .site-nav-sheet-item.site-nav-sheet-item-silver[aria-current="page"] {
+    background: linear-gradient(135deg, var(--sn-silver-mid) 0%, var(--sn-silver-deep) 55%, var(--sn-silver-mid) 100%);
+    box-shadow: inset 0 0 0 1.5px var(--sn-silver-line-on), inset 4px 0 0 var(--sn-silver-line-on);
+}
 
 .site-nav-chev { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; transition: transform 0.15s; }
 .site-nav-item.open .site-nav-chev { transform: rotate(180deg); }
@@ -146,6 +193,9 @@
 .site-nav-sheet-item small { margin-left: auto; font-size: 15px; font-weight: 500; color: var(--sn-muted); }
 .site-nav-sheet-item [role="status"] { margin-left: auto !important; }
 .site-nav-sheet-item[aria-current="page"] { background: var(--sn-brand-soft); box-shadow: inset 4px 0 0 var(--sn-brand); border-bottom-color: transparent; }
+/* The 무료체험·구매 row wears the same green as the 구매하기 button — still, no motion on the phone list. */
+.site-nav-sheet-item.site-nav-sheet-item-buy, .site-nav-sheet-item.site-nav-sheet-item-buy[aria-current="page"] { margin: 4px 0; background: var(--sn-buy); color: var(--sn-on-buy); border-bottom-color: transparent; }
+.site-nav-sheet-item.site-nav-sheet-item-buy[aria-current="page"] { box-shadow: inset 4px 0 0 var(--sn-on-buy); }
 
 /* Below 1180px the eight bar items cannot fit: the bar keeps brand + free trial + [menu]. */
 @media (max-width: 1180px) {
@@ -195,5 +245,6 @@
 }
 @media (prefers-reduced-motion: reduce) {
     .site-nav *, .site-nav *::before, .site-nav *::after { transition: none !important; }
+    .site-nav .site-nav-link-buy { animation: none !important; background-image: none; }
 }
 .site-nav-sheet-item-featured { color: var(--sn-brand); font-weight: 900; }

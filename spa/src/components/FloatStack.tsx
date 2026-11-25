@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import FloatRoomPicker from './FloatRoomPicker';
 import NewBadge from './NewBadge';
 import { ShellIcon } from './ShellIcons';
 import { useUnseenNoticeCount } from '../lib/useNoticeAlerts';
@@ -24,10 +25,8 @@ function FloatStack({ open, onToggle }: { open: boolean; onToggle: () => void })
     const navigate = useNavigate();
     const unseenNoticeCount = useUnseenNoticeCount();
     const hasNotice = unseenNoticeCount > 0;
-    const baseStyle: React.CSSProperties = {
-        position: 'fixed',
-        right: 24,
-        zIndex: 10001,
+    // Look shared by every slot; `baseStyle` adds where a plain link sits (the room picker brings its own fixed wrapper).
+    const faceStyle: React.CSSProperties = {
         boxSizing: 'border-box',
         display: 'flex',
         alignItems: 'center',
@@ -48,6 +47,7 @@ function FloatStack({ open, onToggle }: { open: boolean; onToggle: () => void })
         textDecoration: 'none',
         transition: TRANSITION,
     };
+    const baseStyle: React.CSSProperties = { position: 'fixed', right: 24, zIndex: 10001, ...faceStyle };
     const toggleLabel = open ? '버튼 접기' : '문의·단톡방·유튜브 펴기';
 
     return (
@@ -83,16 +83,7 @@ function FloatStack({ open, onToggle }: { open: boolean; onToggle: () => void })
                 <span className="lp-float-label">1:1 문의</span>
             </a>
 
-            <a
-                className="lp-float-link lp-float-room"
-                href="https://open.kakao.com/o/gQ1jRBwh" target="_blank" rel="noopener"
-                title="단톡방 바로가기"
-                aria-label="단톡방 바로가기"
-                style={{ ...baseStyle, bottom: slotBottom(1) }}
-            >
-                <ShellIcon name="people" />
-                <span className="lp-float-label">단톡방 바로가기</span>
-            </a>
+            <FloatRoomPicker faceStyle={faceStyle} bottom={slotBottom(1)} />
 
             <a
                 className="lp-float-link lp-float-youtube"

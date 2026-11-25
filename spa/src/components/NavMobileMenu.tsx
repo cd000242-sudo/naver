@@ -41,7 +41,7 @@ function NavMobileMenu({ open, pathname, search, unseenNotices, account, onClose
                         {section.items.map((row) => (
                             <Link
                                 key={row.key}
-                                className={`site-nav-sheet-item${row.featured ? ' site-nav-sheet-item-featured' : ''}`}
+                                className={`site-nav-sheet-item${row.featured ? ' site-nav-sheet-item-featured' : ''}${row.accent ? ` site-nav-sheet-item-${row.accent}` : ''}${row.silver ? ' site-nav-sheet-item-silver' : ''}`}
                                 to={row.to}
                                 aria-current={isNavPathActive(row.to, pathname, search) ? 'page' : undefined}
                                 onClick={onClose}

@@ -298,7 +298,8 @@ test('sidebar: my activity (nickname, grade badge, score bar, counts), board men
     assert.match(text(html), /열매까지 350점/);
     for (const label of ['내 글', '내 댓글', '들른 글']) assert.match(text(html), new RegExp(label));
     assert.match(text(html), /21/);
-    for (const label of ['전체글', '공지사항', '최근 소식', '질문하기', '요청사항', '버그 및 오류 신고', '자유게시판', '내 글 홍보']) assert.match(text(html), new RegExp(label));
+    for (const label of ['공지사항', '최근 소식', '질문하기', '요청사항', '버그 및 오류 신고', '자유게시판', '내 글 홍보']) assert.match(text(html), new RegExp(label));
+    assert.doesNotMatch(text(html), /전체글/, '2026-11-25: the 전체글 entry left the board menu');
     const menu = tags(html, 'a').map((tag) => attr(tag, 'href')).filter((href) => /board=/.test(href || '')).map((href) => /board=(\w+)/.exec(href)[1]);
     assert.deepEqual(menu, ['notice', 'news', 'greeting', 'levelup', 'qna', 'request', 'inquiry', 'free', 'promo', 'secret'], 'the menu follows the agreed order: 질문하기 right after 최근 소식');
     const current = tags(html, 'a').filter((tag) => attr(tag, 'aria-current') === 'page');

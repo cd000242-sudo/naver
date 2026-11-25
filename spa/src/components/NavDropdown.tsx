@@ -75,14 +75,14 @@ export function NavDropdownShell({ dropKey, open, dispatch, className, triggerCl
 
 type GroupProps = { item: NavGroupItem; pathname: string; search: string; unseenNotices: number; open: boolean; dispatch: Dispatch<MenuAction> };
 
-/** A "Product ▾" / "Price·Buy ▾" / "Community ▾" group of the desktop bar. */
+/** A "Product ▾" / "Buy ▾" / "Community ▾" group of the desktop bar. */
 function NavDropdown({ item, pathname, search, unseenNotices, open, dispatch }: GroupProps) {
     return (
         <NavDropdownShell
             dropKey={item.key}
             open={open}
             dispatch={dispatch}
-            triggerClassName="site-nav-link site-nav-trigger"
+            triggerClassName={`site-nav-link site-nav-trigger${item.accent ? ` site-nav-link-${item.accent}` : ''}`}
             triggerContent={<>{item.label}{item.badge ? <NewBadge count={unseenNotices} size="md" /> : null}</>}
             active={isNavGroupActive(item, pathname)}
         >
@@ -91,7 +91,7 @@ function NavDropdown({ item, pathname, search, unseenNotices, open, dispatch }: 
                 return (
                     <Link
                         key={child.key}
-                        className="site-nav-drop-item"
+                        className={`site-nav-drop-item${child.silver ? ' site-nav-drop-item-silver' : ''}`}
                         to={child.to}
                         aria-current={current ? 'page' : undefined}
                         onClick={() => dispatch({ type: 'close-all' })}

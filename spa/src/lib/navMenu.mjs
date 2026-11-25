@@ -5,9 +5,11 @@ import { LOGIN_PATH, SIGNUP_PATH, loginPath } from './siteAuthModel.mjs';
  * Top menu model: destinations, "which item is current" rules, the dropdown / phone-menu state machine
  * and the login-button routing. Pure data and functions so node:test can pin them without a browser.
  *
- * Design 1 (light bar), agreed 2026-11-07: Home · Product ▾ · Free chatbot · Price/Buy ▾ · Reviews · Community ▾
+ * Design 1 (light bar), agreed 2026-11-07. Order since 2026-11-25:
+ * Home · Community ▾ · LEWORD · Product ▾ · Free chatbot · Buy ▾ · Reviews · 질문하기
  * (the community opens straight onto one of its seven boards, 2026-11-08; the promo board as two sub-tabs).
- * 질문하기 (contract 1116) is also its own item right before Community: the board is a click away, not inside a dropdown.
+ * 질문하기 (contract 1116) is also its own item, the last one: the board is a click away, not inside a dropdown.
+ * `accent` (a display field like `featured`) marks the green, gently moving Buy button; `silver` marks the locked board's row.
  */
 
 /** Below this width the bar turns into the [menu] button and the full-height list. */
@@ -44,6 +46,8 @@ const NOTICE_BOARD_ID = 'notice';
 const boardEntry = (board) => Object.freeze({
     ...entry(`community-${board.id}`, board.label, communityPath({ board: board.id }), undefined, BOARD_DESC[board.id], undefined),
     ...(board.id === NOTICE_BOARD_ID ? { badge: true } : {}),
+    // The locked board (시크릿 클래스) wears the silver look everywhere it is listed.
+    ...(board.locked ? { silver: true } : {}),
 });
 
 /**
@@ -63,6 +67,8 @@ const QNA_PATH = communityPath({ board: 'qna' });
 /** Desktop bar. Groups open a dropdown; the notice badge rides on the Community group. */
 export const NAV_ITEMS = Object.freeze([
     link('home', '홈', '/'),
+    // [2026-11-25] The community sits right next to Home (the dropdown and its new-notice badge moved as they were).
+    Object.freeze({ type: 'group', key: 'community', label: '커뮤니티', badge: true, items: COMMUNITY_ENTRIES }),
     // [2026-11-07] LEWORD is the most important site — its own highlighted item, not hidden in a dropdown.
     link('leword', 'LEWORD', '/leword', { featured: true }),
     Object.freeze({
@@ -72,15 +78,15 @@ export const NAV_ITEMS = Object.freeze([
         ]),
     }),
     link('chatbots', '무료 챗봇', '/chatbots'),
+    // [2026-11-25] 가격·구매 → 구매하기: the green button (accent), gently moving on the desktop bar.
     Object.freeze({
-        type: 'group', key: 'buy', label: '가격·구매', items: Object.freeze([
+        type: 'group', key: 'buy', label: '구매하기', accent: 'buy', items: Object.freeze([
             entry('pricing', '무료체험·구매', '/pricing', 'trial-purchase', '요금 보고 바로 시작'),
             entry('lookup', '주문 조회', '/lookup', 'order-search', '결제 내역·코드 다시 보기'),
         ]),
     }),
     link('reviews', '수익 후기', '/reviews'),
     link('qna', '질문하기', QNA_PATH),
-    Object.freeze({ type: 'group', key: 'community', label: '커뮤니티', badge: true, items: COMMUNITY_ENTRIES }),
 ]);
 
 const row = (key, label, to, small, extra = {}) => Object.freeze({ key, label, to, small, ...extra });
@@ -100,7 +106,7 @@ export const NAV_MOBILE_SECTIONS = Object.freeze([
     Object.freeze({
         title: '무료로 쓰기 · 구매', items: Object.freeze([
             row('chatbots', '무료 챗봇', '/chatbots'),
-            row('pricing', '무료체험·구매', '/pricing', undefined, { icon: 'trial-purchase' }),
+            row('pricing', '무료체험·구매', '/pricing', undefined, { icon: 'trial-purchase', accent: 'buy' }),
             row('lookup', '주문 조회', '/lookup', undefined, { icon: 'order-search' }),
         ]),
     }),
@@ -108,7 +114,7 @@ export const NAV_MOBILE_SECTIONS = Object.freeze([
     // The seven boards sit under the community heading; the new-notice badge rides on the heading.
     Object.freeze({
         title: '커뮤니티', badge: true,
-        items: Object.freeze(COMMUNITY_ENTRIES.map((child) => row(child.key, child.label, child.to, undefined, child.badge ? { badge: true } : {}))),
+        items: Object.freeze(COMMUNITY_ENTRIES.map((child) => row(child.key, child.label, child.to, undefined, { ...(child.badge ? { badge: true } : {}), ...(child.silver ? { silver: true } : {}) }))),
     }),
 ]);
 

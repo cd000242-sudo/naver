@@ -73,11 +73,10 @@ const QNA = '/community?board=qna';
 
 test('both the bar and the phone sheet link to every one of the nine pages (community: through its seven boards)', () => {
     const { bar, sheet } = regions(render('/'));
-    for (const region of [bar, sheet]) {
-        const boards = hrefs(region).filter((href) => href.startsWith('/community'));
-        assert.equal(boards[0], QNA, '질문하기 has its own place before the community boards');
-        assert.deepEqual(boards.slice(1, 12), BOARD_LINKS, 'seven boards in board order, the promo board as naver then google');
-    }
+    const boards = (region) => hrefs(region).filter((href) => href.startsWith('/community'));
+    // Seven boards in board order (the promo board as naver then google). Bar: the community dropdown sits next to 홈, 질문하기 is the last item.
+    assert.deepEqual(boards(bar), [...BOARD_LINKS, QNA]);
+    assert.deepEqual(boards(sheet), [QNA, ...BOARD_LINKS], 'phone list: 질문하기 has its own place before the community boards');
     for (const page of NINE_PAGES.filter((entry) => entry !== '/community')) {
         assert.ok(hrefs(bar).includes(page), `bar links ${page}`);
         assert.ok(hrefs(sheet).includes(page), `sheet links ${page}`);
@@ -105,7 +104,7 @@ test('current page: one aria-current in the bar, its dropdown group is marked, o
     assert.equal(withAttr(sheet, 'aria-current', 'page').length, 1, 'sheet marks the same page once');
     const triggers = tagsOf(bar, 'button').filter((tag) => /site-nav-trigger/.test(tag));
     assert.equal(triggers.length, 3);
-    const [product, buy, community] = triggers;
+    const [community, product, buy] = triggers;
     assert.match(product, /is-active/);
     assert.doesNotMatch(buy, /is-active/);
     assert.doesNotMatch(community, /is-active/);
@@ -197,10 +196,22 @@ test('new-notice badge sits on the Community group (bar button, sheet heading), 
     const onSheet = sheet.slice(sheet.indexOf('site-nav-sheet-group">커뮤니티'));
     assert.match(onSheet.slice(0, 700), /role="status"[^>]*aria-label="새 소식 2건"/);
     for (const region of [bar, sheet]) {
-        const home = region.slice(region.indexOf('href="/"'), region.indexOf('href="/leword"'));
-        assert.doesNotMatch(home, /role="status"/);
+        const homeTag = tagsOf(region, 'a').find((tag) => attr(tag, 'href') === '/' && /site-nav-(link|sheet-item)/.test(tag));
+        const from = region.indexOf(homeTag);
+        assert.doesNotMatch(region.slice(from, region.indexOf('</a>', from)), /role="status"/);
     }
     assert.doesNotMatch(render('/', { unseen: 0 }), /role="status"/);
+});
+
+// [2026-11-25 사장님] 구매하기 단추는 녹색 강조(클래스 하나), 시크릿 클래스 줄은 은빛 — 다른 곳엔 붙지 않는다.
+test('accent classes: 구매하기 trigger and its phone row are green, the 시크릿 클래스 rows are silver, nothing else is', () => {
+    const { bar, sheet } = regions(render('/'));
+    const hrefsWith = (html, name, klass) => tagsOf(html, name).filter((tag) => tag.includes(klass)).map((tag) => attr(tag, name === 'a' ? 'href' : 'aria-controls'));
+    assert.deepEqual(hrefsWith(bar, 'button', 'site-nav-link-buy'), ['site-nav-drop-buy']);
+    assert.match(bar, /site-nav-link-buy[^>]*>구매하기</);
+    assert.deepEqual(hrefsWith(sheet, 'a', 'site-nav-sheet-item-buy'), ['/pricing']);
+    assert.deepEqual(hrefsWith(bar, 'a', 'site-nav-drop-item-silver'), ['/community?board=secret']);
+    assert.deepEqual(hrefsWith(sheet, 'a', 'site-nav-sheet-item-silver'), ['/community?board=secret']);
 });
 
 test('logged out: login button in bar and sheet, no logout anywhere', () => {

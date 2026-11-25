@@ -24,7 +24,8 @@ test('menu keeps all nine pages exactly once, in the agreed grouping and order',
     assert.equal(new Set(navDestinations()).size, 8 + COMMUNITY_BOARDS.length, 'eight pages plus the community boards');
     // 질문하기 (contract 1116) is the one destination reached twice: its own item and its row in the community dropdown.
     assert.deepEqual(repeated(navDestinations()), [QNA]);
-    assert.deepEqual(NAV_ITEMS.map((item) => item.label), ['홈', 'LEWORD', '제품', '무료 챗봇', '가격·구매', '수익 후기', '질문하기', '커뮤니티']);
+    // [2026-11-25 사장님] 커뮤니티가 홈 바로 옆으로, 가격·구매는 '구매하기'(녹색 강조)로.
+    assert.deepEqual(NAV_ITEMS.map((item) => item.label), ['홈', '커뮤니티', 'LEWORD', '제품', '무료 챗봇', '구매하기', '수익 후기', '질문하기']);
     const product = NAV_ITEMS.find((item) => item.key === 'product');
     assert.deepEqual(product.items.map((item) => [item.label, item.to]), [['제품 소개', '/products'], ['다운로드', '/download']]);
     const buy = NAV_ITEMS.find((item) => item.key === 'buy');
@@ -38,7 +39,7 @@ test('LEWORD is its own top-level, highlighted menu item (not inside 제품)', (
     assert.equal(leword.type, 'link');
     assert.equal(leword.to, '/leword');
     assert.equal(leword.featured, true);
-    assert.equal(NAV_ITEMS.indexOf(leword), 1, 'right after 홈');
+    assert.equal(NAV_ITEMS.indexOf(leword), 2, 'right after 홈 and 커뮤니티');
     const firstMobile = NAV_MOBILE_SECTIONS[0].items;
     assert.deepEqual(firstMobile.map((row) => row.to), ['/', '/leword']);
     assert.equal(firstMobile[1].featured, true);
@@ -83,15 +84,34 @@ test('menu icons: the dropdown rows and phone rows name the eight icons; communi
 });
 
 // [계약 1116] 상단 메뉴에 '질문하기' 가 따로 있다 — 커뮤니티 드롭다운 안에 숨지 않는다. LEWORD 강조는 그대로.
-test('질문하기 is its own top-level item right before Community, opening the qna board; LEWORD stays the highlighted one', () => {
+test('질문하기 is its own top-level item (the last one), opening the qna board; LEWORD stays the highlighted one', () => {
     const qna = NAV_ITEMS.find((item) => item.key === 'qna');
     assert.deepEqual([qna.type, qna.label, qna.to], ['link', '질문하기', QNA]);
     assert.equal(qna.featured, undefined, 'only LEWORD is highlighted');
-    assert.equal(NAV_ITEMS.indexOf(qna), NAV_ITEMS.findIndex((item) => item.key === 'community') - 1);
+    assert.equal(NAV_ITEMS.indexOf(qna), NAV_ITEMS.length - 1);
     assert.deepEqual(NAV_ITEMS.filter((item) => item.featured).map((item) => item.key), ['leword']);
     const together = NAV_MOBILE_SECTIONS.find((section) => section.title === '함께하기');
     assert.deepEqual(together.items.map((row) => [row.label, row.to]), [['수익 후기', '/reviews'], ['질문하기', QNA]]);
     assert.deepEqual(NAV_MOBILE_SECTIONS.flatMap((section) => section.items).filter((row) => row.featured).map((row) => row.key), ['leword']);
+});
+
+// [2026-11-25 사장님] '구매하기' 는 녹색으로 움직이는 단추 — 모델에는 표시 필드(accent) 하나만 둔다. 휴대폰 목록은 묶음 순서 그대로, 줄만 같은 녹색.
+test('구매하기 carries the one accent field; the phone list keeps its section order and tints only the 무료체험·구매 row', () => {
+    const buy = NAV_ITEMS.find((item) => item.key === 'buy');
+    assert.deepEqual([buy.type, buy.label, buy.accent], ['group', '구매하기', 'buy']);
+    assert.deepEqual(NAV_ITEMS.filter((item) => item.accent).map((item) => item.key), ['buy']);
+    assert.deepEqual(NAV_ITEMS.map((item) => item.key), ['home', 'community', 'leword', 'product', 'chatbots', 'buy', 'reviews', 'qna']);
+    const rows = NAV_MOBILE_SECTIONS.flatMap((section) => section.items);
+    assert.deepEqual(rows.filter((row) => row.accent).map((row) => [row.key, row.accent, row.label]), [['pricing', 'buy', '무료체험·구매']]);
+    assert.ok(NAV_MOBILE_SECTIONS.some((section) => section.title === '무료로 쓰기 · 구매'), 'the phone heading stays');
+});
+
+// [2026-11-25 사장님] 시크릿 클래스 칸은 은빛 — 윗 메뉴 드롭다운 줄과 휴대폰 목록 줄에 같은 표시(silver)를 단다.
+test('only the locked 시크릿 클래스 row is marked silver, in the dropdown and on the phone list', () => {
+    const community = NAV_ITEMS.find((item) => item.key === 'community');
+    assert.deepEqual(community.items.filter((child) => child.silver).map((child) => child.key), ['community-secret']);
+    const sheet = NAV_MOBILE_SECTIONS.find((section) => section.title === '커뮤니티');
+    assert.deepEqual(sheet.items.filter((row) => row.silver).map((row) => row.key), ['community-secret']);
 });
 
 test('new-notice badge moved from Home to the Community group', () => {

@@ -154,6 +154,50 @@ test('old flat-menu rules are gone from global.css so they cannot fight the new 
     assert.match(globalCss, /scroll-padding-top/, 'anchor scroll offset is kept');
 });
 
+// WCAG relative luminance / contrast of two #rrggbb colours.
+const luminance = (hex) => {
+    const [r, g, b] = [1, 3, 5].map((at) => parseInt(hex.slice(at, at + 2), 16) / 255).map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
+const contrast = (a, b) => { const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x); return (hi + 0.05) / (lo + 0.05); };
+const variable = (name) => (css.match(new RegExp(`${name}:\\s*(#[0-9a-fA-F]{6})`)) || [])[1];
+
+// [2026-11-25 사장님] '구매하기' = 녹색 알약 + 2~3초마다 빛이 한 번 지나가고 테두리가 퍼졌다 사라지는 반복 움직임. 움직임 줄이기 설정이면 끈다.
+test('구매하기 button: green pill with 4.5:1 text, a calm 2-3s loop, no motion under prefers-reduced-motion', () => {
+    for (const name of ['--sn-buy', '--sn-buy-hover']) assert.ok(contrast(variable(name), variable('--sn-on-buy')) >= 4.5, `${name} under ${variable('--sn-on-buy')}`);
+    const [buy] = rulesFor(navRules, '.site-nav-link.site-nav-link-buy');
+    assert.ok(buy, 'the green pill rule');
+    assert.match(declaration(buy.body, 'background-color'), /var\(--sn-buy\)/);
+    assert.match(declaration(buy.body, 'color'), /var\(--sn-on-buy\)/);
+    const animation = declaration(buy.body, 'animation');
+    const seconds = Number(animation.match(/([\d.]+)s/)[1]);
+    assert.match(animation, /infinite/);
+    assert.ok(seconds >= 2 && seconds <= 3, `loop is ${seconds}s`);
+    const frames = animation.split(/\s+/)[0];
+    assert.match(css, new RegExp(`@keyframes ${frames}\\s*\\{`), 'the keyframes exist');
+    const keyframes = css.slice(css.indexOf(`@keyframes ${frames}`)).split('\n}\n')[0];
+    assert.match(keyframes, /background-position/, 'a light sweeps across the pill');
+    assert.match(keyframes, /box-shadow/, 'the outline spreads and fades');
+    const reduced = css.slice(css.indexOf('@media (prefers-reduced-motion: reduce)'));
+    assert.match(reduced, /\.site-nav-link-buy\s*\{[^}]*animation:\s*none/);
+    assert.ok(rulesFor(navRules, '.site-nav-link.site-nav-link-buy:hover').length >= 1, 'hover keeps the green (the grey hover fill must not win)');
+    assert.ok(rulesFor(navRules, '.site-nav-sheet-item.site-nav-sheet-item-buy').length >= 1, 'the phone row is tinted too');
+    assert.equal(declaration(rulesFor(navRules, '.site-nav-sheet-item.site-nav-sheet-item-buy')[0].body, 'animation'), undefined, 'no motion on the phone list');
+});
+
+// [2026-11-25 사장님] 시크릿 클래스 줄은 은빛(옅은 은색 바탕 · 가는 은색 테두리 · 먹색 글자). 윗 메뉴 쪽 값도 같은 결, 글자 대비 4.5:1 이상.
+test('silver rows of the top menu: dark ink and the muted line keep 4.5:1 on every silver stop, selected state is stronger', () => {
+    for (const stop of ['--sn-silver-light', '--sn-silver-mid', '--sn-silver-deep']) {
+        assert.ok(contrast(variable('--sn-silver-ink'), variable(stop)) >= 4.5, `ink on ${stop}`);
+        assert.ok(contrast('#545b63', variable(stop)) >= 4.5, `muted line on ${stop}`);
+    }
+    for (const selector of ['.site-nav-drop-item.site-nav-drop-item-silver', '.site-nav-sheet-item.site-nav-sheet-item-silver']) {
+        assert.ok(rulesFor(navRules, selector).length >= 1, selector);
+    }
+    assert.ok(rulesFor(navRules, '.site-nav-drop-item.site-nav-drop-item-silver[aria-current="page"]').length >= 1, 'selected row has its own silver look');
+    assert.ok(navRules.filter((rule) => /silver/.test(rule.selector)).every((rule) => declaration(rule.body, 'animation') === undefined), 'silver never loops');
+});
+
 test('Navbar imports its stylesheet and ships as small files', () => {
     assert.match(read('../src/components/Navbar.tsx'), /import '\.\.\/styles\/navbar\.css'/);
     for (const file of ['components/Navbar.tsx', 'components/NavDropdown.tsx', 'components/NavMobileMenu.tsx', 'components/NavAccount.tsx', 'styles/navbar.css', 'lib/navMenu.mjs', 'lib/useLewordSession.ts']) {
