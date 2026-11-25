@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T09:59:56.527Z",
+ "builtAt": "2026-11-25T10:10:08.621Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "청해부대 임무 확대",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 31,
-   "recent20": 6,
-   "press": 28,
+   "articles90": 32,
+   "recent20": 7,
+   "press": 29,
    "firstArticleAt": "2026-11-25T08:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "李대통령 “청해부대 임무 넓히되 전쟁 불개입 원칙 지킬 것…호르무즈...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-25T10:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133810?sid=100"
+    },
+    {
+     "title": "李, 청해부대 작전구역 확대에 \"전쟁 불개입 분명히 지킬 것\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-25T10:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261125182954424"
+    },
+    {
      "title": "李 “청해부대 작전범위 확대…전쟁 불개입 원칙 분명히 지킬 것”",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-25T09:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006415561?sid=100"
-    },
-    {
-     "title": "李 “청해부대 임무 넓히되, 전쟁불개입 원칙은 분명히 지킬 것”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-25T09:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765161?sid=100"
-    },
-    {
-     "title": "李대통령 \"청해부대 전쟁불개입 원칙…호르무즈 활동범위 제외\"",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-25T09:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042347?sid=100"
     }
    ]
   },
   {
-   "keyword": "KLPGA 상금왕 수상",
+   "keyword": "창원지법 법관 탄핵 헌법 훼손",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 73,
-   "recent20": 6,
-   "press": 27,
-   "firstArticleAt": "2026-11-25T08:34:00.000Z",
+   "articles90": 24,
+   "recent20": 4,
+   "press": 22,
+   "firstArticleAt": "2026-11-25T08:44:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "창원지법 전체판사회의 \"법관 탄핵 추진, 사법권 독립·헌법 가치 훼손...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-25T10:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438015?sid=102"
+    },
+    {
+     "title": "조희대 탄핵 추진에 창원지법 판사들 들고 일어났다",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-25T10:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887448?sid=102"
+    },
+    {
+     "title": "창원지법 \"법관 탄핵, 헌법가치 훼손\"…일선 법원 첫 성명",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-25T10:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000555603?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "산업장관 52시간 특례",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 23,
+   "recent20": 2,
+   "press": 22,
+   "firstArticleAt": "2026-11-25T08:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민솔 3관왕, 서교림 4승, 임희정 인기상… KLPGA 화려한 피날레",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-25T09:51:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/396/0000761973"
+     "title": "산업장관 “52시간 특례, 당장 내일도 늦다”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-25T10:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061197?sid=101"
     },
     {
-     "title": "김민솔, 신인왕·대상·상금왕 KLPGA 3관왕…“끊임없이 성장하겠다”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-25T09:46:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/020/0003765159"
+     "title": "김정관, 초광역특구법 R&D 인력 52시간 근무 예외 필요 재차 강조…“초...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-25T09:54:00.000Z",
+     "link": "https://www.viva100.com/article/20261125501389"
     },
     {
-     "title": "김민솔, 신인상에 대상·상금왕까지…신지애 이후 20년 만의 3관왕",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-25T09:46:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/028/0002833983"
+     "title": "산업장관, 반도체 R&D 주52시간 특례 촉구",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-25T09:50:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001845"
     }
    ]
   },
@@ -80,10 +112,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 25,
-   "recent20": 3,
-   "press": 24,
-   "firstArticleAt": "2026-11-25T08:31:00.000Z",
+   "articles90": 21,
+   "recent20": 1,
+   "press": 20,
+   "firstArticleAt": "2026-11-25T08:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -94,48 +126,16 @@
      "link": "https://n.news.naver.com/mnews/article/032/0003485040?sid=100"
     },
     {
-     "title": "李 대통령 “2030년까지 매년 공적주택 24만호 공급할 것”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-25T09:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887430?sid=100"
-    },
-    {
      "title": "李대통령 \"공적임대주택, 중산층도 선택할 수 있어야…2030년까지 매년 ...",
      "press": "thepublic.kr",
      "publishedAt": "2026-11-25T09:44:00.000Z",
      "link": "https://www.thepublic.kr/news/articleView.html?idxno=328484"
-    }
-   ]
-  },
-  {
-   "keyword": "창원지법 탄핵 헌법 훼손",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 25,
-   "recent20": 1,
-   "press": 22,
-   "firstArticleAt": "2026-11-25T08:33:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
+    },
     {
-     "title": "조희대 탄핵 추진에 법원 '폭풍전야'…30일 법관대표회의 분수령",
-     "press": "goodnews1.com",
+     "title": "李 대통령 “2030년까지 매년 공적주택 24만호 공급할 것”",
+     "press": "kmib.co.kr",
      "publishedAt": "2026-11-25T09:44:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466647"
-    },
-    {
-     "title": "서울변회 \"탄핵, 헌법이 정한 목적과 한계 안에서 행사돼야\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-25T09:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358246?sid=102"
-    },
-    {
-     "title": "창원지법 판사들, 조희대 탄핵 추진에 첫 집단 입장",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-25T09:36:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261125500746"
+     "link": "https://n.news.naver.com/mnews/article/005/0001887430?sid=100"
     }
    ]
   },
@@ -145,10 +145,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 25,
+   "articles90": 18,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T08:34:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-25T08:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -173,49 +173,56 @@
    ]
   },
   {
-   "keyword": "출생아 수 증가율",
+   "keyword": "젠슨 황 복귀와 논란",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T08:31:00.000Z",
+   "articles90": 11,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-25T08:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "올 출생아 21.8만명… 年 합계출산율 0.9명대 기대감",
+     "title": "하루천하로 끝난 ‘젠슨황 효과’…트럼프 입김, 리스크만 키웠다",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-25T10:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006415565?sid=101"
+    },
+    {
+     "title": "\"자본주의 아닌 마오주의\"…트럼프 '젠슨 황 구하기' 역풍",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-25T10:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006415567?sid=104"
+    },
+    {
+     "title": "파랗게 질린 코스피 4697 마감… “바닥 안 보여” 개미들 패닉 [‘젠슨...",
      "press": "segye.com",
-     "publishedAt": "2026-11-25T09:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178084?sid=101"
-    },
-    {
-     "title": "올해 1~9월 태어난 아기 21만9천명…증가율 역대 최고",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-25T09:34:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566443"
-    },
-    {
-     "title": "대구 1~9월 출생아 11.3% 늘어…3분기 인구 1211명 자연감소",
-     "press": "kyongbuk.co.kr",
-     "publishedAt": "2026-11-25T09:26:00.000Z",
-     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4092136"
+     "publishedAt": "2026-11-25T10:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178092?sid=101"
     }
    ]
   },
   {
    "keyword": "태국",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
    "firstArticleAt": "2026-11-25T08:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한화오션, 6800억원 태국 호위함 사업 우협 지위 상실… “현지 조달 취...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-25T10:02:00.000Z",
+     "link": "https://www.viva100.com/article/20261125501392"
+    },
     {
      "title": "한화오션, 6833억 태국 호위함 수주 원점…우협 지위 상실",
      "press": "4th.kr",
@@ -227,57 +234,50 @@
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-25T09:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000555594?sid=101"
-    },
-    {
-     "title": "한화오션, 태국 해군 호위함 사업 우선협상자 지위 상실 [주목 e공시]",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-25T09:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358221?sid=101"
     }
    ]
   },
   {
-   "keyword": "이형일 부총리 임금체계 방문",
+   "keyword": "부산 인재개발원장 명퇴",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T08:30:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T08:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“노동에 정당한 보상”…이형일 부총리가 찾아간 이 기업, 어디?",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-25T09:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415543?sid=101"
+     "title": "'9급 공무원 시험 고졸 수준' 발언 부산인재개발원장 명퇴 신청",
+     "press": "kado.net",
+     "publishedAt": "2026-11-25T10:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213430?sid=102"
     },
     {
-     "title": "이형일 부총리 “노사 협력해 기업 여건 맞는 자율 임금체계 도입해야”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-25T08:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005769019?sid=101"
+     "title": "‘공무원 자질 비하’ 인재개발원장, 결국 명퇴",
+     "press": "busan.com",
+     "publishedAt": "2026-11-25T09:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001409012?sid=102"
     },
     {
-     "title": "이형일 부총리 \"직무·능력 중심 임금체계 확산해야\"",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-25T08:50:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=173098"
+     "title": "\"9급 시험 고졸 수준\" 발언 논란… 부산시 인재개발원장 명퇴 신청",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-25T09:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967784?sid=102"
     }
    ]
   },
   {
    "keyword": "이정효 감독의 수원 삼성 변화",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T08:36:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-25T09:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -302,44 +302,74 @@
    ]
   },
   {
-   "keyword": "서출구 치열함 기억되길",
+   "keyword": "이형일 부총리 임금체계 방문",
    "sources": [
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-25T08:56:00.000Z",
+   "firstArticleAt": "2026-11-25T08:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'데블스 플랜3' 서출구 \"살아남으려 했던 치열함으로 기억되길\"",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-25T09:12:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110086654714"
+     "title": "“노동에 정당한 보상”…이형일 부총리가 찾아간 이 기업, 어디?",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-25T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006415543?sid=101"
     },
     {
-     "title": "'데블스 플랜3' 서출구, 종영 소감 \"부딪혔던 과정 전부 소중\"",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-25T09:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054110"
+     "title": "이형일 부총리 “노사 협력해 기업 여건 맞는 자율 임금체계 도입해야”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-25T08:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769019?sid=101"
     },
     {
-     "title": "‘데블스 플랜3’ 서출구 “살아남으려 했던 치열함으로 기억되길” [셀...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-25T08:56:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795595450531530005"
+     "title": "이형일 부총리 \"직무·능력 중심 임금체계 확산해야\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-25T08:50:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=173098"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1489,
-  "matched": 759,
-  "avgLeadMin": 493,
+  "flagged": 1493,
+  "matched": 764,
+  "avgLeadMin": 506,
   "recent": [
+   {
+    "keyword": "음악실 방화 20대 징역 2년",
+    "hitKeyword": "모친 흉기 20대 남성 징역",
+    "hitAt": "2026-11-25T19:00:00+09:00",
+    "leadMin": 4876
+   },
+   {
+    "keyword": "초등학교 방화 20대 징역 2년",
+    "hitKeyword": "모친 흉기 20대 남성 징역",
+    "hitAt": "2026-11-25T19:00:00+09:00",
+    "leadMin": 4856
+   },
+   {
+    "keyword": "삼성증권 8241명 정보 유출",
+    "hitKeyword": "앨리스 황 정보 유출",
+    "hitAt": "2026-11-25T19:00:00+09:00",
+    "leadMin": 3153
+   },
+   {
+    "keyword": "김민솔 3관왕",
+    "hitKeyword": "김민솔 3관왕 달성",
+    "hitAt": "2026-11-25T19:00:00+09:00",
+    "leadMin": 10
+   },
+   {
+    "keyword": "증안 펀드",
+    "hitKeyword": "증안펀드 확대 추진",
+    "hitAt": "2026-11-25T19:00:00+09:00",
+    "leadMin": 10
+   },
    {
     "keyword": "이장우 조혜원 결혼 1주년 사진 공개",
     "hitKeyword": "이세영 학창시절 사진 공개",
@@ -369,36 +399,6 @@
     "hitKeyword": "삼성전자 SK하이닉스 급락",
     "hitAt": "2026-11-25T18:30:00+09:00",
     "leadMin": 42
-   },
-   {
-    "keyword": "육성재 기립성 저혈압으로 넘어져",
-    "hitKeyword": "육성재 턱 봉합 수술",
-    "hitAt": "2026-11-25T18:00:00+09:00",
-    "leadMin": 1390
-   },
-   {
-    "keyword": "육성재, 기립성 저혈압으로 넘어져",
-    "hitKeyword": "육성재 턱 봉합 수술",
-    "hitAt": "2026-11-25T18:00:00+09:00",
-    "leadMin": 1359
-   },
-   {
-    "keyword": "나인 투 식스 박민영과 육성재 케미",
-    "hitKeyword": "육성재 턱 봉합 수술",
-    "hitAt": "2026-11-25T18:00:00+09:00",
-    "leadMin": 131
-   },
-   {
-    "keyword": "박민영 육성재 고수 삼각 로맨스",
-    "hitKeyword": "육성재 턱 봉합 수술",
-    "hitAt": "2026-11-25T18:00:00+09:00",
-    "leadMin": 91
-   },
-   {
-    "keyword": "박민영 육성재 고수의 나인 투 식스",
-    "hitKeyword": "육성재 턱 봉합 수술",
-    "hitAt": "2026-11-25T18:00:00+09:00",
-    "leadMin": 71
    }
   ]
  }
