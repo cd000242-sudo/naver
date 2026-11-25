@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T10:30:15.041Z",
+ "builtAt": "2026-11-25T10:40:17.960Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,85 +8,27 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 9,
  "candidates": [
-  {
-   "keyword": "청해부대 임무 확대",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 32,
-   "recent20": 2,
-   "press": 30,
-   "firstArticleAt": "2026-11-25T09:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이재명 대통령 \"청해부대 임무 넓히되 전쟁불개입 지킬 것\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-25T10:28:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452093"
-    },
-    {
-     "title": "李대통령 \"청해부대 작전범위 넓히되 전쟁 불개입…호르무즈 제외\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-25T10:12:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446540"
-    },
-    {
-     "title": "李 대통령 \"청해부대 임무 넓히되 전쟁 불개입 원칙 지킬 것\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-25T10:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358251?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "창원지법 법관 탄핵 헌법 훼손",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 26,
-   "recent20": 5,
-   "press": 23,
-   "firstArticleAt": "2026-11-25T09:02:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“화면에 띄우고 토론”…377자 ‘사법 독립’ 창원지법 집단성명 이렇...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-25T10:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567938?sid=102"
-    },
-    {
-     "title": "창원지법 판사 60명 \"재판 받을 권리 위태해져\" 거세지는 반발",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-25T10:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979854?sid=102"
-    },
-    {
-     "title": "“법관 탄핵 추진, 헌법 가치 훼손”…판사들 첫 집단 성명",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-25T10:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368695?sid=102"
-    }
-   ]
-  },
   {
    "keyword": "발언하는 이재명 대통령",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 5,
-   "press": 17,
-   "firstArticleAt": "2026-11-25T09:03:00.000Z",
+   "articles90": 17,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-25T09:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령 \"재정 부족해 주택 공급 못하는 일 없도록 하라\"",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-25T10:36:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904464"
+    },
     {
      "title": "李 대통령 \"공적임대주택, 중산층도 선택하는 '주거 사다리'로 대전환\"...",
      "press": "polinews.co.kr",
@@ -98,12 +40,6 @@
      "press": "segyebiz.com",
      "publishedAt": "2026-11-25T10:24:00.000Z",
      "link": "http://www.segyebiz.com/newsView/20261125518216?OutUrl=naver"
-    },
-    {
-     "title": "李대통령 \"보편형 공공임대, 분양전환 불가 법에 명시해야\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-25T10:20:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446542"
     }
    ]
   },
@@ -113,10 +49,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 13,
+   "articles90": 10,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-25T09:01:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-25T09:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -141,67 +77,34 @@
    ]
   },
   {
-   "keyword": "태국",
+   "keyword": "미국 과잉생산 관세 조사",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T09:04:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-25T09:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한화오션, 6800억원 태국 호위함 사업 우협 지위 상실… “현지 조달 취...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-25T10:02:00.000Z",
-     "link": "https://www.viva100.com/article/20261125501392"
+     "title": "중국, 미국 과잉생산 관세 발표 앞두고 \"정치적 조작\" 비판",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-25T10:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538016?sid=104"
     },
     {
-     "title": "한화오션, 6833억 태국 호위함 수주 원점…우협 지위 상실",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-25T09:38:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122703"
-    },
-    {
-     "title": "한화오션, 태국 해군 호위함 사업 수주 결국 백지화",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-25T09:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000555594?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "남태현, 음주운전 상고 5일 만에",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T09:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘마약 집유 중 음주운전’ 남태현, 법정구속 5일만 대법원 상고",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-25T09:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543501"
-    },
-    {
-     "title": "’마약 집유 중 음주운전’ 남태현, 대법원 간다..법정구속 5일 만에 상...",
-     "press": "osen.co.kr",
+     "title": "다시 시작된 美 관세 압박… 15% 상한 지켜도 디지털 규제 복병",
+     "press": "kmib.co.kr",
      "publishedAt": "2026-11-25T09:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005645086"
+     "link": "https://n.news.naver.com/mnews/article/005/0001887434?sid=104"
     },
     {
-     "title": "'마약 집유 중 음주운전' 남태현, 결국 대법원 간다...2심 판결 불복 '상...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-25T09:14:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61394"
+     "title": "美 '과잉생산 관세' 전망에 中 \"거짓 명제로 정치적 조작\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T09:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014345471?sid=104"
     }
    ]
   }
