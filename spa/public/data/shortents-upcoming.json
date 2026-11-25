@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T10:20:12.316Z",
+ "builtAt": "2026-11-25T10:30:15.041Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,18 +8,115 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 3,
+ "measured": 10,
  "candidates": [
+  {
+   "keyword": "청해부대 임무 확대",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 32,
+   "recent20": 2,
+   "press": 30,
+   "firstArticleAt": "2026-11-25T09:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이재명 대통령 \"청해부대 임무 넓히되 전쟁불개입 지킬 것\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-25T10:28:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452093"
+    },
+    {
+     "title": "李대통령 \"청해부대 작전범위 넓히되 전쟁 불개입…호르무즈 제외\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-25T10:12:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446540"
+    },
+    {
+     "title": "李 대통령 \"청해부대 임무 넓히되 전쟁 불개입 원칙 지킬 것\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-25T10:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358251?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "창원지법 법관 탄핵 헌법 훼손",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 26,
+   "recent20": 5,
+   "press": 23,
+   "firstArticleAt": "2026-11-25T09:02:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“화면에 띄우고 토론”…377자 ‘사법 독립’ 창원지법 집단성명 이렇...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-25T10:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567938?sid=102"
+    },
+    {
+     "title": "창원지법 판사 60명 \"재판 받을 권리 위태해져\" 거세지는 반발",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-25T10:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979854?sid=102"
+    },
+    {
+     "title": "“법관 탄핵 추진, 헌법 가치 훼손”…판사들 첫 집단 성명",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-25T10:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368695?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "발언하는 이재명 대통령",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 5,
+   "press": 17,
+   "firstArticleAt": "2026-11-25T09:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 대통령 \"공적임대주택, 중산층도 선택하는 '주거 사다리'로 대전환\"...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-25T10:27:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749241"
+    },
+    {
+     "title": "李대통령 “임대 주택서 공적 주택으로, 2030년까지 매년 24만호 공급”",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-25T10:24:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261125518216?OutUrl=naver"
+    },
+    {
+     "title": "李대통령 \"보편형 공공임대, 분양전환 불가 법에 명시해야\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-25T10:20:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446542"
+    }
+   ]
+  },
   {
    "keyword": "베트남전 국군전사자 유해봉환식",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 15,
+   "articles90": 13,
    "recent20": 0,
    "press": 9,
-   "firstArticleAt": "2026-11-25T08:53:00.000Z",
+   "firstArticleAt": "2026-11-25T09:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -44,41 +141,74 @@
    ]
   },
   {
-   "keyword": "이정효 감독의 수원 삼성 변화",
+   "keyword": "태국",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 3,
+   "articles90": 5,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T09:00:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-25T09:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[스포츠머그] \"더 과격하면 쫓겨납니다\"…'버럭' 이정효 감독도 꼼짝 못...",
-     "press": "news.sbs.co.kr",
+     "title": "한화오션, 6800억원 태국 호위함 사업 우협 지위 상실… “현지 조달 취...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-25T10:02:00.000Z",
+     "link": "https://www.viva100.com/article/20261125501392"
+    },
+    {
+     "title": "한화오션, 6833억 태국 호위함 수주 원점…우협 지위 상실",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-25T09:38:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122703"
+    },
+    {
+     "title": "한화오션, 태국 해군 호위함 사업 수주 결국 백지화",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-25T09:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000555594?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "남태현, 음주운전 상고 5일 만에",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T09:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘마약 집유 중 음주운전’ 남태현, 법정구속 5일만 대법원 상고",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-25T09:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543501"
+    },
+    {
+     "title": "’마약 집유 중 음주운전’ 남태현, 대법원 간다..법정구속 5일 만에 상...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-25T09:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005645086"
+    },
+    {
+     "title": "'마약 집유 중 음주운전' 남태현, 결국 대법원 간다...2심 판결 불복 '상...",
+     "press": "starnewsk.com",
      "publishedAt": "2026-11-25T09:14:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/055/0001405794"
-    },
-    {
-     "title": "(일문일답) ‘승격·우승’에도 냉정한 평가, 수원 이정효 감독 “우리...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-25T09:00:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/410/0001148265"
-    },
-    {
-     "title": "승격에도 만족 없다…이정효 수원 삼성 감독 “갈 길 멀다, 아직 52점”",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-25T09:00:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/666/0000133790"
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61394"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1493,
+  "flagged": 1494,
   "matched": 764,
   "avgLeadMin": 506,
   "recent": [
