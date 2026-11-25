@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T02:10:03.463Z",
+ "builtAt": "2026-11-25T02:20:08.647Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "조희대 탄핵 5당 연대 제안",
+   "keyword": "김민석 조희대 탄핵 제안",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 64,
-   "recent20": 9,
-   "press": 57,
-   "firstArticleAt": "2026-11-25T00:49:00.000Z",
+   "articles90": 71,
+   "recent20": 11,
+   "press": 60,
+   "firstArticleAt": "2026-11-25T00:53:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "김민석, 국힘 뺀 야당에 조희대 대법원장 탄핵 연대 제안",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-25T02:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415256?sid=100"
+     "title": "김민석 “조희대 탄핵 위한 5당 연대 제안”…혁신당 “일정부터 정해야...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-25T02:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207202?sid=100"
     },
     {
-     "title": "김민석 '조희대 탄핵' 5당 연대 제안…신장식 \"절차·일정부터 합의해야...",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-25T02:08:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=316166"
+     "title": "김민석 조희대 대법원장 탄핵 5당 연대 제안…시민사회까지 연대 확대 ...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-25T02:16:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630542"
     },
     {
-     "title": "김민석, '5당 연대'해 '조희대 탄핵’ 신속 추진 공식 제안",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-25T02:04:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139908"
+     "title": "개각·이용철 여진…조희대 탄핵 \"5당 연대하자\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T02:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929725?sid=100"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 74,
-   "recent20": 29,
-   "press": 56,
-   "firstArticleAt": "2026-11-25T01:02:00.000Z",
+   "articles90": 72,
+   "recent20": 22,
+   "press": 54,
+   "firstArticleAt": "2026-11-25T01:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "KB증권, 지속가능성보고서상 금융부문 2년 연속 수상",
-     "press": "lcnews.co.kr",
-     "publishedAt": "2026-11-25T02:08:00.000Z",
-     "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=211988"
+     "title": "삼성SDI 울산사업장, ‘녹색경영 우수기업’ 대상",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-25T02:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728235?sid=101"
     },
     {
-     "title": "교보증권, 기후 공시 넓힌 ESG 보고서로 5년 연속 수상",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-25T02:06:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566465"
+     "title": "삼성SDI 울산사업장, 녹색경영 우수기업 대상 수상",
+     "press": "newslock.co.kr",
+     "publishedAt": "2026-11-25T02:16:00.000Z",
+     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=140866"
     },
     {
-     "title": "삼성SDI 울산사업장, '녹색경영 우수기업' 대상 기후에너지환경부 장관...",
-     "press": "thebigdata.co.kr",
-     "publishedAt": "2026-11-25T02:06:00.000Z",
-     "link": "https://www.thebigdata.co.kr/view.php?ud=2026112510414051990ecbf9426b_23"
+     "title": "[호텔가 이모저모] 한화호텔앤드리조트, 산업통상부장관상 수상 外",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-25T02:16:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784652"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 50,
+   "articles90": 42,
    "recent20": 12,
-   "press": 49,
-   "firstArticleAt": "2026-11-25T00:42:00.000Z",
+   "press": 42,
+   "firstArticleAt": "2026-11-25T00:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "KB국민은행, 서울 25개 자치구 중 11곳 금고 유치…시중은행 점유율 1위",
-     "press": "public25.com",
-     "publishedAt": "2026-11-25T02:06:00.000Z",
-     "link": "https://www.public25.com/news/articleView.html?idxno=59010"
+     "title": "KB국민은행, 수출상담회 참가기업 외환 수수료 감면",
+     "press": "press9.kr",
+     "publishedAt": "2026-11-25T02:14:00.000Z",
+     "link": "http://www.press9.kr/news/articleView.html?idxno=87003"
     },
     {
-     "title": "KB국민은행, 서울 자치구 금고 11곳 확보…점유율 44%로 '1위'",
-     "press": "smarttimes.co.kr",
-     "publishedAt": "2026-11-25T02:06:00.000Z",
-     "link": "http://www.smarttimes.co.kr/news/articleView.html?idxno=50899"
+     "title": "국민은행, 서울시 구금고 11개 유치…시중은행 중 '점유율 1위'",
+     "press": "bizwnews.com",
+     "publishedAt": "2026-11-25T02:14:00.000Z",
+     "link": "http://www.bizwnews.com/news/articleView.html?idxno=153077"
     },
     {
-     "title": "KB국민은행, 'Korea Grand Sourcing Fair'서 수출기업 환리스크·FDI 원스톱...",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-25T02:04:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68412"
+     "title": "KB국민은행, 수출상담회서 기업 맞춤형 금융지원",
+     "press": "bizwork.co.kr",
+     "publishedAt": "2026-11-25T02:14:00.000Z",
+     "link": "https://www.bizwork.co.kr/news/articleView.html?idxno=421154"
     }
    ]
   },
@@ -111,30 +111,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 46,
-   "recent20": 3,
-   "press": 42,
-   "firstArticleAt": "2026-11-25T00:41:00.000Z",
+   "articles90": 42,
+   "recent20": 4,
+   "press": 38,
+   "firstArticleAt": "2026-11-25T00:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "현대차그룹, ‘HMG 글로벌 완속충전기’ 공개",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-25T02:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728236?sid=101"
+    },
+    {
+     "title": "현대차그룹, 통합 완속충전기 공개 … 내년부터 글로벌 시장 출시",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-25T02:16:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/25/2026112550127.html"
+    },
     {
      "title": "현대차·기아·제네시스 충전 경험 하나로…‘HMG 글로벌 완속충전기’...",
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-25T02:04:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/468/0001283300?sid=101"
-    },
-    {
-     "title": "현대차그룹, 완속충전기에 자동 인증·결제 적용…2027년 국내 출시",
-     "press": "datanews.co.kr",
-     "publishedAt": "2026-11-25T02:02:00.000Z",
-     "link": "http://www.datanews.co.kr/news/article.html?no=147841"
-    },
-    {
-     "title": "현대차그룹, 글로벌 통합 완속충전기 공개…2027년 국내 출시",
-     "press": "weekly.hankooki.com",
-     "publishedAt": "2026-11-25T01:58:00.000Z",
-     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7195639"
     }
    ]
   },
@@ -143,30 +143,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 42,
+   "articles90": 36,
    "recent20": 4,
-   "press": 41,
-   "firstArticleAt": "2026-11-25T00:42:00.000Z",
+   "press": 35,
+   "firstArticleAt": "2026-11-25T00:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "AI 부정행위 후폭풍...수능 시험지 5년간 묶인다",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-25T02:06:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108344"
+     "title": "지난해 수능 시험지 상당수 이미 폐기.. 강원은 전량 폐기",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-25T02:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000087050?sid=102"
     },
     {
-     "title": "수능 시험지 보관 1년→5년 연장…“부정행위 끝까지 추적”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-25T01:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765018?sid=102"
+     "title": "교육부, 수능 시험지 보관기간 1년→5년 연장 추진",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-25T02:18:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=543234"
     },
     {
-     "title": "1년에서 5년으로 교육부수능 시험지 보관기간 연장 추진…부정행위 사후...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-25T01:56:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630530"
+     "title": "수능 시험지 보관 5년으로 늘린다··· 교육부, 부정행위 사후 조사 강...",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-25T02:14:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=562044"
     }
    ]
   },
@@ -175,13 +175,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 5,
-   "press": 22,
-   "firstArticleAt": "2026-11-25T00:45:00.000Z",
+   "articles90": 21,
+   "recent20": 3,
+   "press": 21,
+   "firstArticleAt": "2026-11-25T00:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한전, 고객정보 유출 사고 관련 3단계 보호 대책 가동",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-25T02:18:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1428789"
+    },
     {
      "title": "한전, 개인정보 유출 2차피해 막는다…금융사기 최대 1000만원 보상",
      "press": "sidae.com",
@@ -193,76 +199,6 @@
      "press": "sentv.co.kr",
      "publishedAt": "2026-11-25T02:04:00.000Z",
      "link": "https://www.sentv.co.kr/article/view/sentv202611250109"
-    },
-    {
-     "title": "한전, 고객정보 유출 2차 피해 방지…최대 1000만원 보상보험 제공",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-25T02:00:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887048"
-    }
-   ]
-  },
-  {
-   "keyword": "정년연장",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 30,
-   "recent20": 6,
-   "press": 18,
-   "firstArticleAt": "2026-11-25T00:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "양대노총 \"정년연장 또 해 넘기면 더 이상 대화 없다\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T02:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213669?sid=102"
-    },
-    {
-     "title": "양대노총, ‘연내 65세 법정 정년연장 입법 촉구’",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-25T02:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702987?sid=100"
-    },
-    {
-     "title": "양대노총 \"정년연장 연내 입법\"… 인구절벽에 고용 방식 전환 과제",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-25T02:04:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566466"
-    }
-   ]
-  },
-  {
-   "keyword": "김민석 대표 참석",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 26,
-   "recent20": 6,
-   "press": 13,
-   "firstArticleAt": "2026-11-25T01:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "민주당 최고위원회의 참석하는 김민석-한민수-최민희",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T02:03:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125000502"
-    },
-    {
-     "title": "민주당 최고위 참석하는 김민석-한민수",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T02:03:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125000503"
-    },
-    {
-     "title": "최고위원회의 참석한 김민석 대표-최민희 최고위원",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-25T02:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005768616?sid=100"
     }
    ]
   },
@@ -272,30 +208,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
+   "articles90": 10,
+   "recent20": 2,
+   "press": 9,
    "firstArticleAt": "2026-11-25T00:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "남양주시, 복지·교통·재정 현안 해결 지원 요청",
+     "press": "newstown.co.kr",
+     "publishedAt": "2026-11-25T02:14:00.000Z",
+     "link": "http://www.newstown.co.kr/news/articleView.html?idxno=723293"
+    },
+    {
+     "title": "부천시, 먹거리·생필품 지원 '그냥드림' 내년 3개 구청으로 확대",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-25T02:12:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023091"
+    },
+    {
      "title": "최현덕 남양주시장, 국회에 지역 현안사업 국비 지원과 예산 반영 건의",
      "press": "m-i.kr",
      "publishedAt": "2026-11-25T02:00:00.000Z",
      "link": "https://www.m-i.kr/news/articleView.html?idxno=2023116"
-    },
-    {
-     "title": "건보공단 특사경 도입에 간호협회도 협력⋯“적극 지원”",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-25T01:48:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652707"
-    },
-    {
-     "title": "KT&G, 고립·보호종료 청년 겨울나기 지원… 성동구 300가구에 김장김치...",
-     "press": "ilyoseoul.co.kr",
-     "publishedAt": "2026-11-25T01:44:00.000Z",
-     "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=525534"
     }
    ]
   },
@@ -304,10 +240,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T00:41:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-25T01:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -332,41 +268,41 @@
    ]
   },
   {
-   "keyword": "진시몬, 아들 자랑스러워",
+   "keyword": "폭설",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T00:46:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T01:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "법 전공 진시몬, 막내아들 잃은 뒤 큰아들 美 변호사",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-25T01:50:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95894"
+     "title": "중랑구, 구리시와 제설 공조체계 구축…겨울철 폭설 대응 강화",
+     "press": "job-post.co.kr",
+     "publishedAt": "2026-11-25T02:16:00.000Z",
+     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=240760"
     },
     {
-     "title": "진시몬 아들 진명진, '아침마당' 출연",
-     "press": "topstarnews.net",
+     "title": "양구군 기습 폭설 대비 실전 대응능력 높인다",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-25T01:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001233259?sid=102"
+    },
+    {
+     "title": "'폭설' 7일 연속 박스오피스 1위… 누적 관객 49만 돌파",
+     "press": "bntnews.co.kr",
      "publishedAt": "2026-11-25T01:28:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285642"
-    },
-    {
-     "title": "진시몬, 미국 변호사 아들이 부른 노래 듣더니...\"목소리가 저랑 똑같더...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T00:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083684"
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611250201"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1366,
+  "flagged": 1368,
   "matched": 722,
   "avgLeadMin": 503,
   "recent": [
