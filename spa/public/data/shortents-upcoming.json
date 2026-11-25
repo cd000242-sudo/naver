@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T11:10:26.860Z",
+ "builtAt": "2026-11-25T11:20:30.118Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 31,
-   "recent20": 6,
-   "press": 24,
-   "firstArticleAt": "2026-11-25T09:44:00.000Z",
+   "articles90": 30,
+   "recent20": 5,
+   "press": 23,
+   "firstArticleAt": "2026-11-25T09:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "붕어빵 사며 민생물가 살핀 李대통령…은평구 전통시장 깜짝 방문",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-25T11:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728514?sid=100"
+    },
+    {
+     "title": "李 대통령 \"공공임대 '영세민 이미지' 벗고 중산층 주거 사다리로\"",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-25T11:07:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000086672"
+    },
     {
      "title": "이 대통령 \"공적주택, 주거사다리·주거안전매트…공급 최대한 확대\"",
      "press": "korea.kr",
      "publishedAt": "2026-11-25T11:05:00.000Z",
      "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148976503&call_from=naver_news"
-    },
-    {
-     "title": "李, 공적주택 현장 점검…\"발표한 공급 계획 반드시 지켜라\"",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-25T11:02:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466652"
-    },
-    {
-     "title": "李대통령 \"보편형 공공임대 주택, 국민의 주거사다리…분양전환 금지 법...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T11:01:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125001295"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T09:42:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-25T09:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -113,7 +113,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-25T10:02:00.000Z",
    "exclusive": false,
@@ -136,71 +136,6 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-25T10:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014345485?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T09:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "중국, 미국 과잉생산 관세 발표 앞두고 \"정치적 조작\" 비판",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-25T10:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538016?sid=104"
-    },
-    {
-     "title": "다시 시작된 美 관세 압박… 15% 상한 지켜도 디지털 규제 복병",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-25T09:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887434?sid=104"
-    },
-    {
-     "title": "美 '과잉생산 관세' 전망에 中 \"거짓 명제로 정치적 조작\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T09:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014345471?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "숲",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T09:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "기고/숲에서 배우는 양성평등",
-     "press": "dynews.co.kr",
-     "publishedAt": "2026-11-25T10:38:00.000Z",
-     "link": "https://www.dynews.co.kr/news/articleView.html?idxno=875548"
-    },
-    {
-     "title": "다시 붉게 물드는 제주 소나무숲…재선충병 비상",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-25T10:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301042?sid=102"
-    },
-    {
-     "title": "교육도서관, 진천 백곡면에 '글숲' 개관",
-     "press": "ccdn.co.kr",
-     "publishedAt": "2026-11-25T09:42:00.000Z",
-     "link": "https://www.ccdn.co.kr/news/articleView.html?idxno=1113605"
     }
    ]
   }
