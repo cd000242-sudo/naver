@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T11:00:23.916Z",
+ "builtAt": "2026-11-25T11:10:26.860Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,131 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "산업장관 52시간 특례",
+   "keyword": "이재명 대통령, 공적주택 방문",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-25T09:32:00.000Z",
+   "articles90": 31,
+   "recent20": 6,
+   "press": 24,
+   "firstArticleAt": "2026-11-25T09:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김정관 \"中에 R&D 시간 밀려\"…주 52시간 특례도 촉구",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-25T10:56:00.000Z",
-     "link": "https://www.ajunews.com/view/20261125194630596"
+     "title": "이 대통령 \"공적주택, 주거사다리·주거안전매트…공급 최대한 확대\"",
+     "press": "korea.kr",
+     "publishedAt": "2026-11-25T11:05:00.000Z",
+     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148976503&call_from=naver_news"
     },
     {
-     "title": "산업부장관 \"주52시간 특례, 내일부터라도…중국에 R&D 밀려\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T10:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213927?sid=103"
+     "title": "李, 공적주택 현장 점검…\"발표한 공급 계획 반드시 지켜라\"",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-25T11:02:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466652"
     },
     {
-     "title": "산업장관 “52시간 특례, 당장 내일도 늦다”",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-25T10:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061197?sid=101"
+     "title": "李대통령 \"보편형 공공임대 주택, 국민의 주거사다리…분양전환 금지 법...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T11:01:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125001295"
     }
    ]
   },
   {
-   "keyword": "발언하는 이재명 대통령",
+   "keyword": "맹승지, 의사 남친과 결혼 준비",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-25T09:36:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-25T09:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 \"재정 부족해 주택 공급 못하는 일 없도록 하라\"",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-25T10:36:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904464"
+     "title": "맹승지, ♥의사 연인과 결혼 305일 전…\"대문자 J 남친, 예식장 뚝딱 예...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-25T11:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084038"
     },
     {
-     "title": "[이슈] 李대통령 \"공적주택, 중산층 선택하는 '주거사다리' 대전환\"…정...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-25T10:27:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749241"
+     "title": "\"결혼식까지 305일\"… 맹승지, 연하 의사 예비 신랑과 예식장 예약 인증...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-25T10:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000493283"
     },
     {
-     "title": "李대통령 “임대 주택서 공적 주택으로, 2030년까지 매년 24만호 공급”",
-     "press": "segyebiz.com",
+     "title": "‘개그우먼 은퇴’ 맹승지, ♥의사 남친과 결혼 준비 돌입 “예식장 예...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-25T10:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543527"
+    }
+   ]
+  },
+  {
+   "keyword": "호재성 기사 주식 선행매매 과징금",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-25T09:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "선행매매 후 기사 보도…금융위, 언론사 기자 등에 50억 과징금",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-25T10:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847865?sid=101"
+    },
+    {
+     "title": "주식 미리 사놓고 '호재성 기사' 출고…금융당국, 언론사 기자 고발",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T10:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213928?sid=101"
+    },
+    {
+     "title": "‘기사 정보로 주식거래’ 전직 한국경제 기자들에 과징금 50억 원…부...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-25T09:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301036?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "검사",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T10:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "AI 부정 막으려 중·고교도 금속탐지기 검사.. 수능보다 더 강화?",
+     "press": "jmbc.co.kr",
+     "publishedAt": "2026-11-25T11:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/659/0000049027?sid=102"
+    },
+    {
+     "title": "에이아이매틱스, CES 2027서 AI 비전검사 플랫폼 공개…\"3μm급 미세 결함...",
+     "press": "digitalchosun.dizzo.com",
      "publishedAt": "2026-11-25T10:24:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261125518216?OutUrl=naver"
+     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/25/2026112580019.html"
+    },
+    {
+     "title": "광주동부경찰서, 검사 사칭 보이스피싱 막은 은행원에 감사장",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T10:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014345485?sid=102"
     }
    ]
   },
@@ -79,10 +144,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T09:37:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-25T09:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -105,14 +170,71 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014345471?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "숲",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T09:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "기고/숲에서 배우는 양성평등",
+     "press": "dynews.co.kr",
+     "publishedAt": "2026-11-25T10:38:00.000Z",
+     "link": "https://www.dynews.co.kr/news/articleView.html?idxno=875548"
+    },
+    {
+     "title": "다시 붉게 물드는 제주 소나무숲…재선충병 비상",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-25T10:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301042?sid=102"
+    },
+    {
+     "title": "교육도서관, 진천 백곡면에 '글숲' 개관",
+     "press": "ccdn.co.kr",
+     "publishedAt": "2026-11-25T09:42:00.000Z",
+     "link": "https://www.ccdn.co.kr/news/articleView.html?idxno=1113605"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1494,
-  "matched": 764,
-  "avgLeadMin": 506,
+  "flagged": 1499,
+  "matched": 768,
+  "avgLeadMin": 504,
   "recent": [
+   {
+    "keyword": "코스피 급락 매도 사이드카",
+    "hitKeyword": "반도체주 급락 코스피",
+    "hitAt": "2026-11-25T20:00:00+09:00",
+    "leadMin": 201
+   },
+   {
+    "keyword": "코스피 6.16% 급락",
+    "hitKeyword": "반도체주 급락 코스피",
+    "hitAt": "2026-11-25T20:00:00+09:00",
+    "leadMin": 170
+   },
+   {
+    "keyword": "코스피 6%대 급락",
+    "hitKeyword": "반도체주 급락 코스피",
+    "hitAt": "2026-11-25T20:00:00+09:00",
+    "leadMin": 132
+   },
+   {
+    "keyword": "부산 인재개발원장 명퇴",
+    "hitKeyword": "인재개발원장 명퇴 신청",
+    "hitAt": "2026-11-25T20:00:00+09:00",
+    "leadMin": 50
+   },
    {
     "keyword": "음악실 방화 20대 징역 2년",
     "hitKeyword": "모친 흉기 20대 남성 징역",
@@ -148,30 +270,6 @@
     "hitKeyword": "이세영 학창시절 사진 공개",
     "hitAt": "2026-11-25T18:30:00+09:00",
     "leadMin": 2880
-   },
-   {
-    "keyword": "황인범 포르투 UCL 2연승",
-    "hitKeyword": "황인범 페예노르트 환대",
-    "hitAt": "2026-11-25T18:30:00+09:00",
-    "leadMin": 601
-   },
-   {
-    "keyword": "황인범 교체 승리 1-0",
-    "hitKeyword": "황인범 페예노르트 환대",
-    "hitAt": "2026-11-25T18:30:00+09:00",
-    "leadMin": 581
-   },
-   {
-    "keyword": "황인범 포르투 2연승",
-    "hitKeyword": "황인범 페예노르트 환대",
-    "hitAt": "2026-11-25T18:30:00+09:00",
-    "leadMin": 541
-   },
-   {
-    "keyword": "하이닉스",
-    "hitKeyword": "삼성전자 SK하이닉스 급락",
-    "hitAt": "2026-11-25T18:30:00+09:00",
-    "leadMin": 42
    }
   ]
  }
