@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T16:42:06.432Z",
+ "builtAt": "2026-11-25T16:52:10.156Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 19,
  "candidates": [
-  {
-   "keyword": "관세 15% 유지",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 25,
-   "recent20": 8,
-   "press": 17,
-   "firstArticleAt": "2026-11-25T15:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김정관 “美 관세 상한 15%, 선방 이상의 선방”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-25T16:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703229?sid=101"
-    },
-    {
-     "title": "美 과잉생산 관세, 韓 '15%' 지켰지만…협의 불발 시 日·EU보다 높은 25...",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-25T16:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490007?sid=100"
-    },
-    {
-     "title": "美, 과잉생산 관세 15% 제안…정부 \"최종 관세 긴밀히 협의할 것\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T16:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014345644?sid=101"
-    }
-   ]
-  },
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 8,
-   "press": 17,
-   "firstArticleAt": "2026-11-25T15:17:00.000Z",
+   "articles90": 27,
+   "recent20": 7,
+   "press": 21,
+   "firstArticleAt": "2026-11-25T15:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 과잉생산 관세, 韓 '15%' 지켰지만…협의 불발 시 日·EU보다 높은 25...",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-25T16:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490007?sid=100"
+     "title": "USTR \"韓 과잉생산 관세 15%\"…산업부 \"기존 관세 합의 존중 재확인\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T16:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009310587?sid=101"
+    },
+    {
+     "title": "미 과잉생산 관세 15% 제안에, 김정관 “15% 유지하면 선방”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-25T16:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301364?sid=101"
+    },
+    {
+     "title": "美 '과잉생산 관세' 예고… 한국은 15% 기본안",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-25T16:44:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=562221"
+    }
+   ]
+  },
+  {
+   "keyword": "관세 15% 유지",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 26,
+   "recent20": 5,
+   "press": 19,
+   "firstArticleAt": "2026-11-25T15:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "USTR \"韓 과잉생산 관세 15%\"…산업부 \"기존 관세 합의 존중 재확인\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T16:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009310587?sid=101"
+    },
+    {
+     "title": "미 과잉생산 관세 15% 제안에, 김정관 “15% 유지하면 선방”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-25T16:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301364?sid=101"
     },
     {
      "title": "김정관 “美 관세 상한 15%, 선방 이상의 선방”",
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-25T16:41:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003703229?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "가능한 사랑",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T15:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'청룡영화상' 나홍진 '호프' 최우수작품상…'가능한 사랑' 4관왕[종합]",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-25T16:20:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305782"
     },
     {
-     "title": "美, 과잉생산 관세 15% 제안…정부 \"최종 관세 긴밀히 협의할 것\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T16:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014345644?sid=101"
+     "title": "청룡영화상 작품상에 '호프'…'가능한 사랑' 남녀주연상 등 4관왕",
+     "press": "idaegu.co.kr",
+     "publishedAt": "2026-11-25T16:08:00.000Z",
+     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566539"
+    },
+    {
+     "title": "“그게 진짜 사랑” vs “찝찝해”⋯부부끼리 발톱 깎아줘도 ‘이것’은...",
+     "press": "kormedi.com",
+     "publishedAt": "2026-11-25T16:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/296/0000107823?sid=103"
     }
    ]
   }
