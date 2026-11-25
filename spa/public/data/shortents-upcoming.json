@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T21:53:47.423Z",
+ "builtAt": "2026-11-25T22:03:50.287Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,87 +11,114 @@
  "measured": 20,
  "candidates": [
   {
-   "keyword": "조희대 탄핵 연대 추진",
+   "keyword": "공공",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 5,
+   "press": 11,
+   "firstArticleAt": "2026-11-25T21:02:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "해양수산 혁신기술 공공시장 활로 연다…'중소기업기술마켓' 맞춤 지원",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009310712?sid=101"
+    },
+    {
+     "title": "한국주택금융공사, 금융 공공기관 브랜드평판 1위…서민금융진흥원 45%...",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-25T22:00:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=508178"
+    },
+    {
+     "title": "[기자수첩] 공공기관 이전, 명분 넘어 실행으로",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-25T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193600?sid=110"
+    }
+   ]
+  },
+  {
+   "keyword": "네타냐후 부패 공소취하",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-25T20:28:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T21:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "조희대 탄핵 속도 내는 민주당…범여권 5당 연대 추진에 사법부 내 우려...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-25T21:44:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=102039"
+     "title": "이스라엘 법원, 네타냐후 '최대 혐의' 공소 취하 권고",
+     "press": "globale.co.kr",
+     "publishedAt": "2026-11-25T21:50:00.000Z",
+     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41849"
     },
     {
-     "title": "'조희대 탄핵' 속도전에 사법부 첫 회의…한은, 오늘 기준금리 결정[오...",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T21:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213953?sid=100"
+     "title": "네타냐후 총리 “이스라엘 국민 분열시킨 재판 종결” 요구",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T21:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014345753?sid=104"
     },
     {
-     "title": "‘진보 연대’로 탄핵 밀어붙이는 여…장외 여론전에 집중하는 야",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-25T21:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301387?sid=100"
+     "title": "네타냐후 부패 재판 뒤집히나…법원 “유죄 가능성 거의 없다”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-25T21:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568077?sid=104"
     }
    ]
   },
   {
-   "keyword": "편의점",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T20:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[반려동물] \"사료·간식도 동네 편의점서\"…전용매대 늘리고 매출도 '쑥...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T21:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016464053?sid=101"
-    },
-    {
-     "title": "마트·편의점에 치이던 SSM의 반격…즉시배송 타고 실적 ‘쑥’",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-25T21:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652908"
-    },
-    {
-     "title": "고물가에 더 잘 팔린다…마트·편의점이 키우는 '초저가'",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-25T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078496?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "윤가은 감독상 부담스럽다",
+   "keyword": "가능한 사랑 전도연",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 3,
    "press": 4,
+   "firstArticleAt": "2026-11-25T20:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "설경구는 4번째, 전도연은 3번째 주연상…'가능한 사랑' 4관왕·'호프' 최...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-25T22:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786217"
+    },
+    {
+     "title": "청룡영화상 시청률 3.4%…설경구·전도연 주연상 석권",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T21:58:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286449"
+    },
+    {
+     "title": "'제47회 청룡영화상' 설경구·전도연 주연상→서수빈·박지훈 신인상…...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-25T21:58:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784855"
+    }
+   ]
+  },
+  {
+   "keyword": "세계의 주인",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
    "firstArticleAt": "2026-11-25T20:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "47년 청룡에 여성 감독상은 처음이라…쉽게 쓰이지 않은 새역사[이슈S]",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-25T21:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000640976"
-    },
     {
      "title": "'세계의 주인' 윤가은 감독상…서수빈 신인상까지",
      "press": "bntnews.co.kr",
@@ -99,49 +126,23 @@
      "link": "https://www.bntnews.co.kr/article/view/bnt202611260025"
     },
     {
-     "title": "청룡 감독상, 장항준도 나홍진도 아닌 윤가은-이변 갑론을박",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-25T21:42:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95944"
-    }
-   ]
-  },
-  {
-   "keyword": "전도연 여우주연상 수상",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-25T20:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "손예진은 정해인, 현빈은 정려원..'빈진 부부', 청룡 수상 1년 후 [스타...",
-     "press": "starnewskorea.com",
+     "title": "[헐크 이만수의 힘] 조력자의 퇴장과 주인의 탄생… 라오스 유급 코치 ...",
+     "press": "nbntv.co.kr",
      "publishedAt": "2026-11-25T21:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490295"
+     "link": "https://www.nbntv.co.kr/news/articleView.html?idxno=4027984"
     },
     {
-     "title": "전도연 19년 만의 청룡…조여정·구교환도 수상",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-25T20:42:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611260007"
-    },
-    {
-     "title": "설경구 남우주연상…청룡 최초 4회 수상",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-25T20:40:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611260005"
+     "title": "1600만 장항준·나홍진 다 꺾었다!…'세계의 주인' 윤가은, 감독상 대이...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-25T20:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128156"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1498,
+  "flagged": 1502,
   "matched": 758,
   "avgLeadMin": 500,
   "recent": [
