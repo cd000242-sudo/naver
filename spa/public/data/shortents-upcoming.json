@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T01:09:41.102Z",
+ "builtAt": "2026-11-25T01:19:45.363Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 27,
-   "recent20": 4,
-   "press": 25,
-   "firstArticleAt": "2026-11-24T23:41:00.000Z",
+   "articles90": 29,
+   "recent20": 9,
+   "press": 28,
+   "firstArticleAt": "2026-11-24T23:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美, 中·EU 등 추가 관세 추진…기존 무역합의 세율 넘지 않고 국가별 차...",
-     "press": "theguru.co.kr",
-     "publishedAt": "2026-11-25T01:08:00.000Z",
-     "link": "https://www.theguru.co.kr/news/article.html?no=110160"
+     "title": "美, 이르면 오늘 '과잉생산' 관세 발표…韓 총관세율 15% 상한 넘지 않을...",
+     "press": "widedaily.com",
+     "publishedAt": "2026-11-25T01:18:00.000Z",
+     "link": "https://www.widedaily.com/news/articleView.html?idxno=304645"
     },
     {
-     "title": "블룸버그 \"美, 中·EU 관세 인상 발표 임박\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-25T01:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415204?sid=104"
+     "title": "美 '과잉생산 관세' 이르면 오늘 발표…\"韓 15% 유지 예상\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-25T01:18:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023028"
     },
     {
-     "title": "닛케이지수 장중 5만7천선 붕괴..美 반도체주 급락·관세 우려",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-25T00:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609376?sid=104"
+     "title": "[뉴스초점] 美 ‘과잉생산’ 관세 예고…'젠슨황 효과' 제동",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T01:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929703?sid=104"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 4,
-   "press": 20,
+   "articles90": 21,
+   "recent20": 3,
+   "press": 21,
    "firstArticleAt": "2026-11-24T23:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "수출 1조 달러의 역설…역대 최대 무역흑자, 복잡해진 통상 셈법",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-25T01:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887310?sid=101"
+    },
     {
      "title": "한국 수출 1조 달러 돌파…65년간 세계 평균 2배 속도로 성장",
      "press": "sentv.co.kr",
@@ -65,44 +71,6 @@
      "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-25T01:00:00.000Z",
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887009"
-    },
-    {
-     "title": "‘수출 1조달러’ 견인한 K소비재…중소·중견 비중 91%",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-25T00:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207158?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "정년연장",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 7,
-   "press": 15,
-   "firstArticleAt": "2026-11-24T23:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "양대노총, 정년연장 입법 촉구…\"해 넘기면 정부와 국회 책임\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T01:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461985?sid=102"
-    },
-    {
-     "title": "‘65세 정년연장’ 입법 지연에 뿔난 양대노총…“올해 넘기면 더 이상...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-25T01:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728116?sid=101"
-    },
-    {
-     "title": "[속보]“65세 정년연장” 기업 경영 우려",
-     "press": "magazine.hankyung.com",
-     "publishedAt": "2026-11-25T01:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/050/0000113718?sid=101"
     }
    ]
   },
@@ -111,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 0,
-   "press": 15,
+   "articles90": 25,
+   "recent20": 1,
+   "press": 16,
    "firstArticleAt": "2026-11-25T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김종철 첫 행보는 영등포역…\"국민 일상에서 시작\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T01:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929702?sid=102"
+    },
     {
      "title": "새벽 도보순찰·야간당직 회의 주재…김종철 경찰청장 취임 후 첫 현장...",
      "press": "biz.heraldcorp.com",
@@ -129,44 +103,6 @@
      "press": "khan.co.kr",
      "publishedAt": "2026-11-25T00:41:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/032/0003484888?sid=102"
-    },
-    {
-     "title": "김종철 경찰청장, 취임 후 첫 행보로 영등포역 일대 도보 순찰",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T00:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461887?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "윤하정 결혼식 민폐 하객",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 12,
-   "recent20": 5,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T23:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"버진로드 걸어다녀\"...이관희♥유시은, 윤하정 결혼식 '민폐 하객 논란...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-25T01:08:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61363"
-    },
-    {
-     "title": "\"아줌마 느낌\"…이관희·유시은, '민폐 하객 논란' 사과에도 여론 싸늘...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-25T01:08:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110071586203"
-    },
-    {
-     "title": "이관희·유시은, '민폐 하객' 사과는 했지만…누리꾼 \"돈으로 갚아\"→비...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-25T01:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409493"
     }
    ]
   },
@@ -203,15 +139,48 @@
    ]
   },
   {
+   "keyword": "주주",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 7,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T00:46:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "정부, 거래소 대주주 지분 20% 제한 추진",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-25T01:16:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=410879"
+    },
+    {
+     "title": "[김형균의 주주자본주의] 지배권에도 경쟁이 필요하다",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-25T01:12:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446412"
+    },
+    {
+     "title": "대신증권, 주주환원·고배당 금융상품 매수 이벤트 진행",
+     "press": "inthenews.co.kr",
+     "publishedAt": "2026-11-25T01:10:00.000Z",
+     "link": "https://www.inthenews.co.kr/news/article.html?no=94973"
+    }
+   ]
+  },
+  {
    "keyword": "스트레이 키즈, 새해 고척돔 공연",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T23:45:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-24T23:50:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -236,51 +205,24 @@
    ]
   },
   {
-   "keyword": "주주",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-25T00:24:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "대신증권, 고배당·주주환원 상품 매수 이벤트 연다",
-     "press": "newsmap.co.kr",
-     "publishedAt": "2026-11-25T01:02:00.000Z",
-     "link": "https://www.newsmap.co.kr/news/articleView.html?idxno=5748"
-    },
-    {
-     "title": "고려아연 최대주주 영풍·MBK \"회사 뒤에 숨어 책임 회피 말라\"…최윤범...",
-     "press": "job-post.co.kr",
-     "publishedAt": "2026-11-25T01:00:00.000Z",
-     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=240686"
-    },
-    {
-     "title": "다올투자증권, 최대주주 경영권 매각 추진 소식에 20%대 급등",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-25T01:00:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82718"
-    }
-   ]
-  },
-  {
    "keyword": "빅테크",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-24T23:44:00.000Z",
+   "firstArticleAt": "2026-11-25T00:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 전력망 병목에 AI 인프라 빌리는 빅테크…韓 데이터센터 수주 기회",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-25T01:12:00.000Z",
+     "link": "https://www.ajunews.com/view/20261125100922575"
+    },
     {
      "title": "은행·빅테크 스테이블코인 합종연횡 재점화 vs 안갯속?",
      "press": "news.bizwatch.co.kr",
@@ -292,25 +234,50 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-25T00:45:00.000Z",
      "link": "https://www.newspim.com/news/view/20261125000088"
+    }
+   ]
+  },
+  {
+   "keyword": "국무회의",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-25T00:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "남원 국립의전원법 시행령 제정안, 국무회의 의결",
+     "press": "news.lghellovision.net",
+     "publishedAt": "2026-11-25T01:16:00.000Z",
+     "link": "http://news.lghellovision.net/news/articleView.html?idxno=563639"
     },
     {
-     "title": "학회·빅테크 행사에 AI 실시간 통역, 플리토 '보글' 올해 도입 행사 850...",
-     "press": "platum.kr",
-     "publishedAt": "2026-11-25T00:06:00.000Z",
-     "link": "https://platum.kr/archives/299398"
+     "title": "\"토론의 장이라면서\"…국무회의 발언 불발에 오세훈측 '불만'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T01:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014343640?sid=102"
+    },
+    {
+     "title": "남원 국립의전원 설립 시행령 국무회의 의결",
+     "press": "jtv.co.kr",
+     "publishedAt": "2026-11-25T00:32:00.000Z",
+     "link": "https://www.jtv.co.kr/news/article.php?id=72311"
     }
    ]
   },
   {
    "keyword": "박지훈 변호사",
    "sources": [
-    "nate",
-    "daum"
+    "nate"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T23:48:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-25T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -333,45 +300,13 @@
      "link": "https://m.entertain.naver.com/article/440/0000054044"
     }
    ]
-  },
-  {
-   "keyword": "국무회의",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T00:31:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "\"토론의 장이라면서\"…국무회의 발언 불발에 오세훈측 '불만'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T01:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014343640?sid=102"
-    },
-    {
-     "title": "남원 국립의전원 설립 시행령 국무회의 의결",
-     "press": "jtv.co.kr",
-     "publishedAt": "2026-11-25T00:32:00.000Z",
-     "link": "https://www.jtv.co.kr/news/article.php?id=72311"
-    },
-    {
-     "title": "박홍근, 오세훈에 “대권놀음 위한 정치쇼”…국무회의 상황 공개 비판",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-25T00:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005768538?sid=100"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1363,
-  "matched": 712,
-  "avgLeadMin": 498,
+  "flagged": 1362,
+  "matched": 711,
+  "avgLeadMin": 496,
   "recent": [
    {
     "keyword": "사고",
