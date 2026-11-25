@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T11:50:38.923Z",
+ "builtAt": "2026-11-25T12:00:44.652Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
   {
    "keyword": "빗썸 해킹 추가 피해",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 28,
-   "recent20": 8,
-   "press": 27,
+   "articles90": 30,
+   "recent20": 5,
+   "press": 29,
    "firstArticleAt": "2026-11-25T10:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "빗썸, 개인정보 추가 유출 확인…해킹 기간도 보름 넘어",
+     "press": "paxetv.com",
+     "publishedAt": "2026-11-25T11:58:00.000Z",
+     "link": "http://www.paxetv.com/news/articleView.html?idxno=287870"
+    },
+    {
+     "title": "빗썸, 보름 동안 해킹 사실 몰랐다…뒤늦게 드러난 추가 피해",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-25T11:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004128111?sid=103"
+    },
+    {
      "title": "빗썸, 개인정보 유출 피해 추가 확인…보름간 해킹 몰랐다",
      "press": "newsworks.co.kr",
      "publishedAt": "2026-11-25T11:48:00.000Z",
      "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904465"
-    },
-    {
-     "title": "빗썸, 개인정보 유출 추가 확인…보름 넘게 털렸다",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-25T11:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003489959?sid=101"
-    },
-    {
-     "title": "빗썸, 그룹웨어 해킹 후속 점검서 개인정보 추가 유출 확인",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T11:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213932?sid=101"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 26,
+   "articles90": 21,
    "recent20": 5,
-   "press": 24,
-   "firstArticleAt": "2026-11-25T10:24:00.000Z",
+   "press": 18,
+   "firstArticleAt": "2026-11-25T10:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령 \"서울 핵심지역 집값 하향 안정화…급격한 변동에도 대비\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-25T11:50:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446547"
+    },
     {
      "title": "李대통령 \"토지임대부 주택도 투기자산화\"…與의원 제안에 공개 반박",
      "press": "news.einfomax.co.kr",
@@ -65,12 +71,6 @@
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-25T11:45:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001207342?sid=100"
-    },
-    {
-     "title": "李대통령, 은평구 전통시장 깜짝 방문…장바구니 물가 살펴",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-25T11:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609885?sid=100"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-25T10:25:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-25T10:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "공소청, '불법 정치자금' 전광훈에 구속영장 청구",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T11:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929913?sid=102"
+    },
     {
      "title": "공소청, 교회 돈으로 자유통일당 '불법' 지원한 전광훈 구속영장 신청",
      "press": "hansbiz.co.kr",
@@ -97,12 +103,70 @@
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-25T11:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003567944?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "청해부대 전쟁불개입 원칙 유지",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-25T10:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "청해부대 임무 확대에…李 “해상 위협 앞에서 무임승차 못해”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-25T11:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765166?sid=100"
     },
     {
-     "title": "‘교회 돈 102억 자유통일당에 기부한 혐의’ 전광훈 구속영장 청구",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-25T11:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162314?sid=102"
+     "title": "李 대통령 “청해부대 작전 넓히되 전쟁 불개입 원칙 분명히 지킬 것”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-25T11:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686204?sid=100"
+    },
+    {
+     "title": "李대통령 “청해부대 작전범위 확대…전쟁 불개입 원칙 분명히 지킬 것...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-25T11:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728511?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "청룡영화상",
+   "sources": [
+    "google"
+   ],
+   "articles90": 21,
+   "recent20": 21,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T11:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[S포토] 박지연, '우와~' (청룡영화상)",
+     "press": "stardailynews.co.kr",
+     "publishedAt": "2026-11-25T12:00:00.000Z",
+     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=603100"
+    },
+    {
+     "title": "[포토] 박지훈, 청룡영화상 신인상 수상",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-25T11:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004469630"
+    },
+    {
+     "title": "[포토] 청룡영화상 신인남우상 박지훈, 영광스러운 순간",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-25T11:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004469629"
     }
    ]
   },
@@ -112,62 +176,62 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T10:22:00.000Z",
+   "articles90": 12,
+   "recent20": 5,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T11:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "2년 만에 T1 유니폼 다시 입는 '제우스' 최우제, \"철없던 아이, 어른이 ...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-25T11:48:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61398"
+     "title": "T1 돌아온 '제우스' 최우제 \"경기 보는 시야 넓어져\"⋯2029년까지 3년 계...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-25T11:56:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653024"
     },
     {
-     "title": "[포토] '제우스' 최우제 'T1 복귀했습니다'",
-     "press": "dailyesports.com",
-     "publishedAt": "2026-11-25T11:14:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/347/0000196827"
+     "title": "'제우스' 최우제, 2년 전 갈등에도 T1 복귀한 이유…\"상혁이 형 보고 시...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-25T11:55:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/445/0000493403"
     },
     {
-     "title": "[포토] T1 '제우스' 최우제의 시그니처 포즈",
-     "press": "dailyesports.com",
-     "publishedAt": "2026-11-25T11:11:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/347/0000196826"
+     "title": "2년 만에 T1으로 복귀한 '제우스' 최우제 \"높은 성적 바라보고 왔다\"",
+     "press": "todaykorea.co.kr",
+     "publishedAt": "2026-11-25T11:52:00.000Z",
+     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=409231"
     }
    ]
   },
   {
-   "keyword": "맹승지 의사 남친 결혼 준비",
+   "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T10:23:00.000Z",
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T11:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "맹승지, 의사 남친과 본격 새출발 \"결혼식 D-305\"",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-25T11:28:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110093672822"
+     "title": "미국증시 전망, 나스닥 선물 2% 급락…반등 가능할까",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T11:56:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286230"
     },
     {
-     "title": "맹승지, ♥의사 연인과 결혼 305일 전…\"대문자 J 남친, 예식장 뚝딱 예...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T11:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084038"
+     "title": "미, '과잉생산 관세' 발표 임박…한 관세 15% 유지할 듯",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-25T11:46:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544999"
     },
     {
-     "title": "\"결혼식까지 305일\"… 맹승지, 연하 의사 예비 신랑과 예식장 예약 인증...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-25T10:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000493283"
+     "title": "유럽 조이고, 미국은 조만간…'엎친 데 덮친' 자동차업계 상황",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-25T11:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522451?sid=101"
     }
    ]
   },
@@ -177,24 +241,24 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T10:24:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-25T11:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "국내 수산물 방사능 검사 6건 모두 적합",
-     "press": "phmbc.co.kr",
-     "publishedAt": "2026-11-25T11:40:00.000Z",
-     "link": "http://www.phmbc.co.kr/www/news/desk_news?idx=205604&mode=view"
-    },
     {
      "title": "선박·어선 검사증서도 정부24에서 발급 가능",
      "press": "phmbc.co.kr",
      "publishedAt": "2026-11-25T11:40:00.000Z",
      "link": "http://www.phmbc.co.kr/www/news/desk_news?idx=205599&mode=view"
+    },
+    {
+     "title": "국내 수산물 방사능 검사 6건 모두 적합",
+     "press": "phmbc.co.kr",
+     "publishedAt": "2026-11-25T11:40:00.000Z",
+     "link": "http://www.phmbc.co.kr/www/news/desk_news?idx=205604&mode=view"
     },
     {
      "title": "AI 부정 막으려 중·고교도 금속탐지기 검사.. 수능보다 더 강화?",
@@ -207,7 +271,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1505,
+  "flagged": 1507,
   "matched": 769,
   "avgLeadMin": 504,
   "recent": [
