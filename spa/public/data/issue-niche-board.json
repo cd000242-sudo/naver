@@ -1,20 +1,1219 @@
 {
-  "publishedAt": "2026-11-23T21:36:38.356Z",
+  "publishedAt": "2026-11-24T21:40:17.592Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
-    "issues": 17,
+    "issues": 18,
     "candidates": 240,
     "niche": 0,
-    "preemption": 1,
+    "preemption": 14,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-11-24",
+    "day": "2026-11-25",
     "keywords": []
   },
   "rows": [],
   "observations": [
+    {
+      "keyword": "멤T-1.0 프로",
+      "issue": "멤T-1.0 프로",
+      "topic": "멤T-1.0 프로",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 1,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 1",
+        "선점 후보 — 경쟁 문서 1건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "멤텐서·엔비디아가 과거 대화를 기억하는 AI 멤T-1.0 프로를 공개해서",
+        "basis": "뉴스 헤드라인 1건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "멤T-1.0 프로 과거 대화 기억하는 AI, 멤텐서 엔비디아",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "멤T-1.0 프로가 과거 대화를 기억한다는데 많이들 헷갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T21:34:54.328Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "멤텐서 엔비디아",
+      "issue": "멤T-1.0 프로",
+      "topic": "멤T-1.0 프로",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 2,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 2",
+        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "멤텐서·엔비디아가 과거 대화를 기억하는 AI 멤T-1.0 프로를 공개해서",
+        "basis": "뉴스 헤드라인 1건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "멤텐서 엔비디아 멤T-1.0 프로 과거 대화 재입력 원리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "멤텐서 엔비디아가 공개한 멤T-1.0 프로 과거 대화 재입력 방식이 생각보다 다르더라고",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T21:34:54.328Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "GLM-5.4 한글",
+      "issue": "GLM-5.4",
+      "topic": "GLM-5.4",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 6,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 6",
+        "선점 후보 — 경쟁 문서 6건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Z.ai가 GLM-5.4에 루프 트랜스포머를 적용해 반복 연산 경쟁에 나서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "GLM-5.4 한글 사용법, GLM-5.3 대비 주간 한도 50% 확대 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "GLM-5.4 한글 쓸 때 주간 한도가 GLM-5.3이랑 이렇게 차이 나네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T21:34:54.328Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "glm 5.4 reddit",
+      "issue": "GLM-5.4",
+      "topic": "GLM-5.4",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 7,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 7",
+        "선점 후보 — 경쟁 문서 7건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Z.ai가 GLM-5.4에 루프 트랜스포머를 적용해 반복 연산 경쟁에 나서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "glm 5.4 reddit 주간 한도 50% 확대 반응",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "glm 5.4 레딧 보니 5.3이랑 주간 한도 차이 많이들 착각하더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T21:34:54.328Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "glm 5.4 ollama",
+      "issue": "GLM-5.4",
+      "topic": "GLM-5.4",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 15,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 15",
+        "선점 후보 — 경쟁 문서 15건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Z.ai가 GLM-5.4에 루프 트랜스포머를 적용해 반복 연산 경쟁에 나서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "glm 5.4 ollama 로컬 설치와 GLM-5.3 대비 한도 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "glm 5.4 ollama 돌려보면 GLM-5.3 대비 한도가 생각보다 다르네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T21:34:54.328Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "glm 5.4 benchmark",
+      "issue": "GLM-5.4",
+      "topic": "GLM-5.4",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 25,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 25",
+        "선점 후보 — 경쟁 문서 25건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Z.ai가 GLM-5.4에 루프 트랜스포머를 적용해 반복 연산 경쟁에 나서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T21:34:54.328Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "glm 5.4 free",
+      "issue": "GLM-5.4",
+      "topic": "GLM-5.4",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 49,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 49",
+        "선점 후보 — 경쟁 문서 49건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Z.ai가 GLM-5.4에 루프 트랜스포머를 적용해 반복 연산 경쟁에 나서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "glm 5.4 free 주간 한도 50% 늘어난 무료 사용법",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "glm 5.4 무료 한도 5.3보다 50% 늘었다는데 많이들 놓칩니다",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "glm 5.3",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T21:34:54.328Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "glm 5.4 news",
+      "issue": "GLM-5.4",
+      "topic": "GLM-5.4",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 86,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 86",
+        "선점 후보 — 경쟁 문서 86건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Z.ai가 GLM-5.4에 루프 트랜스포머를 적용해 반복 연산 경쟁에 나서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "glm 5.4 news 루프 트랜스포머와 주간 한도 50% 확대",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "glm 5.4 news에서 주간 한도 50% 확대, 5.3 쓰던 사람은 봐야겠더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T21:34:54.328Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "glm 5.4 model",
+      "issue": "GLM-5.4",
+      "topic": "GLM-5.4",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 132,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 132",
+        "선점 후보 — 경쟁 문서 132건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Z.ai가 GLM-5.4에 루프 트랜스포머를 적용해 반복 연산 경쟁에 나서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "glm 5.4 model GLM-5.3 대비 주간 한도 50% 확대 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "glm 5.4 model 주간 한도 늘었다길래 glm 모델 설정 다시 봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "glm 모델",
+          "searchVolume": 190,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "glm 모델",
+          "searchVolume": 190,
+          "documentCount": 7753,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T21:34:54.328Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "GLM-5.4 벤치마크",
+      "issue": "GLM-5.4",
+      "topic": "GLM-5.4",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 141,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 141",
+        "선점 후보 — 경쟁 문서 141건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Z.ai가 GLM-5.4에 루프 트랜스포머를 적용해 반복 연산 경쟁에 나서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "GLM-5.4 벤치마크 GLM-5.3 대비 한도 50% 확대 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "GLM-5.4 벤치마크 GLM-5.3이랑 비교해보니 한도에서 갈리네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T21:34:54.328Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "GLM-5.4 사용법",
+      "issue": "GLM-5.4",
+      "topic": "GLM-5.4",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "직접 써보고 싶다",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 180,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 2,
+      "freshFrontalCount": 2,
+      "reasons": [
+        "문서수 180",
+        "선점 후보 — 경쟁 문서 180건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 직접 써보고 싶다"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 2건 (최근 2건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Z.ai가 GLM-5.4에 루프 트랜스포머를 적용해 반복 연산 경쟁에 나서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "GLM-5.4 사용법, GLM-5.3 대비 주간 한도 50% 확대",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "GLM-5.4 사용법 찾다가 5.3 대비 주간 한도부터 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T21:34:54.328Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "불계승 영어 로",
+      "issue": "불계승",
+      "topic": "불계승",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 241,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 241",
+        "선점 후보 — 경쟁 문서 241건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "변상일이 삼성화재배 결승 2국을 리친청에 불계승해 승부를 원점으로 돌려서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "불계승 영어 로 바둑 용어, 반집승과 불계패 차이까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "불계승 영어 로 어떻게 쓰는지 찾다 반집승이랑 자꾸 헷갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "불계승 뜻",
+          "searchVolume": 110,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "불계승 뜻",
+          "searchVolume": 110,
+          "documentCount": 978,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 15,
+      "kinTop": [
+        {
+          "title": "영어로 된 바둑 대국사이트 알려주세요.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=20701&docId=39573897&answerNo=2",
+          "views": 2931,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-24T21:34:54.328Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "z.ai coding plan",
+      "issue": "Z.ai",
+      "topic": "Z.ai",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 242,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 242",
+        "선점 후보 — 경쟁 문서 242건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "중국 AI 부상 우려 속 국내 AI 액티브 ETF 경쟁이 맞물려서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "z.ai coding plan 요금제와 claude code 연동 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "z.ai coding plan 코딩플랜 가격 보고 결제를 멈칫했네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "z.ai 코딩플랜 가격",
+          "searchVolume": null,
+          "frame": "price"
+        }
+      ],
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T21:34:54.328Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "GLM-5.4 성능",
+      "issue": "GLM-5.4",
+      "topic": "GLM-5.4",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 233,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 233",
+        "선점 후보 — 경쟁 문서 233건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Z.ai가 GLM-5.4에 루프 트랜스포머를 적용해 반복 연산 경쟁에 나서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "GLM-5.4 성능 GLM-5.3 대비 한도 50% 확대 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "GLM-5.4 성능 GLM-5.3보다 한도 50% 늘었다는데 의외로 다른 게 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T21:34:54.328Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "멤T-1.0",
+      "issue": "멤T-1.0 프로",
+      "topic": "멤T-1.0 프로",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 2,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 2",
+        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "멤텐서와 엔비디아가 기억 내장 AI 멤T-1.0 프로를 공개해서",
+        "basis": "뉴스 헤드라인 1건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "home": {
+          "text": "멤T-1.0 쓰기 시작하고 며칠 만에 책상 풍경이 달라지더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T19:55:41.853Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "멤텐서",
+      "issue": "멤T-1.0 프로",
+      "topic": "멤T-1.0 프로",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 2,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 2",
+        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "멤텐서와 엔비디아가 기억 내장 AI 멤T-1.0 프로를 공개해서",
+        "basis": "뉴스 헤드라인 1건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "멤텐서 엔비디아 공개 기억 내장 AI 멤T-1.0 프로 정체",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "멤텐서가 엔비디아랑 내놓은 AI, 과거 대화를 다시 꺼낸다는 게 이거였네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T19:55:41.853Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "GLM-5.4 한도",
+      "issue": "GLM-5.4",
+      "topic": "GLM-5.4",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 62,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 62",
+        "선점 후보 — 경쟁 문서 62건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Z.ai가 GLM-5.4에 루프 트랜스포머를 적용해 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "GLM-5.4 한도 주간 50% 늘어난 범위 GLM-5.3 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "GLM-5.4 한도 주간 50% 늘었다는데 많이들 놓치는 부분이 있어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T19:55:41.853Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "glm 5.4 flash",
+      "issue": "GLM-5.4",
+      "topic": "GLM-5.4",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 105,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 105",
+        "선점 후보 — 경쟁 문서 105건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Z.ai가 GLM-5.4에 루프 트랜스포머를 적용해 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "glm 5.4 flash 주간 한도와 GLM-5.3 대비 달라진 점",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "glm 5.4 flash 한도 50% 늘었다는데 GLM-5.3이랑 뭐가 달라졌나",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "glm 5.3",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-24T19:55:41.853Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
     {
       "keyword": "북남고속철도 구간",
       "issue": "북남고속철도",
@@ -75,296 +1274,6 @@
       "monetize": null,
       "measuredAt": "2026-11-23T21:30:05.981Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "박종민 모의고사",
-      "issue": "박종민",
-      "topic": "박종민",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 174,
-      "documentCountMeasured": true,
-      "searchVolume": 20,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 20",
-        "문서수 174",
-        "선점 후보 — 경쟁 문서 174건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 29,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-22T21:33:52.360Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "싱킹머신즈",
-      "issue": "싱킹머신즈",
-      "topic": "싱킹머신즈",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 95,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 95",
-        "선점 후보 — 경쟁 문서 95건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-22T21:33:52.360Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "잠수함 노심 뜻",
-      "issue": "잠수함",
-      "topic": "잠수함",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 131,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 131",
-        "선점 후보 — 경쟁 문서 131건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "정보",
-      "adsenseFit": true,
-      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 11,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-22T21:33:52.360Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "잠수함 내파",
-      "issue": "잠수함",
-      "topic": "잠수함",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 298,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 298",
-        "선점 후보 — 경쟁 문서 298건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 86,
-      "kinTop": [
-        {
-          "title": "잠수함의 용도",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60401&docId=195886964&answerNo=2",
-          "views": 173,
-          "answers": 3
-        },
-        {
-          "title": "어뢰를무기로사용하여적의주력함이나잠수함을공격하는작....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60401&docId=196345473&answerNo=1",
-          "views": 150,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-22T21:33:52.360Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "김아림 변호사",
-      "issue": "김아림",
-      "topic": "김아림",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 170,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 170",
-        "선점 후보 — 경쟁 문서 170건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-22T03:34:24.852Z",
-      "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
     }
@@ -372,173 +1281,30 @@
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "젠슨 황 CEO",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "dead",
-      "isHot": true,
-      "why": "엔비디아 이사회가 젠슨 황 CEO 즉시 복귀를 만장일치로 결정, 주가 급등",
-      "headlines": [
-        {
-          "title": "젠슨 황, 엔비디아 CEO 전격 복귀…이사회 만장일치 결정",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-23T14:15:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016459302?sid=104"
-        },
-        {
-          "title": "젠슨 황 엔비디아 CEO 즉시 복귀…이사회 만장일치 결정",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-23T14:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014340783?sid=104"
-        },
-        {
-          "title": "엔디비아 이사회, 젠슨 황 'CEO 즉시 복귀' 결정",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-11-23T15:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000652936?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "젠슨황",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "젠슨",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "고경표",
+      "issue": "젠슨 황 극적",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "음주운전 혐의 고경표가 경찰에 출석해 조사받고 사과",
+      "why": "젠슨 황 복귀에 中 관영매체가 간첩 의혹을 허구라 규정해서",
       "headlines": [
         {
-          "title": "음주운전 배우 고경표 경찰 출석…\"무책임한 모습 죄송\"(종합)",
+          "title": "中관영매체 \"젠슨 황 복귀, '중국 간첩 의혹' 허구라는 뜻\"",
           "press": "yna.co.kr",
-          "publishedAt": "2026-11-23T10:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016459204?sid=102"
+          "publishedAt": "2026-11-24T02:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016460275?sid=104"
         },
         {
-          "title": "\"많이 사랑받았는데‥\" '만취 음주운전' 고경표 울먹이더니",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-11-23T11:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001537492?sid=102"
+          "title": "젠슨 황 복귀에 中 관영매체 \"'중국 간첩 의혹'은 허구\"",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-11-24T07:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004213369?sid=104"
         },
         {
-          "title": "'음주사고' 고경표, 1시간30분 조사…\"무책임한 모습 죄송\" 울먹(종합)",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-23T11:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014340757?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "고경표 입장문",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "고경표 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "고경표 차",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "놀면뭐하니 고경표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "고경표 막국수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "고경표 사주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "고경표 류혜영",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "고경표 만취",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "고경표 처벌",
-          "reason": "혐의 조사 뒤 형량 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "고경표 하차",
-          "reason": "출연작 하차 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "고경표 위약금",
-          "reason": "광고 손해배상 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "고경표 복귀",
-          "reason": "자숙 후 복귀 시점",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "정영모 전자발찌 검거",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "전자발찌 훼손 후 도주한 성범죄자 정영모가 이틀 만에 세종서 검거",
-      "headlines": [
-        {
-          "title": "'전자발찌 훼손' 56살 정영모 세종서 검거",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-23T14:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001405234?sid=102"
-        },
-        {
-          "title": "'전자발찌' 파손 후 도주한 정영모 세종서 검거",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-11-23T14:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000652932?sid=102"
-        },
-        {
-          "title": "'전자발찌 끊고 도주' 정영모, 이틀 만에 세종서 검거",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-23T16:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016459323?sid=102"
+          "title": "젠슨 황 복귀에…중국 관영매체 \"스파이 의혹 허구라는 뜻\"",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-11-24T05:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001979630?sid=104"
         }
       ],
       "concentrated": [],
@@ -546,30 +1312,30 @@
       "rowCount": 0
     },
     {
-      "issue": "선관위 직원 영장심사",
+      "issue": "서울 지하철 노사",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "개표상황표 은닉 혐의 선관위 직원 8명 중 1명 구속, 7명 기각",
+      "why": "서울 지하철 노사가 임단협을 극적 타결해 총파업을 철회해서",
       "headlines": [
         {
-          "title": "'선거 개표상황표 은닉' 선관위 직원 8명 중 1명 구속(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-23T17:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016459332?sid=102"
+          "title": "서울 지하철 노사협상 타결… 총파업 철회",
+          "press": "chosun.com",
+          "publishedAt": "2026-11-24T17:53:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004011575?sid=102"
         },
         {
-          "title": "선관위 직원 8명 영장심사...특검 출범 77일 만",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-11-23T03:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002436727?sid=102"
+          "title": "서울지하철 노사 협상 타결…오늘 총파업 철회",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-11-24T17:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012300517?sid=102"
         },
         {
-          "title": "'투표율 허위 입력' 선관위 직원 1명 구속·7명 기각",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-23T16:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001405250?sid=102"
+          "title": "서울 지하철 노사 임단협 극적 타결…출근길 정상운행",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-24T19:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014343177?sid=102"
         }
       ],
       "concentrated": [],
@@ -577,92 +1343,427 @@
       "rowCount": 0
     },
     {
-      "issue": "100일의 거짓말",
+      "issue": "미국 과잉생산 관세",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "美USTR가 이번주 한국 포함 16개국 과잉생산 관세 조사결과를 발표 예정이라서",
+      "headlines": [
+        {
+          "title": "\"美USTR, 이르면 이번주 '과잉생산 관세' 조사 결과 발표\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-24T13:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016461534?sid=104"
+        },
+        {
+          "title": "트럼프 정부, '과잉생산' 관세 예고…한국은 괜찮을까",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-24T14:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005357800?sid=101"
+        },
+        {
+          "title": "미, 이르면 이번 주 ‘과잉생산 관세’ 발표…‘한국 15% 유지’촉각",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-11-24T21:07:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012300528?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "대한항공 풀세트 승리",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "대한항공이 OK저축은행에 풀세트 진땀승으로 헤난 복귀 후 2연승을 거둬서",
+      "headlines": [
+        {
+          "title": "대한항공, OK저축은행에 풀세트 진땀승…헤난 감독 복귀 후 연승(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-24T13:13:00.000Z",
+          "link": "https://m.sports.naver.com/volleyball/article/001/0016461518"
+        },
+        {
+          "title": "대한항공, 풀세트 진땀승으로 시즌 첫 연승…OK저축은행, 5연패 수렁(종...",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-24T12:57:00.000Z",
+          "link": "https://m.sports.naver.com/volleyball/article/003/0014343104"
+        },
+        {
+          "title": "대한항공, OK저축은행에 풀세트 진땀승으로 '2연승'",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-11-24T14:05:00.000Z",
+          "link": "https://m.sports.naver.com/volleyball/article/055/0001405553"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "국내 코인 발행",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "금융위가 디지털자산법을 공개해 9년 만에 국내 코인 발행(ICO)을 허용해서",
+      "headlines": [
+        {
+          "title": "국내 코인 발행·마켓메이커 빗장 푼다…금융위 '디지털자산법' 공개",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-24T06:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009307504?sid=101"
+        },
+        {
+          "title": "9년 만에 국내 코인 발행(ICO) 허용",
+          "press": "etnews.com",
+          "publishedAt": "2026-11-24T06:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003489153?sid=101"
+        },
+        {
+          "title": "국내서 '코인 발행' 길 열려…가상자산 전문 IB·운용사도 나온다",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-24T08:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005357727?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "아시아모델어워즈 수상자들",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "아시아모델어워즈에서 신인상·피트니스 부문 수상자들이 발표돼서",
+      "headlines": [
+        {
+          "title": "김세연 '수줍수줍'(아시아모델어워즈) [포토]",
+          "press": "bntnews.co.kr",
+          "publishedAt": "2026-11-24T11:26:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202611240307"
+        },
+        {
+          "title": "‘신인상 페이스 오브 아시아 라이징 수상자들’[포토엔HD]",
+          "press": "newsen.com",
+          "publishedAt": "2026-11-24T07:53:00.000Z",
+          "link": "https://m.entertain.naver.com/article/609/0001190718"
+        },
+        {
+          "title": "제니스-MYNT, '아시아모델어워즈' 신인상 수상 [포토]",
+          "press": "bntnews.co.kr",
+          "publishedAt": "2026-11-24T08:26:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202611240262"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "오정태 딸 카이스트",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
-      "isHot": true,
-      "why": "100일의 거짓말이 11.7%로 자체 최고 시청률 경신, 두 사람 인연 드러남",
+      "isHot": false,
+      "why": "오정태가 동상이몽에서 16세 딸의 카이스트 조기 입학 소식을 전해서",
       "headlines": [
         {
-          "title": "'100일의거짓말' 김유정·박진영, 송지효와 인연 드러났다…11.7% 자체 최...",
+          "title": "오정태가 전한 딸의 깜짝 소식…16세에 카이스트 조기 입학",
+          "press": "joongang.co.kr",
+          "publishedAt": "2026-11-24T16:39:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/025/0003567728?sid=102"
+        },
+        {
+          "title": "오정태 \"첫째 딸, 카이스트 합격…만 17세 조기 입학\"",
           "press": "news1.kr",
-          "publishedAt": "2026-11-23T02:43:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009304715"
+          "publishedAt": "2026-11-24T14:08:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009308130"
         },
         {
-          "title": "2회 남기고 파국? 오열하는 김유정에 ‘100일의 거짓말’ 자체 최고 시청...",
-          "press": "biz.heraldcorp.com",
-          "publishedAt": "2026-11-23T12:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/016/0002727348?sid=103"
-        },
-        {
-          "title": "'100일의 거짓말' 알고 보니 남매",
+          "title": "오정태 딸 카이스트 합격…축하 선물 '성형'",
           "press": "bntnews.co.kr",
-          "publishedAt": "2026-11-22T21:14:00.000Z",
-          "link": "https://www.bntnews.co.kr/article/view/bnt202611230012"
+          "publishedAt": "2026-11-24T21:00:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202611250005"
         }
       ],
       "concentrated": [
         {
-          "keyword": "100일의 거짓말 나무위키",
+          "keyword": "오정태",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "농지",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "이용철 법무 후보가 농지 투기 의혹에 주말 체험형 영농 목적이라 해명해서",
+      "headlines": [
+        {
+          "title": "이용철 \"광주 농지는 주말 영농 목적\"‥포커 의혹엔 \"육식 못 해\"",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-11-24T09:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001537742?sid=100"
+        },
+        {
+          "title": "이용철 농지 구입 질문에...\"저는 농지 투기한 적이 없어\" [현장영상+]",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-11-24T01:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002437207?sid=100"
+        },
+        {
+          "title": "이용철 “‘삼성 500만원' 뇌물성 알아 반환”…농지 투기·도박 의혹 부...",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-11-24T08:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001207050?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "농지 전수조사",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "100일의 거짓말 몇부작",
+          "keyword": "농지 매매",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "100일의 거짓말 시청률",
+          "keyword": "농지 양도소득세",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "100일의 거짓말 등장인물",
+          "keyword": "농지 공시지가 조회",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "100일의 거짓말 재방송",
+          "keyword": "농지 비사업용기준",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "100일의 거짓말 작가",
+          "keyword": "농지 전수조사 대상",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "100일의 거짓말 원작",
+          "keyword": "농지 대출 조건",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "100일의 거짓말 송지효",
+          "keyword": "농지 매입 조건",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "이관희 유시은 민폐",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "이관희·유시은이 남의 결혼식 버진로드를 걸은 민폐 하객 논란에 사과해서",
+      "headlines": [
+        {
+          "title": "남의 결혼식 버진로드를?…유시은·이관희, '민폐 하객' 사과",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-24T14:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005357798?sid=103"
+        },
+        {
+          "title": "“살다살다 이런 하객 처음”…‘결혼식 민폐하객’ 유시은·이관희 결...",
+          "press": "joongang.co.kr",
+          "publishedAt": "2026-11-24T12:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/025/0003567647?sid=102"
+        },
+        {
+          "title": "이관희·유시은, 버진로드 걸은 '민폐 하객' 맞았다 “경솔했다”",
+          "press": "news.jtbc.co.kr",
+          "publishedAt": "2026-11-24T12:12:00.000Z",
+          "link": "https://m.entertain.naver.com/article/437/0000522276"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "이관희",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이관희 유시은",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "불계승",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "변상일이 삼성화재배 결승 2국을 리친청에 불계승해 승부를 원점으로 돌려서",
+      "headlines": [
+        {
+          "title": "숫자로 돌아보는 삼성화재배…변상일의 6승, 모두 불계승이었다[PS]",
+          "press": "sports.donga.com",
+          "publishedAt": "2026-11-23T07:41:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/382/0001306343"
+        },
+        {
+          "title": "정준우, 신예바둑 최강전서 김윤태에 역전승... 프로 입단 후 첫 정상",
+          "press": "starnewskorea.com",
+          "publishedAt": "2026-11-24T12:49:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/108/0003489883"
+        },
+        {
+          "title": "'디펜딩 챔피언' 신진서, 박정환에 극적인 역전승…명인전 최종국 간다",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-24T08:17:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/421/0009307921"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "불계승 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "불계승 바둑",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "불계승 영어 로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "백 불계승",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "흑 불계승",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "바둑 불계승",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이세돌 불계승",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "앤트로픽",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "앤트로픽이 상장 4거래일 만에 공모가를 하회하며 6.54% 급락해서",
+      "headlines": [
+        {
+          "title": "스페이스X땐 불나방이었는데…앤트로픽엔 소심해진 국내 ETF들",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-11-23T22:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005767967?sid=101"
+        },
+        {
+          "title": "엔비디아 3%대 하락 출발…전날 '젠슨황 복귀' 랠리 일부 반납",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-24T15:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016461541?sid=104"
+        },
+        {
+          "title": "[속보] 앤트로픽 6.54% 급락…상장 4거래일 만에 공모가 하회",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-24T21:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005357829?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "앤트로픽 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 상장일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 공모가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ipo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 상장 시간",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "100일의 거짓말 결말",
-          "reason": "2회 남아 결말 궁금",
+          "keyword": "앤트로픽 반등",
+          "reason": "저가 매수 여부",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "100일의 거짓말 마지막회",
-          "reason": "종영 시청률 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "100일의 거짓말 시즌2",
-          "reason": "흥행 뒤 후속 여부",
+          "keyword": "앤트로픽 실적",
+          "reason": "적자 규모 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -671,30 +1772,293 @@
       "rowCount": 0
     },
     {
-      "issue": "데블스 플랜 시즌",
+      "issue": "GLM-5.4",
       "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "데블스플랜3에서 정현규가 공황장애로 하차하고 유배지 설정 논쟁",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "Z.ai가 GLM-5.4에 루프 트랜스포머를 적용해 반복 연산 경쟁에 나서서",
       "headlines": [
         {
-          "title": "정현규 공황장애 호소 속…존박, '데블스 플랜3' 배신은 인성 문제 아닌...",
-          "press": "tenasia.co.kr",
-          "publishedAt": "2026-11-23T09:00:00.000Z",
-          "link": "https://m.entertain.naver.com/article/312/0000785794"
+          "title": "Z.ai, 'GLM-5.4'에 루프 트랜스포머 적용…오픈AI 이어 반복 연산 경쟁",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-24T09:16:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=217728"
         },
         {
-          "title": "‘데블스 플랜: 데드 어게인’ 유배지 논쟁 터졌다…24일 11~14회로 우승...",
-          "press": "wikitree.co.kr",
-          "publishedAt": "2026-11-22T11:24:00.000Z",
-          "link": "https://www.wikitree.co.kr/articles/1176757"
+          "title": "지푸 GLM-5.4 제공, GLM-5.3 대비 주간 한도 50% 확대",
+          "press": "tokenpost.kr",
+          "publishedAt": "2026-11-23T06:00:00.000Z",
+          "link": "https://www.tokenpost.kr/news/ai/442771"
         },
         {
-          "title": "“게임 중 손 떨고 과호흡” 촬영 중단 후 의료진 긴급 투입…‘데블스...",
-          "press": "seoul.co.kr",
-          "publishedAt": "2026-11-17T21:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/081/0003700551?sid=103"
+          "title": "Tesla stock leads supplied US search counts with over 10,000",
+          "press": "econotimes.com",
+          "publishedAt": "2026-11-23T16:14:00.000Z",
+          "link": "https://econotimes.com/Tesla-stock-leads-supplied-US-search-counts-with-over-10-000-1780589"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "glm 5.3",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "glm 5.4 free",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "glm 5.4 news",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "glm 5.4 model",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "glm 5.4 ollama",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "glm 5.4 reddit",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "glm 5.4 rumors",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "glm 5.4 benchmark",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "GLM-5.4 사용법",
+          "reason": "직접 써보고 싶다",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "GLM-5.4 API",
+          "reason": "개발자 연동 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "Z.ai",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "중국 AI 부상 우려 속 국내 AI 액티브 ETF 경쟁이 맞물려서",
+      "headlines": [
+        {
+          "title": "한국의 시험은 왜 AI 부정행위 앞에 무력했을까",
+          "press": "bbc.com",
+          "publishedAt": "2026-11-24T08:22:00.000Z",
+          "link": "https://www.bbc.com/korean/articles/ck3rgp0evg7no?xtor=AL-73-%5Bpartner%5D-%5Bnaver%5D-%5Bheadline%5D-%5Bkorean%5D-%5Bbizdev%5D-%5Bisapi%5D"
+        },
+        {
+          "title": "미래에셋·삼성운용·한화, AI 액티브 ETF 경쟁",
+          "press": "m-i.kr",
+          "publishedAt": "2026-11-24T05:14:00.000Z",
+          "link": "https://www.m-i.kr/news/articleView.html?idxno=2022609"
+        },
+        {
+          "title": "\"AI를 주머니에\" 새 수장 온 삼성전자 MX, AI·폴더블에 힘줄까",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-11-23T07:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005445100?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "z.ai glm",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "z.ai 구독",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "z.ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "z.ai api",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "z.ai stock",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "z.ai api key",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "z.ai pricing",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "z.ai coding plan",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "Z.ai 가입 방법",
+          "reason": "이용 절차 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "Z.ai 한국어",
+          "reason": "국내 활용도 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "KT",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "KT가 육군교육사령부와 차세대 지휘통제체계 KCCS-아미 고도화에 협력해서",
+      "headlines": [
+        {
+          "title": "[테크스냅] KT, 육군교육사령부와 미래 국방기술 발전 '맞손'",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-24T01:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016459782?sid=100"
+        },
+        {
+          "title": "식당 태블릿에 오른 KT·티오더 갈등",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-24T08:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005357693?sid=105"
+        },
+        {
+          "title": "KT, 육군교육사령부와 지휘통제체계 연구…\"국방 AX 지원\"",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-24T00:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009306208?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "kt 고객센터",
+          "searchVolume": 194000,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 인터넷",
+          "searchVolume": 62400,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt m모바일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt&g",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 착신전환 방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 알뜰폰",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 요금제",
+          "searchVolume": 25230,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt wiz",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "KT 방산 수혜",
+          "reason": "주가 영향 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KT 국방 AI",
+          "reason": "후속 사업 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KT 티오더 소송",
+          "reason": "갈등 전개 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KT 신규 요금제",
+          "reason": "출시 내용 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "멤T-1.0 프로",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "멤텐서·엔비디아가 과거 대화를 기억하는 AI 멤T-1.0 프로를 공개해서",
+      "headlines": [
+        {
+          "title": "멤텐서·엔비디아, 기억 내장 AI '멤T-1.0 프로' 공개…과거 대화 재입력...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-24T08:16:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=217746"
         }
       ],
       "concentrated": [],
@@ -702,75 +2066,242 @@
       "rowCount": 0
     },
     {
-      "issue": "강성태",
+      "issue": "말레이시아",
       "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "강성태가 수능 결시자 5400명을 두고 AI 커닝 포기 가능성 제기",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "말레이시아가 ICJ 제노사이드 판결에도 미얀마 난민 6800명을 송환해서",
       "headlines": [
         {
-          "title": "“수능장 나타나지 않은 5400명”…강성태가 제기한 의혹",
-          "press": "munhwa.com",
-          "publishedAt": "2026-11-23T05:59:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/021/0002834837?sid=102"
-        },
-        {
-          "title": "학교 10개 통째로 비어…강성태 \"수능장 안 온 5400명에 주목해야\"",
-          "press": "inews24.com",
-          "publishedAt": "2026-11-23T11:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/031/0001077672?sid=102"
-        },
-        {
-          "title": "'공신' 강성태 \"수능 결시율 급등…AI 부정행위 포기했나\"",
+          "title": "말레이시아, ICJ '제노사이드' 판결에도 6800명 미얀마 난민 송환",
           "press": "newsis.com",
-          "publishedAt": "2026-11-23T01:47:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014339132?sid=102"
+          "publishedAt": "2026-11-24T10:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014343058?sid=104"
+        },
+        {
+          "title": "엔와이 비티에스, 말레이시아 어워드 수상",
+          "press": "hansbiz.co.kr",
+          "publishedAt": "2026-11-24T07:00:00.000Z",
+          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886719"
+        },
+        {
+          "title": "방진회, 말레이시아 방산 바이어 9개사 초청 상담회 ‘K-DEX’ 기간 고양...",
+          "press": "munhwa.com",
+          "publishedAt": "2026-11-23T23:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/021/0002834982?sid=100"
         }
       ],
       "concentrated": [
         {
-          "keyword": "강성태 나무위키",
+          "keyword": "말레이시아 환율",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "공부의신 강성태",
+          "keyword": "말레이시아 시간",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "강성태 근황",
+          "keyword": "말레이시아 수도",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "강성태 ai",
+          "keyword": "말레이시아 여행",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "강성태 특이점",
+          "keyword": "말레이시아 항공",
+          "searchVolume": 12170,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "말레이시아 날씨",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "강성태 해병대",
+          "keyword": "말레이시아 입국신고서",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "강성태 수능 점수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "강성태 수능",
+          "keyword": "말레이시아 국제학교",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "KT가 구글 AI와 휴대폰 보험을 결합한 초이스 요금제를 출시해서",
+      "headlines": [
+        {
+          "title": "[단독] 구글도 주목한 폴리텍대 교본… 오랜 현장 경험 담겨",
+          "press": "chosun.com",
+          "publishedAt": "2026-11-24T20:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004011579?sid=102"
+        },
+        {
+          "title": "KT, 구글AI·휴대폰 보험 혜택 결합요금제 출시",
+          "press": "etnews.com",
+          "publishedAt": "2026-11-24T01:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003488945?sid=105"
+        },
+        {
+          "title": "KT, 월 12만원에 구글 AI·휴대폰 보험 할인 제공",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-11-24T05:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002446661?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 영국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 번역기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 클래스룸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 폼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 홈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "구글 AI 구독료",
+          "reason": "가격 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "아마존",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "아마존이 이스라엘계 AI 스타트업 데카르트를 10조원에 인수 임박해서",
+      "headlines": [
+        {
+          "title": "“아마존, AI 스타트업 데카르트 10조원에 인수 임박”",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-11-23T03:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001206659?sid=105"
+        },
+        {
+          "title": "\"에이전트는 안 잔다\"…AWS, 인프라 판 다시 짠다",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-24T05:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014342229?sid=105"
+        },
+        {
+          "title": "AWS \"AI 인프라 투자 계속\"…아마존 올해 설비투자 2000억불",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-24T07:21:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009307802?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "아마존 재팬",
+          "searchVolume": 56200,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아마존 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아마존 프라임",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아마존 활명수",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아마존 미국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "일본 아마존",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아마존 키드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아마존 드라마",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "아마존 주가",
+          "reason": "인수 영향 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "아마존 AI 전략",
+          "reason": "후속 투자 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -808,654 +2339,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "나의 유죄인간",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "나의 유죄인간에서 임시완·설인아가 이별 후 밀당 전개, OST 24일 발매",
-      "headlines": [
-        {
-          "title": "임시완 밀어내고 설인아 붙잡는다…'나의 유죄인간' 이별 후 팽팽한 밀...",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-23T08:14:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009305668"
-        },
-        {
-          "title": "임시완, 설인아 밀어내며 이별 통보…사랑 줄다리기 시작 (나의 유죄인...",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-11-23T10:47:00.000Z",
-          "link": "https://m.entertain.naver.com/article/144/0001151329"
-        },
-        {
-          "title": "'나의 유죄인간' 설인아 임시완, 이별 후 밀당 전개",
-          "press": "topstarnews.net",
-          "publishedAt": "2026-11-23T13:14:00.000Z",
-          "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284367"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "나의 유죄인간 몇부작",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나의 유죄인간 재방송",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나의 유죄인간 웹툰",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나의 유죄인간 시청률",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나의 유죄인간 인물관계도",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나의 유죄인간 ott",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나의 유죄인간 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나의 유죄인간 등장인물",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "나의 유죄인간 결말",
-          "reason": "줄다리기 끝 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "광주 상무역",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "광주 상무역이 AI 열차 도착 예측 도입하고 안전대상 소방청장상 수상",
-      "headlines": [
-        {
-          "title": "광주 상무역, AI로 열차 도착시간 예측…30초 남으면 표시 중단",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-23T08:36:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=217697"
-        },
-        {
-          "title": "전남광주 상무역, 대한민국 안전대상 소방청장상 수상",
-          "press": "namdonews.com",
-          "publishedAt": "2026-11-22T05:30:00.000Z",
-          "link": "https://www.namdonews.com/news/articleView.html?idxno=930010"
-        },
-        {
-          "title": "광주 상무역, 대한민국 안전대상 소방청장상 수상",
-          "press": "jnilbo.com",
-          "publishedAt": "2026-11-19T06:11:00.000Z",
-          "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084631"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "광주 상무역 맛집",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "광주 상무역 카페",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "광주 상무역 호텔",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "광주 상무역 술집",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "광주 상무역 점심",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "광주 상무역 숙소",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "광주 상무역 전화번호",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "광주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "패스트프레임",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "애플이 36ms 지연의 실시간 영상 생성 AI 패스트프레임 공개",
-      "headlines": [
-        {
-          "title": "애플, 실시간 영상 생성 AI '패스트프레임' 공개...36ms 지연",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-23T08:10:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=217686"
-        },
-        {
-          "title": "\"글로벌 표준 목표\" 매니패스트, AI 네이티브 기획서로 북미 간다···투...",
-          "press": "it.donga.com",
-          "publishedAt": "2026-11-23T05:16:00.000Z",
-          "link": "https://it.donga.com/109986/"
-        },
-        {
-          "title": "\"여전히 느린 개발 기획, AI로 빠르게\"…매니패스트, 美 투자유치",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-19T08:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005443745?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "패스트프레임 출시일",
-          "reason": "공개 뒤 상용화 시점",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "애플",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "애플이 아이폰18·맥북 네오2 신제품 예고하고 애플페이 국내 확산",
-      "headlines": [
-        {
-          "title": "애플, 시리 개선에도 AI 경쟁 뒤처지나…개발 속도가 발목[모닝폰]",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-11-22T22:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006413871?sid=105"
-        },
-        {
-          "title": "\"애플, 내년 초 신제품 쏟아낸다…아이폰18·맥북 네오2 출격\"",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-11-22T23:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002446374?sid=105"
-        },
-        {
-          "title": "‘유료’ 애플페이 도입 확산… 연 3000억 국부 유출 가능성",
-          "press": "segye.com",
-          "publishedAt": "2026-11-23T21:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004177567?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "애플 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 서비스센터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 환불",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 보증 확인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 폴더블",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 폴더블폰",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "엔비디아",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "젠슨 황 CEO 복귀 결정에 엔비디아 주가 30% 폭등",
-      "headlines": [
-        {
-          "title": "젠슨 황, 엔비디아 CEO 전격 복귀…이사회 만장일치 결정",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-23T14:15:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016459302?sid=104"
-        },
-        {
-          "title": "젠슨 황 CEO 즉시 복귀…엔비디아 주가 30% 폭등",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-23T14:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005357321?sid=101"
-        },
-        {
-          "title": "[속보] 엔비디아 이사회, 젠슨 황 CEO 복귀 결정",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-11-23T14:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002437044?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "엔비디아 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 실적발표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 젠슨황",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 회장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 그래픽카드",
-          "searchVolume": 6220,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 실적",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "엔비디아 주가 전망",
-          "reason": "폭등 뒤 추가 상승 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "엔비디아 실적발표",
-          "reason": "다음 실적 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "엔비디아 루빈",
-          "reason": "차세대 칩 기대",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "머스크",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "머스크가 데이터센터 차질로 내년 AI 기업 심각한 자금난을 경고",
-      "headlines": [
-        {
-          "title": "'개미들 가뜩이나 불안한데'…머스크까지 던진 섬뜩한 경고",
-          "press": "wowtv.co.kr",
-          "publishedAt": "2026-11-23T04:04:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/215/0001273615?sid=101"
-        },
-        {
-          "title": "머스크, 데이터센터 차질에 우려…\"AI기업 내년에 자금난\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-23T03:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016458154?sid=104"
-        },
-        {
-          "title": "\"내년에 엄청난 일 벌어진다\"…머스크의 섬뜩한 경고",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-23T04:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005357033?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "머스크 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "키엘 머스크 향수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "머스크 재산",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "머스크 향 특징",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "머스크 차",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "머스크 냄새",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "머스크 메론",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "머스크 본사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "뎁스 프로 2",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "애플이 사진·영상 속 실제 거리 추정하는 AI 뎁스 프로 2 공개",
-      "headlines": [
-        {
-          "title": "애플, 사진·영상 속 실제 거리 추정하는 AI '뎁스 프로 2' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-23T07:16:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=217692"
-        },
-        {
-          "title": "프로야구 롯데-키움, 투수 정철원-외야수 임지열 트레이드",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-20T07:19:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/001/0016455061"
-        },
-        {
-          "title": "프로야구 롯데-키움, 투수 정철원-외야수 임지열 트레이드 합의",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-20T08:11:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/055/0001404598"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "뎁스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "앤트로픽",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "1조 달러 몸값 앤트로픽이 상장했지만 신용등급은 정크 전망",
-      "headlines": [
-        {
-          "title": "\"쓰레기\" 앤트로픽에 날선 평가...AI 돈줄 마르나",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-23T07:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005445139?sid=104"
-        },
-        {
-          "title": "몸값 1조 달러 앤트로픽, 신용등급은 '정크' 전망…AI 투자에 경고등",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-23T04:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014339722?sid=104"
-        },
-        {
-          "title": "주식시장선 '환호', 채권시장선 '의구심'…앤트로픽의 두 얼굴",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-11-23T07:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004212930?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "앤트로픽 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 상장일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ipo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 공모가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "앤트로픽 주가 전망",
-          "reason": "상장 뒤 주가 방향 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 락업 해제",
-          "reason": "물량 출회 시점 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "KT",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "KT가 행안부와 사회연대경제 AX 협약, 수자원공사와 피지컬AI 협력",
-      "headlines": [
-        {
-          "title": "KT, 수자원공사와 피지컬AI 인프라 구축 협력",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-11-23T05:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002446483?sid=105"
-        },
-        {
-          "title": "행안부-KT 사회연대경제 AX 활성화 지원 업무협약",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-23T06:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016458537?sid=101"
-        },
-        {
-          "title": "사회연대경제 AX활성화를 위한 행정안전부-KT 업무협약식",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-23T05:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014339970?sid=100"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "kt 고객센터",
-          "searchVolume": 186700,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kt 인터넷",
-          "searchVolume": 60700,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kt m모바일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kt&g",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kt 착신전환 방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kt 알뜰폰",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kt 택배",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kt wiz",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "KT 시범사업 지역",
-          "reason": "춘천·청도 사업 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "KT AI 수혜",
-          "reason": "AX 사업 실적 기대",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "KT 주가",
-          "reason": "협약 뒤 주가 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     }
   ]
 }
