@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T19:02:52.229Z",
+ "builtAt": "2026-11-25T19:12:55.863Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,40 +8,8 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
-  {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T17:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미국, 한국에 ‘과잉생산 관세’ 15% 예고…“협의 불만족 땐 25%”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-25T18:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301371?sid=104"
-    },
-    {
-     "title": "15% 관세 '선방'했지만…디지털·대미투자 통상압박 불씨 여전",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T18:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009310591?sid=101"
-    },
-    {
-     "title": "美공화 22명 \"韓 플랫폼법 주시하라\"…디지털이 '25% 관세' 뇌관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T18:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009310590?sid=104"
-    }
-   ]
-  },
   {
    "keyword": "관세 15% 유지",
    "sources": [
@@ -49,8 +17,40 @@
    ],
    "articles90": 8,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T17:36:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-25T18:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 행정부, 한국에 과잉생산 관세 부과…韓 15% 상한은 유지",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T19:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213942?sid=104"
+    },
+    {
+     "title": "미국, 한국에 ‘과잉생산 관세’ 15% 예고…“협의 불만족 땐 25%”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-25T18:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301371?sid=104"
+    },
+    {
+     "title": "15% 관세 '선방'했지만…디지털·대미투자 통상압박 불씨 여전",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T18:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009310591?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 과잉생산 관세 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-25T17:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -71,38 +71,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-25T18:26:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009310590?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "선수",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T17:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "남친과 이별→국대 돌연 하차한 女축구선수, 알고보니 'NBA 악동' 로드먼...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-25T18:33:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/108/0003490288"
-    },
-    {
-     "title": "[오피셜] '2000억 사나이' 비르츠 완벽 부활! PL 이주의 선수로 선정",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-25T18:25:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/411/0000090487"
-    },
-    {
-     "title": "\"이런 미녀 육상 선수가 있었어?\"…日 25세 허들 스타, '깜짝' 모델 변신...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-25T17:45:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/311/0002084182"
     }
    ]
   }
