@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T20:43:24.709Z",
+ "builtAt": "2026-11-25T20:53:30.023Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 13,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "관세 15% 유지",
@@ -16,13 +16,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 15,
+   "articles90": 16,
    "recent20": 5,
    "press": 11,
    "firstArticleAt": "2026-11-25T19:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "韓반도체·자동차 콕 집은 美…‘과잉생산 관세’ 15% 넘어 25% 인상 압박",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-25T20:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728541?sid=104"
+    },
     {
      "title": "美무역대표, 韓 ‘과잉생산 관세’ 근거에…“정부지원·인프라계획”",
      "press": "biz.heraldcorp.com",
@@ -32,23 +38,17 @@
     {
      "title": "미국, 과잉 생산 관세 한국 15% 유지...25% 인상 여지 남겨",
      "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T20:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438167?sid=104"
-    },
-    {
-     "title": "미 USTR, 14개 경제주체에 과잉생산 관세…\"한국 15% 상한 유지\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-25T20:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979882?sid=104"
+     "publishedAt": "2026-11-25T20:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438168?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1503,
-  "matched": 763,
-  "avgLeadMin": 502,
+  "flagged": 1502,
+  "matched": 762,
+  "avgLeadMin": 503,
   "recent": [
    {
     "keyword": "도로공사 6연승 선두 질주",
