@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T04:58:07.606Z",
+ "builtAt": "2026-11-25T05:08:10.868Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,110 +11,172 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "반도체",
-   "sources": [
-    "google"
-   ],
-   "articles90": 26,
-   "recent20": 19,
-   "press": 22,
-   "firstArticleAt": "2026-11-25T04:34:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "민형배 전남광주시장 \"반도체 팹 건설인력 1만호 공공임대 필요\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-25T04:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545822?sid=101"
-    },
-    {
-     "title": "LS에코에너지, 희토류 양산 초읽기…美中 반도체 갈등이 수혜로",
-     "press": "bloter.net",
-     "publishedAt": "2026-11-25T04:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/293/0000093800?sid=101"
-    },
-    {
-     "title": "외국인 1년간 221조 던졌다…91%가 반도체",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-25T04:54:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321793&inflow=N"
-    }
-   ]
-  },
-  {
    "keyword": "술",
    "sources": [
     "google"
    ],
-   "articles90": 10,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-25T03:32:00.000Z",
+   "articles90": 13,
+   "recent20": 6,
+   "press": 12,
+   "firstArticleAt": "2026-11-25T03:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "술 취해 지인 찌르고 \"손가락 베여\" 신고…\"심신상실\" 50대 중형",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-25T04:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405701?sid=102"
+     "title": "“기억 못 한다” 술 취해 지인 살해한 50대 징역 25년 선고",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-25T05:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484942?sid=102"
     },
     {
-     "title": "사흘 내내 같이 술 먹은 지인 흉기로 살해하고 “기억 안 나” 50대 징역...",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-25T04:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162225?sid=102"
+     "title": "\"술은 관계와 관계없다\"…음주폐해 예방의 달 기념식",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-25T05:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016462692?sid=102"
     },
     {
-     "title": "술집 합석 거절당하자 강제추행 의혹...현직 경찰 내사",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T04:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437822?sid=102"
+     "title": "모임·회식 많아지는 연말연시…\"술은 관계와 관계없어요\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-25T05:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014344444?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "코리아 핀테크 위크",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 24,
+   "recent20": 4,
+   "press": 11,
+   "firstArticleAt": "2026-11-25T03:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[현장] AI 로봇이 송금 하고 투자 상담까지…'코리아핀테크 2026' 가보니",
+     "press": "insightkorea.co.kr",
+     "publishedAt": "2026-11-25T05:04:00.000Z",
+     "link": "https://www.insightkorea.co.kr/news/articleView.html?idxno=259727"
+    },
+    {
+     "title": "손바닥만 대면 결제부터 보험금 청구까지…핀테크 기술 한자리에",
+     "press": "cwn.kr",
+     "publishedAt": "2026-11-25T05:04:00.000Z",
+     "link": "https://www.cwn.kr/news/articleView.html?idxno=62594"
+    },
+    {
+     "title": "AI 상담부터 자산 관리까지…금융위원장이 체험한 핀테크 혁신",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-25T05:02:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321787&inflow=N"
     }
    ]
   },
   {
    "keyword": "65세 정년연장 입법 촉구",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 5,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T03:36:00.000Z",
+   "articles90": 9,
+   "recent20": 6,
+   "press": 9,
+   "firstArticleAt": "2026-11-25T03:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "양대노총 \"법정 정년 65세 연장 입법 연내 완료해야\"",
-     "press": "kado.net",
-     "publishedAt": "2026-11-25T04:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213350?sid=102"
+     "title": "노후 소득 공백 우려…노동계 \"정년 65세로 늘려달라\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-25T05:06:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087704"
     },
     {
-     "title": "양대노총, 정년연장 연내 입법 촉구…\"퇴직 후 소득공백 방치하면 안 돼...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-25T04:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609556?sid=102"
+     "title": "정년연장, 국민연금 68세설의 진실",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-25T05:02:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285837"
     },
     {
-     "title": "\"정년연장 연내 입법 없으면 대화 끊는다\"…양대노총 초강수(종합)",
+     "title": "연금은 65세, 정년은 60세…정년연장 공백 두고 노사 충돌",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-25T05:00:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3762650"
+    }
+   ]
+  },
+  {
+   "keyword": "롯데 수비 캠프 MVP 나승엽, 김기준",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-25T03:59:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "롯데, 일본 수비 강화캠프 마무리…MVP 나승엽·김기준",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-25T05:05:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/055/0001405707"
+    },
+    {
+     "title": "'수비 강화' 21일간 담금질 마친 롯데…캠프 MVP 나승엽·김기준",
      "press": "news1.kr",
-     "publishedAt": "2026-11-25T04:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009309224?sid=101"
+     "publishedAt": "2026-11-25T05:04:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009309282"
+    },
+    {
+     "title": "수비에 한 맺힌 롯데, 21일간 수비강화캠프 마무리…이동욱 감독 \"루틴...",
+     "press": "spochoo.com",
+     "publishedAt": "2026-11-25T05:02:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/529/0000079360"
+    }
+   ]
+  },
+  {
+   "keyword": "우주청 우주신기술 지정",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-25T04:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "우주청, 제3차 우주신기술 4건 지정…우주바이오 첫 선정",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-25T04:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159323?sid=105"
+    },
+    {
+     "title": "우주청, 우주바이오까지 신기술 지정 확대…민간 기술 4건 사업화 지원",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-25T04:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003489637?sid=105"
+    },
+    {
+     "title": "우주청, 우주신기술 4건 지정… 우주바이오 분야 첫 포함",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-25T04:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207231?sid=105"
     }
    ]
   },
   {
    "keyword": "채권",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-25T03:42:00.000Z",
    "exclusive": false,
@@ -141,34 +203,34 @@
    ]
   },
   {
-   "keyword": "유정연의 스크린 데뷔",
+   "keyword": "유정연 첫 영화 도전",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T03:30:00.000Z",
+   "articles90": 5,
+   "recent20": 4,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T04:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "유정연, 첫 스크린 데뷔",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T04:31:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125000771"
+     "title": "안방 휩쓴 '신병' 영화로 만난다…연말 극장가 출격",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-25T05:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273915?sid=103"
     },
     {
-     "title": "\"여러 번 가위 눌려\"..'신병 더 무비', 류경수·정연 품고 스크린으로 [...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-25T04:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490008"
+     "title": "유정연과 신병즈가 만났다, K군텐츠 '신병' [SQ현장]",
+     "press": "newsq.co.kr",
+     "publishedAt": "2026-11-25T05:04:00.000Z",
+     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=501041"
     },
     {
-     "title": "시즌4까지 간 '신병', 이번엔 영화다…트와이스 정연 스크린 데뷔 [종합...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-25T04:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786110"
+     "title": "군대가 이렇게 무서울 일? ‘신병 더 무비’, 류경수X유정연과 손잡고 ...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-25T04:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003814356"
     }
    ]
   },
@@ -177,13 +239,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 2,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-25T04:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "손정의 日 소프트뱅크 회장, 대구 방문해 선대 묘소 참배(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-25T05:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009309286?sid=102"
+    },
     {
      "title": "손정의 대구 방문, 선대 묘소 3곳 비공개 참배…앤트로픽 투자 놓친 일...",
      "press": "cbci.co.kr",
@@ -195,118 +263,86 @@
      "press": "sedaily.com",
      "publishedAt": "2026-11-25T04:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004686003?sid=102"
-    },
-    {
-     "title": "손정의 소프트뱅크그룹 회장, 대구 조상 묘소 비공개 방문",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-25T04:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005768695?sid=100"
     }
    ]
   },
   {
-   "keyword": "유정연 첫 영화 영광, 많이 부족해",
+   "keyword": "유정연의 스크린 데뷔",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
+   "articles90": 6,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T03:30:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-25T03:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "군대가 이렇게 무서울 일? ‘신병 더 무비’, 류경수X유정연과 손잡고 ...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-25T04:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003814356"
+     "title": "\"알아서 잘해\" 정연, 공승연 응원 갔다 스크린 데뷔..새 '배우 자매' 탄...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-25T05:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490018"
     },
     {
-     "title": "류경수x유정연 합류한 '신병 더 무비', 드라마 인기 이을까[종합]",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-25T04:20:00.000Z",
-     "link": "http://www.joynews24.com/view/2030217"
+     "title": "유정연, 첫 스크린 데뷔",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-25T04:31:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125000771"
     },
     {
-     "title": "무대→스크린으로…트와이스 정연·더보이즈 영훈·장규리, 첫 영화 동...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-25T03:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000493082"
+     "title": "\"여러 번 가위 눌려\"..'신병 더 무비', 류경수·정연 품고 스크린으로 [...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-25T04:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490008"
     }
    ]
   },
   {
-   "keyword": "블랙프라이데이 해외직구 물품 세관",
+   "keyword": "선저우 24호 발사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T03:35:00.000Z",
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-25T04:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[김기자의 에어포토] 블랙프라이데이 D-2…해외 직구 물품 검사 강화",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-25T04:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567832?sid=102"
+     "title": "中, 첫 외국인 탑승 우주선 발사 성공",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-25T05:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609572?sid=104"
     },
     {
-     "title": "[포토] 곧 블랙프라이데이…관세청은 해외직구 물품 검사 중",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-25T04:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833876?sid=102"
+     "title": "미국이 막은 우주, 중국은 열었다…파키스탄 우주인 태운 선저우 24호",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-25T04:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703041?sid=104"
     },
     {
-     "title": "[뉴스1 PICK] 세관에 가득 쌓인 블랙 프라이데이 직구템 '짝퉁 꼼짝마'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-25T03:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009309121?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "서울시립미술관 첫 개인전 이슬기",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-25T03:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "속담을 누비고 책에 스파게티를 꽂은 '요모조모 이슬기' 전",
-     "press": "newsfreezone.co.kr",
+     "title": "중국 유인 우주선 ‘선저우 24호’ 발사 성공···외국인 비행사 첫 탑...",
+     "press": "khan.co.kr",
      "publishedAt": "2026-11-25T04:18:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=721239"
-    },
-    {
-     "title": "속담은 이불이 되고 낙서는 벽화가 됐다…이슬기의 엉뚱발랄 미술",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T04:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014344350?sid=103"
-    },
-    {
-     "title": "이슬기 작가, 서울시립미술관 첫 개인전 '요모조모 이슬기'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T03:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014344280?sid=103"
+     "link": "https://n.news.naver.com/mnews/article/032/0003484932?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1384,
-  "matched": 719,
+  "flagged": 1387,
+  "matched": 720,
   "avgLeadMin": 472,
   "recent": [
+   {
+    "keyword": "반도체",
+    "hitKeyword": "반도체 계약학과 지원 증가",
+    "hitAt": "2026-11-25T14:00:00+09:00",
+    "leadMin": 52
+   },
    {
     "keyword": "양홍원 원현주 이혼",
     "hitKeyword": "양홍원 원현주 이혼",
@@ -360,12 +396,6 @@
     "hitKeyword": "틈만나면 1위 기록",
     "hitAt": "2026-11-25T12:00:00+09:00",
     "leadMin": 3038
-   },
-   {
-    "keyword": "LG 케네디와 재계약",
-    "hitKeyword": "LG 케네디 재계약",
-    "hitAt": "2026-11-25T12:00:00+09:00",
-    "leadMin": 30
    }
   ]
  }
