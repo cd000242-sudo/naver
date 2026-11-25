@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T15:51:38.734Z",
+ "builtAt": "2026-11-25T16:21:59.628Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,75 +11,139 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "미국 과잉생산 관세 조사",
+   "keyword": "관세 15% 유지",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 34,
-   "recent20": 2,
-   "press": 27,
-   "firstArticleAt": "2026-11-25T14:22:00.000Z",
+   "articles90": 30,
+   "recent20": 8,
+   "press": 21,
+   "firstArticleAt": "2026-11-25T14:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 USTR, 14개 경제주체에 과잉생산 관세…韓 15% 상한 유지",
-     "press": "segye.com",
-     "publishedAt": "2026-11-25T15:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178171?sid=104"
+     "title": "美, 과잉생산 관세 추가…15% 상한은 유지",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T16:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929957?sid=104"
     },
     {
-     "title": "美무역대표, '과잉생산 관세' 근거로 \"韓 정부지원·인프라계획\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T15:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016463976?sid=104"
+     "title": "美, 과잉생산 301조 한국에 관세 15% 제안…한미 합의 수준 유지",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-25T16:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159563?sid=101"
     },
     {
-     "title": "美, 14개 교역국에 과잉생산 관세 추진…韓 15% 상한 유지",
-     "press": "bloter.net",
-     "publishedAt": "2026-11-25T15:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/293/0000093832?sid=101"
+     "title": "美, 한국산에 301조 관세 합산 15% 제안…김정관 “최종 15% 유지하면 선...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-25T16:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006415609?sid=101"
     }
    ]
   },
   {
-   "keyword": "김민석 조희대 탄핵 5당",
+   "keyword": "미국 과잉생산 관세 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 29,
+   "recent20": 7,
+   "press": 20,
+   "firstArticleAt": "2026-11-25T14:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美, 과잉생산 관세 추가…15% 상한은 유지",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-25T16:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929957?sid=104"
+    },
+    {
+     "title": "美, 과잉생산 301조 한국에 관세 15% 제안…한미 합의 수준 유지",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-25T16:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159563?sid=101"
+    },
+    {
+     "title": "美, 한국산에 301조 관세 합산 15% 제안…김정관 “최종 15% 유지하면 선...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-25T16:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006415609?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 탄핵 연대 제안",
    "sources": [
     "signal.bz"
    ],
    "articles90": 6,
    "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-25T14:30:00.000Z",
+   "firstArticleAt": "2026-11-25T15:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[사설] 이해충돌 논란 속 탄핵 연대까지 하자는 여당 대표",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-25T16:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887518?sid=110"
+    },
+    {
+     "title": "野 “조희대 탄핵 인용땐 의원직 사퇴… 기각되면 與 총사퇴하라”",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-25T15:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011806?sid=100"
+    },
     {
      "title": "[사설] 대법원장 직무정지용 탄핵 추진…명백한 권한 남용이다",
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-25T15:36:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003568021?sid=110"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 후계자 필요없다",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T15:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨황 \"승계 계획 필요 없다\"…기존 경영체제 유지",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-25T15:34:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1795620773693601276"
     },
     {
-     "title": "조희대 탄핵 몰아치는 민주당…“12월 3일 발의, 9일 처리 검토”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-25T15:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568007?sid=100"
+     "title": "젠슨 황 '1극 체제' 그대로…\"중국 공산당 닮았다\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-25T15:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405859?sid=104"
     },
     {
-     "title": "[사설] 여당의 대법원장 탄핵 열차 급가속, 정당성 없는 권한 남용",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-25T15:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967810?sid=110"
+     "title": "돌아온 황 ‘마이웨이’… “승계 계획 필요 없다”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-25T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887486?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1506,
-  "matched": 770,
-  "avgLeadMin": 499,
+  "flagged": 1505,
+  "matched": 769,
+  "avgLeadMin": 500,
   "recent": [
    {
     "keyword": "도로공사 6연승 선두 질주",
