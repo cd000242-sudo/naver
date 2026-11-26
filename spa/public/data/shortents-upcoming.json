@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T14:29:20.039Z",
+ "builtAt": "2026-11-26T14:39:23.189Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "CJ올리브영 개인정보 유출",
@@ -16,10 +16,10 @@
     "nate",
     "daum"
    ],
-   "articles90": 28,
-   "recent20": 3,
-   "press": 27,
-   "firstArticleAt": "2026-11-26T13:01:00.000Z",
+   "articles90": 23,
+   "recent20": 1,
+   "press": 22,
+   "firstArticleAt": "2026-11-26T13:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -48,13 +48,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T13:05:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-26T13:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "중진의원 만찬 나란히 불참…金·鄭 갈등 장기화",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-26T14:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686678?sid=100"
+    },
     {
      "title": "與 중진 만찬 \"단합해 민생 전념\"…김민석·정청래 불참에 회동 불발",
      "press": "nocutnews.co.kr",
@@ -66,12 +72,38 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-26T13:51:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005447154?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "북한 러 군사지원 중단",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T13:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "우크라 정보당국 \"북한, 러 군사 지원 일시 중단\" 주장",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T14:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406179?sid=104"
     },
     {
-     "title": "‘석·청’ 빠진 與중진 만찬…鄭 “‘악수해’ 한다고 해결될 문제냐”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-26T13:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887731?sid=100"
+     "title": "우크라 정보당국 \"김정은, 대러 군사 지원 일시 중단 지시…남북 긴장 ...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-26T14:32:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261126001362"
+    },
+    {
+     "title": "우크라이나 정보당국 “북한, 러 군사지원 일시 중단” 주장",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T14:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302250?sid=104"
     }
    ]
   },
@@ -80,13 +112,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T13:03:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-26T13:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "진공청소기 안에 X을 빨아들여?…서장훈, '미성숙 부부' 아내 충격 청소...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-26T14:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005645901"
+    },
     {
      "title": "'이숙캠' 미성숙 부부, 밀린 월세만 300만원…내로남불 경제관념·외도...",
      "press": "stoo.com",
@@ -98,44 +136,6 @@
      "press": "slist.kr",
      "publishedAt": "2026-11-26T14:18:00.000Z",
      "link": "https://www.slist.kr/news/articleView.html?idxno=785150"
-    },
-    {
-     "title": "'미성숙 부부' 아내, 외도에 동거까지 해놓고 남편 탓…서장훈 \"가지가...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-26T14:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084585"
-    }
-   ]
-  },
-  {
-   "keyword": "경찰, 세무사 수석 구속영장 신청",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T13:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경찰, 'AI 부정행위' 자수한 세무사 수석 구속영장 신청",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-26T14:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522706?sid=102"
-    },
-    {
-     "title": "'AI 커닝' 세무사 수석합격자 구속 기로…\"증거인멸 우려\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T14:10:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785153"
-    },
-    {
-     "title": "세무사 수석 구속영장 신청…\"사회적 파급력 중대\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T13:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930320?sid=102"
     }
    ]
   },
@@ -144,10 +144,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T13:00:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-26T13:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -170,111 +170,44 @@
      "link": "https://www.etoday.co.kr/news/view/2653671"
     }
    ]
-  },
-  {
-   "keyword": "무쇠소녀단 3",
-   "sources": [
-    "nate",
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T13:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'무쇠소녀단' 연우 \"두달만에 10kg 감량, 하루에 밥 2숟갈 먹기도...극단...",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-26T14:10:00.000Z",
-     "link": "http://www.joynews24.com/view/2031039"
-    },
-    {
-     "title": "'무쇠소녀단3' 설인아, 체력 한계 맞아도 포기 않는 연우에 기특",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T13:26:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785147"
-    },
-    {
-     "title": "‘무쇠소녀단3’ 연우, 두 달 만에 10kg 뺐다가 전신 두드러기 “많이 울...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T13:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005769752"
-    }
-   ]
-  },
-  {
-   "keyword": "연우 10kg 감량",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T13:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'무쇠소녀단' 연우 \"두달만에 10kg 감량, 하루에 밥 2숟갈 먹기도...극단...",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-26T14:10:00.000Z",
-     "link": "http://www.joynews24.com/view/2031039"
-    },
-    {
-     "title": "연우 \"두 달만 10kg 감량, 극단적으로 굶어…온몸 두드러기에 눈물\" [무...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T14:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128502"
-    },
-    {
-     "title": "‘무쇠소녀단3’ 연우, 두 달 만에 10kg 뺐다가 전신 두드러기 “많이 울...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T13:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005769752"
-    }
-   ]
-  },
-  {
-   "keyword": "영국 예비군 소집",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T13:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "영국, 냉전 종식 후 첫 예비군 '10만 명' 소집 대비",
-     "press": "cwn.kr",
-     "publishedAt": "2026-11-26T13:46:00.000Z",
-     "link": "https://www.cwn.kr/news/articleView.html?idxno=62759"
-    },
-    {
-     "title": "전역했는데 다시 군대 가라고?…예비군 10만명에 “소집 대비하라” 서...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-26T13:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686676?sid=104"
-    },
-    {
-     "title": "\"정보 갱신하라\"..영국군, 냉전 후 처음 예비군에 소집대비 서한",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T13:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416290?sid=104"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1765,
-  "matched": 857,
-  "avgLeadMin": 524,
+  "flagged": 1766,
+  "matched": 862,
+  "avgLeadMin": 521,
   "recent": [
+   {
+    "keyword": "삼성화재 선두",
+    "hitKeyword": "삼성화재 1114일 만 선두",
+    "hitAt": "2026-11-26T23:30:00+09:00",
+    "leadMin": 121
+   },
+   {
+    "keyword": "무쇠소녀단 3",
+    "hitKeyword": "무쇠소녀단3 쇼트트랙",
+    "hitAt": "2026-11-26T23:30:00+09:00",
+    "leadMin": 121
+   },
+   {
+    "keyword": "삼성화재 선두 도약",
+    "hitKeyword": "삼성화재 1114일 만 선두",
+    "hitAt": "2026-11-26T23:30:00+09:00",
+    "leadMin": 91
+   },
+   {
+    "keyword": "삼성화재 1114일 만에 선두",
+    "hitKeyword": "삼성화재 1114일 만 선두",
+    "hitAt": "2026-11-26T23:30:00+09:00",
+    "leadMin": 81
+   },
+   {
+    "keyword": "경찰, 세무사 수석 구속영장 신청",
+    "hitKeyword": "AI 커닝 세무사 수석 영장",
+    "hitAt": "2026-11-26T23:30:00+09:00",
+    "leadMin": 1
+   },
    {
     "keyword": "연우 전신 두드러기",
     "hitKeyword": "연우 전신 두드러기",
@@ -304,36 +237,6 @@
     "hitKeyword": "삼전 닉스 외국인 매도",
     "hitAt": "2026-11-26T22:00:00+09:00",
     "leadMin": 293
-   },
-   {
-    "keyword": "전광훈 구속영장 신청",
-    "hitKeyword": "세무냥이 구속영장 신청",
-    "hitAt": "2026-11-26T21:00:00+09:00",
-    "leadMin": 3474
-   },
-   {
-    "keyword": "전광훈 구속영장 청구",
-    "hitKeyword": "세무냥이 구속영장 신청",
-    "hitAt": "2026-11-26T21:00:00+09:00",
-    "leadMin": 1449
-   },
-   {
-    "keyword": "전철 지연",
-    "hitKeyword": "퇴근길 광역전철 지연",
-    "hitAt": "2026-11-26T21:00:00+09:00",
-    "leadMin": 132
-   },
-   {
-    "keyword": "경찰, 세무사 구속영장 신청",
-    "hitKeyword": "세무냥이 구속영장 신청",
-    "hitAt": "2026-11-26T21:00:00+09:00",
-    "leadMin": 72
-   },
-   {
-    "keyword": "세무사 구속영장 신청",
-    "hitKeyword": "세무냥이 구속영장 신청",
-    "hitAt": "2026-11-26T21:00:00+09:00",
-    "leadMin": 52
    }
   ]
  }
