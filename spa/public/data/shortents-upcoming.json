@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T10:07:46.668Z",
+ "builtAt": "2026-11-26T10:17:49.755Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,23 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "코레일 전철 지연",
+   "keyword": "코레일 전철 235대 지연",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 38,
+   "articles90": 32,
    "recent20": 5,
-   "press": 35,
-   "firstArticleAt": "2026-11-26T08:39:00.000Z",
+   "press": 30,
+   "firstArticleAt": "2026-11-26T09:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "철도노조 준법투쟁 첫날 퇴근길 지연...주말 나들이객·수험생 이동 '우...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T10:08:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785131"
+    },
     {
      "title": "철도노조 준법투쟁 첫날 퇴근길 지연 속출…\"30분 기다린 열차 이미 만...",
      "press": "yna.co.kr",
@@ -33,6 +39,32 @@
      "press": "ajunews.com",
      "publishedAt": "2026-11-26T10:00:00.000Z",
      "link": "https://www.ajunews.com/view/20261126184900829"
+    }
+   ]
+  },
+  {
+   "keyword": "철도노조 준법투쟁",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 36,
+   "recent20": 4,
+   "press": 26,
+   "firstArticleAt": "2026-11-26T09:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "철도노조 준법투쟁 첫날 퇴근길 지연...주말 나들이객·수험생 이동 '우...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T10:08:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785131"
+    },
+    {
+     "title": "철도노조 준법투쟁 첫날 퇴근길 지연 속출…\"30분 기다린 열차 이미 만...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T10:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466628?sid=102"
     },
     {
      "title": "철도노조 준법투쟁 돌입…수도권 광역전철 수백대 지연",
@@ -47,10 +79,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 30,
-   "recent20": 2,
-   "press": 30,
-   "firstArticleAt": "2026-11-26T08:38:00.000Z",
+   "articles90": 20,
+   "recent20": 1,
+   "press": 20,
+   "firstArticleAt": "2026-11-26T08:48:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -75,18 +107,56 @@
    ]
   },
   {
+   "keyword": "미국 과잉생산 관세 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 23,
+   "recent20": 3,
+   "press": 19,
+   "firstArticleAt": "2026-11-26T08:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미 ‘과잉생산 관세’ 한국 15%…‘최대 25%’ 으름장",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T10:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301954?sid=104"
+    },
+    {
+     "title": "'이재명' 주어로 \"반도체 기업을 압박\"…\"미국의 내로남불\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-26T10:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522662?sid=101"
+    },
+    {
+     "title": "['클릭' 증시] 약발 떨어진 美 관세...아시아 증시 '무덤덤'",
+     "press": "00news.co.kr",
+     "publishedAt": "2026-11-26T09:58:00.000Z",
+     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108394"
+    }
+   ]
+  },
+  {
    "keyword": "에이피알 닥터멜락신 인수",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 28,
-   "recent20": 3,
-   "press": 28,
-   "firstArticleAt": "2026-11-26T08:40:00.000Z",
+   "articles90": 19,
+   "recent20": 2,
+   "press": 19,
+   "firstArticleAt": "2026-11-26T08:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "에이피알, 3900억원에 스킨케어 브랜드 ‘닥터멜락신’ 인수",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-26T10:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011951?sid=101"
+    },
     {
      "title": "에이피알, '브랜드501' 주식 700억원 규모 취득…\"경영권 확보\"",
      "press": "slist.kr",
@@ -98,76 +168,38 @@
      "press": "mydaily.co.kr",
      "publishedAt": "2026-11-26T09:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/117/0004128460?sid=103"
-    },
-    {
-     "title": "에이피알, 닥터멜락신 인수…글로벌 영토 확장",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-26T09:50:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122799"
     }
    ]
   },
   {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 24,
-   "recent20": 3,
-   "press": 20,
-   "firstArticleAt": "2026-11-26T08:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "['클릭' 증시] 약발 떨어진 美 관세...아시아 증시 '무덤덤'",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-26T09:58:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108394"
-    },
-    {
-     "title": "호남반도체·국민성장펀드까지…美 301조 관세 칼끝, 韓 산업정책 향했...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T09:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313103?sid=101"
-    },
-    {
-     "title": "[베트남 증시] 美 '최고 35% 관세' 직격탄에 3.4% 급락…VN지수 1,630선 붕...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-26T09:48:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261126001318"
-    }
-   ]
-  },
-  {
-   "keyword": "최태원 재산분할금 지급 제안",
+   "keyword": "통합 LCC 본사 부산 유치",
    "sources": [
     "daum"
    ],
-   "articles90": 18,
+   "articles90": 19,
    "recent20": 2,
-   "press": 18,
-   "firstArticleAt": "2026-11-26T08:39:00.000Z",
-   "exclusive": false,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T08:50:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "최태원 “9440억원, 화해 확정 7일 내 지급” 제안",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-26T09:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703623?sid=102"
+     "title": "함께 날아볼까...\"저가항공(LCC)사\"는 부산 강서구로",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-26T10:10:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887790"
     },
     {
-     "title": "최태원 \"7일 내 9,440억 지급, 5% 지연이자 부담\" 제안",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T09:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438622?sid=102"
+     "title": "[집중취재] 통합 LCC 본사 유치…‘글로벌 관문 공항’ 발판",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T10:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301947?sid=101"
     },
     {
-     "title": "최태원, 노소영에 '일주일 내 9440억·지연이자 5% 지급' 제안",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-26T09:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160019?sid=101"
+     "title": "통합 LCC 본사 맞는 부산…\"글로벌 항공 중심지로\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-26T09:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610542?sid=102"
     }
    ]
   },
@@ -176,10 +208,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-26T08:38:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-26T08:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -208,10 +240,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T08:47:00.000Z",
+   "articles90": 13,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T08:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -240,10 +272,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T08:41:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-26T08:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -298,43 +330,11 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009313085?sid=101"
     }
    ]
-  },
-  {
-   "keyword": "생방송 투데이",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-26T08:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'생방송 투데이' 수육·소 힘줄 볶음 맛집",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-26T09:02:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611260223"
-    },
-    {
-     "title": "'생방송투데이' 관심집중 줌인, 아빠들의 육아 나들이와 피클볼",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-26T08:44:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566970"
-    },
-    {
-     "title": "'생방송투데이' 어쩌다 한국, 퀴브라가 선보이는 튀르키예의 달콤한 맛",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-26T08:42:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566974"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1707,
+  "flagged": 1710,
   "matched": 835,
   "avgLeadMin": 521,
   "recent": [
