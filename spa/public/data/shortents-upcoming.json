@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T01:34:51.117Z",
+ "builtAt": "2026-11-26T01:44:53.858Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,102 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 10,
  "candidates": [
-  {
-   "keyword": "현대차그룹, 탑기어 6년 연속 수상",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 35,
-   "recent20": 5,
-   "press": 35,
-   "firstArticleAt": "2026-11-26T00:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "현대차그룹, 탑기어 어워즈 6년 연속 수상…제네시스·아이오닉 3 선정",
-     "press": "cnbizm.com",
-     "publishedAt": "2026-11-26T01:32:00.000Z",
-     "link": "https://www.cnbizm.com/news/articleView.html?idxno=322793"
-    },
-    {
-     "title": "현대차그룹, 英 '탑기어 어워즈' 6년 연속 수상",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-26T01:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490132?sid=103"
-    },
-    {
-     "title": "제네시스 '올해의 제조사'·아이오닉 3 '올해의 소형차'…현대차그룹, ...",
-     "press": "nextdaily.co.kr",
-     "publishedAt": "2026-11-26T01:22:00.000Z",
-     "link": "https://www.nextdaily.co.kr/news/articleView.html?idxno=255345"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 1% 상승 출발",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 36,
-   "recent20": 0,
-   "press": 30,
-   "firstArticleAt": "2026-11-26T00:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[개장] 코스피, 반도체주 반등 4800선 회복… 닉스 5% 급등",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-26T01:08:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001870"
-    },
-    {
-     "title": "코스피, 美 기술주 약세에도 외국인 매수세에 1%대 반등…4700선 회복",
-     "press": "greened.kr",
-     "publishedAt": "2026-11-26T01:02:00.000Z",
-     "link": "https://www.greened.kr/news/articleView.html?idxno=355603"
-    },
-    {
-     "title": "한은 금리결정 직전 코스피 1%대 상승…코스닥 3%대 강세",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-26T00:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214014?sid=101"
-    }
-   ]
-  },
   {
    "keyword": "학교비정규직 총파업",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 29,
+   "articles90": 30,
    "recent20": 4,
-   "press": 25,
-   "firstArticleAt": "2026-11-26T00:06:00.000Z",
+   "press": 27,
+   "firstArticleAt": "2026-11-26T00:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "학교비정규직 4만명 내일 총파업…교육당국, 급식·돌봄 비상대응",
-     "press": "tbs.seoul.kr",
-     "publishedAt": "2026-11-26T01:27:00.000Z",
-     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=6&idx_800=3538855&seq_800=20531756"
+     "title": "27일 학교비정규직 총파업에 교육당국, 비상 대응체제 가동 예고",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-26T01:40:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088089"
     },
     {
-     "title": "[세종교육소식] 비정규직 총파업 대응…급식·돌봄 공백 최소화 외",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-26T01:24:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1429255"
+     "title": "내일 급식·돌봄 등 학교 비정규직 노동자 총파업",
+     "press": "jtv.co.kr",
+     "publishedAt": "2026-11-26T01:36:00.000Z",
+     "link": "https://www.jtv.co.kr/news/article.php?id=72332"
     },
     {
-     "title": "27일 교육공무직 총파업…급식·돌봄 어떻게 운영되나",
-     "press": "mediajeju.com",
-     "publishedAt": "2026-11-26T01:20:00.000Z",
-     "link": "https://www.mediajeju.com/news/articleView.html?idxno=367547"
+     "title": "\"아이 도시락 준비해야 하나\"…학교비정규직 4만명 내일 '총파업'",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-26T01:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979945?sid=102"
     }
    ]
   },
@@ -112,30 +47,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 47,
-   "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-26T00:14:00.000Z",
+   "articles90": 50,
+   "recent20": 6,
+   "press": 24,
+   "firstArticleAt": "2026-11-26T00:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "철도노조, 내달 4일까지 안전운행 투쟁…출퇴근길·주말 열차 지연 우려",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-26T01:26:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731115"
+     "title": "철도노조 준법투쟁…파업 일정",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-26T01:42:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611260184"
     },
     {
-     "title": "철도노조 준법투쟁 첫날 울산역…부산행 일부 열차 지연",
+     "title": "[현장] 준법투쟁 첫날 수도권 전철 25분 등 지연 속출…\"돌아올 길 걱정...",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T01:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016464585?sid=102"
+     "publishedAt": "2026-11-26T01:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016464665?sid=102"
     },
     {
-     "title": "철도노조, 26일 오전 9시부터 준법투쟁…KTX 등 열차 지연 우려",
-     "press": "delighti.co.kr",
-     "publishedAt": "2026-11-26T01:22:00.000Z",
-     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125651"
+     "title": "[르포] 철도노조 준법투쟁 첫날 대전역…지연 대란 없이 차분",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-26T01:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193613?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 1% 상승 출발",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 24,
+   "recent20": 2,
+   "press": 23,
+   "firstArticleAt": "2026-11-26T00:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코스피, 4780선 반등…반도체주 강세",
+     "press": "kfenews.co.kr",
+     "publishedAt": "2026-11-26T01:42:00.000Z",
+     "link": "https://www.kfenews.co.kr/news/articleView.html?idxno=668817"
+    },
+    {
+     "title": "[오늘의 증시] 코스피 4750선 회복·코스닥 1.95% 상승…외국인·기관 매...",
+     "press": "job-post.co.kr",
+     "publishedAt": "2026-11-26T01:40:00.000Z",
+     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=241059"
+    },
+    {
+     "title": "[개장] 코스피, 반도체주 반등 4800선 회복… 닉스 5% 급등",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-26T01:08:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001870"
+    }
+   ]
+  },
+  {
+   "keyword": "LG, 김민식 영입!",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 22,
+   "recent20": 3,
+   "press": 22,
+   "firstArticleAt": "2026-11-26T01:04:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LG, '통합우승 2번' 베테랑 포수 김민식 영입",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T01:30:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/052/0002438269"
+    },
+    {
+     "title": "LG, '두 차례 통합우승' 김민식 품었다⋯포수진 깊이 더해",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-26T01:28:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653289"
+    },
+    {
+     "title": "LG, SSG서 방출된 베테랑 포수 김민식 영입…안방 강화",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T01:26:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009311223"
     }
    ]
   },
@@ -145,94 +144,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 32,
-   "recent20": 4,
-   "press": 18,
+   "articles90": 34,
+   "recent20": 5,
+   "press": 20,
    "firstArticleAt": "2026-11-26T00:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국힘 지도부 정면충돌…장동혁 \"탈당이나 창당하라\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-26T01:42:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023701"
+    },
+    {
+     "title": "조작 징계 의혹 발언듣는 장동혁",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T01:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009311283?sid=100"
+    },
     {
      "title": "장동혁, '조희대 탄핵' 5당 연대 제안 민주당에 \"조폭 범죄 단체\"",
      "press": "mediapen.com",
      "publishedAt": "2026-11-26T01:34:00.000Z",
      "link": "https://www.mediapen.com/news/view/1140199"
-    },
-    {
-     "title": "장동혁, ‘조작 징계’ 사과 요구한 우재준에 “탈당·창당이라는 좋은...",
-     "press": "donga.com",
-     "publishedAt": "2026-11-26T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765354?sid=100"
-    },
-    {
-     "title": "국힘, ‘조작 징계’ 두고 설전…우재준 사과 요구에 張 대표 “탈당이...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-26T01:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686370?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "한준호 청문회 준비",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 25,
-   "recent20": 20,
-   "press": 12,
-   "firstArticleAt": "2026-11-26T00:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "승강기 탄 한준호 행안부 장관 후보장",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T01:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009311243?sid=102"
-    },
-    {
-     "title": "한준호 행안부 장관 후보자 출근길",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T01:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009311244?sid=102"
-    },
-    {
-     "title": "[포토] 소감 밝히는 한준호 행안부 장관 후보자",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-26T01:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848134?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "오정세 청룡 축하무대",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T00:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최성곤 가발 쓰고 ‘니가 좋아’..오정세, 청룡 뒤집은 파급력 “40주 만...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-26T01:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005645501"
-    },
-    {
-     "title": "1600만 '왕사남' 아니다…청룡영화상 '최우수작품상' 탄 500억 대작 한국...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-26T01:18:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1177873"
-    },
-    {
-     "title": "청룡영화상에 '와일드 씽' 최성곤으로 등장한 오정세... \"니가좋아♥\" 직...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-26T01:16:00.000Z",
-     "link": "https://www.insight.co.kr/news/583620"
     }
    ]
   },
@@ -245,10 +180,16 @@
    "articles90": 8,
    "recent20": 3,
    "press": 7,
-   "firstArticleAt": "2026-11-26T00:08:00.000Z",
+   "firstArticleAt": "2026-11-26T00:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "박민영·육성재 '나인 투 식스', 시청률 3.6%로 순조로운 첫 출발",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-26T01:38:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435980"
+    },
     {
      "title": "6회 연속 1%대 시청률에 머물렀다…안효섭, 종영 앞두고 마지막 복수 ('...",
      "press": "tenasia.co.kr",
@@ -260,19 +201,13 @@
      "press": "isplus.com",
      "publishedAt": "2026-11-26T01:29:00.000Z",
      "link": "https://m.entertain.naver.com/article/241/0003543678"
-    },
-    {
-     "title": "'나인 투 식스' 육성재, 위기의 박민영 지켰다…3.6% 출발 [N시청률]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T01:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009311212"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1498,
+  "flagged": 1499,
   "matched": 740,
   "avgLeadMin": 497,
   "recent": [
