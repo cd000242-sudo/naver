@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T13:18:55.762Z",
+ "builtAt": "2026-11-26T13:28:59.767Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "CJ올리브영 개인정보 유출",
+   "keyword": "CJ올리브영 고객 개인정보 유출",
    "sources": [
-    "nate",
-    "daum"
+    "nate"
    ],
    "articles90": 25,
-   "recent20": 6,
+   "recent20": 3,
    "press": 25,
-   "firstArticleAt": "2026-11-26T11:57:00.000Z",
+   "firstArticleAt": "2026-11-26T12:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "올리브영 개인정보 유출, 피해 규모는?",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-26T13:20:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287372"
+    },
+    {
+     "title": "CJ올리브영, 업무시스템 해킹…임직원·고객 790명 개인정보 유출",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-26T13:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653670?sid=101"
+    },
     {
      "title": "CJ올리브영, 임직원·고객 등 790명 개인정보 유출…“침입 경로 차단”",
      "press": "ddaily.co.kr",
      "publishedAt": "2026-11-26T13:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/138/0002250093?sid=101"
-    },
-    {
-     "title": "CJ올리브영, 업무시스템 해킹으로 임직원·고객 개인정보 유출",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T13:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930315?sid=100"
-    },
-    {
-     "title": "[속보] CJ올리브영 업무시스템 해킹…임직원·고객 등 790명 개인정보 유...",
-     "press": "kado.net",
-     "publishedAt": "2026-11-26T13:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213707?sid=102"
     }
    ]
   },
@@ -48,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T11:53:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-26T12:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,14 +75,46 @@
    ]
   },
   {
+   "keyword": "중진 만찬 참석 의원들",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T12:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "與중진들, 만찬회동서 \"단결·민생전념\"…김민석·정청래는 불참",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T13:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466707?sid=100"
+    },
+    {
+     "title": "최민희 징계 심의 앞두고 與 중진 모임... 김민석·정청래 불참",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-26T13:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011963?sid=100"
+    },
+    {
+     "title": "민주당 중진들 “우원식·박지원 말도 안 듣는데…그래도 가만 있을 순...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T13:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302188?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "조작기소 특검 후보",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T11:53:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T12:01:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -108,77 +139,12 @@
    ]
   },
   {
-   "keyword": "연우 10kg 감량",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T12:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘무쇠소녀단3’ 연우, 두 달 만에 10kg 뺐다가 전신 두드러기 “많이 울...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T13:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005769752"
-    },
-    {
-     "title": "연우, 두 달 만에 10kg 감량 \"극단적으로 굶다가 전신 두드러기 생겨\"",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-26T12:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004470139"
-    },
-    {
-     "title": "“하루 밥 2숟갈” 연우, 10㎏ 감량 극단적 다이어트 후 건강 적신호‥...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-26T12:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191694"
-    }
-   ]
-  },
-  {
-   "keyword": "무쇠소녀단 3",
-   "sources": [
-    "nate",
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T11:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘무쇠소녀단3’ 연우, 두 달 만에 10kg 뺐다가 전신 두드러기 “많이 울...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T13:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005769752"
-    },
-    {
-     "title": "'무쇠소녀단3' 금새록, 춤추듯 독특한 스케이팅…설인아는 선수급 폼",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T12:56:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785144"
-    },
-    {
-     "title": "'무쇠소녀단3' 곽윤기, 코치 등장 \"제자는 처음\"…연우→설인아 쇼트트...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-26T12:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054374"
-    }
-   ]
-  },
-  {
    "keyword": "영국 예비군 소집",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-26T12:26:00.000Z",
    "exclusive": false,
@@ -205,49 +171,23 @@
    ]
   },
   {
-   "keyword": "삼성화재 1114일 만에 선두",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T11:54:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "프로배구 삼성화재, 우리카드 꺾고 1114일 만에 선두 도약(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T12:19:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/421/0009313163"
-    },
-    {
-     "title": "남자배구 삼성화재, 우리카드 완파하고 1114일 만에 단독 선두 도약",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-26T12:14:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/469/0000968040"
-    },
-    {
-     "title": "삼성화재, 1114일 만에 선두…현대건설 4위 도약·SOOP 7연패(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T12:12:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/003/0014348325"
-    }
-   ]
-  },
-  {
    "keyword": "설인아",
    "sources": [
     "google"
    ],
    "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T11:51:00.000Z",
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T12:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'무쇠소녀단3' 설인아, 체력 한계 맞아도 포기 않는 연우에 기특",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T13:26:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785147"
+    },
     {
      "title": "'무쇠소녀단3' 금새록, 춤추듯 독특한 스케이팅…설인아는 선수급 폼",
      "press": "slist.kr",
@@ -259,49 +199,11 @@
      "press": "tvdaily.co.kr",
      "publishedAt": "2026-11-26T12:56:00.000Z",
      "link": "https://m.entertain.naver.com/article/440/0000054374"
-    },
-    {
-     "title": "한지현 382계단도 거뜬, 금새록X설인아도 놀란 체력 “왜 이렇게 멀쩡해...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-26T12:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191687"
     }
    ]
   },
   {
-   "keyword": "미국 쿠팡 과징금 비판",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T11:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美, 쿠팡 과징금에“한국 공정위 공격이 한미동맹 위협”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-26T12:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002835855?sid=101"
-    },
-    {
-     "title": "쿠팡 과징금·온플법까지…美, 韓 디지털 규제 ‘301조’ 압박",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T12:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416282?sid=101"
-    },
-    {
-     "title": "미 백악관·국무부, 쿠팡 과징금 비판…한국의 미국 기업 차별 주장",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-26T11:52:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3764488"
-    }
-   ]
-  },
-  {
-   "keyword": "정대세, 셋째 임신 소식",
+   "keyword": "정대세 명서현 셋째 임신",
    "sources": [
     "nate"
    ],
@@ -335,7 +237,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1751,
+  "flagged": 1752,
   "matched": 853,
   "avgLeadMin": 521,
   "recent": [
