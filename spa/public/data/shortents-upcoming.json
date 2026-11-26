@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T15:19:36.071Z",
+ "builtAt": "2026-11-26T15:29:39.675Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,51 +11,24 @@
  "measured": 29,
  "candidates": [
   {
-   "keyword": "CJ올리브영 개인정보 유출",
-   "sources": [
-    "nate",
-    "daum"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T13:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "CJ올리브영, 업무시스템 해킹에 임직원·고객 개인정보 유출",
-     "press": "whitepaper.co.kr",
-     "publishedAt": "2026-11-26T15:14:00.000Z",
-     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=269236"
-    },
-    {
-     "title": "“이름·폰번호·생일까지 싹 털렸네”…CJ올리브영 개인정보 유출 비상",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-26T14:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002835868?sid=101"
-    },
-    {
-     "title": "올리브영마저…개인정보 유출 피해 '사과'",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-26T14:20:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=758664"
-    }
-   ]
-  },
-  {
    "keyword": "반도체 메모리",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 7,
-   "recent20": 5,
+   "recent20": 3,
    "press": 7,
-   "firstArticleAt": "2026-11-26T13:50:00.000Z",
+   "firstArticleAt": "2026-11-26T14:50:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "AI가 뒤집은 메모리 시장…머스크도 삼성 앞에서 \"물량 더 달라\"",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-26T15:24:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=436007"
+    },
     {
      "title": "삼성전자 美 반도체법인장에 윤하룡 부사장 내정",
      "press": "kjdaily.com",
@@ -67,12 +40,38 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-26T15:12:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287421"
+    }
+   ]
+  },
+  {
+   "keyword": "CJ올리브영 개인정보 유출",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-26T14:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "CJ올리브영, 개인정보 유출...핵심 금융·인증 정보 비유출?",
+     "press": "job-post.co.kr",
+     "publishedAt": "2026-11-26T15:26:00.000Z",
+     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=241357"
     },
     {
-     "title": "[심층분석] 성장률 상향 이끈 반도체·긴축 파고 맞은 내수주…증시 업...",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-26T15:02:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=95634"
+     "title": "CJ올리브영, 업무시스템 해킹에 임직원·고객 개인정보 유출",
+     "press": "whitepaper.co.kr",
+     "publishedAt": "2026-11-26T15:14:00.000Z",
+     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=269236"
+    },
+    {
+     "title": "“이름·폰번호·생일까지 싹 털렸네”…CJ올리브영 개인정보 유출 비상",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-26T14:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835868?sid=101"
     }
    ]
   },
@@ -82,7 +81,7 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-26T14:16:00.000Z",
    "exclusive": false,
@@ -109,14 +108,46 @@
    ]
   },
   {
-   "keyword": "세무사 수석 구속 신청",
+   "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 3,
    "press": 5,
-   "firstArticleAt": "2026-11-26T13:52:00.000Z",
+   "firstArticleAt": "2026-11-26T14:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[사설] 美, 반도체 콕 집어 \"구조적 과잉생산\"…경계 늦추지 말아야",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-26T15:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358853?sid=110"
+    },
+    {
+     "title": "관세 집착 트럼프…15% 방어했지만 25% 여지",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T15:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406185?sid=104"
+    },
+    {
+     "title": "[사설] 주력산업 육성했다고 관세 인상 으름장 美... 치밀한 대비를",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-26T15:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968049?sid=110"
+    }
+   ]
+  },
+  {
+   "keyword": "세무사 수석 구속 신청",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T14:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,109 +170,13 @@
      "link": "https://www.slist.kr/news/articleView.html?idxno=785153"
     }
    ]
-  },
-  {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T14:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "관세 집착 트럼프…15% 방어했지만 25% 여지",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-26T15:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406185?sid=104"
-    },
-    {
-     "title": "[사설] 주력산업 육성했다고 관세 인상 으름장 美... 치밀한 대비를",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-26T15:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968049?sid=110"
-    },
-    {
-     "title": "[사설] 美, 관세 최고 25% 압박… 통상환경 재점검을",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-26T15:02:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261126010010475"
-    }
-   ]
-  },
-  {
-   "keyword": "연우 10kg 감량",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T14:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "연우, 어쩐지 급격하게 말랐더라…\"굶어서 10kg 감량, 전신 두드러기에...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-26T15:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084592"
-    },
-    {
-     "title": "연우, 하루 밥 두 숟갈 먹고 10kg 감량…“이렇게 살면 안 되겠다”",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-26T14:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001307072"
-    },
-    {
-     "title": "'무쇠소녀단' 연우 \"두달만에 10kg 감량, 하루에 밥 2숟갈 먹기도...극단...",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-26T14:10:00.000Z",
-     "link": "http://www.joynews24.com/view/2031039"
-    }
-   ]
-  },
-  {
-   "keyword": "관세 25% 약속",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T15:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "관세 집착 트럼프…15% 방어했지만 25% 여지",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-26T15:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406185?sid=104"
-    },
-    {
-     "title": "[사설] 주력산업 육성했다고 관세 인상 으름장 美... 치밀한 대비를",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-26T15:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968049?sid=110"
-    },
-    {
-     "title": "[사설] 美, 관세 최고 25% 압박… 통상환경 재점검을",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-26T15:02:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261126010010475"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1762,
-  "matched": 863,
-  "avgLeadMin": 518,
+  "flagged": 1760,
+  "matched": 862,
+  "avgLeadMin": 512,
   "recent": [
    {
     "keyword": "젠슨 황 스캔들 의혹",
