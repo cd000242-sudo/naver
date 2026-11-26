@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T19:20:53.437Z",
+ "builtAt": "2026-11-26T19:30:56.916Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 4,
-   "press": 6,
+   "articles90": 8,
+   "recent20": 1,
+   "press": 7,
    "firstArticleAt": "2026-11-26T18:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 신규 관세 시행 땐 평균 관세율 13.9%",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-26T19:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848515?sid=104"
+    },
     {
      "title": "\"미국 '과잉 생산' 관세에 중국 반발...무역 휴전 다시 시험대\"",
      "press": "ytn.co.kr",
@@ -33,12 +39,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T19:07:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016466743?sid=104"
-    },
-    {
-     "title": "미 새 관세 시행땐 평균관세율 13.9%...상호관세 무효화 전으로",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T19:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438723?sid=104"
     }
    ]
   },
