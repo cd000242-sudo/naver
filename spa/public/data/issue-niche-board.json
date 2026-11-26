@@ -1,21 +1,120 @@
 {
-  "publishedAt": "2026-11-25T21:44:31.927Z",
+  "publishedAt": "2026-11-26T18:50:10.605Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 17,
     "candidates": 240,
-    "niche": 2,
-    "preemption": 6,
+    "niche": 3,
+    "preemption": 19,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-11-26",
+    "day": "2026-11-27",
     "keywords": [
+      "김가영 기자",
+      "인핸스 공홈",
       "오픈ai 김정원"
     ]
   },
   "rows": [
+    {
+      "keyword": "인핸스 공홈",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "\"이 기능 하나만으로도 돈값 합니다\" 테슬라 인핸스 블프 세일 + 할인코드(SHIVATESLA) 총 28% 득템 찬스!",
+          "테슬라 인핸스 섹시버튼 홀더(Feat. 섹시 커맨드 자가 설치)",
+          "S3XY버튼, 섹시노브 직구 인핸스 2026 블프세일 시작~ 추가할인 코드 공유!",
+          "테슬라Y 주니퍼 추천 아이템",
+          "[탈모샴푸] 머리 빠지는 느낌에 고른 바이브랩 4주 솔루션",
+          "테슬라 S3XY노브, S3XY버튼 공홈 해외직구 접수금액, 관부가세, 배송기간 까지 상세하게 공유합니다.",
+          "[SOLD OUT] OAKLEY Enhance Insulation Jacket / 오클리 인핸스 인슐레이션 자켓 / 오클리 경량 패딩 / 오클리 빈티지샵",
+          "블루믹스인핸스뷰 유리세정제 세차용품",
+          "☣️TKC 테슬라 카페 추천 게시글☣️ (2026.08.18 화) feat. 하단 그릴망, 필요한 이유! 4년차, 필터 교체! YL, 잡소리 해결!",
+          "차홍 컬러인핸스샴푸 쓰기 시이작!"
+        ],
+        "measuredAt": "2026-11-26T18:49:40.392Z"
+      },
+      "documentCount": 55,
+      "documentCountMeasured": true,
+      "searchVolume": 380,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.8571427871020221,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 380",
+        "문서수 55",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 380 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.9배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "오픈ai 김정원",
       "issue": "오픈AI",
@@ -47,7 +146,7 @@
         ],
         "measuredAt": "2026-11-25T19:05:18.735Z"
       },
-      "documentCount": 129,
+      "documentCount": 130,
       "documentCountMeasured": true,
       "searchVolume": 370,
       "searchVolumeLt10": false,
@@ -60,7 +159,7 @@
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 370",
-        "문서수 129",
+        "문서수 130",
         "데이터랩 실측 수요",
         "블로그탭 상위 10 정면글 0건 — 자리 있음"
       ],
@@ -86,68 +185,129 @@
           "text": "정면으로 다룬 글 0건 (최근 0건)"
         }
       ],
-      "whySearch": {
-        "text": "오픈AI 상장 추진이 앤트로픽에도 부담이 되고 있다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
+      "whySearch": null,
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "오픈ai 김정원 프로필과 경력, 어떤 인물인지 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
         },
         "home": {
-          "text": "오픈ai 김정원 프로필 찾다가 경력에서 눈이 멈췄어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
         }
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": {
-        "series": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          69,
-          100,
-          79,
-          50
-        ],
-        "label": "🚀 떡상",
-        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음"
-      },
+      "trend": null,
       "kinCount": 0,
-      "kinTop": null,
+      "kinTop": [],
       "monetize": null,
-      "measuredAt": "2026-11-25T21:38:18.047Z",
+      "measuredAt": "2026-11-26T18:48:53.132Z",
       "recommendationStatus": "recommend",
-      "exclusionReason": null
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "인핸스 코리아",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "한국 비즈니스 브리핑 2026년 11월 13일: 트라이에브리싱 2,024억·넥스아이 IPO 하락·네이버 AI팩토리 2.25조 외",
+          "[DailyRecipe] 실험실 나온 기술…7대 SEED 기업이 내민 56억짜리 청사진 - 2026.11.13. , 스타트업레시피",
+          "알라스틴 한국 공식 런칭 파티 참석 한국 공식 런칭 제품 라인업 소개",
+          "(한국투자공사) 한국투자공사 내부 인공지능 플랫폼 고도화 사업을 「퀀팃」에서 투찰금액 2,430,000,000원에 수주함",
+          "국내는 해외 진출 러시, 해외는 AI 인프라 병목과 우주에 3주째 메가머니",
+          "2026년 3분기 한국 스타트업 투자 10조 돌파 — 자리컴퍼니·무신사·올거나이즈 핵심 정리",
+          "글로벌 뷰티 셀럽들이 열광하는 K스킨케어, ENHANSE CEO가 한국 제조를 택한 이유는?",
+          "한국 비즈니스 브리핑 2026년 9월 17일: KT 6조 AI 데이터센터·리벨리온 일본 공급·당근 MCP",
+          "보색샴푸 사용법, 탈색머리 노란기 잡는 횟수와 방치 시간 (보라·파랑 차이)",
+          "2026 알라스틴 한국 공식 런칭 행사｜스킨부스터, 필러 시술 후 멍, 붓기 관리를 위한 다톤의원의 알라스틴 인핸스 세럼 프로토콜"
+        ],
+        "measuredAt": "2026-11-26T18:49:25.263Z"
+      },
+      "documentCount": 641,
+      "documentCountMeasured": true,
+      "searchVolume": 1210,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.1184939615693963,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 1,210",
+        "문서수 641",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 1,210 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.1배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 16,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
     },
     {
       "keyword": "김가영 기자",
@@ -293,7 +453,6 @@
       ],
       "trend": {
         "series": [
-          26,
           52,
           96,
           65,
@@ -321,25 +480,1045 @@
           0,
           26,
           87,
-          100
-        ]
+          100,
+          22
+        ],
+        "measuredAt": "2026-11-26T18:50:11.387Z"
       },
       "kinCount": 11,
       "kinTop": [
         {
           "title": "김가영으로 삼행시",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=80702&docId=51386989&answerNo=6",
-          "views": 1632,
+          "views": 1634,
           "answers": 4
         }
       ],
       "monetize": null,
       "measuredAt": "2026-11-25T21:38:18.047Z",
       "recommendationStatus": "recommend",
-      "exclusionReason": null
+      "exclusionReason": null,
+      "carried": true,
+      "kinMode": "date-views-v2"
     }
   ],
   "observations": [
+    {
+      "keyword": "인핸스 통관수수료",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 1,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 1",
+        "선점 후보 — 경쟁 문서 1건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인핸스 연봉",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 37,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 37",
+        "선점 후보 — 경쟁 문서 37건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인핸스 블라인드",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 48,
+      "documentCountMeasured": true,
+      "searchVolume": 30,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 30",
+        "문서수 48",
+        "선점 후보 — 경쟁 문서 48건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": [
+        {
+          "title": "윈도우 블라인드 사용 애러좀 해결해주세요~",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10301&docId=66719061&answerNo=0",
+          "views": 11,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인핸스 이승현",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 108,
+      "documentCountMeasured": true,
+      "searchVolume": 40,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 40",
+        "문서수 108",
+        "선점 후보 — 경쟁 문서 108건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인핸스 커맨더 배송비",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 6,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 6",
+        "선점 후보 — 경쟁 문서 6건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인핸스 부가세",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 20,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 20",
+        "선점 후보 — 경쟁 문서 20건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "베식타시 대 하포엘",
+      "issue": "베식타시 대 하포엘",
+      "topic": "베식타시 대 하포엘",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 42,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 2,
+      "freshFrontalCount": 2,
+      "reasons": [
+        "문서수 42",
+        "선점 후보 — 경쟁 문서 42건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 2건 (최근 2건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인핸스 팔란티어",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 65,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 65",
+        "선점 후보 — 경쟁 문서 65건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인핸스 세금",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 97,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 97",
+        "선점 후보 — 경쟁 문서 97건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인핸스 매출 영업이익",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 102,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 102",
+        "선점 후보 — 경쟁 문서 102건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인핸스 관세",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 127,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 127",
+        "선점 후보 — 경쟁 문서 127건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인핸스 매출액",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 145,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 145",
+        "선점 후보 — 경쟁 문서 145건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "우크라이나 국결",
+      "issue": "우크라이나",
+      "topic": "우크라이나",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 128,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 128",
+        "선점 후보 — 경쟁 문서 128건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 19,
+      "kinTop": [
+        {
+          "title": "우크라이나 국제결혼시 키??",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110824&docId=460240397&answerNo=2",
+          "views": 510,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "머스크 로켓 갯수",
+      "issue": "머스크",
+      "topic": "머스크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 146,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 146",
+        "선점 후보 — 경쟁 문서 146건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인핸스 상장",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 184,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 184",
+        "선점 후보 — 경쟁 문서 184건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인핸스 배송비",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 177,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 177",
+        "선점 후보 — 경쟁 문서 177건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 6,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인핸스 주관사",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 161,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 161",
+        "선점 후보 — 경쟁 문서 161건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 21,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인핸스 제조국",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 215,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 215",
+        "선점 후보 — 경쟁 문서 215건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인핸스 연마",
+      "issue": "인핸스",
+      "topic": "인핸스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 273,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 273",
+        "선점 후보 — 경쟁 문서 273건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 16,
+      "kinTop": [
+        {
+          "title": "AD 페인트클렌저 인핸스 단종되었나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110301&docId=405205055&answerNo=1",
+          "views": 785,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-26T18:48:53.132Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "윤이나 쐐기 3점",
       "issue": "윤이나",
@@ -445,7 +1624,8 @@
       "monetize": null,
       "measuredAt": "2026-11-25T21:38:18.047Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "시루도 깃허브",
@@ -511,7 +1691,8 @@
       "monetize": null,
       "measuredAt": "2026-11-25T21:38:18.047Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "윤이나 인성 논란",
@@ -622,7 +1803,8 @@
       "monetize": null,
       "measuredAt": "2026-11-25T21:38:18.047Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "lgu+ 도어캠 비용",
@@ -695,7 +1877,8 @@
       "monetize": null,
       "measuredAt": "2026-11-25T21:38:18.047Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "윤이나 WTGL 순위",
@@ -778,7 +1961,8 @@
       "monetize": null,
       "measuredAt": "2026-11-25T21:38:18.047Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "윤이나 홀인원 아쉬움",
@@ -879,7 +2063,8 @@
       "monetize": null,
       "measuredAt": "2026-11-25T21:38:18.047Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "멤T-1.0 프로",
@@ -2098,321 +3283,148 @@
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "관세 15% 유지",
+      "issue": "인핸스",
       "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "미국이 한국 관세 15% 상한을 유지하되 25% 인상 여지를 남겼다",
-      "headlines": [
-        {
-          "title": "미, 한국 관세 15% 유지…25% 인상 여지 남겨",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-25T21:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001405886?sid=104"
-        },
-        {
-          "title": "美, 14개국에 과잉생산 관세…\"한국 15% 상한 유지\"(종합)",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-25T14:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014345596?sid=104"
-        },
-        {
-          "title": "美USTR, 14개 경제주체에 과잉생산 관세…\"韓 15% 상한 유지\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-25T13:47:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016463953?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "관세",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "미국 PCE 물가",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
+      "lane": "tech",
+      "issueStatus": "stable",
       "isHot": false,
-      "why": "미 10월 PCE 물가 3.8% 상승으로 12월 금리 인상 전망이 굳어졌다",
+      "why": null,
       "headlines": [
         {
-          "title": "미국 PCE 물가 3.8%↑...12월 금리 인상 전망 굳어져",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-11-25T16:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002438135?sid=104"
+          "title": "[테크스냅] 인핸스, 국방정보본부 'AI 민간자문기업' 위촉",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-26T01:39:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016464646?sid=100"
         },
         {
-          "title": "美 PCE 물가 들썩… 12월 금리 인상 전망 굳어져",
-          "press": "segye.com",
-          "publishedAt": "2026-11-25T15:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004178170?sid=104"
+          "title": "인핸스, 국방정보본부 AI 민간자문기업 위촉",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-11-26T05:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005446844?sid=101"
         },
         {
-          "title": "美 10월 PCE 물가 전년比 3.8%↑…예상치 부합",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-11-25T14:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001207350?sid=104"
+          "title": "인핸스, 국방정보본부 'AI 민간 자문 기업' 위촉",
+          "press": "etnews.com",
+          "publishedAt": "2026-11-26T07:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003490462?sid=105"
         }
       ],
       "concentrated": [
         {
-          "keyword": "미국",
+          "keyword": "인핸스 코리아",
+          "searchVolume": 1210,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인핸스 테슬라",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인핸스 공홈",
+          "searchVolume": 380,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "테슬라 인핸스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인핸스 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인핸스 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인핸스 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인핸스 이승현",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 2
     },
     {
-      "issue": "가능한 사랑 전도연",
+      "issue": "오픈AI",
       "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "declining",
-      "isHot": true,
-      "why": "청룡영화상에서 전도연·설경구가 남녀주연상을 석권했다",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": null,
       "headlines": [
         {
-          "title": "청룡영화상 작품상에 '호프'…설경구·전도연 남녀주연상 석권",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-25T14:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016463966?sid=103"
-        },
-        {
-          "title": "청룡영화상 남녀주연상…'가능한 사랑' 설경구·전도연 수상",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-25T14:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005358289?sid=103"
-        },
-        {
-          "title": "청룡영화 작품상에 ‘호프’... 주연상은 설경구·전도연",
+          "title": "“가가간데 가는 우째요?”... 사투리도 알아듣는 AI 상담원",
           "press": "chosun.com",
-          "publishedAt": "2026-11-25T14:04:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004011721?sid=103"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "조희대 탄핵 추진",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "조희대 대법원장 탄핵 추진에 창원지법 판사들이 반발했다",
-      "headlines": [
-        {
-          "title": "창원지법 전체 판사회의 \"법관 탄핵 추진은 헌법가치 훼손\"(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-25T07:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016463372?sid=102"
+          "publishedAt": "2026-11-26T04:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004011893?sid=105"
         },
         {
-          "title": "신장식, 창원지법 판사들 '曺 탄핵' 우려에 \"논리적 오류 점철\"",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-25T13:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009310555?sid=100"
+          "title": "ETRI, 논문까지 쓰는 자율 연구 AI 개발",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-11-26T05:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001207542?sid=105"
         },
         {
-          "title": "'조희대 탄핵' 추진에 \"깊은 우려\"…일선지법 첫 입장",
-          "press": "news.jtbc.co.kr",
-          "publishedAt": "2026-11-25T11:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/437/0000522450?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "빗썸 해킹 추가",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "빗썸이 보름 넘게 모른 채 개인정보 추가 유출을 확인했다",
-      "headlines": [
-        {
-          "title": "빗썸, 해킹 피해 추가 확인…보름 동안 해킹 사실 몰랐다",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-25T10:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016463744?sid=101"
-        },
-        {
-          "title": "빗썸, 그룹웨어 해킹 후속 점검서 개인정보 추가 유출 확인",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-11-25T11:47:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004213932?sid=101"
-        },
-        {
-          "title": "보름넘게 개인정보 빼가는데도 몰랐다니…빗썸, 해킹피해 추가 확인",
+          "title": "“우리는 이제 끝났다”…‘망연자실’ 중국 AI기업들, 무슨일이",
           "press": "mk.co.kr",
-          "publishedAt": "2026-11-25T11:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005769089?sid=101"
+          "publishedAt": "2026-11-26T06:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005769501?sid=104"
         }
       ],
       "concentrated": [
         {
-          "keyword": "빗썸",
+          "keyword": "오픈ai 상장",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "빗썸 해킹",
+          "keyword": "오픈ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 순위",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김정원 오픈ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 김정원",
+          "searchVolume": 370,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주식",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "나는 솔로",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "나는솔로 34기가 최종선택을 앞두고 러브라인이 격화됐다",
-      "headlines": [
-        {
-          "title": "'나는솔로' 34기 영철 최종 선택 발언",
-          "press": "bntnews.co.kr",
-          "publishedAt": "2026-11-25T00:36:00.000Z",
-          "link": "https://www.bntnews.co.kr/article/view/bnt202611250176"
-        },
-        {
-          "title": "'나는솔로' 34기 광수, 최종 선택 고민…\"정숙이 질투로 미치게 만들어...",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-25T00:48:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009308572"
-        },
-        {
-          "title": "'나는 솔로' 34기 영호ㆍ순자, 1:1 데이트서 질문 공세⋯러브라인 대격...",
-          "press": "etoday.co.kr",
-          "publishedAt": "2026-11-25T08:54:00.000Z",
-          "link": "https://www.etoday.co.kr/news/view/2652990"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "나는 솔로 34기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나는 솔로 영철",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나는 솔로 갤러리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나는 솔로 16기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나는 솔로 ott",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나는 솔로 편성표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나는 솔로 영자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "사과",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "엔비디아 젠슨 황이 전사회의를 열고 심리치료 중이라며 사과했다",
-      "headlines": [
-        {
-          "title": "사과에 땅콩버터 대신 '이것' 곁들였더니…'놀라운 결과'",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-25T10:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005358250?sid=103"
-        },
-        {
-          "title": "젠슨황, 엔비디아 전사회의 열고 사과…\"심리치료 받고 있다\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-24T20:04:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016461577?sid=104"
-        },
-        {
-          "title": "남의 결혼식 버진로드 걸은 '민폐 하객'…유시은·이관희 결국 사과",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-11-25T00:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000653249?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "사과 반뜻식품",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사과 부작용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사과 효능",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사과 철",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사과 갈변",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사과 감기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사과 감홍",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사과 그림",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 1
     },
     {
       "issue": "김가영",
@@ -2513,7 +3525,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "윤이나",
@@ -2614,305 +3627,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "앤트로픽",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "앤트로픽이 상장 나흘 만에 공모가 밑으로 추락했다",
-      "headlines": [
-        {
-          "title": "앤트로픽, 상장 나흘 만에 공모가 아래서 마감",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-24T23:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001405615?sid=104"
-        },
-        {
-          "title": "앤트로픽, 상장 나흘 만에 공모가 밑으로…고점 대비 29%↓",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-11-25T00:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001207152?sid=105"
-        },
-        {
-          "title": "\"다들 앤트로픽 사더니\" 사흘 만에 공모가 붕괴...최고가 대비 28% 하락",
-          "press": "economist.co.kr",
-          "publishedAt": "2026-11-25T05:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/243/0000106277?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "앤트로픽 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 상장일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 공모가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ipo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "앤트로픽 반등",
-          "reason": "저가매수 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 주가 전망",
-          "reason": "향후 흐름 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 실적",
-          "reason": "하락 원인 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 락업",
-          "reason": "물량 출회 우려",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "사이렌",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "울릉도에 러시아 군용기가 접근해 주민 대피 사이렌이 울렸다",
-      "headlines": [
-        {
-          "title": "(영상)“구급차 길 막은 마라톤 참가자들?”…사이렌 울려도 달렸다 [이...",
-          "press": "seoul.co.kr",
-          "publishedAt": "2026-11-25T10:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/081/0003703206?sid=102"
-        },
-        {
-          "title": "울릉도 향해 날아오다 'ㄴ자'로 꺾은 러시아 군용기…대피 사이렌 울린...",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-24T02:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009306926?sid=100"
-        },
-        {
-          "title": "“울릉도에 북한 항공기” 재난문자·사이렌까지…주민 떨게한 ‘오발송...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-24T01:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005768053?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "수능 사이렌",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사이렌 호미들",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사이렌 불의섬",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사이렌 가사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "호미들 사이렌",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사이렌 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사이렌 드라마",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사이렌 결말",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "최첨단 AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "보령 웅천 AI 데이터센터 부지 매매계약이 체결됐다",
-      "headlines": [
-        {
-          "title": "보령 웅천 AI 데이터센터 사업부지 매매계약 체결",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-25T02:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016462249?sid=105"
-        },
-        {
-          "title": "트럼프가 부활시킨 ‘AI 황제’",
-          "press": "chosun.com",
-          "publishedAt": "2026-11-24T15:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004011571?sid=105"
-        },
-        {
-          "title": "머스크 떠난 xAI 창립 멤버 3명…'미래 예측 AI' 선보여",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-11-25T07:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005847754?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "오픈AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "오픈AI 상장 추진이 앤트로픽에도 부담이 되고 있다",
-      "headlines": [
-        {
-          "title": "앤트로픽 '일장춘몽'?…\"오픈AI 상장에도 부담\"",
-          "press": "biz.sbs.co.kr",
-          "publishedAt": "2026-11-25T19:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/374/0000545934?sid=104"
-        },
-        {
-          "title": "[손정의 회장 관심 쇄도] 소프트뱅크 AI 투자 거물에 쏠린 눈",
-          "press": "imaeil.com",
-          "publishedAt": "2026-11-25T05:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/088/0001042232?sid=102"
-        },
-        {
-          "title": "NH아문디, '미국에이전틱AI TOP+'에 앤트로픽 23.7% 편입",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-25T00:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016461766?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오픈ai 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 종류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 김정원",
-          "searchVolume": 370,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 순위",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 정원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "오픈AI 상장일",
-          "reason": "청약 준비 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "오픈AI 공모가",
-          "reason": "밸류 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "오픈AI 적자",
-          "reason": "수익성 우려",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "시루도",
@@ -2972,138 +3688,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "MS",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "declining",
-      "isHot": false,
-      "why": "MS가 사상 최악의 장애에 '코드레드'를 발령했다",
-      "headlines": [
-        {
-          "title": "\"MS, 사상 최악 장애에 '코드레드' 발령\"",
-          "press": "biz.sbs.co.kr",
-          "publishedAt": "2026-11-24T19:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/374/0000545683?sid=104"
-        },
-        {
-          "title": "레드햇, MS 손잡고 VM웨어 빈틈 파고든다…AI 인프라 주도권 경쟁 가열",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-11-25T01:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002446815?sid=105"
-        },
-        {
-          "title": "레드햇·MS, 애저에 차세대 가상화 기술 구현",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-11-25T02:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001207216?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "ms 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스",
-          "searchVolume": 40000,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 365",
-          "searchVolume": 14780,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 영구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 무료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 정품인증방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms office",
-          "searchVolume": 8030,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "MS 혼내는 방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "MS 장애 복구",
-          "reason": "복구 여부 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "MS 해킹 피해",
-          "reason": "침해 범위 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "MS 주가",
-          "reason": "시장 반응 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "xAI 창립 멤버들",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "머스크 떠난 xAI 창립 멤버 3명이 미래예측 AI 스타트업을 출범했다",
-      "headlines": [
-        {
-          "title": "머스크 떠난 xAI 창립 멤버 3명…'미래 예측 AI' 선보여",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-11-25T07:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005847754?sid=104"
-        },
-        {
-          "title": "'미래 예언' AI 나온다…머스크 떠난 xAI 창립 멤버가 공개한 '타임 포털...",
-          "press": "news.jtbc.co.kr",
-          "publishedAt": "2026-11-25T06:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/437/0000522389?sid=101"
-        },
-        {
-          "title": "미래 예측 ‘예언자 AI’ 만든다…머스크 떠난 xAI 창업자 3명 뭉쳐",
-          "press": "chosun.com",
-          "publishedAt": "2026-11-25T00:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004011609?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "xai",
-          "searchVolume": 1490,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "LGU+",
@@ -3183,7 +3769,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "불계승",
@@ -3449,5 +4036,22 @@
       "rowCount": 0,
       "carried": true
     }
-  ]
+  ],
+  "enrichedAt": "2026-11-26T18:50:31.758Z",
+  "enrichStats": {
+    "enriched": 0,
+    "subsAdded": 0,
+    "titleUpgraded": 0,
+    "proposed": 0,
+    "verified": 0,
+    "judged": 0,
+    "judgedBad": 0,
+    "related": 0,
+    "picked": 0,
+    "pooled": 0,
+    "aiTitled": 0,
+    "trended": 0,
+    "aiCalls": 3,
+    "partial": false
+  }
 }
