@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T11:48:20.919Z",
+ "builtAt": "2026-11-26T11:58:24.484Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "세무사 구속영장 신청",
    "sources": [
     "nate"
    ],
-   "articles90": 33,
-   "recent20": 2,
-   "press": 30,
-   "firstArticleAt": "2026-11-26T10:19:00.000Z",
+   "articles90": 26,
+   "recent20": 3,
+   "press": 25,
+   "firstArticleAt": "2026-11-26T10:31:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "세무사 수석 구속영장…자수했는데 왜?",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-26T11:54:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287326"
+    },
+    {
+     "title": "AI 부정행위 자수 '세무냥이' 경찰 구속영장 신청",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-26T11:54:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545154"
+    },
     {
      "title": "'AI 커닝' 세무사 수석 구속 기로…경찰 \"증거인멸 우려\"",
      "press": "mbn.mk.co.kr",
      "publishedAt": "2026-11-26T11:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/057/0001980071?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "ESS 우선협상 대상 선정",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T10:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'역대 최대' ESS 입찰…1194㎿ 규모 우선협상대상자 선정",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T11:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416280?sid=101"
     },
     {
-     "title": "경찰, 'AI 부정행위' 세무사 수석 30대 구속영장",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-26T11:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000556077?sid=102"
+     "title": "정부, 역대 최대 규모 ESS 사업자 우선 선정",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-26T11:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686662?sid=101"
     },
     {
-     "title": "부정행위 의혹 '세무냥이' 구속영장 신청...\"사회적 파급력 고려\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T11:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438647?sid=102"
+     "title": "3차 ESS 우선협상 대상 선정…전국 14곳에 1194㎿",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-26T11:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848491?sid=101"
     }
    ]
   },
@@ -47,94 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-26T10:28:00.000Z",
+   "articles90": 15,
+   "recent20": 5,
+   "press": 12,
+   "firstArticleAt": "2026-11-26T10:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "중간선거 참패에도 관세 고집…글로벌 경제 불확실성 커져",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-26T11:46:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545135"
+     "title": "'35% 관세 표적' 베트남 \"美우려 해소·무역협상 마무리 노력\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T11:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466682?sid=104"
     },
     {
-     "title": "미, 14개 경제주체 과잉관세…한 15%, 중 20%",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-26T11:46:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545132"
+     "title": "EU “‘과잉생산의 원천’ 아니다”…일, ‘15% 상한 유지’에 안도",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-26T11:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485407?sid=104"
     },
     {
-     "title": "미국 “과잉생산 관세”, 호남 반도체 정조준…정부 대응 시급",
-     "press": "kwangju.co.kr",
-     "publishedAt": "2026-11-26T11:36:00.000Z",
-     "link": "http://www.kwangju.co.kr/article.php?aid=1795692600805767004"
-    }
-   ]
-  },
-  {
-   "keyword": "강금실 인사청문요구서 재가",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T10:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[뉴스프라임] 조희대 탄핵 공방 지속…강금실 청문회 격돌 예고",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T11:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930298?sid=100"
-    },
-    {
-     "title": "이재명, 국회에 강금실 국정원장 후보자와 장관 후보 4명 인사청문 요청",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-26T10:56:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453075"
-    },
-    {
-     "title": "李, '강금실·임웅순·홍익표·한준호·강유정' 인청요구서 재가",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-26T10:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078887?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "윤석열 위증 무죄 확정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T10:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "무죄 확정 尹, 특검 향해 “수사 아닌 소설”",
+     "title": "호남 반도체 800조 투자와 미국의 관세 압박…한국 경제, 정부 주도 성장...",
      "press": "ksmnews.co.kr",
-     "publishedAt": "2026-11-26T11:44:00.000Z",
-     "link": "https://www.ksmnews.co.kr/news/view.php?idx=631360"
-    },
-    {
-     "title": "윤석열 '한덕수 내란 재판 위증', 대법서 무죄 확정",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T11:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438648?sid=102"
-    },
-    {
-     "title": "윤석열 위증 무죄 확정 뒤…김계리 \"특검에 감사\" 비아냥",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-26T11:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522674?sid=102"
+     "publishedAt": "2026-11-26T11:48:00.000Z",
+     "link": "https://www.ksmnews.co.kr/news/view.php?idx=631283"
     }
    ]
   },
@@ -144,10 +112,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 8,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T10:22:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-26T10:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,14 +140,110 @@
    ]
   },
   {
+   "keyword": "윤석열 위증 무죄 확정",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-26T10:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "무죄 확정 尹, 특검 향해 “수사 아닌 소설”",
+     "press": "ksmnews.co.kr",
+     "publishedAt": "2026-11-26T11:44:00.000Z",
+     "link": "https://www.ksmnews.co.kr/news/view.php?idx=631360"
+    },
+    {
+     "title": "윤석열 '한덕수 내란 재판 위증', 대법서 무죄 확정",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T11:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438648?sid=102"
+    },
+    {
+     "title": "윤석열 위증 무죄 확정 뒤…김계리 \"특검에 감사\" 비아냥",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-26T11:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522674?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 인사청문요구서 재가",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T10:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[뉴스프라임] 조희대 탄핵 공방 지속…강금실 청문회 격돌 예고",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T11:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930298?sid=100"
+    },
+    {
+     "title": "이재명, 국회에 강금실 국정원장 후보자와 장관 후보 4명 인사청문 요청",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-26T10:56:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453075"
+    },
+    {
+     "title": "李, '강금실·임웅순·홍익표·한준호·강유정' 인청요구서 재가",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-26T10:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078887?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "송영호 김병기 고위직 인사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T10:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰청 차장에 송영호·부산경찰청장에 김병기…고위직 인사 단행",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-26T11:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207643?sid=102"
+    },
+    {
+     "title": "경찰 '2인자' 승진 인사…경찰청 차장에 송영호 임명",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T11:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214417?sid=102"
+    },
+    {
+     "title": "송영호 경찰청 차장·김병기 부산경찰청장 임명…고위직 인사 단행",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-26T10:54:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545114"
+    }
+   ]
+  },
+  {
    "keyword": "2년 만의 도전",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T10:20:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T10:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -202,75 +266,11 @@
      "link": "https://m.sports.naver.com/general/article/003/0014348281"
     }
    ]
-  },
-  {
-   "keyword": "송영호 김병기 고위직 인사",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T10:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경찰 '2인자' 승진 인사…경찰청 차장에 송영호 임명",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-26T11:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214417?sid=102"
-    },
-    {
-     "title": "경찰청 차장에 송영호·부산경찰청장에 김병기…고위직 인사 단행",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-26T11:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358823?sid=102"
-    },
-    {
-     "title": "송영호 경찰청 차장·김병기 부산경찰청장 임명…고위직 인사 단행",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-26T10:54:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545114"
-    }
-   ]
-  },
-  {
-   "keyword": "이세영",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T10:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이세영, 내추럴 셔츠룩 셀카",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T11:38:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287311"
-    },
-    {
-     "title": "'라스타' 이세영, 선한 캐릭에서 빌런으로 완벽 변신 \"쾌감있었다\" [RE:뷰...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-26T11:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409722"
-    },
-    {
-     "title": "이세영, 셔츠 한 장으로 완성한 역대급 청순미…미소 한번에 '심쿵'",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-26T10:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786369"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1735,
+  "flagged": 1736,
   "matched": 846,
   "avgLeadMin": 518,
   "recent": [
