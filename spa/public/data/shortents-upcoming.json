@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T05:06:02.430Z",
+ "builtAt": "2026-11-26T05:16:05.430Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 53,
+   "articles90": 57,
    "recent20": 10,
-   "press": 43,
-   "firstArticleAt": "2026-11-26T03:44:00.000Z",
+   "press": 47,
+   "firstArticleAt": "2026-11-26T03:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "신현송 \"물가안정에 보다 중점\"…추가 긴축 시사",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-26T05:04:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=756662"
+     "title": "신현송 \"물가, 2028년에야 목표 근접\"…점도표는 '추가 인상' 무게",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-26T05:14:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261126500256"
     },
     {
-     "title": "신현송 한은 총재 \"금리인상은 선제적 대응, 반도체 이익 환원 시간 문...",
-     "press": "consumernews.co.kr",
-     "publishedAt": "2026-11-26T05:04:00.000Z",
-     "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=769162"
+     "title": "한은 총재 \"반도체 시총이 수익 3배 불과\"…주가 상승 기대",
+     "press": "koreareport.co.kr",
+     "publishedAt": "2026-11-26T05:12:00.000Z",
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=55185"
     },
     {
-     "title": "[포커스] 한은, 올해 세번째 인상…신현송이 밝힌 긴축정책의 이유",
-     "press": "startuptoday.co.kr",
-     "publishedAt": "2026-11-26T05:02:00.000Z",
-     "link": "https://www.startuptoday.co.kr/news/articleView.html?idxno=820207"
+     "title": "신현송 \"반도체 영업익 700조원, 국민경제 환원될 것...주가 '추가상승'...",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-26T05:12:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=303411"
     }
    ]
   },
@@ -47,19 +47,13 @@
    "sources": [
     "google"
    ],
-   "articles90": 29,
-   "recent20": 5,
-   "press": 28,
-   "firstArticleAt": "2026-11-26T03:58:00.000Z",
+   "articles90": 25,
+   "recent20": 2,
+   "press": 24,
+   "firstArticleAt": "2026-11-26T04:16:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
-    {
-     "title": "파리바게뜨, 홀리데이 캠페인 '플레이 윈터팝' 광고 영상 공개",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-26T05:00:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121143"
-    },
     {
      "title": "스윙스, 유튜브 성공 120억 빚 청산 눈앞…재계약+한 달 광고 9개까지 (...",
      "press": "stoo.com",
@@ -67,10 +61,16 @@
      "link": "http://www.stoo.com/article.php?aid=110099231691"
     },
     {
-     "title": "애플, 아이폰16 AI 기능 허위 광고 혐의로 공정위 심판대…과징금 최대...",
-     "press": "kyeonggi.com",
+     "title": "파리바게뜨, 홀리데이 캠페인 '플레이 윈터팝' 광고 영상 공개",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-26T05:00:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121143"
+    },
+    {
+     "title": "애플, 공정위 기만광고 혐의에 “심사보고서 결론 동의하지 않아…충분...",
+     "press": "etnews.com",
      "publishedAt": "2026-11-26T04:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133900?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/030/0003490270?sid=105"
     }
    ]
   },
@@ -79,62 +79,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 40,
-   "recent20": 5,
+   "articles90": 41,
+   "recent20": 7,
    "press": 20,
-   "firstArticleAt": "2026-11-26T03:38:00.000Z",
+   "firstArticleAt": "2026-11-26T03:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "비거주 1주택 논란 국세청장 후보자 “국민 눈높이에 미흡…죄송스럽다...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-26T05:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011897?sid=101"
+     "title": "안덕수 국세청장 후보자 인사말",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-26T05:14:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3764019"
     },
     {
-     "title": "안덕수, 비거주 1주택 논란에 \"국민 눈높이 미흡…이유 불문 죄송\"",
-     "press": "intn.co.kr",
-     "publishedAt": "2026-11-26T05:02:00.000Z",
-     "link": "https://www.intn.co.kr/news/articleView.html?idxno=3000546"
+     "title": "인사말 하는 안덕수 국세청장 후보자",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-26T05:14:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3764015"
     },
     {
-     "title": "與 \"특검 후보자 오후 발표\"…국힘 \"사기도박판\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T04:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930132?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "윤석열 위증 혐의 무죄 확정",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 21,
-   "recent20": 5,
-   "press": 20,
-   "firstArticleAt": "2026-11-26T03:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "윤석열 '한덕수 재판 위증' 무죄 확정…\"증거 부족\"",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-26T04:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159846?sid=102"
-    },
-    {
-     "title": "윤석열 '한덕수 재판 위증' 무죄 확정…특검 기소 사건 중 첫 무죄 확정...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-26T04:54:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630995"
-    },
-    {
-     "title": "[속보] 윤석열 측 김계리, 위증 무죄에 \"당연한 일이라 사법부 말고 특...",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-26T04:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002467710?sid=102"
+     "title": "안덕수 국세청장 후보자 선서",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-26T05:12:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3764013"
     }
    ]
   },
@@ -144,30 +112,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 12,
-   "recent20": 12,
-   "press": 12,
-   "firstArticleAt": "2026-11-26T04:47:00.000Z",
+   "articles90": 18,
+   "recent20": 18,
+   "press": 17,
+   "firstArticleAt": "2026-11-26T04:58:00.000Z",
    "exclusive": true,
    "capped": true,
    "samples": [
     {
-     "title": "경찰, 고인이 된 '리트 만점자' 자택·시험지 보관 장소 압수수색",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-26T05:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078706?sid=102"
+     "title": "대전동부경찰서, 어린이 등굣길 안전 지킨다… 스쿨존 음주단속",
+     "press": "chungnamilbo.co.kr",
+     "publishedAt": "2026-11-26T05:14:00.000Z",
+     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=923275"
     },
     {
-     "title": "'경찰 1인당 800명' 치안 한계선 넘은 연수구…10만 구민 '송도경찰서 신...",
-     "press": "joongdo.co.kr",
-     "publishedAt": "2026-11-26T05:04:00.000Z",
-     "link": "https://www.joongdo.co.kr/web/view.php?key=20261126010009215"
+     "title": "현대백화점그룹, 15년간 경찰관 자녀 2677명 지원...장학사업 공로 인정...",
+     "press": "popcornnews.net",
+     "publishedAt": "2026-11-26T05:14:00.000Z",
+     "link": "http://www.popcornnews.net/news/articleView.html?idxno=141696"
     },
     {
-     "title": "경찰, 최민희 '하이에나 떼' 명예훼손 사건 수사 착수",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T05:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416017?sid=102"
+     "title": "신수정 전남광주시 북구청장 불기소 처분…6개월 경찰 수사 일단락",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-26T05:14:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904534"
     }
    ]
   },
@@ -176,30 +144,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
+   "articles90": 12,
+   "recent20": 4,
+   "press": 12,
    "firstArticleAt": "2026-11-26T04:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "\"조희대 탄핵에 찬성해?\" 국민 1000명에게 물어봤더니... 이런 결과 나왔...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-26T05:12:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178008"
+    },
+    {
+     "title": "조희대 대법원장 탄핵, 국민 여론 '팽팽'… 찬반 양극화 심화",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-26T05:04:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887393"
+    },
+    {
      "title": "국민 44% “조희대 대법원장 탄핵 반대”",
      "press": "ekn.kr",
      "publishedAt": "2026-11-26T05:02:00.000Z",
      "link": "https://www.ekn.kr/web/view.php?key=20261126029375140"
-    },
-    {
-     "title": "‘조희대 탄핵’에 ‘반대’ 44%, ‘찬성’ 34%···이 대통령 지지율 ...",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-26T05:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053654?sid=100"
-    },
-    {
-     "title": "[속보] 조희대 대법원장 탄핵 추진.. '찬성' 34%, '반대' 44% [NBS]",
-     "press": "jmbc.co.kr",
-     "publishedAt": "2026-11-26T04:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/659/0000049041?sid=100"
     }
    ]
   },
@@ -208,10 +176,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-26T03:38:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-26T03:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -236,12 +204,44 @@
    ]
   },
   {
+   "keyword": "준법투쟁",
+   "sources": [
+    "google"
+   ],
+   "articles90": 22,
+   "recent20": 7,
+   "press": 8,
+   "firstArticleAt": "2026-11-26T03:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"병원 예약시간 다 됐는데\"…준법투쟁 첫날 열차 지연 속출",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T05:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009312102?sid=102"
+    },
+    {
+     "title": "철도 준법투쟁 첫날...\"수도권 전철 최대 30분 지연\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T05:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438399?sid=101"
+    },
+    {
+     "title": "철도노조 준법투쟁 첫째날",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-26T04:59:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261126000837"
+    }
+   ]
+  },
+  {
    "keyword": "해외 의약품 밀반입 적발",
    "sources": [
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 2,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-26T03:50:00.000Z",
    "exclusive": false,
@@ -264,6 +264,38 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-26T04:42:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286885"
+    }
+   ]
+  },
+  {
+   "keyword": "연금",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T04:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "키움투자자산운용, 국민연금 기금운용본부 인근 전주사무소 개소",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-26T05:10:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611261406211655923c501012_1"
+    },
+    {
+     "title": "사학연금, 굿윌스토어와 함께하는 물품기부 행사 진행",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-26T04:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003490280?sid=102"
+    },
+    {
+     "title": "KB국민은행, 수수료 인하로 퇴직연금 1위 탈환 노린다",
+     "press": "press9.kr",
+     "publishedAt": "2026-11-26T04:38:00.000Z",
+     "link": "http://www.press9.kr/news/articleView.html?idxno=87092"
     }
    ]
   },
@@ -324,43 +356,42 @@
      "link": "https://n.news.naver.com/mnews/article/081/0003703439?sid=102"
     },
     {
-     "title": "2026 사랑ON 자선냄비 전달식",
+     "title": "휘슬러코리아-구세군, 사랑ON 자선냄비 점등식",
      "press": "newsis.com",
      "publishedAt": "2026-11-26T03:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014346881?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/003/0014346878?sid=102"
     }
    ]
   },
   {
-   "keyword": "연금",
+   "keyword": "조국",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-26T04:01:00.000Z",
+   "firstArticleAt": "2026-11-26T04:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "사학연금, 굿윌스토어와 함께하는 물품기부 행사 진행",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-26T04:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490280?sid=102"
+     "title": "'日입국 거부' 조국, 다음 달 7일 독도 찾는다…세 번째 방문",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T05:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014347243?sid=100"
     },
     {
-     "title": "KB국민은행, 수수료 인하로 퇴직연금 1위 탈환 노린다",
-     "press": "press9.kr",
-     "publishedAt": "2026-11-26T04:38:00.000Z",
-     "link": "http://www.press9.kr/news/articleView.html?idxno=87092"
+     "title": "조국혁신당, 영종서 신포까지…인천서 넓히는 민생 접점",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-26T04:52:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3042237"
     },
     {
-     "title": "\"천6백조 국민연금 곁으로\"...국내외 금융기관들 '전주 러시'",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T04:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438363?sid=102"
+     "title": "조국 “공공기관 떠난 서울·수도권 알짜 땅에 공공주택 짓자”",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-26T04:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133894?sid=100"
     }
    ]
   },
@@ -370,7 +401,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-26T03:48:00.000Z",
    "exclusive": true,
@@ -395,75 +426,11 @@
      "link": "https://m.entertain.naver.com/article/416/0000328343"
     }
    ]
-  },
-  {
-   "keyword": "부산 방사능 재난 훈련",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 15,
-   "recent20": 7,
-   "press": 2,
-   "firstArticleAt": "2026-11-26T03:43:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "방사능 재난 대비 이재민 오염검사",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T05:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016465388?sid=102"
-    },
-    {
-     "title": "실전처럼 진행되는 방사능방재 합동훈련",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T05:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016465390?sid=102"
-    },
-    {
-     "title": "안전한 일상 지키는 방사능방재 훈련",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T05:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016465391?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "은평구",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-26T03:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "은평구 은뜨락도서관, 고교생과 어린이 짝지어 과학 실험",
-     "press": "siminilbo.co.kr",
-     "publishedAt": "2026-11-26T04:16:00.000Z",
-     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160280854302178"
-    },
-    {
-     "title": "은평구 여성예비군소대, 직접 기른 배추로 김치 200상자 나눔",
-     "press": "siminilbo.co.kr",
-     "publishedAt": "2026-11-26T04:14:00.000Z",
-     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160280709908665"
-    },
-    {
-     "title": "은평구 불광1동, 취약계층 220가구에 김장김치 전달",
-     "press": "siminilbo.co.kr",
-     "publishedAt": "2026-11-26T04:14:00.000Z",
-     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160280745824063"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1578,
+  "flagged": 1579,
   "matched": 768,
   "avgLeadMin": 507,
   "recent": [
