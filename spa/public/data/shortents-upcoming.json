@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T21:11:30.675Z",
+ "builtAt": "2026-11-26T21:21:33.740Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 10,
+   "articles90": 16,
+   "recent20": 1,
+   "press": 11,
    "firstArticleAt": "2026-11-26T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "불난 인플레에 관세 끼얹기…불안한 미중 무역갈등 재점화 [글로벌 뉴스...",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-26T21:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000546202?sid=104"
+    },
     {
      "title": "반도체 초호황의 역설…韓경제 4%대 성장 전망에 '고금리·美관세' 압박...",
      "press": "news1.kr",
@@ -33,12 +39,6 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-26T20:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002729177?sid=104"
-    },
-    {
-     "title": "\"美 새 관세 시행시 평균관세율 13.9%\"…상호관세 부활 수준",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T20:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930379?sid=104"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 1,
-   "press": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-26T19:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프, GDP 조작 의혹…상무부 조사 요구",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-26T21:20:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611270010"
+    },
     {
      "title": "트럼프, 美GDP 3.4→4.3% 상향에 '발끈'…\"선거 전 가짜 수치\" 조사 촉구",
      "press": "newspim.com",
@@ -65,33 +71,21 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-26T20:51:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002729175?sid=104"
-    },
-    {
-     "title": "트럼프 \"중간선거 전 발표된 3분기 성장률은 가짜\"...추수감사절에도 음...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T20:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438739?sid=104"
     }
    ]
   },
   {
-   "keyword": "2026년 11월 27일 운세",
+   "keyword": "2026년 11월 운세",
    "sources": [
     "nate"
    ],
    "articles90": 6,
-   "recent20": 4,
+   "recent20": 2,
    "press": 5,
    "firstArticleAt": "2026-11-26T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 27일 띠별 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416329?sid=103"
-    },
     {
      "title": "[오늘의 운세] 2026년 11월 27일 별자리 운세",
      "press": "edaily.co.kr",
@@ -99,10 +93,16 @@
      "link": "https://n.news.naver.com/mnews/article/018/0006416330?sid=103"
     },
     {
-     "title": "[재미있는 오늘의 운세] 2026년 11월 27일",
-     "press": "newspim.com",
+     "title": "[오늘의 운세] 2026년 11월 27일 띠별 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416329?sid=103"
+    },
+    {
+     "title": "[백운산 오늘의 운세] 2026년 11월 27일",
+     "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-26T21:00:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261118000448"
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260917001401579"
     }
    ]
   },
@@ -113,7 +113,7 @@
     "google"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-26T20:01:00.000Z",
    "exclusive": false,
@@ -138,11 +138,75 @@
      "link": "https://www.ajunews.com/view/20261127040212189"
     }
    ]
+  },
+  {
+   "keyword": "이숙캠 미성숙 아내와 남편",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T20:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'미성숙 부부' 남편, 고백한 상대는 아내 친구…\"둘 다 갖고 싶었다\" 충...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-26T21:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084619"
+    },
+    {
+     "title": "남편 폭언에 아내 돌발행동, 제작진 긴급 투입‥박하선 악플 자제 요청...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-26T21:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191725"
+    },
+    {
+     "title": "“둘 다 가질 기회” 미성숙 남편, 아내 친구와 셋이 동거하며 술 먹고...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-26T21:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191721"
+    }
+   ]
+  },
+  {
+   "keyword": "쿠웨이트 이란 드론 공격",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T20:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유가 하락에 호르무즈 통제 고삐‥주변국 공격도",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-26T21:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538373?sid=104"
+    },
+    {
+     "title": "쿠웨이트 “이란 드론 공격에 이탈리아인 2명 사망”…이란은 부인",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-26T20:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568382?sid=104"
+    },
+    {
+     "title": "\"쿠웨이트서 이란 드론 공격…이탈리아인 2명 사망\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T20:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930355?sid=104"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1748,
+  "flagged": 1749,
   "matched": 867,
   "avgLeadMin": 539,
   "recent": [
