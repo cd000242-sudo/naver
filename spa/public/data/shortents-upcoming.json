@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T22:52:03.939Z",
+ "builtAt": "2026-11-26T23:02:07.719Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,55 @@
  "measured": 26,
  "candidates": [
   {
+   "keyword": "미국 과잉생산 관세 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 15,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-26T21:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"트럼프 새 관세로 美평균 관세율 11.4%→13.9% 추산\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T22:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416363?sid=101"
+    },
+    {
+     "title": "트럼프, 물가 불안 속 추가 관세 추진…'경제적 자해' 비판 확산",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-26T22:58:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733175"
+    },
+    {
+     "title": "NH투자증권 “베트남 증시 관세 우려 과도…무역협상 진전 시 반등 기대...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-26T22:46:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653688"
+    }
+   ]
+  },
+  {
    "keyword": "美 추수감사절 폭풍",
    "sources": [
     "daum"
    ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T21:28:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-26T21:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 추수감사절 동부 강타한 폭풍...55만 곳 정전·항공편 400편 결항",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-26T22:56:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73655"
+    },
     {
      "title": "뉴욕·뉴저지 비상사태 선포…美추수감사절, 폭풍에 정전·결항",
      "press": "biz.sbs.co.kr",
@@ -33,59 +71,27 @@
      "press": "wikitree.co.kr",
      "publishedAt": "2026-11-26T22:40:00.000Z",
      "link": "https://www.wikitree.co.kr/articles/1178185"
-    },
-    {
-     "title": "美 추수감사절 폭풍에 80만곳 정전·항공 2100편 운항 차질",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T22:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416353?sid=104"
     }
    ]
   },
   {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-26T21:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "NH투자증권 “베트남 증시 관세 우려 과도…무역협상 진전 시 반등 기대...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-26T22:46:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653688"
-    },
-    {
-     "title": "美 새 관세 시행 땐 평균 13.9%…\"대법원이 막은 상호관세, 301조로 되살...",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-26T22:36:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68554"
-    },
-    {
-     "title": "\"트럼프 새 관세 시행 땐 美 세입 감소분 80% 보전 전망\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-26T22:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078908?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "김정은, 러시아 공연 관람",
+   "keyword": "김정은 러시아 공연 관람",
    "sources": [
     "nate"
    ],
    "articles90": 18,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T21:32:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-26T21:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김정은, 방북 러 예술단 공연 관람…\"북러, 각 분야 협력 확대\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T22:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406235?sid=100"
+    },
     {
      "title": "北 김정은, 러시아 예술인 공연 관람…“양국 협력 보다 긴밀해져”",
      "press": "etoday.co.kr",
@@ -97,12 +103,6 @@
      "press": "donga.com",
      "publishedAt": "2026-11-26T22:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003765660?sid=100"
-    },
-    {
-     "title": "담화 나누는 김정은과 코즐로프 러시아 장관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T22:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313326?sid=100"
     }
    ]
   },
@@ -113,12 +113,18 @@
     "google"
    ],
    "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T21:25:00.000Z",
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T22:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"조희대 탄핵, 헌재 가면 100% 기각…분열된 민주당엔 공동의 적이 필요...",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-26T23:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143129?sid=100"
+    },
     {
      "title": "법관 집단 반발에…민주 \"탄핵 대상, 조희대 대법원장뿐\"",
      "press": "news.sbs.co.kr",
@@ -130,77 +136,38 @@
      "press": "kor.theasian.asia",
      "publishedAt": "2026-11-26T22:30:00.000Z",
      "link": "http://kor.theasian.asia/archives/423344"
-    },
-    {
-     "title": "들끓는 법대(法臺)…사법부 수장 겨눈 '징계성 탄핵'의 자충수",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-26T22:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000143128?sid=102"
     }
    ]
   },
   {
-   "keyword": "급식 비정규직 총파업에",
+   "keyword": "배당",
    "sources": [
-    "nate"
+    "google"
    ],
    "articles90": 5,
    "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-26T21:36:00.000Z",
+   "firstArticleAt": "2026-11-26T21:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "전국 학교 '빵·우유'로 점심 때우나…비정규직 4만명 오늘 총파업",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-26T22:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522716?sid=102"
+     "title": "\"치킨도 사치, 자녀 학원비에 써야\"…오늘 삼전 배당 30조 푼다 [분석+]",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-26T22:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358878?sid=101"
     },
     {
-     "title": "(아침용)학교 비정규직 오늘 총파업…대전교육청 급식·돌봄 공백 최소...",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-26T22:42:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106591"
+     "title": "신한투자 \"SK리츠, 고금리에도 배당 확대⋯상장 리츠 최선호주\"",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-26T22:56:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653694"
     },
     {
-     "title": "[뉴스픽] 학교 급식·돌봄 비정규직 노동자 총파업 돌입",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-26T21:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538393?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 27일 운세",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T21:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 27일 금요일 띠별 운세… 닭띠 '대길', 돼지띠...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-26T22:34:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3084462"
-    },
-    {
-     "title": "[오늘의 운세] 27일 금요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-26T21:40:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194721"
-    },
-    {
-     "title": "[AI] 오늘의 띠별 운세...2026.11.27(금요일)",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-26T21:30:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68534"
+     "title": "코스피 4700선 지킬까…삼전닉스·배당금 30조원 주목",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-26T22:32:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287474"
     }
    ]
   },
@@ -209,13 +176,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-26T21:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'미성숙 부부' 남편, 아내 앞에선 욕설·서장훈 앞에선 쩔쩔…서장훈 \"...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-26T23:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084637"
+    },
     {
      "title": "'이혼숙려캠프' 시청률 4.0%…서장훈, 미성숙 부부에 일침",
      "press": "topstarnews.net",
@@ -227,22 +200,48 @@
      "press": "wikitree.co.kr",
      "publishedAt": "2026-11-26T22:48:00.000Z",
      "link": "https://www.wikitree.co.kr/articles/1178181"
-    },
-    {
-     "title": "‘개그맨 부부’ 권재관♥김경아, 결혼 16년 만에 경사…부모님 계신 고...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T21:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128527"
     }
    ]
   },
   {
-   "keyword": "선우용여, 젠슨 황 불륜 분노",
+   "keyword": "2026년 11월 27일 운세",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T21:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2026년 11월 27일, 오늘의 띠별 운세 [인포그래픽]",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-26T23:00:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250112"
+    },
+    {
+     "title": "[오늘의 띠별 운세] 2026년 11월 27일 금요일",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-26T22:56:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=770836"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 27일 금요일 띠별 운세… 닭띠 '대길', 돼지띠...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-26T22:34:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3084462"
+    }
+   ]
+  },
+  {
+   "keyword": "선우용여, 젠슨 황 불륜 소식에 분노",
    "sources": [
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-26T21:41:00.000Z",
    "exclusive": false,
@@ -267,75 +266,11 @@
      "link": "https://m.entertain.naver.com/article/468/0001283819"
     }
    ]
-  },
-  {
-   "keyword": "아들 아들은 재산",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T21:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"아빠 재산 노린 거 아니냐?\"…17세 연하 아내와 재혼한 김은우→두 아...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T22:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128531"
-    },
-    {
-     "title": "이부진 아들, 어머니 성으로 바꿨다…노소영, 최태원 화해권고 요청 거...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-26T21:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703751?sid=102"
-    },
-    {
-     "title": "김은우, 아들 둘 데리고 17살 연하 재혼 \"재산 노리는 거 아니냐고\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T21:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014348480"
-    }
-   ]
-  },
-  {
-   "keyword": "배당",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T21:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코스피 4700선 지킬까…삼전닉스·배당금 30조원 주목",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T22:32:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287474"
-    },
-    {
-     "title": "삼성전자, 오늘(27일) 30조원 배당금 지급…100주 보유하면 46만원",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T21:58:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785169"
-    },
-    {
-     "title": "[종목 브리핑] 포사이트그룹홀딩스, 반기 매출 8460만파운드…중간배당...",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-26T21:34:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=412017"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1748,
+  "flagged": 1749,
   "matched": 874,
   "avgLeadMin": 557,
   "recent": [
