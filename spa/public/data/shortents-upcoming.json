@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T13:49:06.166Z",
+ "builtAt": "2026-11-26T13:59:09.879Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 30,
-   "recent20": 9,
-   "press": 29,
-   "firstArticleAt": "2026-11-26T12:21:00.000Z",
+   "articles90": 29,
+   "recent20": 12,
+   "press": 28,
+   "firstArticleAt": "2026-11-26T12:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "CJ올리브영, 업무시스템 해킹돼 임직원·고객 개인정보 유출",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T13:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416299?sid=102"
+     "title": "CJ올리브영 외부 해킹에 790명 개인정보 유출",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-26T13:58:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3764637"
     },
     {
-     "title": "CJ올리브영, 외부 비인가 접근으로 790명 개인정보 유출",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-26T13:46:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026112622451459286"
+     "title": "CJ올리브영, 개인정보 유출 사고…고객·임직원 등 790명 피해",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T13:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004128501?sid=103"
     },
     {
-     "title": "[2보] CJ올리브영 해킹에 790명 정보 유출…10명 중 8명은 직원",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-26T13:44:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733171"
+     "title": "CJ올리브영, 업무시스템 해킹으로 고객·임직원 등 790명 정보 유출",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-26T13:54:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=202611262251193005923defd0cc_18"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T12:21:00.000Z",
+   "articles90": 10,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-26T12:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최민희 징계 심의 앞두고 민주당 중진들 만찬…김민석·정청래 모두 불...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T13:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207647?sid=100"
+     "title": "與 중진 만찬에 김민석·정청래 불참…정청래 \"화해 빙자 몽둥이 찜질\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-26T13:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447154?sid=100"
     },
     {
-     "title": "與중진들, 만찬회동서 \"단결·민생전념\"…김민석·정청래는 불참",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T13:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466707?sid=100"
+     "title": "‘석·청’ 빠진 與중진 만찬…鄭 “‘악수해’ 한다고 해결될 문제냐”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-26T13:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887731?sid=100"
     },
     {
-     "title": "최민희 징계 심의 앞두고 與 중진 모임... 김민석·정청래 불참",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-26T13:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011963?sid=100"
+     "title": "중진 만찬 불참한 정청래 \"화해를 빙자한 몽둥이 찜질\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T13:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930318?sid=100"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T12:26:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-26T12:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,38 +139,6 @@
    ]
   },
   {
-   "keyword": "투컷 존박 디스랩",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T13:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"존박XX\" 투컷, 디스랩에 결국 전화까지..\"왜 날 디스하는 거냐\" ('에픽하...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-26T13:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005645890"
-    },
-    {
-     "title": "“내 멤버 디스곡에 내가 소스 줬다”…타블로, 존박 디스랩 제작 비하...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-26T13:16:00.000Z",
-     "link": "https://www.insight.co.kr/news/583770"
-    },
-    {
-     "title": "존박, 투컷 디스랩 비하인드 공개…타블로 약점 조언",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T13:16:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287370"
-    }
-   ]
-  },
-  {
    "keyword": "무쇠소녀단 3",
    "sources": [
     "nate",
@@ -196,10 +164,10 @@
      "link": "https://m.entertain.naver.com/article/009/0005769752"
     },
     {
-     "title": "'무쇠소녀단3' 곽윤기, 코치 등장 \"제자는 처음\"…연우→설인아 쇼트트...",
-     "press": "tvdaily.co.kr",
+     "title": "'무쇠소녀단3' 금새록, 춤추듯 독특한 스케이팅…설인아는 선수급 폼",
+     "press": "slist.kr",
      "publishedAt": "2026-11-26T12:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054374"
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785144"
     }
    ]
   },
@@ -222,80 +190,16 @@
      "link": "https://www.slist.kr/news/articleView.html?idxno=785147"
     },
     {
-     "title": "'무쇠소녀단3' 금새록, 춤추듯 독특한 스케이팅…설인아는 선수급 폼",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T12:56:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785144"
-    },
-    {
      "title": "'무쇠소녀단3' 곽윤기, 코치 등장 \"제자는 처음\"…연우→설인아 쇼트트...",
      "press": "tvdaily.co.kr",
      "publishedAt": "2026-11-26T12:56:00.000Z",
      "link": "https://m.entertain.naver.com/article/440/0000054374"
-    }
-   ]
-  },
-  {
-   "keyword": "EU 정상회의 우크라 지원",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T12:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "EU 정상들, 우크라 지원안·7년 장기예산 협의 시작",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T13:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438663?sid=104"
     },
     {
-     "title": "EU 정상들, 우크라 지원·7년치 장기예산 놓고 격론 돌입",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T12:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930313?sid=104"
-    },
-    {
-     "title": "EU 정상들, 우크라 지원안·7년 장기예산 놓고 격론 돌입",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T12:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466690?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검 후보",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T12:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "탄핵 연대에 \"책임은 여당\" 쓴소리...조작기소 특검 2명 압축",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T13:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438664?sid=100"
-    },
-    {
-     "title": "與, '구인난' 조작기소 특검에 이임성 추천…'조희대 탄핵 반대성명' 참...",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-26T12:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653660?sid=100"
-    },
-    {
-     "title": "조작기소 특검 후보에 민주당 이임성·혁신당 이정훈 추천",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-26T12:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485431?sid=102"
+     "title": "'무쇠소녀단3' 금새록, 춤추듯 독특한 스케이팅…설인아는 선수급 폼",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T12:56:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785144"
     }
    ]
   },
