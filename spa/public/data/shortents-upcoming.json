@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T23:42:25.478Z",
+ "builtAt": "2026-11-26T23:52:28.603Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
+   "articles90": 11,
    "recent20": 4,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T22:13:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-26T22:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김정은, 러시아 예술인 공연 관람…\"협력 긴밀해져\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T23:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930402?sid=100"
+     "title": "北김정은, 러 대표단과 공연 관람하며 친선 과시…\"각 분야 협력 확대\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-26T23:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848600?sid=100"
     },
     {
-     "title": "러 장관, 김정은에 '동지'…\"북러 관계 긍정적 방향 진전\"",
+     "title": "러시아 방북 대표단 환대한 김정은…북러 밀착 가속화(종합)",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T23:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466873?sid=100"
+     "publishedAt": "2026-11-26T23:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466898?sid=100"
     },
     {
-     "title": "김정은, 러시아 예술인 공연 관람...친선 과시",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T23:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438766?sid=100"
+     "title": "북한 방문 러 장관, 김정은에 ‘동지’…“북러 관계 성과”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T23:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302386?sid=104"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
    "firstArticleAt": "2026-11-26T22:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이란 외무, 조현에 “외국군 주둔은 분쟁 키워”…한국 “전쟁 불개입”",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-26T23:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368868?sid=104"
+    },
     {
      "title": "이란, 외국군 중동 주둔에 경고…韓 \"전쟁 개입 없다\"",
      "press": "ebn.co.kr",
@@ -65,44 +71,6 @@
      "press": "ngonews.kr",
      "publishedAt": "2026-11-26T22:56:00.000Z",
      "link": "https://www.ngonews.kr/news/articleView.html?idxno=244359"
-    },
-    {
-     "title": "이란 \"외국군 주둔 땐 분쟁 확대\"...韓 \"전쟁 불개입\" 재확인",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-26T22:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078909?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "부부",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T22:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "영등포구, 예비·신혼부부 맞춤형 정책 수요 설문조사",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-26T23:34:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1316508"
-    },
-    {
-     "title": "언포게터블 듀엣2, 이종락 부부",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-26T23:20:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611270082"
-    },
-    {
-     "title": "\"신혼부부에 가장 필요한 지원은?\"…영등포구, 내년 2월까지 설문",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-26T23:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848565?sid=102"
     }
    ]
   },
@@ -171,38 +139,6 @@
    ]
   },
   {
-   "keyword": "미국 중국 자동차 규제법",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T22:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미국 의회, ‘중국 자동차 규제법’ 내달 처리 추진…미중 긴장 커지나",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T22:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302354?sid=104"
-    },
-    {
-     "title": "美의회, '中 자동차 규제법' 다음달 내 처리 추진",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T22:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930392?sid=104"
-    },
-    {
-     "title": "美 여야, ‘中 자동차 규제법’ 연내 처리 추진",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207671?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "중부 곳곳 약한 비",
    "sources": [
     "nate"
@@ -233,13 +169,45 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000930393?sid=103"
     }
    ]
+  },
+  {
+   "keyword": "미국 중국 자동차 규제법",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T22:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미국 의회, ‘중국 자동차 규제법’ 내달 처리 추진…미중 긴장 커지나",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T22:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302354?sid=104"
+    },
+    {
+     "title": "美의회, '中 자동차 규제법' 다음달 내 처리 추진",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T22:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930392?sid=104"
+    },
+    {
+     "title": "美 여야, ‘中 자동차 규제법’ 연내 처리 추진",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-26T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207671?sid=104"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1752,
-  "matched": 881,
-  "avgLeadMin": 577,
+  "flagged": 1743,
+  "matched": 875,
+  "avgLeadMin": 580,
   "recent": [
    {
     "keyword": "화장실",
