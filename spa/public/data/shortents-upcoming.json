@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T23:12:10.858Z",
+ "builtAt": "2026-11-26T23:22:14.179Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,47 +8,80 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "트럼프 가짜 성장률 조사",
+   "keyword": "美 추수감사절 폭풍",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-26T21:49:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-26T22:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프, 추수감사절에도 남탓…경제지표·민주당·이민자에 '광역 분노...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T23:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313368?sid=104"
+     "title": "美 추수감사절 폭풍...55만곳 정전·항공기 수백편 결항·뉴욕 퍼레이드...",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-26T23:18:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326668/?sc=Naver"
     },
     {
-     "title": "트럼프, 美 GDP 통계 조작설 제기 … \"선거 전 수치 가짜\" 조사 촉구",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-26T22:54:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/27/2026112750017.html"
+     "title": "美 추수감사절 덮친 폭풍?항공기 400편 결항·40만 가구 정전",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-26T23:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165844?sid=104"
     },
     {
-     "title": "트럼프, 대선 후 수정된 GDP 수치에 \"고의적 오류\"…즉각 조사 지시",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-26T22:54:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=400843"
+     "title": "美 추수감사절 동부 강타한 폭풍...55만 곳 정전·항공편 400편 결항",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-26T22:56:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73655"
+    }
+   ]
+  },
+  {
+   "keyword": "배당",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-26T21:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "SKT, 비과세 배당·5G 요금제 개편 수혜-하나證",
+     "press": "press9.kr",
+     "publishedAt": "2026-11-26T23:20:00.000Z",
+     "link": "http://www.press9.kr/news/articleView.html?idxno=87119"
+    },
+    {
+     "title": "한화에너지, 매출 3300억…김승연 아들 삼형제 1000억 배당 왜?(1부)",
+     "press": "the-today.com",
+     "publishedAt": "2026-11-26T23:14:00.000Z",
+     "link": "https://www.the-today.com/news/articleView.html?idxno=94173"
+    },
+    {
+     "title": "삼성전자 역대급 배당과 강달러…환율 상승 압력[외환브리핑]",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T23:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416376?sid=101"
     }
    ]
   },
   {
    "keyword": "김정은, 러시아 공연 관람",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 19,
-   "recent20": 2,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-26T21:54:00.000Z",
    "exclusive": false,
@@ -75,34 +108,34 @@
    ]
   },
   {
-   "keyword": "배당",
+   "keyword": "이란 외국군 주둔은 분쟁",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 7,
-   "recent20": 5,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T21:58:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-26T22:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재용, 3분기 삼성전자 배당금 12배 증가…360억→4488억",
-     "press": "dealsite.co.kr",
-     "publishedAt": "2026-11-26T23:04:00.000Z",
-     "link": "https://dealsite.co.kr/articles/173569"
+     "title": "이란 외무장관 \"외국군 주둔은 역내 긴장·분쟁 키울 것\"…조현과 통화",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-26T22:56:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244359"
     },
     {
-     "title": "[핀포인트] [넥센] 지분 매입에 배당까지…강호찬 현금흐름 확대 주목",
-     "press": "news.dealsitetv.com",
-     "publishedAt": "2026-11-26T23:02:00.000Z",
-     "link": "https://news.dealsitetv.com/articles/179234"
+     "title": "이란 \"외국군 주둔 땐 분쟁 확대\"...韓 \"전쟁 불개입\" 재확인",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-26T22:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078909?sid=104"
     },
     {
-     "title": "아벨 체제서도 빛나는 버크셔의 '배당 마법'…빅5 종목서 4조원 수령 전...",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-26T23:02:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446865"
+     "title": "이란 외무 \"외국군 주둔은 분쟁 확대 우려\"...조현 장관과 통화",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-26T22:48:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106595"
     }
    ]
   },
@@ -111,13 +144,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 2,
    "press": 6,
    "firstArticleAt": "2026-11-26T22:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국제법률단체, 조희대 탄핵 추진 우려 …\"극도로 신중해야\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-26T23:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653710?sid=102"
+    },
     {
      "title": "30일 법관대표회의 ‘조희대 탄핵 반대’ 의결? “개인비위 옹호” 반론...",
      "press": "vop.co.kr",
@@ -129,12 +168,70 @@
      "press": "sisajournal.com",
      "publishedAt": "2026-11-26T23:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/586/0000143129?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 관세 경제적 자해",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T22:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"트럼프,물가고 상황서 관세 인상카드로 '최악의 경제적 자해'\"",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-26T23:12:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888647"
     },
     {
-     "title": "법관 집단 반발에…민주 \"탄핵 대상, 조희대 대법원장뿐\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-26T22:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406230?sid=100"
+     "title": "트럼프, 물가 불안 속 추가 관세 추진…'경제적 자해' 비판 확산",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-26T22:58:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733175"
+    },
+    {
+     "title": "트럼프 관세의 역설…물가 부담 키우고 재정수입 의존 높여 철폐 어려워...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-26T22:24:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261127010010631"
+    }
+   ]
+  },
+  {
+   "keyword": "보험사 연체율 상승",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T22:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "보험사 대출 연체율 1.27%…기업대출 부실 확대",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-26T23:18:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611270010"
+    },
+    {
+     "title": "금리 오르자 기업 '휘청'…보험사 연체율 15년여 만에 최고",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-26T23:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000546224?sid=101"
+    },
+    {
+     "title": "보험사 대출 부실 확대…금리 인상에 건전성 '이중 부담'",
+     "press": "fins.co.kr",
+     "publishedAt": "2026-11-26T23:16:00.000Z",
+     "link": "http://www.fins.co.kr/news/articleView.html?idxno=110730"
     }
    ]
   },
@@ -147,10 +244,16 @@
    "articles90": 5,
    "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-26T21:47:00.000Z",
+   "firstArticleAt": "2026-11-26T22:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "언포게터블 듀엣2, 이종락 부부",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-26T23:20:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611270082"
+    },
     {
      "title": "\"신혼부부에 가장 필요한 지원은?\"…영등포구, 내년 2월까지 설문",
      "press": "view.asiae.co.kr",
@@ -162,44 +265,102 @@
      "press": "xportsnews.com",
      "publishedAt": "2026-11-26T23:00:00.000Z",
      "link": "https://m.entertain.naver.com/article/311/0002084637"
-    },
-    {
-     "title": "'이혼숙려캠프' 시청률 4.0%…서장훈, 미성숙 부부에 일침",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T22:50:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287496"
     }
    ]
   },
   {
-   "keyword": "미국 중국 자동차 규제법",
+   "keyword": "CJ올리브영, 개인정보 유출",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T22:21:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-26T22:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미국 의회, ‘중국 자동차 규제법’ 내달 처리 추진…미중 긴장 커지나",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T22:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302354?sid=104"
+     "title": "CJ올리브영, 개인정보 유출 사고…“보안 인프라 강화”",
+     "press": "socialvalue.kr",
+     "publishedAt": "2026-11-26T23:18:00.000Z",
+     "link": "https://www.socialvalue.kr/news/view/1065568520171309"
     },
     {
-     "title": "美의회, '中 자동차 규제법' 다음달 내 처리 추진",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T22:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930392?sid=104"
+     "title": "CJ올리브영 업무 시스템에 무단 침입…임직원·고객 등 790명 개인정보 ...",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-26T22:56:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=102127"
     },
     {
-     "title": "美 여야, ‘中 자동차 규제법’ 연내 처리 추진",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207671?sid=104"
+     "title": "CJ올리브영, 임직원·고객 개인정보 유출…“추가 피해 방지에 최선”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-26T22:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729215?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "선우용여, 젠슨 황 불륜에 분노",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T22:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "선우용여, 젠슨황 불륜에 욕설",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-26T23:20:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287519"
+    },
+    {
+     "title": "\"돈만 벌면 이 XX야\" 선우용여, 젠슨 황 불륜 소식에 분노 폭발",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T23:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009313366"
+    },
+    {
+     "title": "“X 같은 XX, 돈말 벌면”…젠슨 황 불륜 소식에 분노한 선우용여",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T22:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769774?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "국민 1명 중 교통약자",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T22:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국민 3명 중 1명은 교통약자···시내 저상버스 보급률 50% 돌파",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-26T23:18:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=644104"
+    },
+    {
+     "title": "전국 시내버스 절반은 저상버스…국민 3명 중 1명은 교통약자",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-26T23:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980107?sid=102"
+    },
+    {
+     "title": "국민 3명 중 1명 '교통약자'…시내버스 2대 중 1대는 '저상버스'",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-26T22:20:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322088&inflow=N"
     }
    ]
   },
@@ -236,73 +397,41 @@
    ]
   },
   {
-   "keyword": "2026년 11월 운세",
+   "keyword": "미국 중국 자동차 규제법",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T22:34:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T22:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "2026년 11월 27일, 오늘의 띠별 운세 [인포그래픽]",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-26T23:00:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250112"
+     "title": "미국 의회, ‘중국 자동차 규제법’ 내달 처리 추진…미중 긴장 커지나",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T22:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302354?sid=104"
     },
     {
-     "title": "[오늘의 띠별 운세] 2026년 11월 27일 금요일",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-26T22:56:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=770836"
+     "title": "美의회, '中 자동차 규제법' 다음달 내 처리 추진",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T22:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930392?sid=104"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 27일 금요일 띠별 운세… 닭띠 '대길', 돼지띠...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-26T22:34:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3084462"
-    }
-   ]
-  },
-  {
-   "keyword": "선우용여, 젠슨 황 불륜 소식에 분노",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T22:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"돈만 벌면 이 XX야\" 선우용여, 젠슨 황 불륜 소식에 분노 폭발",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T23:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009313366"
-    },
-    {
-     "title": "“X 같은 XX, 돈말 벌면”…젠슨 황 불륜 소식에 분노한 선우용여",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T22:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005769774?sid=103"
-    },
-    {
-     "title": "선우용여, 젠슨황 불륜 소식에 “X 같은, 돈만 벌면 XX” 분노 (순풍 선...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-26T22:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191730"
+     "title": "美 여야, ‘中 자동차 규제법’ 연내 처리 추진",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-26T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207671?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1749,
+  "flagged": 1755,
   "matched": 874,
   "avgLeadMin": 565,
   "recent": [
