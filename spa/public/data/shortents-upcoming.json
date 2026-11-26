@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T17:20:15.164Z",
+ "builtAt": "2026-11-26T17:30:18.942Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,12 +16,18 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-26T15:51:00.000Z",
+   "firstArticleAt": "2026-11-26T16:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "공급 부족 여전한데 과잉생산?… “美 협상용 지렛대 가능성”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-26T17:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887771?sid=101"
+    },
     {
      "title": "美 새 관세 시행땐 평균관세율 13.9%…상호관세 무효화 전으로",
      "press": "yna.co.kr",
@@ -33,12 +39,6 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-26T16:27:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000930345?sid=104"
-    },
-    {
-     "title": "미국 과잉생산 관세에 중국 반발…미중 무역휴전 다시 ‘시험대’",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T16:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302277?sid=104"
     }
    ]
   }
