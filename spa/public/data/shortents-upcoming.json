@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T01:24:48.551Z",
+ "builtAt": "2026-11-26T01:34:51.117Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,26 +8,53 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
   {
-   "keyword": "코스피 1% 상승",
+   "keyword": "현대차그룹, 탑기어 6년 연속 수상",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 52,
-   "recent20": 2,
-   "press": 43,
-   "firstArticleAt": "2026-11-26T00:03:00.000Z",
+   "articles90": 35,
+   "recent20": 5,
+   "press": 35,
+   "firstArticleAt": "2026-11-26T00:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피 장중 '저가매수세 유입' 1%대 상승 4790선, 코스닥도 3%대 올라",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-26T01:16:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452971"
+     "title": "현대차그룹, 탑기어 어워즈 6년 연속 수상…제네시스·아이오닉 3 선정",
+     "press": "cnbizm.com",
+     "publishedAt": "2026-11-26T01:32:00.000Z",
+     "link": "https://www.cnbizm.com/news/articleView.html?idxno=322793"
     },
+    {
+     "title": "현대차그룹, 英 '탑기어 어워즈' 6년 연속 수상",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-26T01:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003490132?sid=103"
+    },
+    {
+     "title": "제네시스 '올해의 제조사'·아이오닉 3 '올해의 소형차'…현대차그룹, ...",
+     "press": "nextdaily.co.kr",
+     "publishedAt": "2026-11-26T01:22:00.000Z",
+     "link": "https://www.nextdaily.co.kr/news/articleView.html?idxno=255345"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 1% 상승 출발",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 36,
+   "recent20": 0,
+   "press": 30,
+   "firstArticleAt": "2026-11-26T00:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
     {
      "title": "[개장] 코스피, 반도체주 반등 4800선 회복… 닉스 5% 급등",
      "press": "it.chosun.com",
@@ -39,6 +66,44 @@
      "press": "greened.kr",
      "publishedAt": "2026-11-26T01:02:00.000Z",
      "link": "https://www.greened.kr/news/articleView.html?idxno=355603"
+    },
+    {
+     "title": "한은 금리결정 직전 코스피 1%대 상승…코스닥 3%대 강세",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T00:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214014?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "학교비정규직 총파업",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 29,
+   "recent20": 4,
+   "press": 25,
+   "firstArticleAt": "2026-11-26T00:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "학교비정규직 4만명 내일 총파업…교육당국, 급식·돌봄 비상대응",
+     "press": "tbs.seoul.kr",
+     "publishedAt": "2026-11-26T01:27:00.000Z",
+     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=6&idx_800=3538855&seq_800=20531756"
+    },
+    {
+     "title": "[세종교육소식] 비정규직 총파업 대응…급식·돌봄 공백 최소화 외",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-26T01:24:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1429255"
+    },
+    {
+     "title": "27일 교육공무직 총파업…급식·돌봄 어떻게 운영되나",
+     "press": "mediajeju.com",
+     "publishedAt": "2026-11-26T01:20:00.000Z",
+     "link": "https://www.mediajeju.com/news/articleView.html?idxno=367547"
     }
    ]
   },
@@ -48,136 +113,193 @@
     "signal.bz"
    ],
    "articles90": 47,
-   "recent20": 5,
+   "recent20": 4,
    "press": 22,
-   "firstArticleAt": "2026-11-25T23:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "철도노조, 26일 오전 9시부터 준법투쟁…KTX 등 열차 지연 우려",
-     "press": "delighti.co.kr",
-     "publishedAt": "2026-11-26T01:22:00.000Z",
-     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125651"
-    },
-    {
-     "title": "철도노조, `안전운행 투쟁` 돌입…열차 지연에 승객 불편 불가피",
-     "press": "tbs.seoul.kr",
-     "publishedAt": "2026-11-26T01:21:00.000Z",
-     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=3&idx_800=3538854&seq_800=20531755"
-    },
-    {
-     "title": "[현장] 철도노조 준법투쟁 첫날…최대 12분 등 '지연 폭' 점차 커져",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T01:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016464526?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "진우와 해티, 결혼 4년 만 이혼",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-25T23:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"부부 채널로 1010만 구독→방송까지 나왔는데\"…줄줄이 결혼 생활 '마침...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-26T01:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409625"
-    },
-    {
-     "title": "'1000만 유튜버' 진우·해티, 결혼 4년 만에 '이혼'…\"쉽게 내린 결정 아...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-26T00:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000493494"
-    },
-    {
-     "title": "'1010만 유튜버' 진우와 해티, 결혼 4년 만에 이혼 발표…\"각자의 삶 살...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T00:54:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784996"
-    }
-   ]
-  },
-  {
-   "keyword": "이강인 선발 2-0 승리",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-25T23:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'이강인 선발' 아틀레티코, UCL서 비킹에 2-0 승리",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-26T00:59:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/448/0000653487"
-    },
-    {
-     "title": "'이강인 선발 57분 활약→평점 7.2'…ATM은 버킹에 2-0 승리",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-26T00:58:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6944221"
-    },
-    {
-     "title": "이강인 선발 출전… 아틀레티코 마드리드, 비킹 2-0 완파",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-26T00:46:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/021/0002835656"
-    }
-   ]
-  },
-  {
-   "keyword": "조별리그",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
    "firstArticleAt": "2026-11-26T00:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한국, U-17 월드컵 조별리그 전승 32강행…에콰도르 3-2 제압",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-26T01:08:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/448/0000653494"
+     "title": "철도노조, 내달 4일까지 안전운행 투쟁…출퇴근길·주말 열차 지연 우려",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-26T01:26:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=731115"
     },
     {
-     "title": "김현준호, 한국 축구 사상 첫 FIFA 주관대회 조별리그 ‘3전 전승’ 통과",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-26T01:07:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/144/0001151793"
+     "title": "철도노조 준법투쟁 첫날 울산역…부산행 일부 열차 지연",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T01:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016464585?sid=102"
     },
     {
-     "title": "亞 돌풍 후끈! 한국 3연승 B조 1위 32강행→호주·사우디도 조별리그 통...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T00:58:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/117/0004128221"
+     "title": "철도노조, 26일 오전 9시부터 준법투쟁…KTX 등 열차 지연 우려",
+     "press": "delighti.co.kr",
+     "publishedAt": "2026-11-26T01:22:00.000Z",
+     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125651"
+    }
+   ]
+  },
+  {
+   "keyword": "발언하는 장동혁 대표",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 32,
+   "recent20": 4,
+   "press": 18,
+   "firstArticleAt": "2026-11-26T00:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "장동혁, '조희대 탄핵' 5당 연대 제안 민주당에 \"조폭 범죄 단체\"",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-26T01:34:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1140199"
+    },
+    {
+     "title": "장동혁, ‘조작 징계’ 사과 요구한 우재준에 “탈당·창당이라는 좋은...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-26T01:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765354?sid=100"
+    },
+    {
+     "title": "국힘, ‘조작 징계’ 두고 설전…우재준 사과 요구에 張 대표 “탈당이...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-26T01:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686370?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "한준호 청문회 준비",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 25,
+   "recent20": 20,
+   "press": 12,
+   "firstArticleAt": "2026-11-26T00:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "승강기 탄 한준호 행안부 장관 후보장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T01:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009311243?sid=102"
+    },
+    {
+     "title": "한준호 행안부 장관 후보자 출근길",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T01:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009311244?sid=102"
+    },
+    {
+     "title": "[포토] 소감 밝히는 한준호 행안부 장관 후보자",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-26T01:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848134?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "오정세 청룡 축하무대",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-26T00:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최성곤 가발 쓰고 ‘니가 좋아’..오정세, 청룡 뒤집은 파급력 “40주 만...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-26T01:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005645501"
+    },
+    {
+     "title": "1600만 '왕사남' 아니다…청룡영화상 '최우수작품상' 탄 500억 대작 한국...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-26T01:18:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1177873"
+    },
+    {
+     "title": "청룡영화상에 '와일드 씽' 최성곤으로 등장한 오정세... \"니가좋아♥\" 직...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-26T01:16:00.000Z",
+     "link": "https://www.insight.co.kr/news/583620"
+    }
+   ]
+  },
+  {
+   "keyword": "시청률",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-26T00:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "6회 연속 1%대 시청률에 머물렀다…안효섭, 종영 앞두고 마지막 복수 ('...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-26T01:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786268"
+    },
+    {
+     "title": "박민영 ‘음방 공약’ 수치 절반 달성…‘나인 투 식스’ 시청률 3.6% 출...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-26T01:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543678"
+    },
+    {
+     "title": "'나인 투 식스' 육성재, 위기의 박민영 지켰다…3.6% 출발 [N시청률]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T01:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009311212"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1492,
-  "matched": 736,
-  "avgLeadMin": 500,
+  "flagged": 1498,
+  "matched": 740,
+  "avgLeadMin": 497,
   "recent": [
+   {
+    "keyword": "호프 최우수작품상 나홍진",
+    "hitKeyword": "청룡영화상 최우수작품상",
+    "hitAt": "2026-11-26T10:30:00+09:00",
+    "leadMin": 156
+   },
+   {
+    "keyword": "진우와 해티, 결혼 4년 만 이혼",
+    "hitKeyword": "진우 해티 이혼",
+    "hitAt": "2026-11-26T10:30:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "이강인 선발 2-0 승리",
+    "hitKeyword": "이강인 아틀레티코 비킹전",
+    "hitAt": "2026-11-26T10:30:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "조별리그",
+    "hitKeyword": "한국 U-17 조별리그 전승",
+    "hitAt": "2026-11-26T10:30:00+09:00",
+    "leadMin": 25
+   },
    {
     "keyword": "맹승지, 의사 남친과 결혼 준비",
     "hitKeyword": "맹승지 의사 결혼",
@@ -213,30 +335,6 @@
     "hitKeyword": "이강인 후반 교체",
     "hitAt": "2026-11-26T09:30:00+09:00",
     "leadMin": 66
-   },
-   {
-    "keyword": "유튜버 진우 해티 이혼",
-    "hitKeyword": "진우 해티 이혼",
-    "hitAt": "2026-11-26T09:30:00+09:00",
-    "leadMin": 66
-   },
-   {
-    "keyword": "이강인 선발 2-0 승리",
-    "hitKeyword": "이강인 후반 교체",
-    "hitAt": "2026-11-26T09:30:00+09:00",
-    "leadMin": 56
-   },
-   {
-    "keyword": "임영웅",
-    "hitKeyword": "임영웅 에르메스 선물",
-    "hitAt": "2026-11-26T09:00:00+09:00",
-    "leadMin": 4409
-   },
-   {
-    "keyword": "이혼",
-    "hitKeyword": "원현주 이혼 글",
-    "hitAt": "2026-11-26T09:00:00+09:00",
-    "leadMin": 1011
    }
   ]
  }
