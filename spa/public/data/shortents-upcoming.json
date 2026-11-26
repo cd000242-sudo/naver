@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T06:06:22.480Z",
+ "builtAt": "2026-11-26T06:16:25.703Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 82,
-   "recent20": 19,
-   "press": 67,
-   "firstArticleAt": "2026-11-26T04:42:00.000Z",
+   "articles90": 84,
+   "recent20": 20,
+   "press": 69,
+   "firstArticleAt": "2026-11-26T04:47:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "한은, 기준금리 3.25%로 인상…물가·가계부채 경계",
-     "press": "newspost.kr",
-     "publishedAt": "2026-11-26T06:04:00.000Z",
-     "link": "https://www.newspost.kr/news/articleView.html?idxno=227821"
+     "title": "신현송 한은 총재, 긴축 의지 재확인…\"내년 4.1% 성장 총량에 자신\"",
+     "press": "pointdaily.co.kr",
+     "publishedAt": "2026-11-26T06:12:00.000Z",
+     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=327558"
     },
     {
-     "title": "한은, 기준금리 3.25%로 인상…4%대 성장 전망에 물가•집값 대응",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-26T06:04:00.000Z",
-     "link": "https://www.viva100.com/article/20261126501085"
+     "title": "주가 급락에 민간소비 전망 낮춘 한은…“내년 경제 4.1% 성장”",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-26T06:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394901?sid=101"
     },
     {
-     "title": "JP모건 \"한은, 성장률 대폭 상향은 매파적 신호\"",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-26T06:04:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=316298"
+     "title": "‘호미’ 다음 등장한 ‘줄기’?…신현송 “성장 줄기 굳건…주식시장...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T06:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004128386?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "이임성 특검 후보 추천",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 36,
+   "recent20": 15,
+   "press": 33,
+   "firstArticleAt": "2026-11-26T05:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주당 이임성·혁신당 이정훈…'조작기소 특검' 후보 추천",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-26T06:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610317?sid=100"
+    },
+    {
+     "title": "'조작기소 특검' 민주 이임성 전 검사·혁신 이정훈 전 판사 추천",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T06:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214261?sid=100"
+    },
+    {
+     "title": "민주당, 조작기소특검 후보 이임성 추천…국힘은 후보 추천 거부",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T06:12:00.000Z",
+     "link": "https://www.ajunews.com/view/20261126145926638"
     }
    ]
   },
@@ -48,30 +80,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 45,
-   "recent20": 6,
-   "press": 34,
-   "firstArticleAt": "2026-11-26T04:37:00.000Z",
+   "articles90": 39,
+   "recent20": 7,
+   "press": 32,
+   "firstArticleAt": "2026-11-26T04:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "신현송 \"시장금리 하락 긴축효과 낮추지 않아…잠재성장률 상향 추세\"(...",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-26T06:00:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446788"
+     "title": "신현송 \"물가 안정 확신 들 때까지 대응\"···내년 성장률 4.1% 전망",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-26T06:14:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=160732"
     },
     {
-     "title": "채권시장 \"주가와 따로 노는 매파적 점도표와 신 총재 회견…공감 못하...",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-26T05:58:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446787"
+     "title": "신현송 한은 총재, 긴축 의지 재확인…\"내년 4.1% 성장 총량에 자신\"",
+     "press": "pointdaily.co.kr",
+     "publishedAt": "2026-11-26T06:12:00.000Z",
+     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=327558"
     },
     {
-     "title": "신현송 한은 총재 “반도체 700조 이익, 국민경제 환원은 시간 문제”",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-26T05:56:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261126512595?OutUrl=naver"
+     "title": "‘호미’ 다음 등장한 ‘줄기’?…신현송 “성장 줄기 굳건…주식시장...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T06:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004128386?sid=103"
     }
    ]
   },
@@ -80,30 +112,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 38,
-   "recent20": 10,
+   "articles90": 41,
+   "recent20": 9,
    "press": 26,
-   "firstArticleAt": "2026-11-26T04:38:00.000Z",
+   "firstArticleAt": "2026-11-26T04:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "EU “유럽이 과잉생산 부추겨? 터무니 없다”···브라질 “이러한 위협...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-26T06:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485277?sid=104"
+     "title": "트럼프, 선거 참패에도 관세 드라이브…美 안팎 반발, 법정 공방 예고",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T06:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014347611?sid=104"
     },
     {
-     "title": "트럼프에 ‘740조원’ 준다 했는데…일본, 관세 인상 압박에 보인 반응...",
-     "press": "nownews.seoul.co.kr",
-     "publishedAt": "2026-11-26T06:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703498?sid=104"
+     "title": "美 과잉생산 관세 예고에 인도·EU·日 '부글'…韓은 일단 안도(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T06:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009312437?sid=104"
     },
     {
-     "title": "대미관세 15% 일단 지켰는데… 美측 ‘호남 반도체 경고’ 께름칙",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-26T06:02:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261126511432?OutUrl=naver"
+     "title": "트럼프발 관세 방아쇠에 긴박해진 주요국…무역갈등 또 부글(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T06:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016465854?sid=104"
     }
    ]
   },
@@ -112,62 +144,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 25,
-   "recent20": 6,
-   "press": 23,
+   "articles90": 27,
+   "recent20": 3,
+   "press": 25,
    "firstArticleAt": "2026-11-26T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "법무부, 내달 9일까지 검찰총장 후보 추가 천거 접수",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-26T06:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000555912?sid=102"
+    },
+    {
+     "title": "법무부, 검찰총장 후보 추가 천거…30일부터 내달 9일까지",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-26T06:14:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=173161"
+    },
+    {
      "title": "법무부, 검찰총장 후보자 추가 천거 진행",
      "press": "obsnews.co.kr",
      "publishedAt": "2026-11-26T05:58:00.000Z",
      "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545067"
-    },
-    {
-     "title": "법무부, 검찰총장 후보 추가 천거 절차 진행…내달 9일까지 예정",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-26T05:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159905?sid=102"
-    },
-    {
-     "title": "법무부, 다음 달 9일까지 검찰총장 후보 '추가 천거' 진행",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-26T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538238?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "홈플러스",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 42,
-   "recent20": 5,
-   "press": 21,
-   "firstArticleAt": "2026-11-26T04:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "홈플러스 임시휴업 D-1",
-     "press": "news-s.kr",
-     "publishedAt": "2026-11-26T06:04:00.000Z",
-     "link": "https://news-s.kr/view.html?id=L2611261452150dcc"
-    },
-    {
-     "title": "홈플러스, 통째로 사겠다는 큰손 등장... 기사회생 마지막 승부수 될까",
-     "press": "newskr.kr",
-     "publishedAt": "2026-11-26T06:04:00.000Z",
-     "link": "http://www.newskr.kr/news/articleView.html?idxno=108327"
-    },
-    {
-     "title": "홈플러스 새 주인 찾나…인수의향서 접수, 정상화 기대감",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-26T06:02:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733124"
     }
    ]
   },
@@ -177,7 +177,7 @@
     "nate"
    ],
    "articles90": 35,
-   "recent20": 4,
+   "recent20": 2,
    "press": 21,
    "firstArticleAt": "2026-11-26T04:51:00.000Z",
    "exclusive": false,
@@ -204,76 +204,12 @@
    ]
   },
   {
-   "keyword": "윤석열 무죄",
-   "sources": [
-    "google"
-   ],
-   "articles90": 24,
-   "recent20": 2,
-   "press": 21,
-   "firstArticleAt": "2026-11-26T04:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "추경호에 무죄 선고한 재판부, 법왜곡죄로 고발돼",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-26T05:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967933?sid=102"
-    },
-    {
-     "title": "[속보] 대법원 윤석열 '국무회의 계획' 위증 무죄에 \"이중잣대\" 논란",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-26T05:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138960?sid=100"
-    },
-    {
-     "title": "尹 ‘한덕수 재판 위증’ 대법 무죄 확정에 민주 “면죄부 남발” 반발",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-26T05:44:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261126500339"
-    }
-   ]
-  },
-  {
-   "keyword": "무고성 신고 개선 추진",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 20,
-   "recent20": 3,
-   "press": 19,
-   "firstArticleAt": "2026-11-26T04:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘아동학대 무고성 신고’에 칼 빼든 정부…교권침해 학부모 출입 막는...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-26T05:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686491?sid=102"
-    },
-    {
-     "title": "'묻지마 아동학대 신고' 원천차단…정서적학대 구체화·수사 신속종결",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-26T05:52:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261126010010420"
-    },
-    {
-     "title": "무고성 아동학대 신고 막는다…교원 보호 법·제도 손질",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-26T05:50:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088319"
-    }
-   ]
-  },
-  {
    "keyword": "서울 집값 상승률 둔화",
    "sources": [
     "daum"
    ],
    "articles90": 24,
-   "recent20": 4,
+   "recent20": 3,
    "press": 18,
    "firstArticleAt": "2026-11-26T05:00:00.000Z",
    "exclusive": false,
@@ -300,34 +236,98 @@
    ]
   },
   {
+   "keyword": "무고성 신고 개선 추진",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 18,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-26T04:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[종합] 무고성 아동학대 신고 개선...'혐의 없음' 명백 사건, 수사 개시...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-26T06:09:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261126000998"
+    },
+    {
+     "title": "‘아동학대 무고성 신고’에 칼 빼든 정부…교권침해 학부모 출입 막는...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-26T05:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686491?sid=102"
+    },
+    {
+     "title": "'묻지마 아동학대 신고' 원천차단…정서적학대 구체화·수사 신속종결",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-26T05:52:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261126010010420"
+    }
+   ]
+  },
+  {
    "keyword": "한전 개인정보 유출",
    "sources": [
     "signal.bz"
    ],
    "articles90": 15,
-   "recent20": 0,
+   "recent20": 2,
    "press": 15,
-   "firstArticleAt": "2026-11-26T04:44:00.000Z",
+   "firstArticleAt": "2026-11-26T04:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "케이사인-에이아이딥, 한전KDN 보안 컨퍼런스서 생성형 AI 보안 솔루션 ...",
+     "press": "dailysecu.com",
+     "publishedAt": "2026-11-26T06:12:00.000Z",
+     "link": "https://www.dailysecu.com/news/articleView.html?idxno=209754"
+    },
+    {
+     "title": "한국전력, 대규모 개인정보 유출…주민등록번호·계좌번호·카드번호까...",
+     "press": "job-post.co.kr",
+     "publishedAt": "2026-11-26T06:08:00.000Z",
+     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=241281"
+    },
     {
      "title": "국조실 , 개인정보 유출 '한전' 대상으로 공직 복무 점검 검토",
      "press": "livebiz.today",
      "publishedAt": "2026-11-26T05:40:00.000Z",
      "link": "https://www.livebiz.today/news/articleView.html?idxno=206933"
+    }
+   ]
+  },
+  {
+   "keyword": "경찰",
+   "sources": [
+    "google"
+   ],
+   "articles90": 14,
+   "recent20": 13,
+   "press": 14,
+   "firstArticleAt": "2026-11-26T05:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰·아동보호기관 공조…옹진군 아동학대 예방 인식 개선",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-26T06:14:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611260158"
     },
     {
-     "title": "국무조정실 “‘개인정보 유출’ 한전, 기강해이 등 공직복무 점검 검토...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T05:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416042?sid=100"
+     "title": "충북경찰청, 지역 통계·데이터 정책 활용 최우수상",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T06:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214257?sid=102"
     },
     {
-     "title": "국조실, 개인정보 잇단 유출 한전에 공직복무 점검 검토…“위반 시 일...",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-26T05:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490313?sid=100"
+     "title": "경찰, '리트 만점자' 이진우 집·영훈고 압수수색",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-26T06:08:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121142"
     }
    ]
   },
@@ -337,12 +337,18 @@
     "google"
    ],
    "articles90": 15,
-   "recent20": 7,
+   "recent20": 4,
    "press": 14,
    "firstArticleAt": "2026-11-26T04:52:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "與, 조작기소 특검 후보에 이임성 변호사 추천…조국혁신당은 이정훈",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-26T06:06:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261126000984"
+    },
     {
      "title": "[속보] 조국혁신당, 조작기소 특검 후보에 판사 출신 이정훈 변호사",
      "press": "sedaily.com",
@@ -354,44 +360,38 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-26T05:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002728994?sid=100"
-    },
-    {
-     "title": "조국혁신당, 조작기소 특검 후보로 판사 출신 이정훈 변호사 추천",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T05:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014347510?sid=100"
     }
    ]
   },
   {
-   "keyword": "경찰",
+   "keyword": "윤석열 한덕수 위증 무죄 확정",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 12,
-   "press": 12,
-   "firstArticleAt": "2026-11-26T05:46:00.000Z",
-   "exclusive": true,
-   "capped": true,
+   "articles90": 13,
+   "recent20": 0,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T04:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
    "samples": [
     {
-     "title": "한준호, 경찰·중수청 독립성 묻자 \"국민 눈높이 맞춰 활동\" [종합]",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-26T06:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358596?sid=100"
+     "title": "[속보] 대법원 윤석열 '국무회의 계획' 위증 무죄에 \"이중잣대\" 논란",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-26T05:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138960?sid=100"
     },
     {
-     "title": "겨울철 보행자 교통사고 '비상'…강원경찰, 안전 활동 강화",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T06:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016465825?sid=102"
+     "title": "尹 ‘한덕수 재판 위증’ 대법 무죄 확정에 민주 “면죄부 남발” 반발",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-26T05:44:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261126500339"
     },
     {
-     "title": "전 경찰청 국수본부장 재취업 제동…퇴직공직자 12건 제한·불승인",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-26T06:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610306?sid=100"
+     "title": "윤석열 ‘한덕수 재판 위증’ 무죄 확정",
+     "press": "knnews.co.kr",
+     "publishedAt": "2026-11-26T05:40:00.000Z",
+     "link": "https://www.knnews.co.kr/news/articleView.php?idxno=1556009"
     }
    ]
   },
@@ -401,12 +401,18 @@
     "google"
    ],
    "articles90": 12,
-   "recent20": 5,
+   "recent20": 3,
    "press": 12,
-   "firstArticleAt": "2026-11-26T04:38:00.000Z",
+   "firstArticleAt": "2026-11-26T04:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "집 한 채로 평생 월급…주택연금, 3월부터 이렇게 바뀌었다",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-26T06:14:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3764095"
+    },
     {
      "title": "청년 생애 첫 연금보험료 국가 지원…사전신청 5만명",
      "press": "biz.sbs.co.kr",
@@ -418,12 +424,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-26T06:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012301743?sid=102"
-    },
-    {
-     "title": "AI 호황에 美 퇴직연금 수익률 '껑충'",
-     "press": "fortunekorea.co.kr",
-     "publishedAt": "2026-11-26T05:56:00.000Z",
-     "link": "https://www.fortunekorea.co.kr/news/articleView.html?idxno=54885"
     }
    ]
   },
@@ -452,44 +452,10 @@
      "link": "https://m.sports.naver.com/kbaseball/article/109/0005645603"
     },
     {
-     "title": "[MD포토] 신헌민 '퓨처스 북부리그 승리상'",
-     "press": "mydaily.co.kr",
+     "title": "[포토] 김민재, 북부리그 승리상 공동 수상",
+     "press": "starnewskorea.com",
      "publishedAt": "2026-11-26T05:20:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/117/0004128323"
-    }
-   ]
-  },
-  {
-   "keyword": "kbo 시상식",
-   "sources": [
-    "signal.bz",
-    "google",
-    "daum"
-   ],
-   "articles90": 15,
-   "recent20": 15,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T05:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[ST포토] 2026 KBO 수비상 2루수부분 수상하는 정준재",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-26T06:04:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110103077914"
-    },
-    {
-     "title": "[ST포토] 정준재, 2026 KBO 수비상 2루수부분 수상",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-26T06:04:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110102927987"
-    },
-    {
-     "title": "[ST포토] 2026 KBO 수비상 포수부분 수상하는 허인서",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-26T06:02:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110102846697"
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003490403"
     }
    ]
   },
@@ -498,30 +464,63 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 5,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T05:58:00.000Z",
+   "articles90": 6,
+   "recent20": 6,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T06:08:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "[포토뉴스]태백가덕산 풍력발전(주), 이웃돕기 성금 500만원 삼수동 행...",
+     "title": "고성군 “평생학습을 지역발전의 새로운 동력으로”",
      "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-26T06:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001233635?sid=102"
+     "publishedAt": "2026-11-26T06:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001233650?sid=102"
     },
     {
-     "title": "고려아연 온산제련소, 울산 지역 8개 학교에 발전기금 전달",
-     "press": "newsmap.co.kr",
-     "publishedAt": "2026-11-26T06:02:00.000Z",
-     "link": "https://www.newsmap.co.kr/news/articleView.html?idxno=5865"
+     "title": "한전KPS, 광양그린에너지와 발전설비 인공지능 정비 협약",
+     "press": "niceeconomy.co.kr",
+     "publishedAt": "2026-11-26T06:14:00.000Z",
+     "link": "https://www.niceeconomy.co.kr/news/articleView.html?idxno=92021"
     },
     {
-     "title": "노사발전재단 '일하는 사람 기본법' 제정 과제 점검",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-26T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000546092?sid=101"
+     "title": "한만화 당진고구마연구회장 대통령 표창…고구마 산업 발전 공로",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T06:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009312448?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "김민석 대표 소방 방문",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T05:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신용한, 김민석에 국립소방병원 '응급분만 최종치료기관' 육성 건의",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T06:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009312443?sid=102"
+    },
+    {
+     "title": "民 김민석 당대표, 국립소방병원 방문…충북 현안 탄력 받을까",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T06:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214258?sid=102"
+    },
+    {
+     "title": "김민석 당대표 만난 신용한 “국립소방병원 키워 달라”",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-26T05:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078752?sid=102"
     }
    ]
   },
@@ -530,10 +529,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T04:37:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-26T04:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -563,7 +562,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-26T05:21:00.000Z",
    "exclusive": false,
@@ -590,45 +589,12 @@
    ]
   },
   {
-   "keyword": "김민석 대표 소방 방문",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T04:37:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민석 당대표 만난 신용한 “국립소방병원 키워 달라”",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-26T05:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078752?sid=102"
-    },
-    {
-     "title": "김민석, 소방장비센터·병원 찾아 예산 약속 …\"부족함 없도록\"(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T05:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009312196?sid=100"
-    },
-    {
-     "title": "김민석 “소방장비 노후·부족 없도록 국가 지원 강화”",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-26T05:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490282?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "100일의 거짓말 작가 입 열었다",
    "sources": [
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-26T05:26:00.000Z",
    "exclusive": false,
@@ -653,11 +619,43 @@
      "link": "https://www.wikitree.co.kr/articles/1178021"
     }
    ]
+  },
+  {
+   "keyword": "부산 방사능 재난 훈련",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-26T05:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "우성빈 기장군수, 방사능방재 합동훈련 현장 지휘…주민 대피 직접 참여",
+     "press": "megaeconomy.co.kr",
+     "publishedAt": "2026-11-26T05:46:00.000Z",
+     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065591752919465"
+    },
+    {
+     "title": "방사능 재난 대비 이재민 오염검사",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T05:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016465388?sid=102"
+    },
+    {
+     "title": "실전처럼 진행되는 방사능방재 합동훈련",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T05:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016465390?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1607,
+  "flagged": 1609,
   "matched": 784,
   "avgLeadMin": 523,
   "recent": [
