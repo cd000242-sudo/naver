@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T08:47:18.313Z",
+ "builtAt": "2026-11-26T08:57:22.243Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
-  {
-   "keyword": "kbo mvp",
-   "sources": [
-    "google"
-   ],
-   "articles90": 43,
-   "recent20": 7,
-   "press": 36,
-   "firstArticleAt": "2026-11-26T07:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김도영 2년만에 또 MVP 영예, 신인상은 허인서 차지 [2026 KBO 시상식]",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-26T08:42:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1140442"
-    },
-    {
-     "title": "KIA 김도영, 역대 최연소 ‘2회 MVP’… 이승엽보다 빨라",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T08:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207623?sid=004"
-    },
-    {
-     "title": "KT, KBO 시상식서 5개 부문 개인 타이틀 수상...SSG는 3개 포지션 수비상",
-     "press": "joongboo.com",
-     "publishedAt": "2026-11-26T08:38:00.000Z",
-     "link": "https://www.joongboo.com/news/articleView.html?idxno=363743728"
-    }
-   ]
-  },
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 46,
-   "recent20": 10,
-   "press": 28,
-   "firstArticleAt": "2026-11-26T07:20:00.000Z",
+   "articles90": 44,
+   "recent20": 5,
+   "press": 26,
+   "firstArticleAt": "2026-11-26T07:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "관세 상한 15% 유지에 한숨 돌린 산업계… ‘25% 인상’ 여지에 긴장",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-26T08:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703599?sid=101"
+    },
+    {
+     "title": "中 “美 과잉생산 관세 단호히 반대”⋯보복 가능성 경고",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-26T08:48:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653632"
+    },
     {
      "title": "반도체 주도 '4%대 성장' 역설…트럼프 '25% 관세' 표적",
      "press": "newstomato.com",
      "publishedAt": "2026-11-26T08:44:00.000Z",
      "link": "http://www.newstomato.com/ReadNews.aspx?no=1322070&inflow=N"
-    },
-    {
-     "title": "반도체 부족 난리인데 과잉생산이라니 … 삼전닉스 '당혹'",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T08:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005769700?sid=101"
-    },
-    {
-     "title": "'40% 관세' 협박까지…'트럼프 폭주'에 G2 전쟁 재점화",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-26T08:40:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322036&inflow=N"
     }
    ]
   },
   {
-   "keyword": "이서진 한지민 그냥사람친구",
+   "keyword": "학교 비정규직 총파업",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 36,
+   "articles90": 32,
    "recent20": 5,
-   "press": 25,
-   "firstArticleAt": "2026-11-26T07:18:00.000Z",
-   "exclusive": true,
+   "press": 26,
+   "firstArticleAt": "2026-11-26T07:32:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한지민-이서진 '그냥 사람 친구' 내일 첫 방송…OTT→회차 정보?",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T08:46:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287170"
+     "title": "경기도교육청, 내일 비정규직 파업 때 빵 등 대체식 지급",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-26T08:54:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545095"
     },
     {
-     "title": "이서진, 한지민에 ‘갱년기’ 발언… 누리꾼 “본인이 갱년기인듯” vs...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-26T08:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001151889"
+     "title": "학교비정규직 27일 총파업…경기 학교 32% 대체급식 예정",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-26T08:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000134006?sid=102"
     },
     {
-     "title": "[TD영상] '억척스러운 한지민 vs 노안 이서진' 끝 없는 디스로 '웃음 보...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-26T08:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054361"
+     "title": "세종시교육청 교육공무직원 총파업 대응책 마련",
+     "press": "inews365.com",
+     "publishedAt": "2026-11-26T08:44:00.000Z",
+     "link": "https://www.inews365.com/news/article.html?no=945420"
     }
    ]
   },
@@ -111,62 +79,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 32,
-   "recent20": 5,
+   "articles90": 29,
+   "recent20": 6,
    "press": 25,
-   "firstArticleAt": "2026-11-26T07:21:00.000Z",
+   "firstArticleAt": "2026-11-26T07:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "부울경 시민단체, 통합LCC 본사 부산 유치 환영…\"실질적 경영 권한 확보...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-26T08:42:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328651"
+     "title": "부산, 통합 LCC 본사 품었다…남부권 항공산업 재편 신호탄",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T08:54:00.000Z",
+     "link": "https://www.ajunews.com/view/20261126174241602"
     },
     {
-     "title": "항공기 60대 통합 진에어, 본사는 부산으로…결정권·직원 처우가 과제",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-26T08:40:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328687"
+     "title": "통합LCC 본사 부산 확정에 지역사회 일제히 환영…“핵심 경영 기능 갖...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-26T08:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703597?sid=102"
     },
     {
-     "title": "통합 진에어, 부산에 본사 둔다…김해공항 제2허브 구축",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-26T08:38:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627992"
+     "title": "통합 LCC 본사 부산 유치…지역 여·야 한목소리 '환영'",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-26T08:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078867?sid=102"
     }
    ]
   },
   {
-   "keyword": "철도노조 안전운행 투쟁",
+   "keyword": "이서진 한지민 그냥사람친구",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 22,
-   "recent20": 2,
-   "press": 22,
-   "firstArticleAt": "2026-11-26T07:22:00.000Z",
+   "articles90": 29,
+   "recent20": 5,
+   "press": 21,
+   "firstArticleAt": "2026-11-26T07:30:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“소녀는 맑고 중년은 억척?” 이서진의 시대착오적 막말, ‘찐친’이면...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T08:53:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005769716"
+    },
+    {
+     "title": "한지민-이서진 '그냥 사람 친구' 내일 첫 방송…OTT→회차 정보?",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-26T08:46:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287170"
+    },
+    {
+     "title": "이서진, 중년女·한지민 공개 비하..\"갱년기는 너\" 박경림이 大참사 막...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-26T08:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490520"
+    }
+   ]
+  },
+  {
+   "keyword": "코레일",
+   "sources": [
+    "google"
+   ],
+   "articles90": 20,
+   "recent20": 5,
+   "press": 18,
+   "firstArticleAt": "2026-11-26T07:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "철도노조 안전운행 투쟁 첫날…청주 오송역 열차 정상 운행",
-     "press": "inews365.com",
-     "publishedAt": "2026-11-26T08:44:00.000Z",
-     "link": "https://www.inews365.com/news/article.html?no=945532"
+     "title": "코레일, 27일부터 광명역공항버스 노선에 수소버스 운행",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-26T08:56:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456642"
     },
     {
-     "title": "철도노조 준법 투쟁 여파로 일반 열차 3대 운행 중지",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T08:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301895?sid=101"
+     "title": "철도와 미디어아트의 ‘앙상블’…코레일유통물류, 청년작가 공모전 시...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T08:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769718?sid=101"
     },
     {
-     "title": "철도노조 내달 4일까지 안전운행 투쟁…안전인력 충원 요구",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-26T08:24:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566572"
+     "title": "코레일, 일반열차 모바일 승차권 서비스 확대",
+     "press": "ikld.kr",
+     "publishedAt": "2026-11-26T08:50:00.000Z",
+     "link": "http://www.ikld.kr/news/articleView.html?idxno=344963"
     }
    ]
   },
@@ -175,13 +175,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 30,
-   "recent20": 3,
-   "press": 19,
-   "firstArticleAt": "2026-11-26T07:22:00.000Z",
-   "exclusive": true,
+   "articles90": 26,
+   "recent20": 4,
+   "press": 17,
+   "firstArticleAt": "2026-11-26T07:28:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "홍익표 통일부 장관 후보자 “낮은 수준의 현실적 남북대화 추진”",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-26T08:56:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1140457"
+    },
     {
      "title": "임웅순 \"한미동맹 취약하지 않아\" … 홍익표 \"북한과의 적대관계 해소\"",
      "press": "mk.co.kr",
@@ -193,12 +199,38 @@
      "press": "newdaily.co.kr",
      "publishedAt": "2026-11-26T08:42:00.000Z",
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650385.html"
+    }
+   ]
+  },
+  {
+   "keyword": "철도노조 안전운행 투쟁",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 18,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-26T07:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "철도노조 준법투쟁에 열차 지연",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-26T08:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686610?sid=102"
     },
     {
-     "title": "홍익표 \"남북관계, 낮고 현실적 방안부터 풀어가야\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T08:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466516?sid=100"
+     "title": "철도노조 안전운행 투쟁 첫날…청주 오송역 열차 정상 운행",
+     "press": "inews365.com",
+     "publishedAt": "2026-11-26T08:44:00.000Z",
+     "link": "https://www.inews365.com/news/article.html?no=945532"
+    },
+    {
+     "title": "철도노조 준법 투쟁 여파로 일반 열차 3대 운행 중지",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T08:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301895?sid=101"
     }
    ]
   },
@@ -207,62 +239,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 3,
-   "press": 19,
-   "firstArticleAt": "2026-11-26T07:20:00.000Z",
+   "articles90": 17,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-26T07:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[오늘의 주목주] 현대모비스 주가 5%대 내려, 코스피 '기관 순매수'에 4...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-26T08:50:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453054"
+    },
+    {
+     "title": "코스피, 기준금리 인상·기관 순매수에 강보합 마감...코스닥도 소폭 상...",
+     "press": "futurechosun.com",
+     "publishedAt": "2026-11-26T08:50:00.000Z",
+     "link": "https://futurechosun.com/?p=167805"
+    },
     {
      "title": "코스피, 전날 6% 급락 뒤 강보합…4700선 마감",
      "press": "news.mtn.co.kr",
      "publishedAt": "2026-11-26T08:36:00.000Z",
      "link": "https://news.mtn.co.kr/article/2026112616391858186"
-    },
-    {
-     "title": "코스피, 급락 후 강보합 마감…4,711.21",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-26T08:32:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466708"
-    },
-    {
-     "title": "코스피, '전강후약' 0.29% 상승...장 막판 상승분 대거 반납",
-     "press": "delighti.co.kr",
-     "publishedAt": "2026-11-26T08:28:00.000Z",
-     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125744"
-    }
-   ]
-  },
-  {
-   "keyword": "코레일",
-   "sources": [
-    "google"
-   ],
-   "articles90": 19,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-26T07:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코레일, '셀프 좌석변경' ITX-새마을·마음까지 확대",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-26T08:40:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195904"
-    },
-    {
-     "title": "[공기업 센터] 한국지역난방공사·국민체육진흥공단·코레일유통물류",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-26T08:30:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=173194"
-    },
-    {
-     "title": "코레일, 광명역~인천공항 노선에 친환경 수소 공항버스 도입",
-     "press": "efnews.co.kr",
-     "publishedAt": "2026-11-26T08:28:00.000Z",
-     "link": "http://www.efnews.co.kr/news/articleView.html?idxno=134345"
     }
    ]
   },
@@ -271,13 +271,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
+   "articles90": 12,
    "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-26T07:18:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-26T07:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "헌재 \"외국인 국내 정치활동 금지 출입국관리법 조항 헌법불합치\"",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-26T08:48:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566971"
+    },
     {
      "title": "헌재, 외국인 정치활동 금지법 6대3 헌법불합치 결정",
      "press": "getnews.co.kr",
@@ -289,44 +295,6 @@
      "press": "pressian.com",
      "publishedAt": "2026-11-26T08:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/002/0002467811?sid=102"
-    },
-    {
-     "title": "헌재, '외국인 정치활동 금지' 헌법불합치… 49년 만에 제동",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-26T08:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968003?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김민석",
-   "sources": [
-    "google"
-   ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-26T07:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신용한 충북지사, 김민석 대표에게 현안 건의",
-     "press": "dynews.co.kr",
-     "publishedAt": "2026-11-26T08:45:00.000Z",
-     "link": "https://www.dynews.co.kr/news/articleView.html?idxno=875824"
-    },
-    {
-     "title": "\"최민희 중징계 전망…김민석, 역풍 감당할 수 있나\"[박영환의 시사1번...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-26T08:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122263?sid=100"
-    },
-    {
-     "title": "신용한 충북지사, 국립소방병원 응급·분만 최종 치료기관 육성 김민석...",
-     "press": "inews365.com",
-     "publishedAt": "2026-11-26T08:20:00.000Z",
-     "link": "https://www.inews365.com/news/article.html?no=945485"
     }
    ]
   },
@@ -335,13 +303,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
    "firstArticleAt": "2026-11-26T07:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "헌재 \"외부 조력도 노동3권으로 보호\"…옛 개입금지 조항 위헌",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T08:50:00.000Z",
+     "link": "https://www.ajunews.com/view/20261126173858587"
+    },
     {
      "title": "노조 파업 외부서 지원했다고 처벌…헌재, 36년 만에 \"위헌\"(종합)",
      "press": "yna.co.kr",
@@ -353,76 +327,39 @@
      "press": "sedaily.com",
      "publishedAt": "2026-11-26T08:29:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004686584?sid=102"
-    },
-    {
-     "title": "헌재, 19년 전 사라진 제3자 개입금지 조항 “위헌”…“근로3권 침해”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T08:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568249?sid=102"
     }
    ]
   },
   {
-   "keyword": "곽빈 딸 출산",
+   "keyword": "김도영 MVP 탈환",
    "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T07:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "곽빈, 아내·딸 있다고 직접 공개…내년 시즌 뒤 결혼식 계획",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-26T08:14:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250567"
-    },
-    {
-     "title": "트로피 3개 휩쓴 두산 곽빈의 다짐 “좋은 선수, 좋은 아빠 될게요”",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-26T08:01:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/382/0001307057"
-    },
-    {
-     "title": "‘깜짝 결혼 발표’ 곽빈, 첫 딸 대한 애정도 듬뿍 “좋은 선수이자 아...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-26T07:49:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001283763"
-    }
-   ]
-  },
-  {
-   "keyword": "마운자로",
-   "sources": [
-    "daum"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 6,
-   "recent20": 0,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-26T07:32:00.000Z",
+   "firstArticleAt": "2026-11-26T07:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "마운자로 등 해외 밀반입…25명 적발",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T08:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301892?sid=102"
+     "title": "'왕좌 탈환' 김도영 \"내년 유격수 도전…좋은 모습으로 시즌 완주\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T08:42:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009313023"
     },
     {
-     "title": "일본서 사면 10만원이나 싸다더니…마운자로 몰래 들여와 되판 일당 ‘...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-26T08:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686571?sid=102"
-    },
-    {
-     "title": "마운자로에 가짜 비아그라까지…불법의약품 판매 일당 적발",
-     "press": "news.bbsi.co.kr",
+     "title": "김도영, 통산 2번째 KBO MVP",
+     "press": "hankyung.com",
      "publishedAt": "2026-11-26T08:14:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121139"
+     "link": "https://m.sports.naver.com/kbaseball/article/015/0005358679"
+    },
+    {
+     "title": "'홈런왕' KIA 김도영, 2년 만에 MVP 탈환…신인상은 한화 허인서",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T07:46:00.000Z",
+     "link": "https://www.ajunews.com/view/20261126164019291"
     }
    ]
   },
@@ -493,7 +430,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1681,
+  "flagged": 1683,
   "matched": 813,
   "avgLeadMin": 521,
   "recent": [
