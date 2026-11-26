@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T11:08:07.135Z",
+ "builtAt": "2026-11-26T11:18:10.425Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 53,
-   "recent20": 7,
-   "press": 42,
-   "firstArticleAt": "2026-11-26T09:43:00.000Z",
+   "articles90": 54,
+   "recent20": 5,
+   "press": 44,
+   "firstArticleAt": "2026-11-26T09:56:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "경찰, 'AI 커닝' 세무사 수석 구속영장 신청…\"파급력 매우 커\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-26T11:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447141?sid=102"
+    },
+    {
+     "title": "'AI 커닝' 세무사 수석 구속영장… \"자수했어도 증거인멸·파장 크다\"",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-26T11:12:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=731280"
+    },
     {
      "title": "경찰, ‘세무냥이’ 구속영장 신청…“증거인멸·도주 우려 있어”",
      "press": "sedaily.com",
      "publishedAt": "2026-11-26T11:07:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004686659?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이 대통령 폭언 욕설 차단",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 25,
+   "recent20": 3,
+   "press": 25,
+   "firstArticleAt": "2026-11-26T10:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 \"SNS 제일 큰 문제는 혐오·비방…그러면 차단\"",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-26T11:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002467821?sid=100"
     },
     {
-     "title": "'AI 부정행위' 세무사 수석합격자 구속영장 신청",
-     "press": "yonhapnewstv.co.kr",
+     "title": "\"'저 가난합니다' 왜 해야 하나?\" 李대통령이 밝힌 '복지 자동주의'",
+     "press": "mt.co.kr",
      "publishedAt": "2026-11-26T11:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930291?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/008/0005447140?sid=100"
     },
     {
-     "title": "경찰, 'AI 커닝' 세무사 수석 구속영장 신청...\"중대 범죄 저질러\"",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-26T11:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122272?sid=102"
+     "title": "李대통령 “SNS서 합리적 내용은 수용, 폭언·욕설은 차단”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-26T11:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703636?sid=100"
     }
    ]
   },
@@ -48,7 +80,7 @@
     "signal.bz"
    ],
    "articles90": 27,
-   "recent20": 1,
+   "recent20": 0,
    "press": 25,
    "firstArticleAt": "2026-11-26T09:56:00.000Z",
    "exclusive": false,
@@ -75,49 +107,23 @@
    ]
   },
   {
-   "keyword": "이 대통령 폭언 욕설 차단",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 24,
-   "recent20": 3,
-   "press": 24,
-   "firstArticleAt": "2026-11-26T10:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"'저 가난합니다' 왜 해야 하나?\" 李대통령이 밝힌 '복지 자동주의'",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-26T11:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447140?sid=100"
-    },
-    {
-     "title": "李대통령 “SNS서 합리적 내용은 수용, 폭언·욕설은 차단”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-26T11:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703636?sid=100"
-    },
-    {
-     "title": "이 대통령 “SNS 지적은 도움…폭언·욕설은 차단”",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-26T10:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368847?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 4,
+   "articles90": 13,
+   "recent20": 3,
    "press": 12,
-   "firstArticleAt": "2026-11-26T09:43:00.000Z",
+   "firstArticleAt": "2026-11-26T09:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프, 중간선거 졌는데도 관세는 '마이웨이'…14개국 과잉생산 관세,...",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-26T11:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002467822?sid=104"
+    },
     {
      "title": "아직 공장도 없는데 왜?…美 ‘과잉생산 관세’ 근거 된 800조원 호남 반...",
      "press": "segye.com",
@@ -129,12 +135,6 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-26T10:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001538320?sid=101"
-    },
-    {
-     "title": "미, 한국에 과잉생산 관세 15% 제안…25%까지 인상 경고",
-     "press": "kyongbuk.co.kr",
-     "publishedAt": "2026-11-26T10:52:00.000Z",
-     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4092322"
     }
    ]
   },
@@ -143,10 +143,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-26T09:40:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-26T09:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -175,30 +175,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T09:45:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T10:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "대법, '한덕수 재판 위증 혐의' 윤석열 무죄 확정",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-26T11:16:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545146"
+    },
+    {
+     "title": "尹 ‘한덕수 재판 위증’ 무죄 확정… 대법 “증거 부족”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-26T11:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178413?sid=102"
+    },
     {
      "title": "尹 ‘한덕수 재판 위증’ 대법 무죄(종합)",
      "press": "kookje.co.kr",
      "publishedAt": "2026-11-26T10:47:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/658/0000162426?sid=102"
-    },
-    {
-     "title": "'재판 위증' 첫 무죄 확정, 윤 전 대통령 측 \"특검에 감사\"",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-26T10:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980044?sid=102"
-    },
-    {
-     "title": "尹 ‘한덕수 재판 위증’ 무죄 확정",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-26T10:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887718?sid=102"
     }
    ]
   },
@@ -235,34 +235,35 @@
    ]
   },
   {
-   "keyword": "장동혁 대표 발언",
+   "keyword": "검찰",
    "sources": [
-    "nate"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T09:42:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T09:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장동혁, '조작징계' 의혹 제기 윤리위원 해임...당 내홍 격화 조짐",
-     "press": "ntoday.co.kr",
-     "publishedAt": "2026-11-26T10:40:00.000Z",
-     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131170"
+     "title": "검찰총장 후보 천거기간 연장…'사상 초유'",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T11:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930295?sid=102"
     },
     {
-     "title": "'조작 징계' 두고 지도부 공개 충돌...장동혁 \"탈당 창당도 있다\"",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-26T10:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980043?sid=100"
+     "title": "검찰총장 후보 초유의 ‘추가 천거’… “靑 새 인물 염두” 분분",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-26T10:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887717?sid=102"
     },
     {
-     "title": "'장동혁-최 교수' 대화내역 추가 폭로에…배현진 \"몇 꺼풀의 얼굴이 더...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-26T09:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160021?sid=100"
+     "title": "검찰총장 후보 초유의 ‘추가 천거’…기존 3인 외 새 인물 염두?",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-26T10:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568273?sid=102"
     }
    ]
   },
@@ -299,71 +300,6 @@
    ]
   },
   {
-   "keyword": "검찰",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T09:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "검찰총장 후보 초유의 ‘추가 천거’… “靑 새 인물 염두” 분분",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-26T10:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887717?sid=102"
-    },
-    {
-     "title": "검찰총장 후보 초유의 ‘추가 천거’…기존 3인 외 새 인물 염두?",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T10:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568273?sid=102"
-    },
-    {
-     "title": "첫 공소청 수장 인선…검찰총장 후보 사상 첫 추가 천거",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-26T09:58:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261126500729"
-    }
-   ]
-  },
-  {
-   "keyword": "美 관세 인상 가능성",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T09:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "아직 공장도 없는데 왜?…美 ‘과잉생산 관세’ 근거 된 800조원 호남 반...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-26T11:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178408?sid=100"
-    },
-    {
-     "title": "['클릭' 증시] 약발 떨어진 美 관세...아시아 증시 '무덤덤'",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-26T09:58:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108394"
-    },
-    {
-     "title": "[베트남 증시] 美 '최고 35% 관세' 직격탄에 3.4% 급락…VN지수 1,630선 붕...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-26T09:48:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261126001318"
-    }
-   ]
-  },
-  {
    "keyword": "중진 만찬 참석 의원들",
    "sources": [
     "nate"
@@ -379,19 +315,51 @@
      "title": "중진 만찬 참석하는 남인순·박범계 의원",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T10:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466649?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/001/0016466650?sid=100"
     },
     {
      "title": "중진 만찬 참석하는 이학영 의원",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T10:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466651?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/001/0016466652?sid=100"
     },
     {
      "title": "중진 만찬 참석하는 정성호·민홍철 의원",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T10:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016466643?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "장동혁 대표 발언",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T09:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "장동혁, '조작징계' 의혹 제기 윤리위원 해임...당 내홍 격화 조짐",
+     "press": "ntoday.co.kr",
+     "publishedAt": "2026-11-26T10:40:00.000Z",
+     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131170"
+    },
+    {
+     "title": "'조작 징계' 두고 지도부 공개 충돌...장동혁 \"탈당 창당도 있다\"",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-26T10:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980043?sid=100"
+    },
+    {
+     "title": "'장동혁-최 교수' 대화내역 추가 폭로에…배현진 \"몇 꺼풀의 얼굴이 더...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-26T09:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160021?sid=100"
     }
    ]
   }
