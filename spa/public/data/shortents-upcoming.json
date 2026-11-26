@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T16:09:52.027Z",
+ "builtAt": "2026-11-26T16:19:55.305Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -48,7 +48,7 @@
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 2,
+   "recent20": 1,
    "press": 8,
    "firstArticleAt": "2026-11-26T15:02:00.000Z",
    "exclusive": false,
@@ -71,38 +71,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T15:45:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016466717?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "북한 러 군사지원 중단",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T14:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "우크라 \"北, 러 '남북 긴장 완화' 발언에 반발…군사 지원 중단\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T15:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014348380?sid=104"
-    },
-    {
-     "title": "“김정은, 대러 군사지원 중단 지시”…북·러 균열설 꺼낸 우크라",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568324?sid=104"
-    },
-    {
-     "title": "우크라 정보당국 \"北, 러 군사지원 일시 중단…KN-23 등 공급 끊겨\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-26T14:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968046?sid=104"
     }
    ]
   },
