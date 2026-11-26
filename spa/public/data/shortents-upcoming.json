@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T03:45:36.002Z",
+ "builtAt": "2026-11-26T03:55:39.366Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "위증 무죄 확정",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 49,
-   "recent20": 6,
-   "press": 46,
-   "firstArticleAt": "2026-11-26T02:16:00.000Z",
+   "articles90": 41,
+   "recent20": 4,
+   "press": 38,
+   "firstArticleAt": "2026-11-26T02:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "尹 변호인단, 위증 무죄 확정에 \"특검, 수사 아닌 소설 썼다\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-26T03:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848252?sid=102"
+    },
+    {
+     "title": "尹, '한덕수 재판 위증 혐의' 무죄 확정",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-26T03:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143068?sid=102"
+    },
     {
      "title": "윤석열 위증 무죄 확정…헌재 탄핵 결정과 모순되나",
      "press": "topstarnews.net",
      "publishedAt": "2026-11-26T03:44:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286833"
+    }
+   ]
+  },
+  {
+   "keyword": "광고",
+   "sources": [
+    "google"
+   ],
+   "articles90": 35,
+   "recent20": 3,
+   "press": 32,
+   "firstArticleAt": "2026-11-26T03:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "재혼하길 잘했네…김나영, 마이큐와 가전 광고 모델 발탁→'셋째' 생기...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-26T03:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409658"
     },
     {
-     "title": "'재판 위증' 무죄 확정에 尹측 \"기소 누구 책임…정상적 법치국가 아냐...",
-     "press": "edaily.co.kr",
+     "title": "공정위, '애플 인텔리전스' 기만 광고 제재 착수…관련 매출 3조3527억원...",
+     "press": "pointe.co.kr",
      "publishedAt": "2026-11-26T03:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415960?sid=102"
+     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=88501"
     },
     {
-     "title": "윤석열, 한덕수 재판 위증 혐의 첫 무죄 확정… 조은석 특검, ‘1패’",
-     "press": "siminilbo.co.kr",
-     "publishedAt": "2026-11-26T03:34:00.000Z",
-     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160268625827411"
+     "title": "공정위, ‘아이폰16 허위 광고’ 심의",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T03:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301671?sid=101"
     }
    ]
   },
@@ -47,30 +79,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 30,
-   "recent20": 3,
-   "press": 27,
+   "articles90": 32,
+   "recent20": 4,
+   "press": 29,
    "firstArticleAt": "2026-11-26T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "반도체 초호황에도 실질소득 2년반만에 감소",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-26T03:48:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239955"
+    },
+    {
+     "title": "3분기 실질소득 2.1% 감소…‘양극화 심화’",
+     "press": "bigtanews.co.kr",
+     "publishedAt": "2026-11-26T03:46:00.000Z",
+     "link": "https://www.bigtanews.co.kr/article/view/big202611260009"
+    },
+    {
      "title": "가구 월소득 548만원…실질소득 3년 3개월 만에 최대 감소",
      "press": "shinailbo.co.kr",
      "publishedAt": "2026-11-26T03:38:00.000Z",
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088195"
+    }
+   ]
+  },
+  {
+   "keyword": "신현송 선제 대응",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 18,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-26T02:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신현송 \"반도체 이익 700조원, 블랙홀로 사라지는 돈 아니다\"",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-26T03:52:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733088"
     },
     {
-     "title": "가계 실질소득 '뒷걸음질'…\"먹고살기 더 힘들어졌다\"",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-26T03:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001274050?sid=101"
+     "title": "신현송 한은 총재 \"내년 4.1% 성장\"…긴축 지속",
+     "press": "press9.kr",
+     "publishedAt": "2026-11-26T03:30:00.000Z",
+     "link": "http://www.press9.kr/news/articleView.html?idxno=87086"
     },
     {
-     "title": "경제 3%대 성장에도 가계 실질소득 2.1% 감소…10분기 만에",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-26T03:32:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3763888"
+     "title": "신현송 한은 총재, 내년 상반기 추가 금리 인상 시사…\"선제적 대응 필...",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-26T03:26:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=731150"
     }
    ]
   },
@@ -79,10 +143,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 14,
+   "articles90": 13,
    "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T02:24:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-26T02:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -111,13 +175,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 6,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T02:19:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-26T02:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "아들 앞 폭행→사망 사건 1심 '징역 12년·3년' 불복…故 김창민 감독 폭...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-26T03:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409657"
+    },
     {
      "title": "‘4명에 새 생명’ 故김창민 감독 살해 2명, 살인죄 반쪽에 형량 4배차…...",
      "press": "dt.co.kr",
@@ -129,12 +199,6 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-26T02:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002728893?sid=102"
-    },
-    {
-     "title": "'故 김창민 감독 사망 사건' 2심 간다…피고인 2명·공소청 쌍방 항소",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-26T02:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000493541"
     }
    ]
   },
@@ -143,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T02:16:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-26T02:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,44 +235,12 @@
    ]
   },
   {
-   "keyword": "육아휴직",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T02:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“육아휴직 하고 세무사 합격”…후기 글 올린 30대 워킹맘 결국",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T03:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568148?sid=102"
-    },
-    {
-     "title": "3개월 만에 또…20대 여중사 숨진 채 발견 / \"육아휴직 중 주80시간 공부...",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-26T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979975?sid=102"
-    },
-    {
-     "title": "한국콜마, 남성 육아휴직자 18배 이상 늘어…일∙생활 균형 우수기업 선...",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-26T02:46:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191479"
-    }
-   ]
-  },
-  {
    "keyword": "재혼 황후 이세영 악역 논란",
    "sources": [
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-26T02:51:00.000Z",
    "exclusive": false,
@@ -231,6 +263,38 @@
      "press": "osen.co.kr",
      "publishedAt": "2026-11-26T03:06:00.000Z",
      "link": "https://m.entertain.naver.com/article/109/0005645561"
+    }
+   ]
+  },
+  {
+   "keyword": "이정재",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T02:40:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'최대주주 특혜 논란' 이정재, 수척해진 모습으로 공식 석상…고인 떠올...",
+     "press": "ent.sbs.co.kr",
+     "publishedAt": "2026-11-26T03:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/416/0000328343"
+    },
+    {
+     "title": "2년 전엔 '혼외자' 정우성, 올해는 '특혜 의혹' 이정재…‘청담부부’의...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-26T03:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054282"
+    },
+    {
+     "title": "이정재, 수익 특혜 의혹 속 청룡 무대 … 故 안성기 추모하다 울먹",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-26T02:40:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650149.html"
     }
    ]
   },
@@ -259,10 +323,10 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014346791?sid=102"
     },
     {
-     "title": "고압산소치료실 살피는 김민석 대표",
-     "press": "newsis.com",
+     "title": "신용한, 김민석 만나 국립소방병원 기능 강화·공기업 유치 건의",
+     "press": "newspim.com",
      "publishedAt": "2026-11-26T03:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014346789?sid=102"
+     "link": "https://www.newspim.com/news/view/20261126000705"
     }
    ]
   },
@@ -334,7 +398,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1546,
+  "flagged": 1549,
   "matched": 759,
   "avgLeadMin": 507,
   "recent": [
