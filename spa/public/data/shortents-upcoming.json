@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T22:21:54.119Z",
+ "builtAt": "2026-11-26T22:31:57.591Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,12 +16,18 @@
     "nate"
    ],
    "articles90": 14,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-26T21:01:00.000Z",
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T21:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 “중간선거 전 발표 3분기 성장률 가짜…즉각 조사”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T22:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302330?sid=104"
+    },
     {
      "title": "‘블프’ 직전 ‘관세폭탄’ 날린 트럼프…“GDP 성장률 조작” 음모론",
      "press": "joongang.co.kr",
@@ -33,12 +39,38 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-26T22:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012302327?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 과잉생산 관세 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 13,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-26T21:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"트럼프 새 관세 시행 땐 美 세입 감소분 80% 보전 전망\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-26T22:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078908?sid=104"
     },
     {
-     "title": "\"선거 직전 가짜 수치 발표\" 트럼프, 'GDP 수정' 즉각 조사 주장",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-26T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447215?sid=101"
+     "title": "트럼프 관세의 역설…물가 부담 키우고 재정수입 의존 높여 철폐 어려워...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-26T22:24:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261127010010631"
+    },
+    {
+     "title": "‘블프’ 직전 ‘관세폭탄’ 날린 트럼프…“GDP 성장률 조작” 음모론",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-26T22:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568387?sid=104"
     }
    ]
   },
@@ -47,13 +79,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 14,
-   "recent20": 0,
-   "press": 14,
-   "firstArticleAt": "2026-11-26T21:00:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-26T21:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "보험사 대출 연체율 2분기 연속 상승…기업대출 중심으로 건전성 악화",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T22:30:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785194"
+    },
     {
      "title": "보험사 대출 연체율 1.27%…두 분기 연속 상승",
      "press": "biz.heraldcorp.com",
@@ -65,76 +103,38 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-26T21:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006416326?sid=101"
-    },
-    {
-     "title": "3분기 보험사 대출채권 263.9조⋯연체율 0.19%p↑",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-26T21:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653539"
     }
    ]
   },
   {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-26T20:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘블프’ 직전 ‘관세폭탄’ 날린 트럼프…“GDP 성장률 조작” 음모론",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T22:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568387?sid=104"
-    },
-    {
-     "title": "물가 뛰는데 트럼프 관세 '부채질'…\"최악 시기 경제적 자해\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-26T22:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610587?sid=104"
-    },
-    {
-     "title": "[인사이트 뉴스] 멈추지 않는 트럼프의 관세전쟁…산업정책부터 저축까...",
-     "press": "moneystorm.kr",
-     "publishedAt": "2026-11-26T22:04:00.000Z",
-     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8910"
-    }
-   ]
-  },
-  {
-   "keyword": "정년",
+   "keyword": "탄핵",
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 0,
+   "articles90": 6,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-26T21:00:00.000Z",
+   "firstArticleAt": "2026-11-26T21:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“아빠는 출근, 아들은 백수?”…‘65세 정년 연장’ 추진 논란 [잇슈 머...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T21:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302323?sid=101"
+     "title": "[오늘의 신문] 조희대 대법원장 탄핵 추진에 사법부 반발 확산...한은 기...",
+     "press": "kor.theasian.asia",
+     "publishedAt": "2026-11-26T22:30:00.000Z",
+     "link": "http://kor.theasian.asia/archives/423344"
     },
     {
-     "title": "삭발에 단식까지, 공무원도 \"정년연장\"",
-     "press": "labortoday.co.kr",
-     "publishedAt": "2026-11-26T21:34:00.000Z",
-     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237955"
+     "title": "들끓는 법대(法臺)…사법부 수장 겨눈 '징계성 탄핵'의 자충수",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-26T22:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143128?sid=102"
     },
     {
-     "title": "정년연장 중대 갈림길, 민주당안 회람 마쳤다",
-     "press": "labortoday.co.kr",
-     "publishedAt": "2026-11-26T21:34:00.000Z",
-     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237951"
+     "title": "'하이에나 떼'·'탄핵 반대' 발언…오늘 최민희 징계 수위 촉각",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-26T22:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653677?sid=100"
     }
    ]
   },
@@ -144,7 +144,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-26T21:40:00.000Z",
    "exclusive": false,
@@ -171,66 +171,34 @@
    ]
   },
   {
-   "keyword": "김은우 17살 연하 아내와 재혼",
+   "keyword": "정년",
    "sources": [
-    "nate"
+    "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-26T20:53:00.000Z",
+   "firstArticleAt": "2026-11-26T21:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"아빠 재산 노린 거 아니냐?\"…17세 연하 아내와 재혼한 김은우→두 아...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T22:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128531"
+     "title": "“아빠는 출근, 아들은 백수?”…‘65세 정년 연장’ 추진 논란 [잇슈 머...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T21:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302323?sid=101"
     },
     {
-     "title": "김은우, 아들 둘 데리고 17살 연하 재혼 \"재산 노리는 거 아니냐고\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T21:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014348480"
+     "title": "정년연장 중대 갈림길, 민주당안 회람 마쳤다",
+     "press": "labortoday.co.kr",
+     "publishedAt": "2026-11-26T21:34:00.000Z",
+     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237951"
     },
     {
-     "title": "'재혼' 김은우, 두 아들이 ♥17살 연하 아내 의심…\"'재산 노린 것 아니...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-26T21:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084616"
-    }
-   ]
-  },
-  {
-   "keyword": "연우, 두 달 10KG 감량",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T20:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민하는 17kg, 연우는 밥 두 숟갈로 10kg…면역력 '적신호'",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-26T22:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786390"
-    },
-    {
-     "title": "두 달 만에 10kg 뺀 연우 \"온몸에 두드러기\" 부작용 고백",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-26T21:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005447211"
-    },
-    {
-     "title": "'무쇠소녀단3' 연우 10kg 감량",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-26T20:54:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611270007"
+     "title": "삭발에 단식까지, 공무원도 \"정년연장\"",
+     "press": "labortoday.co.kr",
+     "publishedAt": "2026-11-26T21:34:00.000Z",
+     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237955"
     }
    ]
   },
@@ -239,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T20:52:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-26T21:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -269,8 +237,8 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1751,
-  "matched": 871,
+  "flagged": 1749,
+  "matched": 868,
   "avgLeadMin": 566,
   "recent": [
    {
