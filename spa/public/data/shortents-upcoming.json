@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T10:27:52.872Z",
+ "builtAt": "2026-11-26T10:37:56.293Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "코레일 전철 지연",
+   "keyword": "세무사 수석 구속영장 신청",
    "sources": [
     "daum"
    ],
-   "articles90": 40,
-   "recent20": 2,
-   "press": 36,
-   "firstArticleAt": "2026-11-26T09:08:00.000Z",
-   "exclusive": false,
+   "articles90": 36,
+   "recent20": 14,
+   "press": 32,
+   "firstArticleAt": "2026-11-26T09:43:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "주말 앞 철도勞 ‘안전운행 투쟁’…KTX·화물 연쇄지연 우려(종합)",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-26T10:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162418?sid=102"
+     "title": "경찰, 세무사 시험 'AI 부정행위' 자수한 수석 합격자 구속영장 신청",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-26T10:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848486?sid=102"
     },
     {
-     "title": "철도노조 준법투쟁 첫날 퇴근길 지연...주말 나들이객·수험생 이동 '우...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T10:08:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785131"
+     "title": "[속보]경찰, ‘AI 커닝’ 세무사 수석 구속영장 신청",
+     "press": "donga.com",
+     "publishedAt": "2026-11-26T10:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765503?sid=102"
     },
     {
-     "title": "철도노조 준법투쟁 첫날 퇴근길 지연 속출…\"30분 기다린 열차 이미 만...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T10:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466628?sid=102"
+     "title": "경찰, ‘AI 부정행위’ 세무사 수석 구속영장 신청",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-26T10:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368833?sid=102"
     }
    ]
   },
@@ -49,11 +49,17 @@
    ],
    "articles90": 36,
    "recent20": 1,
-   "press": 26,
-   "firstArticleAt": "2026-11-26T09:04:00.000Z",
+   "press": 27,
+   "firstArticleAt": "2026-11-26T09:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "철도노조 준법투쟁 첫날 열차 4대 멈춰…전철 235대 지연",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-26T10:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165822?sid=102"
+    },
     {
      "title": "철도노조 준법투쟁 첫날 퇴근길 지연...주말 나들이객·수험생 이동 '우...",
      "press": "slist.kr",
@@ -65,12 +71,38 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T10:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016466628?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 인사청문요구서 재가",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 19,
+   "recent20": 5,
+   "press": 19,
+   "firstArticleAt": "2026-11-26T09:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 대통령, 강금실·한준호·강유정·임웅순 인사청문요구서 재가",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-26T10:34:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650418.html"
     },
     {
-     "title": "철도노조 준법투쟁 돌입…수도권 광역전철 수백대 지연",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-26T09:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887704?sid=101"
+     "title": "이 대통령, 강금실 국정원장 후보 등 5명 인사청문요구서 재가",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-26T10:26:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887812"
+    },
+    {
+     "title": "李대통령, 강금실 국정원장 후보자 등 5명 인사청문요구서 재가",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-26T10:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848485?sid=100"
     }
    ]
   },
@@ -79,13 +111,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 24,
+   "articles90": 16,
    "recent20": 2,
-   "press": 23,
-   "firstArticleAt": "2026-11-26T08:58:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-26T09:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "자본시장 개혁기구 위원장에 김용범 메리츠지주 부회장",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-26T10:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703632?sid=101"
+    },
     {
      "title": "‘李대통령 주문’ 자본시장 개혁기구 수장에 메리츠 김용범 부회장",
      "press": "khan.co.kr",
@@ -97,12 +135,6 @@
      "press": "magazine.hankyung.com",
      "publishedAt": "2026-11-26T10:16:00.000Z",
      "link": "https://magazine.hankyung.com/money/article/202611263351c"
-    },
-    {
-     "title": "'자본시장 개혁기구' 출범…수장에 김용범 메리츠 부회장",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-26T10:00:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261126500615"
     }
    ]
   },
@@ -111,24 +143,24 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-26T08:58:00.000Z",
+   "articles90": 18,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-26T09:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[사설] 미 관세 15% 선방했지만, ‘추가 인상’ 확실히 막아야",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-26T10:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834187?sid=110"
+    },
     {
      "title": "'호남 반도체' 콕 집어 \"관세 25%\" 압박한 미국…K-반도체 '긴장'",
      "press": "mbn.co.kr",
      "publishedAt": "2026-11-26T10:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/057/0001980042?sid=101"
-    },
-    {
-     "title": "미 ‘과잉생산 관세’ 한국 15%…‘최대 25%’ 으름장",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T10:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301954?sid=104"
     },
     {
      "title": "'이재명' 주어로 \"반도체 기업을 압박\"…\"미국의 내로남불\"",
@@ -143,10 +175,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 15,
+   "articles90": 9,
    "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-26T08:58:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-26T09:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -176,10 +208,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T08:58:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-26T09:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,17 +236,55 @@
    ]
   },
   {
+   "keyword": "이임성 특검 후보 추천",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-26T09:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'조희대 탄핵 반대' 檢 출신, 검사 수사 지휘할 판사 출신…특검 2명 압...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T10:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009313133?sid=102"
+    },
+    {
+     "title": "조작기소 특검에 이임성-이정훈 변호사 추천",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T10:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466632?sid=102"
+    },
+    {
+     "title": "조작기소 특검 후보에 檢출신 이임성… 檢개혁 비판·조희대 탄핵도 반...",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-26T09:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887698?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "텀블러",
    "sources": [
     "daum"
    ],
-   "articles90": 6,
-   "recent20": 4,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
    "firstArticleAt": "2026-11-26T09:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[사건추적] 텀블러에 소변 테러…마신 여학생은 결국 자퇴",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-26T10:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980052?sid=102"
+    },
     {
      "title": "같은반 학생 텀블러에 소변…가해자는 반 옮겼는데 피해자는 자퇴",
      "press": "mk.co.kr",
@@ -226,76 +296,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-26T10:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012301971?sid=102"
-    },
-    {
-     "title": "같은 반 여학생 텀블러에 소변...피해 학생은 자퇴",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T10:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438628?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁 대표 발언",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T09:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'조작 징계' 두고 지도부 공개 충돌...장동혁 \"탈당 창당도 있다\"",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-26T10:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980043?sid=100"
-    },
-    {
-     "title": "'장동혁-최 교수' 대화내역 추가 폭로에…배현진 \"몇 꺼풀의 얼굴이 더...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-26T09:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160021?sid=100"
-    },
-    {
-     "title": "[이슈] 국힘 '조작징계' 의혹, 장동혁·윤리위원 측 정면충돌",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-26T09:47:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749341"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 7대 시드 프로젝트",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T09:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령 \"핵심 경제지표 역사적 이정표…7대 시드 더 속도내야\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-26T10:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406133?sid=100"
-    },
-    {
-     "title": "李대통령 “첨단기술 육성 7대 시드 프로젝트 속도를”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-26T09:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178395?sid=100"
-    },
-    {
-     "title": "李 “7대 SEED 프로젝트 관련 위험성 없는 규제 과감히 풀어달라”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T09:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729140?sid=100"
     }
    ]
   },
@@ -305,7 +305,7 @@
     "google"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-26T09:08:00.000Z",
    "exclusive": false,
@@ -332,17 +332,56 @@
    ]
   },
   {
-   "keyword": "올해의 상생기업대상 기념식",
+   "keyword": "장동혁 대표 발언",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 12,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T09:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'조작 징계' 두고 지도부 공개 충돌...장동혁 \"탈당 창당도 있다\"",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-26T10:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980043?sid=100"
+    },
+    {
+     "title": "'장동혁-최 교수' 대화내역 추가 폭로에…배현진 \"몇 꺼풀의 얼굴이 더...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-26T09:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160021?sid=100"
+    },
+    {
+     "title": "[이슈] 국힘 '조작징계' 의혹, 장동혁·윤리위원 측 정면충돌",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-26T09:47:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749341"
+    }
+   ]
+  },
+  {
+   "keyword": "올해의 상생기업대상 기념식",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-26T09:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "장철웅 삼성디스플레이 부사장, 올해의 상생기업대상 은탑산업훈장",
+     "press": "weeklytrade.co.kr",
+     "publishedAt": "2026-11-26T10:36:00.000Z",
+     "link": "https://weeklytrade.co.kr/news/view.html?section=1&category=5&item=&no=102454"
+    },
     {
      "title": "[기업] 중기부, '올해의 상생기업대상' 포상식 개최",
      "press": "ytn.co.kr",
@@ -354,18 +393,45 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T09:29:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016466607?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이정훈 변호사",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T09:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조작기소 특검에 이임성-이정훈 변호사 추천",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T10:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466632?sid=102"
     },
     {
-     "title": "2026 동반성장주간 올해의 상생기업대상 기념식",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T09:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313085?sid=101"
+     "title": "조작기소 특검 후보에 이임성·이정훈",
+     "press": "segye.com",
+     "publishedAt": "2026-11-26T09:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178389?sid=100"
+    },
+    {
+     "title": "특검 후보 이임성·이정훈…'탄핵 비판' 이력 눈길",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T09:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930256?sid=161"
     }
    ]
   },
   {
    "keyword": "장관 후보자 인사청문회 준비 시작",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 3,
@@ -396,44 +462,86 @@
    ]
   },
   {
-   "keyword": "금융위 증시 긴급회의",
+   "keyword": "윤석열 호감도 꼴찌",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-26T09:13:00.000Z",
+   "firstArticleAt": "2026-11-26T09:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "금융위, 30일 금융권 긴급 점검회의…10조원대 증안펀드 가동 논의",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-26T10:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061441?sid=101"
+     "title": "노무현, 역대 대통령 호감도 1위…박정희 2위·이재명 4위·윤석열 ‘꼴...",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-26T10:16:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326652/?sc=Naver"
     },
     {
-     "title": "금융위, 다음주 5대 지주 회장 소집…10조 증안펀드 준비 시동",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-26T09:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214402?sid=101"
+     "title": "역대 대통령 호감도 노무현 1위, 윤석열은 꼴찌…이재명은?",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-26T09:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522657?sid=100"
     },
     {
-     "title": "금융위, 다음 주 증시안정 회의...증시안정펀드 가동되나",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T09:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438592?sid=101"
+     "title": "노무현 전 대통령 역대 대통령 호감도 1위···꼴찌는 전두환도 제친 윤...",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-26T09:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053659?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1715,
-  "matched": 835,
-  "avgLeadMin": 521,
+  "flagged": 1719,
+  "matched": 842,
+  "avgLeadMin": 520,
   "recent": [
+   {
+    "keyword": "정찬성 스승 별세",
+    "hitKeyword": "정찬성 에디 차 추모",
+    "hitAt": "2026-11-26T19:30:00+09:00",
+    "leadMin": 1522
+   },
+   {
+    "keyword": "가능한 사랑",
+    "hitKeyword": "가능한 사랑 4관왕",
+    "hitAt": "2026-11-26T19:30:00+09:00",
+    "leadMin": 1078
+   },
+   {
+    "keyword": "코레일",
+    "hitKeyword": "코레일 전철 운행 차질",
+    "hitAt": "2026-11-26T19:30:00+09:00",
+    "leadMin": 163
+   },
+   {
+    "keyword": "남동산단 공장 시신 발견",
+    "hitKeyword": "남동산단 공장 화재 사망",
+    "hitAt": "2026-11-26T19:30:00+09:00",
+    "leadMin": 73
+   },
+   {
+    "keyword": "최태원 재산분할금 지급 제안",
+    "hitKeyword": "최태원 재산분할금 제안",
+    "hitAt": "2026-11-26T19:30:00+09:00",
+    "leadMin": 52
+   },
+   {
+    "keyword": "코레일 전철 지연",
+    "hitKeyword": "코레일 전철 운행 차질",
+    "hitAt": "2026-11-26T19:30:00+09:00",
+    "leadMin": 22
+   },
+   {
+    "keyword": "코레일 전철 235대 지연",
+    "hitKeyword": "코레일 전철 운행 차질",
+    "hitAt": "2026-11-26T19:30:00+09:00",
+    "leadMin": 12
+   },
    {
     "keyword": "2027년 전망 하나증권",
     "hitKeyword": "환승연애5 2027년 방영",
@@ -451,48 +559,6 @@
     "hitKeyword": "이정재 광고사업 펑크",
     "hitAt": "2026-11-26T19:00:00+09:00",
     "leadMin": 364
-   },
-   {
-    "keyword": "곽빈 딸 출산",
-    "hitKeyword": "곽빈 결혼 출산 깜짝 고백",
-    "hitAt": "2026-11-26T19:00:00+09:00",
-    "leadMin": 123
-   },
-   {
-    "keyword": "학교 비정규직 총파업",
-    "hitKeyword": "학교 비정규직 총파업",
-    "hitAt": "2026-11-26T19:00:00+09:00",
-    "leadMin": 63
-   },
-   {
-    "keyword": "곽빈 결혼",
-    "hitKeyword": "곽빈 결혼 출산 깜짝 고백",
-    "hitAt": "2026-11-26T19:00:00+09:00",
-    "leadMin": 53
-   },
-   {
-    "keyword": "김선태의 고졸 비하 발언 분노",
-    "hitKeyword": "김선태 고졸 발언 논란",
-    "hitAt": "2026-11-26T19:00:00+09:00",
-    "leadMin": 22
-   },
-   {
-    "keyword": "스페이스x 주가",
-    "hitKeyword": "머스크 스페이스X 기부",
-    "hitAt": "2026-11-26T18:30:00+09:00",
-    "leadMin": 3868
-   },
-   {
-    "keyword": "이서진 짐꾼 은퇴 나이",
-    "hitKeyword": "그냥사람친구 이서진",
-    "hitAt": "2026-11-26T18:30:00+09:00",
-    "leadMin": 163
-   },
-   {
-    "keyword": "이서진 짐꾼 은퇴 필요할 나이",
-    "hitKeyword": "그냥사람친구 이서진",
-    "hitAt": "2026-11-26T18:30:00+09:00",
-    "leadMin": 143
    }
   ]
  }
