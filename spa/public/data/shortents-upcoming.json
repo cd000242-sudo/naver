@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T14:19:16.144Z",
+ "builtAt": "2026-11-26T14:29:20.039Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,27 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "CJ올리브영 개인정보 유출",
    "sources": [
+    "nate",
     "daum"
    ],
-   "articles90": 31,
+   "articles90": 28,
    "recent20": 3,
-   "press": 30,
-   "firstArticleAt": "2026-11-26T12:52:00.000Z",
+   "press": 27,
+   "firstArticleAt": "2026-11-26T13:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "올리브영마저…개인정보 유출 피해 '사과'",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-26T14:20:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=758664"
+    },
     {
      "title": "올리브영도 임직원·고객 개인정보 유출…“해킹 피해”",
      "press": "segye.com",
@@ -33,24 +40,18 @@
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-26T14:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003568287?sid=102"
-    },
-    {
-     "title": "올리브영, 업무시스템 해킹으로 임직원·고객 개인정보 유출",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T14:08:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785151"
     }
    ]
   },
   {
-   "keyword": "중진 의원 만찬 참석",
+   "keyword": "만찬 참석하는 의원",
    "sources": [
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 8,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-26T12:52:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-26T13:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,15 +76,111 @@
    ]
   },
   {
+   "keyword": "미성숙부부",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T13:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'이숙캠' 미성숙 부부, 밀린 월세만 300만원…내로남불 경제관념·외도...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-26T14:26:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110116544339"
+    },
+    {
+     "title": "'이혼숙려캠프' 미성숙 부부 아내, 자살 시도에 제작진 긴급 제지",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T14:18:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785150"
+    },
+    {
+     "title": "'미성숙 부부' 아내, 외도에 동거까지 해놓고 남편 탓…서장훈 \"가지가...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-26T14:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084585"
+    }
+   ]
+  },
+  {
+   "keyword": "경찰, 세무사 수석 구속영장 신청",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T13:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰, 'AI 부정행위' 자수한 세무사 수석 구속영장 신청",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-26T14:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522706?sid=102"
+    },
+    {
+     "title": "'AI 커닝' 세무사 수석합격자 구속 기로…\"증거인멸 우려\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T14:10:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785153"
+    },
+    {
+     "title": "세무사 수석 구속영장 신청…\"사회적 파급력 중대\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T13:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930320?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "야노시호, 50억 도쿄 자택 공개",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T13:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'편스토랑' 야노시호, 방송 최초 도쿄 50억 자택 공개 \"명의는 내 이름으...",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-26T13:52:00.000Z",
+     "link": "http://www.joynews24.com/view/2031038"
+    },
+    {
+     "title": "야노 시호, 50억 도쿄 집 주인이었다…\"♥추성훈은 생활비 담당\" [편스토...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T13:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128495"
+    },
+    {
+     "title": "'편스토랑' 야노시호, 50억대 日 자택 공개⋯남편 추성훈과 각방 쓰는 이...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-26T13:18:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653671"
+    }
+   ]
+  },
+  {
    "keyword": "무쇠소녀단 3",
    "sources": [
     "nate",
     "daum"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T12:56:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-26T13:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,76 +205,12 @@
    ]
   },
   {
-   "keyword": "선우용여, 젠슨 황 불륜 분노",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T12:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "선우용여 젠슨 황 불륜 소식에 “남자들 돈만 벌면 이XX”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T14:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568288?sid=102"
-    },
-    {
-     "title": "선우용여, 젠슨 황 불륜에 분노 폭발…“왜 돈만 벌면 그 모양이냐”",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-26T13:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543815"
-    },
-    {
-     "title": "\"돈만 벌면 바람피울까?\"…선우용여, 젠슨 황 불륜에 욕설 튀어나와 '극...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-26T13:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786382"
-    }
-   ]
-  },
-  {
-   "keyword": "영국 예비군 소집",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T12:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "영국, 냉전 종식 후 첫 예비군 '10만 명' 소집 대비",
-     "press": "cwn.kr",
-     "publishedAt": "2026-11-26T13:46:00.000Z",
-     "link": "https://www.cwn.kr/news/articleView.html?idxno=62759"
-    },
-    {
-     "title": "전역했는데 다시 군대 가라고?…예비군 10만명에 “소집 대비하라” 서...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-26T13:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686676?sid=104"
-    },
-    {
-     "title": "\"정보 갱신하라\"..영국군, 냉전 후 처음 예비군에 소집대비 서한",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T13:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416290?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "연우 10kg 감량",
    "sources": [
     "daum"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-26T13:07:00.000Z",
    "exclusive": false,
@@ -204,41 +237,41 @@
    ]
   },
   {
-   "keyword": "설인아",
+   "keyword": "영국 예비군 소집",
    "sources": [
-    "google"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-26T12:56:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-26T13:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'무쇠소녀단3' 설인아, 체력 한계 맞아도 포기 않는 연우에 기특",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T13:26:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785147"
+     "title": "영국, 냉전 종식 후 첫 예비군 '10만 명' 소집 대비",
+     "press": "cwn.kr",
+     "publishedAt": "2026-11-26T13:46:00.000Z",
+     "link": "https://www.cwn.kr/news/articleView.html?idxno=62759"
     },
     {
-     "title": "'무쇠소녀단3' 금새록, 춤추듯 독특한 스케이팅…설인아는 선수급 폼",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T12:56:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785144"
+     "title": "전역했는데 다시 군대 가라고?…예비군 10만명에 “소집 대비하라” 서...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-26T13:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686676?sid=104"
     },
     {
-     "title": "'무쇠소녀단3' 곽윤기, 코치 등장 \"제자는 처음\"…연우→설인아 쇼트트...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-26T12:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054374"
+     "title": "\"정보 갱신하라\"..영국군, 냉전 후 처음 예비군에 소집대비 서한",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T13:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416290?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1761,
+  "flagged": 1765,
   "matched": 857,
   "avgLeadMin": 524,
   "recent": [
