@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T15:39:42.670Z",
+ "builtAt": "2026-11-26T15:49:45.562Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 12,
+   "articles90": 13,
    "recent20": 6,
    "press": 10,
    "firstArticleAt": "2026-11-26T14:50:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "中 반도체 기술 자립 가속…삼성전자·SK하이닉스 추격",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-26T15:44:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1795707728693723276"
+    },
     {
      "title": "이재용 회장에 장기계약 제안한 머스크…메모리 확보경쟁 어디까지",
      "press": "cbci.co.kr",
@@ -33,12 +39,6 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-26T15:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004011999?sid=105"
-    },
-    {
-     "title": "“한국 반도체 기업, 이익 변동성 줄이고 주주 환원 늘려야”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-26T15:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011995?sid=101"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T14:16:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-26T14:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,17 +75,55 @@
    ]
   },
   {
+   "keyword": "이숙캠 미성숙 아내, 남편 외도 충격",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T14:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'이숙캠' 미성숙 남편 \"태어나 사랑받은 적 없어, 엄마 만나 보고 싶다...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-26T15:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490567"
+    },
+    {
+     "title": "‘이숙캠’ 미성숙 아내, 남편 일당 훌쩍 넘는 ‘10만 원’ 탕진하더니...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-26T15:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001151934"
+    },
+    {
+     "title": "'이숙캠' 남편, 아내 친구와 셋이 동거→강제 뽀뽀?..충격적인 속내[별...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-26T14:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490564"
+    }
+   ]
+  },
+  {
    "keyword": "연우 10kg 감량",
    "sources": [
     "daum"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-26T14:10:00.000Z",
+   "firstArticleAt": "2026-11-26T14:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "연우, 두 달 만에 10kg 감량…전신 두드러기까지",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-26T15:46:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287425"
+    },
     {
      "title": "연우, 어쩐지 급격하게 말랐더라…\"굶어서 10kg 감량, 전신 두드러기에...",
      "press": "xportsnews.com",
@@ -97,19 +135,13 @@
      "press": "sports.donga.com",
      "publishedAt": "2026-11-26T14:38:00.000Z",
      "link": "https://m.entertain.naver.com/article/382/0001307072"
-    },
-    {
-     "title": "'무쇠소녀단' 연우 \"두달만에 10kg 감량, 하루에 밥 2숟갈 먹기도...극단...",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-26T14:10:00.000Z",
-     "link": "http://www.joynews24.com/view/2031039"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1759,
+  "flagged": 1758,
   "matched": 861,
   "avgLeadMin": 512,
   "recent": [
