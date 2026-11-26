@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T18:30:37.337Z",
+ "builtAt": "2026-11-26T18:40:40.395Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,74 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
- "candidates": [],
+ "measured": 28,
+ "candidates": [
+  {
+   "keyword": "미국 과잉생산 관세 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T17:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 관세율 다시 13.9%로…상호관세 사실상 부활 수준",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-26T18:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447169?sid=101"
+    },
+    {
+     "title": "美기술패권 진력하는 트럼프…교역국엔 '깨알 트집' 관세 칼날",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T17:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466727?sid=104"
+    },
+    {
+     "title": "공급 부족 여전한데 과잉생산?… “美 협상용 지렛대 가능성”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-26T17:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887771?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "우크라이나",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T17:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "폴란드, 나토에 우크라이나 상공 러시아 미사일 요격 요청",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-26T18:34:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=20261127033026726620990b2dc5_1"
+    },
+    {
+     "title": "우크라이나 의회, 가상자산 시장법 통과 '2027년 시행'",
+     "press": "khgames.co.kr",
+     "publishedAt": "2026-11-26T18:18:00.000Z",
+     "link": "https://www.khgames.co.kr/news/articleView.html?idxno=310779"
+    },
+    {
+     "title": "트럼프 대통령·나토, 러시아에 우크라이나전 확대 말라 촉구",
+     "press": "voakorea.com",
+     "publishedAt": "2026-11-26T17:38:00.000Z",
+     "link": "https://www.voakorea.com/a/us-russia-ukraine/8228291.html"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
   "flagged": 1752,
