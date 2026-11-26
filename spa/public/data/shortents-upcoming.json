@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T14:39:23.189Z",
+ "builtAt": "2026-11-26T14:49:26.145Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,18 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "CJ올리브영 개인정보 유출",
    "sources": [
-    "nate",
     "daum"
    ],
-   "articles90": 23,
-   "recent20": 1,
-   "press": 22,
-   "firstArticleAt": "2026-11-26T13:11:00.000Z",
+   "articles90": 21,
+   "recent20": 0,
+   "press": 20,
+   "firstArticleAt": "2026-11-26T13:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -44,49 +43,23 @@
    ]
   },
   {
-   "keyword": "만찬 참석하는 의원",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T13:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "중진의원 만찬 나란히 불참…金·鄭 갈등 장기화",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-26T14:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686678?sid=100"
-    },
-    {
-     "title": "與 중진 만찬 \"단합해 민생 전념\"…김민석·정청래 불참에 회동 불발",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-26T13:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214424?sid=100"
-    },
-    {
-     "title": "與 중진 만찬에 김민석·정청래 불참…정청래 \"화해 빙자 몽둥이 찜질\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-26T13:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447154?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "북한 러 군사지원 중단",
    "sources": [
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 3,
    "press": 6,
-   "firstArticleAt": "2026-11-26T13:16:00.000Z",
+   "firstArticleAt": "2026-11-26T13:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "우크라 정보당국 \"北, 러 군사지원 일시 중단…KN-23 등 공급 끊겨\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-26T14:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968046?sid=104"
+    },
     {
      "title": "우크라 정보당국 \"북한, 러 군사 지원 일시 중단\" 주장",
      "press": "news.sbs.co.kr",
@@ -98,83 +71,45 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-26T14:32:00.000Z",
      "link": "https://www.newspim.com/news/view/20261126001362"
-    },
-    {
-     "title": "우크라이나 정보당국 “북한, 러 군사지원 일시 중단” 주장",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T14:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302250?sid=104"
     }
    ]
   },
   {
-   "keyword": "미성숙부부",
+   "keyword": "반도체 메모리",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T13:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "진공청소기 안에 X을 빨아들여?…서장훈, '미성숙 부부' 아내 충격 청소...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-26T14:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005645901"
-    },
-    {
-     "title": "'이숙캠' 미성숙 부부, 밀린 월세만 300만원…내로남불 경제관념·외도...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-26T14:26:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110116544339"
-    },
-    {
-     "title": "'이혼숙려캠프' 미성숙 부부 아내, 자살 시도에 제작진 긴급 제지",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T14:18:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785150"
-    }
-   ]
-  },
-  {
-   "keyword": "야노시호, 50억 도쿄 자택 공개",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T13:18:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-26T13:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'편스토랑' 야노시호, 방송 최초 도쿄 50억 자택 공개 \"명의는 내 이름으...",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-26T13:52:00.000Z",
-     "link": "http://www.joynews24.com/view/2031038"
+     "title": "이재용, 메모리 장기구매 요청한 머스크에 “뭘 더 해줄 수 있느냐”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-26T13:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765517?sid=104"
     },
     {
-     "title": "야노 시호, 50억 도쿄 집 주인이었다…\"♥추성훈은 생활비 담당\" [편스토...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T13:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128495"
+     "title": "'AI 반도체 품귀'에 머스크도 진땀… 이재용 \"뭘 더 해줄 수 있나\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-26T13:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968045?sid=104"
     },
     {
-     "title": "'편스토랑' 야노시호, 50억대 日 자택 공개⋯남편 추성훈과 각방 쓰는 이...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-26T13:18:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653671"
+     "title": "삼성전자 DX, M&A 조직 강화…DS는 메모리 개발체제 일원화",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T13:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214423?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1766,
+  "flagged": 1767,
   "matched": 862,
   "avgLeadMin": 521,
   "recent": [
