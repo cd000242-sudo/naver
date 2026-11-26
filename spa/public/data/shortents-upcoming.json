@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T23:32:17.952Z",
+ "builtAt": "2026-11-26T23:42:25.478Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,149 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 26,
  "candidates": [
-  {
-   "keyword": "배당",
-   "sources": [
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-26T22:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성전자 배당금 지급일…보통주·우선주 1주당 4,601원",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-26T23:28:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631196"
-    },
-    {
-     "title": "신한證 \"롯데리츠, 금리 상승에 목표가↓…안정적 배당 매력은 유효\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-26T23:24:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127082143326"
-    },
-    {
-     "title": "SKT, 비과세 배당·5G 요금제 개편 수혜-하나證",
-     "press": "press9.kr",
-     "publishedAt": "2026-11-26T23:20:00.000Z",
-     "link": "http://www.press9.kr/news/articleView.html?idxno=87119"
-    }
-   ]
-  },
-  {
-   "keyword": "美 추수감사절 폭풍",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-26T22:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 추수감사절 폭풍...55만곳 정전·항공기 수백편 결항·뉴욕 퍼레이드...",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-26T23:18:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326668/?sc=Naver"
-    },
-    {
-     "title": "美 추수감사절 덮친 폭풍?항공기 400편 결항·40만 가구 정전",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-26T23:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165844?sid=104"
-    },
-    {
-     "title": "美 추수감사절 동부 강타한 폭풍...55만 곳 정전·항공편 400편 결항",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-26T22:56:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73655"
-    }
-   ]
-  },
-  {
-   "keyword": "CJ올리브영, 개인정보 유출",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 4,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T22:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "올리브영도 해킹으로 직원·고객 등 790명 개인정보 유출",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-26T23:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000546225?sid=101"
-    },
-    {
-     "title": "CJ올리브영, 업무시스템에 외부 비인가 접근…790명 개인정보 유출",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-26T23:28:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=230396"
-    },
-    {
-     "title": "CJ올리브영, 업무 시스템 해킹돼 임직원·고객 등 개인정보 유출",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-26T23:22:00.000Z",
-     "link": "https://www.insight.co.kr/news/583778"
-    }
-   ]
-  },
   {
    "keyword": "김정은, 러시아 공연 관람",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T22:11:00.000Z",
+   "articles90": 17,
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-26T22:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김정은, 러시아 예술인 공연 관람…북러 밀착 행보 이어가",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-26T23:30:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244363"
+     "title": "김정은, 러시아 예술인 공연 관람…\"협력 긴밀해져\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T23:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930402?sid=100"
     },
     {
-     "title": "[포토] 김정은, 러시아 예술인들의 공연 관람",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-26T23:02:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326669/?sc=Naver"
+     "title": "러 장관, 김정은에 '동지'…\"북러 관계 긍정적 방향 진전\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T23:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466873?sid=100"
     },
     {
-     "title": "김정은, 방북 러 예술단 공연 관람…\"북러, 각 분야 협력 확대\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-26T22:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406235?sid=100"
+     "title": "김정은, 러시아 예술인 공연 관람...친선 과시",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T23:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438766?sid=100"
     }
    ]
   },
   {
    "keyword": "이란 외국군 주둔은 분쟁",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
    "firstArticleAt": "2026-11-26T22:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이란, 외국군 중동 주둔에 경고…韓 \"전쟁 개입 없다\"",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-26T23:40:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733179"
+    },
     {
      "title": "이란 외무장관 \"외국군 주둔은 역내 긴장·분쟁 키울 것\"…조현과 통화",
      "press": "ngonews.kr",
@@ -162,92 +71,27 @@
      "press": "inews24.com",
      "publishedAt": "2026-11-26T22:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/031/0001078909?sid=104"
-    },
-    {
-     "title": "이란 외무 \"외국군 주둔은 분쟁 확대 우려\"...조현 장관과 통화",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-26T22:48:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106595"
-    }
-   ]
-  },
-  {
-   "keyword": "보험사 연체율 상승",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 4,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T22:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "3분기 보험사 대출잔액 2.1조원 감소…연체율·부실채권비율은 증가",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-26T23:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485461?sid=101"
-    },
-    {
-     "title": "보험사 대출 연체율 1.27%…기업대출 부실 확대",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-26T23:18:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611270010"
-    },
-    {
-     "title": "금리 오르자 기업 '휘청'…보험사 연체율 15년여 만에 최고",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-26T23:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000546224?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 관세 경제적 자해",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T22:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"트럼프,물가고 상황서 관세 인상카드로 '최악의 경제적 자해'\"",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-26T23:12:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888647"
-    },
-    {
-     "title": "트럼프, 물가 불안 속 추가 관세 추진…'경제적 자해' 비판 확산",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-26T22:58:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733175"
-    },
-    {
-     "title": "트럼프 관세의 역설…물가 부담 키우고 재정수입 의존 높여 철폐 어려워...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-26T22:24:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261127010010631"
     }
    ]
   },
   {
    "keyword": "부부",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 1,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-26T22:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "영등포구, 예비·신혼부부 맞춤형 정책 수요 설문조사",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-26T23:34:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1316508"
+    },
     {
      "title": "언포게터블 듀엣2, 이종락 부부",
      "press": "bntnews.co.kr",
@@ -259,108 +103,70 @@
      "press": "view.asiae.co.kr",
      "publishedAt": "2026-11-26T23:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/277/0005848565?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "나인 식스 시청률 하락",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T22:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'나인 투 식스' 박민영·육성재 공조 본격화…3.1% 소폭 하락[시청률 VS...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-26T23:02:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795733273531635006"
     },
     {
-     "title": "'미성숙 부부' 남편, 아내 앞에선 욕설·서장훈 앞에선 쩔쩔…서장훈 \"...",
-     "press": "xportsnews.com",
+     "title": "'나인 투 식스' 박민영, 기존쎄 여신의 반격...시청률은 하락 3.1% [종합...",
+     "press": "ize.co.kr",
      "publishedAt": "2026-11-26T23:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084637"
+     "link": "https://m.entertain.naver.com/article/465/0000021311"
+    },
+    {
+     "title": "박민영, 갑질 누명에 법무팀 퇴출…'나인 투 식스' 3.1% 하락",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T22:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128536"
     }
    ]
   },
   {
-   "keyword": "선우용여, 젠슨 황 불륜에 분노",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T22:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "선우용여, 젠슨황 불륜에 욕설",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T23:20:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287519"
-    },
-    {
-     "title": "\"돈만 벌면 이 XX야\" 선우용여, 젠슨 황 불륜 소식에 분노 폭발",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T23:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009313366"
-    },
-    {
-     "title": "“X 같은 XX, 돈만 벌면”…젠슨 황 불륜 소식에 분노한 선우용여",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T22:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005769774?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "국민 1명 중 교통약자",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T22:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국민 3명 중 1명은 교통약자···시내 저상버스 보급률 50% 돌파",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-26T23:18:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=644104"
-    },
-    {
-     "title": "전국 시내버스 절반은 저상버스…국민 3명 중 1명은 교통약자",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-26T23:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980107?sid=102"
-    },
-    {
-     "title": "국민 3명 중 1명 '교통약자'…시내버스 2대 중 1대는 '저상버스'",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-26T22:20:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322088&inflow=N"
-    }
-   ]
-  },
-  {
-   "keyword": "사우디 정유시설 공격",
+   "keyword": "트럼프 관세 경제적 자해",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-26T22:28:00.000Z",
+   "firstArticleAt": "2026-11-26T22:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "사우디 정유시설 피격으로 1명 사망·여러 명 부상…가동 일시 중단",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T22:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014348514?sid=104"
+     "title": "美언론도 트럼프 관세 폭주 비판…\"경제적 자해 행위\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T23:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930404?sid=104"
     },
     {
-     "title": "후티, 사우디 지잔 정유시설 공격…1명 사망·일부 가동 중단",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T22:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416352?sid=104"
+     "title": "\"트럼프,물가고 상황서 관세 인상카드로 '최악의 경제적 자해'\"",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-26T23:12:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888647"
     },
     {
-     "title": "사우디 정유시설 피격 1명 사망...가동 일시 중단",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T22:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438755?sid=104"
+     "title": "트럼프, 물가 불안 속 추가 관세 추진…'경제적 자해' 비판 확산",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-26T22:58:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733175"
     }
    ]
   },
@@ -395,73 +201,105 @@
      "link": "https://n.news.naver.com/mnews/article/366/0001207671?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "중부 곳곳 약한 비",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T22:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울 낮 최고 16도 '포근'…중부 흐리고 오후 곳곳 약한 비",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T22:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014348518?sid=102"
+    },
+    {
+     "title": "[출근길 날씨] 어제보다 더 온화해…중부 중심 약한 비",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T22:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302353?sid=103"
+    },
+    {
+     "title": "[날씨] 오늘 초봄처럼 포근…남부 곳곳 20도 이상",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T22:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930393?sid=103"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1754,
-  "matched": 873,
-  "avgLeadMin": 566,
+  "flagged": 1752,
+  "matched": 881,
+  "avgLeadMin": 577,
   "recent": [
    {
-    "keyword": "한화 국방 AI 데이터센터",
-    "hitKeyword": "머스크 우주 AI 데이터센터",
-    "hitAt": "2026-11-27T08:00:00+09:00",
-    "leadMin": 3800
+    "keyword": "화장실",
+    "hitKeyword": "공중화장실 휴지 폭탄",
+    "hitAt": "2026-11-27T08:30:00+09:00",
+    "leadMin": 3760
    },
    {
-    "keyword": "국방 AI 데이터센터 창원 구축",
-    "hitKeyword": "머스크 우주 AI 데이터센터",
-    "hitAt": "2026-11-27T08:00:00+09:00",
-    "leadMin": 3710
+    "keyword": "삼성 준감위 주주환원 결정",
+    "hitKeyword": "SK하이닉스 주주환원",
+    "hitAt": "2026-11-27T08:30:00+09:00",
+    "leadMin": 3649
    },
    {
-    "keyword": "급식 비정규직 총파업에",
-    "hitKeyword": "학교 비정규직 총파업",
-    "hitAt": "2026-11-27T08:00:00+09:00",
-    "leadMin": 18
+    "keyword": "준감위 주주환원 결정",
+    "hitKeyword": "SK하이닉스 주주환원",
+    "hitAt": "2026-11-27T08:30:00+09:00",
+    "leadMin": 3629
    },
    {
-    "keyword": "신현송 물가 목표 수렴",
-    "hitKeyword": "신현송 반도체 저평가",
-    "hitAt": "2026-11-27T07:30:00+09:00",
-    "leadMin": 1134
+    "keyword": "u-17 월드컵",
+    "hitKeyword": "U17 월드컵 아시아 강세",
+    "hitAt": "2026-11-27T08:30:00+09:00",
+    "leadMin": 1949
    },
    {
-    "keyword": "준법투쟁",
-    "hitKeyword": "철도노조 준법투쟁 지연",
-    "hitAt": "2026-11-27T07:30:00+09:00",
-    "leadMin": 1124
+    "keyword": "추수감사절",
+    "hitKeyword": "미국 추수감사절 폭풍",
+    "hitAt": "2026-11-27T08:30:00+09:00",
+    "leadMin": 1546
    },
    {
-    "keyword": "신현송 선제 대응",
-    "hitKeyword": "신현송 반도체 저평가",
-    "hitAt": "2026-11-27T07:30:00+09:00",
-    "leadMin": 1114
+    "keyword": "코스피 소폭 상승 마감",
+    "hitKeyword": "코스피 급락 손실",
+    "hitAt": "2026-11-27T08:30:00+09:00",
+    "leadMin": 963
    },
    {
-    "keyword": "신현송 총재 간담회",
-    "hitKeyword": "신현송 반도체 저평가",
-    "hitAt": "2026-11-27T07:30:00+09:00",
-    "leadMin": 1084
+    "keyword": "코스피 4700선 강보합 마감",
+    "hitKeyword": "코스피 급락 손실",
+    "hitAt": "2026-11-27T08:30:00+09:00",
+    "leadMin": 943
    },
    {
-    "keyword": "신현송 한은 총재 간담회",
-    "hitKeyword": "신현송 반도체 저평가",
-    "hitAt": "2026-11-27T07:30:00+09:00",
-    "leadMin": 1064
+    "keyword": "코스피 강보합 마감",
+    "hitKeyword": "코스피 급락 손실",
+    "hitAt": "2026-11-27T08:30:00+09:00",
+    "leadMin": 923
    },
    {
-    "keyword": "신현송 한국은행 총재",
-    "hitKeyword": "신현송 반도체 저평가",
-    "hitAt": "2026-11-27T07:30:00+09:00",
-    "leadMin": 1014
+    "keyword": "코스피, 강보합 마감",
+    "hitKeyword": "코스피 급락 손실",
+    "hitAt": "2026-11-27T08:30:00+09:00",
+    "leadMin": 903
    },
    {
-    "keyword": "EU 정상회의 우크라 지원",
-    "hitKeyword": "트럼프 푸틴 우크라",
-    "hitAt": "2026-11-27T07:30:00+09:00",
-    "leadMin": 531
+    "keyword": "크리스마스 빌리지 개막",
+    "hitKeyword": "크리스마스 시즌 트렌드",
+    "hitAt": "2026-11-27T08:30:00+09:00",
+    "leadMin": 883
    }
   ]
  }
