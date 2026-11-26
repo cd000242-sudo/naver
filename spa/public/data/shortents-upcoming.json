@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T12:28:37.925Z",
+ "builtAt": "2026-11-26T12:38:41.050Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,44 +11,12 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 17,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-26T10:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美, 호남 반도체까지 겨냥…협의 미흡 땐 관세 최대 25%",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-26T12:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653650?sid=104"
-    },
-    {
-     "title": "호남 반도체로 美 추가 관세?...\"확대 해석\"",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-26T12:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122276?sid=100"
-    },
-    {
-     "title": "美 '최고 35% 관세' 예고에…베트남 \"무역협상 조속히 마무리\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-26T12:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848499?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "삼성화재 선두",
    "sources": [
     "daum"
    ],
    "articles90": 12,
-   "recent20": 4,
+   "recent20": 1,
    "press": 9,
    "firstArticleAt": "2026-11-26T11:41:00.000Z",
    "exclusive": true,
@@ -75,67 +43,67 @@
    ]
   },
   {
-   "keyword": "윤석열 위증 무죄 확정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T11:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "무죄 확정 尹, 특검 향해 “수사 아닌 소설”",
-     "press": "ksmnews.co.kr",
-     "publishedAt": "2026-11-26T11:44:00.000Z",
-     "link": "https://www.ksmnews.co.kr/news/view.php?idx=631360"
-    },
-    {
-     "title": "윤석열 '한덕수 내란 재판 위증', 대법서 무죄 확정",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T11:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438648?sid=102"
-    },
-    {
-     "title": "윤석열 위증 무죄 확정 뒤…김계리 \"특검에 감사\" 비아냥",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-26T11:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522674?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "정대세 명서현 셋째 임신",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
    "firstArticleAt": "2026-11-26T11:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "이혼 위기 고백했던 정대세 부부, 셋째 생겼다…\"뻥이지?\" 눈물 펑펑",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-26T12:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005447148"
+    },
+    {
+     "title": "정대세♥명서현, 결혼 13년만 셋째 임신…웃통 벗고 오열 \"뻥이지?\"",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T12:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128484"
+    },
+    {
      "title": "정대세, '39세' ♥명서현 셋째 임신에 오열…13살 터울 늦둥이 생긴다 [...",
      "press": "xportsnews.com",
      "publishedAt": "2026-11-26T12:07:00.000Z",
      "link": "https://m.entertain.naver.com/article/311/0002084566"
+    }
+   ]
+  },
+  {
+   "keyword": "무쇠소녀단 3",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T11:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'무쇠소녀단3' 쇼트트랙 최민정 \"스쿼트 120kg 한다\"…설인아 '감탄' [TV...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-26T12:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054373"
     },
     {
-     "title": "“뻥이지?”…명서현, 깜짝 셋째 임신 발표에 정대세 오열",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T11:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005769746"
+     "title": "'무쇠소녀단3' 연우 \"극단적 다이어트로 10kg 감량…전신 두드러기 나\" ...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-26T12:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054372"
     },
     {
-     "title": "‘이혼 결심’ 2년 뒤…정대세·명서현, 첫째와 13살 차 셋째 임신",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T11:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568277?sid=102"
+     "title": "‘무쇠소녀단3’ 설인아→연우, 극악무도한 첫 훈련 돌입! 김동현 “악...",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-26T11:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329299"
     }
    ]
   },
@@ -168,38 +136,6 @@
      "press": "view.asiae.co.kr",
      "publishedAt": "2026-11-26T11:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/277/0005848489?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "무쇠소녀단 3",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T11:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'무쇠소녀단3' 연우 \"극단적 다이어트로 10kg 감량…전신 두드러기 나\" ...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-26T12:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054372"
-    },
-    {
-     "title": "‘무쇠소녀단3’ 설인아→연우, 극악무도한 첫 훈련 돌입! 김동현 “악...",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-26T11:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000329299"
-    },
-    {
-     "title": "'무쇠소녀단3' 유이·박주현 가고 한지현·연우 왔다",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-26T11:36:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305815"
     }
    ]
   }
