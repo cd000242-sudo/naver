@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T17:50:25.103Z",
+ "builtAt": "2026-11-26T18:00:28.646Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,12 +16,18 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T16:27:00.000Z",
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-26T16:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美기술패권 진력하는 트럼프…교역국엔 '깨알 트집' 관세 칼날",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T17:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466727?sid=104"
+    },
     {
      "title": "공급 부족 여전한데 과잉생산?… “美 협상용 지렛대 가능성”",
      "press": "kmib.co.kr",
@@ -33,12 +39,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T16:51:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016466724?sid=104"
-    },
-    {
-     "title": "미 과잉생산 관세에 중국 반발…무역휴전 다시 시험대",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T16:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930345?sid=104"
     }
    ]
   }
