@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T00:14:28.405Z",
+ "builtAt": "2026-11-26T00:24:31.837Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,199 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 6,
  "candidates": [
-  {
-   "keyword": "관세 15% 유지 25% 인상 가능",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 26,
-   "recent20": 9,
-   "press": 25,
-   "firstArticleAt": "2026-11-25T22:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대미 무역흑자 역대 최대에도 관세 15% 방어···美 추가 압박은 부담",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-26T00:12:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=160651"
-    },
-    {
-     "title": "美 과잉생산 관세 15% 상한 방어…호남 반도체 클러스터 지목하며 25% 인...",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-26T00:12:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566698"
-    },
-    {
-     "title": "美, 한국에 15% 관세 제안…협의 따라 25%까지 인상 가능성",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-26T00:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213970?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "1010만 유튜버 해티",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 19,
-   "recent20": 6,
-   "press": 19,
-   "firstArticleAt": "2026-11-25T22:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘1010만 유튜버’ 진우와 해티, 결혼 4년 만에 이혼…“각자의 삶”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T00:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/016/0002728648"
-    },
-    {
-     "title": "[전문] '1010만 유튜버' 진우와 해티, 결혼 4년 만에 이혼…유튜브·SNS도...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-26T00:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786247"
-    },
-    {
-     "title": "구독자 1010만 국제 부부 유튜버 '진우와 해티', 결혼 4년 만에 파경",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T00:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014345887"
-    }
-   ]
-  },
   {
    "keyword": "이강인 선발 2-0 승리",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 18,
-   "recent20": 1,
+   "recent20": 3,
    "press": 17,
-   "firstArticleAt": "2026-11-25T22:48:00.000Z",
+   "firstArticleAt": "2026-11-25T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'시메오네 아들 대신 선발 출격했는데…' 이강인, 시즌 첫 UCL 득점 무산...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-25T23:55:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/413/0000227169"
+     "title": "이강인, UCL 선발 출전해 날카로운 공격 전개…아틀레티코 3경기 만에 승...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T00:20:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/018/0006415746"
     },
     {
-     "title": "이강인, 챔스전 활약에도 공격 포인트 無…10경기째 침묵",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-25T23:53:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/023/0004011836"
+     "title": "이강인 선발 출전한 아틀레티코, UCL서 3경기만에 승리",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-26T00:16:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261126010010183"
     },
     {
-     "title": "이강인 웃고 김민재 울고…UCL서 엇갈린 희비",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-25T23:49:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/396/0000762000"
+     "title": "이강인 선발 출전 아틀레티코, 비킹 꺾고 UCL 3경기 만에 승리",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-26T00:12:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000086716"
     }
    ]
   },
   {
    "keyword": "김정은 핵시설 전술핵",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 5,
-   "press": 13,
-   "firstArticleAt": "2026-11-25T22:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "北김정은, 핵물질 생산기지·핵무기연구소 현지지도 … \"전술핵 다영역...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-26T00:12:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650039.html"
-    },
-    {
-     "title": "김정은, 핵시설 현지지도…\"전술핵 다영역 활용화 주목해야\"(종합)",
-     "press": "konas.net",
-     "publishedAt": "2026-11-26T00:04:00.000Z",
-     "link": "https://www.konas.net/article/article.asp?idx=64809"
-    },
-    {
-     "title": "北핵시설 찾은 김정은 \"전술핵, 다영역 활용화 주목해야\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T23:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213967?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "대한민국 고용노동부",
-   "sources": [
-    "google"
-   ],
-   "articles90": 10,
+   "articles90": 12,
    "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-25T22:46:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "바커케미칼코리아, 고용노동부 '2026 대한민국 일·생활 균형 우수기업...",
-     "press": "epnc.co.kr",
-     "publishedAt": "2026-11-26T00:10:00.000Z",
-     "link": "https://www.epnc.co.kr/news/articleView.html?idxno=410325"
-    },
-    {
-     "title": "NS홈쇼핑, '대한민국 일·생활 균형 우수기업' 선정",
-     "press": "newsdream.kr",
-     "publishedAt": "2026-11-26T00:10:00.000Z",
-     "link": "http://www.newsdream.kr/news/articleView.html?idxno=123041"
-    },
-    {
-     "title": "한국콜마, 고용노동부 ‘일·생활 균형 우수기업’ 선정",
-     "press": "beyondpost.co.kr",
-     "publishedAt": "2026-11-26T00:06:00.000Z",
-     "link": "http://www.beyondpost.co.kr/view.php?ud=2026112609030963946a9e4dd7f_30"
-    }
-   ]
-  },
-  {
-   "keyword": "오브더블루 4인 비주얼 최초",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T23:10:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-25T22:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'JYP 신인' 오브더블루, 마스크 벗었다⋯\"바다 한가운데서 노트북을?\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-25T23:32:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653102"
+     "title": "핵시설 찾은 北 김정은 \"전술핵 다영역 활용화 주목\"",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-26T00:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159636?sid=100"
     },
     {
-     "title": "‘JYP 막내아들’ 오브더블루 멤버 4인 얼굴 최초 공개…비주얼 자신감...",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-25T23:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001306881"
+     "title": "김정은, 핵무기 생산 점검…\"핵보유국지위 불가침적\"",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-26T00:16:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466667"
     },
     {
-     "title": "‘JYP 새 보이그룹’ 오브더블루, 멤버 4인 최초 공개",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-25T23:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761997"
+     "title": "김정은 핵시설 현지지도...\"전술핵 다역화에 주목\"",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-26T00:14:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120975"
     }
    ]
   },
@@ -213,10 +83,16 @@
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-25T22:48:00.000Z",
+   "firstArticleAt": "2026-11-25T23:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "영철은 영자가 별로고, 현숙은 영호랑 힘들고..엇갈리는 ‘나는 SOLO’ 3...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-26T00:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003814465"
+    },
     {
      "title": "‘나는 솔로’ 34기 상철, 순자·옥순 사이 갈팡질팡… “영호 대타 같...",
      "press": "isplus.com",
@@ -228,53 +104,15 @@
      "press": "ize.co.kr",
      "publishedAt": "2026-11-25T23:51:00.000Z",
      "link": "https://m.entertain.naver.com/article/465/0000021281"
-    },
-    {
-     "title": "‘나는 솔로’ 34기 영식·영숙 쌍방 직진…영철·광수 고민 [종합]",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-25T23:42:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795650015531546010"
-    }
-   ]
-  },
-  {
-   "keyword": "롯데 자이언츠",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T23:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "일본 구단도 눈독 들였는데…3년 연속 안타왕 레이예스, 롯데와 재계약...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-26T00:11:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005645477"
-    },
-    {
-     "title": "美·日 구애에도 의리 지켰다! '대체 불가' 레이예스, 롯데 잔류 가닥",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T23:13:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/079/0004213962"
-    },
-    {
-     "title": "신동빈 롯데그룹 회장 10월 온라인 관심도 감소…\"신인 선수 축전 미담...",
-     "press": "thebigdata.co.kr",
-     "publishedAt": "2026-11-25T23:02:00.000Z",
-     "link": "https://www.thebigdata.co.kr/view.php?ud=202611251934072922d0a8833aad_23"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1487,
-  "matched": 734,
-  "avgLeadMin": 501,
+  "flagged": 1481,
+  "matched": 728,
+  "avgLeadMin": 495,
   "recent": [
    {
     "keyword": "임영웅",
