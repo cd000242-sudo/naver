@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T22:11:51.133Z",
+ "builtAt": "2026-11-26T22:21:54.119Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,40 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
+  {
+   "keyword": "트럼프 가짜 성장률",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-26T21:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘블프’ 직전 ‘관세폭탄’ 날린 트럼프…“GDP 성장률 조작” 음모론",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-26T22:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568387?sid=104"
+    },
+    {
+     "title": "선거 지고 경제통계 탓?…트럼프 “3분기 성장률 조작” 조사 요구",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T22:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302327?sid=104"
+    },
+    {
+     "title": "\"선거 직전 가짜 수치 발표\" 트럼프, 'GDP 수정' 즉각 조사 주장",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-26T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447215?sid=101"
+    }
+   ]
+  },
   {
    "keyword": "보험사 대출 연체율 상승",
    "sources": [
@@ -35,42 +67,10 @@
      "link": "https://n.news.naver.com/mnews/article/018/0006416326?sid=101"
     },
     {
-     "title": "3분기 보험사 대출채권 2조 '감소'…건전성은 '악화'",
-     "press": "asiatime.co.kr",
+     "title": "3분기 보험사 대출채권 263.9조⋯연체율 0.19%p↑",
+     "press": "etoday.co.kr",
      "publishedAt": "2026-11-26T21:02:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261126500430"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 3분기 성장률 가짜 조사",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T20:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"선거 직전 가짜 수치 발표\" 트럼프, 'GDP 수정' 즉각 조사 주장",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-26T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447215?sid=101"
-    },
-    {
-     "title": "트럼프 \"중간선거 전 3분기 성장률은 가짜…즉각 조사해야\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-26T21:52:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127064802239"
-    },
-    {
-     "title": "트럼프, 중간선거 참패에 ‘경제지표 조작설’ 제기…즉각 조사 요구",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-26T21:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160062?sid=104"
+     "link": "https://www.etoday.co.kr/news/view/2653539"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 4,
+   "articles90": 13,
+   "recent20": 3,
    "press": 11,
-   "firstArticleAt": "2026-11-26T20:43:00.000Z",
+   "firstArticleAt": "2026-11-26T20:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘블프’ 직전 ‘관세폭탄’ 날린 트럼프…“GDP 성장률 조작” 음모론",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-26T22:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568387?sid=104"
+    },
     {
      "title": "물가 뛰는데 트럼프 관세 '부채질'…\"최악 시기 경제적 자해\"",
      "press": "fnnews.com",
@@ -97,12 +103,6 @@
      "press": "moneystorm.kr",
      "publishedAt": "2026-11-26T22:04:00.000Z",
      "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8910"
-    },
-    {
-     "title": "\"반도체는 美 수요 대응, 석화는 공급과잉 해소\"…정부, 美관세 대응 논...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014348495?sid=101"
     }
    ]
   },
@@ -125,48 +125,80 @@
      "link": "https://n.news.naver.com/mnews/article/056/0012302323?sid=101"
     },
     {
-     "title": "정년연장 중대 갈림길, 민주당안 회람 마쳤다",
-     "press": "labortoday.co.kr",
-     "publishedAt": "2026-11-26T21:34:00.000Z",
-     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237951"
-    },
-    {
      "title": "삭발에 단식까지, 공무원도 \"정년연장\"",
      "press": "labortoday.co.kr",
      "publishedAt": "2026-11-26T21:34:00.000Z",
      "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237955"
+    },
+    {
+     "title": "정년연장 중대 갈림길, 민주당안 회람 마쳤다",
+     "press": "labortoday.co.kr",
+     "publishedAt": "2026-11-26T21:34:00.000Z",
+     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237951"
     }
    ]
   },
   {
-   "keyword": "美 관세 우려 완화",
+   "keyword": "선우용여, 돈만 벌면 불륜",
    "sources": [
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-26T21:00:00.000Z",
+   "firstArticleAt": "2026-11-26T21:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"반도체는 美 수요 대응, 석화는 공급과잉 해소\"…정부, 美관세 대응 논...",
+     "title": "먼저 떠난 남편 추억하던 선우용여, 젠슨 황 불륜 소식엔 “X 같은 XX”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T22:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001148495"
+    },
+    {
+     "title": "선우용여, 젠슨황 불륜 소식에 “X 같은, 돈만 벌면 XX” 분노 (순풍 선...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-26T22:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191730"
+    },
+    {
+     "title": "“돈만 벌면 이 XX이야”…선우용여, 젠슨 황 불륜에 거친 분노",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-26T21:41:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001283819"
+    }
+   ]
+  },
+  {
+   "keyword": "김은우 17살 연하 아내와 재혼",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T20:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"아빠 재산 노린 거 아니냐?\"…17세 연하 아내와 재혼한 김은우→두 아...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T22:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128531"
+    },
+    {
+     "title": "김은우, 아들 둘 데리고 17살 연하 재혼 \"재산 노리는 거 아니냐고\"",
      "press": "newsis.com",
-     "publishedAt": "2026-11-26T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014348495?sid=101"
+     "publishedAt": "2026-11-26T21:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014348480"
     },
     {
-     "title": "물가 뛰는데 관세 또 올리는 트럼프…美언론 “경제적 자해 행위”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T21:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729192?sid=104"
-    },
-    {
-     "title": "유럽증시, 美 추가 관세 우려 완화에 일제히 상승…스톡스600 1.8%↑",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-26T21:30:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127062456232"
+     "title": "'재혼' 김은우, 두 아들이 ♥17살 연하 아내 의심…\"'재산 노린 것 아니...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-26T21:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084616"
     }
    ]
   },
@@ -233,43 +265,11 @@
      "link": "https://m.entertain.naver.com/article/609/0001191721"
     }
    ]
-  },
-  {
-   "keyword": "야노시호 50억 도쿄 집 공개",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-26T20:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“내 명의” 야노 시호, 도쿄 50억 집 공개‥♥추성훈 때문에 더러운집...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-26T20:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191716"
-    },
-    {
-     "title": "야노 시호, 850만원 수소 호흡기→명품 E사 식기‥50억 집 채운 럭셔리 ...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-26T20:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191712"
-    },
-    {
-     "title": "50억 도쿄집에 천만원 '수소호흡기'까지..야노시호, 50대 동안 비결공개",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-26T20:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005645931"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1748,
+  "flagged": 1751,
   "matched": 871,
   "avgLeadMin": 566,
   "recent": [
