@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T00:54:40.528Z",
+ "builtAt": "2026-11-26T01:04:43.040Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,207 +8,201 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 10,
  "candidates": [
-  {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 72,
-   "recent20": 23,
-   "press": 60,
-   "firstArticleAt": "2026-11-25T23:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한국, 15% 관세 상한 방어...호남 반도체 클러스터 지목 '25% 인상' 가능...",
-     "press": "nextdaily.co.kr",
-     "publishedAt": "2026-11-26T00:52:00.000Z",
-     "link": "https://www.nextdaily.co.kr/news/articleView.html?idxno=255338"
-    },
-    {
-     "title": "15% 관세 상한 \"선방\"...호남반도체 등 25% 인상 불씨는 남아",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-26T00:52:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82749"
-    },
-    {
-     "title": "과잉생산 한숨 돌렸더니…\"백악관, 韓 쿠팡 9000억대 과징금 비난\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T00:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014346122?sid=104"
-    }
-   ]
-  },
   {
    "keyword": "코스피 1% 상승",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 47,
-   "recent20": 9,
-   "press": 37,
+   "articles90": 50,
+   "recent20": 6,
+   "press": 40,
    "firstArticleAt": "2026-11-25T23:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[개장시황] 코스피, 외국인 귀환에 1%대 반등…SK하이닉스 4%대 상승",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-26T00:52:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566722"
+     "title": "코스피, 美 기술주 약세에도 외국인 매수세에 1%대 반등…4700선 회복",
+     "press": "greened.kr",
+     "publishedAt": "2026-11-26T01:02:00.000Z",
+     "link": "https://www.greened.kr/news/articleView.html?idxno=355603"
     },
     {
-     "title": "코스피, 폭락 하루 만에 2%대 상승...반도체·이차전지주 반등",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-26T00:48:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73599"
+     "title": "한은 금리결정 직전 코스피 1%대 상승…코스닥 3%대 강세",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T00:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214014?sid=101"
     },
     {
-     "title": "외인 '사자'에 반도체株 급등⋯코스피 장중 '4800선' 탈환",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-26T00:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078540?sid=101"
+     "title": "[위클리오늘] 코스피 4700선 상승 출발···환율 1340원대",
+     "press": "weeklytoday.com",
+     "publishedAt": "2026-11-26T00:56:00.000Z",
+     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=803514"
     }
    ]
   },
   {
-   "keyword": "학교비정규직 총파업",
+   "keyword": "철도노조 준법투쟁",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 7,
-   "press": 20,
+   "articles90": 42,
+   "recent20": 6,
+   "press": 18,
+   "firstArticleAt": "2026-11-25T23:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "철도노조 준법투쟁 돌입…일부 열차 운행 지연 [포토뉴스]",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-26T01:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133862?sid=102"
+    },
+    {
+     "title": "철도노조 준법투쟁 돌입…KTX·수도권 전철 지연에 출퇴근길 비상",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-26T01:02:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=154752"
+    },
+    {
+     "title": "철도노조 준법투쟁 돌입… 일부 열차 지연 가능성 [뉴시스Pic]",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T01:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014346182?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "진우와 해티, 결혼 4년 만 이혼",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 15,
+   "recent20": 3,
+   "press": 14,
    "firstArticleAt": "2026-11-25T23:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "학교비정규직 4만명 내일 총파업…교육당국, 급식·돌봄 비상대응",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-26T00:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214002?sid=102"
+     "title": "\"부부 채널로 1010만 구독→방송까지 나왔는데\"…줄줄이 결혼 생활 '마침...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-26T01:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409625"
     },
     {
-     "title": "학교 비정규직 4만 명 내일 총파업…교육당국 급식·돌봄 비상대응",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T00:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301514?sid=102"
+     "title": "'1000만 유튜버' 진우·해티, 결혼 4년 만에 '이혼'…\"쉽게 내린 결정 아...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-26T00:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000493494"
     },
     {
-     "title": "학교 비정규직 4만명 총파업 예고… 급식·돌봄교실 차질 예상",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T00:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207412?sid=102"
+     "title": "'1010만 유튜버' 진우와 해티, 결혼 4년 만에 이혼 발표…\"각자의 삶 살...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T00:54:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784996"
     }
    ]
   },
   {
-   "keyword": "김정은 전술핵 현지지도",
+   "keyword": "이강인 선발 2-0 승리",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 18,
-   "firstArticleAt": "2026-11-25T23:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "핵 생산 실태 점검한 김정은…\"전술핵무기 다양한 영역 활용해야\"",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-26T00:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000143051?sid=100"
-    },
-    {
-     "title": "핵시설 찾은 김정은 \"다영역 활용화 주목해야\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-26T00:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538164?sid=104"
-    },
-    {
-     "title": "김정은, 핵시설 현지지도…\"전술핵 다영역 활용화에 주목해야\"",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-26T00:38:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=173104"
-    }
-   ]
-  },
-  {
-   "keyword": "CJ ENM 협상 타결",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 5,
-   "press": 16,
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
    "firstArticleAt": "2026-11-25T23:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "방송 끊길 뻔했는데…LG헬로비전·CJ ENM, 막판 합의",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T00:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005769237?sid=103"
+     "title": "'이강인 선발 57분 활약→평점 7.2'…ATM은 버킹에 2-0 승리",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-26T00:58:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6944221"
     },
     {
-     "title": "CJ ENM·LG헬로비전, 콘텐츠 사용료 협상 타결…송출 중단 위기 넘겨",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-26T00:50:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446628"
-    },
-    {
-     "title": "LG헬로비전·CJ ENM, 막판 협상 타결…채널 정상 송출",
-     "press": "iminju.net",
+     "title": "이강인 선발 출전… 아틀레티코 마드리드, 비킹 2-0 완파",
+     "press": "munhwa.com",
      "publishedAt": "2026-11-26T00:46:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=173106"
+     "link": "https://m.sports.naver.com/wfootball/article/021/0002835656"
+    },
+    {
+     "title": "'이강인 57분+2-0 완승' 시메오네 ATM 감독, \"알바레스 야유? 그를 거치지...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-26T00:39:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/109/0005645486"
     }
    ]
   },
   {
-   "keyword": "나는 솔로",
+   "keyword": "조별리그",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
    "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-25T23:42:00.000Z",
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-25T23:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“내가 왜?”…광수 향한 불만 폭발한 34기 정숙 ‘나는 솔로’ 시청률...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T00:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001148370"
+     "title": "亞 돌풍 후끈! 한국 3연승 B조 1위 32강행→호주·사우디도 조별리그 통...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T00:58:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/117/0004128221"
     },
     {
-     "title": "영철은 영자가 별로고, 현숙은 영호랑 힘들고..엇갈리는 ‘나는 SOLO’ 3...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-26T00:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003814465"
+     "title": "'韓 축구 경사!' U17 월드컵 조별리그 3전 전승, 남녀 통틀어 최초 대기...",
+     "press": "footballist.co.kr",
+     "publishedAt": "2026-11-26T00:43:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/436/0000115247"
     },
     {
-     "title": "‘나는 솔로’ 34기 상철, 순자·옥순 사이 갈팡질팡… “영호 대타 같...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-25T23:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543655"
+     "title": "3경기만에 '12골' 폭발… 조별리그 전승으로 대기록 세운 축구대표팀",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-26T00:14:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1177883"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1488,
-  "matched": 732,
-  "avgLeadMin": 499,
+  "flagged": 1492,
+  "matched": 736,
+  "avgLeadMin": 500,
   "recent": [
+   {
+    "keyword": "맹승지, 의사 남친과 결혼 준비",
+    "hitKeyword": "맹승지 의사 결혼",
+    "hitAt": "2026-11-26T10:00:00+09:00",
+    "leadMin": 830
+   },
+   {
+    "keyword": "맹승지 의사 남친 결혼 준비",
+    "hitKeyword": "맹승지 의사 결혼",
+    "hitAt": "2026-11-26T10:00:00+09:00",
+    "leadMin": 799
+   },
+   {
+    "keyword": "맹승지, 의사 남친과 결혼 준비 중",
+    "hitKeyword": "맹승지 의사 결혼",
+    "hitAt": "2026-11-26T10:00:00+09:00",
+    "leadMin": 749
+   },
+   {
+    "keyword": "미국 과잉생산 관세 조사",
+    "hitKeyword": "한국 과잉생산 관세",
+    "hitAt": "2026-11-26T10:00:00+09:00",
+    "leadMin": 25
+   },
    {
     "keyword": "영월서 70대 숨져 중독 추정",
     "hitKeyword": "70대 마라톤 사고",
@@ -244,30 +238,6 @@
     "hitKeyword": "원현주 이혼 글",
     "hitAt": "2026-11-26T09:00:00+09:00",
     "leadMin": 1011
-   },
-   {
-    "keyword": "마이크론 주가 급락",
-    "hitKeyword": "삼성전자 주가 급락",
-    "hitAt": "2026-11-26T09:00:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "나스닥 100",
-    "hitKeyword": "나스닥 급락 후 반등",
-    "hitAt": "2026-11-26T09:00:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "이강인 아틀레티코 2-0 승리",
-    "hitKeyword": "아틀레티코 비킹 승리",
-    "hitAt": "2026-11-26T08:00:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "김민재 뮌헨 1-1",
-    "hitKeyword": "김민재 바이에른 선발",
-    "hitAt": "2026-11-26T07:30:00+09:00",
-    "leadMin": 7100
    }
   ]
  }
