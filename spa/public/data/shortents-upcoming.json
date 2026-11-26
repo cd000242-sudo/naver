@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T12:48:44.463Z",
+ "builtAt": "2026-11-26T12:58:48.285Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,195 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "삼성화재 선두",
+   "keyword": "CJ올리브영 개인정보 유출",
    "sources": [
     "daum"
    ],
-   "articles90": 14,
-   "recent20": 2,
+   "articles90": 19,
+   "recent20": 4,
+   "press": 19,
+   "firstArticleAt": "2026-11-26T11:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "CJ올리브영 업무시스템 뚫려…또 개인정보 유출사고",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-26T12:58:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=303537"
+    },
+    {
+     "title": "CJ올리브영, 임직원·고객 개인정보 유출...업무시스템 해킹",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-26T12:54:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206953"
+    },
+    {
+     "title": "CJ올리브영, 해킹으로 임직원·소비자 등 790명 개인정보 유출",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-26T12:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011962?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "내일 날씨",
+   "sources": [
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 1,
    "press": 10,
-   "firstArticleAt": "2026-11-26T11:41:00.000Z",
+   "firstArticleAt": "2026-11-26T11:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[날씨] 금요일 서울 낮 16도 포근…주말 반짝 영하권 추위",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-26T12:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653667?sid=004"
+    },
+    {
+     "title": "맑은 날씨..낮 최고 15도까지 올라",
+     "press": "andongmbc.co.kr",
+     "publishedAt": "2026-11-26T12:38:00.000Z",
+     "link": "http://andongmbc.co.kr/adboard/NewsView85956"
+    },
+    {
+     "title": "[ 아이 날씨] 대체로 맑고 포근한 가운데 일교차 커",
+     "press": "news.knn.co.kr",
+     "publishedAt": "2026-11-26T12:36:00.000Z",
+     "link": "https://news.knn.co.kr/news/article/195019"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성화재 선두 도약",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-26T11:46:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "4연승으로 ‘선두’ 등극, 삼성화재 토미 감독 “순위 크게 의미 두지 ...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-26T12:45:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/468/0001283806"
-    },
-    {
      "title": "남자배구 삼성화재, 1천114일 만에 리그 1위 등극",
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-26T12:41:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001406175"
+     "link": "https://m.sports.naver.com/volleyball/article/055/0001406175"
     },
     {
      "title": "프로배구 삼성화재, 우리카드 꺾고 1114일 만에 선두 도약(종합)",
      "press": "news1.kr",
      "publishedAt": "2026-11-26T12:19:00.000Z",
      "link": "https://m.sports.naver.com/volleyball/article/421/0009313163"
+    },
+    {
+     "title": "남자배구 삼성화재, 1천114일 만에 순위표 맨 꼭대기로(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T12:15:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/001/0016466686"
     }
    ]
   },
   {
-   "keyword": "윤석열 한덕수 재판 무죄 확정",
+   "keyword": "오승원 아기공룡 둘리",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T11:24:00.000Z",
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T11:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "윤석열 ‘위증’ 무죄 확정…1심부터 같은 결론, 판단 근거는 달랐다",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T12:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302111?sid=102"
+     "title": "\"무면허 음주운전 일삼던 전 남편\"…오승원, 이혼 후 겪은 생활고·우울...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-26T12:50:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110116180717"
     },
     {
-     "title": "한덕수 판결, 헌정 파괴의 큰길을 내다",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-26T12:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834198?sid=102"
+     "title": "'아기공룡 둘리' 부르고 대박난 줄 알았는데…\"통장에 잔고 없어\" 오승...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-26T12:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084579"
     },
     {
-     "title": "무죄 확정 尹, 특검 향해 “수사 아닌 소설”",
-     "press": "ksmnews.co.kr",
-     "publishedAt": "2026-11-26T11:44:00.000Z",
-     "link": "https://www.ksmnews.co.kr/news/view.php?idx=631360"
+     "title": "'특종세상' 오승원, '아기공룡 둘리' 주제곡 가수 근황…아들과 캠핑",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-26T12:06:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305821"
+    }
+   ]
+  },
+  {
+   "keyword": "무쇠소녀단 3",
+   "sources": [
+    "nate",
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T11:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'무쇠소녀단3' 금새록, 춤추듯 독특한 스케이팅…설인아는 선수급 폼",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T12:56:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785144"
+    },
+    {
+     "title": "'무쇠소녀단3' 곽윤기, 코치 등장 \"제자는 처음\"…연우→설인아 쇼트트...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-26T12:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054374"
+    },
+    {
+     "title": "'무쇠소녀단3' 쇼트트랙 최민정 \"스쿼트 120kg 한다\"…설인아 '감탄' [TV...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-26T12:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054373"
+    }
+   ]
+  },
+  {
+   "keyword": "영국 예비군 소집",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T11:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“소집 대비하라”…영국, 냉전 후 처음 예비군 10만명에 서한",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T12:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769750?sid=104"
+    },
+    {
+     "title": "영국, 예비군 10만 명에 \"소집 대비하라\" 서한… 냉전 이후 처음",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-26T12:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968041?sid=104"
+    },
+    {
+     "title": "英, 예비군 10만명에 \"전쟁 시 소집 대비\"… 냉전 이후 처음",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-26T12:26:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452502"
     }
    ]
   },
@@ -79,10 +208,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T11:21:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T11:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,105 +236,73 @@
    ]
   },
   {
-   "keyword": "영국 예비군 소집",
+   "keyword": "미국 쿠팡 과징금 비판",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T11:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "영국, 예비군 10만 명에 \"소집 대비하라\" 서한… 냉전 이후 처음",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-26T12:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968041?sid=104"
-    },
-    {
-     "title": "英, 예비군 10만명에 \"전쟁 시 소집 대비\"… 냉전 이후 처음",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-26T12:26:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452502"
-    },
-    {
-     "title": "영국, 예비군 10만명에 소집 대비 통보…냉전 이후 처음",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-26T11:46:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=20261126203057676bb91c46fcd_1"
-    }
-   ]
-  },
-  {
-   "keyword": "무쇠소녀단 3",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-26T11:36:00.000Z",
+   "firstArticleAt": "2026-11-26T11:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'무쇠소녀단3' 쇼트트랙 최민정 \"스쿼트 120kg 한다\"…설인아 '감탄' [TV...",
-     "press": "tvdaily.co.kr",
+     "title": "美, 쿠팡 과징금에“한국 공정위 공격이 한미동맹 위협”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-26T12:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835855?sid=101"
+    },
+    {
+     "title": "쿠팡 과징금·온플법까지…美, 韓 디지털 규제 ‘301조’ 압박",
+     "press": "edaily.co.kr",
      "publishedAt": "2026-11-26T12:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054373"
+     "link": "https://n.news.naver.com/mnews/article/018/0006416282?sid=101"
     },
     {
-     "title": "'무쇠소녀단3' 연우 \"극단적 다이어트로 10kg 감량…전신 두드러기 나\" ...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-26T12:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054372"
-    },
-    {
-     "title": "‘무쇠소녀단3’ 설인아→연우, 극악무도한 첫 훈련 돌입! 김동현 “악...",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-26T11:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000329299"
+     "title": "미 백악관·국무부, 쿠팡 과징금 비판…한국의 미국 기업 차별 주장",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-26T11:52:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3764488"
     }
    ]
   },
   {
-   "keyword": "오승원 아기공룡 둘리",
+   "keyword": "정혜린과 하민, 친구 사이일 뿐",
    "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-26T11:48:00.000Z",
+   "firstArticleAt": "2026-11-26T11:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'특종세상' 오승원, '아기공룡 둘리' 주제곡 가수 근황…아들과 캠핑",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-26T12:06:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305821"
+     "title": "SM 연습생 하민·트리플에스 정혜린, 열애설 일축…\"친구 사이일 뿐\"",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T12:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128480"
     },
     {
-     "title": "'둘리' 가수 오승원, 시각장애인 가수 아들 곁을 떠나야 했던 이유",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-26T11:50:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3764294"
+     "title": "\"친한 친구\" 트리플에스 정혜린, 'SMTR25' 하민과 열애설 부인",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-26T12:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490555"
     },
     {
-     "title": "'둘리' 주제곡 부른 여가수 '딸기 농장'서 발견→아들 두고 잠적해야 했...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-26T11:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000493770"
+     "title": "'트리플에스' 정혜린, SM 연습생 하민과 열애설 부인⋯\"친구 사이일 뿐...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-26T11:34:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653663"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1742,
+  "flagged": 1746,
   "matched": 852,
   "avgLeadMin": 521,
   "recent": [
