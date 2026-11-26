@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T16:50:05.375Z",
+ "builtAt": "2026-11-26T17:00:08.870Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,12 +16,18 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T15:26:00.000Z",
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T15:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 새 관세 시행땐 평균관세율 13.9%…상호관세 무효화 전으로",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T16:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466724?sid=104"
+    },
     {
      "title": "미 과잉생산 관세에 중국 반발…무역휴전 다시 시험대",
      "press": "yonhapnewstv.co.kr",
@@ -33,12 +39,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-26T16:04:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012302277?sid=104"
-    },
-    {
-     "title": "다시 관세버튼 누른 트럼프… 비과세 투자·노후 적립금도 문제 삼아",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-26T15:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012049?sid=104"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T15:24:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-26T15:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -71,38 +71,6 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-26T15:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004011999?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검 후보",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-26T15:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조작기소 특검 후보 민주당, 이임성 추천",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-26T15:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012053?sid=100"
-    },
-    {
-     "title": "[사설] 여권 추천해 대통령이 임명하는 특검, 공정한 수사 가능한가",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T15:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568346?sid=110"
-    },
-    {
-     "title": "민주당 추천 이임성 특검 후보, 윤석열에 1등급 훈장 받았다",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T15:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568344?sid=102"
     }
    ]
   }
