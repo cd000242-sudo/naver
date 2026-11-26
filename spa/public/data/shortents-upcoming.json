@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T12:18:34.030Z",
+ "builtAt": "2026-11-26T12:28:37.925Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,94 +15,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T10:52:00.000Z",
+   "articles90": 17,
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-26T10:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'35% 관세 표적' 베트남 \"美우려 해소·무역협상 마무리 노력\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-26T12:14:00.000Z",
-     "link": "https://www.ajunews.com/view/20261126210907978"
+     "title": "美, 호남 반도체까지 겨냥…협의 미흡 땐 관세 최대 25%",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-26T12:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653650?sid=104"
     },
     {
-     "title": "美 무역대표부 \"호남 반도체 클러스터, 관세 인상 요인\"",
-     "press": "tbc.co.kr",
-     "publishedAt": "2026-11-26T12:06:00.000Z",
-     "link": "https://www.tbc.co.kr/news/view?pno=20261126142017AE09187&id=213832"
+     "title": "호남 반도체로 美 추가 관세?...\"확대 해석\"",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-26T12:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122276?sid=100"
     },
     {
-     "title": "中 “무역협상 신뢰 훼손” EU “우린 오히려 피해자” [美 ‘과잉생산...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-26T12:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178431?sid=104"
+     "title": "美 '최고 35% 관세' 예고에…베트남 \"무역협상 조속히 마무리\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-26T12:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848499?sid=104"
     }
    ]
   },
   {
-   "keyword": "ESS 우선협상 대상 선정",
+   "keyword": "삼성화재 선두",
    "sources": [
     "daum"
    ],
-   "articles90": 9,
-   "recent20": 0,
+   "articles90": 12,
+   "recent20": 4,
    "press": 9,
-   "firstArticleAt": "2026-11-26T10:57:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-26T11:41:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "'역대 최대' ESS 입찰…1194㎿ 규모 우선협상대상자 선정",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T11:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416280?sid=101"
+     "title": "프로배구 삼성화재, 우리카드 꺾고 1114일 만에 선두 도약(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T12:19:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/421/0009313163"
     },
     {
-     "title": "정부, 역대 최대 규모 ESS 사업자 우선 선정",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-26T11:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686662?sid=101"
+     "title": "남자배구 삼성화재, 1천114일 만에 순위표 맨 꼭대기로(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T12:15:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/001/0016466686"
     },
     {
-     "title": "3차 ESS 우선협상 대상 선정…전국 14곳에 1194㎿",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-26T11:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848491?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "정대세 명서현 셋째 임신",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T10:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정대세, '39세' ♥명서현 셋째 임신에 오열…13살 터울 늦둥이 생긴다 [...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-26T12:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084566"
-    },
-    {
-     "title": "“뻥이지?”…명서현, 깜짝 셋째 임신 발표에 정대세 오열",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T11:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005769746"
-    },
-    {
-     "title": "‘이혼 결심’ 2년 뒤…정대세·명서현, 첫째와 13살 차 셋째 임신",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T11:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568277?sid=102"
+     "title": "남자배구 삼성화재, 우리카드 완파하고 1114일 만에 단독 선두 도약",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-26T12:14:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/469/0000968040"
     }
    ]
   },
@@ -139,74 +107,106 @@
    ]
   },
   {
-   "keyword": "강금실 인사청문요구서 재가",
+   "keyword": "정대세 명서현 셋째 임신",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T10:56:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T11:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령, 강금실·임웅순·홍익표 등 5명 인사청문요구서 재가",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T12:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438653?sid=100"
+     "title": "정대세, '39세' ♥명서현 셋째 임신에 오열…13살 터울 늦둥이 생긴다 [...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-26T12:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084566"
     },
     {
-     "title": "[뉴스프라임] 조희대 탄핵 공방 지속…강금실 청문회 격돌 예고",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T11:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930298?sid=100"
+     "title": "“뻥이지?”…명서현, 깜짝 셋째 임신 발표에 정대세 오열",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T11:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005769746"
     },
     {
-     "title": "이재명, 국회에 강금실 국정원장 후보자와 장관 후보 4명 인사청문 요청",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-26T10:56:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453075"
+     "title": "‘이혼 결심’ 2년 뒤…정대세·명서현, 첫째와 13살 차 셋째 임신",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-26T11:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568277?sid=102"
     }
    ]
   },
   {
-   "keyword": "송영호 김병기 경찰 인사",
+   "keyword": "영국 예비군 소집",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
+   "articles90": 3,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-26T10:52:00.000Z",
+   "firstArticleAt": "2026-11-26T11:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경찰청 차장에 송영호·부산경찰청장에 김병기…고위직 인사 단행",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T11:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207643?sid=102"
+     "title": "英, 예비군 10만명에 \"전쟁 시 소집 대비\"… 냉전 이후 처음",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-26T12:26:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452502"
     },
     {
-     "title": "경찰 '2인자' 승진 인사…경찰청 차장에 송영호 임명",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-26T11:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214417?sid=102"
+     "title": "영국, 예비군 10만명에 소집 대비 통보…냉전 이후 처음",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-26T11:46:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=20261126203057676bb91c46fcd_1"
     },
     {
-     "title": "송영호 경찰청 차장·김병기 부산경찰청장 임명…고위직 인사 단행",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-26T10:54:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545114"
+     "title": "예비군 10만명에 연락 돌려…'심상찮다' 전쟁 대비 움직임 보이는 영국",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-26T11:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848489?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "무쇠소녀단 3",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T11:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'무쇠소녀단3' 연우 \"극단적 다이어트로 10kg 감량…전신 두드러기 나\" ...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-26T12:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054372"
+    },
+    {
+     "title": "‘무쇠소녀단3’ 설인아→연우, 극악무도한 첫 훈련 돌입! 김동현 “악...",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-26T11:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329299"
+    },
+    {
+     "title": "'무쇠소녀단3' 유이·박주현 가고 한지현·연우 왔다",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-26T11:36:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305815"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1737,
+  "flagged": 1740,
   "matched": 852,
   "avgLeadMin": 521,
   "recent": [
