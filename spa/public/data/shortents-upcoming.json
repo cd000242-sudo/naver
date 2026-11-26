@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T20:41:20.361Z",
+ "builtAt": "2026-11-26T20:51:23.716Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-26T19:21:00.000Z",
+   "articles90": 15,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-26T19:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한국 헌법까지 꺼낸 美 '과잉생산' 압박…수출 1조달러 시대 복병",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-26T20:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447196?sid=101"
+     "title": "\"美 새 관세 시행시 평균관세율 13.9%\"…상호관세 부활 수준",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T20:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930379?sid=104"
     },
     {
-     "title": "亞, 트럼프 301조 관세 근거 반박… 韓·日은 ‘과잉생산’ 부인, 동남아...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-26T20:26:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026112618263186280c8c1c064d_1"
+     "title": "美언론, 트럼프 관세 정책 비판…\"최악 시기 경제적 자해\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T20:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930378?sid=104"
     },
     {
-     "title": "[사설] 관세 15% 방어… 반도체, 디지털 규제 또 어깃장 美",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-26T20:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703744?sid=110"
+     "title": "美 과잉생산 관세 시행땐 평균관세율 13.9%…상호관세 무효화 이전 수준",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-26T20:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729174?sid=104"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 3,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-26T19:40:00.000Z",
    "exclusive": false,
@@ -99,19 +99,19 @@
      "link": "https://n.news.naver.com/mnews/article/662/0000109409?sid=102"
     },
     {
-     "title": "김장김치·쌀 나눔 꾸준…지역사회 ‘훈풍’",
+     "title": "대전원예농협, 도농상생 김장배추 소비촉진 행사",
      "press": "nongmin.com",
      "publishedAt": "2026-11-26T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/662/0000109395?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/662/0000109402?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1754,
-  "matched": 855,
-  "avgLeadMin": 505,
+  "flagged": 1751,
+  "matched": 853,
+  "avgLeadMin": 497,
   "recent": [
    {
     "keyword": "젠슨 황 스캔들 의혹",
