@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T23:22:14.179Z",
+ "builtAt": "2026-11-26T23:32:17.952Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
+  {
+   "keyword": "배당",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-26T22:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성전자 배당금 지급일…보통주·우선주 1주당 4,601원",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-26T23:28:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631196"
+    },
+    {
+     "title": "신한證 \"롯데리츠, 금리 상승에 목표가↓…안정적 배당 매력은 유효\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T23:24:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127082143326"
+    },
+    {
+     "title": "SKT, 비과세 배당·5G 요금제 개편 수혜-하나證",
+     "press": "press9.kr",
+     "publishedAt": "2026-11-26T23:20:00.000Z",
+     "link": "http://www.press9.kr/news/articleView.html?idxno=87119"
+    }
+   ]
+  },
   {
    "keyword": "美 추수감사절 폭풍",
    "sources": [
     "daum"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-26T22:02:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-26T22:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,34 +75,34 @@
    ]
   },
   {
-   "keyword": "배당",
+   "keyword": "CJ올리브영, 개인정보 유출",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 4,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T21:58:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-26T22:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "SKT, 비과세 배당·5G 요금제 개편 수혜-하나證",
-     "press": "press9.kr",
-     "publishedAt": "2026-11-26T23:20:00.000Z",
-     "link": "http://www.press9.kr/news/articleView.html?idxno=87119"
+     "title": "올리브영도 해킹으로 직원·고객 등 790명 개인정보 유출",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-26T23:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000546225?sid=101"
     },
     {
-     "title": "한화에너지, 매출 3300억…김승연 아들 삼형제 1000억 배당 왜?(1부)",
-     "press": "the-today.com",
-     "publishedAt": "2026-11-26T23:14:00.000Z",
-     "link": "https://www.the-today.com/news/articleView.html?idxno=94173"
+     "title": "CJ올리브영, 업무시스템에 외부 비인가 접근…790명 개인정보 유출",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-26T23:28:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=230396"
     },
     {
-     "title": "삼성전자 역대급 배당과 강달러…환율 상승 압력[외환브리핑]",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T23:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416376?sid=101"
+     "title": "CJ올리브영, 업무 시스템 해킹돼 임직원·고객 등 개인정보 유출",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-26T23:22:00.000Z",
+     "link": "https://www.insight.co.kr/news/583778"
     }
    ]
   },
@@ -81,12 +113,18 @@
     "nate"
    ],
    "articles90": 19,
-   "recent20": 0,
+   "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-26T21:54:00.000Z",
+   "firstArticleAt": "2026-11-26T22:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김정은, 러시아 예술인 공연 관람…북러 밀착 행보 이어가",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-26T23:30:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244363"
+    },
     {
      "title": "[포토] 김정은, 러시아 예술인들의 공연 관람",
      "press": "jasm.co.kr",
@@ -98,12 +136,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-26T22:57:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001406235?sid=100"
-    },
-    {
-     "title": "北 김정은, 러시아 예술인 공연 관람…“양국 협력 보다 긴밀해져”",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-26T22:36:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653684"
     }
    ]
   },
@@ -112,10 +144,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T22:01:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-26T22:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,34 +172,34 @@
    ]
   },
   {
-   "keyword": "탄핵",
+   "keyword": "보험사 연체율 상승",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 8,
-   "recent20": 2,
+   "articles90": 6,
+   "recent20": 4,
    "press": 6,
-   "firstArticleAt": "2026-11-26T22:00:00.000Z",
+   "firstArticleAt": "2026-11-26T22:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국제법률단체, 조희대 탄핵 추진 우려 …\"극도로 신중해야\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-26T23:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653710?sid=102"
+     "title": "3분기 보험사 대출잔액 2.1조원 감소…연체율·부실채권비율은 증가",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-26T23:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485461?sid=101"
     },
     {
-     "title": "30일 법관대표회의 ‘조희대 탄핵 반대’ 의결? “개인비위 옹호” 반론...",
-     "press": "vop.co.kr",
-     "publishedAt": "2026-11-26T23:08:00.000Z",
-     "link": "https://vop.co.kr/A00001697784.html"
+     "title": "보험사 대출 연체율 1.27%…기업대출 부실 확대",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-26T23:18:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611270010"
     },
     {
-     "title": "\"조희대 탄핵, 헌재 가면 100% 기각…분열된 민주당엔 공동의 적이 필요...",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-26T23:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000143129?sid=100"
+     "title": "금리 오르자 기업 '휘청'…보험사 연체율 15년여 만에 최고",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-26T23:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000546224?sid=101"
     }
    ]
   },
@@ -177,7 +209,7 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-26T22:04:00.000Z",
    "exclusive": false,
@@ -204,45 +236,13 @@
    ]
   },
   {
-   "keyword": "보험사 연체율 상승",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T22:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "보험사 대출 연체율 1.27%…기업대출 부실 확대",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-26T23:18:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611270010"
-    },
-    {
-     "title": "금리 오르자 기업 '휘청'…보험사 연체율 15년여 만에 최고",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-26T23:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000546224?sid=101"
-    },
-    {
-     "title": "보험사 대출 부실 확대…금리 인상에 건전성 '이중 부담'",
-     "press": "fins.co.kr",
-     "publishedAt": "2026-11-26T23:16:00.000Z",
-     "link": "http://www.fins.co.kr/news/articleView.html?idxno=110730"
-    }
-   ]
-  },
-  {
    "keyword": "부부",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-26T22:48:00.000Z",
    "exclusive": false,
@@ -269,44 +269,12 @@
    ]
   },
   {
-   "keyword": "CJ올리브영, 개인정보 유출",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T22:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "CJ올리브영, 개인정보 유출 사고…“보안 인프라 강화”",
-     "press": "socialvalue.kr",
-     "publishedAt": "2026-11-26T23:18:00.000Z",
-     "link": "https://www.socialvalue.kr/news/view/1065568520171309"
-    },
-    {
-     "title": "CJ올리브영 업무 시스템에 무단 침입…임직원·고객 등 790명 개인정보 ...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-26T22:56:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=102127"
-    },
-    {
-     "title": "CJ올리브영, 임직원·고객 개인정보 유출…“추가 피해 방지에 최선”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T22:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729215?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "선우용여, 젠슨 황 불륜에 분노",
    "sources": [
     "nate"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-26T22:08:00.000Z",
    "exclusive": false,
@@ -325,7 +293,7 @@
      "link": "https://m.entertain.naver.com/article/421/0009313366"
     },
     {
-     "title": "“X 같은 XX, 돈말 벌면”…젠슨 황 불륜 소식에 분노한 선우용여",
+     "title": "“X 같은 XX, 돈만 벌면”…젠슨 황 불륜 소식에 분노한 선우용여",
      "press": "mk.co.kr",
      "publishedAt": "2026-11-26T22:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/009/0005769774?sid=103"
@@ -338,7 +306,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-26T22:04:00.000Z",
    "exclusive": false,
@@ -431,9 +399,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1755,
-  "matched": 874,
-  "avgLeadMin": 565,
+  "flagged": 1754,
+  "matched": 873,
+  "avgLeadMin": 566,
   "recent": [
    {
     "keyword": "한화 국방 AI 데이터센터",
