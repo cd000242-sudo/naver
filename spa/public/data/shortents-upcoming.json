@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T23:54:22.213Z",
+ "builtAt": "2026-11-26T00:04:25.472Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,21 +8,59 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 18,
  "candidates": [
+  {
+   "keyword": "관세 15% 유지 25% 인상 가능",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 22,
+   "recent20": 8,
+   "press": 22,
+   "firstArticleAt": "2026-11-25T22:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 추가 관세 리스크 해소…현대차·기아 한숨 돌렸다",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-26T00:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002249957?sid=101"
+    },
+    {
+     "title": "한미 합의 15% 넘어 25%까지…USTR, 한국에 과잉생산 관세 예고",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-26T00:02:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=729494"
+    },
+    {
+     "title": "미국, 한국 반도체·자동차 과잉생산 지목…관세 25% 인상 여지",
+     "press": "fntoday.co.kr",
+     "publishedAt": "2026-11-26T00:00:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=400361"
+    }
+   ]
+  },
   {
    "keyword": "이강인 선발 2-0 승리",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 23,
+   "articles90": 19,
    "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-25T22:26:00.000Z",
+   "press": 18,
+   "firstArticleAt": "2026-11-25T22:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'시메오네 아들 대신 선발 출격했는데…' 이강인, 시즌 첫 UCL 득점 무산...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-25T23:55:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/413/0000227169"
+    },
     {
      "title": "이강인, 챔스전 활약에도 공격 포인트 無…10경기째 침묵",
      "press": "chosun.com",
@@ -34,269 +72,136 @@
      "press": "sportsworldi.com",
      "publishedAt": "2026-11-25T23:49:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/396/0000762000"
-    },
-    {
-     "title": "이강인 57분 활약⋯아틀레티코, 비킹 꺾고 UCL 3경기 만에 승리",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-25T23:48:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653113"
     }
    ]
   },
   {
-   "keyword": "뉴욕증시 AI 불안 혼조 마감",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-25T22:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "뉴욕증시, AI 투자 불안에 혼조세 마감",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-25T23:44:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=729489"
-    },
-    {
-     "title": "[뉴욕마켓워치] AI 투매와 저가 매수의 줄다리기…주식 혼조·채권↑달...",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-25T23:40:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446593"
-    },
-    {
-     "title": "[AI MY 증시전망] 코스피, 반도체주 저가매수세 유입 전망…금통위·증안...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-25T23:25:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261126000053"
-    }
-   ]
-  },
-  {
-   "keyword": "관세 15% 유지, 25% 인상 가능",
+   "keyword": "1010만 유튜버 해티",
    "sources": [
     "nate"
    ],
    "articles90": 17,
-   "recent20": 2,
+   "recent20": 4,
    "press": 17,
-   "firstArticleAt": "2026-11-25T22:34:00.000Z",
+   "firstArticleAt": "2026-11-25T22:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美, 과잉생산 이유로 韓·中·日·EU 등 14개 경제권에 신규 관세 추진",
-     "press": "theguru.co.kr",
-     "publishedAt": "2026-11-25T23:50:00.000Z",
-     "link": "https://www.theguru.co.kr/news/article.html?no=110209"
+     "title": "연소득 63억 1010만 유튜버 진우와 해티, 이혼",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-26T00:02:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95963"
     },
     {
-     "title": "‘1000억 달러 대미 흑자’ 관세 부메랑 피했다…美 관세 상한 15% 사수",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-25T23:46:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611260013"
+     "title": "진우와 해티, 결혼 4년 만에 이혼",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-26T00:00:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286586"
     },
     {
-     "title": "미국, 한국 '반도체·자동차' 겨냥…'관세 25% 인상' 카드 만지작",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-25T23:34:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=230330"
+     "title": "'연소득 63억설' 진우와 해티, 결혼 4년 만 파경…'1010만' 채널은 진우...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-25T23:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409617"
     }
    ]
   },
   {
    "keyword": "김정은 핵시설 전술핵",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 17,
-   "firstArticleAt": "2026-11-25T22:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김정은, 핵시설 현지지도…\"전술핵 다영역 활용화 주목해야\"",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-25T23:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162320?sid=100"
-    },
-    {
-     "title": "김정은, 핵시설 시찰…\"전술핵 절실한 과제\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-25T23:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930001?sid=100"
-    },
-    {
-     "title": "핵시설 둘러본 김정은, 南 겨냥 “전술핵 다양한 활용”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-25T23:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686305?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "김새롬 재혼 2세 계획",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
+   "articles90": 18,
    "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T22:26:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-25T22:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘10년만 재혼’ 39살 김새롬 “188㎝ 남편과 혼인신고 먼저, 2세 계획 때...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-25T23:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191440"
+     "title": "北핵시설 찾은 김정은 \"전술핵, 다영역 활용화 주목해야\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T23:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213967?sid=100"
     },
     {
-     "title": "김새롬, 연하 남편 공개…혼인신고 서두른 이유",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T23:44:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286573"
-    },
-    {
-     "title": "'재혼' 김새롬 “남편 키 188cm…2세 계획 위해 혼인신고부터”",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-25T23:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000522506"
-    }
-   ]
-  },
-  {
-   "keyword": "마이크론 주가 급락",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-25T22:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이틀 만에 15% '뚝'…마이크론 덮친 메모리 가격 정점론",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-25T23:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415705?sid=101"
-    },
-    {
-     "title": "美 반도체, 급락 딛고 0.65% 하락으로 선방⋯엔비디아 4%↓[뉴욕증시 무...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-25T23:30:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653092"
-    },
-    {
-     "title": "[뉴욕증시] AI 신용불안에 나스닥 장중 4.6% 급락…반발 매수에 0.62%↓ ...",
+     "title": "핵시설 시찰한 김정은, 전술핵 필요성 강조…美·英·호주 동맹 견제도",
      "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-25T23:08:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087946"
+     "publishedAt": "2026-11-25T23:58:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087967"
+    },
+    {
+     "title": "김정은, 핵시설 찾아…\"핵보유는 물러설 수 없는 선택\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-25T23:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005446600?sid=100"
     }
    ]
   },
   {
-   "keyword": "나스닥 100",
+   "keyword": "나는 솔로",
    "sources": [
     "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T22:41:00.000Z",
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-25T22:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘빅쇼트’ 버리, 나스닥 하락 베팅 청산…엔비디아 재매도 예고",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-25T23:18:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026112608153972229a1f309431_1"
+     "title": "‘나는 솔로’ 34기 상철, 순자·옥순 사이 갈팡질팡… “영호 대타 같...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-25T23:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543655"
     },
     {
-     "title": "비트코인 '나스닥의 그림자' 전락했나…기술주보다 취약한 하락장",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-25T22:58:00.000Z",
-     "link": "http://coinreaders.com/273495"
+     "title": "'나는 솔로' 광수, 정숙에 황당 요구…\"질투 나서 미치게 해줘\"",
+     "press": "ize.co.kr",
+     "publishedAt": "2026-11-25T23:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000021281"
     },
     {
-     "title": "장중 4.6% 급락한 나스닥...점심 먹고 돌아온 '저가 매수' [마켓무버의 ...",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-25T22:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001274009?sid=101"
+     "title": "‘나는 솔로’ 34기 영식·영숙 쌍방 직진…영철·광수 고민 [종합]",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-25T23:42:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795650015531546010"
     }
    ]
   },
   {
-   "keyword": "젠슨 황 혐의 없음 확인",
+   "keyword": "오브더블루 4인 비주얼 최초",
    "sources": [
     "nate"
    ],
-   "articles90": 3,
+   "articles90": 7,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T22:30:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-25T23:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "가죽 재킷 벗은 젠슨 황 '컴백'...미 현지 분위기는? [뉴스UP]",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-25T23:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438204?sid=104"
+     "title": "'JYP 신인' 오브더블루, 마스크 벗었다⋯\"바다 한가운데서 노트북을?\"",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-25T23:32:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653102"
     },
     {
-     "title": "중국에 정보 넘긴 앨리스 황…젠슨 황은 수사 없이 '혐의 없음'",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-25T23:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522491?sid=104"
+     "title": "‘JYP 막내아들’ 오브더블루 멤버 4인 얼굴 최초 공개…비주얼 자신감...",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-25T23:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001306881"
     },
     {
-     "title": "美법무부, 젠슨 황 정식 수사도 없이 '혐의 없음' 결론",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-25T22:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159600?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "문원재 한국체대 총장",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-25T23:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "문원재 한국체대 총장 \"하남 국제 트레일런, 국가대표와 시민 한 코스에...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-25T23:18:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286549"
-    },
-    {
-     "title": "문원재 한국체대 총장, 연합뉴스 인터뷰",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T23:00:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/001/0016464143"
-    },
-    {
-     "title": "문원재 한국체대 총장 \"하남 트레일런, 국가대표와 시민 잇는다\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-25T23:00:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/001/0016464136"
+     "title": "‘JYP 새 보이그룹’ 오브더블루, 멤버 4인 최초 공개",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-25T23:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761997"
     }
    ]
   }
@@ -304,9 +209,33 @@
  "hitRate": {
   "days": 7,
   "flagged": 1491,
-  "matched": 738,
-  "avgLeadMin": 500,
+  "matched": 740,
+  "avgLeadMin": 505,
   "recent": [
+   {
+    "keyword": "임영웅",
+    "hitKeyword": "임영웅 에르메스 선물",
+    "hitAt": "2026-11-26T09:00:00+09:00",
+    "leadMin": 4409
+   },
+   {
+    "keyword": "이혼",
+    "hitKeyword": "원현주 이혼 글",
+    "hitAt": "2026-11-26T09:00:00+09:00",
+    "leadMin": 1011
+   },
+   {
+    "keyword": "마이크론 주가 급락",
+    "hitKeyword": "삼성전자 주가 급락",
+    "hitAt": "2026-11-26T09:00:00+09:00",
+    "leadMin": 26
+   },
+   {
+    "keyword": "나스닥 100",
+    "hitKeyword": "나스닥 급락 후 반등",
+    "hitAt": "2026-11-26T09:00:00+09:00",
+    "leadMin": 26
+   },
    {
     "keyword": "이강인 아틀레티코 2-0 승리",
     "hitKeyword": "아틀레티코 비킹 승리",
@@ -342,30 +271,6 @@
     "hitKeyword": "미국 한국 관세 15%",
     "hitAt": "2026-11-26T06:30:00+09:00",
     "leadMin": 389
-   },
-   {
-    "keyword": "15% 관세 유지",
-    "hitKeyword": "미국 한국 관세 15%",
-    "hitAt": "2026-11-26T06:30:00+09:00",
-    "leadMin": 97
-   },
-   {
-    "keyword": "미국 과잉생산 관세 조사",
-    "hitKeyword": "한국 미국 관세 압박",
-    "hitAt": "2026-11-26T06:00:00+09:00",
-    "leadMin": 1190
-   },
-   {
-    "keyword": "청룡영화상 2026",
-    "hitKeyword": "2026 청룡영화상",
-    "hitAt": "2026-11-26T06:00:00+09:00",
-    "leadMin": 359
-   },
-   {
-    "keyword": "도로공사 6연승 선두 질주",
-    "hitKeyword": "도로공사 6연승 1위",
-    "hitAt": "2026-11-25T23:30:00+09:00",
-    "leadMin": 99
    }
   ]
  }
