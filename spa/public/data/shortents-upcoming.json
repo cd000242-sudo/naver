@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T15:09:32.924Z",
+ "builtAt": "2026-11-26T15:19:36.071Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,13 +16,19 @@
     "nate",
     "daum"
    ],
-   "articles90": 17,
+   "articles90": 13,
    "recent20": 1,
-   "press": 17,
-   "firstArticleAt": "2026-11-26T13:41:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-26T13:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "CJ올리브영, 업무시스템 해킹에 임직원·고객 개인정보 유출",
+     "press": "whitepaper.co.kr",
+     "publishedAt": "2026-11-26T15:14:00.000Z",
+     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=269236"
+    },
     {
      "title": "“이름·폰번호·생일까지 싹 털렸네”…CJ올리브영 개인정보 유출 비상",
      "press": "munhwa.com",
@@ -34,12 +40,39 @@
      "press": "econovill.com",
      "publishedAt": "2026-11-26T14:20:00.000Z",
      "link": "https://www.econovill.com/news/articleView.html?idxno=758664"
+    }
+   ]
+  },
+  {
+   "keyword": "반도체 메모리",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 5,
+   "press": 7,
+   "firstArticleAt": "2026-11-26T13:50:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성전자 美 반도체법인장에 윤하룡 부사장 내정",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-26T15:18:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1795706120693616276"
     },
     {
-     "title": "올리브영도 임직원·고객 개인정보 유출…“해킹 피해”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-26T14:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178476?sid=101"
+     "title": "유니테스트, 매출 11.17% 규모 Micron India 반도체 검사장비 공급 계약",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-26T15:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287421"
+    },
+    {
+     "title": "[심층분석] 성장률 상향 이끈 반도체·긴축 파고 맞은 내수주…증시 업...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-26T15:02:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=95634"
     }
    ]
   },
@@ -76,39 +109,6 @@
    ]
   },
   {
-   "keyword": "반도체 메모리",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 4,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T13:42:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[심층분석] 성장률 상향 이끈 반도체·긴축 파고 맞은 내수주…증시 업...",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-26T15:02:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=95634"
-    },
-    {
-     "title": "[단독] 한화 상대 한미반도체 특허 소송 막 오른다…변수는 조정 결과",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-26T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000556093?sid=101"
-    },
-    {
-     "title": "실적 호조에도 추락한 반도체株…내년 3~4월 주목해야 하는 이유",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T15:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014348363?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "세무사 수석 구속 신청",
    "sources": [
     "signal.bz"
@@ -141,17 +141,55 @@
    ]
   },
   {
+   "keyword": "미국 과잉생산 관세 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T14:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "관세 집착 트럼프…15% 방어했지만 25% 여지",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T15:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406185?sid=104"
+    },
+    {
+     "title": "[사설] 주력산업 육성했다고 관세 인상 으름장 美... 치밀한 대비를",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-26T15:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968049?sid=110"
+    },
+    {
+     "title": "[사설] 美, 관세 최고 25% 압박… 통상환경 재점검을",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-26T15:02:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261126010010475"
+    }
+   ]
+  },
+  {
    "keyword": "연우 10kg 감량",
    "sources": [
     "daum"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-26T14:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "연우, 어쩐지 급격하게 말랐더라…\"굶어서 10kg 감량, 전신 두드러기에...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-26T15:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084592"
+    },
     {
      "title": "연우, 하루 밥 두 숟갈 먹고 10kg 감량…“이렇게 살면 안 되겠다”",
      "press": "sports.donga.com",
@@ -163,21 +201,47 @@
      "press": "joynews24.com",
      "publishedAt": "2026-11-26T14:10:00.000Z",
      "link": "http://www.joynews24.com/view/2031039"
+    }
+   ]
+  },
+  {
+   "keyword": "관세 25% 약속",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T15:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "관세 집착 트럼프…15% 방어했지만 25% 여지",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T15:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406185?sid=104"
     },
     {
-     "title": "연우 \"두 달만 10kg 감량, 극단적으로 굶어…온몸 두드러기에 눈물\" [무...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T14:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128502"
+     "title": "[사설] 주력산업 육성했다고 관세 인상 으름장 美... 치밀한 대비를",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-26T15:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968049?sid=110"
+    },
+    {
+     "title": "[사설] 美, 관세 최고 25% 압박… 통상환경 재점검을",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-26T15:02:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261126010010475"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1764,
-  "matched": 864,
-  "avgLeadMin": 519,
+  "flagged": 1762,
+  "matched": 863,
+  "avgLeadMin": 518,
   "recent": [
    {
     "keyword": "젠슨 황 스캔들 의혹",
