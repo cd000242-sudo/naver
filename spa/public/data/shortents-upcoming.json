@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T14:49:26.145Z",
+ "builtAt": "2026-11-26T14:59:29.492Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "CJ올리브영 개인정보 유출",
@@ -16,12 +16,18 @@
     "daum"
    ],
    "articles90": 21,
-   "recent20": 0,
+   "recent20": 1,
    "press": 20,
-   "firstArticleAt": "2026-11-26T13:20:00.000Z",
+   "firstArticleAt": "2026-11-26T13:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“이름·폰번호·생일까지 싹 털렸네”…CJ올리브영 개인정보 유출 비상",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-26T14:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835868?sid=101"
+    },
     {
      "title": "올리브영마저…개인정보 유출 피해 '사과'",
      "press": "econovill.com",
@@ -33,12 +39,6 @@
      "press": "segye.com",
      "publishedAt": "2026-11-26T14:16:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004178476?sid=101"
-    },
-    {
-     "title": "올리브영 업무시스템 해킹…790명 개인정보·회원번호 자료 240만여건 유...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T14:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568287?sid=102"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T13:21:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T14:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,13 +79,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T13:20:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T13:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“장기 구매할게” 머스크에 이재용 “뭘 더 해줄 건데”⋯메모리 쟁탈...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-26T14:50:00.000Z",
+     "link": "https://www.viva100.com/article/20261126501737"
+    },
     {
      "title": "이재용, 메모리 장기구매 요청한 머스크에 “뭘 더 해줄 수 있느냐”",
      "press": "donga.com",
@@ -97,12 +103,6 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-26T13:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000968045?sid=104"
-    },
-    {
-     "title": "삼성전자 DX, M&A 조직 강화…DS는 메모리 개발체제 일원화",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-26T13:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214423?sid=101"
     }
    ]
   }
