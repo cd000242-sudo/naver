@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T18:00:28.646Z",
+ "builtAt": "2026-11-26T18:10:31.864Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
@@ -16,7 +16,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 2,
    "firstArticleAt": "2026-11-26T16:51:00.000Z",
    "exclusive": false,
