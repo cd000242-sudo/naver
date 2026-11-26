@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-26T14:14:27.250Z",
+  "generatedAt": "2026-11-26T17:44:24.369Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -212,77 +212,6 @@
           "views": 168,
           "answers": 5,
           "askedAt": "2026.11.12"
-        }
-      ]
-    },
-    {
-      "id": "c589c4113b35525f",
-      "urls": [
-        "https://ssoyoung1.com/entry/%ED%95%9C%EC%A0%84%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EC%9C%A0%EC%B6%9C-%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80",
-        "https://kwinner.starkjk.com/173",
-        "https://yjfreelifestyle.tistory.com/entry/%EC%82%BC%EC%84%B1%EC%A6%9D%EA%B6%8C-%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4-%EC%9C%A0%EC%B6%9C-%ED%94%BC%ED%95%B4-%EB%B3%B4%EC%83%81-%EB%B0%8F-%EC%8B%A0%EA%B3%A0-%EB%B0%A9%EB%B2%95-%EB%82%B4-%EC%A0%95%EB%B3%B4-%ED%99%95%EC%9D%B8%EB%B6%80%ED%84%B0-%EB%B0%B0%EC%83%81-%EC%B2%AD%EA%B5%AC%EA%B9%8C%EC%A7%80",
-        "https://yoarc.tistory.com/1857",
-        "https://muramara.com/entry/%EC%82%BC%EC%84%B1%EC%A6%9D%EA%B6%8C-%ED%95%B4%ED%82%B9-8241%EB%AA%85-%EC%9C%A0%EC%B6%9C-%ED%94%BC%ED%95%B4-%ED%99%95%EC%9D%B8-%EB%B0%A9%EB%B2%95",
-        "https://muramara.com/entry/%ED%95%9C%EC%A0%84-%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4-%EC%9C%A0%EC%B6%9C-152%EB%A7%8C%EB%AA%85-%ED%94%BC%ED%95%B4-%EC%98%88%EB%B0%A9-%EB%8C%80%EC%B2%98%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "검색자는 '한전 개인정보유출'에서 내 정보가 포함됐는지 어디서 확인하고 뭘 해야 하는지 몰라 막혀 있다. 고수 블로그들은 152만명이라는 피해 규모만 강조하고 데일리씨큐 조회 방법과 확인 후 조치 절차는 다루지 못한다. 이 글은 조회 사이트 이용법과 해지 고객 포함 여부, 비밀번호 변경·피해신고 체크리스트로 끝내준다.",
-        "searchTargets": [
-          "한전 개인정보 데일리씨큐",
-          "한전 개인정보 조회",
-          "한전 개인정보 확인"
-        ],
-        "mustInclude": [
-          "피해 규모 152만명(확인 필요: 한전 공식 발표/보도자료)",
-          "데일리씨큐 사이트에서 유출여부 조회하는 절차와 본인인증 방법(확인 필요: 한전 공식 공지)",
-          "유출 확인 후 해야 할 조치(비밀번호 변경, 명의도용방지서비스, 피해신고 창구)",
-          "해지한 지 오래된 고객도 요금 납부기록이 5년간 보관돼 유출대상 포함될 수 있다는 점",
-          "한전 고객센터/피해신고 접수처 연락처(확인 필요: 한전 공식 공지)"
-        ],
-        "mustAvoid": [
-          "한전 NCS 채용, 전자조달시스템 입찰대리인, 현장 폭행사건 신고 등 전혀 다른 한전 이슈와 섞지 않기",
-          "유출 원인(해킹 주체·경로)을 추측해서 단정짓지 않기",
-          "삼성증권·컬리 등 다른 회사 유출 사건과 혼동해 피해보상 절차를 같다고 서술하지 않기"
-        ],
-        "checkBefore": [
-          "피해자 수(152만명)와 유출 항목은 한전 공식 보도자료/공지 확인",
-          "데일리씨큐 조회 사이트 정확한 주소와 절차는 한전 공식 안내 확인"
-        ],
-        "solves": [
-          "내 개인정보가 이번 한전 유출에 포함됐는지 몰라서 → 데일리씨큐 조회 방법으로 바로 확인",
-          "한전을 예전에 해지했는데도 유출 대상인지 몰라서 → 해지 후 5년 보관 규정으로 포함 여부 설명",
-          "유출 확인됐을 때 뭘 해야 할지 몰라서 → 비밀번호 변경부터 피해신고까지 체크리스트 제공"
-        ],
-        "actionTitles": [
-          "한전 개인정보 데일리씨큐로 유출여부 바로 조회하는 법",
-          "한전 개인정보 확인 후 비밀번호 변경 등 대처 체크리스트",
-          "한전 개인정보 조회, 해지한 고객도 포함되는지 확인하기"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "개인정보 유출로 인해서..",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11003&docId=496056978&answerNo=1&qb=7ZWc7KCE6rCc7J247KCV67O0",
-          "views": 1289,
-          "answers": 11,
-          "askedAt": "2026.11.22"
-        },
-        {
-          "title": "한국전력공사 ncs 전공",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110412&docId=488899142&answerNo=2&qb=7ZWc7KCE6rCc7J247KCV67O0",
-          "views": 406,
-          "answers": 2,
-          "askedAt": "2025.09.17"
-        },
-        {
-          "title": "한국전력공사 전자조달시스템 입찰대리인 간....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=410&docId=494024586&answerNo=1&qb=7ZWc7KCE6rCc7J247KCV67O0",
-          "views": 288,
-          "answers": 3,
-          "askedAt": "2026.06.25"
         }
       ]
     },
@@ -539,76 +468,6 @@
           "views": 52,
           "answers": 1,
           "askedAt": "2026.11.11"
-        }
-      ]
-    },
-    {
-      "id": "0e9c0befdb6fc687",
-      "urls": [
-        "https://insight3429.tistory.com/entry/2027-%EC%9E%85%EC%8B%9C-%EC%88%98%EB%8A%A5-%EB%81%9D%EB%82%9C-%EA%B3%A03-%EC%99%84%EB%B2%BD-%EA%B0%80%EC%9D%B4%EB%93%9C%EF%BD%9C%EC%88%98%ED%97%98%ED%91%9C-%ED%95%A0%EC%9D%B8-30%EC%84%A0-%EC%A0%95%EC%8B%9C-%EC%9D%BC%EC%A0%95-%EC%84%A0%EB%AC%BC-BEST-18",
-        "https://angju.tistory.com/1050",
-        "https://story7880.tistory.com/entry/%F0%9F%8E%93-%EC%88%98%EB%8A%A5-%EB%81%9D-%EC%88%98%ED%97%98%ED%91%9C-%ED%95%9C-%EC%9E%A5%EC%9C%BC%EB%A1%9C-%EB%88%84%EB%A6%AC%EB%8A%94-%ED%95%A0%EC%9D%B8%C2%B7%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://insight3429.tistory.com/entry/2026-%EC%88%98%EB%8A%A5-END-%EC%88%98%EB%8A%A5-%EB%81%9D%EB%82%9C-%EA%B3%A03-%EC%99%84%EC%A0%84-%EA%B0%80%EC%9D%B4%EB%93%9C%EF%BD%9C%EC%95%8C%EB%B0%94-%EC%B6%94%EC%B2%9C-TOP-10-%EC%88%98%ED%97%98%ED%91%9C-%ED%95%A0%EC%9D%B8-%ED%98%9C%ED%83%9D-50%EA%B0%80%EC%A7%80-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://maccrey.tistory.com/entry/2026-%EC%88%98%EB%8A%A5-%EC%88%98%ED%97%98%ED%91%9C-%ED%95%A0%EC%9D%B8-%EC%B4%9D%EC%A0%95%EB%A6%AC%EF%BD%9C%EC%97%90%EB%B2%84%EB%9E%9C%EB%93%9C%C2%B7%EB%A1%AF%EB%8D%B0%EC%9B%94%EB%93%9C%C2%B7%EC%98%81%ED%99%94%EA%B4%80%C2%B7%EC%99%B8%EC%8B%9D%C2%B7%ED%95%AD%EA%B3%B5%EA%B6%8C%EA%B9%8C%EC%A7%80-%EC%96%B4%EB%94%94%EC%84%9C-%EC%96%BC%EB%A7%88%EB%82%98-%ED%95%A0%EC%9D%B8%EB%B0%9B%EC%9D%84%EA%B9%8C",
-        "https://futurefreelance.tistory.com/entry/2027-%EC%88%98%EB%8A%A5-%EC%88%98%ED%97%98%ED%91%9C-%ED%95%A0%EC%9D%B8-%EC%96%B4%EB%94%94%EC%84%9C-%EC%97%90%EB%B2%84%EB%9E%9C%EB%93%9C%C2%B7%EB%A1%AF%EB%8D%B0%EC%9B%94%EB%93%9C%C2%B7%EC%98%81%ED%99%94%EA%B4%80%C2%B7%EC%99%B8%EC%8B%9D-%EA%B0%80%EA%B2%A9%EA%B3%BC-%EA%B8%B0%EA%B0%84"
-      ],
-      "guide": {
-        "direction": "지식인 질문은 할인보다 수험표 자체의 분실·재발급·대리수령에서 막힌다. 고수 블로그 제목들은 할인처 리스트만 나열해 수험표를 잃어버리거나 대리수령해야 하는 경우는 다루지 않는다. 이 글은 할인 리스트 앞에 수험표 배부·분실·재발급·대리수령 절차를 정리해 할인처 방문 전 문제를 끝내게 한다.",
-        "searchTargets": [
-          "수능 수험표 할인",
-          "수능 수험표 분실",
-          "수능 수험표 재발급",
-          "수능 수험표 대리수령"
-        ],
-        "mustInclude": [
-          "수험표는 예비소집일에 학교에서 교부되며 시험장 수험표와 완전히 동일하다는 사실",
-          "수험표 분실 시 재발급 가능 여부와 절차 (확인 필요: 학교·교육청 공지)",
-          "수험표 대리수령 가능 여부와 준비물 (확인 필요: 교육청 공지)",
-          "에버랜드·롯데월드·영화관·외식·항공권 등 할인처별 적용 기간과 수험표 지참 여부",
-          "수험표 없이 신분증만으로 할인 가능한 곳이 있는지 (확인 필요: 각 업체 공지)"
-        ],
-        "mustAvoid": [
-          "2026·2027 수능 등 여러 해 할인 글을 섞어 날짜·학년도를 혼동시키는 서술",
-          "할인처별 적용 기간이 서로 다른데 하나의 '수능 끝 기간'으로 뭉뚱그리기",
-          "수험표 분실이 시험 응시 불가로 이어진다고 오인시키는 표현"
-        ],
-        "checkBefore": [
-          "각 할인처(에버랜드·롯데월드·영화관 등) 공식 홈페이지·공지에서 할인율·기간·지참물 확인",
-          "수험표 분실·재발급·대리수령 절차는 해당 학교 또는 교육청 공지로 확인"
-        ],
-        "solves": [
-          "수험표를 잃어버렸는데 재발급 되나? → 재발급 가능 여부와 절차 정리",
-          "예비소집일 수험표와 시험장 수험표가 다른가? → 동일하다는 사실과 보관법 안내",
-          "수험표 대리수령 가능한가? → 가능 여부와 필요 준비물 정리"
-        ],
-        "actionTitles": [
-          "수능 수험표 분실·재발급 완벽 정리｜할인 받으려면 꼭 확인"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "수능 수험표 교육청 수령 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=495946274&answerNo=1&qb=7IiY64ql7IiY7ZeY7ZGc",
-          "views": 338,
-          "answers": 2,
-          "askedAt": "2026.11.14"
-        },
-        {
-          "title": "수능 수험표",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=495970570&answerNo=3&qb=7IiY64ql7IiY7ZeY7ZGc",
-          "views": 299,
-          "answers": 3,
-          "askedAt": "2026.11.16"
-        },
-        {
-          "title": "수능 수험표",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30202&docId=495888295&answerNo=1&qb=7IiY64ql7IiY7ZeY7ZGc",
-          "views": 269,
-          "answers": 3,
-          "askedAt": "2026.11.09"
         }
       ]
     },
@@ -1191,76 +1050,6 @@
           "views": 219,
           "answers": 3,
           "askedAt": "2026.11.16"
-        }
-      ]
-    },
-    {
-      "id": "d6d66d50be4e03cf",
-      "urls": [
-        "https://ilpavkf.linkistat.com/138",
-        "https://mindocean.tistory.com/2372",
-        "https://bunny43.tistory.com/entry/%EC%9A%B4%EC%A0%84%EB%A9%B4%ED%97%88-%EC%A0%81%EC%84%B1%EA%B2%80%EC%82%AC-%EA%B0%B1%EC%8B%A0-%EC%B0%A8%EC%9D%B4-70%EC%84%B8-%EC%9D%B4%EC%83%81-2%EC%A2%85%EB%8F%84-%EB%8C%80%EC%83%81",
-        "https://cnp.youmytv.com/46"
-      ],
-      "guide": {
-        "direction": "① '기간이 지났는데 갱신 가능한가' '생일 기준인지 면허증 표기 기준인지' 지식인에 반복되는 질문처럼, 검색자는 본인에게 맞는 기준을 못 찾아 막힌다. ② 고수 블로그 제목들은 갱신·준비물·대상을 따로 다뤘지만 기간 기준과 경과 시 처리(과태료·취소 여부)를 한 표로 묶지 않았다. ③ 생일 ±6개월 기준표와 경과 기간별 처리(과태료·재취득) 정리로 본인 상황을 바로 판단하게 한다.",
-        "searchTargets": [
-          "운전면허 적성검사 기간",
-          "운전면허 적성검사 갱신",
-          "운전면허 적성검사 준비물",
-          "운전면허 적성검사 온라인"
-        ],
-        "mustInclude": [
-          "면허증 표기 기간 vs 생일 ±6개월, 두 기준 비교표",
-          "안전운전 통합민원 사이트(또는 경찰서)에서 본인 기간 조회하는 방법",
-          "기간 경과 시 2종보통 과태료 2만원 갱신 가능 사례(확인 필요: 안전운전 통합민원 공지)",
-          "준비물(사진 등) 목록 — 정확한 사진 규격은 확인 필요: 안전운전 통합민원 공지",
-          "수시적성검사(질병·신체 변화 등) 미이행과 정기적성검사 기간 경과의 차이 구분"
-        ],
-        "mustAvoid": [
-          "수시적성검사(특정 대상자)와 정기적성검사(일반 갱신)를 같은 것으로 설명하기",
-          "2종보통과 1종 등 면허 종류별 취소·갱신 가능 여부를 뭉뚱그려 안내하기",
-          "과태료 금액·처리 기준을 지역·사례 차이 없이 단정하기"
-        ],
-        "checkBefore": [
-          "안전운전 통합민원 홈페이지 공지에서 적성검사 기간·미이행 시 처리 기준 확인",
-          "경찰청·도로교통공단 공식 발표로 2종보통 갱신 초과 과태료 금액 확인"
-        ],
-        "solves": [
-          "적성검사 기간이 생일 기준인지 면허증 표기 기준인지 헷갈릴 때 → 두 기준 비교표로 정리",
-          "기간이 몇 년 지났는데 갱신 가능한지 모를 때 → 2종보통 과태료 갱신 사례와 취소 기준 구분",
-          "수시적성검사 대상인지 정기 갱신 대상인지 모를 때 → 두 제도 차이와 확인 방법 안내"
-        ],
-        "actionTitles": [
-          "운전면허 적성검사 기간 조회하고 갱신하는 법",
-          "운전면허 적성검사 갱신 준비물 한눈에 확인하기",
-          "운전면허 적성검사 기간 지났을 때 대처하는 법"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "운전면허 수시적성검사 미이행",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60215&docId=495491679&answerNo=5&qb=7Jq07KCE66m07ZeI7KCB7ISx6rKA7IKs",
-          "views": 353,
-          "answers": 6,
-          "askedAt": "2026.11.13"
-        },
-        {
-          "title": "운전면허 적성검사-갱신 기간 경과",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110303&docId=495813846&answerNo=2&qb=7Jq07KCE66m07ZeI7KCB7ISx6rKA7IKs",
-          "views": 179,
-          "answers": 6,
-          "askedAt": "2026.11.03"
-        },
-        {
-          "title": "운전면허 적성검사 안내문 관련하여",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110303&docId=495910081&answerNo=5&qb=7Jq07KCE66m07ZeI7KCB7ISx6rKA7IKs",
-          "views": 147,
-          "answers": 6,
-          "askedAt": "2026.11.11"
         }
       ]
     },
@@ -2000,70 +1789,6 @@
       "at": "2026-11-24T03:03:47.531Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "8c80b2137a9792f6",
-      "urls": [
-        "https://story7880.tistory.com/entry/%F0%9F%94%AE-2026%EB%85%84-11%EC%9B%94-24%EC%9D%BC-%EB%9D%A0%EB%B3%84-%EC%97%B0%EB%8F%84%EB%B3%84-%EC%98%A4%EB%8A%98%EC%9D%98-%EC%9A%B4%EC%84%B8",
-        "https://whitepebble.tistory.com/entry/2026%EB%85%84-11%EC%9B%94-24%EC%9D%BC-%EB%9D%A0%EB%B3%84-%EC%98%A4%EB%8A%98%EC%9D%98-%EC%9A%B4%EC%84%B8",
-        "https://story7880.tistory.com/entry/%F0%9F%94%AE-2026%EB%85%84-11%EC%9B%94-23%EC%9D%BC-%EB%9D%A0%EB%B3%84-%EC%97%B0%EB%8F%84%EB%B3%84-%EC%98%A4%EB%8A%98%EC%9D%98-%EC%9A%B4%EC%84%B8",
-        "https://expert-j.com/entry/2027-%EC%A0%95%EB%AF%B8%EB%85%84-%EB%9D%A0%EB%B3%84-%EC%9A%B4%EC%84%B8-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%82%BC%EC%9E%AC-%EB%9D%A0%C2%B7%EC%9E%98-%EB%A7%9E%EB%8A%94-%EB%9D%A0-%EB%AC%B4%EB%A3%8C-%EC%82%AC%EC%A3%BC-%EB%B3%B4%EA%B8%B0",
-        "https://whitepebble.tistory.com/entry/2026%EB%85%84-11%EC%9B%94-23%EC%9D%BC-%EB%9D%A0%EB%B3%84-%EC%98%A4%EB%8A%98%EC%9D%98-%EC%9A%B4%EC%84%B8",
-        "https://whitepebble.tistory.com/entry/2026%EB%85%84-11%EC%9B%94-22%EC%9D%BC-%EB%9D%A0%EB%B3%84-%EC%98%A4%EB%8A%98%EC%9D%98-%EC%9A%B4%EC%84%B8"
-      ],
-      "guide": {
-        "direction": "지식인에는 '내 띠를 어떻게 계산하냐', '가족·자식 띠별 궁합'을 묻는 질문이 많아, 단순 운세 나열보다 띠 계산법이 막힌 지점이다. 고수 블로그는 날짜별 운세만 반복해 음력 기준 계산법과 가족 궁합표가 빠져 있다. 음력 생일 주의사항과 12지 궁합표를 함께 줘서 글 안에서 '내 띠 확인+궁합'까지 끝내게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "2026년 11월 24일 날짜 명시 및 12지 전체 띠 나열",
-          "음력 기준 띠 계산 주의(양력 1~2월 출생자는 띠가 달라질 수 있음)",
-          "부모·자녀 세대별 띠 궁합 간단 매칭표",
-          "2027년 삼재 띠 예고(원문 제목 근거)"
-        ],
-        "mustAvoid": [
-          "운세 내용을 확정적 사실처럼 단정하는 서술",
-          "날짜를 명시하지 않아 전날·다음날 글과 혼동"
-        ],
-        "checkBefore": [
-          "음력·양력 변환 및 삼재 띠 공식 기준(만세력 등)"
-        ],
-        "solves": [
-          "출생연도만으론 내 띠를 모르겠음 → 음력 기준 계산법 설명",
-          "가족·자식 띠 궁합이 궁금함 → 세대별 궁합 매칭표 제공",
-          "오늘 운세와 연도별 운세가 헷갈림 → 띠별/연도별을 구분해 정리"
-        ],
-        "actionTitles": [
-          "2026년 11월 24일 띠별 오늘의 운세 전체 확인",
-          "내 띠 계산법부터 가족 궁합까지 한번에 보기",
-          "2027년 삼재 띠 미리 확인하고 대비하는 법"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "가족 띠별 궁합이요..꼭좀 알려주세요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=31501&docId=113307858&answerNo=2&qb=652g67OEIOyXsOuPhOuzhCDsmrTshLg=",
-          "views": 2436,
-          "answers": 2,
-          "askedAt": "2026.11.03"
-        },
-        {
-          "title": "오늘의 띠별 운세",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=31504&docId=488965040&answerNo=5&qb=652g67OEIOyXsOuPhOuzhCDsmrTshLg=",
-          "views": 1852,
-          "answers": 5,
-          "askedAt": "2026.11.19"
-        },
-        {
-          "title": "자식간띠별궁합",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=31501&docId=187849902&answerNo=4&qb=652g67OEIOyXsOuPhOuzhCDsmrTshLg=",
-          "views": 262,
-          "answers": 5,
-          "askedAt": "2026.11.08"
-        }
-      ]
     },
     {
       "id": "c2395cf53b0d02c8",
@@ -3037,74 +2762,6 @@
           "views": 349,
           "answers": 4,
           "askedAt": "2026.10.26"
-        }
-      ]
-    },
-    {
-      "id": "0516a41fe29211d4",
-      "urls": [
-        "https://kjw6633.tistory.com/entry/%EA%B2%A8%EC%9A%B8%EC%B2%A0-%EB%85%B8%EB%A1%9C%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EC%A6%9D%EC%83%81%C2%B7%EC%98%88%EB%B0%A9%EB%B2%95%EF%BD%9C%ED%99%98%EC%9E%90-26%EB%B0%B0-%EA%B8%89%EC%A6%9D-%EC%86%90%EC%94%BB%EA%B8%B0-30%EC%B4%88%C2%B7%EA%B5%B4-%EA%B0%80%EC%97%B4-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://piwpiw.tistory.com/entry/%EB%85%B8%EB%A1%9C%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EC%8B%9D%EC%A4%91%EB%8F%85-122%EC%9B%94%EC%97%90-52-%EA%B5%B4%EC%9D%80-85%E2%84%83-1%EB%B6%84-%EA%B0%80%EC%97%B4",
-        "https://angju.tistory.com/1049"
-      ],
-      "guide": {
-        "direction": "지식인엔 '노로바이러스 치료약 있냐', '굴 먹고 걸린 게 노로인지 비브리오인지' 처럼 구분·치료 여부에서 막힌 질문이 많다. 고수 글은 가열 온도·손씻기 예방 수칙에 집중해 '왜 치료제가 없는지', '다른 식중독과 뭐가 다른지'는 안 짚었다. 환자 2.6배 급증 수치, 노로 vs 비브리오 구분표, 치료제 없이 1주일 내 자연호전된다는 대처법으로 끝낸다.",
-        "searchTargets": [
-          "노로바이러스 식중독 차이",
-          "노로바이러스 식중독 구분",
-          "노로바이러스 식중독 예방법",
-          "노로바이러스 식중독 원인"
-        ],
-        "mustInclude": [
-          "환자 2.6배 급증 수치와 발생 집중 시기(12~2월, 52%)",
-          "굴 85℃ 1분 가열, 손씻기 30초 등 예방 수칙",
-          "노로바이러스 vs 비브리오균 등 세균성 식중독 구분표",
-          "치료제 없이 1주일 내 자연호전, 수분 보충 중심 대처법",
-          "음식점 의심 시 구청 위생과 신고 절차(확인 필요: 공식 신고 방법)"
-        ],
-        "mustAvoid": [
-          "특정 음식점·업소 실명 거론이나 추측성 지목",
-          "노로바이러스 백신·특효 치료제가 있다는 식의 오해 유발",
-          "식중독과 급성장염 증상을 동일시해 혼동 주는 서술"
-        ],
-        "checkBefore": [
-          "환자 2.6배 급증, 12~2월 52% 통계 출처(질병관리청 등 공식 발표)",
-          "굴 85℃ 1분 가열 기준의 원출처 확인"
-        ],
-        "solves": [
-          "노로바이러스 치료약 있나요? → 치료제 없이 1주일 내 자연호전, 수분보충 중심 대처법 안내",
-          "굴 먹고 식중독인데 노로인지 비브리오인지 구분 안 돼요 → 원인별 증상·구분표 정리",
-          "음식점에서 식중독 걸린 것 같은데 어떻게 하나요 → 구청 위생과 신고 절차 안내"
-        ],
-        "actionTitles": [
-          "노로바이러스 식중독 차이 구분법, 비브리오균과 비교정리",
-          "노로바이러스 식중독 예방법, 손씻기 30초·굴 가열 85도"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "노로바이러스로 인한 식중독 치료 약에",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010107&docId=341138281&answerNo=1&qb=64W466Gc67CU7J2065+s7Iqk7Iud7KSR64+F",
-          "views": 3141,
-          "answers": 1,
-          "askedAt": "2019.11.25"
-        },
-        {
-          "title": "굴 노로바이러스",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=71103&docId=496049558&answerNo=3&qb=64W466Gc67CU7J2065+s7Iqk7Iud7KSR64+F",
-          "views": 630,
-          "answers": 9,
-          "askedAt": "2026.11.22"
-        },
-        {
-          "title": "음식점 식중독 노로바이러스 ? 질문 드려요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010102&docId=387204633&answerNo=1&qb=64W466Gc67CU7J2065+s7Iqk7Iud7KSR64+F",
-          "views": 592,
-          "answers": 1,
-          "askedAt": "2021.04.14"
         }
       ]
     },
@@ -4217,72 +3874,6 @@
       ]
     },
     {
-      "id": "eb187d08ff459000",
-      "urls": [
-        "https://b.paris15000.com/entry/%EB%8C%80%EC%B6%9C-%EA%B3%A0%EC%A0%95-%EB%AC%B6%EC%9D%84%EA%B9%8C-%EB%B3%80%EB%8F%99-%EA%B0%88%EA%B9%8C-%E2%80%94-%EA%B8%88%EB%A6%AC-%EC%83%81%EC%8A%B9%EA%B8%B0-%EC%84%A0%ED%83%9D%EB%B2%95-%ED%95%9C%EB%8F%84-%EC%B2%B4%ED%81%AC",
-        "https://cogone.tistory.com/893"
-      ],
-      "guide": {
-        "direction": "지금 금리 상황에서 고정·변동 중 뭐가 유리한지, 몇 %p 차이가 나야 바꿀 가치가 있는지 모르는 게 실제 문제다. 지식인 질문들은 신규 대출 선택과 5년고정 만기 후 변동 전환이라는 두 상황이 섞여 있는데, 고수 글의 '0.5%p면 얼마?'는 차액 계산만 보여주고 이 두 상황을 구분하지 않는다. 독자는 신규 선택 기준표와 기존 고정 만기 전환 비교표를 자기 상황에 바로 대입해 끝낼 수 있다.",
-        "searchTargets": [
-          "대출금리 고정 변동 차이",
-          "대출 금리 고정 변동",
-          "대출금리 고정금리차이"
-        ],
-        "mustInclude": [
-          "신규 대출 시 고정·변동 선택 기준(단기 대출은 고정, 장기 대출은 변동이 유리하다는 답변 근거)",
-          "5년 고정형 주담대 만기 후 변동 전환 시 금리 변동 구조 (확인 필요: 해당 은행 상품설명서)",
-          "혼합형(3~5년 단기고정) 금리 예시 구조 (확인 필요: 해당 은행 현재 고시금리로 재확인)",
-          "0.5%p 차이로 월 상환액이 얼마나 달라지는지 계산 예시",
-          "버팀목대출처럼 고정기간 중 금리가 시장과 무관하게 유지되는 상품 구조"
-        ],
-        "mustAvoid": [
-          "'고정금리가 항상 안전하다'는 단정 — 장기 대출에서는 변동이 유리할 수 있다는 답변과 충돌",
-          "지식인 답변에 나온 과거 시점 금리(예: 1.55%, 3.2%)를 현재 금리처럼 단정해 쓰는 것",
-          "전세대출·주담대·버팀목대출을 구분 없이 같은 기준으로 설명하는 것"
-        ],
-        "checkBefore": [
-          "질문에 나온 1.55%, 3.2% 등은 과거 답변 시점 금리이므로 해당 은행 공식 금리 페이지에서 최신 수치 확인",
-          "버팀목대출 등 정책상품의 고정·변동 구조는 주택도시기금 공식 안내에서 재확인"
-        ],
-        "solves": [
-          "'대출금리 고정 변동 차이가 뭔지, 뭘 골라야 하는지' → 단기/장기 대출별 선택 기준표 제시",
-          "'5년 고정 끝나면 금리 얼마나 오르는지' → 전환 구조와 계산 예시 제시",
-          "'버팀목대출도 변동금리인지' → 정책상품의 고정기간 구조 설명"
-        ],
-        "actionTitles": [
-          "대출금리 고정 변동 차이, 내 상황에 맞는 선택 기준 확인",
-          "대출 금리 고정 변동, 5년 고정 끝나면 어떻게 바뀌는지 확인"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "토스뱅크 전세대출 변동금리 고정금리 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010502&docId=487000052&answerNo=1&qb=64yA7Lac6riI66asIOqzoOyglSDrs4Drj5kg7LCo7J2066m0",
-          "views": 1764,
-          "answers": 4,
-          "askedAt": "2025.07.11"
-        },
-        {
-          "title": "주담대 5년고정후 변동금리 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010501&docId=492735526&answerNo=3&qb=64yA7Lac6riI66asIOqzoOyglSDrs4Drj5kg7LCo7J2066m0",
-          "views": 727,
-          "answers": 5,
-          "askedAt": "2026.03.31"
-        },
-        {
-          "title": "은행이자 변동금리와 고정금리의 차이점은 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401&docId=477509294&answerNo=1&qb=64yA7Lac6riI66asIOqzoOyglSDrs4Drj5kg7LCo7J2066m0",
-          "views": 725,
-          "answers": 1,
-          "askedAt": "2024.11.05"
-        }
-      ]
-    },
-    {
       "id": "e6db4b062ac54efe",
       "urls": [
         "https://beyond-the-story.tistory.com/entry/%EC%8A%A4%ED%8C%80-%EC%84%9C%EB%B2%84%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EA%B1%B0%EB%82%98-%EB%84%88%EB%AC%B4-%EB%B0%94%EC%81%A8-%EC%98%A4%EB%A5%98-%EB%9C%B0-%EB%95%8C-%ED%99%95%EC%9D%B8-%EB%B0%A9%EB%B2%95",
@@ -4707,68 +4298,6 @@
           "views": 548,
           "answers": 5,
           "askedAt": "2026.10.29"
-        }
-      ]
-    },
-    {
-      "id": "ab824e1f0dee9dea",
-      "urls": [
-        "https://sweetonion1005.tistory.com/entry/%EA%B0%84%ED%97%90%EC%A0%81-%EB%8B%A8%EC%8B%9D%EC%9C%BC%EB%A1%9C-%EC%B2%B4%EC%A7%80%EB%B0%A9-%EA%B0%90%EC%86%8C%ED%95%98%EA%B8%B0-168-%EB%B0%A9%EC%8B%9D%EA%B3%BC-%EC%9A%B4%EB%8F%99-%EB%B3%91%ED%96%89-%ED%9A%A8%EA%B3%BC",
-        "https://teacafe-story230726.tistory.com/entry/%EA%B0%84%ED%97%90%EC%A0%81-%EB%8B%A8%EC%8B%9D-%ED%9A%A8%EA%B3%BC%EC%99%80-%EC%A3%BC%EC%9D%98%EC%A0%90-2"
-      ],
-      "guide": {
-        "direction": "지식인 질문은 당뇨병·혈당강하제 복용자, 성장기 어린이, 겨울철 지속 등 특정 대상별로 해도 되는지를 구체적으로 묻는다. 고수 글은 '효과와 주의점'으로 포괄 설명해 대상별 금기를 가르지 못한다. 이 글은 대상별(당뇨·성장기·겨울철) 체크리스트와 단백질 섭취 기준으로 독자가 본인 상황을 바로 판단하게 한다.",
-        "searchTargets": [
-          "간헐적 단식 16:8",
-          "간헐적 단식 효과",
-          "간헐적 단식 부작용",
-          "간헐적 단식 커피"
-        ],
-        "mustInclude": [
-          "16:8 방식은 8시간 섭취·16시간 공복으로 정의, 공복시간 기준 명시",
-          "당뇨병·인슐린/혈당강하제 복용자는 저혈당 위험으로 주의 필요",
-          "단백질 섭취는 체중 1kg당 일정량 필요(확인 필요: 구체 g수치)",
-          "성장기 어린이는 영양소·열량 부족, 집중력 저하 우려로 권장하지 않음",
-          "공복 중 커피·물 등 무열량 음료 섭취 가능 여부(확인 필요: 카페인 영향)"
-        ],
-        "mustAvoid": [
-          "당뇨병·혈당강하제 복용자에게 저혈당 위험 언급 없이 무조건 권장하는 서술",
-          "성장기 어린이·청소년에게도 적용 가능한 것처럼 일반화"
-        ],
-        "checkBefore": [
-          "당뇨병 환자 저혈당 위험 관련 의학적 근거(하이닥 등 전문가 답변) 확인",
-          "단백질 섭취 권장량 공식 수치 출처 확인"
-        ],
-        "solves": [
-          "당뇨병 환자도 간헐적단식 해도 되나? → 혈당강하제 복용 시 저혈당 위험과 주의사항 제시",
-          "단식 중 단백질 얼마나 먹어야 하나? → 체중 기준 섭취 가이드 제시(확인 필요)",
-          "성장기 어린이도 해도 되나? → 권장하지 않는 이유와 주의점 명시"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "당뇨병 환자도 간헐적단식을 해도 될까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010106&docId=495939575&answerNo=1&qb=6rCE7ZeQ7KCB64uo7Iud",
-          "views": 127,
-          "answers": 4,
-          "askedAt": "2026.11.13"
-        },
-        {
-          "title": "간헐적단식을 할 때 단백질은 얼마나 먹어야 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70117&docId=495940219&answerNo=2&qb=6rCE7ZeQ7KCB64uo7Iud",
-          "views": 62,
-          "answers": 2,
-          "askedAt": "2026.11.14"
-        },
-        {
-          "title": "겨울철에도 간헐적단식을 계속해도 괜찮을까....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70117&docId=495947264&answerNo=2&qb=6rCE7ZeQ7KCB64uo7Iud",
-          "views": 56,
-          "answers": 2,
-          "askedAt": "2026.11.16"
         }
       ]
     },
@@ -7670,74 +7199,6 @@
       ]
     },
     {
-      "id": "f814d8f178199765",
-      "urls": [
-        "https://astrowise.tistory.com/entry/%ED%83%80%EC%9D%B4%EB%B0%8D%EB%B2%A8%ED%8A%B8-%EA%B5%90%EC%B2%B4-%EC%A3%BC%EA%B8%B0%EC%99%80-%EC%A6%9D%EC%83%81-%EC%95%88-%ED%95%98%EB%A9%B4-%EC%83%9D%EA%B8%B0%EB%8A%94-%EC%9D%BC",
-        "https://anotherdifference.tistory.com/2635"
-      ],
-      "guide": {
-        "direction": "쿠쿠정수기 이용자는 필터를 직접 교체해도 되는지, 호환 필터를 써도 하자보증에 문제없는지, 특정 모델(CP-TS100S) 냉수가 안 나올 때 AS를 불러야 하는지 헷갈려한다. 고수 글은 '교체 주기·셀프 교체법'만 다루고 모델별 고장 자가진단, 살균수 오용 주의, 가입비 환급 처리 같은 실무 디테일은 비워둔다. 모델별 체크리스트와 AS 신청 기준을 정리해 교체와 AS 판단을 한 번에 끝내준다.",
-        "searchTargets": [
-          "쿠쿠 정수기 필터",
-          "쿠쿠 정수기 필터 교체",
-          "쿠쿠정수기 as",
-          "호환 쿠쿠정수기필터"
-        ],
-        "mustInclude": [
-          "CP-TS100S 모델은 온수는 정상인데 냉수만 미지근하면 냉각 기능 이상일 가능성",
-          "정수기에서 나오는 전기분해 살균수는 가습기 물 대신 쓰면 안 된다",
-          "CP-AR011W 무전원 정수기는 수전 형태에 따라 설치 가능 여부가 달라진다",
-          "신규 렌탈 가입비 3만원 환급 시 계정과목 처리(사업자 기준) 사례",
-          "(확인 필요: 쿠쿠 공식 AS 정책) 호환 필터 사용 시 하자보증 영향 여부"
-        ],
-        "mustAvoid": [
-          "바우젠 등 타사 전해수 제품과 쿠쿠 정수기 살균수를 동일한 효과로 혼동",
-          "살균수의 건강·소독 효과를 의학적으로 단정",
-          "특정 모델(CP-TS100S, CP-AR011W) 사례를 전체 쿠쿠정수기 라인업으로 일반화"
-        ],
-        "checkBefore": [
-          "쿠쿠 공식 홈페이지·고객센터 공지로 모델별 필터 교체 주기 재확인",
-          "쿠쿠 AS센터 기준으로 호환 필터 사용 시 하자보증 적용 여부 확인"
-        ],
-        "solves": [
-          "정수기 살균수 가습기 물로 써도 되나? → 전기분해 살균수는 가습기용으로 쓰지 말 것을 안내",
-          "CP-TS100S 냉수 안나옴 → 온수 정상/냉수만 미지근할 때 자가진단 포인트 정리",
-          "렌탈 가입비 환급받았는데 분개 어떻게? → 사업자 계정과목 처리 방법 안내"
-        ],
-        "actionTitles": [
-          "쿠쿠정수기 필터 교체 주기 확인하고 셀프 교체하는 법",
-          "쿠쿠정수기 냉수 안나올 때 AS 신청 전 자가진단법",
-          "쿠쿠정수기 호환필터 써도 되는지 AS 전 확인하는 법"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "바우젠 전해수와 쿠쿠정수기 살균수 차이가 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50104&docId=360676843&answerNo=4&qb=7L+g7L+g7KCV7IiY6riw",
-          "views": 6156,
-          "answers": 4,
-          "askedAt": "2026.11.13"
-        },
-        {
-          "title": "쿠쿠정수기 살균수 가습기에 물 대신 써도되....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50104&docId=410878746&answerNo=14&qb=7L+g7L+g7KCV7IiY6riw",
-          "views": 5538,
-          "answers": 14,
-          "askedAt": "2026.11.03"
-        },
-        {
-          "title": "쿠쿠 정수기 CP-TS100S 냉수가 안나와요.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50104&docId=494259379&answerNo=6&qb=7L+g7L+g7KCV7IiY6riw",
-          "views": 1877,
-          "answers": 6,
-          "askedAt": "2026.11.03"
-        }
-      ]
-    },
-    {
       "id": "3cb89189f8dde048",
       "urls": [
         "https://uknowlaw.com/dishwasher-detergent-rinse-aid-salt-different-compartments/",
@@ -9133,73 +8594,6 @@
       ]
     },
     {
-      "id": "892726ebaa756e46",
-      "urls": [
-        "https://piwpiw.tistory.com/entry/%EC%88%98%EB%8A%A5-%EC%8A%A4%EB%A7%88%ED%8A%B8%EA%B8%B0%EA%B8%B0-%EC%A0%81%EB%B0%9C-111%EA%B1%B4-%EC%9D%91%EC%8B%9C%EC%A0%9C%ED%95%9C-10%EB%85%84%EC%9D%80-%EC%B6%94%EC%A7%84-%EB%8B%A8%EA%B3%84",
-        "https://freeplus.tistory.com/entry/2027-csat-cheating-98-cases-smart-devices-analysis"
-      ],
-      "guide": {
-        "direction": "검색자는 뿔테안경이 스마트안경으로 오인될지, 1교시 전 전자기기를 어떻게 반납해야 하는지 막혀 있다. 고수 블로그는 적발 111건·부정행위자 98명 수치만 다루고 응시제한 10년이 아직 추진 단계라는 점과 실제 반납 절차는 짚지 않는다. 반납 체크리스트와 안경 판별 기준, 추진 단계임을 명시해 혼란 없이 끝내게 한다.",
-        "searchTargets": [
-          "수능 스마트기기 부정행위",
-          "수능 스마트기기 반납",
-          "수능 스마트기기 적발 인원",
-          "수능 스마트기기 반입"
-        ],
-        "mustInclude": [
-          "적발 111건, 부정행위자 98명 등 관련 수치(확인 필요: 교육부 발표 자료와 일치 여부)",
-          "스마트안경·소형카메라 등 스마트기기 적발 5건 사례",
-          "응시제한 10년은 아직 '추진 단계'임을 명확히 표시(확정 아님)",
-          "1교시 시작 전 전자기기 반납 절차 체크리스트",
-          "뿔테안경과 스마트안경을 감독관이 구분하는 기준"
-        ],
-        "mustAvoid": [
-          "일반 뿔테안경 착용 수험생을 부정행위 의심자처럼 서술",
-          "응시제한 10년을 이미 확정된 제도처럼 단정",
-          "특정 적발 수험생의 신상이나 사생활을 추측"
-        ],
-        "checkBefore": [
-          "교육부·평가원 공식 발표 자료에서 적발 건수(111건)·부정행위자 수(98명) 확인",
-          "응시제한 10년 추진 관련 법령·고시 개정 진행 상황 확인"
-        ],
-        "solves": [
-          "뿔테안경이 스마트안경으로 오해받을까 걱정 → 감독관 판별 기준과 안전한 안경 요건 정리",
-          "전자기기 반납 절차를 몰라 불안함 → 1교시 전 반납 순서와 유의사항 체크리스트 제공",
-          "응시제한 10년이 확정된 건지 궁금함 → 추진 단계임을 명확히 전달"
-        ],
-        "actionTitles": [
-          "수능 스마트기기 반납 절차 확인, 1교시 전 체크리스트",
-          "수능 스마트기기 부정행위 기준, 뿔테안경 오해 피하는 법"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "수능 뿔테안경 스마트안경으로 오해받을까요....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=495813785&answerNo=5&qb=7IiY64ql7Iqk66eI7Yq46riw6riw",
-          "views": 911,
-          "answers": 5,
-          "askedAt": "2026.11.17"
-        },
-        {
-          "title": "수능 스마트폰 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=495998931&answerNo=2&qb=7IiY64ql7Iqk66eI7Yq46riw6riw",
-          "views": 674,
-          "answers": 5,
-          "askedAt": "2026.11.18"
-        },
-        {
-          "title": "수능 스마트폰 사용",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=496008101&answerNo=3&qb=7IiY64ql7Iqk66eI7Yq46riw6riw",
-          "views": 452,
-          "answers": 5,
-          "askedAt": "2026.11.19"
-        }
-      ]
-    },
-    {
       "id": "bfb67479b232d21b",
       "urls": [
         "https://bunny43.tistory.com/entry/%EA%B5%AD%EA%B0%80%EC%9E%A5%ED%95%99%EA%B8%88-%EC%86%8C%EB%93%9D%EB%B6%84%EC%9C%84-5%EA%B5%AC%EA%B0%84-1%EC%B0%A8-%EC%8B%A0%EC%B2%AD-1%EC%9B%94-7%EC%9D%BC-%EB%A7%88%EA%B0%90",
@@ -10397,68 +9791,6 @@
           "views": 98,
           "answers": 1,
           "askedAt": "2026.11.04"
-        }
-      ]
-    },
-    {
-      "id": "fb5c731a8ab42a52",
-      "urls": [
-        "https://shinnaburo.tistory.com/entry/korea-major-news-november-23-2026"
-      ],
-      "guide": {
-        "direction": "검색자는 '왜 떨어졌는지(원인)'와 '지금 뭘 해야 하는지(대책)'를 가장 궁금해하며, 지식인엔 '6000선 붕괴' 같은 다른 시점 수치가 섞여 있어 이 글의 '4,700선'과 혼동하기 쉽다. 고수 블로그 제목은 '총정리'라며 키워드만 나열하고 사이드카 발동 여부·반도체 등락률·개미 대응법은 비워둔다. 이 글은 당일 원인 요약·반도체주 등락표·패닉 시 대응 체크리스트로 끝낼 수 있게 한다.",
-        "searchTargets": [
-          "코스피 급락 원인",
-          "코스피 급락 반도체 주",
-          "코스피 급락 대책",
-          "코스피 급락 사이드카"
-        ],
-        "mustInclude": [
-          "2026년 11월 23일 코스피 등락률·종가 (확인 필요: 한국거래소·시황 기사)",
-          "사이드카 발동 여부와 시각 (확인 필요)",
-          "삼성전자·SK하이닉스 등 반도체 대형주 등락률 (확인 필요)",
-          "급락 원인 키워드(글로벌 기술주 약세·외국인 매도 등) 정리표",
-          "'6000선 붕괴' 등 과거 급락 사례와 이번 사건의 구분"
-        ],
-        "mustAvoid": [
-          "날짜가 다른 '6000선 붕괴' 사건과 이번 '4700선' 사건을 섞어 혼동시키기"
-        ],
-        "checkBefore": [
-          "한국거래소·증권사 마감 시황에서 11월 23일 등락률과 사이드카 발동 여부 확인"
-        ],
-        "solves": [
-          "'코스피 급락 이유·원인' → 11월 23일 급락 배경 키워드를 정리해 답한다",
-          "'코스피 급락 사이드카' → 발동 여부와 의미를 설명한다",
-          "'코스피 급락 대책·손실' → 개미 투자자 대응 체크리스트를 제공한다"
-        ],
-        "actionTitles": [
-          "코스피 급락 사이드카 발동 여부 확인하는 법"
-        ]
-      },
-      "at": "2026-11-24T03:56:52.583Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "코스피가 7%정도 하락했네요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=495525429&answerNo=2&qb=7L2U7Iqk7ZS8IOq4ieudvSDrsJjrj4TssrQg7JW97IS4IOq4gOuhnOuyjA==",
-          "views": 1020,
-          "answers": 8,
-          "askedAt": "2026.10.13"
-        },
-        {
-          "title": "코스피 7000대가 무너지면 사회는 어떻게 되나....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=409&docId=494146005&answerNo=10&qb=7L2U7Iqk7ZS8IOq4ieudvSDrsJjrj4TssrQg7JW97IS4IOq4gOuhnOuyjA==",
-          "views": 744,
-          "answers": 14,
-          "askedAt": "2026.07.09"
-        },
-        {
-          "title": "[속보] 코스피, 6%대 급락에 6,000선 아래로",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61404&docId=495524818&answerNo=4&qb=7L2U7Iqk7ZS8IOq4ieudvSDrsJjrj4TssrQg7JW97IS4IOq4gOuhnOuyjA==",
-          "views": 693,
-          "answers": 6,
-          "askedAt": "2026.10.22"
         }
       ]
     },
@@ -15326,72 +14658,6 @@
       ]
     },
     {
-      "id": "9a4c9834966457e2",
-      "urls": [
-        "https://hwichistory.tistory.com/1324"
-      ],
-      "guide": {
-        "direction": "검색자는 '포장이사 업체가 냉장고 음식까지 다 처리해주는지'와 전원을 언제 끄고 물을 어떻게 빼야 하는지 순서를 몰라 막혀 있다. 고수 글 제목은 자극적 실패 사례만 강조해 '그럼 지금 뭘 해야 하는지' 순서는 안 줬을 가능성이 크다. 이사 전날부터 당일까지 전원·물빼기·음식물·문 분리 순서 체크리스트로 끝낸다.",
-        "searchTargets": [
-          "이사 냉장고 전원",
-          "이사 냉장고 물빼는 방법",
-          "이사 냉장고 음식",
-          "보관이사 냉장고"
-        ],
-        "mustInclude": [
-          "냉장고 전원은 이사 전 미리 꺼서 물받이(제상수) 제거해야 한다는 점(확인 필요: 업체별 권장 시간)",
-          "냉장·냉동식품 포장재는 업체마다 기본 제공 여부가 다르므로 예약 전 확인 필요",
-          "보관이사(KGB보이사 등)는 냉장고 전원을 계속 연결해 음식물 보관을 지원하는 서비스가 있다는 차이",
-          "락스로 냉장고 내부 청소 시 냄새가 음식에 배일 수 있어 밀폐용기 사용 권장"
-        ],
-        "mustAvoid": [
-          "특정 이사업체명을 신뢰성 보증처럼 단정적으로 홍보하는 서술",
-          "폐기물 처리비를 단정적 금액으로 제시",
-          "일반이사와 보관이사 서비스 범위를 혼동해 설명"
-        ],
-        "checkBefore": [
-          "이용할 포장이사 업체의 냉장고/음식물 처리 범위 사전 공지 확인",
-          "거주 지자체의 생활폐기물(음식물) 배출 규정 확인"
-        ],
-        "solves": [
-          "포장이사 냉장고 음식 어떻게 처리하나 → 전원 끄는 시점부터 물빼기까지 순서로 정리",
-          "보관이사 냉장고 전원 계속 켜놓는지 → 보관이사 업체별 전원 연결 서비스 차이 비교",
-          "이사 냉장고 청소하면 냄새 밴다는데 → 락스 청소 주의점과 대안 제시"
-        ],
-        "actionTitles": [
-          "이사 냉장고 물빼는 방법, 전원 끄는 시점까지 정리",
-          "포장이사 냉장고 음식 처리, 업체 서비스 범위 확인법",
-          "보관이사 냉장고 전원 연결 여부 비교하고 확인하기"
-        ]
-      },
-      "at": "2026-11-25T00:35:23.007Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "대전 폐기물 처리후 보관이사업체",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=111603&docId=490546921&answerNo=2&qb=7J207IKsIOuDieyepeqzoCDsnYzsi53rrLwg7Y+s7J6l7J207IKsIOyXheyytA==",
-          "views": 758,
-          "answers": 11,
-          "askedAt": "2025.12.04"
-        },
-        {
-          "title": "(서울)이사 폐기물 생활 폐기물 업체 문의",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80901&docId=474001440&answerNo=15&qb=7J207IKsIOuDieyepeqzoCDsnYzsi53rrLwg7Y+s7J6l7J207IKsIOyXheyytA==",
-          "views": 613,
-          "answers": 17,
-          "askedAt": "2026.08.21"
-        },
-        {
-          "title": "이사업체에서 냉장고에 락스를 부어서 청소....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50503&docId=491613139&answerNo=4&qb=7J207IKsIOuDieyepeqzoCDsnYzsi53rrLwg7Y+s7J6l7J207IKsIOyXheyytA==",
-          "views": 415,
-          "answers": 5,
-          "askedAt": "2026.01.28"
-        }
-      ]
-    },
-    {
       "id": "885ab465b5debc4b",
       "urls": [
         "https://axles.kr/entry/%EC%9D%98%EB%A3%8C%EB%B9%84-%EC%84%B8%EC%95%A1%EA%B3%B5%EC%A0%9C-2026-%EC%B4%9D%EA%B8%89%EC%97%AC-3%ED%8D%BC%EC%84%BC%ED%8A%B8-%EC%8B%A4%EC%86%90%EB%B3%B4%ED%97%98%EA%B8%88-%EC%B0%A8%EA%B0%90-%EA%B3%84%EC%82%B0"
@@ -16276,69 +15542,6 @@
       ]
     },
     {
-      "id": "ce5a7a84b5e01be6",
-      "urls": [
-        "https://lifekeep.kr/yeskey-certificate-center/",
-        "https://lifekeep.kr/gas-facility-safety-manager-training/",
-        "https://gusle.kr/%ec%b6%a9%eb%82%a8%ea%b5%90%ed%86%b5%ec%97%b0%ec%88%98%ec%9b%90-%eb%b0%94%eb%a1%9c%ea%b0%80%ea%b8%b0-https-www-ctti-or-kr-main-intro-do/",
-        "https://yiwi.co.kr/307",
-        "https://routeit.kr/%eb%af%b8%ec%b6%94%ed%99%80%ea%b5%ac%ec%8b%9c%ec%84%a4%ea%b4%80%eb%a6%ac%ea%b3%b5%eb%8b%a8-%ed%99%88%ed%8e%98%ec%9d%b4%ec%a7%80/",
-        "https://lifekeep.kr/krcaa-cyber-education-center/"
-      ],
-      "guide": {
-        "direction": "지식인 질문은 '공인인증센터'가 아니라 건강보험EDI·국민연금EDI 로그인 시 인증서 오류와 '3곳을 따로 신고해야 하나'에 몰려 있다. 고수 글들은 단순 바로가기 링크만 나열해 이 막힘을 못 푼다. 금융결제원 사이트 링크에 인증서(공동인증서) 재설치 순서와 통합신고 가능 여부 표를 붙여야 끝까지 읽힌다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "공인인증서→공동인증서 명칭 전환 여부(확인 필요: 금융결제원 yeskey.or.kr 공지)",
-          "건강보험·국민연금·고용산재 EDI 통합신고 가능 여부(확인 필요: 4대사회보험정보연계센터)",
-          "EDI 프로그램 오류 시 삭제 후 재설치 순서",
-          "국민연금 미납금 납부 경로: EDI·인터넷뱅킹·카드로택스"
-        ],
-        "mustAvoid": [
-          "가스사용시설 안전관리교육·충남교통연수원 등 무관 기관과 섞어 설명하지 않기"
-        ],
-        "checkBefore": [
-          "금융결제원 yeskey.or.kr에서 현재 서비스(공동인증서 전환) 상태 확인",
-          "4대사회보험정보연계센터 공식 사이트에서 통합신고 가능 메뉴 확인"
-        ],
-        "solves": [
-          "EDI 프로그램 오류로 로그인이 안 돼 헤맴 → 삭제 후 재설치 순서 정리",
-          "건강보험·국민연금 EDI를 3곳 따로 신고해야 하는지 몰라 불안 → 통합신고 가능 여부 정리",
-          "국민연금 미납금을 어디서 한번에 내야 할지 모름 → EDI·카드로택스 납부 경로 정리"
-        ],
-        "actionTitles": [
-          "금융결제원 공인인증센터 바로가기와 EDI 오류 해결법",
-          "국민연금 미납금 한번에 납부하는 방법 총정리"
-        ]
-      },
-      "at": "2026-11-25T09:37:33.944Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "4대보험 상실신고 건강보험EDI 국민연금EDI 고....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6080402&docId=490788281&answerNo=4&qb=6rWt66+87Jew6riIZWRpIGh0dHBzIGVkaSBucHMgb3I=",
-          "views": 2905,
-          "answers": 5,
-          "askedAt": "2026.08.26"
-        },
-        {
-          "title": "국민연금edi 홈페이지",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=350802719&answerNo=1&qb=6rWt66+87Jew6riIZWRpIGh0dHBzIGVkaSBucHMgb3I=",
-          "views": 358,
-          "answers": 1,
-          "askedAt": "2020.03.23"
-        },
-        {
-          "title": "국민연금 미납",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=491669662&answerNo=1&qb=6rWt66+87Jew6riIZWRpIGh0dHBzIGVkaSBucHMgb3I=",
-          "views": 156,
-          "answers": 3,
-          "askedAt": "2026.01.30"
-        }
-      ]
-    },
-    {
       "id": "3e60c32bff873682",
       "urls": [
         "https://c.foqvjtm100.com/entry/2027%EB%85%84-%EA%B5%AD%EA%B0%80%EC%9E%A5%ED%95%99%EA%B8%88-%EC%8B%A0%EC%B2%AD-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%8B%A0%EC%B2%AD%EA%B8%B0%EA%B0%84%C2%B7%EB%8C%80%EC%83%81%C2%B7%EC%A7%80%EC%9B%90%EA%B8%88%C2%B7%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95-%ED%95%9C%EB%88%88%EC%97%90",
@@ -16776,43 +15979,6 @@
           "askedAt": "2026.11.10"
         }
       ]
-    },
-    {
-      "id": "9743553ba3886aee",
-      "urls": [
-        "https://money-magazine.co.kr/%ed%94%bc%ed%81%b4-ai/",
-        "https://silk1105.tistory.com/524"
-      ],
-      "guide": {
-        "direction": "검색자는 피클 AI를 어떻게 설치하고 초대장을 등록해 첫 업무를 맡기는지 구체 절차를 몰라 막혀 있다. 고수 블로그는 \"챗봇과 무엇이 달랐나\"식 후기에 그쳐 설치~가입~첫 업무지시까지 단계별 절차를 주지 않는다. 독자는 설치 경로, 초대장 등록 입력창 위치, 가입 후 첫 일을 맡기는 순서를 단계별로 확인하면 글을 끝낸다(세부 경로는 확인 필요: 공식 홈페이지).",
-        "searchTargets": [],
-        "mustInclude": [
-          "설치 경로(앱스토어/웹) 및 지원 플랫폼 — (확인 필요: 피클 AI 공식 홈페이지)",
-          "초대장 등록 입력창 위치와 입력 형식 — (확인 필요: 공식 홈페이지·공지)",
-          "초대장을 받는 방법(선착순/대기자 신청 등) — (확인 필요: 공식 SNS·공지)"
-        ],
-        "mustAvoid": [
-          "이름이 같은 다른 '피클' 앱(영상편집·레시피 등)과 혼동해 잘못된 정보 연결",
-          "실사용 경험을 지어내 1인칭 후기처럼 서술하는 것",
-          "초대장 재판매·불법 공유를 유도하는 문구"
-        ],
-        "checkBefore": [
-          "초대장(invite) 등록 제도가 실제로 존재하는지와 발급 방식 — 공식 홈페이지·공식 SNS 계정에서 확인",
-          "설치 가능한 플랫폼(iOS/Android/웹) 범위 — 공식 홈페이지에서 확인"
-        ],
-        "solves": [
-          "피클 AI 어떻게 설치하나 → 설치 경로 단계별 정리(확인 필요: 공식 사이트)",
-          "초대장 어디서 받고 어떻게 등록하나 → 등록 절차 정리(확인 필요)"
-        ],
-        "actionTitles": [
-          "피클 AI 설치부터 초대장 등록까지 순서 한번에 정리",
-          "피클 AI 가입부터 첫 업무 맡기기까지 단계별 정리",
-          "피클 AI 초대장 등록 방법과 가입 절차까지 확인하기"
-        ]
-      },
-      "at": "2026-11-25T09:37:33.944Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "440fd6d9323aa369",
@@ -18907,70 +18073,6 @@
           "views": 242,
           "answers": 8,
           "askedAt": "2026.05.30"
-        }
-      ]
-    },
-    {
-      "id": "db40c3b61fa61a41",
-      "urls": [
-        "https://tmhub.co.kr/1577",
-        "https://themoneyblog1.tistory.com/entry/aimaji-support-fund-eligibility-criteria"
-      ],
-      "guide": {
-        "direction": "실제 트래픽은 '대만 지원금'이 아니라 '아이맞이지원금'에 있는데, 지식인마다 첫째 1,000만원·1,200만원·1,500만원이라는 총액과 150만·200만·300만원이라는 기존 출산축하금이 뒤섞여 올라와 독자가 자기가 받을 금액을 못 가린다. 고수 글은 '대상과 지급 기준'만 다뤄 이 금액 혼선을 정리해주지 않는다. 기존 출산축하금·첫만남이용권·부모급여와 아이맞이지원금을 금액·시기별로 분리한 표를 주면 혼선이 끝난다.",
-        "searchTargets": [
-          "아이맞이지원금 지급방법"
-        ],
-        "mustInclude": [
-          "첫째 1,000만원·둘째 1,200만원·셋째 1,500만원(우대지역 추가 500만원) vs 기존 출산축하금 150/200/300만원 차이 구분(확인 필요: 지자체·정부 공식 발표)",
-          "출생 후 1년간 4회 분할 지급, 2027년 1월 시행 예정이라는 시기(확인 필요: 보건복지부 공지)",
-          "첫만남이용권·부모급여와 아이맞이지원금의 중복·대체 여부 비교표",
-          "대만 전국민 지원금 80만원·AI보너스법은 아이맞이지원금과 별개 사안임을 명시(확인 필요: 대만 정부 공식 발표)"
-        ],
-        "mustAvoid": [
-          "대만 전국민 지원금과 한국 아이맞이지원금을 같은 정책으로 섞어 서술",
-          "지자체마다 다른 우대지역 추가지원금을 전국 공통 금액처럼 일반화",
-          "아직 확정 전인 시행일·지급횟수를 기정사실처럼 단정"
-        ],
-        "checkBefore": [
-          "아이맞이지원금 확정 지급액·분할 횟수·시행일 — 보건복지부·저출산고령사회위원회 공식 발표",
-          "대만 80만원 지원금·AI보너스법 통과 여부 — 대만 정부 공식 발표 또는 원문 기사"
-        ],
-        "solves": [
-          "아이맞이지원금 첫째·둘째 지원액이 기사마다 다르게 나와 헷갈림 → 발표 금액 구간을 기존 출산축하금과 분리한 표로 정리",
-          "아이맞이지원금이 첫만남이용권·부모급여와 뭐가 다른지 모름 → 기존 제도와 중복·대체 여부 비교",
-          "아이맞이지원금이 언제, 몇 번에 나눠 들어오는지 모름 → 4회 분할 지급 시기 정리(확인 필요: 공식 시행일)"
-        ],
-        "actionTitles": [
-          "아이맞이지원금 지급방법, 첫째·둘째 금액 헷갈림 정리",
-          "아이맞이지원금 첫만남이용권·부모급여와 차이 비교",
-          "아이맞이지원금 4회 분할 지급 시기, 신청 전 확인할 것"
-        ]
-      },
-      "at": "2026-11-25T10:20:02.861Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "신생아 지원금이나 복지혜택이 무엇이 있나....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80105&docId=482082417&answerNo=6&qb=7JWE7J2066ee7J207KeA7JuQ6riIIOyngOq4iQ==",
-          "views": 872,
-          "answers": 8,
-          "askedAt": "2025.07.26"
-        },
-        {
-          "title": "아이맞이지원금, 기존 지원체계와 어떻게 달....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40403&docId=494984314&answerNo=16&qb=7JWE7J2066ee7J207KeA7JuQ6riIIOyngOq4iQ==",
-          "views": 423,
-          "answers": 16,
-          "askedAt": "2026.11.12"
-        },
-        {
-          "title": "아이맞이지원금, 첫째와 둘째 지원액 정확히 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010101&docId=494984308&answerNo=12&qb=7JWE7J2066ee7J207KeA7JuQ6riIIOyngOq4iQ==",
-          "views": 329,
-          "answers": 13,
-          "askedAt": "2026.11.12"
         }
       ]
     },
