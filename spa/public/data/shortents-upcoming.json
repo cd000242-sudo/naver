@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T13:08:52.613Z",
+ "builtAt": "2026-11-26T13:18:55.762Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,13 +16,19 @@
     "nate",
     "daum"
    ],
-   "articles90": 24,
-   "recent20": 9,
-   "press": 24,
+   "articles90": 25,
+   "recent20": 6,
+   "press": 25,
    "firstArticleAt": "2026-11-26T11:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "CJ올리브영, 임직원·고객 등 790명 개인정보 유출…“침입 경로 차단”",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-26T13:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002250093?sid=101"
+    },
     {
      "title": "CJ올리브영, 업무시스템 해킹으로 임직원·고객 개인정보 유출",
      "press": "yonhapnewstv.co.kr",
@@ -34,12 +40,6 @@
      "press": "kado.net",
      "publishedAt": "2026-11-26T13:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/654/0000213707?sid=102"
-    },
-    {
-     "title": "CJ올리브영, 해킹 당했다…임직원·고객 790명 개인정보 유출",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-26T13:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447150?sid=101"
     }
    ]
   },
@@ -49,7 +49,7 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 0,
    "press": 9,
    "firstArticleAt": "2026-11-26T11:53:00.000Z",
    "exclusive": false,
@@ -80,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T11:45:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-26T11:53:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -108,34 +108,34 @@
    ]
   },
   {
-   "keyword": "삼성화재 1114일 만에 선두",
+   "keyword": "연우 10kg 감량",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 7,
-   "recent20": 0,
+   "articles90": 5,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-26T11:46:00.000Z",
-   "exclusive": true,
+   "firstArticleAt": "2026-11-26T12:18:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "프로배구 삼성화재, 우리카드 꺾고 1114일 만에 선두 도약(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T12:19:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/421/0009313163"
+     "title": "‘무쇠소녀단3’ 연우, 두 달 만에 10kg 뺐다가 전신 두드러기 “많이 울...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T13:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005769752"
     },
     {
-     "title": "남자배구 삼성화재, 우리카드 완파하고 1114일 만에 단독 선두 도약",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-26T12:14:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/469/0000968040"
+     "title": "연우, 두 달 만에 10kg 감량 \"극단적으로 굶다가 전신 두드러기 생겨\"",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-26T12:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004470139"
     },
     {
-     "title": "삼성화재, 1114일 만에 선두…현대건설 4위 도약·SOOP 7연패(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T12:12:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/003/0014348325"
+     "title": "“하루 밥 2숟갈” 연우, 10㎏ 감량 극단적 다이어트 후 건강 적신호‥...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-26T12:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191694"
     }
    ]
   },
@@ -146,7 +146,7 @@
     "daum"
    ],
    "articles90": 6,
-   "recent20": 3,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-26T11:51:00.000Z",
    "exclusive": false,
@@ -173,38 +173,6 @@
    ]
   },
   {
-   "keyword": "설인아",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T11:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'무쇠소녀단3' 곽윤기, 코치 등장 \"제자는 처음\"…연우→설인아 쇼트트...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-26T12:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054374"
-    },
-    {
-     "title": "'무쇠소녀단3' 금새록, 춤추듯 독특한 스케이팅…설인아는 선수급 폼",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T12:56:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785144"
-    },
-    {
-     "title": "한지현 382계단도 거뜬, 금새록X설인아도 놀란 체력 “왜 이렇게 멀쩡해...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-26T12:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191687"
-    }
-   ]
-  },
-  {
    "keyword": "영국 예비군 소집",
    "sources": [
     "signal.bz"
@@ -212,10 +180,16 @@
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-26T11:46:00.000Z",
+   "firstArticleAt": "2026-11-26T12:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"정보 갱신하라\"..영국군, 냉전 후 처음 예비군에 소집대비 서한",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T13:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416290?sid=104"
+    },
     {
      "title": "“소집 대비하라”…영국, 냉전 후 처음 예비군 10만명에 서한",
      "press": "mk.co.kr",
@@ -227,44 +201,70 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-26T12:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000968041?sid=104"
-    },
-    {
-     "title": "英, 예비군 10만명에 \"전쟁 시 소집 대비\"… 냉전 이후 처음",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-26T12:26:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452502"
     }
    ]
   },
   {
-   "keyword": "정대세, 셋째 임신 소식",
+   "keyword": "삼성화재 1114일 만에 선두",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 6,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-26T11:44:00.000Z",
+   "firstArticleAt": "2026-11-26T11:54:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "프로배구 삼성화재, 우리카드 꺾고 1114일 만에 선두 도약(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T12:19:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/421/0009313163"
+    },
+    {
+     "title": "남자배구 삼성화재, 우리카드 완파하고 1114일 만에 단독 선두 도약",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-26T12:14:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/469/0000968040"
+    },
+    {
+     "title": "삼성화재, 1114일 만에 선두…현대건설 4위 도약·SOOP 7연패(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T12:12:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/003/0014348325"
+    }
+   ]
+  },
+  {
+   "keyword": "설인아",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T11:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이혼 위기 고백했던 정대세 부부, 셋째 생겼다…\"뻥이지?\" 눈물 펑펑",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-26T12:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005447148"
+     "title": "'무쇠소녀단3' 금새록, 춤추듯 독특한 스케이팅…설인아는 선수급 폼",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T12:56:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785144"
     },
     {
-     "title": "정대세♥명서현, 결혼 13년만 셋째 임신…웃통 벗고 오열 \"뻥이지?\"",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T12:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128484"
+     "title": "'무쇠소녀단3' 곽윤기, 코치 등장 \"제자는 처음\"…연우→설인아 쇼트트...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-26T12:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054374"
     },
     {
-     "title": "정대세, '39세' ♥명서현 셋째 임신에 오열…13살 터울 늦둥이 생긴다 [...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-26T12:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084566"
+     "title": "한지현 382계단도 거뜬, 금새록X설인아도 놀란 체력 “왜 이렇게 멀쩡해...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-26T12:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191687"
     }
    ]
   },
@@ -274,7 +274,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-26T11:52:00.000Z",
    "exclusive": false,
@@ -299,11 +299,43 @@
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3764488"
     }
    ]
+  },
+  {
+   "keyword": "정대세, 셋째 임신 소식",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T12:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이혼 위기 고백했던 정대세 부부, 셋째 생겼다…\"뻥이지?\" 눈물 펑펑",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-26T12:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005447148"
+    },
+    {
+     "title": "정대세♥명서현, 결혼 13년만 셋째 임신…웃통 벗고 오열 \"뻥이지?\"",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T12:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128484"
+    },
+    {
+     "title": "정대세, '39세' ♥명서현 셋째 임신에 오열…13살 터울 늦둥이 생긴다 [...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-26T12:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084566"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1750,
+  "flagged": 1751,
   "matched": 853,
   "avgLeadMin": 521,
   "recent": [
