@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T01:44:53.858Z",
+ "builtAt": "2026-11-26T01:54:57.166Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,197 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 23,
  "candidates": [
+  {
+   "keyword": "한은 성장률 상향",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 85,
+   "recent20": 26,
+   "press": 74,
+   "firstArticleAt": "2026-11-26T01:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "성장률 3.9%로 높인 한은…금리 3.25% 인상·추가 긴축 열어둬(종합)",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-26T01:54:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=102063"
+    },
+    {
+     "title": "한은, 소수의견 2명 속 금리 3.25%로 인상…내년 성장률 4.1%로 상향",
+     "press": "raonnews.com",
+     "publishedAt": "2026-11-26T01:54:00.000Z",
+     "link": "https://www.raonnews.com/news/article.html?no=63099"
+    },
+    {
+     "title": "한은 금통위 \"국내경제 성장세 한층 강화\"…추가 인상 '속도' 문구 빠져",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T01:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014346397?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "일·생활 균형 우수기업 선정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 40,
+   "recent20": 3,
+   "press": 34,
+   "firstArticleAt": "2026-11-26T00:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "HLB, 연간 12일 유급휴무 지급…‘일·생활 균형 우수기업’ 선정",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-26T01:50:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=2026112610462997997fd637f543_18"
+    },
+    {
+     "title": "캐논코리아, '2026년 일·생활 균형 우수기업' 선정",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-26T01:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005446707?sid=105"
+    },
+    {
+     "title": "한국콜마, '워라밸' 우수기업 선정...육아휴직 쓰는 남성 직원 늘어",
+     "press": "job-post.co.kr",
+     "publishedAt": "2026-11-26T01:38:00.000Z",
+     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=241046"
+    }
+   ]
+  },
   {
    "keyword": "학교비정규직 총파업",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 30,
-   "recent20": 4,
-   "press": 27,
-   "firstArticleAt": "2026-11-26T00:18:00.000Z",
+   "articles90": 34,
+   "recent20": 11,
+   "press": 32,
+   "firstArticleAt": "2026-11-26T00:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "27일 학교비정규직 총파업에 교육당국, 비상 대응체제 가동 예고",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-26T01:40:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088089"
+     "title": "[교육] 전북 학교비정규직 파업…급식·돌봄 비상대응",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-26T01:54:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=721468"
     },
     {
-     "title": "내일 급식·돌봄 등 학교 비정규직 노동자 총파업",
-     "press": "jtv.co.kr",
-     "publishedAt": "2026-11-26T01:36:00.000Z",
-     "link": "https://www.jtv.co.kr/news/article.php?id=72332"
+     "title": "학교 비정규직 내일(27일) 파업 예고.. 전북교육청, 급식·돌봄 비상 대...",
+     "press": "jmbc.co.kr",
+     "publishedAt": "2026-11-26T01:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/659/0000049036?sid=102"
     },
     {
-     "title": "\"아이 도시락 준비해야 하나\"…학교비정규직 4만명 내일 '총파업'",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-26T01:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979945?sid=102"
+     "title": "\"엄마, 내일 급식 안 나온대요\"…학교비정규직 4만명 27일 총파업",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-26T01:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848159?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "철도 파업",
+   "sources": [
+    "google"
+   ],
+   "articles90": 31,
+   "recent20": 3,
+   "press": 26,
+   "firstArticleAt": "2026-11-26T00:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "철도노조 ‘안전운행 투쟁’ 첫날…광역철도 등 일부 지연",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T01:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301590?sid=101"
+    },
+    {
+     "title": "철도노조, 안전운행 투쟁 돌입···퇴근길 및 주말 열차 지연 불가피",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-26T01:44:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=643982"
+    },
+    {
+     "title": "철도노조 준법투쟁…파업 일정",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-26T01:42:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611260184"
+    }
+   ]
+  },
+  {
+   "keyword": "6년 연속 수상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 26,
+   "recent20": 3,
+   "press": 25,
+   "firstArticleAt": "2026-11-26T00:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "현대차그룹, 영국 '탑기어 어워즈' 6년 연속 수상⋯제네시스 첫 제조사...",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-26T01:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078593?sid=103"
+    },
+    {
+     "title": "현대차그룹, 英 탑기어 어워즈 2관왕…6년 연속 수상",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-26T01:38:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=303284"
+    },
+    {
+     "title": "넥센타이어, 6년 연속 품질경쟁력우수기업 선정",
+     "press": "newslock.co.kr",
+     "publishedAt": "2026-11-26T01:38:00.000Z",
+     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=141038"
+    }
+   ]
+  },
+  {
+   "keyword": "LG, 김민식 영입!",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 3,
+   "press": 24,
+   "firstArticleAt": "2026-11-26T01:04:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[스포츠]LG트윈스, 베테랑 포수 김민식 영입…통산 880경기·통합우승 두...",
+     "press": "kizmom.com",
+     "publishedAt": "2026-11-26T01:50:00.000Z",
+     "link": "https://www.kizmom.com/news/articleView.html?idxno=114221"
+    },
+    {
+     "title": "트레이드 시도→방출, 1순위 될 줄이야…LG의 결별 시그널? '포수 FA 시장...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-26T01:48:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/076/0004469956"
+    },
+    {
+     "title": "LG, '2차례 우승' 김민식 영입…\"젊은 포수들 성장에 역할\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T01:46:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/422/0000930051"
     }
    ]
   },
@@ -47,30 +207,63 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 50,
+   "articles90": 47,
    "recent20": 6,
-   "press": 24,
-   "firstArticleAt": "2026-11-26T00:18:00.000Z",
+   "press": 19,
+   "firstArticleAt": "2026-11-26T00:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "철도노조 준법투쟁…파업 일정",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-26T01:42:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611260184"
-    },
-    {
-     "title": "[현장] 준법투쟁 첫날 수도권 전철 25분 등 지연 속출…\"돌아올 길 걱정...",
+     "title": "철도노조 준법투쟁 돌입…역에 붙은 안내문",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T01:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016464665?sid=102"
+     "publishedAt": "2026-11-26T01:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016464722?sid=102"
     },
     {
-     "title": "[르포] 철도노조 준법투쟁 첫날 대전역…지연 대란 없이 차분",
+     "title": "역에 붙은 철도노조 준법투쟁 안내문",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T01:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016464718?sid=102"
+    },
+    {
+     "title": "[르포] 철도노조 준법투쟁 첫날 대전역…차분한 분위기 속 일부 지연",
      "press": "daejonilbo.com",
      "publishedAt": "2026-11-26T01:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/656/0000193613?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "발언하는 장동혁 대표",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 30,
+   "recent20": 5,
+   "press": 18,
+   "firstArticleAt": "2026-11-26T00:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "장동혁-친한계 정면충돌...張 \"탈당과 창당이란 방법 있다\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-26T01:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358497?sid=100"
+    },
+    {
+     "title": "면전에서 “조작징계 사과” 요구 받은 장동혁 “탈당·창당이란 좋은 ...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-26T01:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834046?sid=100"
+    },
+    {
+     "title": "장동혁, 조희대 탄핵 추진은 \"의회 쿠데타\"…사법부에 李 재판 재개 촉...",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-26T01:46:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261126500184"
     }
    ]
   },
@@ -79,10 +272,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
+   "articles90": 17,
    "recent20": 2,
-   "press": 23,
-   "firstArticleAt": "2026-11-26T00:18:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-26T00:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,78 +300,13 @@
    ]
   },
   {
-   "keyword": "LG, 김민식 영입!",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 22,
-   "recent20": 3,
-   "press": 22,
-   "firstArticleAt": "2026-11-26T01:04:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG, '통합우승 2번' 베테랑 포수 김민식 영입",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T01:30:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/052/0002438269"
-    },
-    {
-     "title": "LG, '두 차례 통합우승' 김민식 품었다⋯포수진 깊이 더해",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-26T01:28:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653289"
-    },
-    {
-     "title": "LG, SSG서 방출된 베테랑 포수 김민식 영입…안방 강화",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T01:26:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009311223"
-    }
-   ]
-  },
-  {
-   "keyword": "발언하는 장동혁 대표",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 34,
-   "recent20": 5,
-   "press": 20,
-   "firstArticleAt": "2026-11-26T00:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국힘 지도부 정면충돌…장동혁 \"탈당이나 창당하라\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-26T01:42:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023701"
-    },
-    {
-     "title": "조작 징계 의혹 발언듣는 장동혁",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T01:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009311283?sid=100"
-    },
-    {
-     "title": "장동혁, '조희대 탄핵' 5당 연대 제안 민주당에 \"조폭 범죄 단체\"",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-26T01:34:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1140199"
-    }
-   ]
-  },
-  {
    "keyword": "시청률",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 8,
-   "recent20": 3,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-26T00:26:00.000Z",
    "exclusive": false,
@@ -203,11 +331,43 @@
      "link": "https://m.entertain.naver.com/article/241/0003543678"
     }
    ]
+  },
+  {
+   "keyword": "세계의 주인",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T00:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서수빈·윤가은 감독, 청룡 2관왕 '세계의 주인' 어떤 영화?",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-26T01:36:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305796"
+    },
+    {
+     "title": "마크, '세계의 주인' 이재희와 청룡영화상 오프닝 무대 …신곡 깜짝 공...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T01:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/079/0004214020"
+    },
+    {
+     "title": "'세계의 주인' 윤가은, 청룡영화상 47년 만의 첫 여성 감독상…새 역사...",
+     "press": "star.ytn.co.kr",
+     "publishedAt": "2026-11-26T00:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/052/0002438235"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1499,
+  "flagged": 1502,
   "matched": 740,
   "avgLeadMin": 497,
   "recent": [
