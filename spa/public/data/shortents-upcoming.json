@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T21:41:40.307Z",
+ "builtAt": "2026-11-26T21:51:43.795Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,13 +8,12 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "버스",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
    "articles90": 13,
    "recent20": 0,
@@ -44,17 +43,55 @@
    ]
   },
   {
+   "keyword": "트럼프 3분기 성장률 조작 의혹",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-26T20:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"중간선거 직전 경제 통계 조작됐다\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-26T21:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968073?sid=104"
+    },
+    {
+     "title": "트럼프 \"선거 전 발표한 美경제성장률은 가짜…조사해야\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T21:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416337?sid=104"
+    },
+    {
+     "title": "트럼프, 상향된 성장률에 '음모론' 제기…\"의도적 조작\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-26T21:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000546203?sid=101"
+    }
+   ]
+  },
+  {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
    "articles90": 12,
-   "recent20": 3,
+   "recent20": 4,
    "press": 9,
-   "firstArticleAt": "2026-11-26T20:14:00.000Z",
+   "firstArticleAt": "2026-11-26T20:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“트럼프 새 관세안 시행 땐 실효세율 13.9%⋯상호관세 무효화 전으로 ...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-26T21:44:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653677"
+    },
     {
      "title": "美 새 관세 시행땐 평균관세율 13.9%…상호관세 무효화 전으로",
      "press": "fnnews.com",
@@ -66,44 +103,6 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-26T21:36:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002729192?sid=104"
-    },
-    {
-     "title": "중국, 트럼프 행정부의 과잉생산 관세에 즉각 반발...다음 달 마이애미...",
-     "press": "beyondpost.co.kr",
-     "publishedAt": "2026-11-26T21:32:00.000Z",
-     "link": "http://www.beyondpost.co.kr/view.php?ud=2026112706254020362aaae0046f_30"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 3분기 성장률 조작 의혹",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T20:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프, 상향된 성장률에 '음모론' 제기…\"의도적 조작\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-26T21:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000546203?sid=101"
-    },
-    {
-     "title": "트럼프 “중간선거 전 발표된 3분기 성장률 가짜… 즉각 조사해야”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T21:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207669?sid=104"
-    },
-    {
-     "title": "트럼프, GDP 조작 의혹…상무부 조사 요구",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-26T21:20:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611270010"
     }
    ]
   },
@@ -113,7 +112,7 @@
     "nate"
    ],
    "articles90": 7,
-   "recent20": 3,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-26T21:00:00.000Z",
    "exclusive": false,
@@ -145,13 +144,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 6,
-   "recent20": 3,
+   "articles90": 7,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-26T20:46:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "천안 북면서 단독주택 화재...1명 화상",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-26T21:42:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=721620"
+    },
     {
      "title": "점심시간 남아있다가…남동공단 화재로 1명 사망",
      "press": "news.sbs.co.kr",
@@ -163,12 +168,6 @@
      "press": "ftimes.kr",
      "publishedAt": "2026-11-26T21:24:00.000Z",
      "link": "https://www.ftimes.kr/news/articleView.html?idxno=41386"
-    },
-    {
-     "title": "이집트 카이로 유조차 충돌 화재…최소 31명 사망",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T21:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302308?sid=104"
     }
    ]
   },
@@ -239,7 +238,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1745,
+  "flagged": 1743,
   "matched": 864,
   "avgLeadMin": 537,
   "recent": [
