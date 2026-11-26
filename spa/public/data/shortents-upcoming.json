@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T02:45:13.134Z",
+ "builtAt": "2026-11-26T02:55:17.188Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,39 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "윤석열 위증 무죄 확정",
+   "keyword": "윤석열 위증 혐의 무죄 확정",
    "sources": [
-    "signal.bz",
-    "nate",
     "daum"
    ],
-   "articles90": 75,
-   "recent20": 20,
-   "press": 61,
+   "articles90": 80,
+   "recent20": 13,
+   "press": 65,
    "firstArticleAt": "2026-11-26T01:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "대법, 윤석열 '한덕수 재판 위증' 무죄 확정",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-26T02:44:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=368081"
+     "title": "윤석열 무죄 확정 뒤 김계리, 마이크 앞 \"특검에 감사\" 씨익 [현장영상...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-26T02:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522551?sid=102"
     },
     {
-     "title": "[그래픽] 윤석열 전 대통령 재판 현황(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T02:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016464964?sid=102"
+     "title": "윤석열, ‘한덕수 재판 위증’ 혐의 무죄 확정",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-26T02:52:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261126500152"
     },
     {
-     "title": "윤석열 '한덕수 재판서 위증' 혐의 무죄 확정",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T02:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930083?sid=102"
+     "title": "'한덕수 재판서 계엄 국무회의 위증 혐의' 윤석열 무죄 확정",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-26T02:48:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250497"
     }
    ]
   },
@@ -50,29 +48,29 @@
     "signal.bz"
    ],
    "articles90": 62,
-   "recent20": 13,
+   "recent20": 9,
    "press": 41,
-   "firstArticleAt": "2026-11-26T01:46:00.000Z",
+   "firstArticleAt": "2026-11-26T01:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한준호 행안장관 후보자, 첫 출근… 청문회 준비 본격화",
+     "press": "s-journal.co.kr",
+     "publishedAt": "2026-11-26T02:50:00.000Z",
+     "link": "https://www.s-journal.co.kr/news/articleView.html?idxno=45684"
+    },
+    {
+     "title": "장동혁 “이 대통령, ‘탈옥 지원단’ 내각 꾸리나…장관 지명 철회해야...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T02:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301637?sid=100"
+    },
     {
      "title": "한준호 \"치안·안전 책임…갓난아이 돌보는 심정으로 노력\"",
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-26T02:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000930086?sid=102"
-    },
-    {
-     "title": "한준호 행안장관 후보 \"큰 책임감…경찰·중수청 등 독립성은 명확\"",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-26T02:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000143062?sid=102"
-    },
-    {
-     "title": "정치적 중립 우려? 한준호 “수사 독립성 명확…국민 눈높이 맞춰 활동...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-26T02:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834056?sid=102"
     }
    ]
   },
@@ -81,30 +79,63 @@
    "sources": [
     "google"
    ],
-   "articles90": 38,
-   "recent20": 36,
-   "press": 28,
-   "firstArticleAt": "2026-11-26T02:25:00.000Z",
+   "articles90": 43,
+   "recent20": 35,
+   "press": 34,
+   "firstArticleAt": "2026-11-26T02:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성증권, 2027년 정기 임원인사 단행…부사장 3명·상무 3명 승진",
-     "press": "ttlnews.com",
-     "publishedAt": "2026-11-26T02:44:00.000Z",
-     "link": "http://www.ttlnews.com/news/articleView.html?idxno=3166616"
+     "title": "삼성자산운용, 2027년 정기 임원인사…이시완 부사장 승진",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-26T02:54:00.000Z",
+     "link": "https://www.viva100.com/article/20261126500825"
     },
     {
-     "title": "sms오스람, 삼성디스플레이로부터 3100억원 지분 투자 유치",
-     "press": "it-b.co.kr",
-     "publishedAt": "2026-11-26T02:44:00.000Z",
-     "link": "https://www.it-b.co.kr/news/articleView.html?idxno=90870"
+     "title": "[인사] 강북삼성병원",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T02:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009311611?sid=102"
     },
     {
-     "title": "삼성자산운용, 2027년 임원 인사 단행… 이시완 부사장 승진·핵심 인재...",
-     "press": "ilyoseoul.co.kr",
+     "title": "“신사업 가속화하며 인공지능 전환 주력”… 삼성 금융계열사, 미래 겨...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-26T02:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835739?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "발언하는 장동혁 대표",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 21,
+   "recent20": 4,
+   "press": 19,
+   "firstArticleAt": "2026-11-26T01:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "우재준 “장동혁, 저한테 ‘탈당과 창당이란 제도 있다’고 말해” [현...",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-26T02:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368765?sid=100"
+    },
+    {
+     "title": "장동혁은 장외투쟁, 오세훈은 여의도로 … 미묘한 눈치작전 [정치野담]",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-26T02:48:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650162.html"
+    },
+    {
+     "title": "\"장동혁 사과!\" \"비공개회의서 해!\" 면전 충돌‥정점식 '급퇴장' [현장영...",
+     "press": "imnews.imbc.com",
      "publishedAt": "2026-11-26T02:44:00.000Z",
-     "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=525629"
+     "link": "https://n.news.naver.com/mnews/article/214/0001538195?sid=100"
     }
    ]
   },
@@ -113,10 +144,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 21,
-   "recent20": 5,
-   "press": 20,
-   "firstArticleAt": "2026-11-26T01:18:00.000Z",
+   "articles90": 18,
+   "recent20": 1,
+   "press": 17,
+   "firstArticleAt": "2026-11-26T01:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -141,67 +172,34 @@
    ]
   },
   {
-   "keyword": "발언하는 장동혁 대표",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 19,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-26T01:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "우재준 “나도 제명하려 했느냐” 장동혁 “탈당·창당이라는 좋은 제도...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-26T02:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485227?sid=100"
-    },
-    {
-     "title": "장동혁 대표 최고위 발언",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-26T02:26:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3763795"
-    },
-    {
-     "title": "분열상 드러난 野최고위..장동혁, 친한계에 \"탈당·창당\" 언급도",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-26T02:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610176?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "신현송 한국은행 총재",
    "sources": [
     "nate"
    ],
-   "articles90": 23,
-   "recent20": 17,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T01:16:00.000Z",
+   "articles90": 32,
+   "recent20": 20,
+   "press": 14,
+   "firstArticleAt": "2026-11-26T01:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 신현송 \"올해 명목 GDP 3000조원 훌쩍 넘을 것\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-26T02:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005446771?sid=101"
+     "title": "[속보] 신현송 한은 총재 \"올 국민소득 3000조 넘을 것..민간소비로 가는...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-26T02:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610190?sid=101"
     },
     {
-     "title": "[속보] 신현송 \"올해 반도체 영업익 700조…국민소득 5분의 1 이상\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T02:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009311583?sid=101"
+     "title": "신현송 \"올해 명목 GDP 3000조 넘을 것\"⋯반도체 영업이익 700조 육박",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-26T02:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078634?sid=101"
     },
     {
-     "title": "신현송 총재 “주식시장 침체, 민간소비 영향 미쳐”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T02:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728886?sid=101"
+     "title": "신현송 \"반도체 비중 커진 경제구조 반영\"…내년 4.1% 성장 전망 배경은",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T02:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006415908?sid=101"
     }
    ]
   },
@@ -211,29 +209,29 @@
     "google"
    ],
    "articles90": 12,
-   "recent20": 5,
+   "recent20": 2,
    "press": 10,
-   "firstArticleAt": "2026-11-26T01:57:00.000Z",
+   "firstArticleAt": "2026-11-26T02:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'한덕수 재판서 계엄 국무회의 위증 혐의' 윤석열 무죄 확정",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-26T02:48:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250497"
+    },
+    {
+     "title": "국힘, 12월3일 '계엄 2주년' 서울서 장외집회 검토",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T02:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014346681?sid=100"
+    },
     {
      "title": "尹 '계엄 국무회의 위증' 무죄 확정…대법 \"증거 부족\"",
      "press": "news.tvchosun.com",
      "publishedAt": "2026-11-26T02:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/448/0000653532?sid=102"
-    },
-    {
-     "title": "윤석열, '계엄 전 국무회의 소집 계획' 위증 혐의 무죄 확정",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-26T02:34:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=102066"
-    },
-    {
-     "title": "대법원, 윤석열 '계엄 국무회의 위증' 무죄 확정(종합)",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-26T02:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848217?sid=102"
     }
    ]
   },
@@ -246,10 +244,16 @@
    "articles90": 9,
    "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-26T01:21:00.000Z",
+   "firstArticleAt": "2026-11-26T01:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "철도노조 준법투쟁 돌입…광역전철 최대 30분 지연·KTX 평소 수준(종합...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T02:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009311595?sid=101"
+    },
     {
      "title": "철도노조 ‘안전운행 투쟁’ 돌입…수도권 전철·KTX 지연 우려",
      "press": "kgnews.co.kr",
@@ -261,44 +265,6 @@
      "press": "sedaily.com",
      "publishedAt": "2026-11-26T02:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004686421?sid=102"
-    },
-    {
-     "title": "“규정 지키면 열차가 늦는다?”…철도노조 준법투쟁에 열차 지연 우려",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T02:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/024/0000109900?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "가수",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T02:02:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "가수 추혁진 팬클럽 '추스티니', 이천시에 성금 500만원 기탁",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T02:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009311551?sid=102"
-    },
-    {
-     "title": "김국희, ‘천천히 강렬하게’ 출연…당대 최고의 인기 가수 변신",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-26T02:30:00.000Z",
-     "link": "https://swtvnews.com/news/newsview.php?ncode=1065579915864242"
-    },
-    {
-     "title": "가수 성리, 이찬원·김용빈 트로트 대상 경쟁",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T02:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286764"
     }
    ]
   },
@@ -335,14 +301,79 @@
    ]
   },
   {
+   "keyword": "가수",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T02:24:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "가수 겸 배우 이지훈·아야네 부부, 일산차병원서 둘째 딸 출산",
+     "press": "betanews.net",
+     "publishedAt": "2026-11-26T02:54:00.000Z",
+     "link": "https://www.betanews.net/article/view/beta202611260075"
+    },
+    {
+     "title": "'불륜 인정' 국민 女가수, 정치적 발언 여파…활동 재개 발표에도 '싸늘...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-26T02:53:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000493543"
+    },
+    {
+     "title": "가수 추혁진 팬클럽 '추스티니', 이천시에 성금 500만원 기탁",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T02:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009311551?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "수험",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T01:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "타임스퀘어, 수험생 대상 연말 할인 행사 '매직 위크' 진행",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-26T02:52:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=303366"
+    },
+    {
+     "title": "수능 마친 구미 수험생 한자리에…아이돌 공연에 스트레스 날렸다",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-26T02:44:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261126500297"
+    },
+    {
+     "title": "부산 수험생 '사탐런' 뚜렷…부산대·부경대 지원선 최대 21점 오를 듯",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T01:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214065?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "미래대응기금 전면 재검토 촉구",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T01:22:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-26T01:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -367,42 +398,41 @@
    ]
   },
   {
-   "keyword": "수험",
+   "keyword": "오정세 청룡 1위",
    "sources": [
-    "signal.bz",
-    "google"
+    "daum"
    ],
-   "articles90": 3,
-   "recent20": 1,
+   "articles90": 4,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-26T01:25:00.000Z",
+   "firstArticleAt": "2026-11-26T01:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수능 마친 구미 수험생 한자리에…아이돌 공연에 스트레스 날렸다",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-26T02:44:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261126500297"
+     "title": "신민아·박지현 배꼽 이탈-오정세, '니가 좋아' 립싱크 '청룡'",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-26T02:32:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95986"
     },
     {
-     "title": "부산 수험생 '사탐런' 뚜렷…부산대·부경대 지원선 최대 21점 오를 듯",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-26T01:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214065?sid=102"
+     "title": "53살 김원준, 청룡서 '쇼' 열창-여배우들 눈동자에 하트",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-26T02:30:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95984"
     },
     {
-     "title": "수능 끝난 수험생, 가장 많이 지원한 알바는 '서빙'",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-26T01:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848111?sid=101"
+     "title": "39주 2위 최성곤, '청룡톱텐'서 1위 … 오정세, 박지현에 꽃다발 주고 줄...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-26T02:12:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650133.html"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1524,
+  "flagged": 1525,
   "matched": 753,
   "avgLeadMin": 504,
   "recent": [
