@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T06:26:29.650Z",
+ "builtAt": "2026-11-26T06:36:33.072Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,165 +8,102 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 27,
  "candidates": [
-  {
-   "keyword": "한은 내년 성장 전망",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 79,
-   "recent20": 13,
-   "press": 62,
-   "firstArticleAt": "2026-11-26T04:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 스테이트스트리트 \"한은, 당분간 관망 기조…최종금리 도달\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T06:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014347675?sid=101"
-    },
-    {
-     "title": "한은, 기준금리 3.25%로 인상...신현송 \"내년 4.1% 성장, 근거 있다\"",
-     "press": "womentimes.co.kr",
-     "publishedAt": "2026-11-26T06:22:00.000Z",
-     "link": "https://www.womentimes.co.kr/news/articleView.html?idxno=108300"
-    },
-    {
-     "title": "한은 \"반도체 경기 둔화에도 내년 성장률 3%대 중반\"",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-26T06:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193653?sid=101"
-    }
-   ]
-  },
   {
    "keyword": "조작기소 특검 이임성 추천",
    "sources": [
     "nate"
    ],
-   "articles90": 50,
-   "recent20": 22,
-   "press": 42,
+   "articles90": 60,
+   "recent20": 19,
+   "press": 49,
    "firstArticleAt": "2026-11-26T05:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 조작기소특검 후보자에 민주 이임성·혁신 이정훈 추천",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-26T06:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834115?sid=100"
+     "title": "'조작기소 특검' 후보에 민주당 이임성·혁신당 이정훈",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-26T06:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165778?sid=100"
     },
     {
-     "title": "'조작기소 특검' 인선 본격화 … 민주당 이임성·혁신당 이정훈 추천",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-26T06:22:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650295.html"
+     "title": "민주당 이임성·혁신당 이정훈 변호사 특검 후보 추천...국민의힘은 거...",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-26T06:34:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73639"
     },
     {
-     "title": "'조작기소 특검' 후보로 민주당 이임성·혁신당 이정훈 추천",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-26T06:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000555915?sid=100"
+     "title": "조작기소 특검 후보에…민주당 이임성·혁신당 이정훈 추천",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T06:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769499?sid=100"
     }
    ]
   },
   {
-   "keyword": "혁신당 이정훈 추천",
+   "keyword": "7대 시드프로젝트 속도",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 44,
-   "recent20": 20,
+   "articles90": 42,
+   "recent20": 11,
    "press": 40,
-   "firstArticleAt": "2026-11-26T05:41:00.000Z",
-   "exclusive": true,
+   "firstArticleAt": "2026-11-26T05:08:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 조작기소특검 후보자에 민주 이임성·혁신 이정훈 추천",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-26T06:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834115?sid=100"
+     "title": "이 대통령 \"핵심 경제지표 역사적 이정표…7대 시드 속도 내야\"",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-26T06:32:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087002"
     },
     {
-     "title": "'조작기소 특검' 인선 본격화 … 민주당 이임성·혁신당 이정훈 추천",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-26T06:22:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650295.html"
+     "title": "李 대통령 “오늘 한 걸음 차이가 훗날 천 걸음 격차”…미래산업 속도...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T06:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769497?sid=100"
     },
     {
-     "title": "'조작기소 특검' 후보로 민주당 이임성·혁신당 이정훈 추천",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-26T06:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000555915?sid=100"
+     "title": "李대통령 \"미래산업 경쟁 속도 높여야…7대 시드 프로젝트 가속화\"",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-26T06:30:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1316421"
     }
    ]
   },
   {
-   "keyword": "신현송 한국은행 총재",
+   "keyword": "발언하는 이재명 대통령",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 37,
-   "recent20": 8,
-   "press": 29,
-   "firstArticleAt": "2026-11-26T05:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신현송 “올해 반도체 영업익 700조원…소비파급은 시간문제” [일문일...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T06:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568195?sid=101"
-    },
-    {
-     "title": "[포토] 통화정책방향 기자간담회서 발언하는 신현송 한은총재",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-26T06:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078778?sid=100"
-    },
-    {
-     "title": "한은, 기준금리 3.25%로 인상...신현송 \"내년 4.1% 성장, 근거 있다\"",
-     "press": "womentimes.co.kr",
-     "publishedAt": "2026-11-26T06:22:00.000Z",
-     "link": "https://www.womentimes.co.kr/news/articleView.html?idxno=108300"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 41,
    "recent20": 6,
-   "press": 26,
-   "firstArticleAt": "2026-11-26T04:59:00.000Z",
+   "press": 23,
+   "firstArticleAt": "2026-11-26T05:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "日, 美 과잉생산 관세에 '유감'…15% 상한 유지엔 '안도'",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-26T06:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214276?sid=104"
+     "title": "이 대통령 \"핵심 경제지표 역사적 이정표…7대 시드 속도 내야\"",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-26T06:32:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087002"
     },
     {
-     "title": "중간선거서 심판받고도 관세 강행한 트럼프…'민심'보다 '권력' 택했다",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T06:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009312463?sid=104"
+     "title": "李대통령 \"미래산업 경쟁 속도 높여야…7대 시드 프로젝트 가속화\"",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-26T06:30:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1316421"
     },
     {
-     "title": "미, ‘과잉생산 관세’ 예고…“한국 15%, 약속 안 지키면 25%”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T06:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301793?sid=104"
+     "title": "이 대통령 \"희귀·중증질환자 치료비 걱정 덜게 하겠다\"",
+     "press": "news.cpbc.co.kr",
+     "publishedAt": "2026-11-26T06:28:00.000Z",
+     "link": "https://news.cpbc.co.kr/article/1177301?division=NAVER"
     }
    ]
   },
@@ -175,13 +112,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 28,
-   "recent20": 3,
-   "press": 26,
-   "firstArticleAt": "2026-11-26T05:00:00.000Z",
+   "articles90": 23,
+   "recent20": 1,
+   "press": 23,
+   "firstArticleAt": "2026-11-26T05:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "법무부, 다음달 9일까지 검찰총장 후보 추가 천거 진행",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-26T06:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653587?sid=102"
+    },
     {
      "title": "사상 초유 검찰총장 후보 ‘추가 천거’ …기존 ‘3자 구도’ 변화 가능...",
      "press": "donga.com",
@@ -193,12 +136,6 @@
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-26T06:15:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000555912?sid=102"
-    },
-    {
-     "title": "법무부, 검찰총장 후보 추가 천거…30일부터 내달 9일까지",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-26T06:14:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=173161"
     }
    ]
   },
@@ -207,24 +144,24 @@
    "sources": [
     "nate"
    ],
-   "articles90": 31,
-   "recent20": 6,
-   "press": 25,
-   "firstArticleAt": "2026-11-26T04:57:00.000Z",
+   "articles90": 28,
+   "recent20": 1,
+   "press": 22,
+   "firstArticleAt": "2026-11-26T05:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“학생 지도했다가 아동학대 신고”…교원 보호 제도 손본다",
+     "press": "ibabynews.com",
+     "publishedAt": "2026-11-26T06:28:00.000Z",
+     "link": "https://www.ibabynews.com/news/articleView.html?idxno=157361"
+    },
     {
      "title": "교사 무고성 아동학대 신고 막는다… 정당한 생활지도 법적 보호 강화",
      "press": "newscj.com",
      "publishedAt": "2026-11-26T06:16:00.000Z",
      "link": "https://www.newscj.com/news/articleView.html?idxno=3452338"
-    },
-    {
-     "title": "\"학생 기분 상했다고 신고\" 원천 차단…정서적 학대 기준 구체화·무혐...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-26T06:16:00.000Z",
-     "link": "https://www.ajunews.com/view/20261126151151694"
     },
     {
      "title": "정부, 무고성 아동학대 신고 교사 보호 강화…법 개정 추진",
@@ -235,81 +172,88 @@
    ]
   },
   {
-   "keyword": "발언하는 이재명 대통령",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 36,
-   "recent20": 3,
-   "press": 21,
-   "firstArticleAt": "2026-11-26T04:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 \"경제지표 역사적 이정표…7대 시드 더 속도내야\"",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-26T06:20:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95278"
-    },
-    {
-     "title": "이 대통령 \"핵심 경제지표 역사적 이정표…7대 시드 프로젝트, 더 속도...",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-26T06:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406053?sid=100"
-    },
-    {
-     "title": "“대통령 분당집 판 돈 코스피 넣었다면 7억 손실…국민에 사과해야” ...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-26T06:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002835808?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "보험",
    "sources": [
     "google"
    ],
    "articles90": 16,
-   "recent20": 7,
+   "recent20": 8,
    "press": 16,
-   "firstArticleAt": "2026-11-26T05:52:00.000Z",
+   "firstArticleAt": "2026-11-26T06:01:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "의료현장 AI 혁신 가속화…보험심사 업무시간 97%·통계 작업 최대 99.5%...",
-     "press": "job-post.co.kr",
-     "publishedAt": "2026-11-26T06:22:00.000Z",
-     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=241292"
+     "title": "자동차·실손보험료 인상 압박…손보사 원가 부담에 가계는 '한숨'",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T06:34:00.000Z",
+     "link": "https://www.ajunews.com/view/20261126145052622"
     },
     {
-     "title": "창녕군, 건강보험료 지원 우수기관 선정",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-26T06:20:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261126500303"
+     "title": "보험 판매수수료 '꼼수 증액' 막는다… 표준해약공제액 넘으면 지급 제...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-26T06:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967954?sid=101"
     },
     {
-     "title": "건강보험심사평가원 발굴 스타트업 AI 대회 석권..대통령·국무총리상",
-     "press": "kpenews.com",
-     "publishedAt": "2026-11-26T06:20:00.000Z",
-     "link": "https://kpenews.com/View.aspx?No=4331285"
+     "title": "[속보] 18세 청년 생애 첫 연금보험료 국가가 낸다…사전 신청자 5만 명...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-26T06:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133947?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "경찰",
+   "sources": [
+    "google"
+   ],
+   "articles90": 14,
+   "recent20": 13,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T06:16:00.000Z",
+   "exclusive": true,
+   "capped": true,
+   "samples": [
+    {
+     "title": "경찰, '리트 만점' 이진우 집·수능시험지 보관장소 압수수색 外 [오늘의...",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-26T06:34:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250533"
+    },
+    {
+     "title": "도심 공원서 흉기 휘두르고 경찰과 전기톱 대치…20대 징역 1년",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T06:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406063?sid=102"
+    },
+    {
+     "title": "\"지난해 12월 교통사망 10건 중 9건 보행자\"…강원경찰, 집중 계도·단속",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T06:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009312553?sid=102"
     }
    ]
   },
   {
    "keyword": "김민석 민주당 대표",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 7,
-   "press": 14,
-   "firstArticleAt": "2026-11-26T05:00:00.000Z",
+   "articles90": 14,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T05:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "계파 갈등에 발목 잡힌 김민석…'현장 민생'으로 돌파구",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-26T06:28:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261126010010409"
+    },
     {
      "title": "여야 내홍 격화…정청래 '김민석 결자해지' 압박·장동혁 '한동훈 복당...",
      "press": "news.ifm.kr",
@@ -321,76 +265,6 @@
      "press": "daejonilbo.com",
      "publishedAt": "2026-11-26T06:18:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/656/0000193647?sid=102"
-    },
-    {
-     "title": "\"당대표 직무수행 잘못하고 있다\"…김민석 68.3%, 장동혁 60.7%[리얼미터...",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-26T06:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653582?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "경찰",
-   "sources": [
-    "google"
-   ],
-   "articles90": 14,
-   "recent20": 12,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T06:05:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "인천서 중학생 집단 폭행…경찰, 10대 4명 입건",
-     "press": "news.skbroadband.com",
-     "publishedAt": "2026-11-26T06:24:00.000Z",
-     "link": "https://news.skbroadband.com/news/articleView.html?idxno=244347"
-    },
-    {
-     "title": "외항선 면세유 5080만L 빼돌려 유통… 경찰, 일당 100명 적발",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-26T06:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011916?sid=102"
-    },
-    {
-     "title": "현대백화점그룹, 보훈부 감사패 수상…순직·공상 경찰 자녀 지원 공로",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-26T06:22:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=218733"
-    }
-   ]
-  },
-  {
-   "keyword": "윤석열 한덕수 위증 무죄 확정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T04:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "윤석열 '한덕수 재판 위증' 무죄 확정",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T06:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016465967?sid=102"
-    },
-    {
-     "title": "[이슈] 대법, '한덕수 재판 위증' 尹 무죄 확정…'계엄 2주년' 12월 3일,...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-26T06:22:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749324"
-    },
-    {
-     "title": "민주당 \"내란범 줄줄이 무죄…사법부도 역사의 심판대 위에\"",
-     "press": "gobalnews.com",
-     "publishedAt": "2026-11-26T06:22:00.000Z",
-     "link": "https://www.gobalnews.com/news/articleView.html?idxno=203174"
     }
    ]
   },
@@ -399,13 +273,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 12,
+   "articles90": 13,
    "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-26T04:59:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-26T05:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[속보] 18세 청년 생애 첫 연금보험료 국가가 낸다…사전 신청자 5만 명...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-26T06:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133947?sid=101"
+    },
     {
      "title": "집 한 채로 평생 월급…주택연금, 3월부터 이렇게 바뀌었다",
      "press": "gukjenews.com",
@@ -417,44 +297,167 @@
      "press": "biz.sbs.co.kr",
      "publishedAt": "2026-11-26T06:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/374/0000546095?sid=101"
-    },
-    {
-     "title": "청년 생애 첫 연금보험료 지원에 사전신청 5만 명 넘어",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301743?sid=102"
     }
    ]
   },
   {
-   "keyword": "한전 개인정보 유출",
+   "keyword": "곽빈 2관왕",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 11,
+   "articles90": 13,
    "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-26T04:59:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-26T05:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "케이사인-에이아이딥, 한전KDN 보안 컨퍼런스서 생성형 AI 보안 솔루션 ...",
-     "press": "dailysecu.com",
-     "publishedAt": "2026-11-26T06:12:00.000Z",
-     "link": "https://www.dailysecu.com/news/articleView.html?idxno=209754"
+     "title": "두산 곽빈, KBO 시상식서 결혼 깜짝 공개 \"고생하는 아내 고맙다\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T06:26:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785104"
     },
     {
-     "title": "한국전력, 대규모 개인정보 유출…주민등록번호·계좌번호·카드번호까...",
-     "press": "job-post.co.kr",
-     "publishedAt": "2026-11-26T06:08:00.000Z",
-     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=241281"
+     "title": "곽빈 3개 부문 수상·김도영-구자욱 타격 2관왕…구본혁은 신설 유틸리...",
+     "press": "spochoo.com",
+     "publishedAt": "2026-11-26T06:18:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/529/0000079373"
     },
     {
-     "title": "국조실 , 개인정보 유출 '한전' 대상으로 공직 복무 점검 검토",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-26T05:40:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=206933"
+     "title": "“내 와이프, 고마워” 두산 에이스의 ‘깜짝 공개’… 곽빈, 유부남이...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-26T06:16:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/144/0001151851"
+    }
+   ]
+  },
+  {
+   "keyword": "kbo 시상식",
+   "sources": [
+    "google"
+   ],
+   "articles90": 16,
+   "recent20": 16,
+   "press": 10,
+   "firstArticleAt": "2026-11-26T06:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] KIA 김도영, KBO리그 MVP 수상",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-26T06:35:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001283720"
+    },
+    {
+     "title": "[포토S] 김도영, '2026 KBO MVP'",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-26T06:34:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/477/0000641108"
+    },
+    {
+     "title": "[MD포토] 김도영 '최고의 KBO 선수, MVP'",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T06:33:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004128403"
+    }
+   ]
+  },
+  {
+   "keyword": "북부리그 승리상 수상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 17,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-26T05:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[표] 2026 신한은행 SOL뱅크 KBO 시상식 수상자 명단",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T06:30:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009312546"
+    },
+    {
+     "title": "곽빈 3개 부문 수상·김도영-구자욱 타격 2관왕…구본혁은 신설 유틸리...",
+     "press": "spochoo.com",
+     "publishedAt": "2026-11-26T06:18:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/529/0000079373"
+    },
+    {
+     "title": "[포토] 신현민, 승리상에 제가 빠질 수 없죠",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-26T05:22:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003490405"
+    }
+   ]
+  },
+  {
+   "keyword": "임웅순 장관 첫 출근",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 28,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-26T05:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 첫 출근하는 임웅순 외교부 장관 후보자",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-26T06:04:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452350"
+    },
+    {
+     "title": "임웅순 \"한미동맹 취약하지 않아…한중관계도 중요\"[노컷네컷]",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T05:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214243?sid=100"
+    },
+    {
+     "title": "첫 출근길 취재진 만난 임웅순 외교부 장관 후보자",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-26T05:49:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261126000945"
+    }
+   ]
+  },
+  {
+   "keyword": "발전",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 7,
+   "press": 7,
+   "firstArticleAt": "2026-11-26T06:28:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "고려아연, 울산 8개 학교에 발전기금 1억4500만원 전달",
+     "press": "inthenews.co.kr",
+     "publishedAt": "2026-11-26T06:34:00.000Z",
+     "link": "https://www.inthenews.co.kr/news/article.html?no=95080"
+    },
+    {
+     "title": "남부발전, AI·데이터 품질혁신으로 대통령표창",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-26T06:34:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023949"
+    },
+    {
+     "title": "젠슨황 복귀 질문하자 “AI발전에 좋아”…1년만에 더 똑똑해진 샤오펑...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-26T06:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686513?sid=104"
     }
    ]
   },
@@ -463,10 +466,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-26T05:00:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T05:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -491,142 +494,12 @@
    ]
   },
   {
-   "keyword": "임웅순 장관 첫 출근",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 28,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T05:15:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 첫 출근하는 임웅순 외교부 장관 후보자",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-26T06:04:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452350"
-    },
-    {
-     "title": "임웅순 \"한미동맹 취약하지 않아…한중관계도 중요\"[노컷네컷]",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-26T05:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214243?sid=100"
-    },
-    {
-     "title": "첫 출근길 나선 임웅순 외교부 장관 후보자",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-26T05:49:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261126000954"
-    }
-   ]
-  },
-  {
-   "keyword": "북부리그 승리상 수상",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T05:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "곽빈 3개 부문 수상·김도영-구자욱 타격 2관왕…구본혁은 신설 유틸리...",
-     "press": "spochoo.com",
-     "publishedAt": "2026-11-26T06:18:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/529/0000079373"
-    },
-    {
-     "title": "[포토] 신현민, 승리상에 제가 빠질 수 없죠",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-26T05:22:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003490405"
-    },
-    {
-     "title": "[사진]김민규,'북부리그 승리상 수상'",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-26T05:21:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005645603"
-    }
-   ]
-  },
-  {
-   "keyword": "발전",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 6,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T06:20:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "한전KPS·광양그린에너지, AI 기반 발전설비 운영·정비 기술 개발 협력",
-     "press": "eroun.net",
-     "publishedAt": "2026-11-26T06:24:00.000Z",
-     "link": "https://www.eroun.net/news/articleView.html?idxno=96664"
-    },
-    {
-     "title": "남부발전, 국가품질혁신상 'Quality 4.0' 부문 대통령 표창 수상",
-     "press": "todayenergy.kr",
-     "publishedAt": "2026-11-26T06:22:00.000Z",
-     "link": "https://www.todayenergy.kr/news/articleView.html?idxno=306131"
-    },
-    {
-     "title": "한전KPS, 광양그린에너지와 AI 기반 발전설비 기술개발 협력",
-     "press": "beyondpost.co.kr",
-     "publishedAt": "2026-11-26T06:22:00.000Z",
-     "link": "http://www.beyondpost.co.kr/view.php?ud=20261126151849262146a9e4dd7f_30"
-    }
-   ]
-  },
-  {
-   "keyword": "kbo 시상식",
-   "sources": [
-    "signal.bz",
-    "google",
-    "daum"
-   ],
-   "articles90": 13,
-   "recent20": 13,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T06:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[ST포토] 2026 KBO 신인상 수상하는 허인서",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-26T06:24:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110104754921"
-    },
-    {
-     "title": "한화 허인서, KBO 신인상 수상",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T06:23:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009312504"
-    },
-    {
-     "title": "허인서 '2026 KBO 신인왕 등극'[포토]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-26T06:22:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002084403"
-    }
-   ]
-  },
-  {
    "keyword": "곽빈 결혼",
    "sources": [
     "daum"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-26T05:38:00.000Z",
    "exclusive": false,
@@ -655,10 +528,52 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1616,
-  "matched": 784,
-  "avgLeadMin": 523,
+  "flagged": 1618,
+  "matched": 791,
+  "avgLeadMin": 520,
   "recent": [
+   {
+    "keyword": "손석구 푸른길 인터뷰",
+    "hitKeyword": "류보리 작가 인터뷰",
+    "hitAt": "2026-11-26T15:30:00+09:00",
+    "leadMin": 1482
+   },
+   {
+    "keyword": "재혼 황후 이세영 악역 논란",
+    "hitKeyword": "이세영 안색 논란 언급",
+    "hitAt": "2026-11-26T15:30:00+09:00",
+    "leadMin": 164
+   },
+   {
+    "keyword": "이세영 라스타 연기",
+    "hitKeyword": "이세영 안색 논란 언급",
+    "hitAt": "2026-11-26T15:30:00+09:00",
+    "leadMin": 114
+   },
+   {
+    "keyword": "이정재",
+    "hitKeyword": "이정재 안성기 추모",
+    "hitAt": "2026-11-26T15:30:00+09:00",
+    "leadMin": 114
+   },
+   {
+    "keyword": "한은 내년 성장 전망",
+    "hitKeyword": "한은 반도체 낙수 전망",
+    "hitAt": "2026-11-26T15:30:00+09:00",
+    "leadMin": 24
+   },
+   {
+    "keyword": "홈플러스",
+    "hitKeyword": "홈플러스 휴업 예정",
+    "hitAt": "2026-11-26T15:30:00+09:00",
+    "leadMin": 24
+   },
+   {
+    "keyword": "박지현 영어 인터뷰",
+    "hitKeyword": "류보리 작가 인터뷰",
+    "hitAt": "2026-11-26T15:30:00+09:00",
+    "leadMin": 24
+   },
    {
     "keyword": "명륜당 압수수색 영장 기각",
     "hitKeyword": "리트 만점자 이진우 압수수색",
@@ -676,48 +591,6 @@
     "hitKeyword": "리트 만점자 이진우 압수수색",
     "hitAt": "2026-11-26T15:00:00+09:00",
     "leadMin": 4232
-   },
-   {
-    "keyword": "진우와 해티",
-    "hitKeyword": "진우와 해티 유튜버 이혼",
-    "hitAt": "2026-11-26T15:00:00+09:00",
-    "leadMin": 235
-   },
-   {
-    "keyword": "육아휴직",
-    "hitKeyword": "육아휴직 세무사 합격",
-    "hitAt": "2026-11-26T15:00:00+09:00",
-    "leadMin": 175
-   },
-   {
-    "keyword": "전도연, 청룡 여우주연상 수상",
-    "hitKeyword": "청룡영화상 설경구 전도연",
-    "hitAt": "2026-11-26T14:30:00+09:00",
-    "leadMin": 869
-   },
-   {
-    "keyword": "가능한 사랑, 전도연 수상",
-    "hitKeyword": "청룡영화상 설경구 전도연",
-    "hitAt": "2026-11-26T14:30:00+09:00",
-    "leadMin": 838
-   },
-   {
-    "keyword": "설경구 남우주연상 수상",
-    "hitKeyword": "청룡영화상 설경구 전도연",
-    "hitAt": "2026-11-26T14:30:00+09:00",
-    "leadMin": 748
-   },
-   {
-    "keyword": "가능한 사랑, 전도연 여우주연상",
-    "hitKeyword": "청룡영화상 설경구 전도연",
-    "hitAt": "2026-11-26T14:30:00+09:00",
-    "leadMin": 718
-   },
-   {
-    "keyword": "가능한 사랑 전도연 수상",
-    "hitKeyword": "청룡영화상 설경구 전도연",
-    "hitAt": "2026-11-26T14:30:00+09:00",
-    "leadMin": 506
    }
   ]
  }
