@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T19:40:59.856Z",
+ "builtAt": "2026-11-26T19:51:03.178Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -29,16 +29,16 @@
      "link": "https://n.news.naver.com/mnews/article/366/0001207653?sid=105"
     },
     {
-     "title": "땅밑 광섬유로 ‘작은 지진’ 관측하니… 큰 지진처럼 복잡했다",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-26T19:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834201?sid=105"
-    },
-    {
      "title": "땅속 통신 광섬유로 미세 지진파 1000분의 1초 규명",
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-26T19:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003160043?sid=105"
+    },
+    {
+     "title": "땅밑 광섬유로 ‘작은 지진’ 관측하니… 큰 지진처럼 복잡했다",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-26T19:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834201?sid=105"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 3,
+   "recent20": 1,
    "press": 9,
    "firstArticleAt": "2026-11-26T18:38:00.000Z",
    "exclusive": false,
@@ -71,38 +71,6 @@
      "press": "view.asiae.co.kr",
      "publishedAt": "2026-11-26T19:21:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/277/0005848515?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "우크라이나",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T18:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프·나토 수장, 러시아에 \"우크라이나 전쟁 확전 말라\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T18:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438715?sid=104"
-    },
-    {
-     "title": "폴란드, 나토에 우크라이나 상공 러시아 미사일 요격 요청",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-26T18:34:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=20261127033026726620990b2dc5_1"
-    },
-    {
-     "title": "우크라이나 의회, 가상자산 시장법 통과 '2027년 시행'",
-     "press": "khgames.co.kr",
-     "publishedAt": "2026-11-26T18:18:00.000Z",
-     "link": "https://www.khgames.co.kr/news/articleView.html?idxno=310779"
     }
    ]
   }
