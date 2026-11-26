@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T03:15:24.549Z",
+ "builtAt": "2026-11-26T03:25:28.692Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,33 +13,96 @@
   {
    "keyword": "윤석열 위증 무죄 확정",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 79,
-   "recent20": 7,
-   "press": 67,
-   "firstArticleAt": "2026-11-26T01:51:00.000Z",
+   "articles90": 76,
+   "recent20": 5,
+   "press": 66,
+   "firstArticleAt": "2026-11-26T01:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[WIKI 이슈] 윤석열, '계엄 국무회의 위증' 무죄...형사재판 10건 중 첫 ...",
-     "press": "wikileaks-kr.org",
-     "publishedAt": "2026-11-26T03:06:00.000Z",
-     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=195309"
+     "title": "한덕수 재판서 위증 혐의…윤석열, 대법에서 '무죄' 확정",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T03:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406012?sid=102"
     },
     {
-     "title": "'한덕수 재판 위증' 윤석열 무죄 확정…10건 중 2건 마무리",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-26T03:06:00.000Z",
-     "link": "https://www.ajunews.com/view/20261126115221027"
+     "title": "대법원, '재판 위증' 윤석열 무죄 확정‥상고 기각",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-26T03:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538203?sid=102"
     },
     {
-     "title": "대법, ‘한덕수 재판 위증’ 윤석열 무죄 확정",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-26T03:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002835776?sid=102"
+     "title": "윤석열 ‘계엄 국무회의 위증’ 무죄 확정",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301655?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "현대차그룹 사장단 인사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 55,
+   "recent20": 3,
+   "press": 54,
+   "firstArticleAt": "2026-11-26T01:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘안정 속 핀셋 쇄신’ 택한 현대차그룹… 완성차 투톱 유임·계열사 재...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-26T03:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207492?sid=103"
+    },
+    {
+     "title": "현대차그룹, 대표이사·사장단 인사…현대모비스에 백철승 사장",
+     "press": "pointdaily.co.kr",
+     "publishedAt": "2026-11-26T03:10:00.000Z",
+     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=327537"
+    },
+    {
+     "title": "[뉴스+]현대차그룹, 완성차 CEO 무뇨스·송호성 유임…경영 연속성 성과...",
+     "press": "businessplus.kr",
+     "publishedAt": "2026-11-26T03:08:00.000Z",
+     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120537"
+    }
+   ]
+  },
+  {
+   "keyword": "2027년 임원 승진",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 78,
+   "recent20": 9,
+   "press": 53,
+   "firstArticleAt": "2026-11-26T02:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성자산운용, 이시완 대체투자부문장 부사장 발탁...임원 3명 승진",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-26T03:24:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261126500268"
+    },
+    {
+     "title": "호텔신라, 정기 임원인사 … 김여울·최상록 신임 상무 승진",
+     "press": "worktoday.co.kr",
+     "publishedAt": "2026-11-26T03:18:00.000Z",
+     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=92699"
+    },
+    {
+     "title": "제일기획, 부사장 2명·상무 4명 승진…AX·신사업 리더 발탁",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-26T03:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728909?sid=101"
     }
    ]
   },
@@ -48,62 +111,62 @@
    "sources": [
     "google"
    ],
-   "articles90": 39,
-   "recent20": 19,
-   "press": 36,
-   "firstArticleAt": "2026-11-26T02:42:00.000Z",
+   "articles90": 36,
+   "recent20": 9,
+   "press": 33,
+   "firstArticleAt": "2026-11-26T02:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성SDI, 1.4조 규모 자사주 350만9791주 소각 결정",
-     "press": "whitepaper.co.kr",
-     "publishedAt": "2026-11-26T03:14:00.000Z",
-     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=269199"
+     "title": "삼성자산운용, 이시완 대체투자부문장 부사장 발탁...임원 3명 승진",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-26T03:24:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261126500268"
     },
     {
-     "title": "삼성카드·삼성증권·삼성자산운용, 정기 임원인사…14명 승진",
-     "press": "whitepaper.co.kr",
-     "publishedAt": "2026-11-26T03:14:00.000Z",
-     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=269196"
+     "title": "삼성생명 등 삼성 금융계열사 CEO 모두 유임...안정·연속성 중시",
+     "press": "choicenews.co.kr",
+     "publishedAt": "2026-11-26T03:22:00.000Z",
+     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173535"
     },
     {
-     "title": "인사-전원상 강북삼성병원 부사장 승진",
-     "press": "dailypharm.com",
-     "publishedAt": "2026-11-26T03:08:00.000Z",
-     "link": "https://www.dailypharm.com/user/news/today-focus/12585?REFERER=NP"
+     "title": "[오피셜]구자욱·원태인 없는 삼성 우승 축제…아쉽지만 틀리지 않은 결...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-26T03:20:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/445/0000493547"
     }
    ]
   },
   {
-   "keyword": "안덕수 국세청장 후보자 청문회",
+   "keyword": "레이예스 재계약",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 81,
-   "recent20": 26,
-   "press": 22,
-   "firstArticleAt": "2026-11-26T02:15:00.000Z",
-   "exclusive": false,
+   "articles90": 24,
+   "recent20": 2,
+   "press": 24,
+   "firstArticleAt": "2026-11-26T02:32:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[안덕수 청문회] 이종욱, \"세무조사 남용 공로로 국세청장 후보 올랐나...",
-     "press": "sejungilbo.com",
-     "publishedAt": "2026-11-26T03:14:00.000Z",
-     "link": "https://www.sejungilbo.com/news/articleView.html?idxno=61291"
+     "title": "‘211안타’ 레이예스, 총액 180만 달러에 롯데 잔류…“우승의 꿈 현실...",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-26T03:10:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/382/0001306968"
     },
     {
-     "title": "안덕수 국세청장 후보자 인사청문회…'세무조사 중립성·글로벌 과세' 쟁...",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-26T03:12:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887602"
+     "title": "'타격의 달인' 레이예스, 美日 안 가고 롯데 남는다…24억 원 재계약",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T03:07:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/079/0004214151"
     },
     {
-     "title": "[포토] 질의에 답변하는 안덕수 국세청장 후보자",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-26T03:12:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650204.html"
+     "title": "롯데, 빅터 레이예스와 180만 달러에 재계약",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-26T03:04:00.000Z",
+     "link": "https://www.viva100.com/article/20261126500807"
     }
    ]
   },
@@ -113,7 +176,7 @@
     "signal.bz"
    ],
    "articles90": 22,
-   "recent20": 4,
+   "recent20": 1,
    "press": 21,
    "firstArticleAt": "2026-11-26T02:03:00.000Z",
    "exclusive": false,
@@ -140,34 +203,66 @@
    ]
   },
   {
-   "keyword": "한준호 지명 책임감",
+   "keyword": "신현송 한국은행 총재",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 0,
+   "articles90": 68,
+   "recent20": 29,
    "press": 20,
-   "firstArticleAt": "2026-11-26T01:46:00.000Z",
+   "firstArticleAt": "2026-11-26T02:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한준호 행안장관 후보 \"큰 책임감…경찰·중수청 등 독립성은 명확\"",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-26T02:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000143062?sid=102"
+     "title": "[포토]한국은행, '올해 성장률 3.9%...내년 4.1%로 대폭 상향'",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T03:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006415953?sid=101"
     },
     {
-     "title": "\"비전문가라고요? 앞으로 활동하면서 보여줄 것\"… 한준호 후보 청문회...",
-     "press": "public25.com",
-     "publishedAt": "2026-11-26T02:38:00.000Z",
-     "link": "https://www.public25.com/news/articleView.html?idxno=59118"
+     "title": "신현송 \"올해 명목 GDP 3000조 원 훌쩍 넘을 것\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T03:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009311738?sid=101"
     },
     {
-     "title": "한준호 “장관 지명받고 가장 먼저 연락드렸다”…첫 출근길에 밝힌 사...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-26T02:38:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1177964"
+     "title": "금통위 통화정책방향 기자간담회 하는 신현송 총재",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T03:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009311736?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "김창민 감독 항소 사건",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 0,
+   "press": 14,
+   "firstArticleAt": "2026-11-26T02:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김창민 감독 사망 사건 ‘쌍방 항소’…공소청 “형량 가볍다”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-26T02:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728893?sid=102"
+    },
+    {
+     "title": "'故 김창민 감독 사망 사건' 2심 간다…피고인 2명·공소청 쌍방 항소",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-26T02:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000493541"
+    },
+    {
+     "title": "'故김창민 감독 살인 사건', 다시 법정으로⋯가해자들·공소청 쌍방 항...",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-26T02:34:00.000Z",
+     "link": "http://www.joynews24.com/view/2030716"
     }
    ]
   },
@@ -176,10 +271,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
+   "articles90": 13,
    "recent20": 0,
-   "press": 18,
-   "firstArticleAt": "2026-11-26T01:48:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-26T01:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,38 +299,6 @@
    ]
   },
   {
-   "keyword": "신현송 한국은행 총재",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 49,
-   "recent20": 16,
-   "press": 17,
-   "firstArticleAt": "2026-11-26T02:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신현송 한은 총재 “고유가 장기화에 수요 압력까지… 물가 안정에 중점...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-26T03:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011882?sid=101"
-    },
-    {
-     "title": "신현송 \"잠재성장률은 이론적 개념…현재 통화정책 기준 아냐\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T03:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415937?sid=101"
-    },
-    {
-     "title": "[속보]신현송 총재 \"물가 목표치 2%대, 통화정책 전제로 크게 올리지 않...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-26T03:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610203?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "육아휴직",
    "sources": [
     "signal.bz",
@@ -244,10 +307,16 @@
    "articles90": 11,
    "recent20": 1,
    "press": 11,
-   "firstArticleAt": "2026-11-26T01:50:00.000Z",
+   "firstArticleAt": "2026-11-26T01:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“육아휴직 하고 세무사 합격”…워킹맘 30대, 결국 신고 당했다",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-26T03:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568148?sid=102"
+    },
     {
      "title": "3개월 만에 또…20대 여중사 숨진 채 발견 / \"육아휴직 중 주80시간 공부...",
      "press": "mbn.mk.co.kr",
@@ -259,44 +328,6 @@
      "press": "kdfnews.com",
      "publishedAt": "2026-11-26T02:46:00.000Z",
      "link": "http://www.kdfnews.com/news/articleView.html?idxno=191479"
-    },
-    {
-     "title": "“육아휴직 내고 공부, 세무사 합격” 30대 女, 결국 신고 당했다",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T02:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728855?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "조희대 탄핵 여론 갈등",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T02:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령 국정지지율 43%…조희대 탄핵 반대 44%·찬성 34% [NBS]",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-26T03:00:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731144"
-    },
-    {
-     "title": "與 \"탄핵 대상, 曺 한 사람\"…野 \"조작 탄핵\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T02:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930090?sid=100"
-    },
-    {
-     "title": "조희대 탄핵 정국 격화…김민석 '5당 연대' 승부수, 역풍 넘을까",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-26T02:35:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000086814"
     }
    ]
   },
@@ -325,81 +356,81 @@
      "link": "https://n.news.naver.com/mnews/article/117/0004128275?sid=102"
     },
     {
-     "title": "신동우號 스타벅스, 실적 반등 자신감…성장 공식 바꾼다 [종합]",
-     "press": "etoday.co.kr",
+     "title": "스벅 반등에도 \"신뢰 회복 단언은 자만\"…'질적 성장' 제시한 신동우 대...",
+     "press": "hankyung.com",
      "publishedAt": "2026-11-26T02:32:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653349"
+     "link": "https://n.news.naver.com/mnews/article/015/0005358523?sid=101"
     }
    ]
   },
   {
-   "keyword": "발언하는 한병도 원내대표",
+   "keyword": "학교 폭력",
    "sources": [
-    "nate"
+    "google"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-26T01:48:00.000Z",
+   "firstArticleAt": "2026-11-26T01:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한병도 \"탄핵 대상은 사법부 전체 아냐…조희대 한 사람\"",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-26T02:28:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321940&inflow=N"
+     "title": "여학생 텀블러에 소변본 남학생…피해자만 학교 떠났다",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-26T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274048?sid=102"
     },
     {
-     "title": "「M포토」 정책조정회의서 발언하는 한병도 원내대표",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-26T01:58:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73612"
+     "title": "학교폭력 딛고 일상 회복…교육부, 상담 우수사례 40편 선정",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009311637?sid=102"
     },
     {
-     "title": "한병도, 내란 2주년에 \"野, 내란 인정하고 석고대죄하라\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-26T01:56:00.000Z",
-     "link": "https://www.ajunews.com/view/20261126085337153"
+     "title": "계양구 또래상담연합회, 청소년폭력예방 영상공모전서 수상",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-26T02:38:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3763823"
     }
    ]
   },
   {
-   "keyword": "서인영 남양주 신혼집 마련",
+   "keyword": "안덕수 후보자 청문회 진행",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T02:17:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T02:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'12월 결혼' 서인영, 신혼집 장만하더니..'이혼 때 챙긴 물건' 중고거래...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-26T02:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004469972"
+     "title": "[안덕수 청문회] 이종욱, \"세무조사 남용 공로로 국세청장 후보 올랐나...",
+     "press": "sejungilbo.com",
+     "publishedAt": "2026-11-26T03:14:00.000Z",
+     "link": "https://www.sejungilbo.com/news/articleView.html?idxno=61291"
     },
     {
-     "title": "'유행꼰대' 서인영 \"남양주 신혼집 마련⋯중고거래 고민중\"",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-26T02:34:00.000Z",
-     "link": "http://www.joynews24.com/view/2030711"
+     "title": "안덕수 청문회, 초반부터 '기획 세무조사' 공방",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-26T02:44:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088163"
     },
     {
-     "title": "서인영 \"예비 남편과 돈 모아 남양주에 신혼집 마련\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-26T02:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000967889"
+     "title": "국세청장 후보 안덕수, 세금 신고 대혁신과 탈세 집중 단속 예고",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-26T02:14:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887371"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1532,
+  "flagged": 1538,
   "matched": 754,
   "avgLeadMin": 504,
   "recent": [
