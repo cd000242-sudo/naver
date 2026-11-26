@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T16:19:55.305Z",
+ "builtAt": "2026-11-26T16:29:58.723Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,46 @@
  "measured": 29,
  "candidates": [
   {
+   "keyword": "미국 과잉생산 관세 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-26T15:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미 과잉생산 관세에 중국 반발…무역휴전 다시 시험대",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T16:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930345?sid=104"
+    },
+    {
+     "title": "미국 과잉생산 관세에 중국 반발…미중 무역휴전 다시 ‘시험대’",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T16:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302277?sid=104"
+    },
+    {
+     "title": "다시 관세버튼 누른 트럼프… 비과세 투자·노후 적립금도 문제 삼아",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-26T15:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004012049?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "반도체 메모리",
    "sources": [
     "google"
    ],
-   "articles90": 13,
+   "articles90": 12,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-26T14:50:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-26T15:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -39,38 +71,6 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-26T15:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004011999?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T15:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미국 과잉생산 관세에 중국 반발…미중 무역휴전 다시 ‘시험대’",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T16:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302277?sid=104"
-    },
-    {
-     "title": "다시 관세버튼 누른 트럼프… 비과세 투자·노후 적립금도 문제 삼아",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-26T15:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012049?sid=104"
-    },
-    {
-     "title": "美 과잉생산 관세에 中 반발…미중 무역휴전 다시 '시험대'",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T15:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466717?sid=104"
     }
    ]
   },
@@ -109,7 +109,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1757,
+  "flagged": 1755,
   "matched": 860,
   "avgLeadMin": 512,
   "recent": [
