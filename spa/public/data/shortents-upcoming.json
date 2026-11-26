@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T07:16:46.807Z",
+ "builtAt": "2026-11-26T07:26:50.881Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,98 @@
  "measured": 30,
  "candidates": [
   {
-   "keyword": "조작기소 특검 후보 추천",
+   "keyword": "통합 LCC 본사 부산",
    "sources": [
     "nate"
    ],
-   "articles90": 75,
-   "recent20": 7,
-   "press": 54,
-   "firstArticleAt": "2026-11-26T05:47:00.000Z",
+   "articles90": 94,
+   "recent20": 20,
+   "press": 73,
+   "firstArticleAt": "2026-11-26T06:18:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "민주, 조작기소 특검 후보에 이임성 변호사 추천",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-26T07:10:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653546"
+     "title": "통합LCC, 부산 본사 확정 '기능 배분' 과제",
+     "press": "bloter.net",
+     "publishedAt": "2026-11-26T07:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/293/0000093889?sid=101"
     },
     {
-     "title": "[단독] '與 추천' 조작기소 특검 후보, 李대통령 경기지사 시절 원외재...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-26T07:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159937?sid=102"
+     "title": "대한항공, '국내 최대 LCC' 통합 진에어 '부산 시대' 연다",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-26T07:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358656?sid=101"
     },
     {
-     "title": "민주당 '조작기소 특검' 후보로 검사 출신 이임성 변호사 추천",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-26T07:00:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452396"
+     "title": "내년 3월 출범하는 통합 진에어 본사는 부산",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-26T07:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165798?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "조작기소 특검 후보 이임성·이정훈 추천",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 56,
+   "recent20": 9,
+   "press": 50,
+   "firstArticleAt": "2026-11-26T06:01:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "與, 조작기소 특검 후보에 '檢 출신' 이임성…혁신당은 '판사 출신' 이정...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-26T07:26:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904576"
+    },
+    {
+     "title": "조작기소 특검 후보에 이임성·이정훈 추천…국민의힘은 '추천 보이콧'",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-26T07:22:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261126500540"
+    },
+    {
+     "title": "與, ‘조작 기소 특검’ 후보로 이임성 변호사 추천…국힘은 추천 거부",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-26T07:22:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611261558362490838"
+    }
+   ]
+  },
+  {
+   "keyword": "김도영 MVP 수상!",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 91,
+   "recent20": 18,
+   "press": 43,
+   "firstArticleAt": "2026-11-26T06:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "프로야구 2026시즌 MVP는 KIA 김도영",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-26T07:26:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/088/0001042540"
+    },
+    {
+     "title": "'완벽 부활' KIA 김도영, 2년 만에 MVP 등극…한화 허인서, 16년만에 포수...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T07:23:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014347948"
+    },
+    {
+     "title": "MVP보다 값졌던 김도영의 '수비상', '5년 차' 허인서의 신인왕, 그리고 ...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-26T07:23:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/445/0000493629"
     }
    ]
   },
@@ -47,30 +111,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 58,
-   "recent20": 24,
+   "articles90": 55,
+   "recent20": 8,
    "press": 39,
-   "firstArticleAt": "2026-11-26T05:47:00.000Z",
+   "firstArticleAt": "2026-11-26T05:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"트럼프, 최악의 시점에 관세 올렸다\" 평가 이유는",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-26T07:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005446985?sid=101"
+     "title": "美 USTR '과잉생산' 관세…삼전·닉스 中 공장 운영 부담될까",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T07:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014347950?sid=101"
     },
     {
-     "title": "[美 과잉생산 관세]파업 처벌·하청 저임금도 원인 지목…노동정책 '통...",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-26T07:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490443?sid=100"
+     "title": "미국 ‘과잉생산 관세’, 근거는 “한국 노동자 월급이 너무 낮다”",
+     "press": "newscham.net",
+     "publishedAt": "2026-11-26T07:20:00.000Z",
+     "link": "https://newscham.net/130229/"
     },
     {
-     "title": "[美 과잉생산 관세]15%는 구두 약속…불만족 땐 日·EU보다 높은 25%",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-26T07:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490445?sid=100"
+     "title": "트럼프, 한국·중국·EU 등 14개 경제권에 신규 관세 추진…“제조업 과...",
+     "press": "hellot.net",
+     "publishedAt": "2026-11-26T07:20:00.000Z",
+     "link": "https://www.hellot.net/news/article.html?no=116658"
+    }
+   ]
+  },
+  {
+   "keyword": "신인상 한화 허인서",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 78,
+   "recent20": 7,
+   "press": 31,
+   "firstArticleAt": "2026-11-26T06:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "허인서, 신인왕·수비상 동시 석권…한화 포수의 새 역사 썼다",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-26T07:23:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087044"
+    },
+    {
+     "title": "'완벽 부활' KIA 김도영, 2년 만에 MVP 등극…한화 허인서, 16년만에 포수...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T07:23:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014347948"
+    },
+    {
+     "title": "MVP보다 값졌던 김도영의 '수비상', '5년 차' 허인서의 신인왕, 그리고 ...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-26T07:23:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/445/0000493629"
     }
    ]
   },
@@ -79,30 +175,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 30,
-   "recent20": 3,
-   "press": 25,
-   "firstArticleAt": "2026-11-26T05:51:00.000Z",
+   "articles90": 28,
+   "recent20": 6,
+   "press": 23,
+   "firstArticleAt": "2026-11-26T05:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "외국인 정치활동 금지한 현행법…헌재, 헌법불합치 판단",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-26T07:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159942?sid=102"
+     "title": "헌재 \"외국인 정치활동 금지한 출입국관리법 헌법불합치\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-26T07:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358657?sid=102"
     },
     {
-     "title": "헌재 \"외국인 정치활동 전면금지, 헌법불합치…표현의자유 침해\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T07:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466266?sid=102"
+     "title": "헌재, '외국인 정치활동 금지' 조항 헌법불합치…도입 49년 만에 제동",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-26T07:24:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261126001169"
     },
     {
-     "title": "헌재, 국내 체류 외국인 정치활동 일률 금지 '헌법불합치'(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T07:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009312697?sid=102"
+     "title": "헌재 \"외국인 정치활동 전면 금지 출입국관리법 '헌법불합치'\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T07:18:00.000Z",
+     "link": "https://www.ajunews.com/view/20261126151457717"
+    }
+   ]
+  },
+  {
+   "keyword": "2026 KBO 시상식 수상자들",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 40,
+   "recent20": 6,
+   "press": 22,
+   "firstArticleAt": "2026-11-26T06:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "프로야구 2026시즌 MVP는 KIA 김도영",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-26T07:26:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/088/0001042540"
+    },
+    {
+     "title": "‘홈런왕’ KIA 김도영, 2년 만에 KBO MVP 탈환…신인왕은 허인서",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-26T07:21:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/021/0002835821"
+    },
+    {
+     "title": "김도영 4관왕ㆍ곽빈 3관왕⋯2026 프로야구 빛낸 별들(종합) [2026 KBO 시상...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-26T07:16:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653551"
     }
    ]
   },
@@ -111,30 +239,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 27,
+   "articles90": 30,
    "recent20": 5,
    "press": 22,
-   "firstArticleAt": "2026-11-26T05:50:00.000Z",
+   "firstArticleAt": "2026-11-26T05:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국방위, 청해부대 파견 확대·연장 의결... ‘전쟁 불개입’ 부대 의견",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T07:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416139?sid=100"
+     "title": "조현, 이란에 “청해부대 임무 확대는 국민 보호용”…전쟁 불개입 원칙...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-26T07:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729057?sid=100"
     },
     {
-     "title": "대학생 단체 \"청해부대 파병 반대\"…국회 본관 기습시위",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T07:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466235?sid=102"
+     "title": "조현, 이란 외교장관에 청해부대 확대 설명…'전쟁 불개입' 강조",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T07:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009312796?sid=104"
     },
     {
-     "title": "국방위, 청해부대 파견연장안 의결…호르무즈 인근까지 임무확대",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T07:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466232?sid=100"
+     "title": "국방위, 청해부대 파견 연장안 여야 합의 의결",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-26T07:18:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239965"
+    }
+   ]
+  },
+  {
+   "keyword": "홍익표 장관 후보자",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 61,
+   "recent20": 15,
+   "press": 20,
+   "firstArticleAt": "2026-11-26T06:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "홍익표 “남북관계, 높은 수준 대화보다 낮고 현실적 방안으로 풀어가야...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-26T07:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011935?sid=100"
+    },
+    {
+     "title": "[여의도1번지] 후보자들 인사청문회 본격화…여야 적격성 공방 가열",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T07:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930202?sid=100"
+    },
+    {
+     "title": "홍익표 통일부 장관 후보자 \"낮고 현실적인 방안부터…국민 안전 지킬 ...",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-26T07:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980002?sid=100"
     }
    ]
   },
@@ -144,93 +304,93 @@
     "nate"
    ],
    "articles90": 20,
-   "recent20": 4,
+   "recent20": 5,
    "press": 20,
-   "firstArticleAt": "2026-11-26T05:53:00.000Z",
+   "firstArticleAt": "2026-11-26T05:58:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[스틸컷] \"시드 프로젝트 늦어지고 있다\" 대통령의 채근[전문]",
+     "press": "dailybrief.co.kr",
+     "publishedAt": "2026-11-26T07:23:00.000Z",
+     "link": "https://www.dailybrief.co.kr/news/articleView.html?idxno=7429"
+    },
+    {
+     "title": "국무회의 발언 막힌 오세훈… 민주당 \"정치쇼로 체급 키운다\"",
+     "press": "sisaweek.com",
+     "publishedAt": "2026-11-26T07:22:00.000Z",
+     "link": "https://www.sisaweek.com/news/articleView.html?idxno=239216"
+    },
     {
      "title": "이 대통령 \"7대 SEED 프로젝트, 좀 더 속도 내야\"…경제 성과 속 '미래 먹...",
      "press": "metroseoul.co.kr",
      "publishedAt": "2026-11-26T07:16:00.000Z",
      "link": "http://www.metroseoul.co.kr/article/20261126500529"
-    },
-    {
-     "title": "李대통령, ‘사이비 종교’ 해산 조치 검토 지시... 현실성 낮다는 지적...",
-     "press": "siminilbo.co.kr",
-     "publishedAt": "2026-11-26T07:10:00.000Z",
-     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160291344768630"
-    },
-    {
-     "title": "특검에 가이드라인? 이재명 대통령 '대장동' 여론전 막후",
-     "press": "ilyo.co.kr",
-     "publishedAt": "2026-11-26T07:10:00.000Z",
-     "link": "https://ilyo.co.kr/?ac=article_view&entry_id=513803"
     }
    ]
   },
   {
-   "keyword": "그냥 사람 친구",
+   "keyword": "코스피 소폭 상승 마감",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 49,
-   "recent20": 13,
-   "press": 16,
-   "firstArticleAt": "2026-11-26T06:32:00.000Z",
+   "articles90": 19,
+   "recent20": 3,
+   "press": 17,
+   "firstArticleAt": "2026-11-26T06:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[HD포토] 주헌-정연, '영혼리스 포토타임' (그냥사람친구 제작발표회)",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T07:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287087"
+     "title": "[마감시황] 코스피, 폭락 하루 만에 소폭 반등…4800선 찍고 4700선 마감",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-26T07:24:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088408"
     },
     {
-     "title": "'그냥사람친구' 정연 “주헌 오빠 장롱면허인 줄 처음 알았다”",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-26T07:08:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611260262"
+     "title": "코스피, 기관 7500억원 순매수에 0.29% 올라 4700선 턱걸이...장중 상승 ...",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-26T07:16:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=508485"
     },
     {
-     "title": "'그냥사람친구' 주헌 “서진 형님 처음엔 조금 무서웠다”",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-26T07:06:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611260230"
+     "title": "코스피, 급락 딛고 소폭 반등…4,700선 회복",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T07:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930197?sid=101"
     }
    ]
   },
   {
-   "keyword": "보험",
+   "keyword": "김민석",
    "sources": [
     "google"
    ],
-   "articles90": 17,
-   "recent20": 11,
-   "press": 16,
-   "firstArticleAt": "2026-11-26T06:40:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-26T06:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "보험 판매수수료 경쟁에 추가 안전장치 마련…분급제 실효성 높인다",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-26T07:14:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=303482"
+     "title": "신용한 지사, 김민석 당대표 만나 충북현안 집중 건의",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-26T07:22:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456641"
     },
     {
-     "title": "[인사] DB손해보험·DB생명",
-     "press": "sisaon.co.kr",
-     "publishedAt": "2026-11-26T07:14:00.000Z",
-     "link": "https://www.sisaon.co.kr/news/articleView.html?idxno=206446"
+     "title": "신용한 충북도지사, 김민석 민주당대표에 국립소방병원 육성 건의",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-26T07:20:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121240"
     },
     {
-     "title": "건강보험 '보장 공백' 살피고 채우는 법 [보험 200% 활용법]",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T07:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005769534?sid=101"
+     "title": "신용한 충북지사, 김민석 대표에게 국립소방병원 육성 등 건의",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T06:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466214?sid=102"
     }
    ]
   },
@@ -239,7 +399,7 @@
    "sources": [
     "google"
    ],
-   "articles90": 13,
+   "articles90": 15,
    "recent20": 4,
    "press": 11,
    "firstArticleAt": "2026-11-26T06:02:00.000Z",
@@ -247,196 +407,162 @@
    "capped": false,
    "samples": [
     {
+     "title": "인천 남동공단 공장 화재 완진··· 건물 수색에도 연락두절 직원 미발...",
+     "press": "incheontoday.com",
+     "publishedAt": "2026-11-26T07:20:00.000Z",
+     "link": "https://www.incheontoday.com/news/articleView.html?idxno=326980"
+    },
+    {
+     "title": "인천 남동산단 공장 화재 4시간 만에 완진…실종자 발견 못해(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T07:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014347936?sid=102"
+    },
+    {
      "title": "\"남동산단 공장 화재 실종자, 2~3층에 있을 가능성\"",
      "press": "newsis.com",
      "publishedAt": "2026-11-26T07:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014347925?sid=102"
-    },
+    }
+   ]
+  },
+  {
+   "keyword": "윤석열 위증 무죄 확정",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 12,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-26T06:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
     {
-     "title": "인천 고잔동 플라스틱 제조공장서 화재… 소방인력 100여 명 투입",
-     "press": "kmaeil.com",
-     "publishedAt": "2026-11-26T07:10:00.000Z",
-     "link": "https://www.kmaeil.com/news/articleView.html?idxno=659984"
-    },
-    {
-     "title": "인천 자동차 부품 공장 화재, 실종１명 수색 중…20명 대피(종합2보)",
-     "press": "news1.kr",
+     "title": "尹, ‘한덕수 내란재판 위증’ 혐의 대법원서 무죄 확정",
+     "press": "donga.com",
      "publishedAt": "2026-11-26T07:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009312706?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "kbo 시상식",
-   "sources": [
-    "google",
-    "daum"
-   ],
-   "articles90": 17,
-   "recent20": 11,
-   "press": 10,
-   "firstArticleAt": "2026-11-26T06:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김도영 4관왕ㆍ곽빈 3관왕⋯2026 프로야구 빛낸 별들(종합) [2026 KBO 시상...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-26T07:16:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653551"
+     "link": "https://n.news.naver.com/mnews/article/020/0003765443?sid=102"
     },
     {
-     "title": "'12년 만의 1군 타격왕' 구자욱, KBO 시상식서 퓨처스 선수들·삼성 팬들...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T07:14:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287090"
+     "title": "[자유통일당 대변인 논평] 윤석열 전 대통령 위증 혐의는 무죄다!극악무...",
+     "press": "christiantoday.co.kr",
+     "publishedAt": "2026-11-26T06:58:00.000Z",
+     "link": "https://www.christiantoday.co.kr/news/378906"
     },
     {
-     "title": "2026 KBO 수상자들",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T07:12:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009312739"
-    }
-   ]
-  },
-  {
-   "keyword": "홍익표 후보자 도어스테핑",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 22,
-   "recent20": 7,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T06:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 홍익표 통일부 장관 후보자 도어스테핑",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-26T07:12:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452403"
-    },
-    {
-     "title": "인사하는 홍익표 통일부 장관 후보자",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T07:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009312731?sid=100"
-    },
-    {
-     "title": "[포토] 도어스테핑하는 홍익표 통일부 장관 후보자",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-26T07:10:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452398"
-    }
-   ]
-  },
-  {
-   "keyword": "김도영 4관왕 등극",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T06:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김도영 4관왕ㆍ곽빈 3관왕⋯2026 프로야구 빛낸 별들(종합) [2026 KBO 시상...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-26T07:16:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653551"
-    },
-    {
-     "title": "‘역시 슈퍼스타!’ KIA 김도영, 통산 두 번째 MVP 수상",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T07:12:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/056/0012301832"
-    },
-    {
-     "title": "'부상 딛고 홈런왕' KIA 김도영, 최연소 MVP 2회 수상…신인왕은 한화 허...",
-     "press": "kado.net",
-     "publishedAt": "2026-11-26T06:59:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/654/0000213650"
+     "title": "'한덕수 내란 재판 위증' 윤석열 대법서 무죄 확정",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T06:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438493?sid=102"
     }
    ]
   },
   {
    "keyword": "인천 남동산단 화재 발생",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
+   "articles90": 9,
+   "recent20": 3,
    "press": 8,
-   "firstArticleAt": "2026-11-26T05:52:00.000Z",
+   "firstArticleAt": "2026-11-26T05:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "인천 남동산단 공장 화재 4시간 만에 완진…실종자 발견 못해(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T07:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014347936?sid=102"
+    },
+    {
+     "title": "인천 남동산단 공장 화재…근로자 1명 소재 불명",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-26T07:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703542?sid=102"
+    },
     {
      "title": "\"남동산단 공장 화재 실종자, 2~3층에 있을 가능성\"",
      "press": "newsis.com",
      "publishedAt": "2026-11-26T07:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014347925?sid=102"
-    },
-    {
-     "title": "인천 남동산단 공장 화재 1시간 50분 만에 초진…노동자 1명 수색 중",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-26T06:46:00.000Z",
-     "link": "https://www.ajunews.com/view/20261126153712854"
-    },
-    {
-     "title": "인천 남동산단 화재 초진…직원 1명 연락 안돼",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T06:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930166?sid=102"
     }
    ]
   },
   {
-   "keyword": "아동학대 신고 막는다",
+   "keyword": "한지민 이서진, 20년 우정 싸움",
    "sources": [
     "nate"
    ],
    "articles90": 6,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T05:50:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-26T06:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'아니면 말고'식 아동학대 신고 막는다… 혐의 없으면 수사 신속종결",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-26T07:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193657?sid=102"
+     "title": "'싸움 구경이 제일 재밌어' … '그냥사람친구' 27일 첫 방송",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-26T07:24:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650344.html"
     },
     {
-     "title": "\"애 아빠가 화났어요\"...훈계도 학대로 신고당하는 선생님들, 정부가 막...",
-     "press": "mt.co.kr",
+     "title": "박정수 “이서진·한지민, 잠잘 때 빼고 계속 싸워…따로 귀국할 줄” ...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-26T06:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001151862"
+    },
+    {
+     "title": "“쉴 틈 없이 싸워”…이서진·한지민 ‘찐친 케미’ 예고한 ‘그냥사람...",
+     "press": "mk.co.kr",
      "publishedAt": "2026-11-26T06:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005446947?sid=102"
-    },
-    {
-     "title": "'묻지마 아동학대 신고' 막는다…교육부 무고성 신고 근절 방안 발표",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-26T06:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653594?sid=102"
+     "link": "https://m.entertain.naver.com/article/009/0005769509"
     }
    ]
   },
   {
-   "keyword": "답변하는 강신철 장관",
+   "keyword": "음악회",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T06:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "해피업사회복지회, 당진서 청소년 숲속음악회 숲팝 열어",
+     "press": "idjnews.kr",
+     "publishedAt": "2026-11-26T07:14:00.000Z",
+     "link": "https://www.idjnews.kr/news/articleView.html?idxno=304254"
+    },
+    {
+     "title": "진천 상산초,하굣길 음악회",
+     "press": "cctimes.kr",
+     "publishedAt": "2026-11-26T06:48:00.000Z",
+     "link": "http://www.cctimes.kr/news/articleView.html?idxno=939363"
+    },
+    {
+     "title": "나주시, 장애인·비장애인 함께 즐긴 음악회 열어",
+     "press": "newsmaker.or.kr",
+     "publishedAt": "2026-11-26T06:46:00.000Z",
+     "link": "http://www.newsmaker.or.kr/news/articleView.html?idxno=186500"
+    }
+   ]
+  },
+  {
+   "keyword": "강신철 장관 질의 답변",
    "sources": [
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T05:51:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-26T06:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -447,16 +573,16 @@
      "link": "https://www.newspim.com/news/view/20261126001044"
     },
     {
-     "title": "국방위 전체회의, 질의 답변하는 강신철 국방부 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-26T06:26:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261126001041"
-    },
-    {
      "title": "국회 국방위, 질의 답변하는 강신철 장관",
      "press": "newspim.com",
      "publishedAt": "2026-11-26T06:26:00.000Z",
      "link": "https://www.newspim.com/news/view/20261126001042"
+    },
+    {
+     "title": "국방위 전체회의, 질의 답변하는 강신철 국방부 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-26T06:26:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261126001041"
     }
    ]
   },
@@ -493,70 +619,6 @@
    ]
   },
   {
-   "keyword": "북부리그 승리상 수상",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T06:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'2026 KBO' 시상식 개최... 김도영 MVP·허인서 신인왕 등 수상자 명단 공...",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-26T07:10:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195872"
-    },
-    {
-     "title": "김도영 4관왕·구자욱 2관왕…2026 KBO 시상식 최종 수상자 명단",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-26T06:54:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1178067"
-    },
-    {
-     "title": "[표] 2026 신한은행 SOL뱅크 KBO 시상식 수상자 명단",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T06:30:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009312546"
-    }
-   ]
-  },
-  {
-   "keyword": "이서진 짐꾼 은퇴 필요할 나이",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T05:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“짐꾼 은퇴 이서진, 한지민 계속 싸워” 나영석 사단 여행 예능, 이번...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-26T06:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191630"
-    },
-    {
-     "title": "\"다 친구됐다'\" 짐꾼 은퇴 이서진→팀장 한지민과 도합 85년 우정여행(종...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T06:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009312608"
-    },
-    {
-     "title": "\"참 많이 싸웠다\"…'짐꾼 은퇴' 이서진·'팀장 감투' 한지민, 도합 85년 ...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T06:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128407"
-    }
-   ]
-  },
-  {
    "keyword": "백철승",
    "sources": [
     "google"
@@ -587,43 +649,11 @@
      "link": "http://www.beyondpost.co.kr/view.php?ud=202611261503095372be44c0aacd_30"
     }
    ]
-  },
-  {
-   "keyword": "곽빈 결혼 공개",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T06:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "두산 곽빈 \"와이프에게 감사\" 깜짝 발표…고영표 \"내년엔 MVP 남편 되고...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T06:54:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014347829"
-    },
-    {
-     "title": "곽빈, KBO 시상식서 결혼 깜짝 공개",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T06:54:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287055"
-    },
-    {
-     "title": "두산 곽빈, KBO 시상식서 결혼 깜짝 공개 \"고생하는 아내 고맙다\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T06:26:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785104"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1640,
+  "flagged": 1649,
   "matched": 791,
   "avgLeadMin": 520,
   "recent": [
