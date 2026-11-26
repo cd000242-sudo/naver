@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T22:42:00.654Z",
+ "builtAt": "2026-11-26T22:52:03.939Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
+  {
+   "keyword": "美 추수감사절 폭풍",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T21:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "뉴욕·뉴저지 비상사태 선포…美추수감사절, 폭풍에 정전·결항",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-26T22:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000546216?sid=104"
+    },
+    {
+     "title": "美 동부 추수감사절 폭풍에 55만곳 정전…메이시스 퍼레이드도 처음 당...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-26T22:40:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178185"
+    },
+    {
+     "title": "美 추수감사절 폭풍에 80만곳 정전·항공 2100편 운항 차질",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T22:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416353?sid=104"
+    }
+   ]
+  },
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
    "articles90": 14,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-26T21:20:00.000Z",
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-26T21:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "NH투자증권 “베트남 증시 관세 우려 과도…무역협상 진전 시 반등 기대...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-26T22:46:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653688"
+    },
     {
      "title": "美 새 관세 시행 땐 평균 13.9%…\"대법원이 막은 상호관세, 301조로 되살...",
      "press": "newsroad.co.kr",
@@ -33,12 +71,6 @@
      "press": "inews24.com",
      "publishedAt": "2026-11-26T22:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/031/0001078908?sid=104"
-    },
-    {
-     "title": "트럼프 관세의 역설…물가 부담 키우고 재정수입 의존 높여 철폐 어려워...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-26T22:24:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261127010010631"
     }
    ]
   },
@@ -48,7 +80,7 @@
     "nate"
    ],
    "articles90": 18,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-26T21:32:00.000Z",
    "exclusive": false,
@@ -81,12 +113,18 @@
     "google"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-26T21:16:00.000Z",
+   "firstArticleAt": "2026-11-26T21:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "법관 집단 반발에…민주 \"탄핵 대상, 조희대 대법원장뿐\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T22:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406230?sid=100"
+    },
     {
      "title": "[오늘의 신문] 조희대 대법원장 탄핵 추진에 사법부 반발 확산...한은 기...",
      "press": "kor.theasian.asia",
@@ -98,12 +136,38 @@
      "press": "sisajournal.com",
      "publishedAt": "2026-11-26T22:26:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/586/0000143128?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "급식 비정규직 총파업에",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T21:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "전국 학교 '빵·우유'로 점심 때우나…비정규직 4만명 오늘 총파업",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-26T22:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522716?sid=102"
     },
     {
-     "title": "'하이에나 떼'·'탄핵 반대' 발언…오늘 최민희 징계 수위 촉각",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-26T22:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653677?sid=100"
+     "title": "(아침용)학교 비정규직 오늘 총파업…대전교육청 급식·돌봄 공백 최소...",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-26T22:42:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106591"
+    },
+    {
+     "title": "[뉴스픽] 학교 급식·돌봄 비정규직 노동자 총파업 돌입",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-26T21:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538393?sid=102"
     }
    ]
   },
@@ -141,6 +205,38 @@
    ]
   },
   {
+   "keyword": "부부",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T21:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'이혼숙려캠프' 시청률 4.0%…서장훈, 미성숙 부부에 일침",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-26T22:50:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287496"
+    },
+    {
+     "title": "눈물 펑펑… 나이 40 앞두고 무려 '12년' 만에 임신 소식 전한 유명 부부",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-26T22:48:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178181"
+    },
+    {
+     "title": "‘개그맨 부부’ 권재관♥김경아, 결혼 16년 만에 경사…부모님 계신 고...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T21:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128527"
+    }
+   ]
+  },
+  {
    "keyword": "선우용여, 젠슨 황 불륜 분노",
    "sources": [
     "nate"
@@ -169,70 +265,6 @@
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-26T21:41:00.000Z",
      "link": "https://m.entertain.naver.com/article/468/0001283819"
-    }
-   ]
-  },
-  {
-   "keyword": "배당",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T21:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코스피 4700선 지킬까…삼전닉스·배당금 30조원 주목",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T22:32:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287474"
-    },
-    {
-     "title": "삼성전자, 오늘(27일) 30조원 배당금 지급…100주 보유하면 46만원",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T21:58:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785169"
-    },
-    {
-     "title": "[종목 브리핑] 포사이트그룹홀딩스, 반기 매출 8460만파운드…중간배당...",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-26T21:34:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=412017"
-    }
-   ]
-  },
-  {
-   "keyword": "정년",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T21:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“아빠는 출근, 아들은 백수?”…‘65세 정년 연장’ 추진 논란 [잇슈 머...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T21:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302323?sid=101"
-    },
-    {
-     "title": "정년연장 중대 갈림길, 민주당안 회람 마쳤다",
-     "press": "labortoday.co.kr",
-     "publishedAt": "2026-11-26T21:34:00.000Z",
-     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237951"
-    },
-    {
-     "title": "삭발에 단식까지, 공무원도 \"정년연장\"",
-     "press": "labortoday.co.kr",
-     "publishedAt": "2026-11-26T21:34:00.000Z",
-     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237955"
     }
    ]
   },
@@ -269,43 +301,43 @@
    ]
   },
   {
-   "keyword": "급식 비정규직 총파업에",
+   "keyword": "배당",
    "sources": [
-    "nate"
+    "google"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-26T21:36:00.000Z",
+   "firstArticleAt": "2026-11-26T21:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[뉴스픽] 학교 급식·돌봄 비정규직 노동자 총파업 돌입",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-26T21:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538393?sid=102"
+     "title": "코스피 4700선 지킬까…삼전닉스·배당금 30조원 주목",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-26T22:32:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287474"
     },
     {
-     "title": "학교 비정규직 오늘 총파업…급식·돌봄 비상 대응",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T21:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302317?sid=102"
+     "title": "삼성전자, 오늘(27일) 30조원 배당금 지급…100주 보유하면 46만원",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T21:58:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785169"
     },
     {
-     "title": "학교비정규직 오늘 총파업…급식·돌봄 '비상 대응'",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-26T21:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406212?sid=102"
+     "title": "[종목 브리핑] 포사이트그룹홀딩스, 반기 매출 8460만파운드…중간배당...",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-26T21:34:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=412017"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1750,
-  "matched": 877,
-  "avgLeadMin": 555,
+  "flagged": 1748,
+  "matched": 874,
+  "avgLeadMin": 557,
   "recent": [
    {
     "keyword": "신현송 물가 목표 수렴",
