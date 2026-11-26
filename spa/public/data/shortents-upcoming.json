@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T01:04:43.040Z",
+ "builtAt": "2026-11-26T01:14:45.540Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,13 +16,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 50,
-   "recent20": 6,
-   "press": 40,
+   "articles90": 52,
+   "recent20": 4,
+   "press": 42,
    "firstArticleAt": "2026-11-25T23:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[개장] 코스피, 반도체주 반등 4800선 회복… 닉스 5% 급등",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-26T01:08:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001870"
+    },
     {
      "title": "코스피, 美 기술주 약세에도 외국인 매수세에 1%대 반등…4700선 회복",
      "press": "greened.kr",
@@ -34,44 +40,71 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-26T00:57:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004214014?sid=101"
-    },
-    {
-     "title": "[위클리오늘] 코스피 4700선 상승 출발···환율 1340원대",
-     "press": "weeklytoday.com",
-     "publishedAt": "2026-11-26T00:56:00.000Z",
-     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=803514"
     }
    ]
   },
   {
    "keyword": "철도노조 준법투쟁",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 42,
-   "recent20": 6,
-   "press": 18,
-   "firstArticleAt": "2026-11-25T23:41:00.000Z",
+   "articles90": 46,
+   "recent20": 10,
+   "press": 21,
+   "firstArticleAt": "2026-11-25T23:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "철도노조 준법투쟁 돌입…일부 열차 운행 지연 [포토뉴스]",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-26T01:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133862?sid=102"
+     "title": "[현장] 철도노조 준법투쟁 첫날…최대 12분 등 '지연 폭' 점차 커져",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T01:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016464526?sid=102"
     },
     {
-     "title": "철도노조 준법투쟁 돌입…KTX·수도권 전철 지연에 출퇴근길 비상",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-26T01:02:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=154752"
+     "title": "준법투쟁 돌입한 철도노조",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T01:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016464521?sid=102"
     },
     {
-     "title": "철도노조 준법투쟁 돌입… 일부 열차 지연 가능성 [뉴시스Pic]",
+     "title": "철도노조 투쟁 첫날 열차 지연 잇따라…'줄지연' 가능성",
      "press": "newsis.com",
-     "publishedAt": "2026-11-26T01:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014346182?sid=102"
+     "publishedAt": "2026-11-26T01:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014346214?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이강인 선발 2-0 승리",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-25T23:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'이강인 선발' 아틀레티코, UCL서 비킹에 2-0 승리",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-26T00:59:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/448/0000653487"
+    },
+    {
+     "title": "'이강인 선발 57분 활약→평점 7.2'…ATM은 버킹에 2-0 승리",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-26T00:58:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6944221"
+    },
+    {
+     "title": "이강인 선발 출전… 아틀레티코 마드리드, 비킹 2-0 완파",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-26T00:46:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/021/0002835656"
     }
    ]
   },
@@ -80,10 +113,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-25T23:36:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-25T23:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,67 +141,35 @@
    ]
   },
   {
-   "keyword": "이강인 선발 2-0 승리",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-25T23:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'이강인 선발 57분 활약→평점 7.2'…ATM은 버킹에 2-0 승리",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-26T00:58:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6944221"
-    },
-    {
-     "title": "이강인 선발 출전… 아틀레티코 마드리드, 비킹 2-0 완파",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-26T00:46:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/021/0002835656"
-    },
-    {
-     "title": "'이강인 57분+2-0 완승' 시메오네 ATM 감독, \"알바레스 야유? 그를 거치지...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-26T00:39:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/109/0005645486"
-    }
-   ]
-  },
-  {
    "keyword": "조별리그",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-25T23:37:00.000Z",
+   "articles90": 6,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T23:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한국, U-17 월드컵 조별리그 전승 32강행…에콰도르 3-2 제압",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-26T01:08:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/448/0000653494"
+    },
+    {
+     "title": "김현준호, 한국 축구 사상 첫 FIFA 주관대회 조별리그 ‘3전 전승’ 통과",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-26T01:07:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/144/0001151793"
+    },
     {
      "title": "亞 돌풍 후끈! 한국 3연승 B조 1위 32강행→호주·사우디도 조별리그 통...",
      "press": "mydaily.co.kr",
      "publishedAt": "2026-11-26T00:58:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/117/0004128221"
-    },
-    {
-     "title": "'韓 축구 경사!' U17 월드컵 조별리그 3전 전승, 남녀 통틀어 최초 대기...",
-     "press": "footballist.co.kr",
-     "publishedAt": "2026-11-26T00:43:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/436/0000115247"
-    },
-    {
-     "title": "3경기만에 '12골' 폭발… 조별리그 전승으로 대기록 세운 축구대표팀",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-26T00:14:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1177883"
     }
    ]
   }
