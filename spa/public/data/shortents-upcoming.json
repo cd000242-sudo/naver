@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T16:40:02.256Z",
+ "builtAt": "2026-11-26T16:50:05.375Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T15:15:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T15:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,10 +47,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T15:12:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-26T15:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -71,70 +71,6 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-26T15:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004011999?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "황윤성 농사 규모",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T15:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이찬원 놀라게 한 황윤성 본가…물려받은 '금'?",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T16:30:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287430"
-    },
-    {
-     "title": "'편스토랑' 황윤성, 밭·논·축사 갖춘 아버지 시골집 공개…\"농사도 폼...",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-26T15:36:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628033"
-    },
-    {
-     "title": "황윤성 아버지, 아들은 중스타·이찬원은 우주대스타 대접 “소 잡을 뻔...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-26T15:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191702"
-    }
-   ]
-  },
-  {
-   "keyword": "추수감사절",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T15:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "메이시스 추수감사절 퍼레이드, 악천후로 첫 연기",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-26T16:14:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3764691"
-    },
-    {
-     "title": "미국 추수감사절 덮친 폭풍에 30만곳 정전…항공편 수백편 결항",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T16:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302279?sid=104"
-    },
-    {
-     "title": "美 추수감사절 덮친 폭풍에 30만곳 정전…항공편 수백편 결항",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T15:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466719?sid=104"
     }
    ]
   },
