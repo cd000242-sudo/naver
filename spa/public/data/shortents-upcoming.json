@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T04:25:49.127Z",
+ "builtAt": "2026-11-26T04:35:52.209Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,103 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
+  {
+   "keyword": "신현송 총재 간담회",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 63,
+   "recent20": 15,
+   "press": 31,
+   "firstArticleAt": "2026-11-26T03:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신현송 \"금리 인상, 선제 대응이자 가시화된 물가 압력 대응\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-26T04:34:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261126000776"
+    },
+    {
+     "title": "신현송 \"금리인상, 선제 대응이자 물가상승 대응\"…점도표 금리 최고 3....",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T04:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009311950?sid=101"
+    },
+    {
+     "title": "\"주식시장 굵어질 여지\"…한은 총재 \"주가보다 반도체 가격\" 강조한 이...",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-26T04:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274056?sid=101"
+    }
+   ]
+  },
   {
    "keyword": "광고",
    "sources": [
     "google"
    ],
-   "articles90": 32,
-   "recent20": 8,
-   "press": 32,
-   "firstArticleAt": "2026-11-26T03:01:00.000Z",
+   "articles90": 22,
+   "recent20": 7,
+   "press": 22,
+   "firstArticleAt": "2026-11-26T03:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "AI로 만든 가짜 의사·전문가 광고 금지…위반하면 영업정지",
+     "press": "hemophilia.co.kr",
+     "publishedAt": "2026-11-26T04:30:00.000Z",
+     "link": "https://www.hemophilia.co.kr/news/articleView.html?idxno=45872"
+    },
+    {
+     "title": "공정위, 애플 'AI 기능 부당광고' 심의 착수…과징금 부과 추진",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-26T04:28:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=173142"
+    },
     {
      "title": "공정위, 애플 'AI 과장광고' 제재 착수…최대 536억 과징금 가능성",
      "press": "newsworks.co.kr",
      "publishedAt": "2026-11-26T04:24:00.000Z",
      "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904528"
-    },
-    {
-     "title": "애플, 아이폰16 AI 광고로 공정위 심의…과징금 최대 500억원대 가능성",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-26T04:22:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3763961"
-    },
-    {
-     "title": "AI 가짜 의사·교수 내세운 식품·화장품 추천 광고 금지",
-     "press": "ibabynews.com",
-     "publishedAt": "2026-11-26T04:20:00.000Z",
-     "link": "https://www.ibabynews.com/news/articleView.html?idxno=157340"
     }
    ]
   },
   {
-   "keyword": "신현송 총재 간담회",
+   "keyword": "한덕수 위증 무죄 확정",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 63,
-   "recent20": 19,
-   "press": 29,
-   "firstArticleAt": "2026-11-26T03:26:00.000Z",
+   "articles90": 20,
+   "recent20": 4,
+   "press": 20,
+   "firstArticleAt": "2026-11-26T03:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "신현송 \"내년 4.1% 성장 자신…주식시장도 더 커질 여지\"[일문일답]",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T04:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006415984?sid=101"
+     "title": "尹 '한덕수 재판 위증 혐의' 무죄 확정… 3대 특검 기소 첫 무죄(종합)",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-26T04:28:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452310"
     },
     {
-     "title": "신현송 한국은행 총재, 통화정책방향 기자간담회",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T04:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016465194?sid=101"
+     "title": "윤석열, ‘한덕수 재판 위증’ 무죄 확정",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T04:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769378?sid=102"
     },
-    {
-     "title": "한은 총재 “올해 명목GDP 3,000조 중 반도체가 700조…소비 파급엔 시간...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T04:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301689?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "대법원, 위증 무죄 확정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 23,
-   "recent20": 5,
-   "press": 22,
-   "firstArticleAt": "2026-11-26T02:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
     {
      "title": "대법, 尹 전 대통령 '한덕수 재판 위증 혐의' 무죄 확정",
      "press": "lawtimes.co.kr",
      "publishedAt": "2026-11-26T04:20:00.000Z",
      "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=230119"
-    },
-    {
-     "title": "尹, 한덕수 재판 위증 혐의 무죄 확정",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-26T04:16:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1316327"
-    },
-    {
-     "title": "'한덕수 재판 위증' 혐의 윤석열, 대법서 무죄 확정(종합)",
-     "press": "todaykorea.co.kr",
-     "publishedAt": "2026-11-26T04:08:00.000Z",
-     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=409271"
     }
    ]
   },
@@ -111,30 +113,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 25,
-   "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-26T02:56:00.000Z",
+   "articles90": 22,
+   "recent20": 3,
+   "press": 19,
+   "firstArticleAt": "2026-11-26T03:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김정관 산업장관 \"美 관세 15% 선방\"…25% 상향 가능성은 부담",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-26T04:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000555831?sid=101"
+     "title": "美, 中 관세 최대 20% 예고…韓 제조업 '저가 공세' 불똥 튀나",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-26T04:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159826?sid=101"
     },
     {
-     "title": "美, 14개 경제권 대상 '무역법 301조' 과잉생산 관세 예고…베트남 최고...",
-     "press": "insidevina.com",
-     "publishedAt": "2026-11-26T04:08:00.000Z",
-     "link": "https://www.insidevina.com/news/articleView.html?idxno=44599"
+     "title": "트럼프, 韓 관세 25%까지 검토…왜 ‘호남 반도체’ 지목했나 [핫이슈]",
+     "press": "nownews.seoul.co.kr",
+     "publishedAt": "2026-11-26T04:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703448?sid=104"
     },
     {
-     "title": "美, 호남 반도체 '과잉생산' 지목… 韓 관세 15% 제안·협의 미흡 땐 25%",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-26T04:08:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328552"
+     "title": "미 301조 관세 발표에 각국 반응은?",
+     "press": "weeklytrade.co.kr",
+     "publishedAt": "2026-11-26T04:26:00.000Z",
+     "link": "https://weeklytrade.co.kr/news/view.html?section=1&category=136&item=&no=102444"
+    }
+   ]
+  },
+  {
+   "keyword": "이세영 라스타 연기",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 26,
+   "recent20": 0,
+   "press": 14,
+   "firstArticleAt": "2026-11-26T03:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이세영, 주지훈 '안색 논란'에 입 열었다…\"제가 드릴 말씀 없어\" ('재혼...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-26T04:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786295"
+    },
+    {
+     "title": "'재혼 황후' 이세영 \"레이저·우산·선크림, 시상식 때도 이런 관리는 안...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-26T03:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054283"
+    },
+    {
+     "title": "'재혼 황후' 이세영 \"진맥으로 임신 확인·한글 서명…로판 이질감 못 느...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-26T03:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000641033"
+    }
+   ]
+  },
+  {
+   "keyword": "가계 실질소득 감소",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 13,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T03:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "가계 실질소득 2.1% 감소…자영업자 사업소득 줄고 저소득층 절반 이상...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-26T04:34:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630987"
+    },
+    {
+     "title": "가구소득은 늘었는데 쓸 돈은 줄었다…가계 살림 더 빠듯",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-26T04:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159823?sid=101"
+    },
+    {
+     "title": "실질소득 10분기 만에 감소...저소득층 절반 이상 '적자 가구'",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-26T04:16:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566828"
     }
    ]
   },
@@ -144,7 +210,7 @@
     "google"
    ],
    "articles90": 18,
-   "recent20": 10,
+   "recent20": 1,
    "press": 10,
    "firstArticleAt": "2026-11-26T03:06:00.000Z",
    "exclusive": false,
@@ -163,10 +229,75 @@
      "link": "http://www.smedaily.co.kr/news/articleView.html?idxno=366653"
     },
     {
-     "title": "철도노조 준법투쟁 안내문",
+     "title": "철도노조 준법투쟁 열차 운행 지연 안내문",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-26T04:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214165?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/079/0004214162?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "철도 파업",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 11,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-26T03:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "철도노조 준법투쟁 첫날 울산역 '차분'…부산행 일부 10분 지연",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T04:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009311880?sid=102"
+    },
+    {
+     "title": "철도노조 준법투쟁 돌입…총파업 땐 내륙 시멘트 물류 먼저 흔들려",
+     "press": "smedaily.co.kr",
+     "publishedAt": "2026-11-26T04:10:00.000Z",
+     "link": "http://www.smedaily.co.kr/news/articleView.html?idxno=366653"
+    },
+    {
+     "title": "\"지하철 40분 기다렸다\"…철도노조 안전운행 투쟁에 시민들 '혼란'",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T04:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261126125926166"
+    }
+   ]
+  },
+  {
+   "keyword": "안덕수 후보자 청문회 답변",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 7,
+   "press": 9,
+   "firstArticleAt": "2026-11-26T03:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "안덕수 국세청장 후보, 비거주 1주택에 “국민 눈높이에 미흡…이유불문...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T04:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006415988?sid=101"
+    },
+    {
+     "title": "안덕수 국세청장 후보자 “비정기 세무조사 적정 수준 유지”",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-26T04:24:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653390"
+    },
+    {
+     "title": "인사청문회 의원 질의 답변하는 안덕수 국세청장 후보자",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T04:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014347000?sid=100"
     }
    ]
   },
@@ -175,10 +306,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 21,
-   "recent20": 9,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T03:02:00.000Z",
+   "articles90": 19,
+   "recent20": 4,
+   "press": 8,
+   "firstArticleAt": "2026-11-26T03:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,66 +334,34 @@
    ]
   },
   {
-   "keyword": "안덕수 후보자 청문회 답변",
+   "keyword": "마운자로",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 26,
-   "recent20": 7,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T03:01:00.000Z",
+   "articles90": 6,
+   "recent20": 4,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T03:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "안덕수 국세청장 후보자 “비정기 세무조사 적정 수준 유지”",
-     "press": "etoday.co.kr",
+     "title": "\"마운자로까지 현금 거래\"…약국 밖 '무허가약' 상시 유통망 덜미",
+     "press": "kpanews.co.kr",
+     "publishedAt": "2026-11-26T04:28:00.000Z",
+     "link": "https://www.kpanews.co.kr/news/articleView.html?idxno=549973"
+    },
+    {
+     "title": "마운자로 밀반입 적발…비만치료제 수요 급증에 불법 유통, 25명 송치",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-26T04:26:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630983"
+    },
+    {
+     "title": "마운자로부터 가짜 발기부전약까지…27억 상당 불법 수입 의약품 등 유...",
+     "press": "rapportian.com",
      "publishedAt": "2026-11-26T04:24:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653390"
-    },
-    {
-     "title": "인사청문회 의원 질의 답변하는 안덕수 국세청장 후보자",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T04:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014346995?sid=100"
-    },
-    {
-     "title": "[포토] 의원질의 답하는 안덕수 국세청장 후보자",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-26T04:18:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452309"
-    }
-   ]
-  },
-  {
-   "keyword": "재혼 황후 이세영 악역 논란",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T03:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이세영, 주지훈 '안색 논란'에 입 열었다…\"제가 드릴 말씀 없어\" ('재혼...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-26T04:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786295"
-    },
-    {
-     "title": "‘재혼 황후’ 이세영 “中테무산 목걸이 논란? 크게 생각 없었다..관심...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-26T03:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003814506"
-    },
-    {
-     "title": "'재혼 황후' 이세영 “하얀 피부 라스타, 주지훈 안색과 비교? 드릴 말씀...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-26T03:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000522555"
+     "link": "https://www.rapportian.com/news/articleView.html?idxno=242922"
     }
    ]
   },
@@ -271,30 +370,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 43,
-   "recent20": 39,
+   "articles90": 44,
+   "recent20": 28,
    "press": 3,
    "firstArticleAt": "2026-11-26T03:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "재활 중인 소방대원 격려하는 김민석 대표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T04:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009311893?sid=100"
-    },
-    {
-     "title": "국립소방병원 옥상 헬리패드 둘러보는 김민석 대표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T04:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009311891?sid=100"
+     "title": "김민석 \"국회 마지막 예산 심의 과정에 소방 현장 예산 반영할 것\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T04:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014347038?sid=100"
     },
     {
      "title": "국립소방병원 방문한 김민석 민주당 대표",
      "press": "news1.kr",
      "publishedAt": "2026-11-26T04:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009311898?sid=100"
+    },
+    {
+     "title": "국립소방병원 재활치료시설 둘러보는 김민석 대표",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T04:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009311899?sid=100"
     }
    ]
   },
@@ -304,12 +403,18 @@
     "daum"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 3,
    "press": 3,
-   "firstArticleAt": "2026-11-26T02:56:00.000Z",
+   "firstArticleAt": "2026-11-26T04:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘나인 투 식스’ 박민영, 법무팀서 경영지원팀으로 ‘좌천’",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T04:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005769377"
+    },
     {
      "title": "박민영, 법무팀 떠나 경영지원팀 좌천…차청화와 팽팽한 기 싸움 ('나인...",
      "press": "mhnse.com",
@@ -321,23 +426,48 @@
      "press": "slist.kr",
      "publishedAt": "2026-11-26T04:16:00.000Z",
      "link": "https://www.slist.kr/news/articleView.html?idxno=785062"
+    }
+   ]
+  },
+  {
+   "keyword": "이정재",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T03:14:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "논란 후 첫 공식석상은 청룡…이정재, '혼외자 논란' 정우성과 닮은꼴 ...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-26T04:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084288"
     },
     {
-     "title": "'나인 투 식스' 시청률 3.6%로 첫 방송, 박민영 육성재 열연",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T02:56:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286805"
+     "title": "'최대주주 특혜 논란' 이정재, 수척해진 모습으로 공식 석상…고인 떠올...",
+     "press": "ent.sbs.co.kr",
+     "publishedAt": "2026-11-26T03:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/416/0000328343"
+    },
+    {
+     "title": "2년 전엔 '혼외자' 정우성, 올해는 '특혜 의혹' 이정재…‘청담부부’의...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-26T03:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054282"
     }
    ]
   },
   {
    "keyword": "은평구",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 8,
-   "recent20": 6,
+   "recent20": 1,
    "press": 2,
    "firstArticleAt": "2026-11-26T03:38:00.000Z",
    "exclusive": false,
@@ -350,26 +480,44 @@
      "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160280854302178"
     },
     {
+     "title": "은평구 불광1동, 취약계층 220가구에 김장김치 전달",
+     "press": "siminilbo.co.kr",
+     "publishedAt": "2026-11-26T04:14:00.000Z",
+     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160280745824063"
+    },
+    {
      "title": "은평구, 평생돌봄복지재단 2027년 10월 출범 추진",
      "press": "siminilbo.co.kr",
      "publishedAt": "2026-11-26T04:14:00.000Z",
      "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160280799358104"
-    },
-    {
-     "title": "은평구, 주민 의견 수렴·정책 제안에 AI 활용 교육",
-     "press": "siminilbo.co.kr",
-     "publishedAt": "2026-11-26T04:14:00.000Z",
-     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160280828974140"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1563,
-  "matched": 763,
-  "avgLeadMin": 504,
+  "flagged": 1566,
+  "matched": 766,
+  "avgLeadMin": 505,
   "recent": [
+   {
+    "keyword": "소송",
+    "hitKeyword": "MLB 노조 소송",
+    "hitAt": "2026-11-26T13:30:00+09:00",
+    "leadMin": 1761
+   },
+   {
+    "keyword": "한은 총재 반도체 상황 설명 필요",
+    "hitKeyword": "반도체 주가 급락",
+    "hitAt": "2026-11-26T13:30:00+09:00",
+    "leadMin": 44
+   },
+   {
+    "keyword": "미스 유니버스",
+    "hitKeyword": "미스 유니버스 엄마 우승",
+    "hitAt": "2026-11-26T13:30:00+09:00",
+    "leadMin": 24
+   },
    {
     "keyword": "홈플러스",
     "hitKeyword": "홈플러스 영업 중단",
@@ -411,24 +559,6 @@
     "hitKeyword": "오정세 청룡 1위",
     "hitAt": "2026-11-26T12:30:00+09:00",
     "leadMin": 115
-   },
-   {
-    "keyword": "오정세 청룡 1위",
-    "hitKeyword": "오정세 청룡 1위",
-    "hitAt": "2026-11-26T12:30:00+09:00",
-    "leadMin": 55
-   },
-   {
-    "keyword": "레이예스 재계약",
-    "hitKeyword": "레이예스 롯데 재계약",
-    "hitAt": "2026-11-26T12:30:00+09:00",
-    "leadMin": 5
-   },
-   {
-    "keyword": "1010만 유튜버 해티",
-    "hitKeyword": "1010만 유튜버 이혼",
-    "hitAt": "2026-11-26T12:00:00+09:00",
-    "leadMin": 176
    }
   ]
  }
