@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T10:47:59.623Z",
+ "builtAt": "2026-11-26T10:58:03.852Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 44,
-   "recent20": 13,
-   "press": 37,
+   "articles90": 50,
+   "recent20": 8,
+   "press": 41,
    "firstArticleAt": "2026-11-26T09:43:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "경찰, 인공지능 활용 세무사 수석 구속영장 신청",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-26T10:46:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887814"
+     "title": "경찰, ‘AI 커닝’ 세무사 시험 수석 합격자 구속영장 신청",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-26T10:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207641?sid=102"
     },
     {
-     "title": "'세무사 수석', 구속영장 신청…\"증거인멸·도주 우려 있다\"[종합]",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-26T10:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078889?sid=102"
+     "title": "경찰, 'AI 커닝' 세무사 수석 합격자 구속영장 신청…중대성과 사회적 ...",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-26T10:54:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1429578"
     },
     {
-     "title": "경찰, 세무사 시험 수석합격자 구속영장 신청",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-26T10:42:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650420.html"
+     "title": "[단독] '세무사 수석' 구속영장 신청...\"사회적 파급력 고려\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T10:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438642?sid=102"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 26,
-   "recent20": 3,
-   "press": 24,
+   "articles90": 27,
+   "recent20": 2,
+   "press": 25,
    "firstArticleAt": "2026-11-26T09:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이재명, 국회에 강금실 국정원장 후보자와 장관 후보 4명 인사청문 요청",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-26T10:56:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453075"
+    },
     {
      "title": "李, '강금실·임웅순·홍익표·한준호·강유정' 인청요구서 재가",
      "press": "inews24.com",
@@ -65,44 +71,38 @@
      "press": "hidomin.com",
      "publishedAt": "2026-11-26T10:38:00.000Z",
      "link": "https://www.hidomin.com/news/articleView.html?idxno=731279"
-    },
-    {
-     "title": "李 대통령, 강금실·한준호·강유정·임웅순 인사청문요구서 재가",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-26T10:34:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650418.html"
     }
    ]
   },
   {
-   "keyword": "철도노조 안전운행 투쟁",
+   "keyword": "이 대통령 폭언 욕설 차단",
    "sources": [
     "daum"
    ],
-   "articles90": 30,
-   "recent20": 2,
-   "press": 24,
-   "firstArticleAt": "2026-11-26T09:18:00.000Z",
+   "articles90": 21,
+   "recent20": 3,
+   "press": 21,
+   "firstArticleAt": "2026-11-26T10:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "철도노조 안전운행 투쟁…울산역 KTX 지연 잇따라",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T10:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302010?sid=101"
+     "title": "李대통령 “SNS에서 폭언, 욕설은 차단한다···방치하면 소통 방해”",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-26T10:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053660?sid=100"
     },
     {
-     "title": "철도노조 안전운행 투쟁 첫날…전국 광역전철 235대 지연",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-26T10:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193707?sid=102"
+     "title": "이 대통령 \"가난하다는 걸 왜 증명해야 하나\" 신청주의서 자동주의로",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-26T10:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162425?sid=100"
     },
     {
-     "title": "안전운행 투쟁에 열차 지연 속출…다음 달 총파업 예고",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T10:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301996?sid=101"
+     "title": "李대통령 \"복지 신청 왜 해야 하나…해당되면 자동 지급\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T10:44:00.000Z",
+     "link": "https://www.ajunews.com/view/20261126192546891"
     }
    ]
   },
@@ -111,30 +111,63 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-26T09:26:00.000Z",
+   "articles90": 16,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T09:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“호남 반도체 과잉생산 아닌 세계 반도체 공급 안정에 기여”",
-     "press": "kwangju.co.kr",
+     "title": "“韓 쿠팡 과징금, 국가 간 약속 어긴 행위” [美 ‘과잉생산 관세’ 압...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-26T10:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178407?sid=104"
+    },
+    {
+     "title": "미, 한국에 과잉생산 관세 15% 제안…25%까지 인상 경고",
+     "press": "kyongbuk.co.kr",
+     "publishedAt": "2026-11-26T10:52:00.000Z",
+     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4092322"
+    },
+    {
+     "title": "[인도증시] 美 관세 주시하며 '관망', 소폭 상승 마감…시총 기준 홍콩...",
+     "press": "newspim.com",
      "publishedAt": "2026-11-26T10:46:00.000Z",
-     "link": "http://www.kwangju.co.kr/article.php?aid=1795689600805763277"
+     "link": "https://www.newspim.com/news/view/20261126001326"
+    }
+   ]
+  },
+  {
+   "keyword": "에이피알 닥터멜락신 인수",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-26T09:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "에이피알, 美 틱톡샵 뷰티 2위 '닥터멜락신' 3900억원에 인수",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-26T10:52:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001957"
     },
     {
-     "title": "[사설] 미 관세 15% 선방했지만, ‘추가 인상’ 확실히 막아야",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-26T10:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834187?sid=110"
+     "title": "에이피알, 3900억원에 스킨케어 브랜드 ‘닥터멜락신’ 인수",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-26T10:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011951?sid=101"
     },
     {
-     "title": "'호남 반도체' 콕 집어 \"관세 25%\" 압박한 미국…K-반도체 '긴장'",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-26T10:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980042?sid=101"
+     "title": "에이피알, '브랜드501' 주식 700억원 규모 취득…\"경영권 확보\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T10:02:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785129"
     }
    ]
   },
@@ -143,10 +176,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 6,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-26T09:18:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-26T09:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,82 +204,23 @@
    ]
   },
   {
-   "keyword": "텀블러",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T09:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사건추적] 텀블러에 소변 테러…마신 여학생은 결국 자퇴",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-26T10:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980052?sid=102"
-    },
-    {
-     "title": "같은반 학생 텀블러에 소변…가해자는 반 옮겼는데 피해자는 자퇴",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T10:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005769736?sid=102"
-    },
-    {
-     "title": "“같은 반 여학생 텀블러에 소변”…‘강제추행’ 검토",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T10:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301971?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "에이피알 닥터멜락신 인수",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T09:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "에이피알, 3900억원에 스킨케어 브랜드 ‘닥터멜락신’ 인수",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-26T10:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011951?sid=101"
-    },
-    {
-     "title": "에이피알, '브랜드501' 주식 700억원 규모 취득…\"경영권 확보\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T10:02:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785129"
-    },
-    {
-     "title": "에이피알, 더마 화장품 브랜드 ‘닥터멜락신’ 3900억원에 인수",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T09:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/117/0004128460?sid=103"
-    }
-   ]
-  },
-  {
    "keyword": "박종복 은행연합회장 선출",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T09:20:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T09:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "박종복 전 SC제일은행장, 차기 은행연합회장 선출",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-26T10:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078890?sid=101"
+    },
     {
      "title": "박종복 前 SC제일은행장, 은행연합회장 선출",
      "press": "hankyung.com",
@@ -258,44 +232,6 @@
      "press": "dt.co.kr",
      "publishedAt": "2026-11-26T10:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/029/0003061442?sid=101"
-    },
-    {
-     "title": "박종복 은행연합회장 만장일치 선출…내달1일 취임",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-26T09:48:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122791"
-    }
-   ]
-  },
-  {
-   "keyword": "올해의 상생기업대상 기념식",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T09:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장철웅 삼성디스플레이 부사장, 올해의 상생기업대상 은탑산업훈장",
-     "press": "weeklytrade.co.kr",
-     "publishedAt": "2026-11-26T10:36:00.000Z",
-     "link": "https://weeklytrade.co.kr/news/view.html?section=1&category=5&item=&no=102454"
-    },
-    {
-     "title": "[기업] 중기부, '올해의 상생기업대상' 포상식 개최",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T09:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438613?sid=101"
-    },
-    {
-     "title": "이병권 중기부 2차관, 2026 올해의 상생기업대상",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T09:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466607?sid=101"
     }
    ]
   },
@@ -332,41 +268,73 @@
    ]
   },
   {
-   "keyword": "정현규 플랜3 하차 심경",
+   "keyword": "장관 후보자 인사청문회 준비 시작",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-26T09:25:00.000Z",
+   "firstArticleAt": "2026-11-26T10:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정현규 하차 심경 밝혔다…'데블스플랜3' 공황 증세 재발, 지난 시즌 논...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-26T10:08:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631114"
+     "title": "강유정 문체장관 후보자, 한한령 해빙 대비 \"민관 합동조직 만들 것\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-26T10:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968037?sid=103"
     },
     {
-     "title": "정현규 심경 고백 \"'데블스 플랜3'서 겁이 나 공황 재발…하차 아쉽다\"...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-26T09:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054365"
+     "title": "강유정 문체장관 후보자 \"석 자 얼음 녹기 시작했다\"…'한한령 대응' 최...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-26T10:26:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749346"
     },
     {
-     "title": "정현규, '데블스플랜3' 공항 하차 속사정…한 명 몰아붙이다 \"겁이 났다...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T09:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128453"
+     "title": "李, 강금실 국정원장 후보자 등 5명 인사청문요구서 재가",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-26T10:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207638?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "올해의 상생기업대상 기념식",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T09:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "장철웅 삼성디스플레이 부사장, 올해의 상생기업대상 은탑산업훈장",
+     "press": "weeklytrade.co.kr",
+     "publishedAt": "2026-11-26T10:36:00.000Z",
+     "link": "https://weeklytrade.co.kr/news/view.html?section=1&category=5&item=&no=102454"
+    },
+    {
+     "title": "[기업] 중기부, '올해의 상생기업대상' 포상식 개최",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T09:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438613?sid=101"
+    },
+    {
+     "title": "이병권 중기부 2차관, 2026 올해의 상생기업대상",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T09:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466607?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1724,
+  "flagged": 1725,
   "matched": 842,
   "avgLeadMin": 520,
   "recent": [
