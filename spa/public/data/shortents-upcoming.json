@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T19:51:03.178Z",
+ "builtAt": "2026-11-26T20:01:06.894Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,31 +8,31 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "땅속 광섬유로 지진 연구",
+   "keyword": "땅속 광섬유 작은 지진 연구",
    "sources": [
     "nate"
    ],
-   "articles90": 17,
+   "articles90": 18,
    "recent20": 0,
-   "press": 14,
+   "press": 15,
    "firstArticleAt": "2026-11-26T19:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "데이터 나르던 광섬유, 지구 ‘작은 떨림’ 읽는다",
+     "press": "donga.com",
+     "publishedAt": "2026-11-26T19:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765625?sid=105"
+    },
+    {
      "title": "땅속 통신용 광섬유가 지진계 7000개로… 1000분의 1초 단위 파열 포착",
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-26T19:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001207653?sid=105"
-    },
-    {
-     "title": "땅속 통신 광섬유로 미세 지진파 1000분의 1초 규명",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-26T19:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160043?sid=105"
     },
     {
      "title": "땅밑 광섬유로 ‘작은 지진’ 관측하니… 큰 지진처럼 복잡했다",
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 11,
    "recent20": 1,
-   "press": 9,
+   "press": 10,
    "firstArticleAt": "2026-11-26T18:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[사설] 호남반도체·쿠팡·관세, 미국의 경고 예사롭지 않다",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-26T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001042619?sid=110"
+    },
     {
      "title": "호남팹까지 트집 잡은 美 “韓과 협의 불만족땐 25% 관세 적용”",
      "press": "donga.com",
@@ -65,19 +71,45 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-26T19:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000968070?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 27일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T18:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 27일(금) ♣띠별 운세♣",
+     "press": "srtimes.kr",
+     "publishedAt": "2026-11-26T20:00:00.000Z",
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=217966"
     },
     {
-     "title": "美 신규 관세 시행 땐 평균 관세율 13.9%",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-26T19:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848515?sid=104"
+     "title": "[오늘의 운세] 11월 27일 金(음력 10월 19일) 띠별 운세",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-26T20:00:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=202611270454339430c1c16452b0_18"
+    },
+    {
+     "title": "[김동완의 오늘의 운세] 2026년 11월 27일",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-26T18:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703650?sid=103"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1753,
+  "flagged": 1755,
   "matched": 858,
   "avgLeadMin": 509,
   "recent": [
