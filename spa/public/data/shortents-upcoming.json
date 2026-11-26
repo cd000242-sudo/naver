@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T00:34:34.168Z",
+ "builtAt": "2026-11-26T00:44:37.221Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,135 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 16,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 63,
-   "recent20": 9,
-   "press": 49,
-   "firstArticleAt": "2026-11-25T23:06:00.000Z",
+   "articles90": 67,
+   "recent20": 17,
+   "press": 54,
+   "firstArticleAt": "2026-11-25T23:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김정관 산업장관 \"대미 관세 15% 상한 방어…선방한 성과\"",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-26T00:32:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120987"
+     "title": "대미 관세 15% 상한 유지…반도체·디지털 뇌관 여전",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-26T00:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979931?sid=101"
     },
     {
-     "title": "美, 한국에 '관세 최고 25%' 으름장... 반도체·자동차 과잉생산 지목",
-     "press": "lawtv.kr",
-     "publishedAt": "2026-11-26T00:32:00.000Z",
-     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61530"
+     "title": "美 과잉생산 관세, 한국엔 15% 상한 유지…합의 이행 미흡하면 25% 검토",
+     "press": "theopiniontimes.news",
+     "publishedAt": "2026-11-26T00:42:00.000Z",
+     "link": "https://theopiniontimes.news/%e7%be%8e-%ea%b3%bc%ec%9e%89%ec%83%9d%ec%82%b0-%ea%b4%80%ec%84%b8-%ed%95%9c%ea%b5%ad%ec%97%94-15-%ec%83%81%ed%95%9c-%ec%9c%a0%ec%a7%80%ed%95%a9%ec%9d%98-%ec%9d%b4%ed%96%89-%eb%af%b8%ed%9d%a1/"
     },
     {
-     "title": "미국 '과잉 생산 관세' 한국 15% 유지...'25% 인상' 여지는 남겨",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T00:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438222?sid=104"
+     "title": "美, ‘무역법 301조’ 관세 장벽 재건… 韓·日 15%, 中 20% 추가 부과",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-26T00:42:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026112609391049080c8c1c064d_1"
     }
    ]
   },
   {
-   "keyword": "삼성전자서비스 기술경진 안전혁신대회",
+   "keyword": "코스피 1% 상승",
    "sources": [
     "nate"
    ],
-   "articles90": 36,
-   "recent20": 8,
-   "press": 33,
-   "firstArticleAt": "2026-11-25T23:12:00.000Z",
+   "articles90": 44,
+   "recent20": 14,
+   "press": 34,
+   "firstArticleAt": "2026-11-25T23:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성전자, 제31회 '서비스 기술경진·안전혁신대회' 운영",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-26T00:32:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=758568"
+     "title": "코스피, 상승폭 확대에 한때 4,800선 회복도…외인 순매수",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-26T00:42:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446625"
     },
     {
-     "title": "“가전 고장, AI로 잡는다”… 삼성전자서비스, ‘스마트싱스’ 수리 경...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-26T00:26:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1140151"
+     "title": "[속보] 코스피, 1%대 상승 출발 4700대… 코스닥 3%대 강세",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-26T00:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193604?sid=101"
     },
     {
-     "title": "삼성전자서비스, ‘서비스 기술경진 및 안전혁신대회’ 개최…AI 활용 능...",
-     "press": "inthenews.co.kr",
-     "publishedAt": "2026-11-26T00:26:00.000Z",
-     "link": "https://www.inthenews.co.kr/news/article.html?no=95022"
+     "title": "삼성전자·SK하이닉스 동반 반등…장 초반 1~3%대 상승",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-26T00:39:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000086734"
     }
    ]
   },
   {
    "keyword": "김정은 전술핵 현지지도",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 17,
    "recent20": 4,
-   "press": 14,
+   "press": 17,
    "firstArticleAt": "2026-11-25T23:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "러 핵폭격기 이어 북도 \"전술핵, 다양한 영역 활용\"",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-26T00:26:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545020"
+     "title": "핵시설 찾은 김정은 \"다영역 활용화 주목해야\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-26T00:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538164?sid=104"
     },
     {
-     "title": "김정은, 핵무기 연구소 등 방문… “전술핵 다양하게 활용”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T00:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207400?sid=101"
+     "title": "김정은, 핵시설 현지지도…\"전술핵 다영역 활용화에 주목해야\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-26T00:38:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=173104"
     },
     {
-     "title": "핵시설 찾은 北 김정은 \"전술핵 다영역 활용화 주목\"",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-26T00:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159636?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "철도 파업",
-   "sources": [
-    "google",
-    "daum"
-   ],
-   "articles90": 14,
-   "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-25T23:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "철도노조, ‘안전운행 투쟁’ 돌입…12월 4일까지 진행",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-26T00:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162325?sid=102"
-    },
-    {
-     "title": "철도노조, 준법투쟁 돌입…노사협상 평행선에 시민 불편 우려",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-26T00:22:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261126500033"
-    },
-    {
-     "title": "“오늘 퇴근길부터 정신없겠네”…철도노조, ‘안전운행 투쟁’ 돌입",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T00:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005769209?sid=103"
+     "title": "김정은, 핵시설 현지지도...\"핵보유국 지위 불가침, 전술핵 다영역 활용...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T00:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438225?sid=100"
     }
    ]
   },
@@ -145,43 +111,74 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 16,
    "recent20": 3,
-   "press": 13,
+   "press": 15,
    "firstArticleAt": "2026-11-25T23:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "학교비정규직 노동자 4만명 총파업 예고…급식·돌봄 차질 우려",
-     "press": "mdtoday.co.kr",
+     "title": "학교비정규직 내일 총파업...\"임금차별 해소\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T00:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438224?sid=102"
+    },
+    {
+     "title": "경기교육청, 27일 학교비정규직 파업 대비…급식·돌봄 지침",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016464364?sid=102"
+    },
+    {
+     "title": "학교비정규직 4만명 내일 총파업…교육당국, 급식·돌봄 비상대응",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T00:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016464350?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "대한민국 고용노동부",
+   "sources": [
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-25T23:18:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "HLB, 대한민국 일·생활 균형 우수기업 선정…연간 12일 추가 유급휴무",
+     "press": "etoday.co.kr",
      "publishedAt": "2026-11-26T00:24:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627837"
+     "link": "https://www.etoday.co.kr/news/view/2653188"
     },
     {
-     "title": "27일 학교비정규직노조 총파업…교육청 비상대응 체제",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-26T00:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122212?sid=102"
+     "title": "행정공제회, ‘대한민국커뮤니케이션대상’ 국회 행정안전위원장상 수...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-26T00:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835644?sid=102"
     },
     {
-     "title": "부산교육청, 27일 총파업 대비 급식·돌봄 대책 마련",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-26T00:18:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261125500588"
+     "title": "쿠도커뮤니케이션, ‘2026년 대한민국 일·생활균형 우수기업’ 선정",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-26T00:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703331?sid=101"
     }
    ]
   },
   {
    "keyword": "나는 솔로",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T23:10:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T23:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,11 +201,75 @@
      "link": "https://m.entertain.naver.com/article/241/0003543655"
     }
    ]
+  },
+  {
+   "keyword": "세계의 주인",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T23:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[IS포토|청룡영화상] 서수빈, 신인여우상 주인공",
+     "press": "ilyoseoul.co.kr",
+     "publishedAt": "2026-11-26T00:42:00.000Z",
+     "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=525591"
+    },
+    {
+     "title": "“청룡史 새로 썼다”…‘세계의 주인’ 윤가은 감독, 최초 女 감독상 ...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-25T23:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001151768"
+    },
+    {
+     "title": "[키워드 NOW] 왕관의 주인 '엄마'",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-25T23:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653453?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "리플",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 3,
+   "press": 2,
+   "firstArticleAt": "2026-11-26T00:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] 비트코인 6만달러선 회복…리플·이더리움 등 주요 코인 '반등'",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-26T00:38:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630879"
+    },
+    {
+     "title": "비트와이즈 리플(XRP) ETF, 하루 평균 1,400만 달러 거래...누적 거래 35...",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-26T00:32:00.000Z",
+     "link": "http://coinreaders.com/273537"
+    },
+    {
+     "title": "[시세] 리플(XRP) 1.32% 반등…0.8900달러 지킬까",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-26T00:28:00.000Z",
+     "link": "http://coinreaders.com/273525"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1485,
+  "flagged": 1487,
   "matched": 732,
   "avgLeadMin": 499,
   "recent": [
