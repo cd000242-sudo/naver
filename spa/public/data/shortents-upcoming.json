@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T18:10:31.864Z",
+ "builtAt": "2026-11-26T18:30:37.337Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,40 +9,7 @@
   "minPress": 2
  },
  "measured": 29,
- "candidates": [
-  {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-26T16:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美기술패권 진력하는 트럼프…교역국엔 '깨알 트집' 관세 칼날",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T17:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466727?sid=104"
-    },
-    {
-     "title": "공급 부족 여전한데 과잉생산?… “美 협상용 지렛대 가능성”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-26T17:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887771?sid=101"
-    },
-    {
-     "title": "美 새 관세 시행땐 평균관세율 13.9%…상호관세 무효화 전으로",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T16:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466724?sid=104"
-    }
-   ]
-  }
- ],
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 1752,
