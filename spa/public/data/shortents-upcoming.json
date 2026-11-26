@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T17:00:08.870Z",
+ "builtAt": "2026-11-26T17:10:12.052Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T15:36:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-26T15:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -41,44 +41,12 @@
      "link": "https://n.news.naver.com/mnews/article/056/0012302277?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "반도체 메모리",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T15:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "中 반도체 기술 자립 가속…삼성전자·SK하이닉스 추격",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-26T15:44:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1795707728693723276"
-    },
-    {
-     "title": "이재용 회장에 장기계약 제안한 머스크…메모리 확보경쟁 어디까지",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-26T15:36:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631161"
-    },
-    {
-     "title": "메모리 수요 폭증 부메랑… 낸드값 내년 떨어질듯",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-26T15:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011999?sid=105"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1755,
-  "matched": 860,
+  "flagged": 1753,
+  "matched": 859,
   "avgLeadMin": 512,
   "recent": [
    {
