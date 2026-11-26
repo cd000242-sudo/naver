@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T15:49:45.562Z",
+ "builtAt": "2026-11-26T15:59:49.004Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "google"
    ],
    "articles90": 13,
-   "recent20": 6,
+   "recent20": 1,
    "press": 10,
    "firstArticleAt": "2026-11-26T14:50:00.000Z",
    "exclusive": true,
@@ -75,38 +75,6 @@
    ]
   },
   {
-   "keyword": "이숙캠 미성숙 아내, 남편 외도 충격",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T14:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'이숙캠' 미성숙 남편 \"태어나 사랑받은 적 없어, 엄마 만나 보고 싶다...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-26T15:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490567"
-    },
-    {
-     "title": "‘이숙캠’ 미성숙 아내, 남편 일당 훌쩍 넘는 ‘10만 원’ 탕진하더니...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-26T15:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001151934"
-    },
-    {
-     "title": "'이숙캠' 남편, 아내 친구와 셋이 동거→강제 뽀뽀?..충격적인 속내[별...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-26T14:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490564"
-    }
-   ]
-  },
-  {
    "keyword": "연우 10kg 감량",
    "sources": [
     "daum"
@@ -135,6 +103,38 @@
      "press": "sports.donga.com",
      "publishedAt": "2026-11-26T14:38:00.000Z",
      "link": "https://m.entertain.naver.com/article/382/0001307072"
+    }
+   ]
+  },
+  {
+   "keyword": "이숙캠 미성숙 아내, 남편 외도 충격",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-26T14:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'이숙캠' 미성숙 남편 \"태어나 사랑받은 적 없어, 엄마 만나 보고 싶다...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-26T15:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490567"
+    },
+    {
+     "title": "‘이숙캠’ 미성숙 아내, 남편 일당 훌쩍 넘는 ‘10만 원’ 탕진하더니...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-26T15:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001151934"
+    },
+    {
+     "title": "'이숙캠' 남편, 아내 친구와 셋이 동거→강제 뽀뽀?..충격적인 속내[별...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-26T14:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490564"
     }
    ]
   }
