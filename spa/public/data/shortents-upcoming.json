@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T03:05:21.014Z",
+ "builtAt": "2026-11-26T03:15:24.549Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "윤석열 위증 무죄 확정",
@@ -16,30 +16,30 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 78,
-   "recent20": 9,
-   "press": 66,
-   "firstArticleAt": "2026-11-26T01:48:00.000Z",
+   "articles90": 79,
+   "recent20": 7,
+   "press": 67,
+   "firstArticleAt": "2026-11-26T01:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "대법원, 윤석열 '한덕수 재판 위증' 무죄",
-     "press": "thereport.co.kr",
-     "publishedAt": "2026-11-26T03:00:00.000Z",
-     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93753"
+     "title": "[WIKI 이슈] 윤석열, '계엄 국무회의 위증' 무죄...형사재판 10건 중 첫 ...",
+     "press": "wikileaks-kr.org",
+     "publishedAt": "2026-11-26T03:06:00.000Z",
+     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=195309"
     },
     {
-     "title": "대법, 윤석열 위증 혐의 무죄 확정…국무회의 소집 계획 판단 유지",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-26T02:56:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=400480"
+     "title": "'한덕수 재판 위증' 윤석열 무죄 확정…10건 중 2건 마무리",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T03:06:00.000Z",
+     "link": "https://www.ajunews.com/view/20261126115221027"
     },
     {
-     "title": "‘한덕수 재판서 위증 혐의’ 윤석열, 대법원 무죄 확정",
-     "press": "kyeongin.com",
-     "publishedAt": "2026-11-26T02:56:00.000Z",
-     "link": "https://www.kyeongin.com/article/1775439"
+     "title": "대법, ‘한덕수 재판 위증’ 윤석열 무죄 확정",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-26T03:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835776?sid=102"
     }
    ]
   },
@@ -48,30 +48,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 40,
-   "recent20": 27,
-   "press": 37,
-   "firstArticleAt": "2026-11-26T02:38:00.000Z",
+   "articles90": 39,
+   "recent20": 19,
+   "press": 36,
+   "firstArticleAt": "2026-11-26T02:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성자산운용, 부사장에 이시완 대체투자부문장 승진 …임원 3명 승진",
-     "press": "industrynews.co.kr",
-     "publishedAt": "2026-11-26T03:04:00.000Z",
-     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=90277"
+     "title": "삼성SDI, 1.4조 규모 자사주 350만9791주 소각 결정",
+     "press": "whitepaper.co.kr",
+     "publishedAt": "2026-11-26T03:14:00.000Z",
+     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=269199"
     },
     {
-     "title": "[인사] 삼성자산운용",
-     "press": "popcornnews.net",
-     "publishedAt": "2026-11-26T03:04:00.000Z",
-     "link": "http://www.popcornnews.net/news/articleView.html?idxno=141673"
+     "title": "삼성카드·삼성증권·삼성자산운용, 정기 임원인사…14명 승진",
+     "press": "whitepaper.co.kr",
+     "publishedAt": "2026-11-26T03:14:00.000Z",
+     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=269196"
     },
     {
-     "title": "AI로 산업 경쟁력 높인 삼성SDS…국가품질경영대회 최고 영예",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-26T03:02:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887416"
+     "title": "인사-전원상 강북삼성병원 부사장 승진",
+     "press": "dailypharm.com",
+     "publishedAt": "2026-11-26T03:08:00.000Z",
+     "link": "https://www.dailypharm.com/user/news/today-focus/12585?REFERER=NP"
     }
    ]
   },
@@ -80,30 +80,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 78,
-   "recent20": 23,
-   "press": 20,
-   "firstArticleAt": "2026-11-26T02:11:00.000Z",
+   "articles90": 81,
+   "recent20": 26,
+   "press": 22,
+   "firstArticleAt": "2026-11-26T02:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "청문회 답변하는 안덕수 국세청장 후보자",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009311681?sid=100"
+     "title": "[안덕수 청문회] 이종욱, \"세무조사 남용 공로로 국세청장 후보 올랐나...",
+     "press": "sejungilbo.com",
+     "publishedAt": "2026-11-26T03:14:00.000Z",
+     "link": "https://www.sejungilbo.com/news/articleView.html?idxno=61291"
     },
     {
-     "title": "답변하는 안덕수 후보자",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009311673?sid=100"
+     "title": "안덕수 국세청장 후보자 인사청문회…'세무조사 중립성·글로벌 과세' 쟁...",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-26T03:12:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887602"
     },
     {
-     "title": "현안 답변하는 안덕수 후보자",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009311667?sid=100"
+     "title": "[포토] 질의에 답변하는 안덕수 국세청장 후보자",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-26T03:12:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650204.html"
     }
    ]
   },
@@ -112,13 +112,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 5,
-   "press": 20,
+   "articles90": 22,
+   "recent20": 4,
+   "press": 21,
    "firstArticleAt": "2026-11-26T02:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李 대통령 지지율 43%, 2주 새 1%p 하락…부정평가 45%",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-26T03:06:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=321077"
+    },
     {
      "title": "[NBS] 李대통령 국정 지지율 43%…민주 35% 국힘 23%",
      "press": "polinews.co.kr",
@@ -130,12 +136,38 @@
      "press": "hidomin.com",
      "publishedAt": "2026-11-26T03:00:00.000Z",
      "link": "https://www.hidomin.com/news/articleView.html?idxno=731144"
+    }
+   ]
+  },
+  {
+   "keyword": "한준호 지명 책임감",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 20,
+   "recent20": 0,
+   "press": 20,
+   "firstArticleAt": "2026-11-26T01:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한준호 행안장관 후보 \"큰 책임감…경찰·중수청 등 독립성은 명확\"",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-26T02:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143062?sid=102"
     },
     {
-     "title": "李대통령 지지율 43%…조희대 탄핵 반대 44%·찬성 34% [NBS]",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-26T02:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000143064?sid=100"
+     "title": "\"비전문가라고요? 앞으로 활동하면서 보여줄 것\"… 한준호 후보 청문회...",
+     "press": "public25.com",
+     "publishedAt": "2026-11-26T02:38:00.000Z",
+     "link": "https://www.public25.com/news/articleView.html?idxno=59118"
+    },
+    {
+     "title": "한준호 “장관 지명받고 가장 먼저 연락드렸다”…첫 출근길에 밝힌 사...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-26T02:38:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1177964"
     }
    ]
   },
@@ -145,7 +177,7 @@
     "signal.bz"
    ],
    "articles90": 19,
-   "recent20": 1,
+   "recent20": 0,
    "press": 18,
    "firstArticleAt": "2026-11-26T01:48:00.000Z",
    "exclusive": false,
@@ -176,30 +208,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 39,
-   "recent20": 14,
-   "press": 15,
-   "firstArticleAt": "2026-11-26T01:38:00.000Z",
+   "articles90": 49,
+   "recent20": 16,
+   "press": 17,
+   "firstArticleAt": "2026-11-26T02:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "신현송 한은 총재 \"올해 명목GDP 3천조원 상회…반도체 영업익 700조원\"",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-26T03:04:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191481"
+     "title": "신현송 한은 총재 “고유가 장기화에 수요 압력까지… 물가 안정에 중점...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-26T03:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011882?sid=101"
     },
     {
-     "title": "신현송 \"주가보다 반도체 가격…주식시장 강해질 여지\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014346769?sid=101"
+     "title": "신현송 \"잠재성장률은 이론적 개념…현재 통화정책 기준 아냐\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T03:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006415937?sid=101"
     },
     {
-     "title": "한은 총재 \"잠재성장률 기존 추정치보다 높아져\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-26T02:58:00.000Z",
-     "link": "https://www.ajunews.com/view/20261126115034026"
+     "title": "[속보]신현송 총재 \"물가 목표치 2%대, 통화정책 전제로 크게 올리지 않...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-26T03:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610203?sid=101"
     }
    ]
   },
@@ -209,10 +241,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-26T01:38:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-26T01:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -233,38 +265,6 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-26T02:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002728855?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "가능한 사랑",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T01:48:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[경기광주소식]시, 12월 광주사랑카드 인센티브 10% 상향 등",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T02:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014346665?sid=102"
-    },
-    {
-     "title": "보름달 아래서 소주 한잔 , 가능한 사랑을 만든 것",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-26T02:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/047/0002537311"
-    },
-    {
-     "title": "‘가능한 사랑’ 설경구·전도연 주연상, 다시 쓴 청룡史…최우수작품...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-26T02:12:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611260076"
     }
    ]
   },
@@ -306,7 +306,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-26T02:30:00.000Z",
    "exclusive": true,
@@ -325,10 +325,10 @@
      "link": "https://n.news.naver.com/mnews/article/117/0004128275?sid=102"
     },
     {
-     "title": "스벅 반등에도 \"신뢰 회복 단언은 자만\"…'질적 성장' 제시한 신동우 대...",
-     "press": "hankyung.com",
+     "title": "신동우號 스타벅스, 실적 반등 자신감…성장 공식 바꾼다 [종합]",
+     "press": "etoday.co.kr",
      "publishedAt": "2026-11-26T02:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358523?sid=101"
+     "link": "https://www.etoday.co.kr/news/view/2653349"
     }
    ]
   },
@@ -337,10 +337,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T01:45:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-26T01:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -370,7 +370,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-26T02:17:00.000Z",
    "exclusive": false,
@@ -395,43 +395,11 @@
      "link": "https://m.entertain.naver.com/article/469/0000967889"
     }
    ]
-  },
-  {
-   "keyword": "수험",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T01:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "타임스퀘어, 수험생 대상 연말 할인 행사 '매직 위크' 진행",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-26T02:52:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=303366"
-    },
-    {
-     "title": "수능 마친 구미 수험생 한자리에…아이돌 공연에 스트레스 날렸다",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-26T02:44:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261126500297"
-    },
-    {
-     "title": "부산 수험생 '사탐런' 뚜렷…부산대·부경대 지원선 최대 21점 오를 듯",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-26T01:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214065?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1531,
+  "flagged": 1532,
   "matched": 754,
   "avgLeadMin": 504,
   "recent": [
