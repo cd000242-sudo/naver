@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T00:44:37.221Z",
+ "builtAt": "2026-11-26T00:54:40.528Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 16,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 67,
-   "recent20": 17,
-   "press": 54,
-   "firstArticleAt": "2026-11-25T23:15:00.000Z",
+   "articles90": 72,
+   "recent20": 23,
+   "press": 60,
+   "firstArticleAt": "2026-11-25T23:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "대미 관세 15% 상한 유지…반도체·디지털 뇌관 여전",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-26T00:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979931?sid=101"
+     "title": "한국, 15% 관세 상한 방어...호남 반도체 클러스터 지목 '25% 인상' 가능...",
+     "press": "nextdaily.co.kr",
+     "publishedAt": "2026-11-26T00:52:00.000Z",
+     "link": "https://www.nextdaily.co.kr/news/articleView.html?idxno=255338"
     },
     {
-     "title": "美 과잉생산 관세, 한국엔 15% 상한 유지…합의 이행 미흡하면 25% 검토",
-     "press": "theopiniontimes.news",
-     "publishedAt": "2026-11-26T00:42:00.000Z",
-     "link": "https://theopiniontimes.news/%e7%be%8e-%ea%b3%bc%ec%9e%89%ec%83%9d%ec%82%b0-%ea%b4%80%ec%84%b8-%ed%95%9c%ea%b5%ad%ec%97%94-15-%ec%83%81%ed%95%9c-%ec%9c%a0%ec%a7%80%ed%95%a9%ec%9d%98-%ec%9d%b4%ed%96%89-%eb%af%b8%ed%9d%a1/"
+     "title": "15% 관세 상한 \"선방\"...호남반도체 등 25% 인상 불씨는 남아",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-26T00:52:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82749"
     },
     {
-     "title": "美, ‘무역법 301조’ 관세 장벽 재건… 韓·日 15%, 中 20% 추가 부과",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-26T00:42:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026112609391049080c8c1c064d_1"
+     "title": "과잉생산 한숨 돌렸더니…\"백악관, 韓 쿠팡 9000억대 과징금 비난\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T00:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014346122?sid=104"
     }
    ]
   },
@@ -47,30 +47,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 44,
-   "recent20": 14,
-   "press": 34,
+   "articles90": 47,
+   "recent20": 9,
+   "press": 37,
    "firstArticleAt": "2026-11-25T23:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피, 상승폭 확대에 한때 4,800선 회복도…외인 순매수",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-26T00:42:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446625"
+     "title": "[개장시황] 코스피, 외국인 귀환에 1%대 반등…SK하이닉스 4%대 상승",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-26T00:52:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566722"
     },
     {
-     "title": "[속보] 코스피, 1%대 상승 출발 4700대… 코스닥 3%대 강세",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-26T00:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193604?sid=101"
+     "title": "코스피, 폭락 하루 만에 2%대 상승...반도체·이차전지주 반등",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-26T00:48:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73599"
     },
     {
-     "title": "삼성전자·SK하이닉스 동반 반등…장 초반 1~3%대 상승",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-26T00:39:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000086734"
+     "title": "외인 '사자'에 반도체株 급등⋯코스피 장중 '4800선' 탈환",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-26T00:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078540?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "학교비정규직 총파업",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 20,
+   "recent20": 7,
+   "press": 20,
+   "firstArticleAt": "2026-11-25T23:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "학교비정규직 4만명 내일 총파업…교육당국, 급식·돌봄 비상대응",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T00:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214002?sid=102"
+    },
+    {
+     "title": "학교 비정규직 4만 명 내일 총파업…교육당국 급식·돌봄 비상대응",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T00:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301514?sid=102"
+    },
+    {
+     "title": "학교 비정규직 4만명 총파업 예고… 급식·돌봄교실 차질 예상",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-26T00:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207412?sid=102"
     }
    ]
   },
@@ -79,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
+   "articles90": 18,
    "recent20": 4,
-   "press": 17,
+   "press": 18,
    "firstArticleAt": "2026-11-25T23:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "핵 생산 실태 점검한 김정은…\"전술핵무기 다양한 영역 활용해야\"",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-26T00:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143051?sid=100"
+    },
     {
      "title": "핵시설 찾은 김정은 \"다영역 활용화 주목해야\"",
      "press": "imnews.imbc.com",
@@ -97,76 +135,38 @@
      "press": "iminju.net",
      "publishedAt": "2026-11-26T00:38:00.000Z",
      "link": "http://www.iminju.net/news/articleView.html?idxno=173104"
-    },
-    {
-     "title": "김정은, 핵시설 현지지도...\"핵보유국 지위 불가침, 전술핵 다영역 활용...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T00:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438225?sid=100"
     }
    ]
   },
   {
-   "keyword": "학교비정규직 총파업",
+   "keyword": "CJ ENM 협상 타결",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 16,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-25T23:22:00.000Z",
+   "recent20": 5,
+   "press": 16,
+   "firstArticleAt": "2026-11-25T23:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "학교비정규직 내일 총파업...\"임금차별 해소\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T00:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438224?sid=102"
+     "title": "방송 끊길 뻔했는데…LG헬로비전·CJ ENM, 막판 합의",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T00:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769237?sid=103"
     },
     {
-     "title": "경기교육청, 27일 학교비정규직 파업 대비…급식·돌봄 지침",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T00:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016464364?sid=102"
+     "title": "CJ ENM·LG헬로비전, 콘텐츠 사용료 협상 타결…송출 중단 위기 넘겨",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-26T00:50:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446628"
     },
     {
-     "title": "학교비정규직 4만명 내일 총파업…교육당국, 급식·돌봄 비상대응",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T00:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016464350?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "대한민국 고용노동부",
-   "sources": [
-    "google"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-25T23:18:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "HLB, 대한민국 일·생활 균형 우수기업 선정…연간 12일 추가 유급휴무",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-26T00:24:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653188"
-    },
-    {
-     "title": "행정공제회, ‘대한민국커뮤니케이션대상’ 국회 행정안전위원장상 수...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-26T00:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002835644?sid=102"
-    },
-    {
-     "title": "쿠도커뮤니케이션, ‘2026년 대한민국 일·생활균형 우수기업’ 선정",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-26T00:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703331?sid=101"
+     "title": "LG헬로비전·CJ ENM, 막판 협상 타결…채널 정상 송출",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-26T00:46:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=173106"
     }
    ]
   },
@@ -175,10 +175,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-25T23:20:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-25T23:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -201,75 +201,11 @@
      "link": "https://m.entertain.naver.com/article/241/0003543655"
     }
    ]
-  },
-  {
-   "keyword": "세계의 주인",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-25T23:15:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[IS포토|청룡영화상] 서수빈, 신인여우상 주인공",
-     "press": "ilyoseoul.co.kr",
-     "publishedAt": "2026-11-26T00:42:00.000Z",
-     "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=525591"
-    },
-    {
-     "title": "“청룡史 새로 썼다”…‘세계의 주인’ 윤가은 감독, 최초 女 감독상 ...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-25T23:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001151768"
-    },
-    {
-     "title": "[키워드 NOW] 왕관의 주인 '엄마'",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-25T23:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653453?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "리플",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 2,
-   "firstArticleAt": "2026-11-26T00:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보] 비트코인 6만달러선 회복…리플·이더리움 등 주요 코인 '반등'",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-26T00:38:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630879"
-    },
-    {
-     "title": "비트와이즈 리플(XRP) ETF, 하루 평균 1,400만 달러 거래...누적 거래 35...",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-26T00:32:00.000Z",
-     "link": "http://coinreaders.com/273537"
-    },
-    {
-     "title": "[시세] 리플(XRP) 1.32% 반등…0.8900달러 지킬까",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-26T00:28:00.000Z",
-     "link": "http://coinreaders.com/273525"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1487,
+  "flagged": 1488,
   "matched": 732,
   "avgLeadMin": 499,
   "recent": [
