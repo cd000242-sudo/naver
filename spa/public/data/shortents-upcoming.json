@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T22:31:57.591Z",
+ "builtAt": "2026-11-26T22:42:00.654Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 25,
  "candidates": [
-  {
-   "keyword": "트럼프 가짜 성장률",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T21:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 “중간선거 전 발표 3분기 성장률 가짜…즉각 조사”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T22:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302330?sid=104"
-    },
-    {
-     "title": "‘블프’ 직전 ‘관세폭탄’ 날린 트럼프…“GDP 성장률 조작” 음모론",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T22:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568387?sid=104"
-    },
-    {
-     "title": "선거 지고 경제통계 탓?…트럼프 “3분기 성장률 조작” 조사 요구",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T22:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302327?sid=104"
-    }
-   ]
-  },
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 11,
+   "articles90": 14,
+   "recent20": 3,
+   "press": 12,
    "firstArticleAt": "2026-11-26T21:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 새 관세 시행 땐 평균 13.9%…\"대법원이 막은 상호관세, 301조로 되살...",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-26T22:36:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68554"
+    },
     {
      "title": "\"트럼프 새 관세 시행 땐 美 세입 감소분 80% 보전 전망\"",
      "press": "inews24.com",
@@ -65,50 +39,45 @@
      "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-26T22:24:00.000Z",
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261127010010631"
-    },
-    {
-     "title": "‘블프’ 직전 ‘관세폭탄’ 날린 트럼프…“GDP 성장률 조작” 음모론",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T22:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568387?sid=104"
     }
    ]
   },
   {
-   "keyword": "보험사 대출 연체율 상승",
+   "keyword": "김정은, 러시아 공연 관람",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T21:02:00.000Z",
+   "articles90": 18,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T21:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "보험사 대출 연체율 2분기 연속 상승…기업대출 중심으로 건전성 악화",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T22:30:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785194"
+     "title": "北 김정은, 러시아 예술인 공연 관람…“양국 협력 보다 긴밀해져”",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-26T22:36:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653684"
     },
     {
-     "title": "보험사 대출 연체율 1.27%…두 분기 연속 상승",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T21:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729195?sid=101"
+     "title": "김정은, 방북 러시아 예술인 공연 관람…“양국 협력 확대”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-26T22:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765660?sid=100"
     },
     {
-     "title": "보험사 대출 2.1조 줄었는데…연체율 1.27%로 상승",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416326?sid=101"
+     "title": "담화 나누는 김정은과 코즐로프 러시아 장관",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T22:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009313326?sid=100"
     }
    ]
   },
   {
    "keyword": "탄핵",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 6,
@@ -139,22 +108,55 @@
    ]
   },
   {
-   "keyword": "선우용여, 돈만 벌면 불륜",
+   "keyword": "2026년 11월 27일 운세",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-26T21:40:00.000Z",
+   "firstArticleAt": "2026-11-26T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "먼저 떠난 남편 추억하던 선우용여, 젠슨 황 불륜 소식엔 “X 같은 XX”",
+     "title": "[오늘의 운세] 2026년 11월 27일 금요일 띠별 운세… 닭띠 '대길', 돼지띠...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-26T22:34:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3084462"
+    },
+    {
+     "title": "[오늘의 운세] 27일 금요일 나의 운세는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-26T21:40:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194721"
+    },
+    {
+     "title": "[AI] 오늘의 띠별 운세...2026.11.27(금요일)",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-26T21:30:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68534"
+    }
+   ]
+  },
+  {
+   "keyword": "선우용여, 젠슨 황 불륜 분노",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T21:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“X 같은 XX, 돈말 벌면”…젠슨 황 불륜 소식에 분노한 선우용여",
      "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T22:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001148495"
+     "publishedAt": "2026-11-26T22:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769774?sid=103"
     },
     {
      "title": "선우용여, 젠슨황 불륜 소식에 “X 같은, 돈만 벌면 XX” 분노 (순풍 선...",
@@ -171,14 +173,46 @@
    ]
   },
   {
+   "keyword": "배당",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T21:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코스피 4700선 지킬까…삼전닉스·배당금 30조원 주목",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-26T22:32:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287474"
+    },
+    {
+     "title": "삼성전자, 오늘(27일) 30조원 배당금 지급…100주 보유하면 46만원",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T21:58:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785169"
+    },
+    {
+     "title": "[종목 브리핑] 포사이트그룹홀딩스, 반기 매출 8460만파운드…중간배당...",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-26T21:34:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=412017"
+    }
+   ]
+  },
+  {
    "keyword": "정년",
    "sources": [
     "google"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T21:02:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-26T21:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,103 +237,135 @@
    ]
   },
   {
-   "keyword": "미성숙 남편 아내 친구와 동거",
+   "keyword": "아들 아들은 재산",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-26T21:02:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-26T21:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'이혼숙려캠프' 미성숙 남편, 아내 친구에 뽀뽀",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-26T21:14:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611270009"
+     "title": "\"아빠 재산 노린 거 아니냐?\"…17세 연하 아내와 재혼한 김은우→두 아...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T22:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128531"
     },
     {
-     "title": "남편 폭언에 아내 돌발행동, 제작진 긴급 투입‥박하선 악플 자제 요청...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-26T21:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191725"
+     "title": "이부진 아들, 어머니 성으로 바꿨다…노소영, 최태원 화해권고 요청 거...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-26T21:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703751?sid=102"
     },
     {
-     "title": "“둘 다 가질 기회” 미성숙 남편, 아내 친구와 셋이 동거하며 술 먹고...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-26T21:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191721"
+     "title": "김은우, 아들 둘 데리고 17살 연하 재혼 \"재산 노리는 거 아니냐고\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T21:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014348480"
+    }
+   ]
+  },
+  {
+   "keyword": "급식 비정규직 총파업에",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T21:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[뉴스픽] 학교 급식·돌봄 비정규직 노동자 총파업 돌입",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-26T21:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538393?sid=102"
+    },
+    {
+     "title": "학교 비정규직 오늘 총파업…급식·돌봄 비상 대응",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T21:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302317?sid=102"
+    },
+    {
+     "title": "학교비정규직 오늘 총파업…급식·돌봄 '비상 대응'",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T21:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406212?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1749,
-  "matched": 868,
-  "avgLeadMin": 566,
+  "flagged": 1750,
+  "matched": 877,
+  "avgLeadMin": 555,
   "recent": [
    {
-    "keyword": "2026년 11월 21일 운세",
-    "hitKeyword": "11월 말 포근한 날씨",
-    "hitAt": "2026-11-27T07:00:00+09:00",
-    "leadMin": 8691
+    "keyword": "신현송 물가 목표 수렴",
+    "hitKeyword": "신현송 반도체 저평가",
+    "hitAt": "2026-11-27T07:30:00+09:00",
+    "leadMin": 1134
    },
    {
-    "keyword": "2026년 11월 22일 운세",
-    "hitKeyword": "11월 말 포근한 날씨",
-    "hitAt": "2026-11-27T07:00:00+09:00",
-    "leadMin": 7177
+    "keyword": "준법투쟁",
+    "hitKeyword": "철도노조 준법투쟁 지연",
+    "hitAt": "2026-11-27T07:30:00+09:00",
+    "leadMin": 1124
    },
    {
-    "keyword": "2026년 11월 23일 운세",
-    "hitKeyword": "11월 말 포근한 날씨",
-    "hitAt": "2026-11-27T07:00:00+09:00",
-    "leadMin": 5749
+    "keyword": "신현송 선제 대응",
+    "hitKeyword": "신현송 반도체 저평가",
+    "hitAt": "2026-11-27T07:30:00+09:00",
+    "leadMin": 1114
    },
    {
-    "keyword": "2026년 11월 운세",
-    "hitKeyword": "11월 말 포근한 날씨",
-    "hitAt": "2026-11-27T07:00:00+09:00",
-    "leadMin": 2851
+    "keyword": "신현송 총재 간담회",
+    "hitKeyword": "신현송 반도체 저평가",
+    "hitAt": "2026-11-27T07:30:00+09:00",
+    "leadMin": 1084
    },
    {
-    "keyword": "2026년 11월 25일 운세",
-    "hitKeyword": "11월 말 포근한 날씨",
-    "hitAt": "2026-11-27T07:00:00+09:00",
-    "leadMin": 2801
+    "keyword": "신현송 한은 총재 간담회",
+    "hitKeyword": "신현송 반도체 저평가",
+    "hitAt": "2026-11-27T07:30:00+09:00",
+    "leadMin": 1064
    },
    {
-    "keyword": "2026년 11월 26일 운세",
-    "hitKeyword": "11월 말 포근한 날씨",
-    "hitAt": "2026-11-27T07:00:00+09:00",
-    "leadMin": 1406
+    "keyword": "신현송 한국은행 총재",
+    "hitKeyword": "신현송 반도체 저평가",
+    "hitAt": "2026-11-27T07:30:00+09:00",
+    "leadMin": 1014
    },
    {
-    "keyword": "2026년 11월 27일 운세",
-    "hitKeyword": "11월 말 포근한 날씨",
-    "hitAt": "2026-11-27T07:00:00+09:00",
-    "leadMin": 119
+    "keyword": "EU 정상회의 우크라 지원",
+    "hitKeyword": "트럼프 푸틴 우크라",
+    "hitAt": "2026-11-27T07:30:00+09:00",
+    "leadMin": 531
    },
    {
-    "keyword": "남경주 제자 성폭행 혐의",
-    "hitKeyword": "남경주 국민참여재판",
-    "hitAt": "2026-11-27T07:00:00+09:00",
-    "leadMin": 28
+    "keyword": "CJ올리브영 고객정보 유출",
+    "hitKeyword": "CJ올리브영 정보 유출",
+    "hitAt": "2026-11-27T07:30:00+09:00",
+    "leadMin": 501
    },
    {
-    "keyword": "마운자로",
-    "hitKeyword": "대마도 마운자로 원정",
-    "hitAt": "2026-11-27T06:30:00+09:00",
-    "leadMin": 1044
+    "keyword": "트럼프 3분기 성장률 조작 의혹",
+    "hitKeyword": "트럼프 푸틴 우크라",
+    "hitAt": "2026-11-27T07:30:00+09:00",
+    "leadMin": 109
    },
    {
-    "keyword": "한전 개인정보 유출",
-    "hitKeyword": "올리브영 개인정보 유출",
-    "hitAt": "2026-11-27T06:00:00+09:00",
-    "leadMin": 5568
+    "keyword": "화재",
+    "hitKeyword": "남동산단 공장 화재 사망",
+    "hitAt": "2026-11-27T07:30:00+09:00",
+    "leadMin": 58
    }
   ]
  }
