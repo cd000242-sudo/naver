@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T20:21:13.426Z",
+ "builtAt": "2026-11-26T20:31:17.103Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,46 @@
  "measured": 29,
  "candidates": [
   {
-   "keyword": "땅속 광섬유로 지진 연구",
+   "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
    "articles90": 17,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T19:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한국 헌법까지 꺼낸 美 '과잉생산' 압박…수출 1조달러 시대 복병",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-26T20:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447196?sid=101"
+    },
+    {
+     "title": "亞, 트럼프 301조 관세 근거 반박… 韓·日은 ‘과잉생산’ 부인, 동남아...",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-26T20:26:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026112618263186280c8c1c064d_1"
+    },
+    {
+     "title": "[사설] 관세 15% 방어… 반도체, 디지털 규제 또 어깃장 美",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-26T20:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703744?sid=110"
+    }
+   ]
+  },
+  {
+   "keyword": "땅속 광섬유로 지진 연구",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
    "recent20": 0,
-   "press": 14,
-   "firstArticleAt": "2026-11-26T19:00:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-26T19:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -41,44 +73,12 @@
      "link": "https://n.news.naver.com/mnews/article/119/0003160043?sid=105"
     }
    ]
-  },
-  {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 17,
-   "recent20": 6,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T18:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] 관세 15% 방어… 반도체, 디지털 규제 또 어깃장 美",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-26T20:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703744?sid=110"
-    },
-    {
-     "title": "美 “최대 40% 관세” 中 “단호히 반대”… 관세전쟁 다시 불붙나",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-26T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703672?sid=104"
-    },
-    {
-     "title": "한국산 제품 관세 15% 압박…현대모비스·HL만도 영향 '촉각'",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-26T20:02:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=508638"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1753,
-  "matched": 856,
+  "flagged": 1752,
+  "matched": 855,
   "avgLeadMin": 505,
   "recent": [
    {
