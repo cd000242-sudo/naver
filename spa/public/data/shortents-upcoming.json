@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T15:29:39.675Z",
+ "builtAt": "2026-11-26T15:39:42.670Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,65 +13,32 @@
   {
    "keyword": "반도체 메모리",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
+   "articles90": 12,
+   "recent20": 6,
+   "press": 10,
    "firstArticleAt": "2026-11-26T14:50:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "AI가 뒤집은 메모리 시장…머스크도 삼성 앞에서 \"물량 더 달라\"",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-26T15:24:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=436007"
+     "title": "이재용 회장에 장기계약 제안한 머스크…메모리 확보경쟁 어디까지",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-26T15:36:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631161"
     },
     {
-     "title": "삼성전자 美 반도체법인장에 윤하룡 부사장 내정",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-26T15:18:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1795706120693616276"
+     "title": "메모리 수요 폭증 부메랑… 낸드값 내년 떨어질듯",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-26T15:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011999?sid=105"
     },
     {
-     "title": "유니테스트, 매출 11.17% 규모 Micron India 반도체 검사장비 공급 계약",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T15:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287421"
-    }
-   ]
-  },
-  {
-   "keyword": "CJ올리브영 개인정보 유출",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T14:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "CJ올리브영, 개인정보 유출...핵심 금융·인증 정보 비유출?",
-     "press": "job-post.co.kr",
-     "publishedAt": "2026-11-26T15:26:00.000Z",
-     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=241357"
-    },
-    {
-     "title": "CJ올리브영, 업무시스템 해킹에 임직원·고객 개인정보 유출",
-     "press": "whitepaper.co.kr",
-     "publishedAt": "2026-11-26T15:14:00.000Z",
-     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=269236"
-    },
-    {
-     "title": "“이름·폰번호·생일까지 싹 털렸네”…CJ올리브영 개인정보 유출 비상",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-26T14:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002835868?sid=101"
+     "title": "“한국 반도체 기업, 이익 변동성 줄이고 주주 환원 늘려야”",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-26T15:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011995?sid=101"
     }
    ]
   },
@@ -108,41 +75,9 @@
    ]
   },
   {
-   "keyword": "미국 과잉생산 관세 조사",
+   "keyword": "연우 10kg 감량",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T14:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] 美, 반도체 콕 집어 \"구조적 과잉생산\"…경계 늦추지 말아야",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-26T15:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358853?sid=110"
-    },
-    {
-     "title": "관세 집착 트럼프…15% 방어했지만 25% 여지",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-26T15:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406185?sid=104"
-    },
-    {
-     "title": "[사설] 주력산업 육성했다고 관세 인상 으름장 美... 치밀한 대비를",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-26T15:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968049?sid=110"
-    }
-   ]
-  },
-  {
-   "keyword": "세무사 수석 구속 신청",
-   "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 3,
    "recent20": 0,
@@ -152,30 +87,30 @@
    "capped": false,
    "samples": [
     {
-     "title": "경찰 'AI 부정행위' 세무사 시험 수석 합격자 구속영장 신청",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-26T15:08:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452542"
+     "title": "연우, 어쩐지 급격하게 말랐더라…\"굶어서 10kg 감량, 전신 두드러기에...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-26T15:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084592"
     },
     {
-     "title": "경찰, 'AI 부정행위' 자수한 세무사 수석 구속영장 신청",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-26T14:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522706?sid=102"
+     "title": "연우, 하루 밥 두 숟갈 먹고 10kg 감량…“이렇게 살면 안 되겠다”",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-26T14:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001307072"
     },
     {
-     "title": "'AI 커닝' 세무사 수석합격자 구속 기로…\"증거인멸 우려\"",
-     "press": "slist.kr",
+     "title": "'무쇠소녀단' 연우 \"두달만에 10kg 감량, 하루에 밥 2숟갈 먹기도...극단...",
+     "press": "joynews24.com",
      "publishedAt": "2026-11-26T14:10:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785153"
+     "link": "http://www.joynews24.com/view/2031039"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1760,
-  "matched": 862,
+  "flagged": 1759,
+  "matched": 861,
   "avgLeadMin": 512,
   "recent": [
    {
