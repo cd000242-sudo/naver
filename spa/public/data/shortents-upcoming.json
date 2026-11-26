@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T17:40:22.052Z",
+ "builtAt": "2026-11-26T17:50:25.103Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,44 +11,12 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "추수감사절",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T16:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“추수감사절 온정 나눴어요”",
-     "press": "koreatimes.com",
-     "publishedAt": "2026-11-26T17:36:00.000Z",
-     "link": "https://www.koreatimes.com/article/11632977?utm_source=naver"
-    },
-    {
-     "title": "美추수감사절 덮친 폭풍…정전·침수에 뉴욕 퍼레이드도 연기",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-26T17:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447157?sid=104"
-    },
-    {
-     "title": "미국 추수감사절 덮친 폭풍에 30만 곳 정전…항공편 수백 편 결항",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-26T17:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406196?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-26T16:27:00.000Z",
    "exclusive": false,
