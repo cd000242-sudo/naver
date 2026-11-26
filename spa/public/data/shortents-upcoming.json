@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T11:18:10.425Z",
+ "builtAt": "2026-11-26T11:28:14.298Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,18 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "세무사 구속영장 신청",
+   "keyword": "세무사 수석 구속영장 신청",
    "sources": [
-    "nate"
+    "nate",
+    "daum"
    ],
-   "articles90": 54,
-   "recent20": 5,
-   "press": 44,
-   "firstArticleAt": "2026-11-26T09:56:00.000Z",
+   "articles90": 51,
+   "recent20": 2,
+   "press": 43,
+   "firstArticleAt": "2026-11-26T10:01:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -47,45 +48,52 @@
    "sources": [
     "daum"
    ],
-   "articles90": 25,
+   "articles90": 27,
    "recent20": 3,
-   "press": 25,
+   "press": 27,
    "firstArticleAt": "2026-11-26T10:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "李대통령 “가난 왜 증명해야하나”…복지 자동주의로 전환",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-26T11:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568279?sid=100"
+    },
+    {
+     "title": "李 대통령 \"합리적 비판 적극 수용하겠다 … SNS 욕설·비방은 차단\"",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-26T11:18:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650413.html"
+    },
+    {
      "title": "李대통령 \"SNS 제일 큰 문제는 혐오·비방…그러면 차단\"",
      "press": "pressian.com",
      "publishedAt": "2026-11-26T11:12:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/002/0002467821?sid=100"
-    },
-    {
-     "title": "\"'저 가난합니다' 왜 해야 하나?\" 李대통령이 밝힌 '복지 자동주의'",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-26T11:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447140?sid=100"
-    },
-    {
-     "title": "李대통령 “SNS서 합리적 내용은 수용, 폭언·욕설은 차단”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-26T11:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703636?sid=100"
     }
    ]
   },
   {
    "keyword": "강금실 인사청문요구서 재가",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 27,
-   "recent20": 0,
-   "press": 25,
-   "firstArticleAt": "2026-11-26T09:56:00.000Z",
+   "articles90": 24,
+   "recent20": 1,
+   "press": 22,
+   "firstArticleAt": "2026-11-26T10:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[뉴스프라임] 조희대 탄핵 공방 지속…강금실 청문회 격돌 예고",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T11:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930298?sid=100"
+    },
     {
      "title": "이재명, 국회에 강금실 국정원장 후보자와 장관 후보 4명 인사청문 요청",
      "press": "businesspost.co.kr",
@@ -97,12 +105,6 @@
      "press": "inews24.com",
      "publishedAt": "2026-11-26T10:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/031/0001078887?sid=100"
-    },
-    {
-     "title": "이 대통령, 강금실 등 후보자 5명 인사청문요구서 재가…국회 검증 돌입",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-26T10:38:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731279"
     }
    ]
   },
@@ -111,10 +113,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-26T09:56:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-26T10:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,66 +141,66 @@
    ]
   },
   {
-   "keyword": "전철 235대 지연",
+   "keyword": "경찰청 송영호 김병기",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 11,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T09:51:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-26T10:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코레일 전철 235대 지연",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T10:58:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287256"
+     "title": "경찰 '2인자' 승진 인사…경찰청 차장에 송영호 임명",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T11:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214417?sid=102"
     },
     {
-     "title": "철도노조 준법투쟁 첫날 열차 4대 멈춰…전철 235대 지연",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-26T10:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165822?sid=102"
+     "title": "경찰청 차장에 송영호·부산경찰청장에 김병기…고위직 인사 단행",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-26T11:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358823?sid=102"
     },
     {
-     "title": "철도노조 안전운행 투쟁 첫날…전국 광역전철 235대 지연",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-26T10:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193707?sid=102"
+     "title": "송영호 경찰청 차장·김병기 부산경찰청장 임명…고위직 인사 단행",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-26T10:54:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545114"
     }
    ]
   },
   {
-   "keyword": "위증 무죄 확정",
+   "keyword": "정대세 명서현 셋째 임신",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T10:10:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-26T10:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "대법, '한덕수 재판 위증 혐의' 윤석열 무죄 확정",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-26T11:16:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545146"
+     "title": "축구선수 정대세 아내 명서현, 둘째 낳고 12년 만에 셋째 임신",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-26T11:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568277?sid=102"
     },
     {
-     "title": "尹 ‘한덕수 재판 위증’ 무죄 확정… 대법 “증거 부족”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-26T11:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178413?sid=102"
+     "title": "'이혼' 갈등 딛고 셋째 임신.. '명서현♥'정대세, 웃통 벗고 오열 \"뻥 아...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-26T11:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005645845"
     },
     {
-     "title": "尹 ‘한덕수 재판 위증’ 대법 무죄(종합)",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-26T10:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162426?sid=102"
+     "title": "‘이혼 위기’ 정대세, ♥명세현 셋째 임신에 눈물...“노산이라 두렵지...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-26T11:13:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543811"
     }
    ]
   },
@@ -207,10 +209,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T09:57:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T10:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -240,10 +242,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T09:58:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-26T10:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -264,38 +266,6 @@
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-26T10:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003568273?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "2년 만에 도전!",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T10:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘부상 딛은 홈런왕’ 김도영, 통산 2번째 MVP···허인서는 16년 만에 ...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-26T11:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485362?sid=102"
-    },
-    {
-     "title": "한국 탁구, 혼성 단체 월드컵 출격…2년 만에 메달 도전",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T10:36:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/003/0014348281"
-    },
-    {
-     "title": "KIA 설렌다! MVP+홈런왕+장타왕 셀프 평가 '70점' 실화?→\"유격수 도전 ...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-26T10:35:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002084483"
     }
    ]
   },
@@ -321,7 +291,7 @@
      "title": "중진 만찬 참석하는 이학영 의원",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T10:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466652?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/001/0016466651?sid=100"
     },
     {
      "title": "중진 만찬 참석하는 정성호·민홍철 의원",
@@ -332,41 +302,41 @@
    ]
   },
   {
-   "keyword": "장동혁 대표 발언",
+   "keyword": "2년 만의 도전",
    "sources": [
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-26T09:53:00.000Z",
+   "firstArticleAt": "2026-11-26T10:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장동혁, '조작징계' 의혹 제기 윤리위원 해임...당 내홍 격화 조짐",
-     "press": "ntoday.co.kr",
-     "publishedAt": "2026-11-26T10:40:00.000Z",
-     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131170"
+     "title": "한국 탁구, 혼성 단체 월드컵 출격…2년 만에 메달 도전",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T10:36:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/003/0014348281"
     },
     {
-     "title": "'조작 징계' 두고 지도부 공개 충돌...장동혁 \"탈당 창당도 있다\"",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-26T10:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980043?sid=100"
+     "title": "KIA 설렌다! MVP+홈런왕+장타왕 셀프 평가 '70점' 실화?→\"유격수 도전 ...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-26T10:35:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002084483"
     },
     {
-     "title": "'장동혁-최 교수' 대화내역 추가 폭로에…배현진 \"몇 꺼풀의 얼굴이 더...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-26T09:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160021?sid=100"
+     "title": "'왕의 귀환' 김도영 2년 만에 MVP 탈환...\"내년 큰 도전\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T10:20:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/052/0002438635"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1730,
+  "flagged": 1733,
   "matched": 845,
   "avgLeadMin": 519,
   "recent": [
