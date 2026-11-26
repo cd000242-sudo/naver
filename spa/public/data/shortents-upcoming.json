@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T08:07:04.286Z",
+ "builtAt": "2026-11-26T08:17:07.736Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "부산 통합 LCC 본사",
    "sources": [
     "nate"
    ],
-   "articles90": 94,
-   "recent20": 8,
-   "press": 65,
-   "firstArticleAt": "2026-11-26T06:40:00.000Z",
+   "articles90": 85,
+   "recent20": 12,
+   "press": 61,
+   "firstArticleAt": "2026-11-26T06:48:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[이슈+]통합 LCC 본사 부산 확정…3조원 항공사, 지역 거점화 시험대",
-     "press": "businessplus.kr",
-     "publishedAt": "2026-11-26T08:06:00.000Z",
-     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120591"
+     "title": "통합 LCC 본사 부산 확정..제2항공 허브 도약 기대",
+     "press": "busanmbc.co.kr",
+     "publishedAt": "2026-11-26T08:16:00.000Z",
+     "link": "https://busanmbc.co.kr/01_new/new01_view.asp?idx=291406"
     },
     {
-     "title": "부산시·대한항공, 통합LCC 본사 부산 이전 전격 합의",
-     "press": "news.lghellovision.net",
-     "publishedAt": "2026-11-26T08:04:00.000Z",
-     "link": "http://news.lghellovision.net/news/articleView.html?idxno=563929"
+     "title": "진에어 조종사노조, 통합 LCC 본사 부산行에 \"깊은 유감\" … 화학적 결합...",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-26T08:16:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/26/2026112650371.html"
     },
     {
-     "title": "통합 LCC 본사 부산 확정···진에어 조종사 노조 즉각 반발",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-26T08:02:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=644066"
+     "title": "통합 LCC 본사 부산 확정…내년 3월 출범",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-26T08:14:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261126500595"
     }
    ]
   },
@@ -47,94 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 58,
-   "recent20": 12,
-   "press": 37,
-   "firstArticleAt": "2026-11-26T06:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "산업부 “美 관세 25% 카드, 대미흑자 감안 추정…최종 15% 유지 전망”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T08:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729103?sid=101"
-    },
-    {
-     "title": "미국 '과잉생산 관세'에 중국 \"정치 농간 반대\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T08:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438543?sid=104"
-    },
-    {
-     "title": "트럼프의 관세 질주…민주당도 못막는다 [1일1트]",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T08:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729098?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검 이임성·이정훈 추천",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 34,
+   "articles90": 57,
    "recent20": 9,
-   "press": 33,
-   "firstArticleAt": "2026-11-26T06:38:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조작기소 특검 후보로…민주당 '이임성'·혁신당 '이정훈'",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-26T08:04:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322021&inflow=N"
-    },
-    {
-     "title": "與, 조작기소 특검 후보로 檢 출신 이임성 변호사 추천",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-26T08:00:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=173182"
-    },
-    {
-     "title": "'조작기소 특검 추천' 마무리…국힘 \"사기도박판\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T07:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930220?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "허인서",
-   "sources": [
-    "google"
-   ],
-   "articles90": 65,
-   "recent20": 3,
-   "press": 33,
-   "firstArticleAt": "2026-11-26T06:38:00.000Z",
+   "press": 36,
+   "firstArticleAt": "2026-11-26T06:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한화 허인서, 16년 만의 포수 신인왕…수비상까지 2관왕",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-26T08:06:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250565"
+     "title": "美 가능한 최대 관세 韓 25%·日 20%인 이유는 '반도체 흑자'",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-26T08:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000556030?sid=101"
     },
     {
-     "title": "“기다릴게 (문)동주야” 한화 허인서가 꿈꾸는 신인왕 배터리 조합",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-26T08:00:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/382/0001307056"
+     "title": "기존 합의한 '15% 상한' 지켜낸 韓… 靑, 美과잉생산 관세에 '예상 범위...",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-26T08:14:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261126500593"
     },
     {
-     "title": "한화 허인서, 16년 만에 포수 신인왕…문동주 \"신인왕 간다\" 예언 통했다",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T07:50:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287115"
+     "title": "중국 정부, ‘과잉생산 관세’에 “단호히 반대…WTO 규칙 심각히 위반...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T08:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301872?sid=104"
     }
    ]
   },
@@ -143,13 +79,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 34,
+   "articles90": 32,
    "recent20": 2,
-   "press": 33,
-   "firstArticleAt": "2026-11-26T06:44:00.000Z",
+   "press": 32,
+   "firstArticleAt": "2026-11-26T06:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "금리 인상·경제성장 전망치 상향에도…코스피, 외국인·개인 매도에 '강...",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-26T08:08:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=230388"
+    },
     {
      "title": "'전강후약' 코스피, 강보합…4711.21 마감",
      "press": "pointdaily.co.kr",
@@ -161,12 +103,6 @@
      "press": "kdfnews.com",
      "publishedAt": "2026-11-26T07:54:00.000Z",
      "link": "http://www.kdfnews.com/news/articleView.html?idxno=191496"
-    },
-    {
-     "title": "'전강후약' 코스피, 0.29% 상승…\"외국인 또 매도세\"",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-26T07:46:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95288"
     }
    ]
   },
@@ -175,10 +111,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 75,
-   "recent20": 12,
+   "articles90": 55,
+   "recent20": 4,
    "press": 31,
-   "firstArticleAt": "2026-11-26T06:42:00.000Z",
+   "firstArticleAt": "2026-11-26T06:49:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -195,42 +131,42 @@
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261126010010552"
     },
     {
-     "title": "홍익표 통일부 장관 후보자 \"낮은 수준의 남북 대화부터\"",
-     "press": "hankookilbo.com",
+     "title": "홍익표 통일부 장관 후보자 “작은 실천으로 남북 신뢰 회복...현실적 대...",
+     "press": "m-economynews.com",
      "publishedAt": "2026-11-26T07:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967994?sid=100"
+     "link": "https://www.m-economynews.com/news/article.html?no=73648"
     }
    ]
   },
   {
-   "keyword": "정부 이란 다야니 ISDS 승소",
+   "keyword": "조작기소 특검 이임성·이정훈 추천",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 25,
-   "recent20": 3,
-   "press": 24,
-   "firstArticleAt": "2026-11-26T06:39:00.000Z",
-   "exclusive": false,
+   "articles90": 30,
+   "recent20": 5,
+   "press": 30,
+   "firstArticleAt": "2026-11-26T06:50:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "정부, 이란 다야니와 2차 국제투자분쟁 최종 승소...7700억원 추가 배상...",
-     "press": "wikileaks-kr.org",
-     "publishedAt": "2026-11-26T08:06:00.000Z",
-     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=195346"
+     "title": "민주 이임성·혁신 이정훈 ‘조작기소 특검’ 후보 추천…국힘 추천 거...",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-26T08:14:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=921386"
     },
     {
-     "title": "정부, 이란 다야니 ISDS 최종 승소...7천700억 국고 지켜",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T08:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438545?sid=102"
+     "title": "'조작기소 특검' 후보에 검사 출신 이임성·판사 출신 이정훈 변호사 추...",
+     "press": "lawtimes.co.kr",
+     "publishedAt": "2026-11-26T08:14:00.000Z",
+     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=230162"
     },
     {
-     "title": "정부, 이란 다야니 2차 ISDS 전부 승소 확정",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-26T08:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000556017?sid=102"
+     "title": "조작기소 특검 후보로…민주당 '이임성'·혁신당 '이정훈'",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-26T08:04:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322021&inflow=N"
     }
    ]
   },
@@ -240,12 +176,18 @@
     "signal.bz"
    ],
    "articles90": 27,
-   "recent20": 4,
+   "recent20": 3,
    "press": 23,
-   "firstArticleAt": "2026-11-26T06:40:00.000Z",
+   "firstArticleAt": "2026-11-26T06:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "철도노조 '안전운행 투쟁' 돌입…퇴근길 열차 지연 우려",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T08:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406106?sid=101"
+    },
     {
      "title": "준법투쟁 첫날, 전라선 열차 3대 운행 중지",
      "press": "yonhapnewstv.co.kr",
@@ -257,12 +199,38 @@
      "press": "m-economynews.com",
      "publishedAt": "2026-11-26T08:02:00.000Z",
      "link": "https://www.m-economynews.com/news/article.html?no=73649"
+    }
+   ]
+  },
+  {
+   "keyword": "정부 이란 다야니 ISDS 승소",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 22,
+   "recent20": 5,
+   "press": 21,
+   "firstArticleAt": "2026-11-26T06:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "韓정부, 이란 다야니에 7천700억 국제투자분쟁 최종 승소",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-26T08:08:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106574"
     },
     {
-     "title": "철도 준법투쟁 첫날부터 운행 차질…총파업 우려 커져",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-26T07:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193669?sid=102"
+     "title": "정부, 이란 다야니 2차 ISDS서 최종 승소… 7700억 원 배상 면해",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-26T08:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968000?sid=102"
+    },
+    {
+     "title": "정부, 이란 다야니와 2차 국제투자분쟁 최종 승소...7700억원 추가 배상...",
+     "press": "wikileaks-kr.org",
+     "publishedAt": "2026-11-26T08:06:00.000Z",
+     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=195346"
     }
    ]
   },
@@ -271,30 +239,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 3,
-   "press": 19,
-   "firstArticleAt": "2026-11-26T06:39:00.000Z",
+   "articles90": 21,
+   "recent20": 4,
+   "press": 20,
+   "firstArticleAt": "2026-11-26T06:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "헌재, '외국인 정치활동 금지' 헌법불합치 결정 : 대자보 한 장, 제 손으...",
+     "press": "huffingtonpost.kr",
+     "publishedAt": "2026-11-26T08:16:00.000Z",
+     "link": "https://www.huffingtonpost.kr/article/262446"
+    },
+    {
+     "title": "헌재 \"외국인 정치활동 전면 제한, 헌법에 어긋난다\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-26T08:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980010?sid=102"
+    },
     {
      "title": "헌재, '외국인 정치활동 금지'에 헌법불합치…\"지나치게 포괄적\"",
      "press": "iminju.net",
      "publishedAt": "2026-11-26T08:06:00.000Z",
      "link": "http://www.iminju.net/news/articleView.html?idxno=173186"
-    },
-    {
-     "title": "외국인 정치활동 전면 금지한 출입국관리법…헌재 \"헌법 불합치\"",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-26T08:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000143109?sid=102"
-    },
-    {
-     "title": "헌재 “외국인 정치활동 전면 금지, 헌법불합치…금지 활동 구체화해야...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T07:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301862?sid=102"
     }
    ]
   },
@@ -304,12 +272,18 @@
     "google"
    ],
    "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-26T06:42:00.000Z",
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-26T06:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김민석, 직무수행 ‘부정평가’ 68.3%…장동혁은 60.7%[리얼미터]",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-26T08:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568246?sid=100"
+    },
     {
      "title": "김민석 민주당 대표, 국립소방병원 방문...충북 현안 건의",
      "press": "ccn.hcn.co.kr",
@@ -321,12 +295,6 @@
      "press": "cc.newdaily.co.kr",
      "publishedAt": "2026-11-26T07:56:00.000Z",
      "link": "https://cc.newdaily.co.kr/site/data/html/2026/11/26/2026112650360.html"
-    },
-    {
-     "title": "친청 유튜버 ‘김민석 사퇴 집회’ 연다…정청래도 연일 저격, 왜",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T07:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568230?sid=100"
     }
    ]
   },
@@ -335,13 +303,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 2,
-   "press": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-26T07:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "곽빈, 아내·딸 있다고 직접 공개…내년 시즌 뒤 결혼식 계획",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-26T08:14:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250567"
+    },
     {
      "title": "트로피 3개 휩쓴 두산 곽빈의 다짐 “좋은 선수, 좋은 아빠 될게요”",
      "press": "sports.donga.com",
@@ -353,12 +327,6 @@
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-26T07:49:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/468/0001283763"
-    },
-    {
-     "title": "\"제 입으로 직접 결혼·출산 소식 이야기 하고 싶어서..\" 곽빈 딸 아빠 ...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T07:44:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/117/0004128434"
     }
    ]
   },
@@ -367,13 +335,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T06:44:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-26T06:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "오산시, 학교 현안 듣고 아동 안전 살핀다…도서관 음악회도 마련",
+     "press": "joongdo.co.kr",
+     "publishedAt": "2026-11-26T08:14:00.000Z",
+     "link": "https://www.joongdo.co.kr/web/view.php?key=20261126010009411"
+    },
     {
      "title": "제천 청풍초·중학교, '맑은바람 고운소리 음악회' 정기연주회 개최",
      "press": "inews365.com",
@@ -385,12 +359,6 @@
      "press": "mhns.co.kr",
      "publishedAt": "2026-11-26T07:26:00.000Z",
      "link": "https://www.mhns.co.kr/news/articleView.html?idxno=770764"
-    },
-    {
-     "title": "해피업사회복지회, 당진서 청소년 숲속음악회 숲팝 열어",
-     "press": "idjnews.kr",
-     "publishedAt": "2026-11-26T07:14:00.000Z",
-     "link": "https://www.idjnews.kr/news/articleView.html?idxno=304254"
     }
    ]
   },
@@ -399,13 +367,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 0,
+   "articles90": 4,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-26T06:44:00.000Z",
+   "firstArticleAt": "2026-11-26T06:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "10년·20년·55년 찐친들의 세대 초월 여행 '그냥사람친구' [SQ현장]",
+     "press": "newsq.co.kr",
+     "publishedAt": "2026-11-26T08:14:00.000Z",
+     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=501074"
+    },
     {
      "title": "나영석 사단의 새 여행 예능 ‘그냥 사람 친구’…‘찐친’들의 우정싸...",
      "press": "sports.khan.co.kr",
@@ -417,19 +391,45 @@
      "press": "newdaily.co.kr",
      "publishedAt": "2026-11-26T07:24:00.000Z",
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650344.html"
+    }
+   ]
+  },
+  {
+   "keyword": "이승우",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T07:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "0-3 완패한 전북, 경기 막판 이승우 멱살잡이까지…日 팬들 \"레드카드 아...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-26T07:39:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/445/0000493636"
     },
     {
-     "title": "박정수 “이서진·한지민, 잠잘 때 빼고 계속 싸워…따로 귀국할 줄” ...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-26T06:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001151862"
+     "title": "\"순간적으로 욱했다\"…경기 중 日선수 멱살 잡은 이승우, 무슨일?",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-26T07:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653602?sid=102"
+    },
+    {
+     "title": "이승우, 日 선수 멱살 잡고 신경전…한일 축구팬 모두 '쓴소리'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T07:00:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014347848"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1667,
+  "flagged": 1668,
   "matched": 808,
   "avgLeadMin": 523,
   "recent": [
