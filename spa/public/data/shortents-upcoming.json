@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T10:58:03.852Z",
+ "builtAt": "2026-11-26T11:08:07.135Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,44 +11,44 @@
  "measured": 29,
  "candidates": [
   {
-   "keyword": "경찰, 세무사 구속영장 신청",
+   "keyword": "세무사 구속영장 신청",
    "sources": [
     "nate"
    ],
-   "articles90": 50,
-   "recent20": 8,
-   "press": 41,
+   "articles90": 53,
+   "recent20": 7,
+   "press": 42,
    "firstArticleAt": "2026-11-26T09:43:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "경찰, ‘AI 커닝’ 세무사 시험 수석 합격자 구속영장 신청",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T10:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207641?sid=102"
+     "title": "경찰, ‘세무냥이’ 구속영장 신청…“증거인멸·도주 우려 있어”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-26T11:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686659?sid=102"
     },
     {
-     "title": "경찰, 'AI 커닝' 세무사 수석 합격자 구속영장 신청…중대성과 사회적 ...",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-26T10:54:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1429578"
+     "title": "'AI 부정행위' 세무사 수석합격자 구속영장 신청",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T11:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930291?sid=102"
     },
     {
-     "title": "[단독] '세무사 수석' 구속영장 신청...\"사회적 파급력 고려\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T10:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438642?sid=102"
+     "title": "경찰, 'AI 커닝' 세무사 수석 구속영장 신청...\"중대 범죄 저질러\"",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-26T11:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122272?sid=102"
     }
    ]
   },
   {
    "keyword": "강금실 인사청문요구서 재가",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 27,
-   "recent20": 2,
+   "recent20": 1,
    "press": 25,
    "firstArticleAt": "2026-11-26T09:56:00.000Z",
    "exclusive": false,
@@ -79,30 +79,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 21,
+   "articles90": 24,
    "recent20": 3,
-   "press": 21,
+   "press": 24,
    "firstArticleAt": "2026-11-26T10:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 “SNS에서 폭언, 욕설은 차단한다···방치하면 소통 방해”",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-26T10:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053660?sid=100"
+     "title": "\"'저 가난합니다' 왜 해야 하나?\" 李대통령이 밝힌 '복지 자동주의'",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-26T11:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447140?sid=100"
     },
     {
-     "title": "이 대통령 \"가난하다는 걸 왜 증명해야 하나\" 신청주의서 자동주의로",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-26T10:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162425?sid=100"
+     "title": "李대통령 “SNS서 합리적 내용은 수용, 폭언·욕설은 차단”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-26T11:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703636?sid=100"
     },
     {
-     "title": "李대통령 \"복지 신청 왜 해야 하나…해당되면 자동 지급\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-26T10:44:00.000Z",
-     "link": "https://www.ajunews.com/view/20261126192546891"
+     "title": "이 대통령 “SNS 지적은 도움…폭언·욕설은 차단”",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-26T10:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368847?sid=100"
     }
    ]
   },
@@ -111,133 +111,197 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
+   "articles90": 15,
    "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T09:29:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-26T09:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“韓 쿠팡 과징금, 국가 간 약속 어긴 행위” [美 ‘과잉생산 관세’ 압...",
+     "title": "아직 공장도 없는데 왜?…美 ‘과잉생산 관세’ 근거 된 800조원 호남 반...",
      "press": "segye.com",
-     "publishedAt": "2026-11-26T10:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178407?sid=104"
+     "publishedAt": "2026-11-26T11:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178408?sid=100"
+    },
+    {
+     "title": "반도체·자동차 콕 집은 미국‥정부 \"과잉생산 동의 어려워\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-26T10:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538320?sid=101"
     },
     {
      "title": "미, 한국에 과잉생산 관세 15% 제안…25%까지 인상 경고",
      "press": "kyongbuk.co.kr",
      "publishedAt": "2026-11-26T10:52:00.000Z",
      "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4092322"
-    },
-    {
-     "title": "[인도증시] 美 관세 주시하며 '관망', 소폭 상승 마감…시총 기준 홍콩...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-26T10:46:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261126001326"
     }
    ]
   },
   {
-   "keyword": "에이피알 닥터멜락신 인수",
+   "keyword": "전철 235대 지연",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 12,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T09:33:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-26T09:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "에이피알, 美 틱톡샵 뷰티 2위 '닥터멜락신' 3900억원에 인수",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-26T10:52:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001957"
+     "title": "코레일 전철 235대 지연",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-26T10:58:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287256"
     },
     {
-     "title": "에이피알, 3900억원에 스킨케어 브랜드 ‘닥터멜락신’ 인수",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-26T10:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011951?sid=101"
+     "title": "철도노조 준법투쟁 첫날 열차 4대 멈춰…전철 235대 지연",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-26T10:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165822?sid=102"
     },
     {
-     "title": "에이피알, '브랜드501' 주식 700억원 규모 취득…\"경영권 확보\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T10:02:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785129"
+     "title": "철도노조 안전운행 투쟁 첫날…전국 광역전철 235대 지연",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-26T10:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193707?sid=102"
     }
    ]
   },
   {
-   "keyword": "전철 235대 20분 지연",
+   "keyword": "위증 무죄 확정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-26T09:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "尹 ‘한덕수 재판 위증’ 대법 무죄(종합)",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-26T10:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162426?sid=102"
+    },
+    {
+     "title": "'재판 위증' 첫 무죄 확정, 윤 전 대통령 측 \"특검에 감사\"",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-26T10:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980044?sid=102"
+    },
+    {
+     "title": "尹 ‘한덕수 재판 위증’ 무죄 확정",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-26T10:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887718?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 7대 시드 프로젝트",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T09:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 “7대 시드 프로젝트 더 속도 내야”",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-26T11:02:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1795690505693708002"
+    },
+    {
+     "title": "“위험성 크지 않은 규제 과감히 풀고 7대 시드 프로젝트 좀 더 속도 내...",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-26T11:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887724?sid=100"
+    },
+    {
+     "title": "이 대통령 \"핵심 경제지표 역사적 이정표…7대 시드 더 속도내야\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T10:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406133?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "장동혁 대표 발언",
    "sources": [
     "nate"
    ],
    "articles90": 6,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T09:34:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-26T09:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "철도노조 준법투쟁 첫날 퇴근길 지연 속출…\"30분 기다린 열차 이미 만...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T10:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466628?sid=102"
+     "title": "장동혁, '조작징계' 의혹 제기 윤리위원 해임...당 내홍 격화 조짐",
+     "press": "ntoday.co.kr",
+     "publishedAt": "2026-11-26T10:40:00.000Z",
+     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131170"
     },
     {
-     "title": "철도노조 안전운행 투쟁...광역전철 235대 20분 이상 지연",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-26T10:00:00.000Z",
-     "link": "https://www.ajunews.com/view/20261126184900829"
+     "title": "'조작 징계' 두고 지도부 공개 충돌...장동혁 \"탈당 창당도 있다\"",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-26T10:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980043?sid=100"
     },
     {
-     "title": "코레일 “광역전철 235대 20분 이상 지연…일반열차 4대 운행정지”",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-26T09:44:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326651/?sc=Naver"
+     "title": "'장동혁-최 교수' 대화내역 추가 폭로에…배현진 \"몇 꺼풀의 얼굴이 더...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-26T09:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160021?sid=100"
     }
    ]
   },
   {
-   "keyword": "박종복 은행연합회장 선출",
+   "keyword": "2년 만에 도전!",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T09:30:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-26T10:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박종복 전 SC제일은행장, 차기 은행연합회장 선출",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-26T10:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078890?sid=101"
+     "title": "‘부상 딛은 홈런왕’ 김도영, 통산 2번째 MVP···허인서는 16년 만에 ...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-26T11:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485362?sid=102"
     },
     {
-     "title": "박종복 前 SC제일은행장, 은행연합회장 선출",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-26T10:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358807?sid=101"
+     "title": "한국 탁구, 혼성 단체 월드컵 출격…2년 만에 메달 도전",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T10:36:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/003/0014348281"
     },
     {
-     "title": "16대 은행연합회장에 박종복 전 SC제일은행장 선출",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-26T10:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061442?sid=101"
+     "title": "KIA 설렌다! MVP+홈런왕+장타왕 셀프 평가 '70점' 실화?→\"유격수 도전 ...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-26T10:35:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002084483"
     }
    ]
   },
   {
    "keyword": "검찰",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 4,
@@ -268,76 +332,94 @@
    ]
   },
   {
-   "keyword": "장관 후보자 인사청문회 준비 시작",
+   "keyword": "美 관세 인상 가능성",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-26T10:00:00.000Z",
+   "firstArticleAt": "2026-11-26T09:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "강유정 문체장관 후보자, 한한령 해빙 대비 \"민관 합동조직 만들 것\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-26T10:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968037?sid=103"
+     "title": "아직 공장도 없는데 왜?…美 ‘과잉생산 관세’ 근거 된 800조원 호남 반...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-26T11:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178408?sid=100"
     },
     {
-     "title": "강유정 문체장관 후보자 \"석 자 얼음 녹기 시작했다\"…'한한령 대응' 최...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-26T10:26:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749346"
+     "title": "['클릭' 증시] 약발 떨어진 美 관세...아시아 증시 '무덤덤'",
+     "press": "00news.co.kr",
+     "publishedAt": "2026-11-26T09:58:00.000Z",
+     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108394"
     },
     {
-     "title": "李, 강금실 국정원장 후보자 등 5명 인사청문요구서 재가",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T10:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207638?sid=100"
+     "title": "[베트남 증시] 美 '최고 35% 관세' 직격탄에 3.4% 급락…VN지수 1,630선 붕...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-26T09:48:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261126001318"
     }
    ]
   },
   {
-   "keyword": "올해의 상생기업대상 기념식",
+   "keyword": "중진 만찬 참석 의원들",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 3,
+   "articles90": 28,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-26T09:29:00.000Z",
+   "firstArticleAt": "2026-11-26T10:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장철웅 삼성디스플레이 부사장, 올해의 상생기업대상 은탑산업훈장",
-     "press": "weeklytrade.co.kr",
-     "publishedAt": "2026-11-26T10:36:00.000Z",
-     "link": "https://weeklytrade.co.kr/news/view.html?section=1&category=5&item=&no=102454"
-    },
-    {
-     "title": "[기업] 중기부, '올해의 상생기업대상' 포상식 개최",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T09:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438613?sid=101"
-    },
-    {
-     "title": "이병권 중기부 2차관, 2026 올해의 상생기업대상",
+     "title": "중진 만찬 참석하는 남인순·박범계 의원",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T09:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466607?sid=101"
+     "publishedAt": "2026-11-26T10:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466649?sid=100"
+    },
+    {
+     "title": "중진 만찬 참석하는 이학영 의원",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T10:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466651?sid=100"
+    },
+    {
+     "title": "중진 만찬 참석하는 정성호·민홍철 의원",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T10:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466643?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1725,
-  "matched": 842,
-  "avgLeadMin": 520,
+  "flagged": 1730,
+  "matched": 845,
+  "avgLeadMin": 519,
   "recent": [
+   {
+    "keyword": "철도노조 준법투쟁 시작",
+    "hitKeyword": "철도노조 투쟁 첫날",
+    "hitAt": "2026-11-26T20:00:00+09:00",
+    "leadMin": 505
+   },
+   {
+    "keyword": "철도노조 안전운행 투쟁",
+    "hitKeyword": "철도노조 투쟁 첫날",
+    "hitAt": "2026-11-26T20:00:00+09:00",
+    "leadMin": 173
+   },
+   {
+    "keyword": "철도노조 준법투쟁",
+    "hitKeyword": "철도노조 투쟁 첫날",
+    "hitAt": "2026-11-26T20:00:00+09:00",
+    "leadMin": 42
+   },
    {
     "keyword": "정찬성 스승 별세",
     "hitKeyword": "정찬성 에디 차 추모",
@@ -379,24 +461,6 @@
     "hitKeyword": "코레일 전철 운행 차질",
     "hitAt": "2026-11-26T19:30:00+09:00",
     "leadMin": 12
-   },
-   {
-    "keyword": "2027년 전망 하나증권",
-    "hitKeyword": "환승연애5 2027년 방영",
-    "hitAt": "2026-11-26T19:00:00+09:00",
-    "leadMin": 4898
-   },
-   {
-    "keyword": "2027년 임원 승진",
-    "hitKeyword": "환승연애5 2027년 방영",
-    "hitAt": "2026-11-26T19:00:00+09:00",
-    "leadMin": 395
-   },
-   {
-    "keyword": "광고",
-    "hitKeyword": "이정재 광고사업 펑크",
-    "hitAt": "2026-11-26T19:00:00+09:00",
-    "leadMin": 364
    }
   ]
  }
