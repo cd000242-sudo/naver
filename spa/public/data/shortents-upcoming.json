@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T12:08:29.099Z",
+ "builtAt": "2026-11-26T12:18:34.030Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 4,
+   "articles90": 16,
+   "recent20": 3,
    "press": 13,
-   "firstArticleAt": "2026-11-26T10:46:00.000Z",
+   "firstArticleAt": "2026-11-26T10:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'35% 관세 표적' 베트남 \"美우려 해소·무역협상 마무리 노력\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T12:14:00.000Z",
+     "link": "https://www.ajunews.com/view/20261126210907978"
+    },
     {
      "title": "美 무역대표부 \"호남 반도체 클러스터, 관세 인상 요인\"",
      "press": "tbc.co.kr",
@@ -33,44 +39,38 @@
      "press": "segye.com",
      "publishedAt": "2026-11-26T12:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004178431?sid=104"
-    },
-    {
-     "title": "'35% 관세 표적' 베트남 \"美우려 해소·무역협상 마무리 노력\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T11:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466682?sid=104"
     }
    ]
   },
   {
-   "keyword": "윤석열 위증 무죄 확정",
+   "keyword": "ESS 우선협상 대상 선정",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 7,
+   "articles90": 9,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T10:47:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-26T10:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "무죄 확정 尹, 특검 향해 “수사 아닌 소설”",
-     "press": "ksmnews.co.kr",
-     "publishedAt": "2026-11-26T11:44:00.000Z",
-     "link": "https://www.ksmnews.co.kr/news/view.php?idx=631360"
+     "title": "'역대 최대' ESS 입찰…1194㎿ 규모 우선협상대상자 선정",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T11:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416280?sid=101"
     },
     {
-     "title": "윤석열 '한덕수 내란 재판 위증', 대법서 무죄 확정",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T11:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438648?sid=102"
+     "title": "정부, 역대 최대 규모 ESS 사업자 우선 선정",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-26T11:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686662?sid=101"
     },
     {
-     "title": "윤석열 위증 무죄 확정 뒤…김계리 \"특검에 감사\" 비아냥",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-26T11:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522674?sid=102"
+     "title": "3차 ESS 우선협상 대상 선정…전국 14곳에 1194㎿",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-26T11:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848491?sid=101"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-26T10:44:00.000Z",
+   "firstArticleAt": "2026-11-26T10:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,46 +107,47 @@
    ]
   },
   {
-   "keyword": "송영호 김병기 경찰 인사",
+   "keyword": "윤석열 위증 무죄 확정",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T10:40:00.000Z",
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T11:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경찰청 차장에 송영호·부산경찰청장에 김병기…고위직 인사 단행",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T11:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207643?sid=102"
+     "title": "무죄 확정 尹, 특검 향해 “수사 아닌 소설”",
+     "press": "ksmnews.co.kr",
+     "publishedAt": "2026-11-26T11:44:00.000Z",
+     "link": "https://www.ksmnews.co.kr/news/view.php?idx=631360"
     },
     {
-     "title": "경찰 '2인자' 승진 인사…경찰청 차장에 송영호 임명",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-26T11:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214417?sid=102"
+     "title": "윤석열 '한덕수 내란 재판 위증', 대법서 무죄 확정",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T11:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438648?sid=102"
     },
     {
-     "title": "송영호 경찰청 차장·김병기 부산경찰청장 임명…고위직 인사 단행",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-26T10:54:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545114"
+     "title": "윤석열 위증 무죄 확정 뒤…김계리 \"특검에 감사\" 비아냥",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-26T11:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522674?sid=102"
     }
    ]
   },
   {
    "keyword": "강금실 인사청문요구서 재가",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T10:42:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-26T10:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,34 +172,34 @@
    ]
   },
   {
-   "keyword": "2년 만의 도전",
+   "keyword": "송영호 김병기 경찰 인사",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-26T11:35:00.000Z",
+   "firstArticleAt": "2026-11-26T10:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김도영 '2년 만에 MVP 탈환'‥FA 구자욱은 어디로?",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-26T11:46:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/214/0001538341"
+     "title": "경찰청 차장에 송영호·부산경찰청장에 김병기…고위직 인사 단행",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-26T11:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207643?sid=102"
     },
     {
-     "title": "박현경, JLPGA 최종전 1R서 공동 4위로 우승 도전…'레전드' 신지애 공동...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-26T11:42:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261126001330"
+     "title": "경찰 '2인자' 승진 인사…경찰청 차장에 송영호 임명",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T11:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214417?sid=102"
     },
     {
-     "title": "김도영, 2년 만에 또 MVP…허인서, 16년 만에 ‘포수 신인왕’",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-26T11:35:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/032/0003485391"
+     "title": "송영호 경찰청 차장·김병기 부산경찰청장 임명…고위직 인사 단행",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-26T10:54:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545114"
     }
    ]
   }
