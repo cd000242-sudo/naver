@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T09:27:32.681Z",
+ "builtAt": "2026-11-26T09:37:36.082Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,56 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "에이피알 닥터멜락신 인수",
+   "keyword": "박종복 은행연합회장 선출",
    "sources": [
     "nate"
    ],
-   "articles90": 59,
-   "recent20": 3,
-   "press": 58,
-   "firstArticleAt": "2026-11-26T07:58:00.000Z",
+   "articles90": 53,
+   "recent20": 4,
+   "press": 52,
+   "firstArticleAt": "2026-11-26T08:12:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "박종복 은행연합회장 선출...3년 임기 시작",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T09:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438610?sid=101"
+    },
+    {
+     "title": "은행연합회장에 박종복 전 SC제일은행장",
+     "press": "koreareport.co.kr",
+     "publishedAt": "2026-11-26T09:28:00.000Z",
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=55200"
+    },
+    {
+     "title": "박종복 은행연합회장 만장일치 선출…12월 1일 임기 시작",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-26T09:22:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904617"
+    }
+   ]
+  },
+  {
+   "keyword": "에이피알 닥터멜락신 인수",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 47,
+   "recent20": 2,
+   "press": 46,
+   "firstArticleAt": "2026-11-26T08:09:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "에이피알, 더마 브랜드 '닥터멜락신' 인수",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T09:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416243?sid=101"
+    },
     {
      "title": "\"美틱톡숍서 뷰티매출2위\" 에이피알, 3900억에 '닥터멜락신' 인수",
      "press": "catchnews.kr",
@@ -33,44 +72,6 @@
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-26T09:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001207633?sid=101"
-    },
-    {
-     "title": "에이피알, '더마 뷰티' 닥터멜락신 인수…지분 87.3% 확보",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-26T09:10:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6944264"
-    }
-   ]
-  },
-  {
-   "keyword": "박종복 은행연합회장 선출",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 51,
-   "recent20": 4,
-   "press": 50,
-   "firstArticleAt": "2026-11-26T08:12:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박종복 은행연합회장 만장일치 선출…12월 1일 임기 시작",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-26T09:22:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904617"
-    },
-    {
-     "title": "은행연합회, 차기 회장에 박종복 전 SC제일은행장 선출",
-     "press": "kfenews.co.kr",
-     "publishedAt": "2026-11-26T09:20:00.000Z",
-     "link": "https://www.kfenews.co.kr/news/articleView.html?idxno=668916"
-    },
-    {
-     "title": "박종복 은행연합회장 선출…생산적 금융·디지털 전환 과제",
-     "press": "economist.co.kr",
-     "publishedAt": "2026-11-26T09:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/243/0000106359?sid=101"
     }
    ]
   },
@@ -79,18 +80,18 @@
    "sources": [
     "daum"
    ],
-   "articles90": 48,
-   "recent20": 6,
+   "articles90": 49,
+   "recent20": 4,
    "press": 43,
    "firstArticleAt": "2026-11-26T08:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민간 자본시장개혁기구 출범...수장에 메리츠 김용범",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T09:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438601?sid=101"
+     "title": "정부 ‘자본시장 대전환 위원회’ 구성.. 위원장에 김용범 메리츠지주 ...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-26T09:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610509?sid=101"
     },
     {
      "title": "김용범 개혁기구 위원장 맡는다…코스닥 재설계·주주가치 제고 추진",
@@ -99,10 +100,10 @@
      "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631110"
     },
     {
-     "title": "자본시장 대전환 위원장에 메리츠 김용범 부회장",
-     "press": "donga.com",
-     "publishedAt": "2026-11-26T09:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765494?sid=102"
+     "title": "민간 자본시장개혁기구 출범...수장에 메리츠 김용범",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T09:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438601?sid=101"
     }
    ]
   },
@@ -111,94 +112,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 38,
-   "recent20": 5,
-   "press": 28,
-   "firstArticleAt": "2026-11-26T08:00:00.000Z",
+   "articles90": 33,
+   "recent20": 3,
+   "press": 24,
+   "firstArticleAt": "2026-11-26T08:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "산업부 \"美 과잉생산 주장 수긍 어려워\"…최종 15% 예상",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-26T09:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000546176?sid=101"
+    },
+    {
+     "title": "\"관세 40% 때릴수도\" 中 압박.. 트럼프, 내달 정상회담 협상용?",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-26T09:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610502?sid=104"
+    },
     {
      "title": "美, 반도체 등 산업정책 트집… 정부 \"15% 관세 사수\"",
      "press": "fnnews.com",
      "publishedAt": "2026-11-26T09:26:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005610489?sid=101"
-    },
-    {
-     "title": "[사설] 호남 반도체까지 겨냥한 美… 추가 관세 빌미 주지 말아야",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-26T09:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061428?sid=110"
-    },
-    {
-     "title": "中, 美 '과잉생산 관세'에 재차 반발…대응 조치 가능성 예고",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T09:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014348208?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "부산 통합 LCC 유치",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 23,
-   "recent20": 5,
-   "press": 20,
-   "firstArticleAt": "2026-11-26T07:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "부산시, 통합LCC 본사 품었다···전재수 \"항공산업 새 중심축 출발점\"",
-     "press": "pointe.co.kr",
-     "publishedAt": "2026-11-26T09:20:00.000Z",
-     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=88520"
-    },
-    {
-     "title": "꺼져 가던 ‘LCC 본사’ 하나로 뭉친 ‘부산’이 살렸다",
-     "press": "busan.com",
-     "publishedAt": "2026-11-26T09:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001409201?sid=101"
-    },
-    {
-     "title": "전재수 부산시장 \"부산을 항공사의 성장 기반으로\"···통합 LCC 본사 유...",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-26T09:16:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=160784"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검 후보 추천",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 19,
-   "firstArticleAt": "2026-11-26T07:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조작기소 특검 후보에 이임성·이정훈 변호사 추천…국힘은 거부·장외...",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-26T09:24:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566575"
-    },
-    {
-     "title": "조작기소특검 후보에 이임성·이정훈 변호사",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-26T09:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358730?sid=100"
-    },
-    {
-     "title": "[영상] 조작기소 특검 후보 추천 마지막날...국힘이 추천 안하자 민주당...",
-     "press": "facttv.kr",
-     "publishedAt": "2026-11-26T08:54:00.000Z",
-     "link": "https://www.facttv.kr/news/articleView.html?idxno=51125"
     }
    ]
   },
@@ -207,30 +144,126 @@
    "sources": [
     "google"
    ],
-   "articles90": 19,
+   "articles90": 22,
    "recent20": 8,
-   "press": 17,
-   "firstArticleAt": "2026-11-26T07:58:00.000Z",
+   "press": 19,
+   "firstArticleAt": "2026-11-26T08:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 코레일 “전철 235대 20분 이상 지연…일반열차 4대 운행정지”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-26T09:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834171?sid=101"
+     "title": "코레일 \"철도노조 안전운행 투쟁에 광역전철 235대 20분 이상 지연\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-26T09:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610513?sid=101"
     },
     {
-     "title": "코레일테크, 생활 속 자원순환 문화 확산",
+     "title": "코레일, 광명역~인천공항 노선 수소버스 전환",
      "press": "ikld.kr",
-     "publishedAt": "2026-11-26T09:24:00.000Z",
-     "link": "http://www.ikld.kr/news/articleView.html?idxno=344972"
+     "publishedAt": "2026-11-26T09:32:00.000Z",
+     "link": "http://www.ikld.kr/news/articleView.html?idxno=344973"
     },
     {
-     "title": "[속보] 코레일 \"전철 235대 20분 이상 지연\"",
-     "press": "todaykorea.co.kr",
-     "publishedAt": "2026-11-26T09:18:00.000Z",
-     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=409313"
+     "title": "[속보]코레일 \"전철 235대 20분 이상 지연…일반열차 4대 운행중지\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-26T09:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522651?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "최태원 재산분할금 지급 제안",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 19,
+   "recent20": 2,
+   "press": 19,
+   "firstArticleAt": "2026-11-26T08:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최태원 “7일 내 9440억 지급·5% 지연이자”…노소영 측 거부",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-26T09:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568265?sid=102"
+    },
+    {
+     "title": "[속보]최태원, 노소영에 \"7일 내 9천440억 지급, 서로 추가 소송 말자\" 제...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-26T09:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001042585?sid=102"
+    },
+    {
+     "title": "최태원 \"노소영에 9440억 일주일 내 지급, 늦으면 하루 1.3억 이자\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-26T09:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078878?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "통합 LCC 본사 부산 이전 확정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 18,
+   "recent20": 4,
+   "press": 16,
+   "firstArticleAt": "2026-11-26T08:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“부산발 국제 노선 확대할 기반 마련됐다” 한목소리로 환영 [통합 LCC...",
+     "press": "busan.com",
+     "publishedAt": "2026-11-26T09:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001409207?sid=102"
+    },
+    {
+     "title": "에어부산·진에어·에어서울 LCC 통합 본사 부산 확정",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-26T09:24:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287199"
+    },
+    {
+     "title": "꺼져 가던 ‘LCC 본사’ 하나로 뭉친 ‘부산’이 살렸다",
+     "press": "busan.com",
+     "publishedAt": "2026-11-26T09:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001409201?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 7대 시드 프로젝트",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-26T08:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 “7대 SEED 프로젝트 관련 위험성 없는 규제 과감히 풀어달라”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-26T09:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729140?sid=100"
+    },
+    {
+     "title": "이 대통령 \"오늘 한 걸음이 훗날 천 걸음 격차\"…7대 시드 속도 주문",
+     "press": "kado.net",
+     "publishedAt": "2026-11-26T09:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213703?sid=100"
+    },
+    {
+     "title": "李대통령 \"경제지표 역사적 이정표… 7대 시드 속도 내야\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-26T09:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610505?sid=100"
     }
    ]
   },
@@ -239,10 +272,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-26T07:58:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T08:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -267,110 +300,80 @@
    ]
   },
   {
-   "keyword": "김선태 고졸 발언 비판",
+   "keyword": "올해의 상생기업대상 기념식",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 14,
-   "recent20": 0,
-   "press": 14,
-   "firstArticleAt": "2026-11-26T08:13:00.000Z",
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-26T08:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"9급 시험은 고졸수준\"…김선태, 정영란 원장 공무원 비하 발언에→결국...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-26T09:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409698"
+     "title": "[기업] 중기부, '올해의 상생기업대상' 포상식 개최",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T09:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438613?sid=101"
     },
     {
-     "title": "\"9급 공무원, 고졸 수준\" 발언에…'충주맨' 김선태 뿔났다 [MHN:픽]",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-26T08:53:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000493666"
+     "title": "이병권 중기부 2차관, 2026 올해의 상생기업대상",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T09:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466607?sid=101"
+    },
+    {
+     "title": "2026 동반성장주간 올해의 상생기업대상 기념식",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T09:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009313085?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "김선태의 고졸 비하 발언 분노",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T08:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"9급은 고졸 수준\" 발언 논란…'충주맨' 김선태 분노 [소셜in]",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-26T09:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329284"
     },
     {
      "title": "‘충주맨’ 김선태 “월급 200만원 주면서”…‘9급 고졸 수준’ 막말에...",
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-26T08:47:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003568252?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 강보합 마감",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T08:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코스피, 기준금리 인상·기관 순매수에 강보합 마감...코스닥도 소폭 상...",
-     "press": "futurechosun.com",
-     "publishedAt": "2026-11-26T08:50:00.000Z",
-     "link": "https://futurechosun.com/?p=167805"
     },
     {
-     "title": "[오늘의 주목주] 현대모비스 주가 5%대 내려, 코스피 '기관 순매수'에 4...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-26T08:50:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453054"
-    },
-    {
-     "title": "코스피, 전날 6% 급락 뒤 강보합…4700선 마감",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-26T08:36:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026112616391858186"
-    }
-   ]
-  },
-  {
-   "keyword": "올해의 상생기업대상 기념식",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T08:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대·중소기업 상생협력 주역 한자리…'올해의 상생기업대상' 개최",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-26T09:22:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088455"
-    },
-    {
-     "title": "'2026 올해의 상생기업대상'…산업훈장 2점등 17점 정부포상",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-26T08:32:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261126500392"
-    },
-    {
-     "title": "aT, '2026 올해의 상생기업대상' 국무총리 표창 수상",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-26T08:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447081?sid=102"
+     "title": "'충주맨' 김선태, 9급 공무원 '고졸 수준' 발언에 분노⋯\"고졸이 죄 지었...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-26T08:44:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653631"
     }
    ]
   },
   {
    "keyword": "강유정 후보자 출근길",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T08:02:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T08:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -397,69 +400,69 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1697,
-  "matched": 817,
-  "avgLeadMin": 519,
+  "flagged": 1701,
+  "matched": 828,
+  "avgLeadMin": 518,
   "recent": [
    {
-    "keyword": "신인상 한화 허인서",
-    "hitKeyword": "허인서 포수 신인왕",
-    "hitAt": "2026-11-26T18:00:00+09:00",
-    "leadMin": 93
+    "keyword": "스페이스x 주가",
+    "hitKeyword": "머스크 스페이스X 기부",
+    "hitAt": "2026-11-26T18:30:00+09:00",
+    "leadMin": 3868
    },
    {
-    "keyword": "허인서 신인왕",
-    "hitKeyword": "허인서 포수 신인왕",
-    "hitAt": "2026-11-26T18:00:00+09:00",
+    "keyword": "이서진 짐꾼 은퇴 나이",
+    "hitKeyword": "그냥사람친구 이서진",
+    "hitAt": "2026-11-26T18:30:00+09:00",
+    "leadMin": 163
+   },
+   {
+    "keyword": "이서진 짐꾼 은퇴 필요할 나이",
+    "hitKeyword": "그냥사람친구 이서진",
+    "hitAt": "2026-11-26T18:30:00+09:00",
+    "leadMin": 143
+   },
+   {
+    "keyword": "그냥 사람 친구",
+    "hitKeyword": "그냥사람친구 이서진",
+    "hitAt": "2026-11-26T18:30:00+09:00",
+    "leadMin": 133
+   },
+   {
+    "keyword": "한지민 이서진, 20년 우정 싸움",
+    "hitKeyword": "그냥사람친구 이서진",
+    "hitAt": "2026-11-26T18:30:00+09:00",
+    "leadMin": 123
+   },
+   {
+    "keyword": "한지민 이서진, 20년 친구 싸움",
+    "hitKeyword": "그냥사람친구 이서진",
+    "hitAt": "2026-11-26T18:30:00+09:00",
+    "leadMin": 103
+   },
+   {
+    "keyword": "한지민 이서진, 20년 지기 우정 싸움",
+    "hitKeyword": "그냥사람친구 이서진",
+    "hitAt": "2026-11-26T18:30:00+09:00",
     "leadMin": 83
    },
    {
-    "keyword": "허인서",
-    "hitKeyword": "허인서 포수 신인왕",
-    "hitAt": "2026-11-26T18:00:00+09:00",
-    "leadMin": 73
+    "keyword": "한지민·이서진, 20년 친구 싸움",
+    "hitKeyword": "그냥사람친구 이서진",
+    "hitAt": "2026-11-26T18:30:00+09:00",
+    "leadMin": 63
    },
    {
-    "keyword": "김도영 MVP 탈환",
-    "hitKeyword": "김도영 완벽 부활",
-    "hitAt": "2026-11-26T18:00:00+09:00",
-    "leadMin": 3
+    "keyword": "kbo mvp",
+    "hitKeyword": "2026 KBO 시상식",
+    "hitAt": "2026-11-26T18:30:00+09:00",
+    "leadMin": 53
    },
    {
-    "keyword": "윤가은 감독상 부담스럽다",
-    "hitKeyword": "청룡 여성 감독상",
-    "hitAt": "2026-11-26T17:30:00+09:00",
-    "leadMin": 636
-   },
-   {
-    "keyword": "리플",
-    "hitKeyword": "르브론 최고령 트리플더블",
-    "hitAt": "2026-11-26T17:30:00+09:00",
-    "leadMin": 465
-   },
-   {
-    "keyword": "연금",
-    "hitKeyword": "연금보험료 국가 지원",
-    "hitAt": "2026-11-26T17:30:00+09:00",
-    "leadMin": 214
-   },
-   {
-    "keyword": "보험",
-    "hitKeyword": "연금보험료 국가 지원",
-    "hitAt": "2026-11-26T17:30:00+09:00",
-    "leadMin": 124
-   },
-   {
-    "keyword": "남동공단 화재",
-    "hitKeyword": "인천 남동공단 공장 화재",
-    "hitAt": "2026-11-26T17:30:00+09:00",
-    "leadMin": 93
-   },
-   {
-    "keyword": "경제",
-    "hitKeyword": "경제방송 진행자 눈물",
-    "hitAt": "2026-11-26T17:00:00+09:00",
-    "leadMin": 9205
+    "keyword": "이서진 한지민 그냥사람친구",
+    "hitKeyword": "그냥사람친구 이서진",
+    "hitAt": "2026-11-26T18:30:00+09:00",
+    "leadMin": 43
    }
   ]
  }
