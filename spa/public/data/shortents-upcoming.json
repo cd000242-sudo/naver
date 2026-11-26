@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T00:24:31.837Z",
+ "builtAt": "2026-11-26T00:34:34.168Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,167 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 6,
+ "measured": 14,
  "candidates": [
   {
-   "keyword": "이강인 선발 2-0 승리",
+   "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-25T23:02:00.000Z",
+   "articles90": 63,
+   "recent20": 9,
+   "press": 49,
+   "firstArticleAt": "2026-11-25T23:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이강인, UCL 선발 출전해 날카로운 공격 전개…아틀레티코 3경기 만에 승...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T00:20:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/018/0006415746"
+     "title": "김정관 산업장관 \"대미 관세 15% 상한 방어…선방한 성과\"",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-26T00:32:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120987"
     },
     {
-     "title": "이강인 선발 출전한 아틀레티코, UCL서 3경기만에 승리",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-26T00:16:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261126010010183"
+     "title": "美, 한국에 '관세 최고 25%' 으름장... 반도체·자동차 과잉생산 지목",
+     "press": "lawtv.kr",
+     "publishedAt": "2026-11-26T00:32:00.000Z",
+     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61530"
     },
     {
-     "title": "이강인 선발 출전 아틀레티코, 비킹 꺾고 UCL 3경기 만에 승리",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-26T00:12:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000086716"
+     "title": "미국 '과잉 생산 관세' 한국 15% 유지...'25% 인상' 여지는 남겨",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T00:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438222?sid=104"
     }
    ]
   },
   {
-   "keyword": "김정은 핵시설 전술핵",
+   "keyword": "삼성전자서비스 기술경진 안전혁신대회",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-25T22:55:00.000Z",
+   "articles90": 36,
+   "recent20": 8,
+   "press": 33,
+   "firstArticleAt": "2026-11-25T23:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "삼성전자, 제31회 '서비스 기술경진·안전혁신대회' 운영",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-26T00:32:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=758568"
+    },
+    {
+     "title": "“가전 고장, AI로 잡는다”… 삼성전자서비스, ‘스마트싱스’ 수리 경...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-26T00:26:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1140151"
+    },
+    {
+     "title": "삼성전자서비스, ‘서비스 기술경진 및 안전혁신대회’ 개최…AI 활용 능...",
+     "press": "inthenews.co.kr",
+     "publishedAt": "2026-11-26T00:26:00.000Z",
+     "link": "https://www.inthenews.co.kr/news/article.html?no=95022"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은 전술핵 현지지도",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-25T23:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "러 핵폭격기 이어 북도 \"전술핵, 다양한 영역 활용\"",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-26T00:26:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545020"
+    },
+    {
+     "title": "김정은, 핵무기 연구소 등 방문… “전술핵 다양하게 활용”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-26T00:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207400?sid=101"
+    },
     {
      "title": "핵시설 찾은 北 김정은 \"전술핵 다영역 활용화 주목\"",
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-26T00:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003159636?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "철도 파업",
+   "sources": [
+    "google",
+    "daum"
+   ],
+   "articles90": 14,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-25T23:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "철도노조, ‘안전운행 투쟁’ 돌입…12월 4일까지 진행",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-26T00:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162325?sid=102"
     },
     {
-     "title": "김정은, 핵무기 생산 점검…\"핵보유국지위 불가침적\"",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-26T00:16:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466667"
+     "title": "철도노조, 준법투쟁 돌입…노사협상 평행선에 시민 불편 우려",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-26T00:22:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261126500033"
     },
     {
-     "title": "김정은 핵시설 현지지도...\"전술핵 다역화에 주목\"",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-26T00:14:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120975"
+     "title": "“오늘 퇴근길부터 정신없겠네”…철도노조, ‘안전운행 투쟁’ 돌입",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T00:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769209?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "학교비정규직 총파업",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-25T23:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "학교비정규직 노동자 4만명 총파업 예고…급식·돌봄 차질 우려",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-26T00:24:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627837"
+    },
+    {
+     "title": "27일 학교비정규직노조 총파업…교육청 비상대응 체제",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-26T00:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122212?sid=102"
+    },
+    {
+     "title": "부산교육청, 27일 총파업 대비 급식·돌봄 대책 마련",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-26T00:18:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261125500588"
     }
    ]
   },
@@ -80,13 +178,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
    "firstArticleAt": "2026-11-25T23:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“내가 왜?”…광수 향한 불만 폭발한 34기 정숙 ‘나는 솔로’ 시청률...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T00:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001148370"
+    },
     {
      "title": "영철은 영자가 별로고, 현숙은 영호랑 힘들고..엇갈리는 ‘나는 SOLO’ 3...",
      "press": "heraldmuse.com",
@@ -98,22 +202,40 @@
      "press": "isplus.com",
      "publishedAt": "2026-11-25T23:55:00.000Z",
      "link": "https://m.entertain.naver.com/article/241/0003543655"
-    },
-    {
-     "title": "'나는 솔로' 광수, 정숙에 황당 요구…\"질투 나서 미치게 해줘\"",
-     "press": "ize.co.kr",
-     "publishedAt": "2026-11-25T23:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/465/0000021281"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1481,
-  "matched": 728,
-  "avgLeadMin": 495,
+  "flagged": 1485,
+  "matched": 732,
+  "avgLeadMin": 499,
   "recent": [
+   {
+    "keyword": "영월서 70대 숨져 중독 추정",
+    "hitKeyword": "70대 마라톤 사고",
+    "hitAt": "2026-11-26T09:30:00+09:00",
+    "leadMin": 5062
+   },
+   {
+    "keyword": "이강인",
+    "hitKeyword": "이강인 후반 교체",
+    "hitAt": "2026-11-26T09:30:00+09:00",
+    "leadMin": 66
+   },
+   {
+    "keyword": "유튜버 진우 해티 이혼",
+    "hitKeyword": "진우 해티 이혼",
+    "hitAt": "2026-11-26T09:30:00+09:00",
+    "leadMin": 66
+   },
+   {
+    "keyword": "이강인 선발 2-0 승리",
+    "hitKeyword": "이강인 후반 교체",
+    "hitAt": "2026-11-26T09:30:00+09:00",
+    "leadMin": 56
+   },
    {
     "keyword": "임영웅",
     "hitKeyword": "임영웅 에르메스 선물",
@@ -149,30 +271,6 @@
     "hitKeyword": "김민재 바이에른 선발",
     "hitAt": "2026-11-26T07:30:00+09:00",
     "leadMin": 7100
-   },
-   {
-    "keyword": "버스",
-    "hitKeyword": "미스 유니버스 기혼 우승",
-    "hitAt": "2026-11-26T07:30:00+09:00",
-    "leadMin": 4369
-   },
-   {
-    "keyword": "美 관세 발표, 韓 15% 유지?",
-    "hitKeyword": "미국 한국 관세 15%",
-    "hitAt": "2026-11-26T06:30:00+09:00",
-    "leadMin": 1381
-   },
-   {
-    "keyword": "뉴욕증시 혼조 마감",
-    "hitKeyword": "뉴욕증시 일제히 급락",
-    "hitAt": "2026-11-26T06:30:00+09:00",
-    "leadMin": 1371
-   },
-   {
-    "keyword": "관세 15% 유지",
-    "hitKeyword": "미국 한국 관세 15%",
-    "hitAt": "2026-11-26T06:30:00+09:00",
-    "leadMin": 389
    }
   ]
  }
