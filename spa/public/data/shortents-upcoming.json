@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T20:01:06.894Z",
+ "builtAt": "2026-11-26T20:11:10.403Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "땅속 광섬유 작은 지진 연구",
@@ -47,71 +47,39 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-26T18:38:00.000Z",
+   "articles90": 16,
+   "recent20": 7,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T18:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[사설] 호남반도체·쿠팡·관세, 미국의 경고 예사롭지 않다",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-26T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042619?sid=110"
-    },
-    {
-     "title": "호남팹까지 트집 잡은 美 “韓과 협의 불만족땐 25% 관세 적용”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-26T19:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765634?sid=101"
-    },
-    {
-     "title": "美 과잉생산 판정… \"15%보다 '中과 한 묶음' 피하는 게 숙제\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-26T19:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968070?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 27일 운세",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T18:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 27일(금) ♣띠별 운세♣",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-26T20:00:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=217966"
-    },
-    {
-     "title": "[오늘의 운세] 11월 27일 金(음력 10월 19일) 띠별 운세",
-     "press": "fntimes.com",
-     "publishedAt": "2026-11-26T20:00:00.000Z",
-     "link": "https://www.fntimes.com/html/view.php?ud=202611270454339430c1c16452b0_18"
-    },
-    {
-     "title": "[김동완의 오늘의 운세] 2026년 11월 27일",
+     "title": "美 “최대 40% 관세” 中 “단호히 반대”… 관세전쟁 다시 불붙나",
      "press": "seoul.co.kr",
-     "publishedAt": "2026-11-26T18:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703650?sid=103"
+     "publishedAt": "2026-11-26T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703672?sid=104"
+    },
+    {
+     "title": "한국산 제품 관세 15% 압박…현대모비스·HL만도 영향 '촉각'",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-26T20:02:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=508638"
+    },
+    {
+     "title": "메가 프로젝트 겨냥… 美 ‘관세 25%’ 압박",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-26T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703653?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1755,
-  "matched": 858,
-  "avgLeadMin": 509,
+  "flagged": 1753,
+  "matched": 856,
+  "avgLeadMin": 505,
   "recent": [
    {
     "keyword": "젠슨 황 스캔들 의혹",
