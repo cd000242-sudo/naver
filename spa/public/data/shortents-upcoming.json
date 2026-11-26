@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T02:35:10.022Z",
+ "builtAt": "2026-11-26T02:45:13.134Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,103 +8,103 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 21,
  "candidates": [
   {
    "keyword": "윤석열 위증 무죄 확정",
    "sources": [
     "signal.bz",
+    "nate",
     "daum"
    ],
-   "articles90": 72,
-   "recent20": 19,
-   "press": 59,
-   "firstArticleAt": "2026-11-26T01:45:00.000Z",
+   "articles90": 75,
+   "recent20": 20,
+   "press": 61,
+   "firstArticleAt": "2026-11-26T01:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "윤석열, '계엄 전 국무회의 소집 계획' 위증 혐의 무죄 확정",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-26T02:34:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=102066"
+     "title": "대법, 윤석열 '한덕수 재판 위증' 무죄 확정",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-26T02:44:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=368081"
     },
     {
-     "title": "尹 '한덕수 재판 위증' 무죄 확정…대법, 특검 상고 기각",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-26T02:32:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=316266"
+     "title": "[그래픽] 윤석열 전 대통령 재판 현황(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T02:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016464964?sid=102"
     },
     {
-     "title": "‘한덕수 재판서 국무회의 위증 혐의’ 윤석열, 무죄 확정",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T02:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568129?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "우수기업 선정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 65,
-   "recent20": 12,
-   "press": 50,
-   "firstArticleAt": "2026-11-26T01:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한국콜마, 남성 육아휴직 의무화…'일·생활 균형 우수기업' 선정",
-     "press": "newscape.co.kr",
-     "publishedAt": "2026-11-26T02:28:00.000Z",
-     "link": "http://www.newscape.co.kr/news/articleView.html?idxno=126122"
-    },
-    {
-     "title": "토니모리, '2026 대한민국 일·생활 균형 우수기업' 선정",
-     "press": "ktnews.com",
-     "publishedAt": "2026-11-26T02:26:00.000Z",
-     "link": "http://www.ktnews.com/news/articleView.html?idxno=150474"
-    },
-    {
-     "title": "하나카드, 한국의 금융소비자보호지수(KCPI) 5년 연속 우수기업 선정",
-     "press": "edu.donga.com",
-     "publishedAt": "2026-11-26T02:26:00.000Z",
-     "link": "https://edu.donga.com/news/articleView.html?idxno=114080"
+     "title": "윤석열 '한덕수 재판서 위증' 혐의 무죄 확정",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T02:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930083?sid=102"
     }
    ]
   },
   {
    "keyword": "한준호 장관 후보자",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 60,
-   "recent20": 22,
-   "press": 37,
-   "firstArticleAt": "2026-11-26T01:43:00.000Z",
+   "articles90": 62,
+   "recent20": 13,
+   "press": 41,
+   "firstArticleAt": "2026-11-26T01:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 한준호 후보자 \"활동을 통해 증명할 부분\"",
-     "press": "ilyosisa.co.kr",
-     "publishedAt": "2026-11-26T02:34:00.000Z",
-     "link": "https://www.ilyosisa.co.kr/news/article.html?no=259204"
+     "title": "한준호 \"치안·안전 책임…갓난아이 돌보는 심정으로 노력\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T02:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930086?sid=102"
     },
     {
-     "title": "[오마이포토] 출근하는 한준호 행정안전부 장관 후보자",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-26T02:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002537312?sid=102"
+     "title": "한준호 행안장관 후보 \"큰 책임감…경찰·중수청 등 독립성은 명확\"",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-26T02:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143062?sid=102"
     },
     {
-     "title": "윤건영 \"한준호 기용, 내각 장악 의도\"…추미애 견제설엔 선 그어",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T02:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014346626?sid=100"
+     "title": "정치적 중립 우려? 한준호 “수사 독립성 명확…국민 눈높이 맞춰 활동...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-26T02:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834056?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성",
+   "sources": [
+    "google"
+   ],
+   "articles90": 38,
+   "recent20": 36,
+   "press": 28,
+   "firstArticleAt": "2026-11-26T02:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성증권, 2027년 정기 임원인사 단행…부사장 3명·상무 3명 승진",
+     "press": "ttlnews.com",
+     "publishedAt": "2026-11-26T02:44:00.000Z",
+     "link": "http://www.ttlnews.com/news/articleView.html?idxno=3166616"
+    },
+    {
+     "title": "sms오스람, 삼성디스플레이로부터 3100억원 지분 투자 유치",
+     "press": "it-b.co.kr",
+     "publishedAt": "2026-11-26T02:44:00.000Z",
+     "link": "https://www.it-b.co.kr/news/articleView.html?idxno=90870"
+    },
+    {
+     "title": "삼성자산운용, 2027년 임원 인사 단행… 이시완 부사장 승진·핵심 인재...",
+     "press": "ilyoseoul.co.kr",
+     "publishedAt": "2026-11-26T02:44:00.000Z",
+     "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=525629"
     }
    ]
   },
@@ -113,13 +113,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 23,
-   "recent20": 4,
-   "press": 21,
-   "firstArticleAt": "2026-11-26T01:10:00.000Z",
+   "articles90": 21,
+   "recent20": 5,
+   "press": 20,
+   "firstArticleAt": "2026-11-26T01:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "홈플러스, 또 문닫는다…자금 수혈 ‘난망’",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-26T02:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728876?sid=101"
+    },
     {
      "title": "홈플러스, 결국 문 닫는다...대구 4곳 영업중단·노동자들 '임금 체불'",
      "press": "pn.or.kr",
@@ -131,12 +137,6 @@
      "press": "srtimes.kr",
      "publishedAt": "2026-11-26T02:32:00.000Z",
      "link": "http://www.srtimes.kr/news/articleView.html?idxno=218710"
-    },
-    {
-     "title": "홈플러스 인수의향자는 부동산 개발업체…전체 인수 추진",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T02:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016464890?sid=101"
     }
    ]
   },
@@ -149,15 +149,15 @@
    "articles90": 19,
    "recent20": 3,
    "press": 18,
-   "firstArticleAt": "2026-11-26T01:11:00.000Z",
+   "firstArticleAt": "2026-11-26T01:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "분열상 드러난 野최고위..장동혁, 친한계에 \"탈당·창당\" 언급도",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-26T02:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610176?sid=100"
+     "title": "우재준 “나도 제명하려 했느냐” 장동혁 “탈당·창당이라는 좋은 제도...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-26T02:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485227?sid=100"
     },
     {
      "title": "장동혁 대표 최고위 발언",
@@ -166,10 +166,42 @@
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3763795"
     },
     {
-     "title": "장동혁 국민의힘 대표 발언",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-26T02:24:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3763792"
+     "title": "분열상 드러난 野최고위..장동혁, 친한계에 \"탈당·창당\" 언급도",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-26T02:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610176?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "신현송 한국은행 총재",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 23,
+   "recent20": 17,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T01:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] 신현송 \"올해 명목 GDP 3000조원 훌쩍 넘을 것\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-26T02:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005446771?sid=101"
+    },
+    {
+     "title": "[속보] 신현송 \"올해 반도체 영업익 700조…국민소득 5분의 1 이상\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T02:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009311583?sid=101"
+    },
+    {
+     "title": "신현송 총재 “주식시장 침체, 민간소비 영향 미쳐”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-26T02:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728886?sid=101"
     }
    ]
   },
@@ -178,13 +210,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
-   "recent20": 6,
+   "articles90": 12,
+   "recent20": 5,
    "press": 10,
    "firstArticleAt": "2026-11-26T01:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "尹 '계엄 국무회의 위증' 무죄 확정…대법 \"증거 부족\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-26T02:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653532?sid=102"
+    },
     {
      "title": "윤석열, '계엄 전 국무회의 소집 계획' 위증 혐의 무죄 확정",
      "press": "newsian.co.kr",
@@ -192,80 +230,10 @@
      "link": "https://www.newsian.co.kr/news/articleView.html?idxno=102066"
     },
     {
-     "title": "尹 \"계엄 전 국무회의 원래 계획\" 위증 무죄 확정…\"증거 부족\"(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T02:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014346628?sid=102"
-    },
-    {
-     "title": "윤석열 전 대통령, 계엄 국무회의 위증 혐의 대법원 무죄 확정...\"허위 ...",
-     "press": "christiantoday.co.kr",
-     "publishedAt": "2026-11-26T02:30:00.000Z",
-     "link": "https://www.christiantoday.co.kr/news/378896"
-    }
-   ]
-  },
-  {
-   "keyword": "가능한 사랑",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-26T01:21:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "보름달 아래서 소주 한잔 , 가능한 사랑을 만든 것",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-26T02:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/047/0002537311"
-    },
-    {
-     "title": "‘가능한 사랑’ 설경구·전도연 주연상, 다시 쓴 청룡史…최우수작품...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-26T02:12:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611260076"
-    },
-    {
-     "title": "[숏크립] 신민아, 우아한 드레스와 사랑스러운 미소…신민아의 레드카펫...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T02:10:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286746"
-    }
-   ]
-  },
-  {
-   "keyword": "김정은 현지지도",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T01:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 구애 손뿌리친 김정은 핵 시설 찾아 “불가역적 현실”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T02:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728835?sid=100"
-    },
-    {
-     "title": "핵시설 현지지도 나선 김정은 “핵보유국 인정 필요없다”",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-26T02:26:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261126010010300"
-    },
-    {
-     "title": "김정은, 핵시설 현지지도…\"전술핵 다영역 활용\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-26T02:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000555783?sid=100"
+     "title": "대법원, 윤석열 '계엄 국무회의 위증' 무죄 확정(종합)",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-26T02:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848217?sid=102"
     }
    ]
   },
@@ -275,62 +243,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
    "firstArticleAt": "2026-11-26T01:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "철도노조 ‘안전운행 투쟁’ 돌입…수도권 전철·KTX 지연 우려",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-26T02:36:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=921312"
+    },
+    {
+     "title": "철도노조 준법투쟁 첫날…열차 일부 지연에 시민들 ‘혼란’ [르포]",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-26T02:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686421?sid=102"
+    },
+    {
      "title": "“규정 지키면 열차가 늦는다?”…철도노조 준법투쟁에 열차 지연 우려",
      "press": "mk.co.kr",
      "publishedAt": "2026-11-26T02:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/024/0000109900?sid=102"
-    },
-    {
-     "title": "철도노조 안전운행 투쟁 첫날, 전국 열차 지연 사태로 혼란 확산",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-26T02:14:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887369"
-    },
-    {
-     "title": "철도노조 준법투쟁 돌입에 수도권 전철 운행 차질...최대 25분 지연",
-     "press": "abcn.kr",
-     "publishedAt": "2026-11-26T02:00:00.000Z",
-     "link": "https://www.abcn.kr/news/articleView.html?idxno=95071"
-    }
-   ]
-  },
-  {
-   "keyword": "황정민 염정아 크로스2 12월 공개",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T01:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "황정민·염정아, ‘액션 부부’의 귀환…‘크로스 2’, 12월 25일 넷플릭...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-26T02:32:00.000Z",
-     "link": "https://www.viva100.com/article/20261126500777"
-    },
-    {
-     "title": "'크로스 2', 황정민·염정아 부부의 귀환…12월 25일 공개",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-26T01:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000555729"
-    },
-    {
-     "title": "글로벌 1위 영화, 2년만에 뚝딱 속편 만들었다‥황정민X염정아 ‘크로스...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-26T01:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191480"
     }
    ]
   },
@@ -339,13 +275,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-26T01:42:00.000Z",
+   "firstArticleAt": "2026-11-26T02:02:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "가수 추혁진 팬클럽 '추스티니', 이천시에 성금 500만원 기탁",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T02:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009311551?sid=102"
+    },
     {
      "title": "김국희, ‘천천히 강렬하게’ 출연…당대 최고의 인기 가수 변신",
      "press": "swtvnews.com",
@@ -357,140 +299,6 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-26T02:24:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286764"
-    },
-    {
-     "title": "\"수십억 날렸다\" 국민가수가 경매로 잡은 한강뷰 아파트, 땅 치고 후회",
-     "press": "realty.chosun.com",
-     "publishedAt": "2026-11-26T02:10:00.000Z",
-     "link": "https://realty.chosun.com/site/data/html_dir/2026/11/26/2026112601412.html"
-    }
-   ]
-  },
-  {
-   "keyword": "투컷 디스랩",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 4,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T02:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "에픽하이 투컷, 존박 디스랩에 발끈... \"만난적도 없는 사이\"",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-26T02:34:00.000Z",
-     "link": "https://www.insight.co.kr/news/583682"
-    },
-    {
-     "title": "“잘한다 잘한다 했더니” 에픽하이 투컷, 일면식 없는 존박 ‘디스랩’...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-26T02:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003814503"
-    },
-    {
-     "title": "\"만난적도 없는데 OO\"…'에픽하이' 투컷, 존박 디스랩에 '욕설' 폭발→결...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-26T02:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000493534"
-    }
-   ]
-  },
-  {
-   "keyword": "정년연장",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T01:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘정년 연장’ 결단 망설이는 與",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T02:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728836?sid=100"
-    },
-    {
-     "title": "정년연장과 청년고용 - 세대 상생을 위한 노동조합의 과제와 해법",
-     "press": "news.inochong.org",
-     "publishedAt": "2026-11-26T02:26:00.000Z",
-     "link": "http://news.inochong.org/detail.php?number=6702&thread=14"
-    },
-    {
-     "title": "중기 10곳 중 8곳 “정년 연장 대신 퇴직 후 재고용”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T02:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728794?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "오정세 청룡 1위",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T01:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신민아·박지현 배꼽 이탈-오정세, '니가 좋아' 립싱크 '청룡'",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-26T02:32:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95986"
-    },
-    {
-     "title": "53살 김원준, 청룡서 '쇼' 열창-여배우들 눈동자에 하트",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-26T02:30:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95984"
-    },
-    {
-     "title": "39주 2위 최성곤, '청룡톱텐'서 1위 … 오정세, 박지현에 꽃다발 주고 줄...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-26T02:12:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650133.html"
-    }
-   ]
-  },
-  {
-   "keyword": "시청률",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T01:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "또 0%대 시청률 찍었다…박민영에 밀린 성훈, ♥키스 엔딩에도 '0.9%' 굴...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-26T02:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786283"
-    },
-    {
-     "title": "박민영·육성재 '나인 투 식스', 시청률 3.6%로 순조로운 첫 출발",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-26T01:38:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435980"
-    },
-    {
-     "title": "6회 연속 1%대 시청률에 머물렀다…안효섭, 종영 앞두고 마지막 복수 ('...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-26T01:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786268"
     }
    ]
   },
@@ -499,30 +307,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
    "firstArticleAt": "2026-11-26T01:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "‘구독자 1010만’ 유튜버 진우·해티, 결혼 4년 만에 파경…채널은 진...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-26T02:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001151811"
+    },
+    {
+     "title": "진우와 해티, 결혼 4년 만에 이혼",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-26T02:36:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611260197"
+    },
+    {
      "title": "1000만 유튜버 부부 ‘진우와 해티’, 결혼 4년 만에 파경",
      "press": "munhwa.com",
      "publishedAt": "2026-11-26T02:22:00.000Z",
      "link": "https://m.entertain.naver.com/article/021/0002835694"
-    },
-    {
-     "title": "‘1010만 유튜버’ 진우♥해티, 결혼 4년 만에 이혼…“각자의 삶 살아...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T02:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001148399"
-    },
-    {
-     "title": "‘1010만 유튜버’ 진우와 해티 연 소득 63억 추정이었는데..충격 파경(...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-26T01:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003814490"
     }
    ]
   },
@@ -557,11 +365,44 @@
      "link": "https://n.news.naver.com/mnews/article/023/0004011857?sid=101"
     }
    ]
+  },
+  {
+   "keyword": "수험",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T01:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능 마친 구미 수험생 한자리에…아이돌 공연에 스트레스 날렸다",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-26T02:44:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261126500297"
+    },
+    {
+     "title": "부산 수험생 '사탐런' 뚜렷…부산대·부경대 지원선 최대 21점 오를 듯",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T01:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214065?sid=102"
+    },
+    {
+     "title": "수능 끝난 수험생, 가장 많이 지원한 알바는 '서빙'",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-26T01:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848111?sid=101"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1522,
+  "flagged": 1524,
   "matched": 753,
   "avgLeadMin": 504,
   "recent": [
