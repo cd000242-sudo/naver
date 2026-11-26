@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T04:45:55.321Z",
+ "builtAt": "2026-11-26T04:55:58.879Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "신현송 한은 총재 간담회",
    "sources": [
     "nate"
    ],
-   "articles90": 55,
+   "articles90": 56,
    "recent20": 17,
-   "press": 36,
-   "firstArticleAt": "2026-11-26T03:16:00.000Z",
+   "press": 42,
+   "firstArticleAt": "2026-11-26T03:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한은, 금리 인상 페달 다시 밟았다…변수는 ‘반도체 쏠림’",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-26T04:44:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611260101"
+     "title": "신현송 \"강한 성장 맞게 통화정책 운용…증시 충분히 커질 여지\"",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-26T04:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159844?sid=101"
     },
     {
-     "title": "한은, 6개월 후 기준금리 전망 3.50%로 상향…추가 인상 가능성 열어둬",
-     "press": "job-post.co.kr",
-     "publishedAt": "2026-11-26T04:42:00.000Z",
-     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=241177"
+     "title": "신현송 “내년 4.1% 성장 자신”…긴축 지속",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-26T04:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162346?sid=101"
     },
     {
-     "title": "한은 총재 \"올해 반도체 영업익 700조\" 시차 두고 국민경제 전반으로 환...",
-     "press": "smedaily.co.kr",
-     "publishedAt": "2026-11-26T04:42:00.000Z",
-     "link": "http://www.smedaily.co.kr/news/articleView.html?idxno=366658"
+     "title": "한은 총재 \"올해 명목GDP 3천조 원 웃돌 것‥반도체 영업익 700조 원\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-26T04:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538221?sid=101"
     }
    ]
   },
@@ -47,62 +47,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 30,
+   "articles90": 31,
    "recent20": 15,
    "press": 30,
-   "firstArticleAt": "2026-11-26T03:16:00.000Z",
+   "firstArticleAt": "2026-11-26T03:34:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "공정위, 애플 '시리' AI기능 지연…부당광고 혐의 심의 착수",
+     "title": "애플, 공정위 기만광고 혐의에 “심사보고서 결론 동의하지 않아…충분...",
      "press": "etnews.com",
-     "publishedAt": "2026-11-26T04:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490262?sid=101"
+     "publishedAt": "2026-11-26T04:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003490270?sid=105"
     },
     {
-     "title": "\"AI 가짜 의사 만들어 광고하면 영업정지\" 27일부터 시행",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-26T04:44:00.000Z",
-     "link": "http://www.breaknews.com/1254090"
+     "title": "애플, 아이폰16 AI 기능 허위 광고 혐의로 공정위 심판대…과징금 최대...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-26T04:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133900?sid=101"
     },
     {
-     "title": "‘AI 가짜 의사’ 설 땅 없어진다⋯식약처, 추천 광고 금지",
-     "press": "kormedi.com",
-     "publishedAt": "2026-11-26T04:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/296/0000107845?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 21,
-   "recent20": 6,
-   "press": 18,
-   "firstArticleAt": "2026-11-26T03:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美, 호남 반도체 클러스터 지목…'과잉생산 관세' 韓 산업계 새 변수",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-26T04:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078678?sid=101"
-    },
-    {
-     "title": "日정부, 15% 美관세에 “유감…구조적 과잉생산 없어”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T04:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728929?sid=104"
-    },
-    {
-     "title": "USTR, 14개국에 과잉생산 관세 부과…韓 15% 상한 적용 전망",
-     "press": "nongmin.com",
-     "publishedAt": "2026-11-26T04:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/662/0000109375?sid=100"
+     "title": "\"애플, 아이폰16 AI 기능 제공할 것처럼 광고\"…공정위, 제재 착수(종합...",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-26T04:48:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446763"
     }
    ]
   },
@@ -111,62 +79,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 18,
-   "firstArticleAt": "2026-11-26T03:18:00.000Z",
+   "articles90": 23,
+   "recent20": 8,
+   "press": 22,
+   "firstArticleAt": "2026-11-26T03:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "윤석열 '한덕수 재판 위증' 무죄확정…尹 측 \"결론 먼저 정한 소설\"",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-26T04:44:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=321084"
+     "title": "윤석열 '한덕수 재판 위증' 무죄 확정…특검 기소 사건 중 첫 무죄 확정...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-26T04:54:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630995"
     },
     {
-     "title": "尹 '한덕수 재판 위증' 무죄확정",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-26T04:38:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466692"
+     "title": "[속보] 윤석열 측 김계리, 위증 무죄에 \"당연한 일이라 사법부 말고 특...",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-26T04:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002467710?sid=102"
     },
     {
-     "title": "尹 '한덕수 재판 위증 혐의' 무죄 확정… 3대 특검 기소 첫 무죄(종합)",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-26T04:28:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452310"
+     "title": "윤석열 '위증 혐의' 무죄 확정…특검 첫 패소",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-26T04:50:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2023845"
     }
    ]
   },
   {
-   "keyword": "준법투쟁",
+   "keyword": "미국 과잉생산 관세 조사",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 4,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T03:16:00.000Z",
+   "articles90": 18,
+   "recent20": 5,
+   "press": 15,
+   "firstArticleAt": "2026-11-26T03:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"퇴근길 걱정되네\"...준법투쟁 첫날 수도권 전철 지연 속출",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-26T04:42:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326583/?sc=Naver"
+     "title": "美, 日 관세 최대 15%로…日 정부 \"유감, 구조적 과잉생산 없다\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T04:52:00.000Z",
+     "link": "https://www.ajunews.com/view/20261126132045219"
     },
     {
-     "title": "'철도노조 준법투쟁' 일부 열차 운행 지연",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T04:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009311964?sid=102"
+     "title": "美 USTR, '과잉생산 관세' 칼날 '호남 반도체 클러스터' 겨냥…국내 지원...",
+     "press": "widedaily.com",
+     "publishedAt": "2026-11-26T04:48:00.000Z",
+     "link": "https://www.widedaily.com/news/articleView.html?idxno=304877"
     },
     {
-     "title": "준법투쟁 안내문 궁금한 외국인",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T04:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009311962?sid=102"
+     "title": "美, 호남 반도체 클러스터 지목…'과잉생산 관세' 韓 산업계 새 변수",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-26T04:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078678?sid=101"
     }
    ]
   },
@@ -207,13 +175,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 7,
+   "articles90": 13,
+   "recent20": 1,
+   "press": 8,
    "firstArticleAt": "2026-11-26T03:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "안덕수 국세청장 후보자 “세무조사 법과 원칙 따라 공정하게...납세서...",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-26T04:46:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73627"
+    },
     {
      "title": "안덕수, 세무조사권 남용 지적에 \"법·원칙 따라 공정하게\"",
      "press": "news.sbs.co.kr",
@@ -225,12 +199,6 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-26T04:29:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006415988?sid=101"
-    },
-    {
-     "title": "답변하는 안덕수 국세청장 후보자",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T04:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014346997?sid=100"
     }
    ]
   },
@@ -240,23 +208,23 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 3,
+   "recent20": 2,
    "press": 5,
    "firstArticleAt": "2026-11-26T03:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "스타벅스, '더남산서울타워점' 개점…신동우 대표 \"기본부터 다잡겠다\"",
-     "press": "ngetnews.com",
-     "publishedAt": "2026-11-26T04:36:00.000Z",
-     "link": "https://www.ngetnews.com/news/articleView.html?idxno=556355"
-    },
-    {
      "title": "\"첫 적자·마케팅 논란 딛고 반등 모색\"... 스타벅스, 남산서 '신뢰 회복...",
      "press": "greened.kr",
      "publishedAt": "2026-11-26T04:36:00.000Z",
      "link": "https://www.greened.kr/news/articleView.html?idxno=355655"
+    },
+    {
+     "title": "스타벅스, '더남산서울타워점' 개점…신동우 대표 \"기본부터 다잡겠다\"",
+     "press": "ngetnews.com",
+     "publishedAt": "2026-11-26T04:36:00.000Z",
+     "link": "https://www.ngetnews.com/news/articleView.html?idxno=556355"
     },
     {
      "title": "2분기 연속 적자 스타벅스...신동우 대표 \"4분기 흑자 전환 최선\"",
@@ -271,10 +239,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-26T03:24:00.000Z",
+   "firstArticleAt": "2026-11-26T04:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -299,34 +267,66 @@
    ]
   },
   {
-   "keyword": "문가영",
+   "keyword": "연금",
    "sources": [
     "google"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-26T03:26:00.000Z",
+   "firstArticleAt": "2026-11-26T03:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "문가영, 청룡 여신이더니 레드카펫 떠나서는 MZ‥구교환과 장난치고 키...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-26T04:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191541"
+     "title": "KB국민은행, 수수료 인하로 퇴직연금 1위 탈환 노린다",
+     "press": "press9.kr",
+     "publishedAt": "2026-11-26T04:38:00.000Z",
+     "link": "http://www.press9.kr/news/articleView.html?idxno=87092"
     },
     {
-     "title": "[패션엔 포토] 문가영, 청룡영화상 드레스퀸! 청순한 듯 매혹적인 레드...",
-     "press": "fashionn.com",
-     "publishedAt": "2026-11-26T03:44:00.000Z",
-     "link": "http://www.fashionn.com/board/read_new.php?table=1023&number=63292"
+     "title": "\"천6백조 국민연금 곁으로\"...국내외 금융기관들 '전주 러시'",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T04:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438363?sid=102"
     },
     {
-     "title": "문가영, 블랙 튜브톱 드레스 자태…청룡 이후 여신 비주얼",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T03:26:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286823"
+     "title": "퇴직연금 디폴트옵션, 어디가 제일 잘하나…미래에셋證, 업계 1위",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T03:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769360?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이정재",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T03:48:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘특혜 정산 의혹’ 이정재, 논란 후 첫 공식 석상…한층 수척해진 모습",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-26T04:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409663"
+    },
+    {
+     "title": "논란 후 첫 공식석상은 청룡…이정재, '혼외자 논란' 정우성과 닮은꼴 ...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-26T04:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084288"
+    },
+    {
+     "title": "'최대주주 특혜 논란' 이정재, 수척해진 모습으로 공식 석상…고인 떠올...",
+     "press": "ent.sbs.co.kr",
+     "publishedAt": "2026-11-26T03:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/416/0000328343"
     }
    ]
   },
@@ -349,23 +349,23 @@
      "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160280854302178"
     },
     {
-     "title": "은평구 여성예비군소대, 직접 기른 배추로 김치 200상자 나눔",
+     "title": "은평구, 평생돌봄복지재단 2027년 10월 출범 추진",
      "press": "siminilbo.co.kr",
      "publishedAt": "2026-11-26T04:14:00.000Z",
-     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160280709908665"
+     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160280799358104"
     },
     {
-     "title": "은평구 불광1동, 취약계층 220가구에 김장김치 전달",
+     "title": "은평구, 주민 의견 수렴·정책 제안에 AI 활용 교육",
      "press": "siminilbo.co.kr",
      "publishedAt": "2026-11-26T04:14:00.000Z",
-     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160280745824063"
+     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160280828974140"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1570,
+  "flagged": 1571,
   "matched": 766,
   "avgLeadMin": 505,
   "recent": [
