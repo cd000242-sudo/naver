@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T03:35:33.011Z",
+ "builtAt": "2026-11-26T03:45:36.002Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,134 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 21,
  "candidates": [
   {
    "keyword": "위증 무죄 확정",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 60,
-   "recent20": 5,
-   "press": 54,
-   "firstArticleAt": "2026-11-26T02:06:00.000Z",
+   "articles90": 49,
+   "recent20": 6,
+   "press": 46,
+   "firstArticleAt": "2026-11-26T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "윤석열 위증 무죄 확정…헌재 탄핵 결정과 모순되나",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-26T03:44:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286833"
+    },
+    {
+     "title": "'재판 위증' 무죄 확정에 尹측 \"기소 누구 책임…정상적 법치국가 아냐...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T03:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006415960?sid=102"
+    },
     {
      "title": "윤석열, 한덕수 재판 위증 혐의 첫 무죄 확정… 조은석 특검, ‘1패’",
      "press": "siminilbo.co.kr",
      "publishedAt": "2026-11-26T03:34:00.000Z",
      "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160268625827411"
-    },
-    {
-     "title": "대법원, 윤석열 위증 혐의 무죄 확정…특검 상고 기각",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-26T03:30:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3763884"
-    },
-    {
-     "title": "‘계엄 국무회의 위증’ 윤석열 무죄 확정",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-26T03:28:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321950&inflow=N"
-    }
-   ]
-  },
-  {
-   "keyword": "2027년 임원 승진",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 77,
-   "recent20": 6,
-   "press": 53,
-   "firstArticleAt": "2026-11-26T02:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "호텔신라, 정기 임원인사…상무 2명 승진",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-26T03:34:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326574/?sc=Naver"
-    },
-    {
-     "title": "삼성생명, 자산운용 약진…유일한 부사장·女임원 승진",
-     "press": "fetv.co.kr",
-     "publishedAt": "2026-11-26T03:32:00.000Z",
-     "link": "https://www.fetv.co.kr/news/articleView.html?idxno=314373"
-    },
-    {
-     "title": "삼성자산운용, 이시완 대체투자부문장 부사장 발탁...임원 3명 승진",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-26T03:24:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261126500268"
-    }
-   ]
-  },
-  {
-   "keyword": "현대차그룹 사장단 인사",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 46,
-   "recent20": 0,
-   "press": 46,
-   "firstArticleAt": "2026-11-26T02:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "현대차그룹, 대표이사·사장단 인사…현대모비스에 백철승 사장",
-     "press": "pointdaily.co.kr",
-     "publishedAt": "2026-11-26T03:10:00.000Z",
-     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=327537"
-    },
-    {
-     "title": "‘안정 속 핀셋 쇄신’ 택한 현대차그룹… 완성차 투톱 유임·계열사 재...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T03:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207492?sid=103"
-    },
-    {
-     "title": "[뉴스+]현대차그룹, 완성차 CEO 무뇨스·송호성 유임…경영 연속성 성과...",
-     "press": "businessplus.kr",
-     "publishedAt": "2026-11-26T03:08:00.000Z",
-     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120537"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성",
-   "sources": [
-    "google"
-   ],
-   "articles90": 35,
-   "recent20": 11,
-   "press": 31,
-   "firstArticleAt": "2026-11-26T02:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[영상뉴스] 삼성전자 로봇 인재 전격 승진... CES 2027서 휴머노이드 공...",
-     "press": "autodaily.co.kr",
-     "publishedAt": "2026-11-26T03:32:00.000Z",
-     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602465"
-    },
-    {
-     "title": "삼성생명, 자산운용 약진…유일한 부사장·女임원 승진",
-     "press": "fetv.co.kr",
-     "publishedAt": "2026-11-26T03:32:00.000Z",
-     "link": "https://www.fetv.co.kr/news/articleView.html?idxno=314373"
-    },
-    {
-     "title": "[인사] 삼성자산운용",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-26T03:30:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=209253"
     }
    ]
   },
@@ -144,74 +47,74 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 28,
-   "recent20": 1,
-   "press": 25,
+   "articles90": 30,
+   "recent20": 3,
+   "press": 27,
    "firstArticleAt": "2026-11-26T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "가구 월소득 548만원…실질소득 3년 3개월 만에 최대 감소",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-26T03:38:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088195"
+    },
+    {
+     "title": "가계 실질소득 '뒷걸음질'…\"먹고살기 더 힘들어졌다\"",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-26T03:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274050?sid=101"
+    },
+    {
      "title": "경제 3%대 성장에도 가계 실질소득 2.1% 감소…10분기 만에",
      "press": "gukjenews.com",
      "publishedAt": "2026-11-26T03:32:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3763888"
-    },
-    {
-     "title": "\"소득 0.8% 늘 때 지출 5.1%↑\" 실질소득 10분기만에 감소",
-     "press": "busan.com",
-     "publishedAt": "2026-11-26T03:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001409095?sid=101"
-    },
-    {
-     "title": "3분기 가계 실질소득 2.1%↓…양극화는 더 커져",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T03:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301653?sid=101"
     }
    ]
   },
   {
-   "keyword": "신현송 물가 목표 수렴",
+   "keyword": "준법투쟁",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-26T02:21:00.000Z",
+   "articles90": 14,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T02:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "신현송 한은 총재 \"내년 4.1% 성장\"…긴축 지속",
-     "press": "press9.kr",
-     "publishedAt": "2026-11-26T03:30:00.000Z",
-     "link": "http://www.press9.kr/news/articleView.html?idxno=87086"
+     "title": "철도노조 준법투쟁 시작, 일주 열차 운행 지연",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-26T03:40:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261126500340"
     },
     {
-     "title": "신현송 한은 총재, 내년 상반기 추가 금리 인상 시사…\"선제적 대응 필...",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-26T03:26:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731150"
+     "title": "철도노조 준법투쟁...서울역 '일부 열차 운행 지연' [포토]",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-26T03:22:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653364"
     },
     {
-     "title": "신현송 \"물가 목표 수렴 확신 들 때까지 대응\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T03:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009311745?sid=101"
+     "title": "철도노조, 준법투쟁 돌입‥곳곳 열차 지연 속출",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-26T03:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538208?sid=101"
     }
    ]
   },
   {
-   "keyword": "김창민 감독 항소 사건",
+   "keyword": "김창민 감독 사건 쌍방 항소",
    "sources": [
     "nate"
    ],
-   "articles90": 15,
+   "articles90": 8,
    "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-26T02:07:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-26T02:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -236,46 +139,14 @@
    ]
   },
   {
-   "keyword": "홈플러스",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 38,
-   "recent20": 16,
-   "press": 14,
-   "firstArticleAt": "2026-11-26T02:06:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "홈플러스 노조 \"인수의향서 확인 안 돼\" 해명 요구‥사측 \"접수됐다\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-26T03:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538205?sid=101"
-    },
-    {
-     "title": "석 달 만에 다시 멈추는 홈플러스",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T03:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014346822?sid=101"
-    },
-    {
-     "title": "홈플러스 내일부터 임시휴업",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T03:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014346835?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "해외 의약품 밀반입 적발",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
+   "articles90": 7,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-26T02:07:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-26T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -304,10 +175,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T02:14:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-26T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -332,66 +203,66 @@
    ]
   },
   {
-   "keyword": "신동우 대표 활동",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T02:30:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신동우 스타벅스 대표 \"고객 신뢰 회복·브랜드 가치 격상 매진할 것\"",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-26T03:32:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=218713"
-    },
-    {
-     "title": "스벅 대표, 마케팅 논란 이후 첫 대외활동… “재발방지 최선”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-26T02:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002835734?sid=101"
-    },
-    {
-     "title": "[현장] “본질 경쟁력으로 승부”…신동우 스타벅스 대표, 4분기 턴어라...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T02:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/117/0004128275?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "안덕수 후보자 청문회 진행",
+   "keyword": "재혼 황후 이세영 악역 논란",
    "sources": [
     "nate"
    ],
    "articles90": 5,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T02:14:00.000Z",
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T02:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[안덕수 청문회] \"임광현 비서실장하고 내통할 거면 국세청장 그만두세...",
-     "press": "sejungilbo.com",
-     "publishedAt": "2026-11-26T03:28:00.000Z",
-     "link": "https://www.sejungilbo.com/news/articleView.html?idxno=61295"
+     "title": "‘재혼 황후’ 이세영 “中테무산 목걸이 논란? 크게 생각 없었다..관심...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-26T03:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003814506"
     },
     {
-     "title": "[안덕수 청문회] \"전임 이어 연속 '조사통' 수장…내부 시각 벗어나 국...",
-     "press": "sejungilbo.com",
-     "publishedAt": "2026-11-26T03:26:00.000Z",
-     "link": "https://www.sejungilbo.com/news/articleView.html?idxno=61293"
+     "title": "'재혼 황후' 이세영 “하얀 피부 라스타, 주지훈 안색과 비교? 드릴 말씀...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-26T03:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000522555"
     },
     {
-     "title": "[안덕수 청문회] 이종욱, \"세무조사 남용 공로로 국세청장 후보 올랐나...",
-     "press": "sejungilbo.com",
+     "title": "'재혼황후' 이세영 \"中테무 2천원 목걸이 논란? 관심 가져준다고 느껴\"...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-26T03:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005645561"
+    }
+   ]
+  },
+  {
+   "keyword": "김민석 소방병원 방문",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T02:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국립소방병원 찾은 김민석 대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T03:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014346843?sid=102"
+    },
+    {
+     "title": "고압산소치료실 살펴보는 김민석 대표",
+     "press": "newsis.com",
      "publishedAt": "2026-11-26T03:14:00.000Z",
-     "link": "https://www.sejungilbo.com/news/articleView.html?idxno=61291"
+     "link": "https://n.news.naver.com/mnews/article/003/0014346791?sid=102"
+    },
+    {
+     "title": "고압산소치료실 살피는 김민석 대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T03:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014346789?sid=102"
     }
    ]
   },
@@ -427,11 +298,43 @@
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3763823"
     }
    ]
+  },
+  {
+   "keyword": "한은 총재 반도체 상황 설명 필요",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T02:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"반도체 영업이익 700조\" 국민소득 5분의 1…올해 명목 GDP 3000조 돌파",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-26T03:18:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904522"
+    },
+    {
+     "title": "신현송 한은 총재 “고유가 장기화에 수요 압력까지… 물가 안정에 중점...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-26T03:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011882?sid=101"
+    },
+    {
+     "title": "한은 \"기준금리 인상…물가 안정에 중점\"",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-26T02:46:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=316262"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1541,
+  "flagged": 1546,
   "matched": 759,
   "avgLeadMin": 507,
   "recent": [
