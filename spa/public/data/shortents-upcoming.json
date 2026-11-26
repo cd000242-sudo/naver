@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T12:38:41.050Z",
+ "builtAt": "2026-11-26T12:48:44.463Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,50 +8,81 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "삼성화재 선두",
    "sources": [
     "daum"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 9,
+   "articles90": 14,
+   "recent20": 2,
+   "press": 10,
    "firstArticleAt": "2026-11-26T11:41:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
+     "title": "4연승으로 ‘선두’ 등극, 삼성화재 토미 감독 “순위 크게 의미 두지 ...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-26T12:45:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/468/0001283806"
+    },
+    {
+     "title": "남자배구 삼성화재, 1천114일 만에 리그 1위 등극",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T12:41:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001406175"
+    },
+    {
      "title": "프로배구 삼성화재, 우리카드 꺾고 1114일 만에 선두 도약(종합)",
      "press": "news1.kr",
      "publishedAt": "2026-11-26T12:19:00.000Z",
      "link": "https://m.sports.naver.com/volleyball/article/421/0009313163"
+    }
+   ]
+  },
+  {
+   "keyword": "윤석열 한덕수 재판 무죄 확정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T11:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "윤석열 ‘위증’ 무죄 확정…1심부터 같은 결론, 판단 근거는 달랐다",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T12:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302111?sid=102"
     },
     {
-     "title": "남자배구 삼성화재, 1천114일 만에 순위표 맨 꼭대기로(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T12:15:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/001/0016466686"
+     "title": "한덕수 판결, 헌정 파괴의 큰길을 내다",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-26T12:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834198?sid=102"
     },
     {
-     "title": "남자배구 삼성화재, 우리카드 완파하고 1114일 만에 단독 선두 도약",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-26T12:14:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/469/0000968040"
+     "title": "무죄 확정 尹, 특검 향해 “수사 아닌 소설”",
+     "press": "ksmnews.co.kr",
+     "publishedAt": "2026-11-26T11:44:00.000Z",
+     "link": "https://www.ksmnews.co.kr/news/view.php?idx=631360"
     }
    ]
   },
   {
    "keyword": "정대세 명서현 셋째 임신",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T11:13:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-26T11:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,12 +107,44 @@
    ]
   },
   {
+   "keyword": "영국 예비군 소집",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T11:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "영국, 예비군 10만 명에 \"소집 대비하라\" 서한… 냉전 이후 처음",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-26T12:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968041?sid=104"
+    },
+    {
+     "title": "英, 예비군 10만명에 \"전쟁 시 소집 대비\"… 냉전 이후 처음",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-26T12:26:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452502"
+    },
+    {
+     "title": "영국, 예비군 10만명에 소집 대비 통보…냉전 이후 처음",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-26T11:46:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=20261126203057676bb91c46fcd_1"
+    }
+   ]
+  },
+  {
    "keyword": "무쇠소녀단 3",
    "sources": [
     "daum"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-26T11:36:00.000Z",
    "exclusive": false,
@@ -108,41 +171,41 @@
    ]
   },
   {
-   "keyword": "영국 예비군 소집",
+   "keyword": "오승원 아기공룡 둘리",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-26T11:22:00.000Z",
+   "firstArticleAt": "2026-11-26T11:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "英, 예비군 10만명에 \"전쟁 시 소집 대비\"… 냉전 이후 처음",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-26T12:26:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452502"
+     "title": "'특종세상' 오승원, '아기공룡 둘리' 주제곡 가수 근황…아들과 캠핑",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-26T12:06:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305821"
     },
     {
-     "title": "영국, 예비군 10만명에 소집 대비 통보…냉전 이후 처음",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-26T11:46:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=20261126203057676bb91c46fcd_1"
+     "title": "'둘리' 가수 오승원, 시각장애인 가수 아들 곁을 떠나야 했던 이유",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-26T11:50:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3764294"
     },
     {
-     "title": "예비군 10만명에 연락 돌려…'심상찮다' 전쟁 대비 움직임 보이는 영국",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-26T11:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848489?sid=104"
+     "title": "'둘리' 주제곡 부른 여가수 '딸기 농장'서 발견→아들 두고 잠적해야 했...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-26T11:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000493770"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1740,
+  "flagged": 1742,
   "matched": 852,
   "avgLeadMin": 521,
   "recent": [
