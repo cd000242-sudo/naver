@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T10:37:56.293Z",
+ "builtAt": "2026-11-26T10:47:59.623Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,133 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 29,
  "candidates": [
   {
-   "keyword": "세무사 수석 구속영장 신청",
+   "keyword": "경찰, 세무사 구속영장 신청",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 36,
-   "recent20": 14,
-   "press": 32,
+   "articles90": 44,
+   "recent20": 13,
+   "press": 37,
    "firstArticleAt": "2026-11-26T09:43:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "경찰, 세무사 시험 'AI 부정행위' 자수한 수석 합격자 구속영장 신청",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-26T10:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848486?sid=102"
+     "title": "경찰, 인공지능 활용 세무사 수석 구속영장 신청",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-26T10:46:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887814"
     },
     {
-     "title": "[속보]경찰, ‘AI 커닝’ 세무사 수석 구속영장 신청",
-     "press": "donga.com",
-     "publishedAt": "2026-11-26T10:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765503?sid=102"
+     "title": "'세무사 수석', 구속영장 신청…\"증거인멸·도주 우려 있다\"[종합]",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-26T10:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078889?sid=102"
     },
     {
-     "title": "경찰, ‘AI 부정행위’ 세무사 수석 구속영장 신청",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-26T10:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368833?sid=102"
+     "title": "경찰, 세무사 시험 수석합격자 구속영장 신청",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-26T10:42:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650420.html"
     }
    ]
   },
   {
-   "keyword": "철도노조 준법투쟁",
+   "keyword": "강금실 인사청문요구서 재가",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 36,
-   "recent20": 1,
-   "press": 27,
-   "firstArticleAt": "2026-11-26T09:08:00.000Z",
+   "articles90": 26,
+   "recent20": 3,
+   "press": 24,
+   "firstArticleAt": "2026-11-26T09:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "철도노조 준법투쟁 첫날 열차 4대 멈춰…전철 235대 지연",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-26T10:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165822?sid=102"
+     "title": "李, '강금실·임웅순·홍익표·한준호·강유정' 인청요구서 재가",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-26T10:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078887?sid=100"
     },
     {
-     "title": "철도노조 준법투쟁 첫날 퇴근길 지연...주말 나들이객·수험생 이동 '우...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T10:08:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785131"
+     "title": "이 대통령, 강금실 등 후보자 5명 인사청문요구서 재가…국회 검증 돌입",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-26T10:38:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=731279"
     },
-    {
-     "title": "철도노조 준법투쟁 첫날 퇴근길 지연 속출…\"30분 기다린 열차 이미 만...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T10:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466628?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 인사청문요구서 재가",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 19,
-   "recent20": 5,
-   "press": 19,
-   "firstArticleAt": "2026-11-26T09:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
     {
      "title": "李 대통령, 강금실·한준호·강유정·임웅순 인사청문요구서 재가",
      "press": "newdaily.co.kr",
      "publishedAt": "2026-11-26T10:34:00.000Z",
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650418.html"
-    },
-    {
-     "title": "이 대통령, 강금실 국정원장 후보 등 5명 인사청문요구서 재가",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-26T10:26:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887812"
-    },
-    {
-     "title": "李대통령, 강금실 국정원장 후보자 등 5명 인사청문요구서 재가",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-26T10:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848485?sid=100"
     }
    ]
   },
   {
-   "keyword": "자본시장 개혁 위원장 김용범",
+   "keyword": "철도노조 안전운행 투쟁",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 16,
+   "articles90": 30,
    "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-26T09:08:00.000Z",
+   "press": 24,
+   "firstArticleAt": "2026-11-26T09:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "자본시장 개혁기구 위원장에 김용범 메리츠지주 부회장",
-     "press": "seoul.co.kr",
+     "title": "철도노조 안전운행 투쟁…울산역 KTX 지연 잇따라",
+     "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-26T10:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703632?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/056/0012302010?sid=101"
     },
     {
-     "title": "‘李대통령 주문’ 자본시장 개혁기구 수장에 메리츠 김용범 부회장",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-26T10:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485360?sid=101"
+     "title": "철도노조 안전운행 투쟁 첫날…전국 광역전철 235대 지연",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-26T10:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193707?sid=102"
     },
     {
-     "title": "민간 자본시장 개혁기구 출범…위원장에 김용범 메리츠금융 부회장",
-     "press": "magazine.hankyung.com",
-     "publishedAt": "2026-11-26T10:16:00.000Z",
-     "link": "https://magazine.hankyung.com/money/article/202611263351c"
+     "title": "안전운행 투쟁에 열차 지연 속출…다음 달 총파업 예고",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T10:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301996?sid=101"
     }
    ]
   },
@@ -143,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-26T09:08:00.000Z",
+   "articles90": 14,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-26T09:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“호남 반도체 과잉생산 아닌 세계 반도체 공급 안정에 기여”",
+     "press": "kwangju.co.kr",
+     "publishedAt": "2026-11-26T10:46:00.000Z",
+     "link": "http://www.kwangju.co.kr/article.php?aid=1795689600805763277"
+    },
     {
      "title": "[사설] 미 관세 15% 선방했지만, ‘추가 인상’ 확실히 막아야",
      "press": "hani.co.kr",
@@ -161,109 +135,38 @@
      "press": "mbn.co.kr",
      "publishedAt": "2026-11-26T10:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/057/0001980042?sid=101"
-    },
-    {
-     "title": "'이재명' 주어로 \"반도체 기업을 압박\"…\"미국의 내로남불\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-26T10:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522662?sid=101"
     }
    ]
   },
   {
-   "keyword": "박종복 은행연합회장 선출",
+   "keyword": "전철 235대 20분 지연",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T09:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박종복 前 SC제일은행장, 은행연합회장 선출",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-26T10:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358807?sid=101"
-    },
-    {
-     "title": "16대 은행연합회장에 박종복 전 SC제일은행장 선출",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-26T10:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061442?sid=101"
-    },
-    {
-     "title": "박종복 은행연합회장 만장일치 선출…내달1일 취임",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-26T09:48:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122791"
-    }
-   ]
-  },
-  {
-   "keyword": "에이피알 닥터멜락신 인수",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 9,
+   "articles90": 11,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T09:10:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-26T09:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "에이피알, 3900억원에 스킨케어 브랜드 ‘닥터멜락신’ 인수",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-26T10:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011951?sid=101"
-    },
-    {
-     "title": "에이피알, '브랜드501' 주식 700억원 규모 취득…\"경영권 확보\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-26T10:02:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785129"
-    },
-    {
-     "title": "에이피알, 더마 화장품 브랜드 ‘닥터멜락신’ 3900억원에 인수",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T09:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/117/0004128460?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "이임성 특검 후보 추천",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T09:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'조희대 탄핵 반대' 檢 출신, 검사 수사 지휘할 판사 출신…특검 2명 압...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T10:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313133?sid=102"
-    },
-    {
-     "title": "조작기소 특검에 이임성-이정훈 변호사 추천",
+     "title": "철도노조 준법투쟁 첫날 퇴근길 지연 속출…\"30분 기다린 열차 이미 만...",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T10:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466632?sid=102"
+     "publishedAt": "2026-11-26T10:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466628?sid=102"
     },
     {
-     "title": "조작기소 특검 후보에 檢출신 이임성… 檢개혁 비판·조희대 탄핵도 반...",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-26T09:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887698?sid=100"
+     "title": "철도노조 안전운행 투쟁...광역전철 235대 20분 이상 지연",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T10:00:00.000Z",
+     "link": "https://www.ajunews.com/view/20261126184900829"
+    },
+    {
+     "title": "코레일 “광역전철 235대 20분 이상 지연…일반열차 4대 운행정지”",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-26T09:44:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326651/?sc=Naver"
     }
    ]
   },
@@ -273,7 +176,7 @@
     "daum"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-26T09:32:00.000Z",
    "exclusive": false,
@@ -300,74 +203,74 @@
    ]
   },
   {
-   "keyword": "부동산",
+   "keyword": "에이피알 닥터멜락신 인수",
    "sources": [
-    "google"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T09:08:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-26T09:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "오세훈·김은혜, 부동산 정책 공조…내달 1일 세미나 공동 개최",
-     "press": "news.sbs.co.kr",
+     "title": "에이피알, 3900억원에 스킨케어 브랜드 ‘닥터멜락신’ 인수",
+     "press": "chosun.com",
      "publishedAt": "2026-11-26T10:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406131?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/023/0004011951?sid=101"
     },
     {
-     "title": "한은 기준금리 인상에 부동산시장 거래 위축 우려",
-     "press": "joongboo.com",
-     "publishedAt": "2026-11-26T09:54:00.000Z",
-     "link": "https://www.joongboo.com/news/articleView.html?idxno=363743742"
+     "title": "에이피알, '브랜드501' 주식 700억원 규모 취득…\"경영권 확보\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T10:02:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785129"
     },
     {
-     "title": "오세훈·김은혜, 부동산 정책 공조…내달 1일 세미나 공동 개최(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T09:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466621?sid=100"
+     "title": "에이피알, 더마 화장품 브랜드 ‘닥터멜락신’ 3900억원에 인수",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T09:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004128460?sid=103"
     }
    ]
   },
   {
-   "keyword": "장동혁 대표 발언",
+   "keyword": "박종복 은행연합회장 선출",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T09:12:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-26T09:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'조작 징계' 두고 지도부 공개 충돌...장동혁 \"탈당 창당도 있다\"",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-26T10:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980043?sid=100"
+     "title": "박종복 前 SC제일은행장, 은행연합회장 선출",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-26T10:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358807?sid=101"
     },
     {
-     "title": "'장동혁-최 교수' 대화내역 추가 폭로에…배현진 \"몇 꺼풀의 얼굴이 더...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-26T09:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160021?sid=100"
+     "title": "16대 은행연합회장에 박종복 전 SC제일은행장 선출",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-26T10:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061442?sid=101"
     },
     {
-     "title": "[이슈] 국힘 '조작징계' 의혹, 장동혁·윤리위원 측 정면충돌",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-26T09:47:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749341"
+     "title": "박종복 은행연합회장 만장일치 선출…내달1일 취임",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-26T09:48:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122791"
     }
    ]
   },
   {
    "keyword": "올해의 상생기업대상 기념식",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 5,
    "recent20": 1,
@@ -397,106 +300,73 @@
    ]
   },
   {
-   "keyword": "이정훈 변호사",
+   "keyword": "검찰",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T09:24:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-26T09:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "조작기소 특검에 이임성-이정훈 변호사 추천",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T10:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466632?sid=102"
+     "title": "검찰총장 후보 초유의 ‘추가 천거’… “靑 새 인물 염두” 분분",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-26T10:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887717?sid=102"
     },
     {
-     "title": "조작기소 특검 후보에 이임성·이정훈",
-     "press": "segye.com",
-     "publishedAt": "2026-11-26T09:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178389?sid=100"
+     "title": "검찰총장 후보 초유의 ‘추가 천거’…기존 3인 외 새 인물 염두?",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-26T10:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568273?sid=102"
     },
     {
-     "title": "특검 후보 이임성·이정훈…'탄핵 비판' 이력 눈길",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T09:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930256?sid=161"
+     "title": "첫 공소청 수장 인선…검찰총장 후보 사상 첫 추가 천거",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-26T09:58:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261126500729"
     }
    ]
   },
   {
-   "keyword": "장관 후보자 인사청문회 준비 시작",
+   "keyword": "정현규 플랜3 하차 심경",
    "sources": [
-    "signal.bz",
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T09:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강유정 문체장관 후보자 \"석 자 얼음 녹기 시작했다\"…'한한령 대응' 최...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-26T10:26:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749346"
-    },
-    {
-     "title": "李, 강금실 국정원장 후보자 등 5명 인사청문요구서 재가",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T10:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207638?sid=100"
-    },
-    {
-     "title": "개각 장관 후보자들 첫 출근…외교·치안·문화·대북 현안 해법 제시",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-26T09:14:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566574"
-    }
-   ]
-  },
-  {
-   "keyword": "윤석열 호감도 꼴찌",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-26T09:57:00.000Z",
+   "firstArticleAt": "2026-11-26T09:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "노무현, 역대 대통령 호감도 1위…박정희 2위·이재명 4위·윤석열 ‘꼴...",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-26T10:16:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326652/?sc=Naver"
+     "title": "정현규 하차 심경 밝혔다…'데블스플랜3' 공황 증세 재발, 지난 시즌 논...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-26T10:08:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631114"
     },
     {
-     "title": "역대 대통령 호감도 노무현 1위, 윤석열은 꼴찌…이재명은?",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-26T09:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522657?sid=100"
+     "title": "정현규 심경 고백 \"'데블스 플랜3'서 겁이 나 공황 재발…하차 아쉽다\"...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-26T09:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054365"
     },
     {
-     "title": "노무현 전 대통령 역대 대통령 호감도 1위···꼴찌는 전두환도 제친 윤...",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-26T09:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053659?sid=100"
+     "title": "정현규, '데블스플랜3' 공항 하차 속사정…한 명 몰아붙이다 \"겁이 났다...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T09:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128453"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1719,
+  "flagged": 1724,
   "matched": 842,
   "avgLeadMin": 520,
   "recent": [
