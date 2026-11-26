@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T10:17:49.755Z",
+ "builtAt": "2026-11-26T10:27:52.872Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "코레일 전철 235대 지연",
+   "keyword": "코레일 전철 지연",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 32,
-   "recent20": 5,
-   "press": 30,
+   "articles90": 40,
+   "recent20": 2,
+   "press": 36,
    "firstArticleAt": "2026-11-26T09:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "주말 앞 철도勞 ‘안전운행 투쟁’…KTX·화물 연쇄지연 우려(종합)",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-26T10:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162418?sid=102"
+    },
     {
      "title": "철도노조 준법투쟁 첫날 퇴근길 지연...주말 나들이객·수험생 이동 '우...",
      "press": "slist.kr",
@@ -33,12 +39,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T10:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016466628?sid=102"
-    },
-    {
-     "title": "철도노조 안전운행 투쟁...광역전철 235대 20분 이상 지연",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-26T10:00:00.000Z",
-     "link": "https://www.ajunews.com/view/20261126184900829"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "daum"
    ],
    "articles90": 36,
-   "recent20": 4,
+   "recent20": 1,
    "press": 26,
    "firstArticleAt": "2026-11-26T09:04:00.000Z",
    "exclusive": false,
@@ -75,34 +75,34 @@
    ]
   },
   {
-   "keyword": "박종복 은행연합회장 선출",
+   "keyword": "자본시장 개혁 위원장 김용범",
    "sources": [
     "nate"
    ],
-   "articles90": 20,
-   "recent20": 1,
-   "press": 20,
-   "firstArticleAt": "2026-11-26T08:48:00.000Z",
-   "exclusive": true,
+   "articles90": 24,
+   "recent20": 2,
+   "press": 23,
+   "firstArticleAt": "2026-11-26T08:58:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "16대 은행연합회장에 박종복 전 SC제일은행장 선출",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-26T10:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061442?sid=101"
+     "title": "‘李대통령 주문’ 자본시장 개혁기구 수장에 메리츠 김용범 부회장",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-26T10:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485360?sid=101"
     },
     {
-     "title": "박종복 은행연합회장 만장일치 선출…내달1일 취임",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-26T09:48:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122791"
+     "title": "민간 자본시장 개혁기구 출범…위원장에 김용범 메리츠금융 부회장",
+     "press": "magazine.hankyung.com",
+     "publishedAt": "2026-11-26T10:16:00.000Z",
+     "link": "https://magazine.hankyung.com/money/article/202611263351c"
     },
     {
-     "title": "박종복 은행연합회장 선출...3년 임기 시작",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T09:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438610?sid=101"
+     "title": "'자본시장 개혁기구' 출범…수장에 김용범 메리츠 부회장",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-26T10:00:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261126500615"
     }
    ]
   },
@@ -111,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
+   "articles90": 21,
    "recent20": 3,
-   "press": 19,
-   "firstArticleAt": "2026-11-26T08:48:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-26T08:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'호남 반도체' 콕 집어 \"관세 25%\" 압박한 미국…K-반도체 '긴장'",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-26T10:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980042?sid=101"
+    },
     {
      "title": "미 ‘과잉생산 관세’ 한국 15%…‘최대 25%’ 으름장",
      "press": "news.kbs.co.kr",
@@ -129,12 +135,38 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-26T10:09:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000522662?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "박종복 은행연합회장 선출",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-26T08:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박종복 前 SC제일은행장, 은행연합회장 선출",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-26T10:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358807?sid=101"
     },
     {
-     "title": "['클릭' 증시] 약발 떨어진 美 관세...아시아 증시 '무덤덤'",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-26T09:58:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108394"
+     "title": "16대 은행연합회장에 박종복 전 SC제일은행장 선출",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-26T10:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061442?sid=101"
+    },
+    {
+     "title": "박종복 은행연합회장 만장일치 선출…내달1일 취임",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-26T09:48:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122791"
     }
    ]
   },
@@ -144,10 +176,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-26T08:48:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T08:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,81 +204,55 @@
    ]
   },
   {
-   "keyword": "통합 LCC 본사 부산 유치",
+   "keyword": "텀블러",
    "sources": [
     "daum"
    ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T08:50:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "함께 날아볼까...\"저가항공(LCC)사\"는 부산 강서구로",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-26T10:10:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887790"
-    },
-    {
-     "title": "[집중취재] 통합 LCC 본사 유치…‘글로벌 관문 공항’ 발판",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T10:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012301947?sid=101"
-    },
-    {
-     "title": "통합 LCC 본사 맞는 부산…\"글로벌 항공 중심지로\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-26T09:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610542?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 7대 시드 프로젝트",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T08:48:00.000Z",
+   "articles90": 6,
+   "recent20": 4,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T09:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 “첨단기술 육성 7대 시드 프로젝트 속도를”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-26T09:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178395?sid=100"
+     "title": "같은반 학생 텀블러에 소변…가해자는 반 옮겼는데 피해자는 자퇴",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T10:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769736?sid=102"
     },
     {
-     "title": "李 “7대 SEED 프로젝트 관련 위험성 없는 규제 과감히 풀어달라”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T09:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729140?sid=100"
+     "title": "“같은 반 여학생 텀블러에 소변”…‘강제추행’ 검토",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T10:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012301971?sid=102"
     },
     {
-     "title": "이 대통령 \"오늘 한 걸음이 훗날 천 걸음 격차\"…7대 시드 속도 주문",
-     "press": "kado.net",
-     "publishedAt": "2026-11-26T09:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213703?sid=100"
+     "title": "같은 반 여학생 텀블러에 소변...피해 학생은 자퇴",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T10:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438628?sid=102"
     }
    ]
   },
   {
-   "keyword": "장동혁 대표의 발언",
+   "keyword": "장동혁 대표 발언",
    "sources": [
     "nate"
    ],
    "articles90": 13,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T08:48:00.000Z",
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T09:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'조작 징계' 두고 지도부 공개 충돌...장동혁 \"탈당 창당도 있다\"",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-26T10:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980043?sid=100"
+    },
     {
      "title": "'장동혁-최 교수' 대화내역 추가 폭로에…배현진 \"몇 꺼풀의 얼굴이 더...",
      "press": "dailian.co.kr",
@@ -258,44 +264,70 @@
      "press": "polinews.co.kr",
      "publishedAt": "2026-11-26T09:47:00.000Z",
      "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749341"
-    },
-    {
-     "title": "장동혁, 조작기소 특검법에 \"최악의 패륜…판사들 행동이 필요\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T09:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466616?sid=100"
     }
    ]
   },
   {
-   "keyword": "금융위 증시 긴급회의",
+   "keyword": "이재명 7대 시드 프로젝트",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 6,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T08:51:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-26T09:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "금융위, 30일 금융권 긴급 점검회의…10조원대 증안펀드 가동 논의",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-26T10:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061441?sid=101"
+     "title": "이 대통령 \"핵심 경제지표 역사적 이정표…7대 시드 더 속도내야\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T10:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406133?sid=100"
     },
     {
-     "title": "금융위, 다음주 5대 지주 회장 소집…10조 증안펀드 준비 시동",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-26T09:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214402?sid=101"
+     "title": "李대통령 “첨단기술 육성 7대 시드 프로젝트 속도를”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-26T09:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178395?sid=100"
     },
     {
-     "title": "금융위, 다음 주 증시안정 회의...증시안정펀드 가동되나",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T09:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438592?sid=101"
+     "title": "李 “7대 SEED 프로젝트 관련 위험성 없는 규제 과감히 풀어달라”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-26T09:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729140?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "부동산",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T09:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오세훈·김은혜, 부동산 정책 공조…내달 1일 세미나 공동 개최",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T10:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406131?sid=102"
+    },
+    {
+     "title": "한은 기준금리 인상에 부동산시장 거래 위축 우려",
+     "press": "joongboo.com",
+     "publishedAt": "2026-11-26T09:54:00.000Z",
+     "link": "https://www.joongboo.com/news/articleView.html?idxno=363743742"
+    },
+    {
+     "title": "오세훈·김은혜, 부동산 정책 공조…내달 1일 세미나 공동 개최(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T09:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466621?sid=100"
     }
    ]
   },
@@ -330,11 +362,75 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009313085?sid=101"
     }
    ]
+  },
+  {
+   "keyword": "장관 후보자 인사청문회 준비 시작",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T09:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강유정 문체장관 후보자 \"석 자 얼음 녹기 시작했다\"…'한한령 대응' 최...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-26T10:26:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749346"
+    },
+    {
+     "title": "李, 강금실 국정원장 후보자 등 5명 인사청문요구서 재가",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-26T10:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207638?sid=100"
+    },
+    {
+     "title": "개각 장관 후보자들 첫 출근…외교·치안·문화·대북 현안 해법 제시",
+     "press": "idaegu.co.kr",
+     "publishedAt": "2026-11-26T09:14:00.000Z",
+     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566574"
+    }
+   ]
+  },
+  {
+   "keyword": "금융위 증시 긴급회의",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T09:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "금융위, 30일 금융권 긴급 점검회의…10조원대 증안펀드 가동 논의",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-26T10:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061441?sid=101"
+    },
+    {
+     "title": "금융위, 다음주 5대 지주 회장 소집…10조 증안펀드 준비 시동",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T09:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214402?sid=101"
+    },
+    {
+     "title": "금융위, 다음 주 증시안정 회의...증시안정펀드 가동되나",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T09:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438592?sid=101"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1710,
+  "flagged": 1715,
   "matched": 835,
   "avgLeadMin": 521,
   "recent": [
