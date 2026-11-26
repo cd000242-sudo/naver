@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T19:10:50.323Z",
+ "builtAt": "2026-11-26T19:20:53.437Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,12 +16,18 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 5,
+   "recent20": 4,
    "press": 6,
-   "firstArticleAt": "2026-11-26T17:50:00.000Z",
+   "firstArticleAt": "2026-11-26T18:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"미국 '과잉 생산' 관세에 중국 반발...무역 휴전 다시 시험대\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T19:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438724?sid=104"
+    },
     {
      "title": "물가 뛰는데 트럼프 관세 '부채질'…\"최악 시기 경제적 자해\"",
      "press": "yna.co.kr",
@@ -33,12 +39,6 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-26T19:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002438723?sid=104"
-    },
-    {
-     "title": "미국 새 관세 시행땐 평균관세율 13.9%…상호관세 무효화 전으로",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T19:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302286?sid=104"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-26T18:18:00.000Z",
    "exclusive": false,
