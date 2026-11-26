@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T09:47:39.587Z",
+ "builtAt": "2026-11-26T09:57:43.437Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,56 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "박종복 은행연합회장 선출",
+   "keyword": "자본시장 개혁 김용범 부회장",
    "sources": [
     "nate"
    ],
-   "articles90": 48,
-   "recent20": 2,
-   "press": 47,
-   "firstArticleAt": "2026-11-26T08:18:00.000Z",
+   "articles90": 45,
+   "recent20": 5,
+   "press": 42,
+   "firstArticleAt": "2026-11-26T08:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김용범 메리츠 부회장 '자본시장개혁기구' 수장 맡아",
+     "press": "koreareport.co.kr",
+     "publishedAt": "2026-11-26T09:56:00.000Z",
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=55202"
+    },
+    {
+     "title": "자본시장개혁기구 수장에 메리츠 김용범…민간에 전권 부여(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T09:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466623?sid=101"
+    },
+    {
+     "title": "민간 주도 자본시장 개혁위 뜬다…김용범, 대통령에 직보",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-26T09:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274118?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "박종복 은행연합회장 선출",
+   "sources": [
+    "nate",
+    "daum"
+   ],
+   "articles90": 38,
+   "recent20": 1,
+   "press": 38,
+   "firstArticleAt": "2026-11-26T08:28:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "박종복 은행연합회장 만장일치 선출…내달1일 취임",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-26T09:48:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122791"
+    },
     {
      "title": "박종복 은행연합회장 선출...3년 임기 시작",
      "press": "ytn.co.kr",
@@ -33,44 +72,38 @@
      "press": "koreareport.co.kr",
      "publishedAt": "2026-11-26T09:28:00.000Z",
      "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=55200"
-    },
-    {
-     "title": "박종복 은행연합회장 만장일치 선출…12월 1일 임기 시작",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-26T09:22:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904617"
     }
    ]
   },
   {
-   "keyword": "자본시장 개혁 김용범 부회장",
+   "keyword": "전철 지연",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 48,
-   "recent20": 3,
-   "press": 44,
-   "firstArticleAt": "2026-11-26T08:18:00.000Z",
+   "articles90": 36,
+   "recent20": 7,
+   "press": 34,
+   "firstArticleAt": "2026-11-26T08:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李 지시한 자본시장 개혁기구, 전원 민간위원으로…수장은 메리츠 김용...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T09:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568269?sid=101"
+     "title": "[속보] 철도노조 준법투쟁 첫날, 4대 운행중지·235대 지연",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-26T09:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078882?sid=102"
     },
     {
-     "title": "자본시장 개혁기구 수장에 김용범…민간이 의제 정해 대통령 직보",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-26T09:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490505?sid=101"
+     "title": "철도노조 안전운행 투쟁 돌입…열차 지연 잇따라",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T09:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930261?sid=161"
     },
     {
-     "title": "정부 ‘자본시장 대전환 위원회’ 구성.. 위원장에 김용범 메리츠지주 ...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-26T09:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610509?sid=101"
+     "title": "철도노조 준법투쟁…경남서도 곳곳 '지연'",
+     "press": "newsgn.com",
+     "publishedAt": "2026-11-26T09:44:00.000Z",
+     "link": "https://www.newsgn.com/news/articleView.html?idxno=588429"
     }
    ]
   },
@@ -80,62 +113,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 37,
-   "recent20": 2,
-   "press": 36,
-   "firstArticleAt": "2026-11-26T08:18:00.000Z",
-   "exclusive": true,
+   "articles90": 33,
+   "recent20": 3,
+   "press": 32,
+   "firstArticleAt": "2026-11-26T08:29:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "에이피알, 더마 화장품 브랜드 ‘닥터멜락신’ 3900억원에 인수",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T09:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004128460?sid=103"
+    },
+    {
+     "title": "에이피알, 닥터멜락신 인수…글로벌 영토 확장",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-26T09:50:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122799"
+    },
     {
      "title": "에이피알, 닥터멜락신 인수…3900억원 투입",
      "press": "news.dealsitetv.com",
      "publishedAt": "2026-11-26T09:38:00.000Z",
      "link": "https://news.dealsitetv.com/articles/179256"
-    },
-    {
-     "title": "에이피알, 더마 브랜드 '닥터멜락신' 인수",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T09:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416243?sid=101"
-    },
-    {
-     "title": "\"美틱톡숍서 뷰티매출2위\" 에이피알, 3900억에 '닥터멜락신' 인수",
-     "press": "catchnews.kr",
-     "publishedAt": "2026-11-26T09:23:00.000Z",
-     "link": "https://www.catchnews.kr/news/articleView.html?idxno=131055"
-    }
-   ]
-  },
-  {
-   "keyword": "전철 지연",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 33,
-   "recent20": 13,
-   "press": 31,
-   "firstArticleAt": "2026-11-26T08:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "철도노조 준법투쟁…경남서도 곳곳 '지연'",
-     "press": "newsgn.com",
-     "publishedAt": "2026-11-26T09:44:00.000Z",
-     "link": "https://www.newsgn.com/news/articleView.html?idxno=588429"
-    },
-    {
-     "title": "코레일 “광역전철 235대 20분 이상 지연…일반열차 4대 운행정지”",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-26T09:44:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326651/?sc=Naver"
-    },
-    {
-     "title": "철도노조 준법투쟁에 열차 4대 운행 중지‥광역전철 235대 지연",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-26T09:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538306?sid=101"
     }
    ]
   },
@@ -144,13 +145,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 5,
-   "press": 22,
-   "firstArticleAt": "2026-11-26T08:20:00.000Z",
+   "articles90": 29,
+   "recent20": 3,
+   "press": 21,
+   "firstArticleAt": "2026-11-26T08:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[베트남 증시] 美 '최고 35% 관세' 직격탄에 3.4% 급락…VN지수 1,630선 붕...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-26T09:48:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261126001318"
+    },
     {
      "title": "\"메모리 공급 부족한데 과잉생산 주장…관세보다 美 자국내 투자 압박\"",
      "press": "edaily.co.kr",
@@ -162,12 +169,6 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-26T09:43:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006416247?sid=101"
-    },
-    {
-     "title": "[사설] 호남 반도체까지 과잉생산으로 모는 美 관세 압박",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-26T09:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610521?sid=110"
     }
    ]
   },
@@ -176,10 +177,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 24,
-   "recent20": 5,
-   "press": 21,
-   "firstArticleAt": "2026-11-26T08:18:00.000Z",
+   "articles90": 22,
+   "recent20": 1,
+   "press": 19,
+   "firstArticleAt": "2026-11-26T08:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -208,10 +209,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T08:21:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-26T08:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -240,10 +241,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 10,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-26T08:20:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-26T08:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -273,7 +274,7 @@
     "nate"
    ],
    "articles90": 10,
-   "recent20": 3,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-26T08:30:00.000Z",
    "exclusive": false,
@@ -296,38 +297,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-26T09:28:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009313085?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "언론 4법 문체소위 통과",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T08:29:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "방송법·정보통신망법 이어…이번엔 '언론 4법'",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-26T09:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138963?sid=100"
-    },
-    {
-     "title": "‘언론4법’ 與 주도 문체소위 통과…국힘 “언론 족쇄 채우기”",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-26T09:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061422?sid=100"
-    },
-    {
-     "title": "언론4법 소위 與 단독 처리… '허위 정보' 유통한 언론사엔 정부 광고 끊...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-26T09:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968018?sid=100"
     }
    ]
   },
