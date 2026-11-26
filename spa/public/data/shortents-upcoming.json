@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T14:59:29.492Z",
+ "builtAt": "2026-11-26T15:09:32.924Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,18 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "CJ올리브영 개인정보 유출",
    "sources": [
+    "nate",
     "daum"
    ],
-   "articles90": 21,
+   "articles90": 17,
    "recent20": 1,
-   "press": 20,
-   "firstArticleAt": "2026-11-26T13:34:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-26T13:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,72 +48,155 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
    "firstArticleAt": "2026-11-26T14:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "우크라 \"北, 러 '남북 긴장 완화' 발언에 반발…군사 지원 중단\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T15:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014348380?sid=104"
+    },
+    {
+     "title": "“김정은, 대러 군사지원 중단 지시”…북·러 균열설 꺼낸 우크라",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-26T15:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568324?sid=104"
+    },
+    {
      "title": "우크라 정보당국 \"北, 러 군사지원 일시 중단…KN-23 등 공급 끊겨\"",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-26T14:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000968046?sid=104"
-    },
-    {
-     "title": "우크라 정보당국 \"북한, 러 군사 지원 일시 중단\" 주장",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-26T14:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406179?sid=104"
-    },
-    {
-     "title": "우크라 정보당국 \"김정은, 대러 군사 지원 일시 중단 지시…남북 긴장 ...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-26T14:32:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261126001362"
     }
    ]
   },
   {
    "keyword": "반도체 메모리",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 6,
+   "recent20": 4,
+   "press": 6,
    "firstArticleAt": "2026-11-26T13:42:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[심층분석] 성장률 상향 이끈 반도체·긴축 파고 맞은 내수주…증시 업...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-26T15:02:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=95634"
+    },
+    {
+     "title": "[단독] 한화 상대 한미반도체 특허 소송 막 오른다…변수는 조정 결과",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-26T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000556093?sid=101"
+    },
+    {
+     "title": "실적 호조에도 추락한 반도체株…내년 3~4월 주목해야 하는 이유",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T15:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014348363?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "세무사 수석 구속 신청",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T13:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“장기 구매할게” 머스크에 이재용 “뭘 더 해줄 건데”⋯메모리 쟁탈...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-26T14:50:00.000Z",
-     "link": "https://www.viva100.com/article/20261126501737"
+     "title": "경찰 'AI 부정행위' 세무사 시험 수석 합격자 구속영장 신청",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-26T15:08:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452542"
     },
     {
-     "title": "이재용, 메모리 장기구매 요청한 머스크에 “뭘 더 해줄 수 있느냐”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-26T13:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765517?sid=104"
+     "title": "경찰, 'AI 부정행위' 자수한 세무사 수석 구속영장 신청",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-26T14:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522706?sid=102"
     },
     {
-     "title": "'AI 반도체 품귀'에 머스크도 진땀… 이재용 \"뭘 더 해줄 수 있나\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-26T13:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968045?sid=104"
+     "title": "'AI 커닝' 세무사 수석합격자 구속 기로…\"증거인멸 우려\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T14:10:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785153"
+    }
+   ]
+  },
+  {
+   "keyword": "연우 10kg 감량",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T14:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "연우, 하루 밥 두 숟갈 먹고 10kg 감량…“이렇게 살면 안 되겠다”",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-26T14:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001307072"
+    },
+    {
+     "title": "'무쇠소녀단' 연우 \"두달만에 10kg 감량, 하루에 밥 2숟갈 먹기도...극단...",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-26T14:10:00.000Z",
+     "link": "http://www.joynews24.com/view/2031039"
+    },
+    {
+     "title": "연우 \"두 달만 10kg 감량, 극단적으로 굶어…온몸 두드러기에 눈물\" [무...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T14:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128502"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1767,
-  "matched": 862,
-  "avgLeadMin": 521,
+  "flagged": 1764,
+  "matched": 864,
+  "avgLeadMin": 519,
   "recent": [
+   {
+    "keyword": "젠슨 황 스캔들 의혹",
+    "hitKeyword": "젠슨 황 측근 의혹",
+    "hitAt": "2026-11-27T00:00:00+09:00",
+    "leadMin": 1951
+   },
+   {
+    "keyword": "젠슨 황 스파이 의혹",
+    "hitKeyword": "젠슨 황 측근 의혹",
+    "hitAt": "2026-11-27T00:00:00+09:00",
+    "leadMin": 1439
+   },
+   {
+    "keyword": "이세영",
+    "hitKeyword": "이세영 시즌2 의지",
+    "hitAt": "2026-11-27T00:00:00+09:00",
+    "leadMin": 192
+   },
    {
     "keyword": "삼성화재 선두",
     "hitKeyword": "삼성화재 1114일 만 선두",
@@ -154,24 +238,6 @@
     "hitKeyword": "올리브영 해킹 유출",
     "hitAt": "2026-11-26T22:30:00+09:00",
     "leadMin": 4783
-   },
-   {
-    "keyword": "정대세 명서현 셋째 임신",
-    "hitKeyword": "정대세 부부 셋째 임신",
-    "hitAt": "2026-11-26T22:30:00+09:00",
-    "leadMin": 122
-   },
-   {
-    "keyword": "정대세, 셋째 임신 소식",
-    "hitKeyword": "정대세 부부 셋째 임신",
-    "hitAt": "2026-11-26T22:30:00+09:00",
-    "leadMin": 21
-   },
-   {
-    "keyword": "외국인 정치활동 금지 헌법불합치",
-    "hitKeyword": "삼전 닉스 외국인 매도",
-    "hitAt": "2026-11-26T22:00:00+09:00",
-    "leadMin": 293
    }
   ]
  }
