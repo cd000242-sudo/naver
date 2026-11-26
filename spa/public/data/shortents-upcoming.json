@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T02:05:00.111Z",
+ "builtAt": "2026-11-26T02:15:03.135Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 86,
-   "recent20": 28,
-   "press": 75,
-   "firstArticleAt": "2026-11-26T01:12:00.000Z",
+   "articles90": 85,
+   "recent20": 25,
+   "press": 74,
+   "firstArticleAt": "2026-11-26T01:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "금리 올린 한은, '추가 인상 속도' 문구 뺐다…완만한 인상 시사",
+     "title": "[뉴스1 PICK] 한은, 기준금리 3.25%로 인상 내년···성장률 전망치도 4...",
      "press": "news1.kr",
-     "publishedAt": "2026-11-26T02:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009311387?sid=101"
+     "publishedAt": "2026-11-26T02:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009311427?sid=101"
     },
     {
-     "title": "한은, 기준금리 3.25%로 인상…2년 만에 최고 수준",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-26T02:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000143059?sid=101"
+     "title": "한은, 기준금리 3.25%로 인상…은행 가계대출 금리는 이미 5% 넘어",
+     "press": "thevaluenews.co.kr",
+     "publishedAt": "2026-11-26T02:10:00.000Z",
+     "link": "http://www.thevaluenews.co.kr/news/view.php?idx=203690"
     },
     {
-     "title": "한은 금리인상 배경…“물가 목표수준 상회, 금융안정 리스크도 지속”",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-26T02:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394871?sid=101"
+     "title": "한은 금리 인상, 5대 2로 결정…점도표 '인상 한 번 더' 반영",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-26T02:10:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904497"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 39,
+   "articles90": 46,
    "recent20": 16,
-   "press": 37,
+   "press": 44,
    "firstArticleAt": "2026-11-26T01:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "함영주 하나금융 회장, '채용비리 의혹' 파기환송심서 무죄 확정",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-26T02:04:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=368070"
+     "title": "법정 드라마의 승리, 함영주 회장 채용비리 무죄 판결로 마무리",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-26T02:14:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887370"
     },
     {
-     "title": "[이슈] 8년 법정공방 끝 파기환송심 무죄…함영주 회장, 사법 리스크 덜...",
-     "press": "startuptoday.co.kr",
-     "publishedAt": "2026-11-26T02:02:00.000Z",
-     "link": "https://www.startuptoday.co.kr/news/articleView.html?idxno=820155"
+     "title": "함영주 하나금융 회장, '채용비리 의혹' 파기환송심서 무죄",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-26T02:14:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=173127"
     },
     {
-     "title": "함영주 하나금융 회장, 파기환송심서 '부정 채용' 혐의 무죄",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-26T02:02:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82753"
+     "title": "함영주 하나금융 회장, 파기환송심서 '부정 채용' 혐의 무죄 … 기소 8년...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-26T02:12:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650137.html"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 64,
-   "recent20": 13,
-   "press": 33,
+   "articles90": 68,
+   "recent20": 8,
+   "press": 36,
    "firstArticleAt": "2026-11-26T01:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한준호 행안장관 후보자 “갓난아이 돌보는 심정으로 노력할 것”",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-26T02:00:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653326"
+     "title": "한준호 행안부 장관 후보자, 이태원 참사 가족과의 약속 지킬까?",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-26T02:14:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887372"
     },
     {
-     "title": "한준호 \"갓난아이 돌보듯 매일 깨어있는 자세로 이끌 것\"",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-26T01:58:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=154775"
+     "title": "한준호 \"갓난아이 돌보는 심정으로 일하겠다\"… 전문성 우려에 \"활동으...",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-26T02:12:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566811"
     },
     {
-     "title": "한준호 \"갓난아이 돌보듯 매일 깨어있는 모습으로 일할 것\"",
-     "press": "kado.net",
-     "publishedAt": "2026-11-26T01:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213583?sid=100"
+     "title": "한준호 \"국정과제에 수사독립 명시…전문성은 업무로 증명\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T02:10:00.000Z",
+     "link": "https://www.ajunews.com/view/20261126103652701"
     }
    ]
   },
@@ -111,30 +111,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 37,
+   "articles90": 33,
    "recent20": 7,
-   "press": 31,
-   "firstArticleAt": "2026-11-26T00:36:00.000Z",
+   "press": 28,
+   "firstArticleAt": "2026-11-26T00:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "제약·뷰티업계, 국가품질혁신경진대회 대통령상 수상...'일·생활 균형...",
+     "press": "wsobi.com",
+     "publishedAt": "2026-11-26T02:12:00.000Z",
+     "link": "http://www.wsobi.com/news/articleView.html?idxno=322626"
+    },
+    {
+     "title": "에스앤아이, '2026 대한민국 일·생활 균형 우수기업' 선정",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-26T02:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610150?sid=101"
+    },
     {
      "title": "아주, '2026 대한민국 일·생활 균형 우수기업' 선정",
      "press": "hankyung.com",
      "publishedAt": "2026-11-26T02:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005358505?sid=101"
-    },
-    {
-     "title": "에스앤아이코퍼레이션, '2026 대한민국 일·생활 균형 우수기업' 선정",
-     "press": "beyondpost.co.kr",
-     "publishedAt": "2026-11-26T02:02:00.000Z",
-     "link": "http://www.beyondpost.co.kr/view.php?ud=202611261100557619205868f676_30"
-    },
-    {
-     "title": "한국콜마 '일·생활 균형 우수기업' 선정, 남성 육아휴직 늘고 퇴직률 낮...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-26T02:02:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452976"
     }
    ]
   },
@@ -143,30 +143,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 27,
-   "recent20": 5,
-   "press": 26,
+   "articles90": 29,
+   "recent20": 4,
+   "press": 28,
    "firstArticleAt": "2026-11-26T01:04:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[공식 발표] LG, '우승 포수' 김민식 영입→포수 뎁스 확충…\"팀이 원하...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T02:01:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/117/0004128263"
+     "title": "FA 박동원 놓칠 경우 대비일까...SSG 방출 김민식, LG 전격 계약 \"풍부한...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-26T02:06:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005645533"
     },
     {
      "title": "\"SSG 방출 2주 만에 핀스트라이프 입었다\" LG, '우승 반지 2개' 베테랑 포...",
      "press": "fnnews.com",
      "publishedAt": "2026-11-26T02:01:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/014/0005610142"
+     "link": "https://m.sports.naver.com/kbaseball/article/014/0005610142"
     },
     {
-     "title": "[스포츠]LG트윈스, 베테랑 포수 김민식 영입…통산 880경기·통합우승 두...",
-     "press": "kizmom.com",
-     "publishedAt": "2026-11-26T01:50:00.000Z",
-     "link": "https://www.kizmom.com/news/articleView.html?idxno=114221"
+     "title": "[공식 발표] LG, '우승 포수' 김민식 영입→포수 뎁스 확충…\"팀이 원하...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T02:01:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004128263"
     }
    ]
   },
@@ -176,30 +176,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 4,
-   "press": 18,
-   "firstArticleAt": "2026-11-26T00:37:00.000Z",
+   "articles90": 23,
+   "recent20": 6,
+   "press": 22,
+   "firstArticleAt": "2026-11-26T00:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'조작징계' 의혹에 국민의힘 지도부 정면충돌…우재준 \"장동혁, 탈당·창...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-26T01:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159753?sid=100"
+     "title": "'조작 징계' 의혹에 갈라진 국힘 최고위…장동혁, 우재준에 \"탈당·창당...",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-26T02:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000555771?sid=100"
     },
     {
-     "title": "장동혁-친한계 정면충돌...張 \"탈당 창당이란 좋은 제도 있다\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-26T01:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358497?sid=100"
+     "title": "우재준 \"'조작징계' 의혹 물으니 장동혁 '탈당·창당 좋은 제도'\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-26T02:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078608?sid=100"
     },
     {
-     "title": "장동혁, ‘조작 징계’ 사과 요구에…“탈당·창당이란 좋은 제도 있다...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-26T01:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834046?sid=100"
+     "title": "국힘 ‘조작 징계’ 내홍 확산…장동혁 “탈당·창당 좋은 제도있다”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-26T02:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178281?sid=100"
     }
    ]
   },
@@ -208,30 +208,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 18,
-   "firstArticleAt": "2026-11-26T00:36:00.000Z",
+   "articles90": 16,
+   "recent20": 5,
+   "press": 16,
+   "firstArticleAt": "2026-11-26T00:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "제네시스, 탑기어 ‘올해의 제조사’ 선정…현대차·기아 이어 그룹 세...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-26T02:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/468/0001283613?sid=101"
+     "title": "현대차그룹, 탑기어 어워즈 6년 연속 수상…제네시스 ‘올해의 제조사’",
+     "press": "socialvalue.kr",
+     "publishedAt": "2026-11-26T02:10:00.000Z",
+     "link": "https://www.socialvalue.kr/news/view/1065578865811482"
     },
     {
-     "title": "현대차그룹, 영국 '탑기어 어워즈' 6년 연속 수상...제네시스 첫 수상",
-     "press": "koreareport.co.kr",
-     "publishedAt": "2026-11-26T01:56:00.000Z",
-     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=55177"
+     "title": "현대차그룹, 英 ‘탑기어 어워즈’ 6년 연속 수상...소비자 관심도 상승",
+     "press": "thebigdata.co.kr",
+     "publishedAt": "2026-11-26T02:08:00.000Z",
+     "link": "https://www.thebigdata.co.kr/view.php?ud=202611261028542314df3c2a17b7_23"
     },
     {
-     "title": "현대차그룹, 영국 '탑기어 어워즈' 6년 연속 수상⋯제네시스 첫 제조사...",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-26T01:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078593?sid=103"
+     "title": "제네시스, 英 탑기어 '올해의 제조사'…현대차그룹 6년 연속 수상",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-26T02:08:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261126500110"
     }
    ]
   },
@@ -240,13 +240,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 5,
-   "press": 15,
+   "articles90": 16,
+   "recent20": 4,
+   "press": 16,
    "firstArticleAt": "2026-11-26T01:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경기 광명 아파트 화재로 母子 심정지 상태서 병원 이송…母는 끝내 숨...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-26T02:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159768?sid=102"
+    },
     {
      "title": "광명 아파트 불…50대 어머니 숨지고 30대 아들 심정지",
      "press": "news.jtbc.co.kr",
@@ -258,12 +264,6 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-26T02:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006415854?sid=102"
-    },
-    {
-     "title": "광명 아파트 9층서 화재, 모자 심정지 상태 발견…50대 어머니 숨지고 ...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-26T01:58:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1177934"
     }
    ]
   },
@@ -286,16 +286,16 @@
      "link": "https://m.entertain.naver.com/article/629/0000555729"
     },
     {
-     "title": "황정민·염정아 액션 부부 돌아온다…'크로스 2' 크리스마스 공개",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T01:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009311249"
-    },
-    {
      "title": "글로벌 1위 영화, 2년만에 뚝딱 속편 만들었다‥황정민X염정아 ‘크로스...",
      "press": "newsen.com",
      "publishedAt": "2026-11-26T01:34:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001191480"
+    },
+    {
+     "title": "황정민·염정아 액션 부부 돌아온다…'크로스 2' 크리스마스 공개",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T01:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009311249"
     }
    ]
   },
@@ -307,28 +307,28 @@
    ],
    "articles90": 7,
    "recent20": 4,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T01:41:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-26T01:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "대법, 尹 '계엄 국무회의 위증' 무죄 확정",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-26T02:10:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904502"
+    },
+    {
+     "title": "'한덕수 재판서 계엄 국무회의 위증 혐의' 윤석열 무죄 확정(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T02:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016464784?sid=102"
+    },
     {
      "title": "천하람 “與 조희대 탄핵, 尹 비상계엄 못지않은 미친 짓”",
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-26T02:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003703394?sid=100"
-    },
-    {
-     "title": "대법원, 윤석열 '계엄 국무회의 위증' 무죄 확정(상보)",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-26T01:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848167?sid=102"
-    },
-    {
-     "title": "[속보] 대법, ‘계엄 국무회의 계획’ 윤석열 위증 혐의 무죄 확정",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T01:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207459?sid=102"
     }
    ]
   },
@@ -365,34 +365,34 @@
    ]
   },
   {
-   "keyword": "조별리그",
+   "keyword": "광주은행",
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T00:43:00.000Z",
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T00:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한국 U-17, 조별리그 3전 전승으로 32강 진출 확정",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-26T01:50:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566799"
+     "title": "[광주은행 is]① 대출 11% 늘려도 RWA 1.8%…운용셈법 차별화",
+     "press": "bloter.net",
+     "publishedAt": "2026-11-26T02:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/293/0000093855?sid=101"
     },
     {
-     "title": "한국, U-17 월드컵 조별리그 전승 32강행…에콰도르 3-2 제압",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-26T01:08:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/448/0000653494"
+     "title": "광주은행, 제16기 대학생 홍보대사 활동 마무리",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-26T02:06:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=930542"
     },
     {
-     "title": "김현준호, 한국 축구 사상 첫 FIFA 주관대회 조별리그 ‘3전 전승’ 통과",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-26T01:07:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/144/0001151793"
+     "title": "'SNS홍보·디지털마케팅'…광주은행 대학생 홍보대사 활동 마감",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T01:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016464638?sid=101"
     }
    ]
   },
@@ -427,11 +427,43 @@
      "link": "https://m.entertain.naver.com/article/445/0000493494"
     }
    ]
+  },
+  {
+   "keyword": "조별리그",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T00:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한국 U-17, 조별리그 3전 전승으로 32강 진출 확정",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-26T01:50:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566799"
+    },
+    {
+     "title": "한국, U-17 월드컵 조별리그 전승 32강행…에콰도르 3-2 제압",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-26T01:08:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/448/0000653494"
+    },
+    {
+     "title": "김현준호, 한국 축구 사상 첫 FIFA 주관대회 조별리그 ‘3전 전승’ 통과",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-26T01:07:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/144/0001151793"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1511,
+  "flagged": 1512,
   "matched": 744,
   "avgLeadMin": 495,
   "recent": [
