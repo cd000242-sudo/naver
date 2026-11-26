@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T13:28:59.767Z",
+ "builtAt": "2026-11-26T13:39:02.869Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "CJ올리브영 고객 개인정보 유출",
+   "keyword": "CJ올리브영 개인정보 유출",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 25,
-   "recent20": 3,
-   "press": 25,
-   "firstArticleAt": "2026-11-26T12:01:00.000Z",
+   "articles90": 28,
+   "recent20": 4,
+   "press": 28,
+   "firstArticleAt": "2026-11-26T12:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "올리브영 개인정보 유출, 피해 규모는?",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T13:20:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287372"
+     "title": "올리브영, 내부 시스템 뚫렸다···고객 개인정보 유출",
+     "press": "finomy.com",
+     "publishedAt": "2026-11-26T13:34:00.000Z",
+     "link": "http://www.finomy.com/news/articleView.html?idxno=268095"
     },
     {
-     "title": "CJ올리브영, 업무시스템 해킹…임직원·고객 790명 개인정보 유출",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-26T13:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653670?sid=101"
+     "title": "CJ올리브영, 외부 침입에 회원 개인정보 유출",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-26T13:34:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733170"
     },
     {
-     "title": "CJ올리브영, 임직원·고객 등 790명 개인정보 유출…“침입 경로 차단”",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-26T13:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002250093?sid=101"
+     "title": "CJ올리브영, \"외부 비인가 접근으로 개인정보 유출\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-26T13:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522705?sid=102"
     }
    ]
   },
   {
-   "keyword": "내일 날씨",
+   "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 9,
    "recent20": 0,
    "press": 8,
-   "firstArticleAt": "2026-11-26T12:06:00.000Z",
+   "firstArticleAt": "2026-11-26T12:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[뉴스9 날씨] 내일도 포근…주말엔 반짝 추위",
+     "title": "미국 '과잉 생산 관세' 한국 15% 유지...'25% 인상' 여지는 남겨",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T13:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438668?sid=104"
+    },
+    {
+     "title": "미 ‘과잉생산 관세’ 한국 15%…‘최대 25%’ 으름장",
      "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T12:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302181?sid=103"
+     "publishedAt": "2026-11-26T12:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302135?sid=104"
     },
     {
-     "title": "[날씨] 금요일 서울 낮 16도 포근…주말 반짝 영하권 추위",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-26T12:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653667?sid=103"
+     "title": "中 \"미국의 대중 301관세 부과 반대, 필요 조치 취할 것\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-26T12:44:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261126001345"
+    }
+   ]
+  },
+  {
+   "keyword": "현대건설 역전승",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T12:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조던·메가 자리잡아가는 현대건설, 3연승 가도",
+     "press": "stnsports.co.kr",
+     "publishedAt": "2026-11-26T13:26:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/450/0000155690"
     },
     {
-     "title": "맑은 날씨..낮 최고 15도까지 올라",
-     "press": "andongmbc.co.kr",
-     "publishedAt": "2026-11-26T12:38:00.000Z",
-     "link": "http://andongmbc.co.kr/adboard/NewsView85956"
+     "title": "고비 넘긴 현대건설, SOOP에 역전승 거두며 3연승 김다인 \"자신감 더 늘...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T13:24:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/117/0004128494"
+    },
+    {
+     "title": "[V리그] '메가·조던 46점' 현대건설, SOOP에 역전승…개막 4연패 뒤 3연...",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-26T13:12:00.000Z",
+     "link": "https://swtvnews.com/news/newsview.php?ncode=1065617873684891"
     }
    ]
   },
@@ -80,7 +112,7 @@
     "nate"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-26T12:21:00.000Z",
    "exclusive": false,
@@ -107,34 +139,34 @@
    ]
   },
   {
-   "keyword": "조작기소 특검 후보",
+   "keyword": "연우 전신 두드러기",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T12:01:00.000Z",
-   "exclusive": true,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T12:18:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "탄핵 연대에 \"책임은 여당\" 쓴소리...조작기소 특검 2명 압축",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T13:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438664?sid=100"
+     "title": "‘무쇠소녀단3’ 연우, 두 달 만에 10kg 뺐다가 전신 두드러기 “많이 울...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T13:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005769752"
     },
     {
-     "title": "與, '구인난' 조작기소 특검에 이임성 추천…'조희대 탄핵 반대성명' 참...",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-26T12:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653660?sid=100"
+     "title": "연우, 두 달 만에 10kg 감량 \"극단적으로 굶다가 전신 두드러기 생겨\"",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-26T12:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004470139"
     },
     {
-     "title": "조작기소 특검 후보에 민주당 이임성·혁신당 이정훈 추천",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-26T12:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485431?sid=102"
+     "title": "“하루 밥 2숟갈” 연우, 10㎏ 감량 극단적 다이어트 후 건강 적신호‥...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-26T12:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191694"
     }
    ]
   },
@@ -171,6 +203,102 @@
    ]
   },
   {
+   "keyword": "EU 정상회의 우크라 지원",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T12:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "EU 정상들, 우크라 지원안·7년 장기예산 협의 시작",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T13:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438663?sid=104"
+    },
+    {
+     "title": "EU 정상들, 우크라 지원·7년치 장기예산 놓고 격론 돌입",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T12:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930313?sid=104"
+    },
+    {
+     "title": "EU 정상들, 우크라 지원안·7년 장기예산 놓고 격론 돌입",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T12:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466690?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "조작기소 특검 후보",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T12:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "탄핵 연대에 \"책임은 여당\" 쓴소리...조작기소 특검 2명 압축",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T13:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438664?sid=100"
+    },
+    {
+     "title": "與, '구인난' 조작기소 특검에 이임성 추천…'조희대 탄핵 반대성명' 참...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-26T12:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653660?sid=100"
+    },
+    {
+     "title": "조작기소 특검 후보에 민주당 이임성·혁신당 이정훈 추천",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-26T12:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485431?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "무쇠소녀단 3",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T12:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'무쇠소녀단3' 설인아, 체력 한계 맞아도 포기 않는 연우에 기특",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T13:26:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785147"
+    },
+    {
+     "title": "‘무쇠소녀단3’ 연우, 두 달 만에 10kg 뺐다가 전신 두드러기 “많이 울...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-26T13:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005769752"
+    },
+    {
+     "title": "'무쇠소녀단3' 금새록, 춤추듯 독특한 스케이팅…설인아는 선수급 폼",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-26T12:56:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785144"
+    }
+   ]
+  },
+  {
    "keyword": "설인아",
    "sources": [
     "google"
@@ -203,44 +331,62 @@
    ]
   },
   {
-   "keyword": "정대세 명서현 셋째 임신",
+   "keyword": "야노시호 50억 도쿄집 공개",
    "sources": [
-    "nate"
+    "daum"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-26T12:07:00.000Z",
+   "firstArticleAt": "2026-11-26T12:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이혼 위기 고백했던 정대세 부부, 셋째 생겼다…\"뻥이지?\" 눈물 펑펑",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-26T12:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005447148"
+     "title": "야노시호, 확 달라진 50억 도쿄집 공개 \"내 명의, 추성훈과 같이 안 자\"",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-26T13:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004470140"
     },
     {
-     "title": "정대세♥명서현, 결혼 13년만 셋째 임신…웃통 벗고 오열 \"뻥이지?\"",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T12:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128484"
+     "title": "'추성훈♥' 야노시호, '50억' 도쿄집 명의 소유..30년 모델 인생의 결실...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-26T12:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005645883"
     },
     {
-     "title": "정대세, '39세' ♥명서현 셋째 임신에 오열…13살 터울 늦둥이 생긴다 [...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-26T12:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084566"
+     "title": "'추성훈♥' 야노 시호, 50억 도쿄집 공개…사랑이 등장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T12:41:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009313169"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1752,
-  "matched": 853,
-  "avgLeadMin": 521,
+  "flagged": 1756,
+  "matched": 856,
+  "avgLeadMin": 525,
   "recent": [
+   {
+    "keyword": "삼성증권 해킹 8241명 유출",
+    "hitKeyword": "올리브영 해킹 유출",
+    "hitAt": "2026-11-26T22:30:00+09:00",
+    "leadMin": 4783
+   },
+   {
+    "keyword": "정대세 명서현 셋째 임신",
+    "hitKeyword": "정대세 부부 셋째 임신",
+    "hitAt": "2026-11-26T22:30:00+09:00",
+    "leadMin": 122
+   },
+   {
+    "keyword": "정대세, 셋째 임신 소식",
+    "hitKeyword": "정대세 부부 셋째 임신",
+    "hitAt": "2026-11-26T22:30:00+09:00",
+    "leadMin": 21
+   },
    {
     "keyword": "외국인 정치활동 금지 헌법불합치",
     "hitKeyword": "삼전 닉스 외국인 매도",
@@ -282,24 +428,6 @@
     "hitKeyword": "김도영 2년 만에 MVP",
     "hitAt": "2026-11-26T21:00:00+09:00",
     "leadMin": 52
-   },
-   {
-    "keyword": "세무사 수석 구속영장 신청",
-    "hitKeyword": "세무 수석 영장 신청",
-    "hitAt": "2026-11-26T20:30:00+09:00",
-    "leadMin": 52
-   },
-   {
-    "keyword": "철도노조 준법투쟁 시작",
-    "hitKeyword": "철도노조 투쟁 첫날",
-    "hitAt": "2026-11-26T20:00:00+09:00",
-    "leadMin": 505
-   },
-   {
-    "keyword": "철도노조 안전운행 투쟁",
-    "hitKeyword": "철도노조 투쟁 첫날",
-    "hitAt": "2026-11-26T20:00:00+09:00",
-    "leadMin": 173
    }
   ]
  }
