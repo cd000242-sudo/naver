@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T20:11:10.403Z",
+ "builtAt": "2026-11-26T20:21:13.426Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,26 +8,20 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
   {
-   "keyword": "땅속 광섬유 작은 지진 연구",
+   "keyword": "땅속 광섬유로 지진 연구",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 18,
+   "articles90": 17,
    "recent20": 0,
-   "press": 15,
+   "press": 14,
    "firstArticleAt": "2026-11-26T19:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "데이터 나르던 광섬유, 지구 ‘작은 떨림’ 읽는다",
-     "press": "donga.com",
-     "publishedAt": "2026-11-26T19:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765625?sid=105"
-    },
     {
      "title": "땅속 통신용 광섬유가 지진계 7000개로… 1000분의 1초 단위 파열 포착",
      "press": "biz.chosun.com",
@@ -39,6 +33,12 @@
      "press": "hani.co.kr",
      "publishedAt": "2026-11-26T19:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002834201?sid=105"
+    },
+    {
+     "title": "땅속 통신 광섬유로 미세 지진파 1000분의 1초 규명",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-26T19:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160043?sid=105"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 7,
+   "articles90": 17,
+   "recent20": 6,
    "press": 13,
    "firstArticleAt": "2026-11-26T18:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[사설] 관세 15% 방어… 반도체, 디지털 규제 또 어깃장 美",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-26T20:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703744?sid=110"
+    },
     {
      "title": "美 “최대 40% 관세” 中 “단호히 반대”… 관세전쟁 다시 불붙나",
      "press": "seoul.co.kr",
@@ -65,12 +71,6 @@
      "press": "pinpointnews.co.kr",
      "publishedAt": "2026-11-26T20:02:00.000Z",
      "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=508638"
-    },
-    {
-     "title": "메가 프로젝트 겨냥… 美 ‘관세 25%’ 압박",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-26T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703653?sid=104"
     }
    ]
   }
