@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T20:31:17.103Z",
+ "builtAt": "2026-11-26T20:41:20.361Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T19:03:00.000Z",
+   "articles90": 13,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-26T19:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,41 +43,73 @@
    ]
   },
   {
-   "keyword": "땅속 광섬유로 지진 연구",
+   "keyword": "트럼프 3분기 성장률 조작 의혹",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T19:02:00.000Z",
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-26T19:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "땅속 통신용 광섬유가 지진계 7000개로… 1000분의 1초 단위 파열 포착",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T19:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207653?sid=105"
+     "title": "트럼프 \"중간선거 전 발표된 3분기 성장률은 가짜\"...추수감사절에도 음...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T20:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438739?sid=104"
     },
     {
-     "title": "땅밑 광섬유로 ‘작은 지진’ 관측하니… 큰 지진처럼 복잡했다",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-26T19:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834201?sid=105"
+     "title": "트럼프, 美 3분기 성장률 상향에 조작 의혹 제기",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-26T20:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848518?sid=104"
     },
     {
-     "title": "땅속 통신 광섬유로 미세 지진파 1000분의 1초 규명",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-26T19:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160043?sid=105"
+     "title": "“중간선거 전 발표된 성장률은 가짜”… 트럼프, 조사 지시",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-26T20:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887800?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "김장",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-26T20:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한울본부, 22년째 사랑의 김장 나눔…김치 4500포기 전달",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T20:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127040212189"
+    },
+    {
+     "title": "달성 옥포농협 봉사단, 김장김치·곰국 나눔행사 펼쳐",
+     "press": "nongmin.com",
+     "publishedAt": "2026-11-26T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/662/0000109409?sid=102"
+    },
+    {
+     "title": "김장김치·쌀 나눔 꾸준…지역사회 ‘훈풍’",
+     "press": "nongmin.com",
+     "publishedAt": "2026-11-26T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/662/0000109395?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1752,
+  "flagged": 1754,
   "matched": 855,
   "avgLeadMin": 505,
   "recent": [
