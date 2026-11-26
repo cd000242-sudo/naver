@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T20:51:23.716Z",
+ "builtAt": "2026-11-26T21:01:27.472Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
@@ -16,12 +16,18 @@
     "signal.bz"
    ],
    "articles90": 15,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-26T19:31:00.000Z",
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-26T19:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "中, 美 ‘최대 40% 관세’ 압박에 반발…미중 무역휴전 ‘기로’",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-26T20:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729177?sid=104"
+    },
     {
      "title": "\"美 새 관세 시행시 평균관세율 13.9%\"…상호관세 부활 수준",
      "press": "yonhapnewstv.co.kr",
@@ -33,12 +39,6 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-26T20:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000930378?sid=104"
-    },
-    {
-     "title": "美 과잉생산 관세 시행땐 평균관세율 13.9%…상호관세 무효화 이전 수준",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T20:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729174?sid=104"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 1,
-   "press": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-26T19:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 3분기 성장률 4.3%로 상향되자…트럼프 “선거 전 경제지표 조작” ...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-26T20:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729175?sid=104"
+    },
     {
      "title": "트럼프 \"중간선거 전 발표된 3분기 성장률은 가짜\"...추수감사절에도 음...",
      "press": "ytn.co.kr",
@@ -65,12 +71,38 @@
      "press": "view.asiae.co.kr",
      "publishedAt": "2026-11-26T20:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/277/0005848518?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 27일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[백운산 오늘의 운세] 2026년 11월 27일",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-26T21:00:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260917001401579"
     },
     {
-     "title": "“중간선거 전 발표된 성장률은 가짜”… 트럼프, 조사 지시",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-26T20:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887800?sid=104"
+     "title": "[오늘의 운세] 11월 27일 金(음력 10월 19일) 띠별 운세",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-26T20:00:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=202611270454339430c1c16452b0_18"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 27일(금) ♣띠별 운세♣",
+     "press": "srtimes.kr",
+     "publishedAt": "2026-11-26T20:00:00.000Z",
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=217966"
     }
    ]
   },
