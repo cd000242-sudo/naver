@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T09:37:36.082Z",
+ "builtAt": "2026-11-26T09:47:39.587Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "박종복 은행연합회장 선출",
    "sources": [
     "nate"
    ],
-   "articles90": 53,
-   "recent20": 4,
-   "press": 52,
-   "firstArticleAt": "2026-11-26T08:12:00.000Z",
+   "articles90": 48,
+   "recent20": 2,
+   "press": 47,
+   "firstArticleAt": "2026-11-26T08:18:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -43,18 +43,56 @@
    ]
   },
   {
+   "keyword": "자본시장 개혁 김용범 부회장",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 48,
+   "recent20": 3,
+   "press": 44,
+   "firstArticleAt": "2026-11-26T08:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 지시한 자본시장 개혁기구, 전원 민간위원으로…수장은 메리츠 김용...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-26T09:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568269?sid=101"
+    },
+    {
+     "title": "자본시장 개혁기구 수장에 김용범…민간이 의제 정해 대통령 직보",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-26T09:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003490505?sid=101"
+    },
+    {
+     "title": "정부 ‘자본시장 대전환 위원회’ 구성.. 위원장에 김용범 메리츠지주 ...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-26T09:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610509?sid=101"
+    }
+   ]
+  },
+  {
    "keyword": "에이피알 닥터멜락신 인수",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 47,
+   "articles90": 37,
    "recent20": 2,
-   "press": 46,
-   "firstArticleAt": "2026-11-26T08:09:00.000Z",
+   "press": 36,
+   "firstArticleAt": "2026-11-26T08:18:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "에이피알, 닥터멜락신 인수…3900억원 투입",
+     "press": "news.dealsitetv.com",
+     "publishedAt": "2026-11-26T09:38:00.000Z",
+     "link": "https://news.dealsitetv.com/articles/179256"
+    },
     {
      "title": "에이피알, 더마 브랜드 '닥터멜락신' 인수",
      "press": "edaily.co.kr",
@@ -66,44 +104,38 @@
      "press": "catchnews.kr",
      "publishedAt": "2026-11-26T09:23:00.000Z",
      "link": "https://www.catchnews.kr/news/articleView.html?idxno=131055"
-    },
-    {
-     "title": "에이피알, 닥터멜락신 3900억원에 인수",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T09:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207633?sid=101"
     }
    ]
   },
   {
-   "keyword": "김용범 개혁기구 위원장",
+   "keyword": "전철 지연",
    "sources": [
     "daum"
    ],
-   "articles90": 49,
-   "recent20": 4,
-   "press": 43,
-   "firstArticleAt": "2026-11-26T08:14:00.000Z",
+   "articles90": 33,
+   "recent20": 13,
+   "press": 31,
+   "firstArticleAt": "2026-11-26T08:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정부 ‘자본시장 대전환 위원회’ 구성.. 위원장에 김용범 메리츠지주 ...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-26T09:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610509?sid=101"
+     "title": "철도노조 준법투쟁…경남서도 곳곳 '지연'",
+     "press": "newsgn.com",
+     "publishedAt": "2026-11-26T09:44:00.000Z",
+     "link": "https://www.newsgn.com/news/articleView.html?idxno=588429"
     },
     {
-     "title": "김용범 개혁기구 위원장 맡는다…코스닥 재설계·주주가치 제고 추진",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-26T09:24:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631110"
+     "title": "코레일 “광역전철 235대 20분 이상 지연…일반열차 4대 운행정지”",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-26T09:44:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326651/?sc=Naver"
     },
     {
-     "title": "민간 자본시장개혁기구 출범...수장에 메리츠 김용범",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T09:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438601?sid=101"
+     "title": "철도노조 준법투쟁에 열차 4대 운행 중지‥광역전철 235대 지연",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-26T09:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538306?sid=101"
     }
    ]
   },
@@ -113,29 +145,29 @@
     "signal.bz"
    ],
    "articles90": 33,
-   "recent20": 3,
-   "press": 24,
-   "firstArticleAt": "2026-11-26T08:11:00.000Z",
+   "recent20": 5,
+   "press": 22,
+   "firstArticleAt": "2026-11-26T08:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "산업부 \"美 과잉생산 주장 수긍 어려워\"…최종 15% 예상",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-26T09:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000546176?sid=101"
+     "title": "\"메모리 공급 부족한데 과잉생산 주장…관세보다 美 자국내 투자 압박\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T09:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416249?sid=101"
     },
     {
-     "title": "\"관세 40% 때릴수도\" 中 압박.. 트럼프, 내달 정상회담 협상용?",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-26T09:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610502?sid=104"
+     "title": "호남팹에 과잉생산 딱지…'美 공장 지어라' 압박",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T09:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416247?sid=101"
     },
     {
-     "title": "美, 반도체 등 산업정책 트집… 정부 \"15% 관세 사수\"",
+     "title": "[사설] 호남 반도체까지 과잉생산으로 모는 美 관세 압박",
      "press": "fnnews.com",
-     "publishedAt": "2026-11-26T09:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610489?sid=101"
+     "publishedAt": "2026-11-26T09:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610521?sid=110"
     }
    ]
   },
@@ -144,13 +176,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 22,
-   "recent20": 8,
-   "press": 19,
+   "articles90": 24,
+   "recent20": 5,
+   "press": 21,
    "firstArticleAt": "2026-11-26T08:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "코레일 “광역전철 235대 20분 이상 지연…일반열차 4대 운행정지”",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-26T09:44:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326651/?sc=Naver"
+    },
     {
      "title": "코레일 \"철도노조 안전운행 투쟁에 광역전철 235대 20분 이상 지연\"",
      "press": "fnnews.com",
@@ -162,76 +200,6 @@
      "press": "ikld.kr",
      "publishedAt": "2026-11-26T09:32:00.000Z",
      "link": "http://www.ikld.kr/news/articleView.html?idxno=344973"
-    },
-    {
-     "title": "[속보]코레일 \"전철 235대 20분 이상 지연…일반열차 4대 운행중지\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-26T09:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522651?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "최태원 재산분할금 지급 제안",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-26T08:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최태원 “7일 내 9440억 지급·5% 지연이자”…노소영 측 거부",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T09:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568265?sid=102"
-    },
-    {
-     "title": "[속보]최태원, 노소영에 \"7일 내 9천440억 지급, 서로 추가 소송 말자\" 제...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-26T09:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042585?sid=102"
-    },
-    {
-     "title": "최태원 \"노소영에 9440억 일주일 내 지급, 늦으면 하루 1.3억 이자\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-26T09:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078878?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "통합 LCC 본사 부산 이전 확정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 16,
-   "firstArticleAt": "2026-11-26T08:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“부산발 국제 노선 확대할 기반 마련됐다” 한목소리로 환영 [통합 LCC...",
-     "press": "busan.com",
-     "publishedAt": "2026-11-26T09:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001409207?sid=102"
-    },
-    {
-     "title": "에어부산·진에어·에어서울 LCC 통합 본사 부산 확정",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T09:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287199"
-    },
-    {
-     "title": "꺼져 가던 ‘LCC 본사’ 하나로 뭉친 ‘부산’이 살렸다",
-     "press": "busan.com",
-     "publishedAt": "2026-11-26T09:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001409201?sid=101"
     }
    ]
   },
@@ -240,10 +208,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-26T08:10:00.000Z",
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T08:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -272,10 +240,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T08:16:00.000Z",
+   "articles90": 12,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-26T08:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -304,10 +272,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 4,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T08:11:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-26T08:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -332,18 +300,55 @@
    ]
   },
   {
+   "keyword": "언론 4법 문체소위 통과",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-26T08:29:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "방송법·정보통신망법 이어…이번엔 '언론 4법'",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-26T09:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138963?sid=100"
+    },
+    {
+     "title": "‘언론4법’ 與 주도 문체소위 통과…국힘 “언론 족쇄 채우기”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-26T09:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061422?sid=100"
+    },
+    {
+     "title": "언론4법 소위 與 단독 처리… '허위 정보' 유통한 언론사엔 정부 광고 끊...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-26T09:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968018?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "김선태의 고졸 비하 발언 분노",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
    "firstArticleAt": "2026-11-26T08:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김선태, 9급ㆍ고졸 비하 발언에 분노",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-26T09:40:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287216"
+    },
     {
      "title": "\"9급은 고졸 수준\" 발언 논란…'충주맨' 김선태 분노 [소셜in]",
      "press": "enews.imbc.com",
@@ -355,20 +360,13 @@
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-26T08:47:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003568252?sid=102"
-    },
-    {
-     "title": "'충주맨' 김선태, 9급 공무원 '고졸 수준' 발언에 분노⋯\"고졸이 죄 지었...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-26T08:44:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653631"
     }
    ]
   },
   {
    "keyword": "강유정 후보자 출근길",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 4,
    "recent20": 0,
@@ -378,16 +376,16 @@
    "capped": false,
    "samples": [
     {
-     "title": "한강 소설 ‘눈송이’, 시진핑 ‘석자 얼음’…강유정 문체부 화두 ‘해...",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-26T09:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358760?sid=100"
-    },
-    {
      "title": "개각 장관 후보자들 첫 출근…외교·치안·문화·대북 현안 해법 제시",
      "press": "idaegu.co.kr",
      "publishedAt": "2026-11-26T09:14:00.000Z",
      "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566574"
+    },
+    {
+     "title": "한강 소설 ‘눈송이’, 시진핑 ‘석자 얼음’…강유정 문체부 화두 ‘해...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-26T09:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358760?sid=100"
     },
     {
      "title": "강유정 문체부 장관 후보자 “李대통령, 중국과 문화 교류에 굉장히 눈...",
@@ -400,7 +398,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1701,
+  "flagged": 1704,
   "matched": 828,
   "avgLeadMin": 518,
   "recent": [
