@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T21:31:37.132Z",
+ "builtAt": "2026-11-26T21:41:40.307Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,12 +13,13 @@
   {
    "keyword": "버스",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T20:02:00.000Z",
+   "articles90": 13,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-26T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -35,42 +36,10 @@
      "link": "https://n.news.naver.com/mnews/article/022/0004178534?sid=102"
     },
     {
-     "title": "저상버스 보급률 50% 첫 돌파… 정류장 편의시설은 64%만 기준 충족",
-     "press": "ajunews.com",
+     "title": "국민 3명 중 1명은 교통약자…시내버스 2대 중 1대는 저상버스",
+     "press": "hani.co.kr",
      "publishedAt": "2026-11-26T21:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261126162844259"
-    }
-   ]
-  },
-  {
-   "keyword": "남경주 제자 성폭행 혐의",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-26T20:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'제자 성폭행 혐의' 남경주, 배심원 판단 받는다...오늘 국민참여재판",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-26T21:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001274139?sid=102"
-    },
-    {
-     "title": "'제자 성폭행 혐의' 뮤지컬 배우 남경주, 오늘 국민참여재판",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-26T21:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653673?sid=102"
-    },
-    {
-     "title": "‘제자 성폭행 혐의’ 뮤지컬 배우 남경주, 오늘 국민참여재판",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-26T21:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005769767?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/028/0002834227?sid=101"
     }
    ]
   },
@@ -79,30 +48,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 1,
+   "articles90": 12,
+   "recent20": 3,
    "press": 9,
-   "firstArticleAt": "2026-11-26T20:02:00.000Z",
+   "firstArticleAt": "2026-11-26T20:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "불난 인플레에 관세 끼얹기…불안한 미중 무역갈등 재점화 [글로벌 뉴스...",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-26T21:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000546202?sid=104"
+     "title": "美 새 관세 시행땐 평균관세율 13.9%…상호관세 무효화 전으로",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-26T21:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610579?sid=104"
     },
     {
-     "title": "반도체 초호황의 역설…韓경제 4%대 성장 전망에 '고금리·美관세' 압박...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313277?sid=101"
-    },
-    {
-     "title": "中, 美 ‘최대 40% 관세’ 압박에 반발…미중 무역휴전 ‘기로’",
+     "title": "물가 뛰는데 관세 또 올리는 트럼프…美언론 “경제적 자해 행위”",
      "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T20:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729177?sid=104"
+     "publishedAt": "2026-11-26T21:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729192?sid=104"
+    },
+    {
+     "title": "중국, 트럼프 행정부의 과잉생산 관세에 즉각 반발...다음 달 마이애미...",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-26T21:32:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=2026112706254020362aaae0046f_30"
     }
    ]
   },
@@ -112,7 +81,7 @@
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 3,
+   "recent20": 2,
    "press": 8,
    "firstArticleAt": "2026-11-26T20:23:00.000Z",
    "exclusive": false,
@@ -139,12 +108,45 @@
    ]
   },
   {
+   "keyword": "2026년 11월 27일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 27일 금요일 나의 운세는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-26T21:40:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194721"
+    },
+    {
+     "title": "[AI] 오늘의 띠별 운세...2026.11.27(금요일)",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-26T21:30:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68534"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 27일 (금) 띠별운세 '11월 마지막 금요일을 즐...",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-26T21:30:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104286"
+    }
+   ]
+  },
+  {
    "keyword": "화재",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 5,
-   "recent20": 4,
+   "articles90": 6,
+   "recent20": 3,
    "press": 5,
    "firstArticleAt": "2026-11-26T20:46:00.000Z",
    "exclusive": true,
@@ -163,81 +165,17 @@
      "link": "https://www.ftimes.kr/news/articleView.html?idxno=41386"
     },
     {
-     "title": "강원 영월 밴드 연습실 화재…50대 남성 숨진 채 발견",
+     "title": "이집트 카이로 유조차 충돌 화재…최소 31명 사망",
      "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T21:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302299?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 운세",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[AI] 오늘의 띠별 운세...2026.11.27(금요일)",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-26T21:30:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68534"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 27일 (금) 띠별운세 '11월 마지막 금요일을 즐...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-26T21:30:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104286"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 27일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416330?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "쿠웨이트 이란 드론 공격",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T20:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "쿠웨이트서 드론 공격에 2명 사망…조현, 이란 외무와 통화",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T21:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302306?sid=104"
-    },
-    {
-     "title": "유가 하락에 호르무즈 통제 고삐‥주변국 공격도",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-26T21:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538373?sid=104"
-    },
-    {
-     "title": "쿠웨이트 “이란 드론 공격에 이탈리아인 2명 사망”…이란은 부인",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T20:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568382?sid=104"
+     "publishedAt": "2026-11-26T21:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302308?sid=104"
     }
    ]
   },
   {
    "keyword": "이숙캠 미성숙 아내와 남편",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 5,
    "recent20": 0,
@@ -267,45 +205,50 @@
    ]
   },
   {
-   "keyword": "김장",
+   "keyword": "쿠웨이트 이란 드론 공격",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-26T20:02:00.000Z",
+   "firstArticleAt": "2026-11-26T20:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김장 후 어깨 뻐근하고 팔 안 올라간다… 단순 근육통 아니려나",
-     "press": "health.chosun.com",
-     "publishedAt": "2026-11-26T21:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/346/0000119543?sid=103"
+     "title": "쿠웨이트서 드론 공격에 2명 사망…조현, 이란 외무와 통화",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T21:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302306?sid=104"
     },
     {
-     "title": "시댁 김장 150포기씩 담갔는데…남편, 친정 김장 15포기엔 \"사 드시라고...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014348459?sid=102"
+     "title": "유가 하락에 호르무즈 통제 고삐‥주변국 공격도",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-26T21:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538373?sid=104"
     },
     {
-     "title": "한울본부, 22년째 사랑의 김장 나눔…김치 4500포기 전달",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-26T20:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127040212189"
+     "title": "쿠웨이트 “이란 드론 공격에 이탈리아인 2명 사망”…이란은 부인",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-26T20:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568382?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1750,
-  "matched": 865,
-  "avgLeadMin": 535,
+  "flagged": 1745,
+  "matched": 864,
+  "avgLeadMin": 537,
   "recent": [
+   {
+    "keyword": "마운자로",
+    "hitKeyword": "대마도 마운자로 원정",
+    "hitAt": "2026-11-27T06:30:00+09:00",
+    "leadMin": 1044
+   },
    {
     "keyword": "한전 개인정보 유출",
     "hitKeyword": "올리브영 개인정보 유출",
@@ -359,12 +302,6 @@
     "hitKeyword": "대구 주유소 성분 검사",
     "hitAt": "2026-11-27T06:00:00+09:00",
     "leadMin": 2030
-   },
-   {
-    "keyword": "광명 아파트 화재",
-    "hitKeyword": "서울 아파트 집값 하락",
-    "hitAt": "2026-11-27T06:00:00+09:00",
-    "leadMin": 1135
    }
   ]
  }
