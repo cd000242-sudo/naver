@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T22:01:47.861Z",
+ "builtAt": "2026-11-26T22:11:51.133Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,22 +8,54 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 28,
  "candidates": [
+  {
+   "keyword": "보험사 대출 연체율 상승",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 14,
+   "recent20": 0,
+   "press": 14,
+   "firstArticleAt": "2026-11-26T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "보험사 대출 연체율 1.27%…두 분기 연속 상승",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-26T21:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729195?sid=101"
+    },
+    {
+     "title": "보험사 대출 2.1조 줄었는데…연체율 1.27%로 상승",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416326?sid=101"
+    },
+    {
+     "title": "3분기 보험사 대출채권 2조 '감소'…건전성은 '악화'",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-26T21:02:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261126500430"
+    }
+   ]
+  },
   {
    "keyword": "트럼프 3분기 성장률 가짜 조사",
    "sources": [
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 5,
-   "press": 14,
-   "firstArticleAt": "2026-11-26T20:38:00.000Z",
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-26T20:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 \"GDP 수정은 기록적 오류, 즉각 조사해야\"",
+     "title": "\"선거 직전 가짜 수치 발표\" 트럼프, 'GDP 수정' 즉각 조사 주장",
      "press": "mt.co.kr",
      "publishedAt": "2026-11-26T22:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005447215?sid=101"
@@ -43,105 +75,41 @@
    ]
   },
   {
-   "keyword": "버스",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-26T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"KTX 입석 안 탈래\"…서울~세종 통근버스 5년 만에 재시 [김익환의 부처...",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-26T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358869?sid=101"
-    },
-    {
-     "title": "고양시, GTX-A 연계 '고양형 급행버스' 도입…운송사업자 공개 모집",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-26T22:00:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566947"
-    },
-    {
-     "title": "전국 시내버스 2대 중 1대는 '저상버스'…보급률 51.8% 돌파",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-26T21:12:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466729"
-    }
-   ]
-  },
-  {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 15,
    "recent20": 4,
-   "press": 10,
+   "press": 11,
    "firstArticleAt": "2026-11-26T20:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "물가 뛰는데 트럼프 관세 '부채질'…\"최악 시기 경제적 자해\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-26T22:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610587?sid=104"
+    },
+    {
+     "title": "[인사이트 뉴스] 멈추지 않는 트럼프의 관세전쟁…산업정책부터 저축까...",
+     "press": "moneystorm.kr",
+     "publishedAt": "2026-11-26T22:04:00.000Z",
+     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8910"
+    },
+    {
      "title": "\"반도체는 美 수요 대응, 석화는 공급과잉 해소\"…정부, 美관세 대응 논...",
      "press": "newsis.com",
      "publishedAt": "2026-11-26T22:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014348495?sid=101"
-    },
-    {
-     "title": "트럼프, 세계 경제 절반에 관세 압박...중국, 대응 경고…한국·일본·E...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-26T21:56:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261127010010625"
-    },
-    {
-     "title": "미국 주요 언론들 \"물가 뛰는데 트럼프 관세 인상은 경제적 자해\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T21:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438750?sid=104"
     }
    ]
   },
   {
-   "keyword": "화재",
+   "keyword": "정년",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T20:46:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "새벽 서울 중구 여인숙에서 화재…거주민 1명 사망",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T21:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466786?sid=102"
-    },
-    {
-     "title": "천안 북면서 단독주택 화재...1명 화상",
-     "press": "newsfreezone.co.kr",
-     "publishedAt": "2026-11-26T21:42:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=721620"
-    },
-    {
-     "title": "점심시간 남아있다가…남동공단 화재로 1명 사망",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-26T21:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406209?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 27일 운세",
-   "sources": [
-    "nate"
+    "google"
    ],
    "articles90": 7,
    "recent20": 0,
@@ -151,22 +119,22 @@
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 27일 금요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-26T21:40:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194721"
+     "title": "“아빠는 출근, 아들은 백수?”…‘65세 정년 연장’ 추진 논란 [잇슈 머...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T21:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302323?sid=101"
     },
     {
-     "title": "[AI] 오늘의 띠별 운세...2026.11.27(금요일)",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-26T21:30:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68534"
+     "title": "정년연장 중대 갈림길, 민주당안 회람 마쳤다",
+     "press": "labortoday.co.kr",
+     "publishedAt": "2026-11-26T21:34:00.000Z",
+     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237951"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 27일 (금) 띠별운세 '11월 마지막 금요일을 즐...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-26T21:30:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104286"
+     "title": "삭발에 단식까지, 공무원도 \"정년연장\"",
+     "press": "labortoday.co.kr",
+     "publishedAt": "2026-11-26T21:34:00.000Z",
+     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237955"
     }
    ]
   },
@@ -203,7 +171,39 @@
    ]
   },
   {
-   "keyword": "이숙캠 미성숙 아내와 남편",
+   "keyword": "연우, 두 달 10KG 감량",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T20:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김민하는 17kg, 연우는 밥 두 숟갈로 10kg…면역력 '적신호'",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-26T22:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786390"
+    },
+    {
+     "title": "두 달 만에 10kg 뺀 연우 \"온몸에 두드러기\" 부작용 고백",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-26T21:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005447211"
+    },
+    {
+     "title": "'무쇠소녀단3' 연우 10kg 감량",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-26T20:54:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611270007"
+    }
+   ]
+  },
+  {
+   "keyword": "미성숙 남편 아내 친구와 동거",
    "sources": [
     "signal.bz"
    ],
@@ -215,10 +215,10 @@
    "capped": false,
    "samples": [
     {
-     "title": "'미성숙 부부' 남편, 고백한 상대는 아내 친구…\"둘 다 갖고 싶었다\" 충...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-26T21:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084619"
+     "title": "'이혼숙려캠프' 미성숙 남편, 아내 친구에 뽀뽀",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-26T21:14:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611270009"
     },
     {
      "title": "남편 폭언에 아내 돌발행동, 제작진 긴급 투입‥박하선 악플 자제 요청...",
@@ -231,38 +231,6 @@
      "press": "newsen.com",
      "publishedAt": "2026-11-26T21:02:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001191721"
-    }
-   ]
-  },
-  {
-   "keyword": "쿠웨이트 이란 드론 공격",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T20:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "쿠웨이트서 드론 공격에 2명 사망…조현, 이란 외무와 통화",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T21:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302306?sid=104"
-    },
-    {
-     "title": "유가 하락에 호르무즈 통제 고삐‥주변국 공격도",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-26T21:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538373?sid=104"
-    },
-    {
-     "title": "쿠웨이트 “이란 드론 공격에 이탈리아인 2명 사망”…이란은 부인",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T20:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568382?sid=104"
     }
    ]
   },
@@ -301,10 +269,58 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1745,
-  "matched": 864,
-  "avgLeadMin": 537,
+  "flagged": 1748,
+  "matched": 871,
+  "avgLeadMin": 566,
   "recent": [
+   {
+    "keyword": "2026년 11월 21일 운세",
+    "hitKeyword": "11월 말 포근한 날씨",
+    "hitAt": "2026-11-27T07:00:00+09:00",
+    "leadMin": 8691
+   },
+   {
+    "keyword": "2026년 11월 22일 운세",
+    "hitKeyword": "11월 말 포근한 날씨",
+    "hitAt": "2026-11-27T07:00:00+09:00",
+    "leadMin": 7177
+   },
+   {
+    "keyword": "2026년 11월 23일 운세",
+    "hitKeyword": "11월 말 포근한 날씨",
+    "hitAt": "2026-11-27T07:00:00+09:00",
+    "leadMin": 5749
+   },
+   {
+    "keyword": "2026년 11월 운세",
+    "hitKeyword": "11월 말 포근한 날씨",
+    "hitAt": "2026-11-27T07:00:00+09:00",
+    "leadMin": 2851
+   },
+   {
+    "keyword": "2026년 11월 25일 운세",
+    "hitKeyword": "11월 말 포근한 날씨",
+    "hitAt": "2026-11-27T07:00:00+09:00",
+    "leadMin": 2801
+   },
+   {
+    "keyword": "2026년 11월 26일 운세",
+    "hitKeyword": "11월 말 포근한 날씨",
+    "hitAt": "2026-11-27T07:00:00+09:00",
+    "leadMin": 1406
+   },
+   {
+    "keyword": "2026년 11월 27일 운세",
+    "hitKeyword": "11월 말 포근한 날씨",
+    "hitAt": "2026-11-27T07:00:00+09:00",
+    "leadMin": 119
+   },
+   {
+    "keyword": "남경주 제자 성폭행 혐의",
+    "hitKeyword": "남경주 국민참여재판",
+    "hitAt": "2026-11-27T07:00:00+09:00",
+    "leadMin": 28
+   },
    {
     "keyword": "마운자로",
     "hitKeyword": "대마도 마운자로 원정",
@@ -316,54 +332,6 @@
     "hitKeyword": "올리브영 개인정보 유출",
     "hitAt": "2026-11-27T06:00:00+09:00",
     "leadMin": 5568
-   },
-   {
-    "keyword": "삼성증권도 개인정보 유출",
-    "hitKeyword": "올리브영 개인정보 유출",
-    "hitAt": "2026-11-27T06:00:00+09:00",
-    "leadMin": 5457
-   },
-   {
-    "keyword": "한국 카타르 LNG 우선 공급 요청",
-    "hitKeyword": "한국 농구 카타르 승리",
-    "hitAt": "2026-11-27T06:00:00+09:00",
-    "leadMin": 5457
-   },
-   {
-    "keyword": "삼성증권 개인정보 유출",
-    "hitKeyword": "올리브영 개인정보 유출",
-    "hitAt": "2026-11-27T06:00:00+09:00",
-    "leadMin": 5293
-   },
-   {
-    "keyword": "한성숙 총리, 카타르 국무장관 접견",
-    "hitKeyword": "한국 농구 카타르 승리",
-    "hitAt": "2026-11-27T06:00:00+09:00",
-    "leadMin": 4870
-   },
-   {
-    "keyword": "개인정보",
-    "hitKeyword": "올리브영 개인정보 유출",
-    "hitAt": "2026-11-27T06:00:00+09:00",
-    "leadMin": 4195
-   },
-   {
-    "keyword": "하나저축은행 개인정보 유출",
-    "hitKeyword": "올리브영 개인정보 유출",
-    "hitAt": "2026-11-27T06:00:00+09:00",
-    "leadMin": 3439
-   },
-   {
-    "keyword": "하나저축은행 552명 개인정보 유출",
-    "hitKeyword": "올리브영 개인정보 유출",
-    "hitAt": "2026-11-27T06:00:00+09:00",
-    "leadMin": 3379
-   },
-   {
-    "keyword": "검사",
-    "hitKeyword": "대구 주유소 성분 검사",
-    "hitAt": "2026-11-27T06:00:00+09:00",
-    "leadMin": 2030
    }
   ]
  }
