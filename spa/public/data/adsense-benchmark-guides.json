@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-26T04:15:01.443Z",
+  "generatedAt": "2026-11-26T04:31:43.605Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -5666,68 +5666,6 @@
       ]
     },
     {
-      "id": "3abf99eb2dfe0999",
-      "urls": [
-        "https://naver-doc.com/life/%ed%98%84%eb%8c%80%ec%88%9c%eb%8c%80%ea%b5%ad-%eb%a9%94%eb%89%b4-%ea%b0%80%ea%b2%a9-%ec%9c%84%ec%b9%98-%ec%a3%bc%ec%b0%a8%ea%b0%95%eb%82%a8-%ec%86%8c%eb%a8%b8%eb%a6%ac%ea%b5%ad%eb%b0%a5-%ec%98%81/",
-        "https://shinnaburo.tistory.com/entry/KBS2TV-saengsaeng-yeppine-someori-gukbap"
-      ],
-      "guide": {
-        "direction": "검색자는 '현대순대국'이 정확히 어디 있는 가게인지, 상호가 예삐네집인지 소머리국밥 전문인지 헷갈려 들어온다. 기존 글들은 상호명(현대순대국/예삐네집)과 방영 코너명이 뒤섞여 있어 혼란을 더한다. 이 글은 상호·주소·주차·영업시간·대표메뉴 가격을 표 하나로 정리해 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "주소와 주차 가능 여부(확인 필요)",
-          "방영 날짜·회차(확인 필요: KBS2TV 생생정보 홈페이지)",
-          "대표메뉴(소머리국밥 등)와 가격표(확인 필요)",
-          "영업시간·휴무일(확인 필요)"
-        ],
-        "mustAvoid": [
-          "현대순대국과 예삐네집을 같은 가게처럼 단정해서 혼용하지 않기",
-          "동명·유사명 소머리국밥집(타 지역)과 혼동하지 않기",
-          "2015년 가격파괴 why 등 전혀 다른 방영분 정보를 섞지 않기"
-        ],
-        "checkBefore": [
-          "정확한 상호명·위치(네이버지도·카카오맵, 가게 SNS)",
-          "방영 날짜·코너명(KBS2TV 생생정보 다시보기)",
-          "메뉴·가격 최신 여부(가게 전화 확인)"
-        ],
-        "solves": [
-          "상호가 현대순대국인지 예삐네집인지 헷갈림 → 정확한 상호·위치를 표로 정리",
-          "주차 가능 여부를 몰라 방문을 미룸 → 주차장 유무와 위치 안내",
-          "영업시간·휴무일을 몰라 헛걸음 → 영업시간표로 바로 확인"
-        ],
-        "actionTitles": [
-          "현대순대국 위치·주차 확인, 소머리국밥 메뉴·가격 정리",
-          "강남 영동시장 소머리국밥 영업시간 한눈에 확인하기"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "kbs2tv저녁생생정보가격파괴why 2015. 02.25일 방....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50103&docId=219213676&answerNo=1&qb=a2JzMnR27IOd7IOd7KCV67O0",
-          "views": 6439,
-          "answers": 1,
-          "askedAt": "2015.02.25"
-        },
-        {
-          "title": "방금 kbs2tv 생생정보통에 나온 국비지원 해주....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=100501&docId=275636640&answerNo=1&qb=a2JzMnR27IOd7IOd7KCV67O0",
-          "views": 1664,
-          "answers": 1,
-          "askedAt": "2017.04.28"
-        },
-        {
-          "title": "KBS2TV 저녁 생생정보프로에서 3000원짜리 수제....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80208&docId=228682557&answerNo=1&qb=a2JzMnR27IOd7IOd7KCV67O0",
-          "views": 534,
-          "answers": 1,
-          "askedAt": "2015.07.02"
-        }
-      ]
-    },
-    {
       "id": "a64c4aad21c9c898",
       "urls": [
         "https://3040-lifeanswer.tistory.com/entry/2026-%ED%86%A0%EC%8A%A4-%EB%91%90%EA%B7%BC%EB%91%90%EA%B7%BC-1%EB%93%B1-11%EC%9B%94-24%EC%9D%BC-%EC%A0%95%EB%8B%B5-ft-%ED%98%84%EB%8C%80%ED%99%88%EC%87%BC%ED%95%91",
@@ -9690,73 +9628,6 @@
       ]
     },
     {
-      "id": "62ac81bd374702a4",
-      "urls": [
-        "https://codingzero.tistory.com/entry/us-pce-november-25-2026-nasdaq-nvidia-outlook",
-        "https://tstrnys.tistory.com/235"
-      ],
-      "guide": {
-        "direction": "검색자는 PCE가 CPI와 뭐가 다른지, 11월 25일 발표 시간이 정확히 몇 시인지부터 막혀 있는데, 고수 블로그들은 이미 다우 급락·엔비디아 대기·환율 1336원대 등 시장 반응·대응전략으로 넘어가 기초 정의·시간표가 비어 있다. 이 글은 PCE·CPI 차이표와 발표 시간을 먼저 정리한 뒤, 직전 지표(환율·다우 급락)와 연결해 체크포인트로 마무리한다.",
-        "searchTargets": [
-          "미국 pce 발표일 11월",
-          "미국 pce 발표 시간",
-          "미국 pce cpi 차이",
-          "미국 pce 예상치"
-        ],
-        "mustInclude": [
-          "미국 PCE 발표일 11월 25일과 한국시간 기준 발표 시각 (확인 필요: 공식 발표 시간)",
-          "PCE와 CPI의 차이 - 집계 기관·대상·금리 정책 반영 비중 비교표",
-          "원/달러 환율 1336원대, 다우 1%대 급락 등 직전 지표 수치",
-          "엔비디아 실적 발표 일정과 브로드컴 독주 관련 영향 (확인 필요: 엔비디아 실적 발표일)"
-        ],
-        "mustAvoid": [
-          "PCE 발표 결과를 미리 단정해 특정 종목 매수·매도를 권유하는 식의 서술",
-          "PCE와 CPI를 같은 지표처럼 혼용해서 설명",
-          "환율·나스닥 방향을 확정적으로 예측"
-        ],
-        "checkBefore": [
-          "미국 상무부(BEA) 공식 발표 일정과 한국시간 환산 여부 확인",
-          "엔비디아 실적 발표일과 브로드컴 관련 수치를 증권사 캘린더나 원문 기사로 확인"
-        ],
-        "solves": [
-          "PCE가 정확히 뭔지 CPI와 뭐가 다른지 헷갈림 → 정의·집계방식·활용처를 표로 비교",
-          "PCE 발표가 몇 시인지 몰라 놓침 → 11월 25일 발표 시간을 정리해 안내",
-          "PCE 결과가 나스닥·환율에 어떻게 영향 미치는지 궁금 → 환율 1336원대·다우 급락과 연결해 체크포인트 제공"
-        ],
-        "actionTitles": [
-          "미국 PCE 발표일 11월 25일, 발표 시간과 CPI 차이 한눈에 확인",
-          "미국 PCE 예상치 확인하고 나스닥·환율 영향 체크하는 법",
-          "미국 PCE 발표 시간 정리, 엔비디아·환율 대응 체크리스트"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "미국의 PCE",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=409&docId=469075825&answerNo=1&qb=66+46rWtcGNl",
-          "views": 719,
-          "answers": 4,
-          "askedAt": "2024.05.03"
-        },
-        {
-          "title": "미국 이외 연금포트 추천과 배당다우 대체 경....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=488245127&answerNo=4&qb=66+46rWtcGNl",
-          "views": 264,
-          "answers": 4,
-          "askedAt": "2026.01.03"
-        },
-        {
-          "title": "미국 경기상황",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=408&docId=495127310&answerNo=4&qb=66+46rWtcGNl",
-          "views": 244,
-          "answers": 4,
-          "askedAt": "2026.09.14"
-        }
-      ]
-    },
-    {
       "id": "92c299761523b1a4",
       "urls": [
         "https://hanbre.tistory.com/2016",
@@ -11653,71 +11524,6 @@
           "views": 669,
           "answers": 5,
           "askedAt": "2022.05.19"
-        }
-      ]
-    },
-    {
-      "id": "c6fcfe888f9aabbc",
-      "urls": [
-        "https://pryra.tistory.com/entry/%EC%9E%AC%EB%82%9C%EB%AC%B8%EC%9E%90-%EB%AA%BB-%EB%B0%9B%EC%9D%84-%EB%95%8C-%EC%8A%A4%EB%A7%88%ED%8A%B8%ED%8F%B0-%EC%84%A4%EC%A0%95-%ED%99%95%EC%9D%B8%EB%B2%95",
-        "https://woocurella.co.kr/%ec%88%98%eb%8a%a5-%ec%9e%ac%eb%82%9c%eb%ac%b8%ec%9e%90-%eb%b6%80%ec%a0%95%ed%96%89%ec%9c%84-%ec%b2%98%eb%b2%8c/"
-      ],
-      "guide": {
-        "direction": "수능날 재난문자를 꺼도 울리는지, 울리면 부정행위로 적발되는지 몰라 불안해서 검색한다. 고수 글은 설정 확인법과 처벌 여부만 따로 다뤄 전원차단과 알림끄기의 차이, 가방 속에서 울려도 무죄인 사례는 못 짚었다. 이 글은 기기별 수신 여부와 전원차단 기준으로 불안을 끝낸다.",
-        "searchTargets": [
-          "재난문자 스마트폰 적발",
-          "재난문자 스마트폰 끄는법"
-        ],
-        "mustInclude": [
-          "위급재난문자는 알림 끄기 설정과 무관하게 강제 송출됨(지식인 답변 근거)",
-          "전원을 완전히 차단하면 재난문자 미수신 → 부정행위 아님(지식인 답변)",
-          "정상 제출한 수거 가방 안에서 울린 경우 부정행위 처리 안됨(지식인 답변)",
-          "와이파이 전용 아이패드는 기지국 경보 자체 수신 불가",
-          "2027학년도 수능 재난문자 발송 시간대 11월19일 8시25~30분(확인 필요: 공식 공지)"
-        ],
-        "mustAvoid": [
-          "재난문자 끄는 법을 부정행위 회피 수단처럼 서술하지 않기",
-          "수능 재난문자 상황과 지진·화재 등 일반 재난문자 상황을 혼동하지 않기",
-          "지식인 질문 속 특정 수험생 사례를 실명·단정적 사실처럼 서술하지 않기"
-        ],
-        "checkBefore": [
-          "2027학년도 수능 재난문자 발송 시간 및 부정행위 처리 기준 - 교육부·한국교육과정평가원 공식 공지 확인",
-          "아이폰/아이패드 등 기기별 재난문자 수신 가능 여부 - 통신사 공지 확인"
-        ],
-        "solves": [
-          "재난문자 꺼도 울리는지 헷갈릴 때 알림 끄기와 전원차단의 차이로 답 제공",
-          "가방 속에서 재난문자 울리면 적발되는지 지식인 답변 근거로 정리",
-          "와이파이 전용 아이패드도 재난문자 받는지 기기별 수신 여부 정리"
-        ],
-        "actionTitles": [
-          "재난문자 스마트폰 끄는법과 적발 여부, 전원차단으로 확인하는 법",
-          "재난문자 못받을때 설정 확인하고 끄는법까지 한번에 정리"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "내일 울리는 위급재난문자 알림 꺼도 울리나....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=107040201&docId=496006853&answerNo=3&qb=7J6s64Kc66y47J6Q7Iqk66eI7Yq47Y+w",
-          "views": 1029,
-          "answers": 4,
-          "askedAt": "2026.11.18"
-        },
-        {
-          "title": "수능 스마트폰 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=495998931&answerNo=3&qb=7J6s64Kc66y47J6Q7Iqk66eI7Yq47Y+w",
-          "views": 674,
-          "answers": 5,
-          "askedAt": "2026.11.18"
-        },
-        {
-          "title": "수능 재난문자 아이폰 꺼도 아이패드에서 울....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010701&docId=496006306&answerNo=3&qb=7J6s64Kc66y47J6Q7Iqk66eI7Yq47Y+w",
-          "views": 613,
-          "answers": 3,
-          "askedAt": "2026.11.20"
         }
       ]
     },
@@ -14147,74 +13953,6 @@
       ]
     },
     {
-      "id": "848680da511f0b82",
-      "urls": [
-        "https://hyunrhee.tistory.com/entry/%EB%AF%B8%EA%B5%AD-%EB%8C%80%ED%86%B5%EB%A0%B9-%EC%97%AD%EC%82%AC-11-2-%EB%AF%B8%EA%B5%AD%C2%B7%EB%A9%95%EC%8B%9C%EC%BD%94-%EC%A0%84%EC%9F%81-%EB%AF%B8%EA%B5%AD%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%83%9C%ED%8F%89%EC%96%91%EA%B9%8C%EC%A7%80-%EC%98%81%ED%86%A0%EB%A5%BC-%EB%84%93%ED%98%94%EC%9D%84%EA%B9%8C",
-        "https://hyunrhee.tistory.com/entry/%EB%AF%B8%EA%B5%AD-%EB%8C%80%ED%86%B5%EB%A0%B9-%EC%97%AD%EC%82%AC-11-1-%EC%A0%9C%EC%9E%84%EC%8A%A4-K-%ED%8F%AC%ED%81%AC-%E2%80%9C%EB%AF%B8%EA%B5%AD%EC%9D%80-%EC%96%B4%EB%94%94%EA%B9%8C%EC%A7%80-%EC%84%9C%EC%AA%BD%EC%9C%BC%EB%A1%9C-%EA%B0%88-%EA%B2%83%EC%9D%B8%EA%B0%80%E2%80%9D",
-        "https://hyunrhee.tistory.com/entry/%EB%AF%B8%EA%B5%AD-%EB%8C%80%ED%86%B5%EB%A0%B9-%EC%97%AD%EC%82%AC-10-%EC%A1%B4-%ED%83%80%EC%9D%BC%EB%9F%AC-%E2%80%9C%EC%9A%B0%EC%97%B0%ED%9E%88-%EB%8C%80%ED%86%B5%EB%A0%B9%EC%9D%B4-%EB%90%98%EC%97%88%EC%A7%80%EB%A7%8C-%EB%82%B4-%EB%B0%A9%EC%8B%9D%EB%8C%80%EB%A1%9C-%ED%86%B5%EC%B9%98%ED%95%98%EB%8B%A4%E2%80%9D",
-        "https://hyunrhee.tistory.com/entry/%EB%AF%B8%EA%B5%AD-%EB%8C%80%ED%86%B5%EB%A0%B9-%EC%97%AD%EC%82%AC-9-%EC%9C%8C%EB%A6%AC%EC%97%84-%ED%97%A8%EB%A6%AC-%ED%95%B4%EB%A6%AC%EC%8A%A8-%EB%AF%B8%EA%B5%AD-%EC%97%AD%EC%82%AC%EC%83%81-%EA%B0%80%EC%9E%A5-%EC%A7%A7%EC%9D%80-%EB%8C%80%ED%86%B5%EB%A0%B9-%EC%9E%84%EA%B8%B0",
-        "https://hyunrhee.tistory.com/entry/%EB%AF%B8%EA%B5%AD-%EB%8C%80%ED%86%B5%EB%A0%B9-%EC%97%AD%EC%82%AC-8-3-%ED%85%8D%EC%82%AC%EC%8A%A4-%EB%B3%91%ED%95%A9-%EB%AC%B8%EC%A0%9C",
-        "https://hyunrhee.tistory.com/entry/%EB%AF%B8%EA%B5%AD-%EB%8C%80%ED%86%B5%EB%A0%B9-%EC%97%AD%EC%82%AC-8-2-1837%EB%85%84-%EA%B2%BD%EC%A0%9C%EA%B3%B5%ED%99%A9-%E2%80%94-%EB%AF%B8%EA%B5%AD%EC%9D%80-%EC%99%9C-%EA%B8%88%EC%9C%B5%EC%9C%84%EA%B8%B0%EC%97%90-%EB%B9%A0%EC%A1%8C%EC%9D%84%EA%B9%8C"
-      ],
-      "guide": {
-        "direction": "'역대 미국 대통령 순서'를 검색하는 사람은 전체 리스트에서 11대 포크가 어디 끼어있고 임기 중 무슨 일이 있었는지 구체적으로 못 찾아 다음 글로 넘어간다. 시리즈 제목(⑪-1, ⑪-2)은 번호만 나열해 '포크=11대, 단임 공약 이행, 멕시코 전쟁으로 영토 확장'이라는 핵심이 제목만 보고는 안 잡힌다. 순서표에 포크의 임기·업적을 끼워 넣고 전쟁으로 넓어진 영토를 지도식으로 정리하면 검색이 끝난다.",
-        "searchTargets": [
-          "역대 미국 대통령 순서",
-          "미국 대통령 순서",
-          "미국 대통령 임기"
-        ],
-        "mustInclude": [
-          "11대 제임스 K. 포크, 단임 공약과 실제 이행 여부",
-          "멕시코-미국 전쟁 발발 배경과 결과",
-          "전쟁 결과로 넓어진 영토(캘리포니아·뉴멕시코 등) 범위",
-          "포크 전후 대통령 순서(타일러 10대 → 포크 11대 → 테일러 12대) 표"
-        ],
-        "mustAvoid": [
-          "멕시코-미국 전쟁을 독립전쟁·미서전쟁(스페인-미국전쟁)과 혼동하지 않기",
-          "현재 미국-멕시코 관계·이민 정책 등 시사 이슈로 확대하지 않기",
-          "포크 개인 평판·사생활을 추측성으로 다루지 않기"
-        ],
-        "checkBefore": [
-          "포크 임기와 멕시코 전쟁 발발·종료 연도를 위키백과 등 역사자료로 재확인",
-          "지식인 속 '표현의 자유' 답변은 주제와 무관하므로 인용하지 않기"
-        ],
-        "solves": [
-          "역대 대통령 순서가 헷갈림 → 10대~12대 흐름표에 포크 위치 명시",
-          "대통령 임기가 왜 1번뿐인지 모름 → 포크의 단임 공약과 이행 과정 설명",
-          "미국 영토가 어떻게 넓어졌는지 모름 → 전쟁 결과 영토 변화를 지도로 정리"
-        ],
-        "actionTitles": [
-          "미국 대통령 임기가 궁금하면 포크의 단임 공약 확인"
-        ]
-      },
-      "at": "2026-11-24T03:56:52.583Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "표현의 자유",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=495646170&answerNo=16&qb=66+46rWtIOuMgO2GteuguSDsl63sgqwg66mV7Iuc7L2UIOyghOyfgeyWtOuWu+qyjA==",
-          "views": 31313,
-          "answers": 18,
-          "askedAt": "2026.11.07"
-        },
-        {
-          "title": "미국의 역사&전쟁역사에 대해서 좀 알려주세....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=111002&docId=62325073&answerNo=1&qb=66+46rWtIOuMgO2GteuguSDsl63sgqwg66mV7Iuc7L2UIOyghOyfgeyWtOuWu+qyjA==",
-          "views": 3762,
-          "answers": 1,
-          "askedAt": "2007.05.12"
-        },
-        {
-          "title": "미국 역사는 어떻게 시작되었나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=113582183&answerNo=1&qb=66+46rWtIOuMgO2GteuguSDsl63sgqwg66mV7Iuc7L2UIOyghOyfgeyWtOuWu+qyjA==",
-          "views": 2807,
-          "answers": 1,
-          "askedAt": "2010.07.26"
-        }
-      ]
-    },
-    {
       "id": "69b25f3e4be59e39",
       "urls": [
         "https://yjfreelifestyle.tistory.com/entry/%EC%BD%94%EB%A0%88%EC%9D%BC-%ED%8C%8C%EC%97%85-%EC%8A%B9%EC%B0%A8%EA%B6%8C-%ED%99%98%EB%B6%88-%EC%9C%84%EC%95%BD%EA%B8%88-%EB%A9%B4%EC%A0%9C-%EC%A0%81%EC%9A%A9-%EA%B8%B0%EA%B0%84%EA%B3%BC-%ED%99%98%EB%B6%88%C2%B7%EB%B3%80%EA%B2%BD-%EB%B0%A9%EB%B2%95-2026%EB%85%84-11%EC%9B%94-23%EC%9D%BC-%EA%B8%B0%EC%A4%80"
@@ -16557,64 +16295,6 @@
           "views": 313,
           "answers": 5,
           "askedAt": "2026.09.05"
-        }
-      ]
-    },
-    {
-      "id": "888c9578d9396ddb",
-      "urls": [
-        "https://initive.co.kr/%ec%82%ac%ec%97%85%ec%9e%90-%ec%82%ac%ec%9e%87%eb%8f%8c%eb%8c%80%ec%b6%9c-%ea%b0%9c%ec%9d%b8%ec%82%ac%ec%97%85%ec%9e%90%ea%b0%80-%ed%99%9c%ec%9a%a9%ed%95%98%eb%8a%94-%eb%b0%a9%eb%b2%95/",
-        "https://supercoms.tistory.com/entry/%EA%B0%88%EC%95%84%ED%83%80%EA%B8%B0-%ED%83%80%EC%9D%B4%EB%B0%8D-%EB%86%93%EC%B3%90%EC%84%9C-%EC%86%90%ED%95%B4-%EB%B3%B8-%EC%8B%A4%EC%A0%9C-%ED%9B%84%EA%B8%B0-%EB%AA%A9%ED%8F%AC%EC%8B%9C-%EA%B4%91%EC%A3%BC%EC%9D%80%ED%96%89-%EA%B0%9C%EC%9D%B8%EC%82%AC%EC%97%85%EC%9E%90%EB%8C%80%EC%B6%9C-%EB%B0%94%EB%A1%9C%EA%B0%80%EA%B8%B0"
-      ],
-      "guide": {
-        "direction": "검색자는 사업자 사잇돌대출이 개인용 사잇돌대출과 자격·한도가 어떻게 다른지 헷갈려 한다. 고수 글 제목은 '활용 방법'만 말하고 대상·한도·금리 조건표나 신청 순서는 다루지 않는다. 조건표와 신청 절차를 한 번에 정리해 글 안에서 신청까지 끝내게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "사잇돌대출 대상자 조건(개인사업자 vs 개인) 비교",
-          "한도·금리 구간(확인 필요: 서민금융진흥원 공식 고시)",
-          "필요서류와 신청 절차 순서"
-        ],
-        "mustAvoid": [
-          "사업자등록 유무에 따른 자격 차이 누락"
-        ],
-        "checkBefore": [
-          "서민금융진흥원 공식 홈페이지에서 최신 대상·한도·금리 확인"
-        ],
-        "solves": [
-          "사잇돌대출과 일반 사업자대출이 뭐가 다른지 → 대상·한도·금리 비교표로 해결",
-          "신청 자격이 되는지 → 조건표로 바로 확인",
-          "어디서 신청하는지 → 취급기관 리스트와 신청 순서 제공"
-        ],
-        "actionTitles": [
-          "사업자 사잇돌대출 신청 조건 한눈에 비교하기",
-          "사잇돌대출 한도·금리 조회하고 신청 순서 정리",
-          "개인사업자 사잇돌대출 자격 확인하는 법"
-        ]
-      },
-      "at": "2026-11-24T14:45:01.846Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "인가전 개인회생 폐지후 주담대 미납금 해결",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60203&docId=494670523&answerNo=1&qb=6rCI7JWE7YOA6riwIO2DgOydtOuwjSDrhpPss5DshJwg7IaQ7ZW0IOyLpOygnA==",
-          "views": 1128,
-          "answers": 13,
-          "askedAt": "2026.08.10"
-        },
-        {
-          "title": "개인회생 언제부터 준비해야 할까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60203&docId=495053255&answerNo=3&qb=6rCI7JWE7YOA6riwIO2DgOydtOuwjSDrhpPss5DshJwg7IaQ7ZW0IOyLpOygnA==",
-          "views": 990,
-          "answers": 26,
-          "askedAt": "2026.09.06"
-        },
-        {
-          "title": "펀드 갈아타기 문의 드립니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=157389127&answerNo=2&qb=6rCI7JWE7YOA6riwIO2DgOydtOuwjSDrhpPss5DshJwg7IaQ7ZW0IOyLpOygnA==",
-          "views": 343,
-          "answers": 3,
-          "askedAt": "2012.08.28"
         }
       ]
     },
@@ -20864,65 +20544,6 @@
       "at": "2026-11-25T00:35:23.007Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "d5810188547efc14",
-      "urls": [
-        "https://infozone25.com/2027-ikon-%ec%84%9c%ec%9a%b8-%ec%bd%98%ec%84%9c%ed%8a%b8-%ec%9d%bc%ec%a0%95%c2%b7%ed%8b%b0%ec%bc%93%ed%8c%85%c2%b7%ec%a2%8c%ec%84%9d-%ea%bf%80%ed%8c%81-%ec%b4%9d%ec%a0%95%eb%a6%ac-fourever-homecomin/"
-      ],
-      "guide": {
-        "direction": "지식인 질문들은 티켓팅 날짜·절차가 공지 전이라 '언제·어떻게 하나요'에 몰려 있다. '총정리' 제목은 많지만 아직 확정 안 된 정보를 모호하게 다뤄 예매처별 오픈시간·좌석등급·양도 주의사항까지 표로 정리한 글이 드물다. 독자는 일정·예매처·좌석 비교표와 양도 체크리스트로 글을 끝낼 수 있다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "공식 일정(날짜·장소, 확인 필요: 소속사 공지)",
-          "좌석 등급별 시야·특징 정리표",
-          "티켓 양도 사기 주의사항",
-          "현장수령/택배 수령 여부(확인 필요)"
-        ],
-        "mustAvoid": [
-          "과거 iKON 투어나 다른 멤버 단독 공연과 혼동"
-        ],
-        "checkBefore": [
-          "소속사/공식 SNS 공지에서 일정·장소 확인",
-          "티켓링크 등 공식 예매처 발표에서 오픈 시간 확인"
-        ],
-        "solves": [
-          "티켓팅 언제 하나요 → 공식 공지 기반 일정표로 정리",
-          "예매 방법을 모름 → 단계별 절차 체크리스트 제공",
-          "좌석 자리가 어떤지 궁금 → 등급별 시야·꿀팁 비교"
-        ],
-        "actionTitles": [
-          "iKON 서울 콘서트 티켓팅 날짜·방법 확인하는 법",
-          "iKON 좌석 등급별 시야 비교, 예매 전 체크",
-          "iKON 콘서트 양도 사기 피하는 법 정리"
-        ]
-      },
-      "at": "2026-11-25T00:35:23.007Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "아이콘 콘서트 티켓팅 (내공 90)",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1306&docId=313921914&answerNo=1&qb=aWtvbiDshJzsmrgg7L2Y7ISc7Yq4IO2LsOy8k+2MhSDsoozshJ0=",
-          "views": 1362,
-          "answers": 1,
-          "askedAt": "2018.11.08"
-        },
-        {
-          "title": "ikon아이콘 콘서트(콘서트 티켓팅 예매방법)",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30215&docId=242199193&answerNo=2&qb=aWtvbiDshJzsmrgg7L2Y7ISc7Yq4IO2LsOy8k+2MhSDsoozshJ0=",
-          "views": 995,
-          "answers": 2,
-          "askedAt": "2016.01.06"
-        },
-        {
-          "title": "IKON콘서트 티켓팅 언제하나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=13040101&docId=241350831&answerNo=1&qb=aWtvbiDshJzsmrgg7L2Y7ISc7Yq4IO2LsOy8k+2MhSDsoozshJ0=",
-          "views": 368,
-          "answers": 1,
-          "askedAt": "2015.12.25"
-        }
-      ]
     },
     {
       "id": "826efc1e86345294",
