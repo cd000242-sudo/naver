@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T21:51:43.795Z",
+ "builtAt": "2026-11-26T22:01:47.861Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
+  {
+   "keyword": "트럼프 3분기 성장률 가짜 조사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 5,
+   "press": 14,
+   "firstArticleAt": "2026-11-26T20:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"GDP 수정은 기록적 오류, 즉각 조사해야\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-26T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447215?sid=101"
+    },
+    {
+     "title": "트럼프 \"중간선거 전 3분기 성장률은 가짜…즉각 조사해야\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T21:52:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127064802239"
+    },
+    {
+     "title": "트럼프, 중간선거 참패에 ‘경제지표 조작설’ 제기…즉각 조사 요구",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-26T21:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160062?sid=104"
+    }
+   ]
+  },
   {
    "keyword": "버스",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 12,
+   "articles90": 15,
+   "recent20": 2,
+   "press": 14,
    "firstArticleAt": "2026-11-26T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "\"KTX 입석 안 탈래\"…서울~세종 통근버스 5년 만에 재시 [김익환의 부처...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-26T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358869?sid=101"
+    },
+    {
+     "title": "고양시, GTX-A 연계 '고양형 급행버스' 도입…운송사업자 공개 모집",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-26T22:00:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566947"
+    },
+    {
      "title": "전국 시내버스 2대 중 1대는 '저상버스'…보급률 51.8% 돌파",
      "press": "goodnews1.com",
      "publishedAt": "2026-11-26T21:12:00.000Z",
      "link": "https://www.goodnews1.com/news/articleView.html?idxno=466729"
-    },
-    {
-     "title": "서울 야간경제 밝혀줄 ‘반딧불이버스’ 첫 시동",
-     "press": "segye.com",
-     "publishedAt": "2026-11-26T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178534?sid=102"
-    },
-    {
-     "title": "국민 3명 중 1명은 교통약자…시내버스 2대 중 1대는 저상버스",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-26T21:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834227?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 3분기 성장률 조작 의혹",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-26T20:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 \"중간선거 직전 경제 통계 조작됐다\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-26T21:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968073?sid=104"
-    },
-    {
-     "title": "트럼프 \"선거 전 발표한 美경제성장률은 가짜…조사해야\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-26T21:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416337?sid=104"
-    },
-    {
-     "title": "트럼프, 상향된 성장률에 '음모론' 제기…\"의도적 조작\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-26T21:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000546203?sid=101"
     }
    ]
   },
@@ -79,30 +79,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 13,
    "recent20": 4,
-   "press": 9,
-   "firstArticleAt": "2026-11-26T20:26:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-26T20:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“트럼프 새 관세안 시행 땐 실효세율 13.9%⋯상호관세 무효화 전으로 ...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-26T21:44:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653677"
+     "title": "\"반도체는 美 수요 대응, 석화는 공급과잉 해소\"…정부, 美관세 대응 논...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014348495?sid=101"
     },
     {
-     "title": "美 새 관세 시행땐 평균관세율 13.9%…상호관세 무효화 전으로",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-26T21:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610579?sid=104"
+     "title": "트럼프, 세계 경제 절반에 관세 압박...중국, 대응 경고…한국·일본·E...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-26T21:56:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261127010010625"
     },
     {
-     "title": "물가 뛰는데 관세 또 올리는 트럼프…美언론 “경제적 자해 행위”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-26T21:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729192?sid=104"
+     "title": "미국 주요 언론들 \"물가 뛰는데 트럼프 관세 인상은 경제적 자해\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T21:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438750?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "화재",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T20:46:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "새벽 서울 중구 여인숙에서 화재…거주민 1명 사망",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T21:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466786?sid=102"
+    },
+    {
+     "title": "천안 북면서 단독주택 화재...1명 화상",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-26T21:42:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=721620"
+    },
+    {
+     "title": "점심시간 남아있다가…남동공단 화재로 1명 사망",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T21:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406209?sid=102"
     }
    ]
   },
@@ -112,7 +144,7 @@
     "nate"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-26T21:00:00.000Z",
    "exclusive": false,
@@ -139,35 +171,34 @@
    ]
   },
   {
-   "keyword": "화재",
+   "keyword": "美 관세 우려 완화",
    "sources": [
-    "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 7,
+   "articles90": 4,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T20:46:00.000Z",
-   "exclusive": true,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T21:00:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "천안 북면서 단독주택 화재...1명 화상",
-     "press": "newsfreezone.co.kr",
-     "publishedAt": "2026-11-26T21:42:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=721620"
+     "title": "\"반도체는 美 수요 대응, 석화는 공급과잉 해소\"…정부, 美관세 대응 논...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014348495?sid=101"
     },
     {
-     "title": "점심시간 남아있다가…남동공단 화재로 1명 사망",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-26T21:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406209?sid=102"
+     "title": "물가 뛰는데 관세 또 올리는 트럼프…美언론 “경제적 자해 행위”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-26T21:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729192?sid=104"
     },
     {
-     "title": "'신진서 꺾고 삼성화재배 제패' 변상일, 농심배 첫 연승 정조준…한국 ...",
-     "press": "ftimes.kr",
-     "publishedAt": "2026-11-26T21:24:00.000Z",
-     "link": "https://www.ftimes.kr/news/articleView.html?idxno=41386"
+     "title": "유럽증시, 美 추가 관세 우려 완화에 일제히 상승…스톡스600 1.8%↑",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-26T21:30:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127062456232"
     }
    ]
   },
@@ -176,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T20:28:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-26T20:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -234,11 +265,43 @@
      "link": "https://n.news.naver.com/mnews/article/025/0003568382?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "야노시호 50억 도쿄 집 공개",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-26T20:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“내 명의” 야노 시호, 도쿄 50억 집 공개‥♥추성훈 때문에 더러운집...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-26T20:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191716"
+    },
+    {
+     "title": "야노 시호, 850만원 수소 호흡기→명품 E사 식기‥50억 집 채운 럭셔리 ...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-26T20:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191712"
+    },
+    {
+     "title": "50억 도쿄집에 천만원 '수소호흡기'까지..야노시호, 50대 동안 비결공개",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-26T20:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005645931"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1743,
+  "flagged": 1745,
   "matched": 864,
   "avgLeadMin": 537,
   "recent": [
