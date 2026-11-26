@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T00:04:25.472Z",
+ "builtAt": "2026-11-26T00:14:28.405Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 22,
-   "recent20": 8,
-   "press": 22,
+   "articles90": 26,
+   "recent20": 9,
+   "press": 25,
    "firstArticleAt": "2026-11-25T22:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 추가 관세 리스크 해소…현대차·기아 한숨 돌렸다",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-26T00:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002249957?sid=101"
+     "title": "대미 무역흑자 역대 최대에도 관세 15% 방어···美 추가 압박은 부담",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-26T00:12:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=160651"
     },
     {
-     "title": "한미 합의 15% 넘어 25%까지…USTR, 한국에 과잉생산 관세 예고",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-26T00:02:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=729494"
+     "title": "美 과잉생산 관세 15% 상한 방어…호남 반도체 클러스터 지목하며 25% 인...",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-26T00:12:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566698"
     },
     {
-     "title": "미국, 한국 반도체·자동차 과잉생산 지목…관세 25% 인상 여지",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-26T00:00:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=400361"
+     "title": "美, 한국에 15% 관세 제안…협의 따라 25%까지 인상 가능성",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-26T00:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213970?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "1010만 유튜버 해티",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 6,
+   "press": 19,
+   "firstArticleAt": "2026-11-25T22:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘1010만 유튜버’ 진우와 해티, 결혼 4년 만에 이혼…“각자의 삶”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-26T00:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/016/0002728648"
+    },
+    {
+     "title": "[전문] '1010만 유튜버' 진우와 해티, 결혼 4년 만에 이혼…유튜브·SNS도...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-26T00:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786247"
+    },
+    {
+     "title": "구독자 1010만 국제 부부 유튜버 '진우와 해티', 결혼 4년 만에 파경",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T00:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014345887"
     }
    ]
   },
@@ -48,10 +80,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 4,
-   "press": 18,
-   "firstArticleAt": "2026-11-25T22:44:00.000Z",
+   "articles90": 18,
+   "recent20": 1,
+   "press": 17,
+   "firstArticleAt": "2026-11-25T22:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,100 +108,67 @@
    ]
   },
   {
-   "keyword": "1010만 유튜버 해티",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 17,
-   "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-25T22:43:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "연소득 63억 1010만 유튜버 진우와 해티, 이혼",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-26T00:02:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95963"
-    },
-    {
-     "title": "진우와 해티, 결혼 4년 만에 이혼",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T00:00:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16286586"
-    },
-    {
-     "title": "'연소득 63억설' 진우와 해티, 결혼 4년 만 파경…'1010만' 채널은 진우...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-25T23:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409617"
-    }
-   ]
-  },
-  {
    "keyword": "김정은 핵시설 전술핵",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-25T22:35:00.000Z",
+   "articles90": 14,
+   "recent20": 5,
+   "press": 13,
+   "firstArticleAt": "2026-11-25T22:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "北김정은, 핵물질 생산기지·핵무기연구소 현지지도 … \"전술핵 다영역...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-26T00:12:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/26/2026112650039.html"
+    },
+    {
+     "title": "김정은, 핵시설 현지지도…\"전술핵 다영역 활용화 주목해야\"(종합)",
+     "press": "konas.net",
+     "publishedAt": "2026-11-26T00:04:00.000Z",
+     "link": "https://www.konas.net/article/article.asp?idx=64809"
+    },
     {
      "title": "北핵시설 찾은 김정은 \"전술핵, 다영역 활용화 주목해야\"",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-25T23:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004213967?sid=100"
-    },
-    {
-     "title": "핵시설 시찰한 김정은, 전술핵 필요성 강조…美·英·호주 동맹 견제도",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-25T23:58:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087967"
-    },
-    {
-     "title": "김정은, 핵시설 찾아…\"핵보유는 물러설 수 없는 선택\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-25T23:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005446600?sid=100"
     }
    ]
   },
   {
-   "keyword": "나는 솔로",
+   "keyword": "대한민국 고용노동부",
    "sources": [
-    "signal.bz",
-    "nate"
+    "google"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-25T22:44:00.000Z",
-   "exclusive": false,
+   "articles90": 10,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-25T22:46:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "‘나는 솔로’ 34기 상철, 순자·옥순 사이 갈팡질팡… “영호 대타 같...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-25T23:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543655"
+     "title": "바커케미칼코리아, 고용노동부 '2026 대한민국 일·생활 균형 우수기업...",
+     "press": "epnc.co.kr",
+     "publishedAt": "2026-11-26T00:10:00.000Z",
+     "link": "https://www.epnc.co.kr/news/articleView.html?idxno=410325"
     },
     {
-     "title": "'나는 솔로' 광수, 정숙에 황당 요구…\"질투 나서 미치게 해줘\"",
-     "press": "ize.co.kr",
-     "publishedAt": "2026-11-25T23:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/465/0000021281"
+     "title": "NS홈쇼핑, '대한민국 일·생활 균형 우수기업' 선정",
+     "press": "newsdream.kr",
+     "publishedAt": "2026-11-26T00:10:00.000Z",
+     "link": "http://www.newsdream.kr/news/articleView.html?idxno=123041"
     },
     {
-     "title": "‘나는 솔로’ 34기 영식·영숙 쌍방 직진…영철·광수 고민 [종합]",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-25T23:42:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795650015531546010"
+     "title": "한국콜마, 고용노동부 ‘일·생활 균형 우수기업’ 선정",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-26T00:06:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=2026112609030963946a9e4dd7f_30"
     }
    ]
   },
@@ -204,13 +203,78 @@
      "link": "https://m.entertain.naver.com/article/396/0000761997"
     }
    ]
+  },
+  {
+   "keyword": "나는 솔로",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-25T22:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘나는 솔로’ 34기 상철, 순자·옥순 사이 갈팡질팡… “영호 대타 같...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-25T23:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543655"
+    },
+    {
+     "title": "'나는 솔로' 광수, 정숙에 황당 요구…\"질투 나서 미치게 해줘\"",
+     "press": "ize.co.kr",
+     "publishedAt": "2026-11-25T23:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000021281"
+    },
+    {
+     "title": "‘나는 솔로’ 34기 영식·영숙 쌍방 직진…영철·광수 고민 [종합]",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-25T23:42:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795650015531546010"
+    }
+   ]
+  },
+  {
+   "keyword": "롯데 자이언츠",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-25T23:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "일본 구단도 눈독 들였는데…3년 연속 안타왕 레이예스, 롯데와 재계약...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-26T00:11:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005645477"
+    },
+    {
+     "title": "美·日 구애에도 의리 지켰다! '대체 불가' 레이예스, 롯데 잔류 가닥",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-25T23:13:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/079/0004213962"
+    },
+    {
+     "title": "신동빈 롯데그룹 회장 10월 온라인 관심도 감소…\"신인 선수 축전 미담...",
+     "press": "thebigdata.co.kr",
+     "publishedAt": "2026-11-25T23:02:00.000Z",
+     "link": "https://www.thebigdata.co.kr/view.php?ud=202611251934072922d0a8833aad_23"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1491,
-  "matched": 740,
-  "avgLeadMin": 505,
+  "flagged": 1487,
+  "matched": 734,
+  "avgLeadMin": 501,
   "recent": [
    {
     "keyword": "임영웅",
