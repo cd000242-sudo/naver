@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T15:59:49.004Z",
+ "builtAt": "2026-11-26T16:09:52.027Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "google"
    ],
    "articles90": 13,
-   "recent20": 1,
+   "recent20": 0,
    "press": 10,
    "firstArticleAt": "2026-11-26T14:50:00.000Z",
    "exclusive": true,
@@ -43,14 +43,46 @@
    ]
   },
   {
+   "keyword": "미국 과잉생산 관세 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-26T15:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미국 과잉생산 관세에 중국 반발…미중 무역휴전 다시 ‘시험대’",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-26T16:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302277?sid=104"
+    },
+    {
+     "title": "다시 관세버튼 누른 트럼프… 비과세 투자·노후 적립금도 문제 삼아",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-26T15:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004012049?sid=104"
+    },
+    {
+     "title": "美 과잉생산 관세에 中 반발…미중 무역휴전 다시 '시험대'",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T15:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466717?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "북한 러 군사지원 중단",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T14:32:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-26T14:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,74 +107,42 @@
    ]
   },
   {
-   "keyword": "연우 10kg 감량",
+   "keyword": "황윤성 농사 규모",
    "sources": [
     "daum"
    ],
    "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T14:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "연우, 두 달 만에 10kg 감량…전신 두드러기까지",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T15:46:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287425"
-    },
-    {
-     "title": "연우, 어쩐지 급격하게 말랐더라…\"굶어서 10kg 감량, 전신 두드러기에...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-26T15:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084592"
-    },
-    {
-     "title": "연우, 하루 밥 두 숟갈 먹고 10kg 감량…“이렇게 살면 안 되겠다”",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-26T14:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001307072"
-    }
-   ]
-  },
-  {
-   "keyword": "이숙캠 미성숙 아내, 남편 외도 충격",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
    "recent20": 0,
    "press": 2,
-   "firstArticleAt": "2026-11-26T14:34:00.000Z",
+   "firstArticleAt": "2026-11-26T15:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'이숙캠' 미성숙 남편 \"태어나 사랑받은 적 없어, 엄마 만나 보고 싶다...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-26T15:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490567"
+     "title": "'편스토랑' 황윤성, 밭·논·축사 갖춘 아버지 시골집 공개…\"농사도 폼...",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-26T15:36:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628033"
     },
     {
-     "title": "‘이숙캠’ 미성숙 아내, 남편 일당 훌쩍 넘는 ‘10만 원’ 탕진하더니...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-26T15:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001151934"
+     "title": "황윤성 아버지, 아들은 중스타·이찬원은 우주대스타 대접 “소 잡을 뻔...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-26T15:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191702"
     },
     {
-     "title": "'이숙캠' 남편, 아내 친구와 셋이 동거→강제 뽀뽀?..충격적인 속내[별...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-26T14:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490564"
+     "title": "황윤성 숨겨진 금수저였네, 논만 4개→1억짜리 농보르기니 시골집 공개...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-26T15:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191701"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1758,
-  "matched": 861,
+  "flagged": 1757,
+  "matched": 860,
   "avgLeadMin": 512,
   "recent": [
    {
