@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T11:28:14.298Z",
+ "builtAt": "2026-11-26T11:38:17.663Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,55 +11,22 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "세무사 수석 구속영장 신청",
-   "sources": [
-    "nate",
-    "daum"
-   ],
-   "articles90": 51,
-   "recent20": 2,
-   "press": 43,
-   "firstArticleAt": "2026-11-26T10:01:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경찰, 'AI 커닝' 세무사 수석 구속영장 신청…\"파급력 매우 커\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-26T11:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447141?sid=102"
-    },
-    {
-     "title": "'AI 커닝' 세무사 수석 구속영장… \"자수했어도 증거인멸·파장 크다\"",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-26T11:12:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731280"
-    },
-    {
-     "title": "경찰, ‘세무냥이’ 구속영장 신청…“증거인멸·도주 우려 있어”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-26T11:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686659?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "이 대통령 폭언 욕설 차단",
    "sources": [
     "daum"
    ],
-   "articles90": 27,
-   "recent20": 3,
-   "press": 27,
-   "firstArticleAt": "2026-11-26T10:00:00.000Z",
+   "articles90": 22,
+   "recent20": 1,
+   "press": 22,
+   "firstArticleAt": "2026-11-26T10:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 “가난 왜 증명해야하나”…복지 자동주의로 전환",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-26T11:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568279?sid=100"
+     "title": "李대통령 \"폭언·욕설은 차단…SNS는 비판·피드백이 중요\"",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-26T11:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193709?sid=100"
     },
     {
      "title": "李 대통령 \"합리적 비판 적극 수용하겠다 … SNS 욕설·비방은 차단\"",
@@ -78,13 +45,12 @@
   {
    "keyword": "강금실 인사청문요구서 재가",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 24,
+   "articles90": 18,
    "recent20": 1,
-   "press": 22,
-   "firstArticleAt": "2026-11-26T10:00:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-26T10:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -113,30 +79,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 10,
+   "articles90": 14,
+   "recent20": 3,
+   "press": 12,
    "firstArticleAt": "2026-11-26T10:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프, 중간선거 졌는데도 관세는 '마이웨이'…14개국 과잉생산 관세,...",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-26T11:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002467822?sid=104"
+     "title": "미국 “과잉생산 관세”, 호남 반도체 정조준…정부 대응 시급",
+     "press": "kwangju.co.kr",
+     "publishedAt": "2026-11-26T11:36:00.000Z",
+     "link": "http://www.kwangju.co.kr/article.php?aid=1795692600805767004"
     },
     {
-     "title": "아직 공장도 없는데 왜?…美 ‘과잉생산 관세’ 근거 된 800조원 호남 반...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-26T11:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178408?sid=100"
+     "title": "관세 집착 트럼프…15% 방어했지만 25% 여지",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T11:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406152?sid=104"
     },
     {
-     "title": "반도체·자동차 콕 집은 미국‥정부 \"과잉생산 동의 어려워\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-26T10:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538320?sid=101"
+     "title": "美 “삼성전자·SK하이닉스, 李대통령” 콕 집어…韓에 최대 25% 관세 으...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-26T11:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703638?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "윤석열 위증 무죄 확정",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-26T10:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "윤석열 '한덕수 내란 재판 위증', 대법서 무죄 확정",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T11:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438648?sid=102"
+    },
+    {
+     "title": "윤석열 위증 무죄 확정 뒤…김계리 \"특검에 감사\" 비아냥",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-26T11:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522674?sid=102"
+    },
+    {
+     "title": "'위증 무죄'에 억지 주장…\"내란 판결 영향 없다\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-26T11:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406149?sid=102"
     }
    ]
   },
@@ -145,10 +143,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 9,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-26T10:02:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-26T10:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -175,17 +173,18 @@
   {
    "keyword": "정대세 명서현 셋째 임신",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T10:08:00.000Z",
+   "articles90": 9,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-26T10:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "축구선수 정대세 아내 명서현, 둘째 낳고 12년 만에 셋째 임신",
+     "title": "‘이혼 결심’ 2년 뒤…정대세·명서현, 첫째와 13살 차 셋째 임신",
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-26T11:21:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003568277?sid=102"
@@ -205,45 +204,45 @@
    ]
   },
   {
-   "keyword": "이재명 7대 시드 프로젝트",
+   "keyword": "2년 만의 도전",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T10:00:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-26T10:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 “7대 시드 프로젝트 더 속도 내야”",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-26T11:02:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1795690505693708002"
+     "title": "한국 탁구, 혼성 단체 월드컵 출격…2년 만에 메달 도전",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-26T10:36:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/003/0014348281"
     },
     {
-     "title": "“위험성 크지 않은 규제 과감히 풀고 7대 시드 프로젝트 좀 더 속도 내...",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-26T11:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887724?sid=100"
+     "title": "KIA 설렌다! MVP+홈런왕+장타왕 셀프 평가 '70점' 실화?→\"유격수 도전 ...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-26T10:35:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002084483"
     },
     {
-     "title": "이 대통령 \"핵심 경제지표 역사적 이정표…7대 시드 더 속도내야\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-26T10:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406133?sid=100"
+     "title": "'왕의 귀환' 김도영 2년 만에 MVP 탈환...\"내년 큰 도전\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T10:20:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/052/0002438635"
     }
    ]
   },
   {
    "keyword": "검찰",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-26T10:11:00.000Z",
    "exclusive": false,
@@ -274,19 +273,13 @@
    "sources": [
     "nate"
    ],
-   "articles90": 28,
+   "articles90": 18,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T10:08:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-26T10:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "중진 만찬 참석하는 남인순·박범계 의원",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T10:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466650?sid=100"
-    },
     {
      "title": "중진 만찬 참석하는 이학영 의원",
      "press": "yna.co.kr",
@@ -294,42 +287,16 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016466651?sid=100"
     },
     {
-     "title": "중진 만찬 참석하는 정성호·민홍철 의원",
+     "title": "중진 만찬 참석하는 남인순·박범계 의원",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T10:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466649?sid=100"
+    },
+    {
+     "title": "중진 만찬 참석하는 김태년 의원",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T10:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466643?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "2년 만의 도전",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T10:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한국 탁구, 혼성 단체 월드컵 출격…2년 만에 메달 도전",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T10:36:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/003/0014348281"
-    },
-    {
-     "title": "KIA 설렌다! MVP+홈런왕+장타왕 셀프 평가 '70점' 실화?→\"유격수 도전 ...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-26T10:35:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002084483"
-    },
-    {
-     "title": "'왕의 귀환' 김도영 2년 만에 MVP 탈환...\"내년 큰 도전\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T10:20:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/052/0002438635"
+     "link": "https://n.news.naver.com/mnews/article/001/0016466641?sid=100"
     }
    ]
   }
@@ -337,9 +304,15 @@
  "hitRate": {
   "days": 7,
   "flagged": 1733,
-  "matched": 845,
-  "avgLeadMin": 519,
+  "matched": 846,
+  "avgLeadMin": 518,
   "recent": [
+   {
+    "keyword": "세무사 수석 구속영장 신청",
+    "hitKeyword": "세무 수석 영장 신청",
+    "hitAt": "2026-11-26T20:30:00+09:00",
+    "leadMin": 52
+   },
    {
     "keyword": "철도노조 준법투쟁 시작",
     "hitKeyword": "철도노조 투쟁 첫날",
@@ -393,12 +366,6 @@
     "hitKeyword": "코레일 전철 운행 차질",
     "hitAt": "2026-11-26T19:30:00+09:00",
     "leadMin": 22
-   },
-   {
-    "keyword": "코레일 전철 235대 지연",
-    "hitKeyword": "코레일 전철 운행 차질",
-    "hitAt": "2026-11-26T19:30:00+09:00",
-    "leadMin": 12
    }
   ]
  }
