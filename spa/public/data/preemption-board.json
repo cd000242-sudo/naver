@@ -31633,7 +31633,12 @@
    "effectiveVolume": 1060,
    "peakConfidence": "",
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-26T04:23:00.718Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -36960,7 +36965,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-25T05:06:42.622Z",
+    "checkedAt": "2026-11-26T04:22:41.826Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -39793,7 +39798,12 @@
    "effectiveVolume": 770,
    "peakConfidence": "",
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-26T04:22:57.113Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -45557,7 +45567,12 @@
    "effectiveVolume": 640,
    "peakConfidence": "",
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-26T04:22:58.924Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -97479,7 +97494,12 @@
    "peakConfidence": "작년엔 다른 달",
    "effectiveVolume": 610,
    "preemptRank": 3,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-26T04:22:58.016Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -102091,7 +102111,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-25T05:06:43.547Z",
+    "checkedAt": "2026-11-26T04:22:42.731Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -110421,7 +110441,12 @@
    "peakConfidence": "1년치만 봄",
    "effectiveVolume": 500,
    "preemptRank": 3,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-26T04:22:47.210Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   }
  ],
  "trendCandidates": [],
@@ -111315,5 +111340,5 @@
    ]
   }
  ],
- "revalidatedAt": "2026-11-25T05:06:57.920Z"
+ "revalidatedAt": "2026-11-26T04:23:00.718Z"
 }
