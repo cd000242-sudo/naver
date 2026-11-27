@@ -167,14 +167,16 @@ function readThumbDirectorRealImages(): any[] {
   }
 }
 
-/** Image tab text mode: checked → include · explicit "false" in settings → exclude · otherwise AUTO (V1 §9). */
+/**
+ * Image tab text mode: checked → include · anything else → exclude.
+ * [2026-11-27 owner] An unticked box used to mean AUTO (the director chose, so copy appeared with the box off).
+ */
 function readThumbDirectorTextMode(): string {
   try {
     const raw = readRawPipelineSettings().thumbnailTextInclude;
     if (raw === 'true') return 'include';
-    if (raw === 'false') return 'exclude';
-  } catch { /* fall through to AUTO */ }
-  return 'auto';
+  } catch { /* unreadable setting: no copy */ }
+  return 'exclude';
 }
 
 function buildThumbDirectorRequest(options: any, structured: any, canUseStructuredContext: boolean): any {

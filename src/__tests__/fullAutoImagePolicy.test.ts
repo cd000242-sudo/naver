@@ -96,9 +96,9 @@ describe('FULL AUTO image strategy', () => {
     expect(resolveFullAutoImagePolicyFromPipeline(pipeline({ headingImageMode: 'all' })).sections.scope).toBe('all');
   });
 
-  it('thumbnail text follows the "썸네일 텍스트 포함" checkbox: ticked = include, off = AUTO on homefeed', () => {
+  it('thumbnail text follows the "썸네일 텍스트 포함" checkbox: ticked = include, off = no text (owner 2026-11-27)', () => {
     expect(resolveFullAutoImagePolicyFromPipeline(pipeline({ thumbnailTextInclude: true })).thumbnail.textMode).toBe('include');
-    expect(resolveFullAutoImagePolicyFromPipeline(pipeline({ thumbnailTextInclude: false })).thumbnail.textMode).toBe('auto');
+    expect(resolveFullAutoImagePolicyFromPipeline(pipeline({ thumbnailTextInclude: false })).thumbnail.textMode).toBe('none');
     // The continuous run passes its own reading of the checkbox.
     expect(resolveFullAutoImagePolicyFromPipeline(pipeline(), { thumbnailTextInclude: true }).thumbnail.textMode).toBe('include');
   });
@@ -120,10 +120,14 @@ describe('FULL AUTO image strategy', () => {
     expect(describeFullAutoImagePolicy(resolveFullAutoImagePolicy({ textOnlyPublish: true }))).toContain('이미지 없음');
   });
 
-  it('thumbnail text: explicit mode wins, the legacy checkbox only counts when ticked, AUTO otherwise', () => {
+  it('thumbnail text: explicit mode wins, the checkbox decides when it was read, AUTO only when nobody read it', () => {
     expect(resolveFullAutoImagePolicy({ thumbnailTextMode: 'none', thumbnailTextInclude: true }).thumbnail.textMode).toBe('none');
     expect(resolveFullAutoImagePolicy({ thumbnailTextInclude: true }).thumbnail.textMode).toBe('include');
-    expect(resolveFullAutoImagePolicy({ thumbnailTextInclude: false }).thumbnail.textMode).toBe('auto');
+    // Customer report 2026-11-27: "체크 풀었는데 텍스트 포함으로 하드코딩" — an unticked box was read as AUTO.
+    expect(resolveFullAutoImagePolicy({ thumbnailTextInclude: false }).thumbnail.textMode).toBe('none');
+    expect(fullAutoDirectorTextMode(resolveFullAutoImagePolicy({ thumbnailTextInclude: false }))).toBe('exclude');
+    // An explicit AUTO request still works, and the app-owned scheduler (no checkbox reading) keeps AUTO.
+    expect(resolveFullAutoImagePolicy({ thumbnailTextMode: 'auto', thumbnailTextInclude: false }).thumbnail.textMode).toBe('auto');
     expect(fullAutoDirectorTextMode(resolveFullAutoImagePolicy({ thumbnailTextMode: 'none' }))).toBe('exclude');
     expect(fullAutoDirectorTextMode(resolveFullAutoImagePolicy())).toBe('auto');
   });

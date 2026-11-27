@@ -94,8 +94,8 @@ export function imgSyncNotify(key: string, value: unknown, source: string, targe
 
 /**
  * Write the one thumbnail-copy key and tell the other checkboxes.
- * Unchecked removes the key instead of storing 'false': the thumbnail director reads a missing key as
- * "auto" and 'false' as "exclude", and the on-screen copy promises "꺼 두면 자동 판단" (2026-11-03 review).
+ * Unchecked removes the key. Since 2026-11-27 a missing key means "no thumbnail copy" in every flow
+ * (it used to mean AUTO, and copy appeared with the box unticked).
  */
 export function imgSyncWriteThumbnailText(store: ImgSyncStore, include: boolean, source: string, target?: ImgSyncEventTarget): void {
   if (include) store.setItem(IMG_SYNC_THUMBNAIL_TEXT_KEY, 'true');

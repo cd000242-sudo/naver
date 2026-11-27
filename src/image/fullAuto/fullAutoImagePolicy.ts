@@ -122,8 +122,10 @@ function resolveFullAutoThumbnailTextMode(strategy: FullAutoImageStrategy, input
   const explicit = normalizeFullAutoThumbnailTextMode(input.thumbnailTextMode);
   if (strategy === 'naver-homefeed') {
     if (explicit) return explicit;
-    // The legacy checkbox is ambiguous when off (it is the default) but explicit when on.
-    return input.thumbnailTextInclude === true ? 'include' : 'auto';
+    // [2026-11-27 owner] An unticked box means NO text ("체크 풀었는데 텍스트 포함으로 하드코딩"). AUTO is left only
+    //   for callers that never read the checkbox (the app-owned daily scheduler passes nothing).
+    if (input.thumbnailTextInclude === true) return 'include';
+    return input.thumbnailTextInclude === false ? 'none' : 'auto';
   }
   return input.thumbnailTextInclude === true ? 'include' : 'none';
 }

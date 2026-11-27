@@ -45,10 +45,12 @@ describe('renderer wiring for the thumbnail director', () => {
     expect(wrapper).toMatch(/if \(Array\.isArray\(current\) && current\.length > 0\) return \[\];/);
   });
 
-  it('image tab text mode: checked → include, explicit "false" → exclude, otherwise AUTO (V1 §9)', () => {
+  it('image tab text mode: checked → include, anything else → exclude (an unticked box is never AUTO, owner 2026-11-27)', () => {
     expect(wrapper).toMatch(/\.\.\.\(imageTabSlot \? \{ textMode: readThumbDirectorTextMode\(\) \} : \{\}\)/);
-    expect(wrapper).toMatch(/if \(raw === 'false'\) return 'exclude';/);
-    expect(wrapper).toMatch(/return 'auto';/);
+    const reader = wrapper.slice(wrapper.indexOf('function readThumbDirectorTextMode'), wrapper.indexOf('function buildThumbDirectorRequest'));
+    expect(reader).toMatch(/if \(raw === 'true'\) return 'include';/);
+    expect(reader).toMatch(/return 'exclude';/);
+    expect(reader).not.toMatch(/'auto'/);
   });
 
   it('the director notice reaches the image tab log', () => {
