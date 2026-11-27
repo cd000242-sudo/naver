@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T13:47:22.670Z",
+ "builtAt": "2026-11-27T13:57:26.485Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,53 +8,27 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
-  {
-   "keyword": "삼성생명 공동 선두",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T12:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'이해란 21점' 삼성생명, 신한은행 74-64 제압…공동 선두 도약",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-27T13:10:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110129154382"
-    },
-    {
-     "title": "'이해란 21점' 삼성생명, 신한은행 74-64 제압…공동 선두",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T13:03:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/421/0009314976"
-    },
-    {
-     "title": "‘이해란 21P·강유림 더블더블’ 삼성생명, 신한은행 잡고 공동 1위 점...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-27T12:50:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/396/0000762180"
-    }
-   ]
-  },
   {
    "keyword": "최민희 중징계 의결에",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-27T12:24:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T12:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[포커스] 최민희 '중징계' 결론...초유의 법사위-장관 충돌",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T13:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439164?sid=100"
+    },
     {
      "title": "[속보]최민희 자격정지 2년…“당 품위 훼손 판단” 윤리심판원 처분",
      "press": "munhwa.com",
@@ -66,12 +40,38 @@
      "press": "imaeil.com",
      "publishedAt": "2026-11-27T13:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/088/0001042805?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "대한항공 KB손해보험 승리",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 16,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-27T12:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "외국인 선수 없이 대한항공 끝까지 괴롭혔다…패배에도 희망 본 라미레...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-27T13:22:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/117/0004128726"
     },
     {
-     "title": "[시사천국] 최민희 '당원권 2년 정지' 중징계…민주당 지지율 반등할까",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-27T13:28:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1177334?division=NAVER"
+     "title": "'케트진스키 25점' 대한항공, KB손해보험 3-1 제압…3연승 질주",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-27T12:52:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110128963868"
+    },
+    {
+     "title": "대한항공, '국내 선수만 뛴' KB손보 꺾고 3연승…여자부 GS 5연승(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T12:46:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/421/0009314975"
     }
    ]
   },
@@ -80,10 +80,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T12:22:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T12:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -112,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T12:23:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T12:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -145,7 +145,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-27T12:28:00.000Z",
    "exclusive": false,
@@ -176,13 +176,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
+   "articles90": 5,
+   "recent20": 2,
    "press": 4,
    "firstArticleAt": "2026-11-27T12:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'굿파트너2' 박준면, 100만 유튜버 남편 외도에 분노 \"당장 나가\"",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-27T13:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084920"
+    },
     {
      "title": "'굿파트너2' 박준면, 배우자 외도 영상에 충격...\"절대 이혼 못합니다\"",
      "press": "slist.kr",
@@ -194,12 +200,6 @@
      "press": "xportsnews.com",
      "publishedAt": "2026-11-27T13:18:00.000Z",
      "link": "https://m.entertain.naver.com/article/311/0002084911"
-    },
-    {
-     "title": "“누가 지금 이혼한대요?” 김혜윤, 박준면 심기 건드렸다 (굿파트너2)",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-27T12:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000329385"
     }
    ]
   },
@@ -209,12 +209,18 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T12:22:00.000Z",
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T13:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[포커스] 최민희 '중징계' 결론...초유의 법사위-장관 충돌",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T13:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439164?sid=100"
+    },
     {
      "title": "초유의 법사위-장관 충돌...\"상원이냐\" vs \"이런 장관 처음\"",
      "press": "ytn.co.kr",
@@ -226,44 +232,6 @@
      "press": "weekly.khan.co.kr",
      "publishedAt": "2026-11-27T13:13:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/033/0000053689?sid=100"
-    },
-    {
-     "title": "박홍근 장관, 법사위서 與-與 충돌…“이런 장관 처음”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-27T13:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887913?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "이서진 한지민 외모 지적",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T12:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이서진, 한지민에 \"갱년기 심하게 앓나\"…잇단 외모 지적 발언 논란",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-27T13:22:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628258"
-    },
-    {
-     "title": "이서진, 숍 갔다온 한지민에..보자마자 ‘외모’ 지적 “화장 떴네?” ...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-27T12:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646242"
-    },
-    {
-     "title": "이서진, 한지민 만나자마자 외모 디스 \"화장이 왜이리 떴어\"…결국 절교...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T12:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084893"
     }
    ]
   }
