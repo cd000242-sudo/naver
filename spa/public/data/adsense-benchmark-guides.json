@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-27T00:56:28.831Z",
+  "generatedAt": "2026-11-27T02:21:42.129Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -2537,74 +2537,6 @@
           "views": 61,
           "answers": 2,
           "askedAt": "2026.11.18"
-        }
-      ]
-    },
-    {
-      "id": "899cb49dcf4b8479",
-      "urls": [
-        "https://todays-econ.tistory.com/entry/%EC%95%A4%ED%8A%B8%EB%A1%9C%ED%94%BD-%EC%83%81%EC%9E%A5-%EC%B2%AB%EB%82%A0-17-%EC%83%81%EC%8A%B9-%EC%BD%94%EC%8A%A4%ED%94%BC-408-%ED%95%98%EB%9D%BD-%EC%B6%9C%EB%B0%9C%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9D%BD%EC%9D%84%EA%B9%8C",
-        "https://yjfreelifestyle.tistory.com/entry/%EC%95%A4%ED%8A%B8%EB%A1%9C%ED%94%BD-%EC%83%81%EC%9E%A5-%EC%B2%AB%EB%82%A0-17-%EC%83%81%EC%8A%B9-%EC%8B%9C%EC%B4%88%EA%B0%80-1115%EB%8B%AC%EB%9F%AC%EC%99%80-%EC%A2%85%EA%B0%80-9717%EB%8B%AC%EB%9F%AC%EA%B0%80-%EB%8B%A4%EB%A5%B8-%EC%9D%B4%EC%9C%A0",
-        "https://happy-life88.tistory.com/1141"
-      ],
-      "guide": {
-        "direction": "검색자는 앤트로픽 상장이 다른 주식·코인 시세에 영향을 주는지, 시초가와 종가가 왜 다른지 궁금해 막혀 있다. 고수 글들은 가격 수치는 정리했지만 코스피 하락과의 실제 연관성, 코인 선물시장과의 혼동 정리는 비워 뒀다. 이 글은 가격 구조 설명과 수혜주 표로 혼동을 끝내준다.",
-        "searchTargets": [
-          "앤트로픽 상장일 한국시간",
-          "앤트로픽 상장가",
-          "앤트로픽 상장 수혜주",
-          "앤트로픽 상장 첫날"
-        ],
-        "mustInclude": [
-          "상장 첫날 17% 상승, 시초가 111.5달러·종가 97.17달러 차이",
-          "코스피 4.08% 하락 출발과 상장의 실제 연관성(수치로 직접 원인 아님을 설명)",
-          "상장 한국시간/일정 (확인 필요: 거래소 공식 공고)",
-          "수혜주 리스트(브로드컴·아이온큐 등, 확인 필요: 추가 종목)"
-        ],
-        "mustAvoid": [
-          "가상자산(코인) 상장과 나스닥 주식 상장을 혼동",
-          "코스피 하락 원인을 앤트로픽 상장 하나로 단정",
-          "수혜주를 매수 추천처럼 서술"
-        ],
-        "checkBefore": [
-          "나스닥/거래소 공식 상장 공고 및 상장일 한국시간 환산",
-          "코스피 하락 당일 시황 관련 공식 리포트",
-          "수혜주로 언급된 종목들의 실제 공시·사업 연관성"
-        ],
-        "solves": [
-          "상장이 다른 주가를 빠지게 하는지 궁금해요 → 수치로 직접 원인 아님을 설명",
-          "시초가·종가 차이가 왜 나는지 궁금해요 → 상장 당일 가격 구조 설명",
-          "코인 선물시장과 혼동돼요 → 주식 IPO 구조임을 구분"
-        ],
-        "actionTitles": [
-          "앤트로픽 상장일 한국시간 확인: 상장 일정 총정리",
-          "앤트로픽 상장가 비교: 시초가 111.5달러 종가 차이 이유"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "엔트로픽 상장 시에 다른주가가 빠지나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=495986427&answerNo=9&qb=7JWk7Yq466Gc7ZS97IOB7J6l",
-          "views": 620,
-          "answers": 13,
-          "askedAt": "2026.11.17"
-        },
-        {
-          "title": "앤트로픽의 클라우드 AI 서비스 확장 계획은 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080506&docId=489735593&answerNo=2&qb=7JWk7Yq466Gc7ZS97IOB7J6l",
-          "views": 598,
-          "answers": 4,
-          "askedAt": "2026.04.18"
-        },
-        {
-          "title": "엔트로픽이 상장하면",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001020208&docId=495712455&answerNo=4&qb=7JWk7Yq466Gc7ZS97IOB7J6l",
-          "views": 419,
-          "answers": 4,
-          "askedAt": "2026.11.12"
         }
       ]
     },
@@ -5357,72 +5289,6 @@
       ]
     },
     {
-      "id": "ffe446908d0c218b",
-      "urls": [
-        "https://modu-total.tistory.com/273",
-        "https://wooojoo.tistory.com/entry/%ED%9C%B4%EB%8C%80%ED%8F%B0-%EC%82%AC%EC%A7%84-%EC%82%AD%EC%A0%9C%ED%96%88%EB%8A%94%EB%8D%B0-%EC%9A%A9%EB%9F%89%EC%9D%B4-%EA%B7%B8%EB%8C%80%EB%A1%9C%EC%9D%B8-%EC%9D%B4%EC%9C%A0%EC%99%80-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "구글포토 사진을 지우고 싶지만 폰 사진까지 같이 삭제될까 걱정하는 검색자는 앱이 아닌 PC 웹에서 지워야 안전하다는 절차를 못 찾는다. 고수 글은 다운로드와 용량 확인을 다뤘지만 구글 테이크아웃 전체 다운로드 순서와 삭제 전 체크리스트는 비워뒀다. 이 글은 용량 확인부터 PC 다운로드, 안전한 삭제 순서까지 단계별로 제공해 사진을 잃지 않고 정리하게 끝낸다.",
-        "searchTargets": [
-          "구글 포토 사진 다운로드",
-          "구글 포토 사진 삭제",
-          "구글 포토 사진 백업",
-          "구글 포토 사진 옮기기"
-        ],
-        "mustInclude": [
-          "구글 테이크아웃(takeout.google.com)으로 전체 사진 PC 다운로드하는 절차",
-          "앱이 아닌 PC 웹 브라우저(크롬·사파리 등)로 접속해 삭제해야 폰 사진이 보존되는 이유",
-          "구글드라이브와 구글포토 용량이 별도 계산된다는 점, 드라이브 컴퓨터 폴더에서 삭제하는 방법",
-          "iCloud 백업과 구글포토 백업 동시 사용시 업로드 완료 전 기기 사진 삭제 금지"
-        ],
-        "mustAvoid": [
-          "구글포토 앱에서 전체 삭제를 눌러 폰 사진까지 함께 지워지는 경우를 안내 없이 넘기기",
-          "구글드라이브 용량과 구글포토 용량을 같은 것으로 설명해 혼동 유발"
-        ],
-        "checkBefore": [
-          "구글 테이크아웃 최신 절차(takeout.google.com 공식 화면)",
-          "구글포토 무료 저장용량 정책 변경 여부(구글 공식 고객센터)"
-        ],
-        "solves": [
-          "구글포토 사진 다 지우되 폰 사진은 남기고 싶음 → PC 웹에서 삭제해야 하는 이유와 절차 제공",
-          "구글포토 사진 전체를 PC로 옮기는 법 모름 → 구글 테이크아웃 다운로드 절차 안내",
-          "구글드라이브에 중복 저장된 파일이 용량 차지 → 컴퓨터 폴더 찾아 삭제·휴지통 비우는 법 제공"
-        ],
-        "actionTitles": [
-          "구글 포토 사진 다운로드, PC로 전체 백업하는 법",
-          "구글 포토 사진 삭제해도 폰 사진 지키는 방법",
-          "구글 포토 사진 용량 확인하고 백업·정리하는 순서"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "구글 포토에 있는 사진 다 지우고 싶은데 어....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1060305&docId=495953386&answerNo=1&qb=6rWs6riAIO2PrO2GoCDsgqzsp4QgcGMg7Jqp65+J",
-          "views": 834,
-          "answers": 4,
-          "askedAt": "2026.11.14"
-        },
-        {
-          "title": "아이폰 저장공간/ 아이폰 백업/ 구글포토/ 아....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010405&docId=495776975&answerNo=3&qb=6rWs6riAIO2PrO2GoCDsgqzsp4QgcGMg7Jqp65+J",
-          "views": 462,
-          "answers": 3,
-          "askedAt": "2026.11.02"
-        },
-        {
-          "title": "구글포토에서 다시 사진 옮기기",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=107040203&docId=495083782&answerNo=1&qb=6rWs6riAIO2PrO2GoCDsgqzsp4QgcGMg7Jqp65+J",
-          "views": 452,
-          "answers": 1,
-          "askedAt": "2026.09.08"
-        }
-      ]
-    },
-    {
       "id": "a41f418476009a63",
       "urls": [
         "https://tali.kr/galaxy-watch-battery",
@@ -6923,62 +6789,6 @@
       ]
     },
     {
-      "id": "489c365412e9457c",
-      "urls": [
-        "https://www.uptoinfo.com/feeds/4891323667410504532/comments/default",
-        "https://ohgominfo.com/windows-11-%ec%9c%88%eb%8f%84%ec%9a%b0-11-%ec%9c%88%eb%8f%84%ec%9a%b0-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8-%eb%8b%a4%ec%9a%b4%eb%a1%9c%eb%93%9c-%ec%86%8d%eb%8f%84-%ec%a0%9c%ed%95%9c-%eb%b0%a9/"
-      ],
-      "guide": {
-        "direction": "자동완성에 '직장인 윈도우 바탕화면'이 뜨는 걸 보면 검색자는 단축키 자체보다 업무용 바탕화면 정리법을 함께 찾고 있다. 단축키 20개를 나열한 고수 글은 바탕화면 정리와 단축키를 연결해주지 않아 어디서부터 적용할지 막힌다. 이 글은 단축키를 바탕화면 정리·업무 루틴에 바로 연결한 조합표로 끝낸다.",
-        "searchTargets": [
-          "직장인 윈도우 바탕화면",
-          "직장인 윈도운 바탕화면"
-        ],
-        "mustInclude": [
-          "창관리·탐색기·브라우저 카테고리별 단축키 20개 표 (확인 필요: 구체 목록 원문 재료 없음)",
-          "Win+D 등 바탕화면 정리에 쓰이는 단축키와 바탕화면 아이콘 정리 연결 설명",
-          "보고서 작성 시 창 분할+복붙 등 실무 조합 루틴 예시"
-        ],
-        "mustAvoid": [
-          "단축키 20개를 바탕화면 정리와 연결 없이 그냥 나열만 하는 것",
-          "맥(Mac) 전용 단축키와 혼동해서 표기하는 것"
-        ],
-        "checkBefore": [
-          "마이크로소프트 공식 윈도우 지원 문서에서 단축키 정확성 확인"
-        ],
-        "solves": [
-          "직장인 윈도우 바탕화면 정리 어떻게 하는지 몰라서 → 바탕화면 정리용 단축키 조합 제시",
-          "윈도우 단축키 뭐부터 외워야 하는지 몰라서 → 실무 조합 루틴 순서로 정리"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "영어기초(단어 문법 ) 내공있음",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=130106&docId=39133158&answerNo=1&qb=7KeB7J6l7J24IOyciOuPhOyasCDri6jstpXtgqQg7JeF66y0IOyGjeuPhA==",
-          "views": 22353,
-          "answers": 3,
-          "askedAt": "2008.03.31"
-        },
-        {
-          "title": "고졸 프로그래머 가능한가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=406&docId=299569077&answerNo=17&qb=7KeB7J6l7J24IOyciOuPhOyasCDri6jstpXtgqQg7JeF66y0IOyGjeuPhA==",
-          "views": 2679,
-          "answers": 17,
-          "askedAt": "2018.04.19"
-        },
-        {
-          "title": "13년 맥북에어 13인치 vs 맥북프로 레티나 13인....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50202&docId=174641109&answerNo=2&qb=7KeB7J6l7J24IOyciOuPhOyasCDri6jstpXtgqQg7JeF66y0IOyGjeuPhA==",
-          "views": 2382,
-          "answers": 2,
-          "askedAt": "2013.06.14"
-        }
-      ]
-    },
-    {
       "id": "eac4ef8983b1aec0",
       "urls": [
         "https://hanu4.hanuhyunu.pw/entry/%EB%B3%B4%EC%9D%B4%EC%B0%A8-%ED%9A%A8%EB%8A%A5%EA%B3%BC-%EB%B6%80%EC%9E%91%EC%9A%A9-1",
@@ -7960,73 +7770,6 @@
       ]
     },
     {
-      "id": "1062716c40ca3e36",
-      "urls": [
-        "https://gov.pinetreem.com/72",
-        "https://realmoneyshot.kr/park-golf-course-fee-reservation-2026/"
-      ],
-      "guide": {
-        "direction": "지식인 질문은 첫 라운딩 준비물과 구장 이용료가 얼마인지 몰라 막혀 있다. 고수 글(전국 575곳 이용료)은 평균만 다뤄 클럽 구매·대여 비용과 소재별 가격 차이는 못 짚었다. 이 글은 공 규격, 대여 불가 시 준비물, 소재별(카본 등) 클럽 가격대를 표로 정리해 1회 비용을 계산하게 한다.",
-        "searchTargets": [
-          "파크골프 클럽 추천",
-          "파크골프클럽 카본",
-          "몽크로스 파크골프클럽",
-          "필라투스 파크골프클럽"
-        ],
-        "mustInclude": [
-          "파크골프 공 규격(직경 약 6cm, 80~95g, 일반 골프공과 다름)",
-          "대여 불가 시 최소 준비물(클럽 1~2개+공 직접 지참)",
-          "소재별 클럽 가격대(카본 vs 일반, 확인 필요: 판매처 공시가)",
-          "구장별 이용료 차이(무료~1만 원대, 확인 필요: 각 구장 공지)"
-        ],
-        "mustAvoid": [
-          "특정 브랜드(마코스포츠·몽크로스·필라투스 등)를 광고처럼 과장 추천",
-          "구장마다 다른 이용료를 전국 동일한 것처럼 일반화",
-          "일반 골프와 파크골프 장비·규격을 혼동해 설명"
-        ],
-        "checkBefore": [
-          "소재별 클럽 실제 판매가(제조사·판매처 공시가)",
-          "구장별 정확한 이용료와 대여 가능 여부(해당 구장 홈페이지·공지)"
-        ],
-        "solves": [
-          "첫 라운딩 준비물을 모른다 → 대여 불가 시 챙길 최소 장비(클럽1~2개+공)를 정리",
-          "파크골프 공 규격이 뭔지 모른다 → 직경·무게 수치로 명확히 안내",
-          "카본 등 클럽 소재별 가격 차이가 궁금하다 → 소재별 가격대를 비교해 정리"
-        ],
-        "actionTitles": [
-          "파크골프 클럽 추천, 카본 소재 가격부터 비교하는 법",
-          "파크골프클럽 카본 가격과 1회 이용료까지 계산하는 법",
-          "파크골프 시작 비용, 클럽 구매·대여 가격 비교하는 법"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "가평파크골프장 예약",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=509&docId=488299255&answerNo=12&qb=7YyM7YGs6rOo7ZSE7YG065+9",
-          "views": 288,
-          "answers": 12,
-          "askedAt": "2026.11.15"
-        },
-        {
-          "title": "울산 두동파크골프장 첫 라운딩, 준비물은 뭐....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=509&docId=494131023&answerNo=2&qb=7YyM7YGs6rOo7ZSE7YG065+9",
-          "views": 103,
-          "answers": 2,
-          "askedAt": "2026.11.18"
-        },
-        {
-          "title": "소양강파크골프장 예약",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=509&docId=489822305&answerNo=1&qb=7YyM7YGs6rOo7ZSE7YG065+9",
-          "views": 37,
-          "answers": 1,
-          "askedAt": "2026.11.17"
-        }
-      ]
-    },
-    {
       "id": "a22821bc591c770a",
       "urls": [
         "https://yjfreelifestyle.tistory.com/entry/%ED%99%88%ED%94%8C%EB%9F%AC%EC%8A%A4-%EC%98%A8%EB%9D%BC%EC%9D%B8-%EB%B0%B0%EC%86%A1-%EC%A4%91%EB%8B%A8-%EC%A3%BC%EB%AC%B8-%EC%B7%A8%EC%86%8C%C2%B7%ED%99%98%EB%B6%88-%EB%B0%A9%EB%B2%95-26%EC%9D%BC-%EC%9D%B4%ED%9B%84-%EC%A3%BC%EB%AC%B8%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EB%90%98%EB%82%98"
@@ -8815,66 +8558,6 @@
       ]
     },
     {
-      "id": "d64e93aca2dbc454",
-      "urls": [
-        "https://yjfreelifestyle.tistory.com/entry/%ED%95%9C%EC%A0%84ON-%EC%A0%84%EA%B8%B0%EC%9A%94%EA%B8%88-%EC%A1%B0%ED%9A%8C-%EB%82%A9%EB%B6%80-%EB%B0%A9%EB%B2%95-%EA%B3%A0%EA%B0%9D%EB%B2%88%ED%98%B8-%ED%99%95%EC%9D%B8%EB%B6%80%ED%84%B0-%EC%97%B0%EC%B2%B4%EB%A3%8C%EA%B9%8C%EC%A7%80"
-      ],
-      "guide": {
-        "direction": "전기요금을 어디서 얼마나 내야 하는지, 밀렸을 때 언제 단전되는지 몰라 고객번호 확인부터 막막해하는 검색자가 많다. 고수 글들은 한전ON 소개만 하고 연체 2개월 이상 공급중지 기준이나 청구서 재발행 경로는 짚지 않는다. 이 글은 고객번호 확인부터 미납 조회·연체료·단전 기준·청구서 재발행까지 순서대로 정리해 한 번에 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "계량기 번호로 고객번호 확인하는 전화 문의 방법",
-          "한전ON 앱/사이트에서 미납요금 조회·결제 경로",
-          "연체 2개월 이상 시 공급중지(단전) 기준",
-          "단전 집행은 평일 영업시간에 진행된다는 점",
-          "한전ON에서 청구서·세금계산서 재발행하는 방법"
-        ],
-        "mustAvoid": [
-          "단전 유예 기간을 보장된 것처럼 안내하는 것",
-          "전기요금과 TV수신료를 구분 없이 뭉뚱그려 설명하는 것"
-        ],
-        "checkBefore": [
-          "연체료 산정 기준과 공급중지 기준일을 한전 고객센터(123)·한전ON 공지에서 확인"
-        ],
-        "solves": [
-          "전기요금 내는 법을 모름 → 한전ON 앱/사이트 결제 경로 안내",
-          "단전 전에 납부하면 되는지 헷갈림 → 연체 2개월 이상 공급중지 기준과 집행 시점 설명",
-          "청구서 재발행 방법을 모름 → 한전ON에서 재출력하는 경로 제공"
-        ],
-        "actionTitles": [
-          "한전ON에서 전기요금 조회하고 미납요금 납부하는 법",
-          "전기요금 연체료 확인하고 단전 전 납부하는 순서",
-          "한전ON 고객번호 확인하고 청구서 재발행받는 방법"
-        ]
-      },
-      "at": "2026-11-24T03:56:52.583Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "전기 요금 내는법?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=809&docId=492511141&answerNo=6&qb=7ZWc7KCEb24g7KCE6riw7JqU6riIIOuCqeu2gCDqs6DqsJ3rsojtmLgg7Jew7LK066OM",
-          "views": 1004,
-          "answers": 7,
-          "askedAt": "2026.03.19"
-        },
-        {
-          "title": "한전 단전 전에 요금납부하면 단전 안되나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=408&docId=494544829&answerNo=1&qb=7ZWc7KCEb24g7KCE6riw7JqU6riIIOuCqeu2gCDqs6DqsJ3rsojtmLgg7Jew7LK066OM",
-          "views": 783,
-          "answers": 2,
-          "askedAt": "2026.07.31"
-        },
-        {
-          "title": "전기세미납",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40308&docId=492292399&answerNo=1&qb=7ZWc7KCEb24g7KCE6riw7JqU6riIIOuCqeu2gCDqs6DqsJ3rsojtmLgg7Jew7LK066OM",
-          "views": 608,
-          "answers": 1,
-          "askedAt": "2026.03.04"
-        }
-      ]
-    },
-    {
       "id": "06be5c2925d31ed2",
       "urls": [
         "https://piwpiw.tistory.com/entry/%ED%99%94%EC%9E%A5%EC%A7%80-11%EC%A2%85-%EC%86%8C%EB%B9%84%EC%9E%90%EC%9B%90-%EC%8B%9C%ED%97%98-10m%EB%8B%B9-%EA%B0%80%EA%B2%A9-%EC%B5%9C%EB%8C%80-19%EB%B0%B0-%EC%B0%A8%EC%9D%B4",
@@ -9452,67 +9135,6 @@
           "views": 22107,
           "answers": 3,
           "askedAt": "2007.11.22"
-        }
-      ]
-    },
-    {
-      "id": "68e34ee56d1e37b4",
-      "urls": [
-        "https://adaybook.com/kb-savings-bank/",
-        "https://lifekeep.kr/hrde-safety-education-center/",
-        "https://xn--2i0bj7ghwb1vexzada718wmmz.kr/2410"
-      ],
-      "guide": {
-        "direction": "검색자는 'KB저축은행 홈페이지 바로가기'로 들어와 진짜 공식 주소인지, 피싱사이트와 혼동되지 않는지부터 확인하려 한다. 고수 블로그들은 URL만 나열하고 로그인·고객센터·상품조회 같은 실제 바로가기 경로나 KB국민은행과의 차이는 짚지 않는다. 이 글은 공식 주소 확인법과 로그인·고객센터 바로가기를 항목별로 정리해 검색자가 다시 검색하지 않게 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "공식 홈페이지 주소 https://www.kbsavings.com 명시 및 피싱사이트 구분법",
-          "모바일뱅킹 앱 다운로드·로그인 바로가기 안내(확인 필요: KB저축은행 공식 홈페이지)",
-          "고객센터 전화번호 및 영업시간(확인 필요: KB저축은행 공식 고지)",
-          "예금자보호 적용 여부(확인 필요: 예금보험공사·저축은행중앙회)"
-        ],
-        "mustAvoid": [
-          "KB국민은행과 KB저축은행을 같은 회사처럼 서술",
-          "검증 안 된 무관 사이트 링크(HRDe, naver 등)를 섞어 피싱 오인 유발"
-        ],
-        "checkBefore": [
-          "KB저축은행 공식 홈페이지에서 현재 URL과 고객센터 번호 확인",
-          "금융감독원 금융소비자정보포털에서 저축은행 정식 등록 여부 확인"
-        ],
-        "solves": [
-          "공식 주소를 몰라 피싱사이트로 갈까 걱정 -> 정확한 주소와 확인법 제시",
-          "로그인·상품조회 페이지를 못찾음 -> 바로가기 항목별 안내"
-        ],
-        "actionTitles": [
-          "KB저축은행 공식 홈페이지 바로가기와 로그인 하는 법",
-          "KB저축은행 공식 사이트 주소 확인하고 피싱 피하는 법",
-          "KB저축은행 고객센터 전화번호와 영업시간 확인하는 법"
-        ]
-      },
-      "at": "2026-11-24T14:45:01.846Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "네이버 웹사이트 검색 미노출",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10501&docId=495725484&answerNo=7&qb=64Sk7J2067KEIGh0dHBzIHd3dyBuYXZlciBjb20=",
-          "views": 224,
-          "answers": 7,
-          "askedAt": "2026.11.22"
-        },
-        {
-          "title": "네이버 캘린더 엑셀파일로 바꾸는 방법?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=102020101&docId=495791999&answerNo=3&qb=64Sk7J2067KEIGh0dHBzIHd3dyBuYXZlciBjb20=",
-          "views": 138,
-          "answers": 4,
-          "askedAt": "2026.11.02"
-        },
-        {
-          "title": "https://naver.me/xGOK5XcM",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60902&docId=495206409&answerNo=1&qb=64Sk7J2067KEIGh0dHBzIHd3dyBuYXZlciBjb20=",
-          "views": 109,
-          "answers": 2,
-          "askedAt": "2026.09.19"
         }
       ]
     },
@@ -11270,47 +10892,6 @@
           "askedAt": "2026.11.19"
         }
       ]
-    },
-    {
-      "id": "bdaeb5b9766d3d89",
-      "urls": [
-        "https://4jsm.com/entry/KRX-%EA%B8%88%EC%8B%9C%EC%9E%A5-%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80%EF%BD%9C%EA%B8%88-%ED%98%84%EB%AC%BC-%EC%8B%9C%EC%84%B8-%EC%A1%B0%ED%9A%8C%C2%B7%EC%A6%9D%EA%B6%8C%EC%82%AC-%EC%88%98%EC%88%98%EB%A3%8C-%EB%B9%84%EA%B5%90%C2%B7%EA%B3%84%EC%A2%8C-%EA%B0%9C%EC%84%A4%C2%B7%EC%A0%88%EC%84%B8-%EB%B0%A9%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "검색자는 '어떻게 시작하느냐'에서 막힌다 — 어떤 증권사 앱으로 계좌를 열고 수수료가 얼마인지가 핵심이다. 고수 글들은 '수수료 비교'를 제목에 걸었지만 실제 증권사별 수수료 수치와 계좌 개설 순서를 표로 정리하지 않아 독자가 끝까지 비교하지 못한다. 이 글은 증권사별 수수료표와 계좌 개설 단계, 비과세 조건을 한 번에 정리해 검색 한 번으로 거래를 시작하게 한다.",
-        "searchTargets": [
-          "KRX 금시장 거래 방법",
-          "krx 금시장 계좌 개설",
-          "krx 금시장 수수료",
-          "krx 금시장 증권사 추천"
-        ],
-        "mustInclude": [
-          "증권사별 금 거래 수수료 비교표(확인 필요: 각 증권사 HTS/MTS 공시 수수료)",
-          "KRX 금시장 계좌 개설 순서(비대면 계좌 개설→금 거래 서비스 신청→HTS/MTS 설치)",
-          "거래 단위 1g, 거래시간 평일 09:00~15:30(확인 필요: KRX 공식 공지)",
-          "부가가치세 면제·양도소득세 비과세 조건 정리(확인 필요: 국세청·KRX 안내)"
-        ],
-        "mustAvoid": [
-          "금시장 거래와 골드바·돌반지 매입을 같은 비과세로 설명"
-        ],
-        "checkBefore": [
-          "KRX 금시장 공식 홈페이지 공지(거래시간·단위·세제)",
-          "각 증권사 공식 수수료 안내 페이지"
-        ],
-        "solves": [
-          "krx 금시장 계좌 어떻게 여나요? → 비대면 개설부터 금 거래 서비스 신청까지 순서로 정리",
-          "krx 금시장 수수료 어느 증권사가 싼가요? → 증권사별 수수료표로 비교",
-          "krx 금시장 어플 어떻게 쓰나요? → 앱 화면별 시세 조회·주문 방법 안내"
-        ],
-        "actionTitles": [
-          "KRX 금시장 계좌 개설 순서와 거래 방법 한눈에 정리",
-          "KRX 금시장 증권사별 수수료 비교, 가장 싼 곳 찾기",
-          "KRX 금시장 어플로 시세 조회하고 계좌 개설하는 법"
-        ]
-      },
-      "at": "2026-11-24T14:45:01.846Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "477c11ef0677ce2d",
@@ -13236,66 +12817,6 @@
           "views": 409,
           "answers": 1,
           "askedAt": "2026.06.10"
-        }
-      ]
-    },
-    {
-      "id": "302bba66b423ae3b",
-      "urls": [
-        "https://cressu.tistory.com/entry/%EB%B3%B4%EC%9D%BC%EB%9F%AC-%EB%81%84%EB%A9%B4-%EC%86%90%ED%95%B4-%EB%82%9C%EB%B0%A9%EB%B9%84-%EC%A4%84%EC%9D%B4%EB%8A%94-%EC%82%AC%EC%9A%A9%EB%B2%95-%EA%B2%A8%EC%9A%B8%EC%B2%A0-%EC%A0%81%EC%A0%95-%EC%98%A8%EB%8F%84"
-      ],
-      "guide": {
-        "direction": "검색자는 보일러를 계속 틀어놔도 난방비가 많이 나오거나, 꺼놨는데도 비싸서 끄고 켜는 기준을 못 잡아 막혀 있다. 고수 글 제목은 '끄면 손해'라고만 하고 몇 도로, 몇 시간 비울 때 꺼야 손해가 안 나는지는 안 짚는다. 외출 시간대별 끄기/유지 기준표와 적정온도 숫자를 집 비우는 시간 기준으로 바로 적용하게 해준다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "외출 시간 기준(1~2시간 vs 반나절 이상)으로 끄기/유지가 갈리는 기준표(확인 필요: 에너지공단 자료)",
-          "겨울철 권장 실내 적정온도 숫자(확인 필요: 한국에너지공단)",
-          "계속 켜두기 vs 끄고 재가동 시 온도 재상승에 드는 에너지 소비 비교 설명",
-          "분배기·온수 과열 시 관리사무소에 고장 여부 문의하라는 분기(설정 문제 아닐 수 있음)",
-          "지역난방 vs 개별보일러 요금 체계 차이(확인 필요: 거주 형태별로 다름)"
-        ],
-        "mustAvoid": [
-          "모든 집·모든 보일러에 동일한 온도 숫자를 일괄 적용(연식·단열·난방 방식 무시)",
-          "난방비 폭탄 원인을 전부 사용법 문제로만 몰아 고장·누수 가능성을 배제"
-        ],
-        "checkBefore": [
-          "겨울철 권장 실내 적정온도 수치 — 한국에너지공단 공식 자료 확인",
-          "지역난방 vs 개별난방 요금 체계 차이 — 지역난방공사·도시가스사 공지 확인"
-        ],
-        "solves": [
-          "'보일러 끄면 난방비 줄어요?' → 외출 시간대별 끄기/유지 기준표로 답",
-          "'계속 틀어놨는데도 왜 비싼지' → 재가동 시 온도 재상승 에너지 소비 원리로 설명",
-          "'분배기 뜨겁고 요금 폭탄' → 설정이 아니라 고장 의심 시 관리사무소 확인 절차 안내"
-        ],
-        "actionTitles": [
-          "보일러 끄는방법, 외출 시간별 기준표로 확인하기",
-          "보일러 안끄면 난방비, 끄기 전 꼭 확인할 것"
-        ]
-      },
-      "at": "2026-11-25T00:35:23.007Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "보일러 실내온도 설정해놓고 안끄면 난방비",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80902&docId=403289777&answerNo=3&qb=67O07J2865+sIOustOyhsOqxtCDrgYTrqbQg7IaQ7ZW07J6F64uI64ukIOuCnOuwqeu5hA==",
-          "views": 2033,
-          "answers": 4,
-          "askedAt": "2021.10.22"
-        },
-        {
-          "title": "보일러를 끄고 살았는데도 난방비가 많이나....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80902&docId=462549904&answerNo=1&qb=67O07J2865+sIOustOyhsOqxtCDrgYTrqbQg7IaQ7ZW07J6F64uI64ukIOuCnOuwqeu5hA==",
-          "views": 539,
-          "answers": 2,
-          "askedAt": "2024.01.19"
-        },
-        {
-          "title": "난방 안 끄고 왔는데 난방비 많이나올까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50104&docId=490603232&answerNo=1&qb=67O07J2865+sIOustOyhsOqxtCDrgYTrqbQg7IaQ7ZW07J6F64uI64ukIOuCnOuwqeu5hA==",
-          "views": 330,
-          "answers": 7,
-          "askedAt": "2025.12.05"
         }
       ]
     },
@@ -16548,43 +16069,6 @@
       ]
     },
     {
-      "id": "e67e60167df579c1",
-      "urls": [
-        "https://sweetonion1005.tistory.com/entry/%ED%86%A0%EC%A7%80%EC%9D%B4%EC%9D%8C%EC%A7%80%EB%8F%84-%EB%B3%B4%EB%8A%94-%EB%B2%95-%EB%B6%80%EB%8F%99%EC%82%B0-%ED%88%AC%EC%9E%90-%EC%A0%84-%ED%95%84%EC%88%98-%ED%99%95%EC%9D%B8-%EC%82%AC%ED%95%AD",
-        "https://flameleaf.tistory.com/entry/%ED%86%A0%EC%A7%80%EC%9D%B4%EC%9D%8C-%EC%82%AC%EC%9A%A9%EB%B2%95-%EB%B6%80%EB%8F%99%EC%82%B0-%EA%B7%9C%EC%A0%9C%EC%A0%95%EB%B3%B4-%EB%AC%B4%EB%A3%8C-%EC%A1%B0%ED%9A%8C%ED%95%98%EB%8A%94-5%EA%B0%80%EC%A7%80-%EB%B0%A9%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "사람들은 토지이음에서 정확히 뭘 봐야 땅 투자 전 리스크를 거를 수 있는지 몰라 헷갈린다. 고수 글은 '보는 법'과 '무료조회 5가지 방법'을 제목에만 걸고 화면 어디를 눌러야 하는지 단계별로 짚지 않았다. 용도지역·용도지구·토지이용계획 확인 순서를 체크리스트로 정리해 투자 전 확인을 한 번에 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "토지이음 접속 후 주소 입력부터 토지이용계획 확인까지 단계별 순서",
-          "규제정보 무료 조회 5가지 방법(구체 항목은 확인 필요: 고수 글 또는 사이트 재확인)",
-          "투자 전 체크리스트(건축제한·용도지역·도로접함 여부 등)"
-        ],
-        "mustAvoid": [
-          "토지이음을 유료 감정평가·측량 서비스로 오인하게 서술",
-          "특정 지역을 투자 추천처럼 단정(토지이음은 규제 확인용 도구일 뿐)"
-        ],
-        "checkBefore": [
-          "토지이음 사이트 실제 화면 구성과 메뉴명 직접 접속해 확인",
-          "'무료조회 5가지 방법'의 구체 항목이 무엇인지 원문 재확인"
-        ],
-        "solves": [
-          "토지이음 지도를 어떻게 보는지 모름 → 화면별 보는 법을 단계로 설명",
-          "투자 전 뭘 확인해야 하는지 모름 → 필수 확인 체크리스트 제공",
-          "규제정보를 무료로 어디서 보는지 모름 → 무료조회 5가지 방법 정리"
-        ],
-        "actionTitles": [
-          "토지이음 지도 보는 법과 투자 전 체크리스트",
-          "토지이음 사용법, 규제정보 무료 조회 5가지",
-          "부동산 투자 전 토지이음으로 용도지역 확인하기"
-        ]
-      },
-      "at": "2026-11-25T20:04:30.843Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
       "id": "063823119087980b",
       "urls": [
         "https://landibagu.com/jeonse-guarantee-renewal-guide/",
@@ -16810,74 +16294,6 @@
           "views": 99,
           "answers": 1,
           "askedAt": "2026.11.14"
-        }
-      ]
-    },
-    {
-      "id": "0108280f2280a374",
-      "urls": [
-        "https://healphy.co.kr/%eb%a7%b9%ec%9e%a5%ec%97%bc-%ec%b4%88%ea%b8%b0%ec%a6%9d%ec%83%81/",
-        "https://sooahealth.com/entry/%EC%98%A4%EB%A5%B8%EC%AA%BD-%EC%98%86%EA%B5%AC%EB%A6%AC-%ED%86%B5%EC%A6%9D-%EC%9D%98%EC%8B%AC%EB%90%98%EB%8A%94%EB%B3%91"
-      ],
-      "guide": {
-        "direction": "검색자는 뛰거나 걸을 때, 또는 기름진 음식 후 느껴지는 오른쪽 옆구리 통증이 맹장염·간·췌장·신장 중 어디 문제인지 구분이 안 돼 병원에 가야 할 시점을 못 정한다. 고수 글은 맹장염 통증 이동 과정에만 집중해 간·췌장·신장·요로결석 등 다른 원인과의 구분법은 다루지 않았다. 독자는 원인별 통증 양상·동반 증상 비교표와 남자·여자·임산부별 병원 선택 기준으로 궁금증을 끝낸다.",
-        "searchTargets": [
-          "오른쪽 옆구리 통증 원인",
-          "오른쪽 옆구리 통증 간",
-          "오른쪽 옆구리 통증 신장",
-          "오른쪽 옆구리 통증 병원 어디"
-        ],
-        "mustInclude": [
-          "통증이 배꼽 주변에서 오른쪽 아랫배로 이동하는 맹장염 의심 패턴 설명",
-          "기름진 음식 후 오른쪽 옆구리가 묵직한 느낌은 담낭·간 연관통 가능성 설명",
-          "6cm 신장 물혹(신낭종)이 옆구리 통증 유발 가능한 사례(확인 필요: 원문 출처)",
-          "남자·여자·임산부별 오른쪽 옆구리 통증 원인 차이와 병원 과 선택 기준",
-          "요로결석 의심 증상과 간·췌장·신장 통증의 구분법 정리표"
-        ],
-        "mustAvoid": [
-          "통증 위치만으로 맹장염·췌장염 등을 확정 진단하듯 서술하지 않기",
-          "고열·심한 압통 등 응급 신호인데도 집에서 관리하라고만 권하지 않기",
-          "임산부 옆구리 통증을 일반 성인과 같은 기준으로 다뤄 혼동 주지 않기"
-        ],
-        "checkBefore": [
-          "신장 물혹(6cm, CT 검사) 사례는 원문 출처 확인",
-          "맹장염 통증 이동 단계(배꼽→우하복부) 설명은 국가건강정보포털 등에서 재확인"
-        ],
-        "solves": [
-          "오른쪽 옆구리 통증이 아랫배까지 내려오면 맹장염인지 궁금함 → 통증 이동 패턴과 병원 방문 타이밍 정리",
-          "기름진 음식 먹으면 옆구리가 묵직한 이유 모름 → 담낭·간 연관통 기전 설명",
-          "옆구리 통증 원인이 간·췌장·신장 중 뭔지 구분 안 됨 → 원인별 통증 양상 비교표 제공"
-        ],
-        "actionTitles": [
-          "오른쪽 옆구리 통증 원인 구분법, 병원 가야 할 신호 확인하기",
-          "남자·여자 오른쪽 옆구리 통증 원인 차이, 간·신장 구분 확인",
-          "오른쪽 옆구리 통증 병원 어디로 가야 할지, 증상별로 확인하기"
-        ]
-      },
-      "at": "2026-11-25T20:04:30.843Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "오른쪽 옆구리 통증",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70106&docId=493680094&answerNo=7&qb=7Jik66W47Kq97JiG6rWs66as7Ya17Kad",
-          "views": 1087,
-          "answers": 8,
-          "askedAt": "2026.10.22"
-        },
-        {
-          "title": "오른쪽 옆구리 통증이 아랫배까지 내려오면 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010105&docId=494047904&answerNo=4&qb=7Jik66W47Kq97JiG6rWs66as7Ya17Kad",
-          "views": 790,
-          "answers": 7,
-          "askedAt": "2026.09.08"
-        },
-        {
-          "title": "오른쪽 옆구리 통증",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=111604&docId=495588288&answerNo=1&qb=7Jik66W47Kq97JiG6rWs66as7Ya17Kad",
-          "views": 280,
-          "answers": 3,
-          "askedAt": "2026.10.17"
         }
       ]
     },
@@ -17110,76 +16526,6 @@
       "provider": "claude"
     },
     {
-      "id": "ac18b958eb4bb105",
-      "urls": [
-        "https://blog.signalplanner.co.kr/16482/",
-        "https://zsewqzsewq.tistory.com/482",
-        "https://zsewqzsewq.tistory.com/481"
-      ],
-      "guide": {
-        "direction": "검색자는 보험 가입 전 건강검진에서 금식을 몇 시간 해야 하는지와, 흉통 같은 기록이 있어도 부담보로 승인될 수 있는지를 동시에 궁금해한다. 기존 글들은 금식시간과 보험 승인 사례를 각각 따로 다뤄 두 궁금증을 한 글에서 풀어주지 못한다. 이 글은 국가건강검진·직장인검진별 금식시간 기준표와 1997년생 남성이 위·십이지장만 4년7개월 부담보로 승인된 사례를 함께 정리해 준비부터 승인까지 이어서 답한다.",
-        "searchTargets": [
-          "국가건강검진 금식시간",
-          "직장인 건강검진 금식 시간",
-          "건강검진 금식시간 위내시경",
-          "건강검진 금식시간 몇시간"
-        ],
-        "mustInclude": [
-          "1997년생 남성, 위·십이지장 질환만 4년7개월 부담보 승인 사례",
-          "국가건강검진 vs 직장인 건강검진 금식시간 기준 비교표",
-          "위내시경 포함 검진 시 금식시간이 달라지는지 여부 (확인 필요: 병원 공지)",
-          "금식 중 물·담배 허용 여부 정리",
-          "부담보 승인이 보험료·가입조건에 미치는 영향"
-        ],
-        "mustAvoid": [
-          "모든 사람이 동일한 조건으로 승인된다고 일반화",
-          "위내시경 포함 여부와 무관하게 금식시간을 하나로 뭉뚱그리기",
-          "특정 보험사·상담사 신상 추측"
-        ],
-        "checkBefore": [
-          "국민건강보험공단 공지에서 국가건강검진 금식시간 기준 확인",
-          "보험사별 부담보 승인조건은 상담 원문 내용 재확인",
-          "위내시경 포함 검진의 금식시간 차이 여부 병원 공지 확인"
-        ],
-        "solves": [
-          "건강검진 금식 몇시간인지 모름 → 국가검진·직장인검진·위내시경 포함 여부별 기준표로 정리",
-          "흉통 기록 있어도 보험 가입되는지 궁금 → 1997년생 남성 부담보 승인 사례로 가능 여부 제시",
-          "검진 전날 물·담배 가능한지 모름 → 금식 중 허용 여부 체크리스트로 정리"
-        ],
-        "actionTitles": [
-          "건강검진 금식시간 몇시간인지 국가검진 기준으로 확인하기",
-          "직장인 건강검진 금식 시간 계산, 전날 몇시부터인지 정리",
-          "건강검진 금식시간 위내시경 포함여부까지 비교해서 확인"
-        ]
-      },
-      "at": "2026-11-25T20:04:30.843Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "건강검진 금식 시간",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70117&docId=467699661&answerNo=3&qb=6rG06rCV6rKA7KeE6riI7Iud7Iuc6rCE",
-          "views": 3014,
-          "answers": 3,
-          "askedAt": "2026.11.23"
-        },
-        {
-          "title": "건강검진 전날 금식 시간과 주의사항이 어떻....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70122&docId=479592563&answerNo=6&qb=6rG06rCV6rKA7KeE6riI7Iud7Iuc6rCE",
-          "views": 2471,
-          "answers": 6,
-          "askedAt": "2026.11.20"
-        },
-        {
-          "title": "20대 건강검진 금식 시간 몇 시간 인가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70117&docId=492161345&answerNo=3&qb=6rG06rCV6rKA7KeE6riI7Iud7Iuc6rCE",
-          "views": 1067,
-          "answers": 3,
-          "askedAt": "2026.11.22"
-        }
-      ]
-    },
-    {
       "id": "7de9d7bffc3ff289",
       "urls": [
         "https://yhcode.tistory.com/entry/PDF-%ED%8C%8C%EC%9D%BC-%EC%A0%95%EB%A6%AC-5%EB%8B%A8%EA%B3%84-%ED%95%A9%EC%B9%98%EA%B8%B0%C2%B7%EC%95%95%EC%B6%95-%ED%95%B4%EA%B2%B0%EB%B2%95%EA%B3%BC-%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD",
@@ -17223,69 +16569,6 @@
           "views": 183,
           "answers": 4,
           "askedAt": "2026.10.13"
-        }
-      ]
-    },
-    {
-      "id": "231c05db33e554f5",
-      "urls": [
-        "https://info-myview.co.kr/youth-employment-subsidy-2026-eligibility-amounts/",
-        "https://cheinggyemoney.tistory.com/156"
-      ],
-      "guide": {
-        "direction": "지식인 질문들은 청년고용지원금과 고령자고용지원금을 혼동하거나 40대도 받을 수 있는지 헷갈려한다. 고수 글들은 '대상과 자격'만 나열하고 960만원이 어떤 지급 구조로 나오는지, 신청 주체가 사업주인지 청년인지는 안 풀었다. 독자는 연령·대상별 지원표와 신청주체·순서만 보면 글을 끝낼 수 있다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "지원 대상 연령·조건 기준(확인 필요: 고용노동부 공고)",
-          "960만원 산출 구성(월 지급액×지급 기간, 확인 필요: 공식 자료)",
-          "신청 주체가 사업주인지 청년 본인인지 구분",
-          "청년고용지원금 vs 고령자고용지원금 비교표",
-          "신청 절차와 제출 서류 순서"
-        ],
-        "mustAvoid": [
-          "청년고용지원금과 고령자고용지원금 대상 기준을 섞어서 서술",
-          "청년내일채움공제 등 유사 제도와 혼동",
-          "종료되었거나 개편된 과거 지원 조건을 현재 기준처럼 제시"
-        ],
-        "checkBefore": [
-          "지원 대상 연령·금액 세부 조건(고용노동부·워크넷 공식 공고)",
-          "신청 접수 기간 및 방법(고용보험 홈페이지)"
-        ],
-        "solves": [
-          "청년고용지원금과 고령자고용지원금이 뭐가 다른지 모름 → 대상·조건 비교표로 정리",
-          "960만원이 어떻게 나온 금액인지 궁금함 → 지급 구성 방식 설명",
-          "회사가 신청하는지 본인이 신청하는지 헷갈림 → 신청 주체와 절차 구분"
-        ],
-        "actionTitles": [
-          "청년고용지원금 960만원 지원 자격 조회하는 법",
-          "청년고용지원금 vs 고령자고용지원금 차이 비교",
-          "청년고용지원금 신청 순서와 필요 서류 확인"
-        ]
-      },
-      "at": "2026-11-25T20:04:30.843Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "2026년 정부지원금 개편, 지금 확인 안 하면 놓....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61401&docId=491055067&answerNo=28&qb=6rOg66C57J6QIOyyreuFhCDqs6Dsmqnsp4Dsm5DquIgg7ZW17IusIOyatOyYgQ==",
-          "views": 953,
-          "answers": 30,
-          "askedAt": "2026.09.18"
-        },
-        {
-          "title": "2026년 예산안에서 가장 주목할 만한 청년정책....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40703&docId=489542290&answerNo=1&qb=6rOg66C57J6QIOyyreuFhCDqs6Dsmqnsp4Dsm5DquIgg7ZW17IusIOyatOyYgQ==",
-          "views": 623,
-          "answers": 8,
-          "askedAt": "2025.10.18"
-        },
-        {
-          "title": "주4일이나 주3일 일자리 있나요? 그리고 자격....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=406&docId=494166227&answerNo=2&qb=6rOg66C57J6QIOyyreuFhCDqs6Dsmqnsp4Dsm5DquIgg7ZW17IusIOyatOyYgQ==",
-          "views": 304,
-          "answers": 5,
-          "askedAt": "2026.07.05"
         }
       ]
     },
