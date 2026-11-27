@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T06:24:43.243Z",
+ "builtAt": "2026-11-27T06:34:46.907Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,90 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
+  {
+   "keyword": "지역재투자 평가 상대평가",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 24,
+   "recent20": 4,
+   "press": 24,
+   "firstArticleAt": "2026-11-27T05:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "은행 지역재투자 상대평가 도입… 서민금융·지역 중기 지원 배점↑",
+     "press": "fntoday.co.kr",
+     "publishedAt": "2026-11-27T06:34:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=401050"
+    },
+    {
+     "title": "은행권 지역재투자 평가 손질…서민금융 지원 따라 등급 갈린다",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-27T06:24:00.000Z",
+     "link": "https://www.viva100.com/article/20261127500502"
+    },
+    {
+     "title": "광주은행 등 7곳 지역재투자 '최우수'…금융당국, 상대평가 도입",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-27T06:21:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087341"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 R&D 성과 환수",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 22,
+   "recent20": 4,
+   "press": 22,
+   "firstArticleAt": "2026-11-27T05:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 \"R&D, 지원·투자 중간 형태 필요…'억까언론·반대정치'가 큰 장애\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-27T06:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001079105?sid=100"
+    },
+    {
+     "title": "李대통령 “욕먹어도 할 일 해야”…성과공유형 재정지원 필요성 강조",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-27T06:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686928?sid=100"
+    },
+    {
+     "title": "이 대통령 \"욕먹어도 할 일 해야\"…성과공유형 재정지원 힘실어",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-27T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406349?sid=100"
+    }
+   ]
+  },
   {
    "keyword": "정년연장 노사 합의 불발",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 27,
+   "articles90": 22,
    "recent20": 3,
-   "press": 27,
-   "firstArticleAt": "2026-11-27T04:56:00.000Z",
+   "press": 22,
+   "firstArticleAt": "2026-11-27T05:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "與정년연장특위 노사합의 불발…10개월만 회동에도 접점 못찾아",
+     "press": "delighti.co.kr",
+     "publishedAt": "2026-11-27T06:28:00.000Z",
+     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125809"
+    },
     {
      "title": "“연내 입법 불발 땐 더 이상 대화 없다”…정년연장 지연에 노동계 반...",
      "press": "sedaily.com",
@@ -33,78 +103,6 @@
      "press": "goodnews1.com",
      "publishedAt": "2026-11-27T06:18:00.000Z",
      "link": "https://www.goodnews1.com/news/articleView.html?idxno=466751"
-    },
-    {
-     "title": "與정년연장 특위, 10개월만 노사협의 합의 불발…내달 2일 종료(종합2보...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T06:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467960?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "학교 비정규직 총파업",
-   "sources": [
-    "signal.bz",
-    "nate",
-    "daum"
-   ],
-   "articles90": 63,
-   "recent20": 9,
-   "press": 21,
-   "firstArticleAt": "2026-11-27T05:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "학교 비정규직 총파업···392개 학교 운영 차질",
-     "press": "jtv.co.kr",
-     "publishedAt": "2026-11-27T06:22:00.000Z",
-     "link": "https://www.jtv.co.kr/news/article.php?id=72360"
-    },
-    {
-     "title": "학교비정규직 노동자 파업…급식 대신 도시락 먹는 학생들",
-     "press": "kyeongin.com",
-     "publishedAt": "2026-11-27T06:22:00.000Z",
-     "link": "https://www.kyeongin.com/article/1775531"
-    },
-    {
-     "title": "학교비정규직노조, 여의도 일대서 대규모 총파업 집회 [포토]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-27T06:20:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2654003"
-    }
-   ]
-  },
-  {
-   "keyword": "AI 가짜 의사 광고 금지",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T04:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李 “AI 가짜 의사 광고 오늘부터 금지…걸려도 남는 장사 안 통한다”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-27T06:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765734?sid=100"
-    },
-    {
-     "title": "'AI가짜 의사' 추천 '건강기능식품-의약품' 영업금지",
-     "press": "gametoc.co.kr",
-     "publishedAt": "2026-11-27T06:02:00.000Z",
-     "link": "https://www.gametoc.co.kr/news/articleView.html?idxno=113463"
-    },
-    {
-     "title": "李대통령 \"AI 가짜 의사 광고, 영업정지 등 강력 제재\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T05:52:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127141409587"
     }
    ]
   },
@@ -114,12 +112,18 @@
     "nate"
    ],
    "articles90": 11,
-   "recent20": 3,
+   "recent20": 2,
    "press": 10,
-   "firstArticleAt": "2026-11-27T05:01:00.000Z",
+   "firstArticleAt": "2026-11-27T05:11:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "솔비♥이규한, 내년 4월 25일 결혼식 확정‥비공개 야외 웨딩[공식입장...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T06:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191877"
+    },
     {
      "title": "솔비♥이규한, 내년 4월 25일 결혼식...\"비공개 야외 예식\"",
      "press": "slist.kr",
@@ -131,115 +135,75 @@
      "press": "sportsworldi.com",
      "publishedAt": "2026-11-27T06:08:00.000Z",
      "link": "https://m.entertain.naver.com/article/396/0000762159"
-    },
-    {
-     "title": "솔비♥이규한, 내년 4월 25일 결혼 확정…종로서 비공개 야외 예식",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-27T06:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004470274"
     }
    ]
   },
   {
-   "keyword": "아일릿 모카, 5개월 만에 복귀",
+   "keyword": "개인정보 유출 긴급대응",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 9,
    "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T05:18:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-27T05:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "아일릿 모카, 5개월 만에 복귀 시동…\"조금씩 함께할 것\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T06:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014349835"
+     "title": "개인정보 유출 신고 벌써 작년 2배 넘어…개인정보위, 긴급 대응 돌입",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-27T06:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207819?sid=105"
     },
     {
-     "title": "아일릿 멤버 모카 근황…복귀 예고",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T06:08:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287899"
+     "title": "과학기술인공제회 해킹…회원정보 21만건 유출",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-27T06:28:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000002014"
     },
     {
-     "title": "아일릿 모카 건강 회복 후 복귀 \"조금씩 멤버들과 활동할 것\"",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-27T06:06:00.000Z",
-     "link": "https://www.insight.co.kr/news/583859"
+     "title": "AI 기반 해킹 확산에 올해 개인정보유출 신고 전년 2배 훌쩍",
+     "press": "aitimes.com",
+     "publishedAt": "2026-11-27T06:18:00.000Z",
+     "link": "https://www.aitimes.com/news/articleView.html?idxno=217882"
     }
    ]
   },
   {
-   "keyword": "교통",
+   "keyword": "내란 특수본 출범",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 5,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T06:04:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T05:21:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "삼성라이온즈 카퍼레이드 오는 29일 개최... 대구 도심 교통 전면통제",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-27T06:12:00.000Z",
-     "link": "https://www.insight.co.kr/news/583869"
+     "title": "비상계엄 수사 ‘중수청·경찰 특수본’ 출범…검·경·공수처·2차 특검...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-27T06:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834297?sid=102"
     },
     {
-     "title": "평택시, 중앙아시아로 행정 교류 넓힌다…교통·안전 분야 협력 모색",
-     "press": "weekly.hankooki.com",
-     "publishedAt": "2026-11-27T06:10:00.000Z",
-     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7196102"
+     "title": "중수청·경찰 합동 '내란 특수본', 다음 달 1일 출범 예정",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T06:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438975?sid=102"
     },
     {
-     "title": "반세기 도시철도 운영 노하우 전수…서울교통공사, 스리랑카 교통·철도...",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-27T06:08:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=95808"
+     "title": "중수청·경찰 ‘내란 특수본’ 임박…내달 1일 출범 예정",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-27T05:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703934?sid=102"
     }
    ]
   },
   {
-   "keyword": "이재명 정부",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T05:11:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "\"주적은 이재명\" 당내 자성에도 … 윤상현·우재준은 또 '장동혁 책임론...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-27T06:14:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/27/2026112750221.html"
-    },
-    {
-     "title": "이재명 \"연 50조원 R&D 성과 국가 환수 장치 필요\" \"지원과 투자의 중간...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-27T06:04:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453132"
-    },
-    {
-     "title": "정부 돈 받아 대박 난 기업…李 “욕먹어도” 이익 환수 추진",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416616?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "남경필 아들 체포",
+   "keyword": "남경필 아들 협박 혐의 체포",
    "sources": [
     "daum"
    ],
@@ -271,34 +235,34 @@
    ]
   },
   {
-   "keyword": "항소",
+   "keyword": "교통",
    "sources": [
     "google"
    ],
    "articles90": 5,
-   "recent20": 4,
+   "recent20": 3,
    "press": 5,
-   "firstArticleAt": "2026-11-27T06:00:00.000Z",
+   "firstArticleAt": "2026-11-27T06:10:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "[속보] 공소청, ‘대장동 개발’ 민간업자들 2심서 항소 기각 요청",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-27T06:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012124?sid=102"
+     "title": "아산시, 내년 3월 까지 남부로(하나로마트) 우수관로 공사 구간 교통통...",
+     "press": "jbnews.com",
+     "publishedAt": "2026-11-27T06:32:00.000Z",
+     "link": "https://www.jbnews.com/news/articleView.html?idxno=1517071"
     },
     {
-     "title": "[속보] 공소청, '대장동 비리' 민간업자들 항소 기각 요청",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-27T06:20:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326728/?sc=Naver"
+     "title": "의왕시, 어르신 교통카드(G-PASS) 부정사용 예방 홍보 강화",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-27T06:30:00.000Z",
+     "link": "https://www.viva100.com/article/20261127500498"
     },
     {
-     "title": "[속보]공소청, '대장동 민간업자' 2심서 항소기각 요청",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T06:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014349818?sid=102"
+     "title": "이병숙 경기도의원, 망포지구 원거리 고교 통학 지원·버스노선 개선 협...",
+     "press": "kmaeil.com",
+     "publishedAt": "2026-11-27T06:26:00.000Z",
+     "link": "https://www.kmaeil.com/news/articleView.html?idxno=660171"
     }
    ]
   },
@@ -335,76 +299,68 @@
    ]
   },
   {
-   "keyword": "북한 MDL 침범",
+   "keyword": "북한 해커 바이낸스 세탁",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-27T04:58:00.000Z",
+   "firstArticleAt": "2026-11-27T05:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경고사격에도 반복되는 북한군 MDL 침범…유용원 \"넉 달간 90여 회\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-27T05:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653804?sid=100"
+     "title": "\"북한 해커, 바이낸스서 탈취한 암호화폐 온라인서 본격 세탁\"",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-27T06:12:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82797"
     },
     {
-     "title": "\"두 달간 40회 MDL 침범\"...軍의 '경고사격' 비웃는 北",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-27T05:16:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653966"
+     "title": "\"北 해커, 바이낸스서 탈취 가상화폐 세탁 본격화\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-27T06:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214672?sid=104"
     },
     {
-     "title": "\"北, 지뢰 도발 이후 두 달간 MDL 40번 침범\"",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-27T05:06:00.000Z",
-     "link": "https://www.insight.co.kr/news/583796"
-    }
-   ]
-  },
-  {
-   "keyword": "투수 박동규 영입",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T04:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "울산웨일즈, 지역 출신 투수 이강혁·박동규 영입…'울산 쿼터' 첫발",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T05:32:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009314341"
-    },
-    {
-     "title": "울산시민야구단, '울산 쿼터' 적용해 투수 이강혁·박동규 영입",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T05:19:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/055/0001406328"
-    },
-    {
-     "title": "울산시민야구단, '울산 쿼터' 적용 투수 이강혁·박동규 영입",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T05:01:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/052/0002438932"
+     "title": "‘바이낸스서 8조 넘게 탈취’ 북 해킹조직, 본격 돈세탁 시작···‘토...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-27T05:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485535?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1856,
-  "matched": 920,
-  "avgLeadMin": 610,
+  "flagged": 1859,
+  "matched": 924,
+  "avgLeadMin": 608,
   "recent": [
+   {
+    "keyword": "학교 비정규직 총파업에",
+    "hitKeyword": "비정규직 파업 대체급식",
+    "hitAt": "2026-11-27T15:30:00+09:00",
+    "leadMin": 186
+   },
+   {
+    "keyword": "학교 비정규직 총파업 진행",
+    "hitKeyword": "비정규직 파업 대체급식",
+    "hitAt": "2026-11-27T15:30:00+09:00",
+    "leadMin": 66
+   },
+   {
+    "keyword": "학교 비정규직 총파업",
+    "hitKeyword": "비정규직 파업 대체급식",
+    "hitAt": "2026-11-27T15:30:00+09:00",
+    "leadMin": 46
+   },
+   {
+    "keyword": "아일릿 모카, 5개월 만에 복귀",
+    "hitKeyword": "지나 10년 만에 복귀",
+    "hitAt": "2026-11-27T15:30:00+09:00",
+    "leadMin": 46
+   },
    {
     "keyword": "가수",
     "hitKeyword": "가수 지나 10년 복귀",
@@ -440,30 +396,6 @@
     "hitKeyword": "손연재 부부 30억 기부",
     "hitAt": "2026-11-27T14:00:00+09:00",
     "leadMin": 368
-   },
-   {
-    "keyword": "나인 식스 시청률 하락",
-    "hitKeyword": "무쇠소녀단3 시청률",
-    "hitAt": "2026-11-27T14:00:00+09:00",
-    "leadMin": 318
-   },
-   {
-    "keyword": "베식타시 경기 30분 중단",
-    "hitKeyword": "유로파리그 30분 중단",
-    "hitAt": "2026-11-27T14:00:00+09:00",
-    "leadMin": 137
-   },
-   {
-    "keyword": "오현규 30분 경기 중단",
-    "hitKeyword": "유로파리그 30분 중단",
-    "hitAt": "2026-11-27T14:00:00+09:00",
-    "leadMin": 116
-   },
-   {
-    "keyword": "손연재 부부 30억 기부",
-    "hitKeyword": "손연재 부부 30억 기부",
-    "hitAt": "2026-11-27T14:00:00+09:00",
-    "leadMin": 86
    }
   ]
  }
