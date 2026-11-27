@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T00:42:45.492Z",
+ "builtAt": "2026-11-27T00:52:48.708Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 41,
-   "recent20": 11,
-   "press": 30,
+   "articles90": 43,
+   "recent20": 7,
+   "press": 32,
    "firstArticleAt": "2026-11-26T23:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "NS홈쇼핑, ‘동반성장 주간 기념식’ 중소벤처기업부 장관 표창 수상",
-     "press": "hbnpress.com",
-     "publishedAt": "2026-11-27T00:40:00.000Z",
-     "link": "https://hbnpress.com/news/view/1065573387718520"
+     "title": "NS홈쇼핑, 동반성장 주간 기념식서 중기부 장관 표창 수상",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-27T00:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003490611?sid=101"
     },
     {
-     "title": "코레일유통물류 '상생물류 지원사업'…중기부 장관 표창 수상",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T00:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313597?sid=101"
+     "title": "삼양식품, '올해의 상생기업' 선정…중기부 장관 표창 수상",
+     "press": "newsmap.co.kr",
+     "publishedAt": "2026-11-27T00:42:00.000Z",
+     "link": "https://www.newsmap.co.kr/news/articleView.html?idxno=5874"
     },
     {
-     "title": "SK인텔릭스, '올해의 상생기업 대상' 중기부 장관 표창 수상",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-27T00:36:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2024196"
+     "title": "코레일유통물류, '올해의 상생기업 대상' 중기부 장관 표창 수상",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-27T00:42:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121332"
     }
    ]
   },
@@ -47,62 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 33,
+   "articles90": 35,
    "recent20": 5,
-   "press": 29,
+   "press": 31,
    "firstArticleAt": "2026-11-26T23:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] '성북구 여중생 살해' 50대 남성 전 연인...20대 김 씨 ‘구속 송...",
-     "press": "cjb.co.kr",
-     "publishedAt": "2026-11-27T00:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/655/0000033720?sid=102"
+     "title": "'성북구 10대 살해' 피의자 前연인 송치…성매매·절도지시 혐의",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T00:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358952?sid=102"
     },
     {
-     "title": "'성북 10대 소녀 살해' 관련 20대 女 송치 … 성매매·절도 지시 혐의",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-27T00:34:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/27/2026112750054.html"
+     "title": "‘살해된 성북구 여중생 가스라이팅’ 또 다른 피의자…20대 여성 구속...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-27T00:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729321?sid=102"
     },
     {
-     "title": "10대 소녀에 성매매·절도 시킨 성북 살인사건 피의자 전 연인 공소청 송...",
-     "press": "busan.com",
-     "publishedAt": "2026-11-27T00:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001409233?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "금융사 검사 제재 쇄신",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 39,
-   "recent20": 6,
-   "press": 27,
-   "firstArticleAt": "2026-11-27T00:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "금감원 노조 \"금융행정 쇄신방안은 반쪽짜리…금융위 구성부터 손봐야...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T00:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313600?sid=101"
-    },
-    {
-     "title": "금융감독 쇄신안 발표에도…금감원 노조 \"검사원 보호 빠졌다\"",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-27T00:36:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887903"
-    },
-    {
-     "title": "금감원 노조 \"감독 쇄신안 반쪽짜리\"…금융위 위원 구성 개편 요구",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-27T00:34:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088543"
+     "title": "성북구 10대 살해사건 피의자 전 연인도 송치···피해자에 성매매·절...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-27T00:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485474?sid=102"
     }
    ]
   },
@@ -111,30 +79,62 @@
    "sources": [
     "google"
    ],
-   "articles90": 23,
-   "recent20": 10,
-   "press": 18,
+   "articles90": 30,
+   "recent20": 13,
+   "press": 24,
    "firstArticleAt": "2026-11-26T23:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경북 140개교 '빵·우유 등 대체식'·초등돌봄 2곳 중단…파업 여파",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T00:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313598?sid=102"
+     "title": "“오늘 급식 안 나오나요?”…각급 학교 비정규직 하루 총파업·여의도...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-27T00:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061477?sid=102"
     },
     {
-     "title": "학교 비정규직 4만여명, 오늘(27일) 총파업…급식·돌봄 등 차질 우려",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-27T00:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160146?sid=102"
+     "title": "전남광주교육청, 학교비정규직 총파업 대응 급식·돌봄 공백 최소화",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-27T00:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214492?sid=102"
     },
     {
-     "title": "서울시교육청, 교육공무직 총파업 대비 학교 대응계획 마련",
-     "press": "news.unn.net",
-     "publishedAt": "2026-11-27T00:36:00.000Z",
-     "link": "https://news.unn.net/news/articleView.html?idxno=601553"
+     "title": "학교 비정규직 총파업…급식·방과후돌봄 차질",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-27T00:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000546240?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "에이피알",
+   "sources": [
+    "google"
+   ],
+   "articles90": 27,
+   "recent20": 3,
+   "press": 23,
+   "firstArticleAt": "2026-11-26T23:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "에이피알 주가, 11월 27일 장중 303,500원 1.68% 상승",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T00:50:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287609"
+    },
+    {
+     "title": "에이피알, 3900억원에 닥터멜락신 품는다…메디큐브와 독립 운영",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-27T00:44:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=756778"
+    },
+    {
+     "title": "에이피알, 닥터멜락신 품는다…글로벌 뷰티 '승부수'",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-27T00:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143137?sid=101"
     }
    ]
   },
@@ -143,62 +143,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 4,
+   "articles90": 17,
+   "recent20": 5,
    "press": 13,
    "firstArticleAt": "2026-11-26T23:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "러 장관, 김정은에 '동지'…\"북러 정상이 논의한 인프라 계획 성과\"",
+     "title": "러시아와 초밀착하는 북한…김정은, 방북한 러 예술인 공연 관람",
      "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-27T00:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980121?sid=104"
+     "publishedAt": "2026-11-27T00:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980123?sid=100"
     },
     {
-     "title": "러시아 방북 대표단 환대한 김정은…북러 밀착 가속화(종합)",
-     "press": "konas.net",
-     "publishedAt": "2026-11-27T00:36:00.000Z",
-     "link": "https://www.konas.net/article/article.asp?idx=64812"
+     "title": "김정은, 러시아 예술인들과 기념촬영",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T00:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467085?sid=100"
     },
     {
-     "title": "김정은, 사망설 후 러시아 접촉",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T00:30:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287587"
-    }
-   ]
-  },
-  {
-   "keyword": "닥터멜락신",
-   "sources": [
-    "google"
-   ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-26T23:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "에이피알, 닥터멜락신 품는다…글로벌 뷰티 '승부수'",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-27T00:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000143137?sid=101"
-    },
-    {
-     "title": "에이피알, 닥터멜락신 인수…브랜드 M&A 이어져",
-     "press": "lcnews.co.kr",
-     "publishedAt": "2026-11-27T00:32:00.000Z",
-     "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=212128"
-    },
-    {
-     "title": "한국투자 \"에이피알 '닥터멜락신' 인수, 기업가치 회복에 긍정적 요소\"",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-27T00:26:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453084"
+     "title": "러시아 가수 돌리나와 악수하는 김정은",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T00:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467083?sid=100"
     }
    ]
   },
@@ -207,13 +175,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-26T23:17:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-26T23:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[LPBA] 김가영, 스롱 꺾고 4강 진출...김보미와 결승행 다툼",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T00:44:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127000220"
+    },
     {
      "title": "20승 보인다! ‘당구 여제’ 김가영 ‘라이벌’ 스롱 꺾고 준결승행…김...",
      "press": "sportsworldi.com",
@@ -225,12 +199,6 @@
      "press": "mediafine.co.kr",
      "publishedAt": "2026-11-27T00:04:00.000Z",
      "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96050"
-    },
-    {
-     "title": "본격 '시즌 2승' 전쟁 막 올랐다…PBA 김영원 '홀로 생존'·LPBA 김가영-김...",
-     "press": "thebilliards.kr",
-     "publishedAt": "2026-11-26T23:58:00.000Z",
-     "link": "https://www.thebilliards.kr/news/articleView.html?idxno=32600"
     }
    ]
   },
@@ -239,13 +207,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 4,
-   "press": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-26T23:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김용범 메리츠 부회장, 자본시장 개혁기구 이끈다…민간 주도 개혁 시동",
+     "press": "paxetv.com",
+     "publishedAt": "2026-11-27T00:44:00.000Z",
+     "link": "http://www.paxetv.com/news/articleView.html?idxno=288045"
+    },
     {
      "title": "거버넌스포럼, 김용범 위원장 내정 환영…\"대통령, 끝까지 힘 실어줘야...",
      "press": "ebn.co.kr",
@@ -257,44 +231,38 @@
      "press": "youthdaily.co.kr",
      "publishedAt": "2026-11-27T00:40:00.000Z",
      "link": "https://www.youthdaily.co.kr/news/article.html?no=230413"
-    },
-    {
-     "title": "자본시장 개혁기구 위원장에 김용범 메리츠 부회장…대통령 직보",
-     "press": "fntimes.com",
-     "publishedAt": "2026-11-27T00:40:00.000Z",
-     "link": "https://www.fntimes.com/html/view.php?ud=2026112709192018760f4390e77d_18"
     }
    ]
   },
   {
-   "keyword": "연우 무쇠소녀단3 눈물",
+   "keyword": "삼성전자 배당금 지급일",
    "sources": [
     "daum"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T23:42:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T23:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'무쇠소녀단3' 첫방부터 피·땀·눈물...시즌 전체 첫방 최고 시청률 2....",
-     "press": "ize.co.kr",
-     "publishedAt": "2026-11-27T00:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/465/0000021323"
+     "title": "오늘 삼성전자 배당금 30조 들어온다, 이재용 얼마 받을까?",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-27T00:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887818?sid=101"
     },
     {
-     "title": "‘무쇠소녀단3’ 설인아, 체력 약체 연우 끝까지 챙겼다… 결국 터진 눈...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-27T00:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543861"
+     "title": "삼성전자 배당금 지급일…기준일은",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-27T00:30:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611270154"
     },
     {
-     "title": "무쇠소녀단3 설인아·한지현, 스타디움 레이스 완주",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-26T23:46:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287553"
+     "title": "[속보]코스피, 4740선 강보합…삼성전자 30조 배당금 유입 촉각",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T00:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416414?sid=101"
     }
    ]
   },
@@ -303,13 +271,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 2,
    "press": 3,
    "firstArticleAt": "2026-11-26T23:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "부산 학교 비정규직 파업으로 150개 학교 급식 차질",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T00:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467100?sid=102"
+    },
     {
      "title": "전남광주교육청, 비정규직 파업 속 학교급식 정상 운영",
      "press": "jnilbo.com",
@@ -321,44 +295,6 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-27T00:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014348666?sid=102"
-    },
-    {
-     "title": "학교 비정규직 오늘 총파업…전국 학교 급식·돌봄 차질 예상",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T23:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466911?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "빅뱅",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T23:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김보미, 챔피언 자신감 장착…김가영과 4강전 빅뱅",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-27T00:26:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/028/0002834235"
-    },
-    {
-     "title": "김유정, 빅뱅 앞 팬심 터졌다…입틀막·떼창에 지드래곤도 '좋아요' [★...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T00:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084653"
-    },
-    {
-     "title": "김유정, 빅뱅 무대에 입 틀어막았다..지드래곤 '좋아요'로 화답",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-26T23:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490604"
     }
    ]
   },
@@ -428,18 +364,55 @@
    ]
   },
   {
-   "keyword": "준법투쟁",
+   "keyword": "빅뱅",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 4,
-   "recent20": 3,
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T23:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김보미, 챔피언 자신감 장착…김가영과 4강전 빅뱅",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-27T00:26:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/028/0002834235"
+    },
+    {
+     "title": "김유정, 빅뱅 앞 팬심 터졌다…입틀막·떼창에 지드래곤도 '좋아요' [★...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-27T00:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084653"
+    },
+    {
+     "title": "김유정, 빅뱅 무대에 입 틀어막았다..지드래곤 '좋아요'로 화답",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-26T23:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490604"
+    }
+   ]
+  },
+  {
+   "keyword": "준법투쟁",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
    "press": 2,
    "firstArticleAt": "2026-11-27T00:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "준법투쟁 이틀째 출근길, 큰 혼란 없지만 '수 분 지연' 이어져",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T00:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467107?sid=102"
+    },
     {
      "title": "철도노조 준법투쟁 이틀째…",
      "press": "yna.co.kr",
@@ -451,19 +424,13 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-27T00:28:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016467036?sid=102"
-    },
-    {
-     "title": "철도노조 준법투쟁 이틀째",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T00:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467032?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1752,
+  "flagged": 1753,
   "matched": 878,
   "avgLeadMin": 590,
   "recent": [
