@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T12:16:52.151Z",
+ "builtAt": "2026-11-27T12:26:54.992Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,47 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "최민희 당원권 정지",
+   "keyword": "GS칼텍스 5연승",
    "sources": [
+    "daum"
+   ],
+   "articles90": 26,
+   "recent20": 14,
+   "press": 14,
+   "firstArticleAt": "2026-11-27T11:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[사진]GS칼텍스 이영택 감독, '높은 곳으로'",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-27T12:24:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/109/0005646222"
+    },
+    {
+     "title": "[사진]뜨겁게 포효하는 GS칼텍스 실바",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-27T12:24:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/109/0005646224"
+    },
+    {
+     "title": "[사진]흥국생명-GS칼텍스 경기 주시하는 김연경 어드바이저",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-27T12:24:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/109/0005646221"
+    }
+   ]
+  },
+  {
+   "keyword": "최민희 당원권 2년 정지",
+   "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T10:50:00.000Z",
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T11:12:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -43,34 +76,34 @@
    ]
   },
   {
-   "keyword": "철도노조 준법투쟁 지연",
+   "keyword": "신지아 6차 쇼트 2위",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-27T10:48:00.000Z",
+   "articles90": 8,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T10:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "철도노조 준법투쟁 이틀째…전철 400여대 지연",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T12:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930693?sid=101"
+     "title": "신지아, 쇼트 개인 최고점 경신…시니어 첫 그랑프리 메달 보인다",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-27T12:22:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/241/0003543958"
     },
     {
-     "title": "철도노조 준법투쟁…동대구역 최대 1시간 40분 열차 지연",
-     "press": "tbc.co.kr",
-     "publishedAt": "2026-11-27T11:50:00.000Z",
-     "link": "https://www.tbc.co.kr/news/view?pno=20261127204218AE09276&id=213870"
+     "title": "'NEW 김연아' 신지아, 첫 메달 보인다!…NHK 트로피서 개인 최고 75.31점 ...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-27T12:20:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/311/0002084892"
     },
     {
-     "title": "철도노조 준법투쟁 이틀째…열차 454대 지연",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-27T11:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207877?sid=102"
+     "title": "女피겨 신지아, 쇼트 개인 최고점 경신 ‘75.31점’…시니어 GP 6차 2위,...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-27T12:11:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/468/0001283962"
     }
    ]
   },
@@ -80,7 +113,7 @@
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-27T11:02:00.000Z",
    "exclusive": true,
@@ -112,7 +145,7 @@
     "daum"
    ],
    "articles90": 12,
-   "recent20": 5,
+   "recent20": 2,
    "press": 7,
    "firstArticleAt": "2026-11-27T11:00:00.000Z",
    "exclusive": false,
@@ -139,16 +172,47 @@
    ]
   },
   {
+   "keyword": "철도노조 준법투쟁 지연",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T10:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "열차 지연 속출…대입 '논술·면접' 몰린 주말 어쩌나",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-27T12:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522869?sid=102"
+    },
+    {
+     "title": "철도노조 준법투쟁 이틀째…전철 400여대 지연",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T12:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930693?sid=101"
+    },
+    {
+     "title": "철도노조 준법투쟁…동대구역 최대 1시간 40분 열차 지연",
+     "press": "tbc.co.kr",
+     "publishedAt": "2026-11-27T11:50:00.000Z",
+     "link": "https://www.tbc.co.kr/news/view?pno=20261127204218AE09276&id=213870"
+    }
+   ]
+  },
+  {
    "keyword": "김범수 무죄 확정",
    "sources": [
     "signal.bz",
-    "nate",
-    "daum"
+    "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T10:50:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T11:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -173,45 +237,13 @@
    ]
   },
   {
-   "keyword": "신지아 6차 쇼트 2위",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T10:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "女피겨 신지아, 쇼트 개인 최고점 경신 ‘75.31점’…시니어 GP 6차 2위,...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-27T12:11:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/468/0001283962"
-    },
-    {
-     "title": "신지아, 피겨 시니어 그랑프리 6차 SP 개인 최고점 '75.31점' 2위…선두...",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-27T12:06:00.000Z",
-     "link": "https://swtvnews.com/news/newsview.php?ncode=1065614129604706"
-    },
-    {
-     "title": "메달 보인다! 피겨 신지아, 그랑프리 6차 대회 쇼트 2위 ‘개인 최고 75...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-27T11:23:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/396/0000762179"
-    }
-   ]
-  },
-  {
    "keyword": "황교안",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-27T11:12:00.000Z",
    "exclusive": false,
@@ -238,12 +270,44 @@
    ]
   },
   {
-   "keyword": "LJ 이혼할 사랑했다",
+   "keyword": "김용건 나이",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T11:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“하정우, 미술 좋아해”…‘그냥사람친구’ 김용건, 박정숙에 ‘넉살...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-27T12:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054481"
+    },
+    {
+     "title": "'늦둥이 아빠' 김용건, 허리 수술 고백하더니…\"병원 부지런히\"",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-27T11:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274245?sid=103"
+    },
+    {
+     "title": "'그냥사람친구' 주헌·정연, 나이 초월 우정 여행지 GO…촬영 시작 장소...",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-27T11:30:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305870"
+    }
+   ]
+  },
+  {
+   "keyword": "이선정과 이혼 후 친구처럼",
    "sources": [
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-27T11:10:00.000Z",
    "exclusive": false,
@@ -256,10 +320,10 @@
      "link": "https://www.etoday.co.kr/news/view/2654142"
     },
     {
-     "title": "14년만에 최초고백..LJ \"이선정과 이혼할때도 사랑했다\" [순간포착]",
+     "title": "'이선정과 이혼' LJ, 뒤늦게 털어놓은 속마음..\"아이 너무 갖고 싶다\"",
      "press": "osen.co.kr",
-     "publishedAt": "2026-11-27T11:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646192"
+     "publishedAt": "2026-11-27T11:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646173"
     },
     {
      "title": "LJ, ‘전처’ 이선정과 이혼 14년 만 고백 “이혼 후에도 사랑했다”",
@@ -300,43 +364,11 @@
      "link": "https://n.news.naver.com/mnews/article/015/0005359232?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "박홍근 서영교 당정 충돌",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T10:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서영교 법사위원장 \"질문 막지 마라\" vs 박홍근 장관 \"고압적\" 당정 충돌",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-27T11:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193765?sid=100"
-    },
-    {
-     "title": "“여기가 상원인가” “이런 장관 처음”…박홍근·서영교 與-與 충돌",
-     "press": "donga.com",
-     "publishedAt": "2026-11-27T11:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765803?sid=100"
-    },
-    {
-     "title": "“법사위는 법사위답게만” 박홍근에 與도 발끈…때아닌 당정 충돌",
-     "press": "segye.com",
-     "publishedAt": "2026-11-27T10:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178702?sid=100"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1951,
+  "flagged": 1954,
   "matched": 975,
   "avgLeadMin": 657,
   "recent": [
