@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T22:20:05.491Z",
+ "builtAt": "2026-11-27T22:30:08.244Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
+  {
+   "keyword": "시장",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T22:00:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "암호화폐 시장 '청산 악몽' 재현…비트코인 6만 달러 붕괴에 시총 연중...",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-27T22:28:00.000Z",
+     "link": "http://coinreaders.com/274104"
+    },
+    {
+     "title": "바이낸스 63억 달러 해킹 사태 일단락…출금 전면 재개로 시장 신뢰 회...",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-27T22:26:00.000Z",
+     "link": "http://coinreaders.com/274103"
+    },
+    {
+     "title": "인천시, 인천기업 중국 시장 진출 ‘전방위 지원’",
+     "press": "globalepic.co.kr",
+     "publishedAt": "2026-11-27T22:26:00.000Z",
+     "link": "https://www.globalepic.co.kr/view.php?ud=2026112713294515906e1e092a28_29"
+    }
+   ]
+  },
   {
    "keyword": "부동산",
    "sources": [
     "google"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T21:00:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T21:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,34 +75,66 @@
    ]
   },
   {
-   "keyword": "시장",
+   "keyword": "한지민",
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 2,
+   "articles90": 8,
+   "recent20": 3,
    "press": 4,
-   "firstArticleAt": "2026-11-27T22:00:00.000Z",
+   "firstArticleAt": "2026-11-27T21:02:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "[기획] 팝업에 패션 플랫폼까지…다이어리 시장 확장 어디까지",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-27T22:02:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611260166"
+     "title": "한지민, 이서진 장난에 표정관리 실패 “인성 논란 나와도 내보내주길”...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T22:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192057"
     },
     {
-     "title": "[N2 포커스] 기준금리 2년 만에 3.25%…주택시장 권역별 차별화 짙어진다",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-27T22:02:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261127500295"
+     "title": "“팬티만 빼고 다 벗어야” 박정수 각오에 한지민 당황 “옷 벗으라고요...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T22:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192055"
     },
     {
-     "title": "글로벌 항공우주 임원 2명 중 1명 “공급망 병목이 가장 큰 시장 리스크...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-27T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729705?sid=101"
+     "title": "이서진, 한지민 태도 지적에 “이게 내 자세”라더니 김용건 박정수 등...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T22:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192056"
+    }
+   ]
+  },
+  {
+   "keyword": "홍민기 전 연인 실종",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T21:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "폭로·고소 그리고 100일…홍민기 전 연인 실종 ‘아직 밝혀지지 않은 ...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-27T22:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001283978"
+    },
+    {
+     "title": "홍민기 전 연인 A씨 실종…가족이 새벽에 신고, 경찰 수색 나서",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T21:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001148552"
+    },
+    {
+     "title": "'홍민기에 임신 중절 강요' 전 연인 실종-경찰 출동",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-27T21:38:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96097"
     }
    ]
   },
@@ -80,10 +144,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T21:00:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-27T21:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,14 +172,46 @@
    ]
   },
   {
+   "keyword": "젠슨 황 디올 재킷 착용",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T21:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨 황, '디올 면재킷·에르메스 운동화'로 복귀...패션계 \"겸손 연출\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-27T22:06:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785450"
+    },
+    {
+     "title": "젠슨 황 '디올 재킷'에 패션계 \"470만 원짜리 겸손\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T21:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439242?sid=104"
+    },
+    {
+     "title": "가죽 재킷 벗고 470만원 디올 입은 젠슨 황…\"겸손한 패션 연출\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-27T21:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653914?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "이란 해상봉쇄 돌파",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T20:58:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-27T21:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -138,44 +234,12 @@
      "link": "https://n.news.naver.com/mnews/article/056/0012303039?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "박홍근 서영교 충돌",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘예산 민원’ 때문?…박홍근 예산장관, 법사위서 “예산 질의에 답변 ...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T21:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012303049?sid=100"
-    },
-    {
-     "title": "\"법사위가 상원?\" vs \"충격적\"…민주당끼리 충돌",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T21:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406457?sid=100"
-    },
-    {
-     "title": "법사위 파행 여진 SNS서 장외설전… 박홍근 “‘국회법 원칙” vs 서영교...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-27T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061586?sid=100"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1967,
-  "matched": 972,
+  "flagged": 1969,
+  "matched": 971,
   "avgLeadMin": 652,
   "recent": [
    {
