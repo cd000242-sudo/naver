@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T07:55:13.870Z",
+ "builtAt": "2026-11-27T08:05:17.484Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,212 +8,339 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 23,
  "candidates": [
   {
-   "keyword": "코스피 급등",
+   "keyword": "법사위, 이용철 청문보고서 채택",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 81,
-   "recent20": 14,
-   "press": 72,
-   "firstArticleAt": "2026-11-27T06:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[마감시황] 코스피, 외인·기관 쌍끌이에 4%대 급등…코스닥도 8%대 올라",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T07:54:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127164842093"
-    },
-    {
-     "title": "외국인 1.1조원 순매수에 코스피 4915…코스닥 8.13% 급등",
-     "press": "smarttimes.co.kr",
-     "publishedAt": "2026-11-27T07:54:00.000Z",
-     "link": "http://www.smarttimes.co.kr/news/articleView.html?idxno=50994"
-    },
-    {
-     "title": "[증시 인싸잇] 코스피 4%·코스닥 8% ↑... 외국인 매수세에 증시 동반 ...",
-     "press": "mediawatch.kr",
-     "publishedAt": "2026-11-27T07:52:00.000Z",
-     "link": "https://www.mediawatch.kr/news/article.html?no=261913"
-    }
-   ]
-  },
-  {
-   "keyword": "이용철 인사청문보고서 채택",
-   "sources": [
-    "signal.bz",
-    "daum"
-   ],
-   "articles90": 72,
-   "recent20": 25,
-   "press": 46,
-   "firstArticleAt": "2026-11-27T06:53:00.000Z",
+   "articles90": 64,
+   "recent20": 13,
+   "press": 49,
+   "firstArticleAt": "2026-11-27T06:46:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "국힘, 이용철 청문보고서 與 주도 채택에 \"이 대통령, 지명 철회하라\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T07:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350058?sid=100"
+     "title": "與주도 이용철 청문보고서 채택…국힘 \"李 공소취소 급한가\"(종합)",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T08:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416701?sid=100"
     },
     {
-     "title": "이용철 법무장관 후보 청문보고서 채택…국힘 퇴장",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-27T07:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165937?sid=100"
+     "title": "법사위, 이용철 법무 청문보고서 與 주도 채택...KBS사장 임명 수순",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-27T08:02:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106626"
     },
     {
-     "title": "'이용철 법무 청문보고서' 與 주도 채택",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-27T07:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001079165?sid=100"
+     "title": "野 “공소취소 선포식”…與 이용철 청문보고서 채택 강행에 반발",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-27T08:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003704010?sid=100"
     }
    ]
   },
   {
    "keyword": "학교 급식 차질",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 46,
+   "articles90": 45,
    "recent20": 4,
-   "press": 33,
-   "firstArticleAt": "2026-11-27T06:32:00.000Z",
+   "press": 32,
+   "firstArticleAt": "2026-11-27T06:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "학교 비정규직 노동자 오늘 총파업…학교 3곳 중 1곳꼴로 급식 차질",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-27T08:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207857?sid=102"
+    },
+    {
+     "title": "\"오늘은 빵이 점심\"…문 닫힌 급식실·돌봄교실 [짤e몽땅]",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-27T08:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980189?sid=102"
+    },
     {
      "title": "비정규직 총파업에 충청권 급식·돌봄 '차질'… 대체식·현장학습 대응",
      "press": "daejonilbo.com",
      "publishedAt": "2026-11-27T07:49:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/656/0000193750?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "황교안 내란선동 구형",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 35,
+   "recent20": 9,
+   "press": 30,
+   "firstArticleAt": "2026-11-27T07:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "황교안이 체포요청한 ‘이석기 판례’로 황교안 겨눈 특검…징역 10년 ...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-27T08:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834329?sid=102"
     },
     {
-     "title": "학교 비정규직 총파업에 급식 차질…전국 학교 32% 대체식·급식 중단",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-27T07:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703999?sid=102"
+     "title": "특검, 황교안에 이석기 법리 대며 ‘징역 10년’ 구형…황 측 “단순한...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-27T08:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061553?sid=102"
     },
     {
-     "title": "최저임금보다 낮은 기본급, 급식실이 멈춘 이유",
-     "press": "newscham.net",
-     "publishedAt": "2026-11-27T07:42:00.000Z",
-     "link": "https://newscham.net/130233/"
+     "title": "특검, '내란 선동 혐의' 황교안 징역 10년 구형",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T08:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439057?sid=102"
     }
    ]
   },
   {
    "keyword": "박홍근",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 37,
-   "recent20": 6,
-   "press": 27,
-   "firstArticleAt": "2026-11-27T06:26:00.000Z",
+   "recent20": 7,
+   "press": 26,
+   "firstArticleAt": "2026-11-27T06:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[포토] 질의 답변하는 박홍근 장관",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-27T08:02:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452746"
+    },
+    {
+     "title": "[포토] 답변하는 박홍근 기획예산처 장관",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-27T08:00:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452745"
+    },
     {
      "title": "“법사위는 법사위 답게 하라” 與 서영교에 목청 높인 박홍근",
      "press": "sedaily.com",
      "publishedAt": "2026-11-27T07:50:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004686974?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "장선익 사장 승진",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 2,
+   "press": 25,
+   "firstArticleAt": "2026-11-27T06:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "동국제강 ‘오너 4세’ 장선익, 사장 승진…경영부문 총괄",
+     "press": "ceoscoredaily.com",
+     "publishedAt": "2026-11-27T07:56:00.000Z",
+     "link": "https://www.ceoscoredaily.com/page/view/2026112716530757242"
     },
     {
-     "title": "박홍근 \"미래기금, 연기금투자풀에 일정 기간 맡기는 방향 검토\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-27T07:48:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326753/?sc=Naver"
+     "title": "동국제강그룹, 오너 4세 장선익 사장 승진…경영승계 속도",
+     "press": "businessplus.kr",
+     "publishedAt": "2026-11-27T07:52:00.000Z",
+     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120654"
     },
     {
-     "title": "서영교·박홍근 충돌...\"법사위가 상원?\" vs \"충격적\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T07:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439042?sid=100"
+     "title": "동국제강 오너 4세 장선익, 사장 승진… 경영부문 이끈다",
+     "press": "the-biz.co.kr",
+     "publishedAt": "2026-11-27T07:36:00.000Z",
+     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=732326"
     }
    ]
   },
   {
    "keyword": "발언하는 이재명 대통령",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 18,
+   "articles90": 20,
    "recent20": 7,
-   "press": 16,
+   "press": 17,
    "firstArticleAt": "2026-11-27T06:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "“‘집 팔고 주식 사라’고 부추겼던 이재명 대통령, 지금 무슨 생각할...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-27T07:58:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178412"
+    },
+    {
+     "title": "이 대통령 “내란 책임자에 합당한 책임 물을 때 완전한 내란 종식…불...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-27T07:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485566?sid=100"
+    },
+    {
      "title": "李대통령 \"내란 책임자에 합당한 책임 물어야\"…사회 개혁 강조",
      "press": "hankyung.com",
      "publishedAt": "2026-11-27T07:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005359105?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "학교 비정규직 총파업 발생",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 5,
+   "press": 12,
+   "firstArticleAt": "2026-11-27T06:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "급식·돌봄 '학교 비정규직' 총파업 동시다발 집회…처우개선 촉구",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T08:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468277?sid=102"
     },
     {
-     "title": "李대통령 \"12·3 내란 책임자에 합당한 책임 물을 때 완전한 내란 종식\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T07:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314771?sid=100"
-    },
-    {
-     "title": "李대통령 \"내란, 책임 물어야 완전 종식…광장 요구, 삶의 변화로\"",
+     "title": "\"방학은 생계 절벽, 일할수록 골병\"…여의도 메운 학교비정규직의 절규",
      "press": "ajunews.com",
+     "publishedAt": "2026-11-27T07:54:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127163229028"
+    },
+    {
+     "title": "임종식 경북교육감, 학교급식 파업 현장 점검",
+     "press": "sisafocus.co.kr",
      "publishedAt": "2026-11-27T07:50:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127163620045"
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=368144"
     }
    ]
   },
   {
    "keyword": "한성숙 총리 주택 회의",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 4,
-   "press": 8,
+   "articles90": 26,
+   "recent20": 5,
+   "press": 11,
    "firstArticleAt": "2026-11-27T07:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "韓총리 \"연말 주택 착공 총력전…공급 실적 국민에 투명하게 공개\"",
-     "press": "news.einfomax.co.kr",
+     "title": "한 총리 \"서울 주택시장 하향 안정 지표 강화...주택 공급 꾸준히\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T08:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439056?sid=100"
+    },
+    {
+     "title": "정부, 연말 주택공급 속도 낸다...내년 착공도 선제적 준비",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-27T08:00:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73690"
+    },
+    {
+     "title": "한 총리 “주택시장 하향 지표 강화…향후 공급여건도 점차 개선”",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T07:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416696?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "신태일",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T06:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'미성년자 성착취 방송' 신태일, 2심서도 실형…징역 6년 유지",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-27T07:56:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848674"
+    },
+    {
+     "title": "‘미성년자 성착취 생방송’ BJ 신태일, 2심도 징역 6년",
+     "press": "biz.chosun.com",
      "publishedAt": "2026-11-27T07:52:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4447000"
+     "link": "https://n.news.naver.com/mnews/article/366/0001207853?sid=102"
     },
     {
-     "title": "한 총리 \"올 주택공급 목표 달성에 남은 기간 총력 다하라\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-27T07:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214732?sid=100"
+     "title": "[속보] '미성년자 성착취물 생중계' BJ 신태일, 항소심도 징역 6년",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-27T07:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000494024"
+    }
+   ]
+  },
+  {
+   "keyword": "최휘영",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T06:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'기습 교체' 보도에 최휘영 \"오보\"…이재명 대통령 \"명예훼손, 정정해주...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-27T07:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522813?sid=100"
     },
     {
-     "title": "韓총리 \"올해 주택공급 목표 달성 총력…내년 준비도 서둘러야\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T07:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468256?sid=100"
+     "title": "‘교체 기습통보’ 주장에 최휘영 “납득 안돼…한참 전에 알아” 발끈",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-27T07:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686961?sid=103"
+    },
+    {
+     "title": "'최휘영 교체 기습 통보' 보도에… 崔 \"사실무근\", 李 대통령 \"명예훼손...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-27T07:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968185?sid=100"
     }
    ]
   },
   {
    "keyword": "최민희 징계",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T06:32:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-27T06:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -238,66 +365,34 @@
    ]
   },
   {
-   "keyword": "재혼 황후 신민아 시즌2 기대!",
+   "keyword": "신임 해병대 장교들",
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T06:32:00.000Z",
+   "articles90": 18,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T06:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "신민아 \"K-로판의 출발점, 왕관의 무게 견뎌야 했죠\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T07:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468201?sid=103"
+     "title": "해군·해병대 사관후보생 141기 110명 임관… 광복군·참전용사 후손 19...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T07:58:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127001282"
     },
     {
-     "title": "'재혼 황후' 신민아 \"시즌2 만들어져야…제가 없으면 안되죠\" [인터뷰M]",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-27T07:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000329367"
+     "title": "제141기 해군·해병대 신임 장교 110명 임관…\"해양 수호 첫발\"",
+     "press": "news.lghellovision.net",
+     "publishedAt": "2026-11-27T07:58:00.000Z",
+     "link": "http://news.lghellovision.net/news/articleView.html?idxno=564068"
     },
     {
-     "title": "신민아·이종석 '재혼 황후' 종영…전 세계가 주목한 K-로판",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-27T06:54:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=218849"
-    }
-   ]
-  },
-  {
-   "keyword": "최휘영",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T06:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘교체 기습통보’ 주장에 최휘영 “납득 안돼…한참 전에 알아” 발끈",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-27T07:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686961?sid=103"
-    },
-    {
-     "title": "'최휘영 교체 기습 통보' 보도에… 崔 \"사실무근\", 李 대통령 \"명예훼손...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-27T07:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968185?sid=100"
-    },
-    {
-     "title": "李대통령, '최휘영 기습교체' 보도에 \"사실 맞춰 정정하길\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-27T07:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848946?sid=100"
+     "title": "임관사령장 받은 신임 장교들의 힘찬 경례",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T07:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314690?sid=102"
     }
    ]
   },
@@ -307,7 +402,7 @@
     "daum"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-27T06:36:00.000Z",
    "exclusive": false,
@@ -332,46 +427,50 @@
      "link": "https://n.news.naver.com/mnews/article/033/0000053681?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "신임 해군 해병대 장교들",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 21,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-27T06:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "임관사령장 받은 신임 장교들의 힘찬 경례",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T07:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314690?sid=102"
-    },
-    {
-     "title": "임관 후 첫 경례하는 신임 해군·해병대 장교들",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T07:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314688?sid=102"
-    },
-    {
-     "title": "힘차게 경례하는 신임 해군·해병대 장교들",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T07:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314678?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1885,
-  "matched": 931,
-  "avgLeadMin": 614,
+  "flagged": 1891,
+  "matched": 937,
+  "avgLeadMin": 611,
   "recent": [
+   {
+    "keyword": "버스",
+    "hitKeyword": "미스 유니버스 베트남 왕관 박탈",
+    "hitAt": "2026-11-27T17:00:00+09:00",
+    "leadMin": 628
+   },
+   {
+    "keyword": "학교급식 빵으로 대체",
+    "hitKeyword": "학교급식 파업 영향",
+    "hitAt": "2026-11-27T17:00:00+09:00",
+    "leadMin": 437
+   },
+   {
+    "keyword": "김정관, 베트남 면담",
+    "hitKeyword": "미스 유니버스 베트남 왕관 박탈",
+    "hitAt": "2026-11-27T17:00:00+09:00",
+    "leadMin": 156
+   },
+   {
+    "keyword": "코스피 코스닥 급등",
+    "hitKeyword": "코스피 코스닥 급등",
+    "hitAt": "2026-11-27T17:00:00+09:00",
+    "leadMin": 45
+   },
+   {
+    "keyword": "코스피 4.34% 상승 4915.68 마감",
+    "hitKeyword": "코스피 코스닥 급등",
+    "hitAt": "2026-11-27T17:00:00+09:00",
+    "leadMin": 35
+   },
+   {
+    "keyword": "코스피 급등",
+    "hitKeyword": "코스피 코스닥 급등",
+    "hitAt": "2026-11-27T17:00:00+09:00",
+    "leadMin": 5
+   },
    {
     "keyword": "수능 부정신고 5억 포상",
     "hitKeyword": "수능 부정행위 신고 포상",
@@ -395,42 +494,6 @@
     "hitKeyword": "학교 비정규직 파업",
     "hitAt": "2026-11-27T16:30:00+09:00",
     "leadMin": 25
-   },
-   {
-    "keyword": "신태일",
-    "hitKeyword": "신태일 미성년자 성 착취",
-    "hitAt": "2026-11-27T16:30:00+09:00",
-    "leadMin": 25
-   },
-   {
-    "keyword": "유승민 FIFA 서한 정관 충돌",
-    "hitKeyword": "FIFA AFC 방한",
-    "hitAt": "2026-11-27T16:00:00+09:00",
-    "leadMin": 4190
-   },
-   {
-    "keyword": "FIFA·AFC 12월 방한",
-    "hitKeyword": "FIFA AFC 방한",
-    "hitAt": "2026-11-27T16:00:00+09:00",
-    "leadMin": 15
-   },
-   {
-    "keyword": "학교 비정규직 총파업에",
-    "hitKeyword": "비정규직 파업 대체급식",
-    "hitAt": "2026-11-27T15:30:00+09:00",
-    "leadMin": 186
-   },
-   {
-    "keyword": "학교 비정규직 총파업 진행",
-    "hitKeyword": "비정규직 파업 대체급식",
-    "hitAt": "2026-11-27T15:30:00+09:00",
-    "leadMin": 66
-   },
-   {
-    "keyword": "학교 비정규직 총파업",
-    "hitKeyword": "비정규직 파업 대체급식",
-    "hitAt": "2026-11-27T15:30:00+09:00",
-    "leadMin": 46
    }
   ]
  }
