@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T11:16:30.137Z",
+ "builtAt": "2026-11-27T11:26:33.752Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "최민희",
    "sources": [
     "google"
    ],
-   "articles90": 54,
-   "recent20": 7,
-   "press": 45,
-   "firstArticleAt": "2026-11-27T09:47:00.000Z",
+   "articles90": 46,
+   "recent20": 8,
+   "press": 38,
+   "firstArticleAt": "2026-11-27T09:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최민희 ‘당원권 2년 정지’ 징계에 계파 갈등 폭발(종합)",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-27T11:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003704065?sid=100"
+     "title": "최민희 '당원권 정지 2년' 중징계. 친청계 발칵",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-27T11:18:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239991"
     },
     {
-     "title": "\"최민희, 당원권 정지 2년\"…김민석 청원도 심사",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-27T11:12:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545247"
+     "title": "최민희 '당원자격정지 2년' 중징계 확정될까…재심서 감경 가능성 주목",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T11:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314951?sid=100"
     },
     {
-     "title": "최민희 ‘당원 자격정지 2년’ 확정 땐 28년 총선 출마 불가능···계파...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-27T11:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485583?sid=100"
+     "title": "[뉴스프라임] 최민희, 당원 자격정지 2년 중징계…\"수용 불가\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T11:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930670?sid=100"
     }
    ]
   },
@@ -48,44 +48,50 @@
     "signal.bz"
    ],
    "articles90": 13,
-   "recent20": 1,
+   "recent20": 2,
    "press": 13,
-   "firstArticleAt": "2026-11-27T09:56:00.000Z",
+   "firstArticleAt": "2026-11-27T10:01:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "선관위특검, 노태악 추가 압수수색…선관위 증거인멸 정황 포착(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T11:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468477?sid=102"
+    },
+    {
+     "title": "선관위 특검, '공추비 부당 지급 의혹' 노태악 추가 압수수색",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-27T11:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160435?sid=102"
+    },
     {
      "title": "선관위 특검, ‘공추비 부당 지급 의혹’ 노태악 2차 압수수색",
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-27T11:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001887908?sid=102"
-    },
-    {
-     "title": "선관위 특검, '공추비 의혹' 노태악 전 위원장 압수수색",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-27T10:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193763?sid=102"
-    },
-    {
-     "title": "특검, 노태악 휴대전화 추가 압수수색…공명선거추진활동비 지급 경위 ...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-27T10:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178701?sid=102"
     }
    ]
   },
   {
-   "keyword": "박홍근 법사위 충돌",
+   "keyword": "서영교·박홍근 법사위 충돌",
    "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 10,
-   "recent20": 2,
+   "recent20": 3,
    "press": 9,
-   "firstArticleAt": "2026-11-27T09:55:00.000Z",
+   "firstArticleAt": "2026-11-27T10:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "서영교 법사위원장 \"질문 막지 마라\" vs 박홍근 장관 \"고압적\" 당정 충돌",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-27T11:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193765?sid=100"
+    },
     {
      "title": "“여기가 상원인가” “이런 장관 처음”…박홍근·서영교 與끼리 충돌",
      "press": "donga.com",
@@ -97,12 +103,6 @@
      "press": "hankyung.com",
      "publishedAt": "2026-11-27T11:09:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005359231?sid=100"
-    },
-    {
-     "title": "“법사위는 법사위답게만” 박홍근에 與도 발끈…때아닌 당정 충돌",
-     "press": "segye.com",
-     "publishedAt": "2026-11-27T10:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178702?sid=100"
     }
    ]
   },
@@ -111,10 +111,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 2,
+   "articles90": 6,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-27T09:52:00.000Z",
+   "firstArticleAt": "2026-11-27T09:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -141,16 +141,21 @@
   {
    "keyword": "신상훈 제네시스 대상 수상",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-27T10:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[핌in현장] 군 복귀 첫해 KPGA 대상 품은 신상훈…상금왕 장유빈, 신인상...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T11:19:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127001291"
+    },
     {
      "title": "‘예비역의 힘’ 전역 후 리그 지배한 신상훈, 내달 PGA투어 직행 도전",
      "press": "donga.com",
@@ -162,12 +167,70 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-27T10:32:00.000Z",
      "link": "https://m.sports.naver.com/golf/article/009/0005770153"
+    }
+   ]
+  },
+  {
+   "keyword": "김이현",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T10:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“거기선 못 이룬 챔피언 꼭 되길…” 19세 복싱 유망주 김이현, 뺑소니...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-27T11:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178708?sid=102"
     },
     {
-     "title": "'생애 첫 KPGA 제네시스 대상' 신상훈 \"더 높은 곳으로 향할 것\"",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-27T10:28:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888217"
+     "title": "스무살 생일 앞두고…복싱 유망주 김이현, 뺑소니 사고로 사망",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T11:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359232?sid=102"
+    },
+    {
+     "title": "스무 번째 생일 11일 앞두고...복싱 유망주 김이현, 뺑소니 사고로 사망",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T10:36:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127001365"
+    }
+   ]
+  },
+  {
+   "keyword": "이혼 후에도 사랑했다",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T10:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LJ, ‘전처’ 이선정과 이혼 14년 만 고백 “이혼 후에도 사랑했다”",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-27T11:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001152079"
+    },
+    {
+     "title": "LJ \"전부인 이선정과 이혼할 때도 사랑..친구처럼 지내는 상상\" 15년 만에...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-27T10:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490723"
+    },
+    {
+     "title": "LJ \"이선정과 이혼 당시에도 사랑했다\"..15년 만에 고백한 속마음",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-27T10:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004470320"
     }
    ]
   },
@@ -202,75 +265,11 @@
      "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93819"
     }
    ]
-  },
-  {
-   "keyword": "오세훈",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T09:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국힘 행안위원 \"與, '오세훈 죽이기' 억지 고발·하명 수사 규탄\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T10:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350247?sid=100"
-    },
-    {
-     "title": "경찰 조사 오세훈, 왜?",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-27T10:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368925?sid=115"
-    },
-    {
-     "title": "野 행안위 \"민주당, '오세훈 죽이기' 억지고발…경찰 길들이기 중단하라...",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-27T09:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653879?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "베트남 당 중앙정책전략위원장",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-27T10:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한성숙 국무총리, 베트남 당 중앙정책전략위원장 접견",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T10:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350241?sid=100"
-    },
-    {
-     "title": "韓총리, 베트남 당 중앙정책전략위원장 접견…\"양국 교류·협력 확대\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T10:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350233?sid=100"
-    },
-    {
-     "title": "韓총리, 베트남 당 고위 인사 만나 \"상호 신뢰 심화 기대\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T10:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468452?sid=100"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1937,
+  "flagged": 1940,
   "matched": 974,
   "avgLeadMin": 656,
   "recent": [
