@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T13:57:26.485Z",
+ "builtAt": "2026-11-27T14:07:30.099Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,21 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "최민희 중징계 의결에",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-27T12:33:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-27T12:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“이재명은 탄핵 반대” 최민희, 당원권 정지 2년 중징계…“재심 신청...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T13:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303000?sid=100"
+    },
     {
      "title": "[포커스] 최민희 '중징계' 결론...초유의 법사위-장관 충돌",
      "press": "ytn.co.kr",
@@ -34,56 +39,18 @@
      "press": "munhwa.com",
      "publishedAt": "2026-11-27T13:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002836117?sid=100"
-    },
-    {
-     "title": "강대규 \"최민희, 재심 신청해도 총선 못 나갈 듯\"[일타뉴스]",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-27T13:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042805?sid=100"
     }
    ]
   },
   {
-   "keyword": "대한항공 KB손해보험 승리",
+   "keyword": "GS칼텍스 선두 탈환",
    "sources": [
     "daum"
    ],
-   "articles90": 16,
+   "articles90": 5,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T12:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "외국인 선수 없이 대한항공 끝까지 괴롭혔다…패배에도 희망 본 라미레...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-27T13:22:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/117/0004128726"
-    },
-    {
-     "title": "'케트진스키 25점' 대한항공, KB손해보험 3-1 제압…3연승 질주",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-27T12:52:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110128963868"
-    },
-    {
-     "title": "대한항공, '국내 선수만 뛴' KB손보 꺾고 3연승…여자부 GS 5연승(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T12:46:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/421/0009314975"
-    }
-   ]
-  },
-  {
-   "keyword": "GS는 선두 탈환",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T12:32:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-27T12:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,76 +75,14 @@
    ]
   },
   {
-   "keyword": "야간근로 3일 제한",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T12:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정부, \"연속 야간근무는 최대 3일만\" 지침 낸다… 새벽배송은 제외",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-27T13:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968243?sid=102"
-    },
-    {
-     "title": "정부, 연속 야간노동 3일 이하 제한토록 권고 추진…새벽배송 업무는 제...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-27T13:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485586?sid=102"
-    },
-    {
-     "title": "정부, 연속 야간근로 3일 이하 권고 추진…새벽배송은 제외",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-27T13:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004687062?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김범수 무죄 확정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T12:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "카카오 경영 비전 탄력 받나…공소청 상고 포기로 김범수 무죄 확정",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-27T13:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002250200?sid=105"
-    },
-    {
-     "title": "김범수, SM 시세조종 혐의 무죄 확정… 공소청 상고 포기",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-27T13:26:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452802"
-    },
-    {
-     "title": "김범수 카카오 창업자 'SM 시세조종' 무죄 확정...3년 사법 리스크 종결",
-     "press": "newsbrite.net",
-     "publishedAt": "2026-11-27T12:48:00.000Z",
-     "link": "http://www.newsbrite.net/news/articleView.html?idxno=201819"
-    }
-   ]
-  },
-  {
    "keyword": "굿파트너2",
    "sources": [
+    "signal.bz",
+    "nate",
     "google"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-27T12:40:00.000Z",
    "exclusive": false,
@@ -204,44 +109,126 @@
    ]
   },
   {
-   "keyword": "서영교 박홍근 충돌",
+   "keyword": "삼성생명 신한은행 공동 1위",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T13:06:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T12:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포커스] 최민희 '중징계' 결론...초유의 법사위-장관 충돌",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T13:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439164?sid=100"
+     "title": "‘신한은행 또 잡았는데’ 하상윤 감독 “우리가 우위? 절대 아냐”…순...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-27T13:31:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/468/0001283972"
     },
     {
-     "title": "초유의 법사위-장관 충돌...\"상원이냐\" vs \"이런 장관 처음\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T13:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439162?sid=100"
+     "title": "'이해란 21득점' 용인 삼성생명, 인천 신한은행 또 잡고 '공동 1위' 점프",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-27T13:30:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/076/0004470341"
     },
     {
-     "title": "박홍근 “법사위가 상원이냐” VS 서영교 “이런 장관 처음봤다”",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-27T13:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053689?sid=100"
+     "title": "“미치겠어요” 최윤아 감독, 삼성생명전 ‘8연패’에 이 악물었다…“...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-27T12:54:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/468/0001283967"
+    }
+   ]
+  },
+  {
+   "keyword": "박정수",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T12:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘25년째 사실혼’ 박정수, ‘정경호父’ ♥정을영에 “사랑해”..여전...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-27T13:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646250"
+    },
+    {
+     "title": "박정수, 남사친과 여행 전 '사실혼 ♥정경호 父'에 \"사랑해\"…김용건도...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-27T12:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084909"
+    },
+    {
+     "title": "김용건·박정수, 깊이가 다른 반세기 우정",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-27T12:46:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6944283"
+    }
+   ]
+  },
+  {
+   "keyword": "한동훈 자료유출 압수수색에",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T12:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한동훈 의혹 압수수색에 본인은 제외…수사 쟁점은?",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T14:02:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288142"
+    },
+    {
+     "title": "경찰, ‘한동훈 자료 유출 의혹’ 법무부·공소청 압수수색",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T13:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303002?sid=102"
+    },
+    {
+     "title": "한동훈 '기소계획서 유출' 의혹…경찰, 법무부·공소청 압수수색",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-27T12:52:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=321159"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1976,
-  "matched": 981,
-  "avgLeadMin": 659,
+  "flagged": 1978,
+  "matched": 984,
+  "avgLeadMin": 657,
   "recent": [
+   {
+    "keyword": "그냥 사람 친구",
+    "hitKeyword": "그냥사람친구 이서진",
+    "hitAt": "2026-11-27T23:00:00+09:00",
+    "leadMin": 747
+   },
+   {
+    "keyword": "SK하이닉스 자사주 매입 2배 확대",
+    "hitKeyword": "95년생 SK하이닉스 투자",
+    "hitAt": "2026-11-27T23:00:00+09:00",
+    "leadMin": 53
+   },
+   {
+    "keyword": "이서진 한지민 외모 지적",
+    "hitKeyword": "그냥사람친구 이서진",
+    "hitAt": "2026-11-27T23:00:00+09:00",
+    "leadMin": 13
+   },
    {
     "keyword": "철도노조 준법투쟁",
     "hitKeyword": "철도노조 준법투쟁 대란",
@@ -283,24 +270,6 @@
     "hitKeyword": "국민연금 3분기 수익률",
     "hitAt": "2026-11-27T21:00:00+09:00",
     "leadMin": 1944
-   },
-   {
-    "keyword": "최교진 교육부 장관 사의",
-    "hitKeyword": "비정규직 파업 교육부 대응",
-    "hitAt": "2026-11-27T20:00:00+09:00",
-    "leadMin": 7544
-   },
-   {
-    "keyword": "최교진 교육부 장관 면직",
-    "hitKeyword": "비정규직 파업 교육부 대응",
-    "hitAt": "2026-11-27T20:00:00+09:00",
-    "leadMin": 7192
-   },
-   {
-    "keyword": "카카오",
-    "hitKeyword": "카카오 김범수 무죄 확정",
-    "hitAt": "2026-11-27T20:00:00+09:00",
-    "leadMin": 6093
    }
   ]
  }
