@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T02:23:20.250Z",
+ "builtAt": "2026-11-27T02:33:24.108Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,97 +13,100 @@
   {
    "keyword": "코스닥 매수 사이드카 발동",
    "sources": [
+    "signal.bz",
     "nate",
     "daum"
    ],
-   "articles90": 71,
-   "recent20": 12,
-   "press": 59,
+   "articles90": 75,
+   "recent20": 11,
+   "press": 61,
    "firstArticleAt": "2026-11-27T01:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "가파른 상승세 보이는 코스닥",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T02:17:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127000498"
+     "title": "증안펀드 기대에 코스닥 5%대 급등…코스피 4800선 회복",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416524?sid=101"
     },
     {
-     "title": "코스닥 5% 급등...사이드카 발동",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T02:17:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127000504"
+     "title": "코스피 장중 4800선 회복…코스닥도 6%대 급등",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-27T02:24:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087224"
     },
     {
-     "title": "5% 급등으로 사이드카 발동한 코스닥",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T02:17:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127000502"
+     "title": "증안펀드 기대에 살아난 증시…코스닥 매수 사이드카",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-27T02:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165889?sid=101"
     }
    ]
   },
   {
    "keyword": "한동훈 자료 유출 의혹 압수수색",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 60,
-   "recent20": 10,
-   "press": 53,
-   "firstArticleAt": "2026-11-27T00:56:00.000Z",
+   "articles90": 56,
+   "recent20": 8,
+   "press": 49,
+   "firstArticleAt": "2026-11-27T01:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경찰, 한동훈 '검찰 수사자료 유출 의혹' 강제수사…법무부·공소청 압...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-27T02:30:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904663"
+    },
+    {
+     "title": "경찰, 한동훈 수사자료 유출 의혹 강제수사… 법무부·공소청 압수수색",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-27T02:24:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452610"
+    },
     {
      "title": "경찰, '한동훈 자료유출 의혹' 수사 본격화...법무부 등 압수수색",
      "press": "news.bbsi.co.kr",
      "publishedAt": "2026-11-27T02:22:00.000Z",
      "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121370"
-    },
-    {
-     "title": "경찰, '한동훈 자료 유출 의혹' 법무부·공소청 등 압수수색",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T02:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438864?sid=102"
-    },
-    {
-     "title": "한동훈, ‘수사자료 유출’ 경찰 압수수색에 “국무회의서 잘못된 교육...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-27T02:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178598?sid=100"
     }
    ]
   },
   {
    "keyword": "ai 에이전트",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 49,
-   "recent20": 10,
-   "press": 40,
-   "firstArticleAt": "2026-11-27T00:54:00.000Z",
+   "articles90": 50,
+   "recent20": 11,
+   "press": 41,
+   "firstArticleAt": "2026-11-27T01:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "벤츠 코리아, 국내 스타트업과 AI 기반 미래 모빌리티 기술 확보 나서",
-     "press": "dizzotv.com",
-     "publishedAt": "2026-11-27T02:22:00.000Z",
-     "link": "https://www.dizzotv.com/site/data/html_dir/2026/11/27/2026112780056.html"
+     "title": "솔트웨어, AWS와 금융권 AI 전환 지원…생성형 AI부터 보안 자동화까지",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-27T02:30:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=567048"
     },
     {
-     "title": "빅테크플러스, 코리아 핀테크위크 2026서 대화형 AI 부동산 서비스 선봬",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-27T02:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061494?sid=105"
+     "title": "\"신약 개발 돕는 AI연구원이 온다\"…히츠, 바이오 AI에이전트 공개",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-27T02:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447351?sid=101"
     },
     {
-     "title": "래블업, 'AI:GO 2.0' 출시...개인 PC에서 파일 읽고 수정하는 AI 에이전트",
-     "press": "the-stock.kr",
-     "publishedAt": "2026-11-27T02:16:00.000Z",
-     "link": "https://www.the-stock.kr/news/articleView.html?idxno=33940"
+     "title": "우길수 아톤 대표 \"AI·양자 시대, 금융보안 과제…공격 대비 필요\"",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-27T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160243?sid=105"
     }
    ]
   },
@@ -112,94 +115,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 35,
-   "recent20": 4,
-   "press": 33,
+   "articles90": 38,
+   "recent20": 6,
+   "press": 37,
    "firstArticleAt": "2026-11-27T01:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李 대통령, 조작기소 특검 이르면 오늘, 늦어도 29일 임명… 안 하면 연...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-27T02:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012100?sid=100"
+     "title": "李대통령 지지율 41%…조희대 탄핵 '반대' 42% vs '찬성' 35% [한국갤럽]",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T02:30:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127000557"
     },
     {
-     "title": "李 지지율 41%…민주 37%·국힘 30% [갤럽]",
+     "title": "이 대통령 지지율 41%…'조희대 탄핵 반대'가 오차 밖 앞서 [한국갤럽]",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-27T02:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980147?sid=100"
+    },
+    {
+     "title": "李대통령 지지율 41%로 7주째 횡보…민주 37%·국힘 30%[한국갤럽]",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-27T02:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568423?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "김대기 관저이전 예산전용",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 31,
+   "recent20": 7,
+   "press": 24,
+   "firstArticleAt": "2026-11-27T01:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'尹관저이전 예산전용' 김대기·윤재순·김오진, 1심서 징역형 집행유예",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T02:32:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653888"
+    },
+    {
+     "title": "‘종합특검 1호 기소’ 김대기 전 비서실장, 징역형 집행유예…이상민...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-27T02:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703867?sid=102"
+    },
+    {
+     "title": "‘尹 관저 예산 전용 혐의’ 김대기 前 비서실장 1심 징역형 집유",
      "press": "biz.chosun.com",
-     "publishedAt": "2026-11-27T02:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207752?sid=100"
-    },
-    {
-     "title": "李대통령 지지율 41%, 2주 연속 상승…부정평가 50%[갤럽]",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-27T02:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610749?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 출발 상승",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 26,
-   "recent20": 2,
-   "press": 25,
-   "firstArticleAt": "2026-11-27T00:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "증안펀드 기대·외국인 매수에 코스닥 6%대 급등…코스피 4,800대",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-27T02:14:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446944"
-    },
-    {
-     "title": "코스피 장중 상승폭 커져 2% 안팎 강세…코스닥 6%대 급등",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T02:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467389?sid=101"
-    },
-    {
-     "title": "코스닥 700선 회복하나 ‘매수 사이드카’…코스피도 상승 흐름 [투자36...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-27T01:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729390?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "국가안보실 해킹 2차 피해 대응",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T00:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "안보실, 해킹 2차 피해 방지 점검... 금융권 보안 대응 긴급 소집",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-27T02:18:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=567132"
-    },
-    {
-     "title": "금융정보 유출에 청와대 긴급회의...2차 인증·이상거래 차단 강화",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-27T02:17:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=323366"
-    },
-    {
-     "title": "靑 국가안보실, 금융당국 긴급 소집…해킹 2차 피해 근본 차단",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-27T01:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394967?sid=100"
+     "publishedAt": "2026-11-27T02:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207756?sid=102"
     }
    ]
   },
@@ -208,10 +179,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 14,
+   "articles90": 12,
    "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-27T01:02:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-27T01:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -241,12 +212,18 @@
     "google"
    ],
    "articles90": 11,
-   "recent20": 7,
+   "recent20": 2,
    "press": 11,
-   "firstArticleAt": "2026-11-27T01:50:00.000Z",
+   "firstArticleAt": "2026-11-27T02:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "위세아이텍, 자사주 소각 추진 ··· 주주환원 정책 강화",
+     "press": "datanet.co.kr",
+     "publishedAt": "2026-11-27T02:24:00.000Z",
+     "link": "https://www.datanet.co.kr/news/articleView.html?idxno=300633"
+    },
     {
      "title": "(저PBR 제약바이오)③“제약사, 주주가치 제고 이대론 안된다”",
      "press": "newstomato.com",
@@ -258,22 +235,49 @@
      "press": "breaknews.com",
      "publishedAt": "2026-11-27T02:12:00.000Z",
      "link": "http://www.breaknews.com/1254553"
+    }
+   ]
+  },
+  {
+   "keyword": "정년연장",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 14,
+   "recent20": 7,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T01:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주 정년연장특위, 노사 협의 재개...연내 입법 분수령",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438869?sid=100"
     },
     {
-     "title": "한국예탁결제원, 전자주주총회 운영 효율화 워크숍 개최",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-27T02:10:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2024244"
+     "title": "'65세 정년 연장' 노사 협의 10개월 만에 재개…연내 합의점 찾을까",
+     "press": "kado.net",
+     "publishedAt": "2026-11-27T02:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213830?sid=100"
+    },
+    {
+     "title": "민주당, 노사와 정년연장 막판 조율",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T02:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467422?sid=100"
     }
    ]
   },
   {
    "keyword": "유한양행",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 9,
-   "recent20": 4,
+   "recent20": 3,
    "press": 9,
    "firstArticleAt": "2026-11-27T01:10:00.000Z",
    "exclusive": true,
@@ -300,29 +304,61 @@
    ]
   },
   {
+   "keyword": "코스피 상승 시작",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T01:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이수페타시스 주가, 11월 27일 장중 66,600원 2.62% 상승",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-27T02:20:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=567134"
+    },
+    {
+     "title": "코스닥 사이드카 발동...코스피도 4800선 회복",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T02:17:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127000501"
+    },
+    {
+     "title": "[속보] \"곡소리 코스피에 홀로 웃는다\"…삼성전자 등에 업더니 '29%' 급등",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-27T01:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274171?sid=101"
+    }
+   ]
+  },
+  {
    "keyword": "발언하는 정점식 원내대표",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T00:59:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T01:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "정점식 원내대표 발언",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T02:08:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765066"
-    },
     {
      "title": "환하게 웃는 정점식 국민의힘 원내대표",
      "press": "gukjenews.com",
      "publishedAt": "2026-11-27T02:08:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765069"
+    },
+    {
+     "title": "정점식 원내대표 발언",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T02:08:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765066"
     },
     {
      "title": "발언하는 정점식 원내대표",
@@ -333,13 +369,44 @@
    ]
   },
   {
+   "keyword": "정영란 부산인재개발원장 학력",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T01:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"9급 시험, 고졸 수준\" 전 부산인재개발원장 발언…인권위 진정",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T02:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416517?sid=102"
+    },
+    {
+     "title": "정영란 '9급 공무원 고졸 수준' 발언 논란…충주맨 김선태 \"고졸이 죄지...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-27T02:14:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631303"
+    },
+    {
+     "title": "\"9급 시험이 고졸 수준?\"…정영란 발언에 시민사회단체도 한마디",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-27T01:48:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=321136"
+    }
+   ]
+  },
+  {
    "keyword": "병무청",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 2,
    "press": 4,
    "firstArticleAt": "2026-11-27T01:26:00.000Z",
    "exclusive": false,
@@ -366,34 +433,34 @@
    ]
   },
   {
-   "keyword": "연우 10kg 감량",
+   "keyword": "나인 투 식스",
    "sources": [
     "daum"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-27T01:00:00.000Z",
+   "firstArticleAt": "2026-11-27T01:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "연우, 종일 밥 두 숟갈…10kg 감량 후 두드러기 부작용 \"힘들어서 많이...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-27T02:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000493932"
+     "title": "[영상클립] 박서준·송강·나인우 이어 고수·육성재까지…박민영의 화...",
+     "press": "newsworker.co.kr",
+     "publishedAt": "2026-11-27T02:14:00.000Z",
+     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=516531"
     },
     {
-     "title": "“하루 밥 두 숟갈로 두 달에 10kg 뺐더니”… 연우가 겪은 끔찍한 부작...",
-     "press": "kormedi.com",
-     "publishedAt": "2026-11-27T02:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/296/0000107891?sid=103"
+     "title": "박민영·육성재 가까워졌지만…'나인 투 식스' 시청률 하락 '3.1%'",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T02:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/018/0006416510"
     },
     {
-     "title": "연우, 하루 밥 두 숟갈로 10kg 감량…“전신 두드러기에 많이 울었다”...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-27T01:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543871"
+     "title": "‘나인 투 식스’ 김미경, 딸 결혼에 진심인 현실 엄마…박민영과 찰떡...",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-27T01:40:00.000Z",
+     "link": "https://swtvnews.com/news/newsview.php?ncode=1065574226291353"
     }
    ]
   },
@@ -416,90 +483,82 @@
      "link": "https://www.newspim.com/news/view/20261127000332"
     },
     {
-     "title": "웃으며 인사하는 원민경 장관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T01:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313715?sid=102"
-    },
-    {
      "title": "인신매매등 방지 방안 논의하는 원민경 성평등가족부 장관 [TF사진관]",
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-27T01:25:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000556168?sid=102"
+    },
+    {
+     "title": "웃으며 인사하는 원민경 장관",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T01:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009313715?sid=102"
     }
    ]
   },
   {
-   "keyword": "김가영, 스롱 꺾고 준결승행",
+   "keyword": "연우 다이어트 감량",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-27T00:55:00.000Z",
+   "firstArticleAt": "2026-11-27T01:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘당구 여제’ 김가영, 스롱 꺾고 LPBA 준결승행⋯김보미와 격돌",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-27T02:12:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653877"
-    },
-    {
-     "title": "이제 20승까지 단 두 걸음! '당구 여제' 김가영, '라이벌' 스롱 꺾고 준...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-27T01:14:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/076/0004470206"
-    },
-    {
-     "title": "20승 보인다…'당구 여제' 김가영, 라이벌 스롱 꺾고 준결승행→정수빈...",
+     "title": "연우, 종일 밥 두 숟갈…10kg 감량 후 두드러기 부작용 \"힘들어서 많이...",
      "press": "mhnse.com",
-     "publishedAt": "2026-11-27T00:55:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/445/0000493901"
-    }
-   ]
-  },
-  {
-   "keyword": "과학기술인공제회",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T01:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "과학기술인공제회 해킹…주민등록번호 등 회원정보 21만 건 유출",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T01:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302535?sid=105"
+     "publishedAt": "2026-11-27T02:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000493932"
     },
     {
-     "title": "과학기술인공제회 해킹…회원 주민번호·비밀번호 등 개인정보 유출",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-27T01:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490637?sid=105"
+     "title": "“하루 밥 두 숟갈로 두 달에 10kg 뺐더니”… 연우가 겪은 끔찍한 부작...",
+     "press": "kormedi.com",
+     "publishedAt": "2026-11-27T02:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/296/0000107891?sid=103"
     },
     {
-     "title": "주민번호·자택주소까지…과학기술인공제회 해킹으로 16종 개인정보 유...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-27T01:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002250125?sid=105"
+     "title": "연우, 하루 밥 두 숟갈로 10kg 감량…“전신 두드러기에 많이 울었다”...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-27T01:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543871"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1780,
-  "matched": 890,
-  "avgLeadMin": 585,
+  "flagged": 1783,
+  "matched": 894,
+  "avgLeadMin": 608,
   "recent": [
+   {
+    "keyword": "수능 신고 최소 1억 포상",
+    "hitKeyword": "수능 부정행위 신고 포상금",
+    "hitAt": "2026-11-27T11:30:00+09:00",
+    "leadMin": 8161
+   },
+   {
+    "keyword": "수능 신고 포상금 1억",
+    "hitKeyword": "수능 부정행위 신고 포상금",
+    "hitAt": "2026-11-27T11:30:00+09:00",
+    "leadMin": 8080
+   },
+   {
+    "keyword": "수능 부정 신고 포상 최대 5억",
+    "hitKeyword": "수능 부정행위 신고 포상금",
+    "hitAt": "2026-11-27T11:30:00+09:00",
+    "leadMin": 5069
+   },
+   {
+    "keyword": "철도 파업",
+    "hitKeyword": "철도 파업",
+    "hitAt": "2026-11-27T11:30:00+09:00",
+    "leadMin": 1555
+   },
    {
     "keyword": "설인아",
     "hitKeyword": "설인아 무쇠소녀단3",
@@ -535,30 +594,6 @@
     "hitKeyword": "설인아 무쇠소녀단3",
     "hitAt": "2026-11-27T11:00:00+09:00",
     "leadMin": 97
-   },
-   {
-    "keyword": "연우 무쇠소녀단3 눈물",
-    "hitKeyword": "설인아 무쇠소녀단3",
-    "hitAt": "2026-11-27T11:00:00+09:00",
-    "leadMin": 77
-   },
-   {
-    "keyword": "성북구 10대 피의자 송치",
-    "hitKeyword": "성북구 여중생 살해",
-    "hitAt": "2026-11-27T11:00:00+09:00",
-    "leadMin": 17
-   },
-   {
-    "keyword": "문근영 기립성 저혈압 부상",
-    "hitKeyword": "문근영 기립성 저혈압 부상",
-    "hitAt": "2026-11-27T10:30:00+09:00",
-    "leadMin": 57
-   },
-   {
-    "keyword": "삼성전자 배당금 지급일",
-    "hitKeyword": "삼성전자 배당금",
-    "hitAt": "2026-11-27T10:30:00+09:00",
-    "leadMin": 37
    }
   ]
  }
