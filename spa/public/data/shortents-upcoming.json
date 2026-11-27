@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T23:10:21.654Z",
+ "builtAt": "2026-11-27T23:20:24.813Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,29 +16,29 @@
     "nate"
    ],
    "articles90": 17,
-   "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-27T21:46:00.000Z",
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-27T21:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美증시, 간만에 일제히 상승…AI·기술주 반등",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-27T23:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729716?sid=104"
+    },
+    {
+     "title": "메타, AI 기술주 매수 열기에 3%대 상승…주간 수익률 12% 돌파",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-27T23:12:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848718"
+    },
     {
      "title": "뉴욕증시, AI 강세에 일제히 상승… 국제유가는 하락",
      "press": "newscj.com",
      "publishedAt": "2026-11-27T23:08:00.000Z",
      "link": "https://www.newscj.com/news/articleView.html?idxno=3452822"
-    },
-    {
-     "title": "미 증시 3대 지수 일제히 상승…추수감사절 휴장 후 반등 랠리",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-27T23:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485601?sid=101"
-    },
-    {
-     "title": "오라클, 100달러 붕괴 충격 딛고 반등…AI 인프라 투자 부담은 여전",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-27T22:58:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848716"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "nate"
    ],
    "articles90": 12,
-   "recent20": 2,
+   "recent20": 0,
    "press": 12,
    "firstArticleAt": "2026-11-27T21:56:00.000Z",
    "exclusive": false,
@@ -75,44 +75,12 @@
    ]
   },
   {
-   "keyword": "시장",
-   "sources": [
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 10,
-   "press": 10,
-   "firstArticleAt": "2026-11-27T22:55:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "로켓랩, 101번째 우주 비행 완수…소형 위성 발사시장 입지 확대",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-27T23:04:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848717"
-    },
-    {
-     "title": "용인반도체클러스터 수도권 비규제지역 분양시장 다시 살펴보는 수요자...",
-     "press": "geconomy.co.kr",
-     "publishedAt": "2026-11-27T23:02:00.000Z",
-     "link": "https://www.geconomy.co.kr/news/article.html?no=326198"
-    },
-    {
-     "title": "[마켓엑세스] 시장지수 아래에 숨어있는 미국 증시의 새로운 기회",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T23:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416800?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "인터넷우체국 개인정보 유출",
    "sources": [
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 3,
+   "recent20": 2,
    "press": 7,
    "firstArticleAt": "2026-11-27T22:00:00.000Z",
    "exclusive": false,
@@ -143,13 +111,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
    "firstArticleAt": "2026-11-27T22:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이동연, 팬레터 폐기 논란에 '인증샷' 공개…고이 보관된 봉투들",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-27T23:18:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785480"
+    },
     {
      "title": "이동연 “저걸 아직도 갖고 있어?” 모아둔 선물+편지 ‘증거들’ 여론...",
      "press": "newsen.com",
@@ -161,44 +135,38 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-27T22:51:00.000Z",
      "link": "https://m.entertain.naver.com/article/003/0014350418"
-    },
-    {
-     "title": "'팬레터 폐기 논란' 이동연, 2차 사과+보관함 인증 공개하자…여론 급반...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-27T22:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004470381"
     }
    ]
   },
   {
-   "keyword": "부동산",
+   "keyword": "홍민기 전 연인 실종",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T21:50:00.000Z",
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T22:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "강남 부자들도 계산기를 두드리기 시작했다[손바닥부동산]",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T22:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416790?sid=101"
+     "title": "'낙태-폭력 주장' 홍민기 전 연인, 마지막 종적은 마포대교",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-27T23:16:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96108"
     },
     {
-     "title": "\"한강뷰 좋아하는 한국인들\"…뉴욕 부동산 여왕의 뜻밖의 조언 [황정수...",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-27T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359280?sid=104"
+     "title": "“홍민기가 폭행·낙태 종용” 전 연인 실종…마지막 행적은 마포대교",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-27T23:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329396"
     },
     {
-     "title": "\"땅값 10배 뛴다\"며 200억 사기…기획부동산 회장 1심 징역 12년",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468566?sid=102"
+     "title": "폭로·고소 그리고 100일…홍민기 전 연인 실종 ‘아직 밝혀지지 않은 ...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-27T22:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001283978"
     }
    ]
   },
@@ -221,55 +189,55 @@
      "link": "https://m.entertain.naver.com/article/312/0000786549"
     },
     {
-     "title": "이세영, 조롱마저 웃어 넘긴 악녀…\"시즌2서 더 욕 먹고 싶다\" ('재혼황...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-27T22:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786539"
-    },
-    {
      "title": "신민아, 이종석 이어 '이종새'와도 멜로…CG팀에 특별 주문 \"꼭 귀엽길\"...",
      "press": "tenasia.co.kr",
      "publishedAt": "2026-11-27T22:30:00.000Z",
      "link": "https://m.entertain.naver.com/article/312/0000786542"
+    },
+    {
+     "title": "이세영, 조롱마저 웃어 넘긴 악녀…\"시즌2서 더 욕 먹고 싶다\" ('재혼황...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-27T22:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786539"
     }
    ]
   },
   {
-   "keyword": "홍민기 전 연인 실종",
+   "keyword": "트럼프 푸틴 유럽 공격 중단",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-27T21:49:00.000Z",
+   "firstArticleAt": "2026-11-27T22:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“홍민기가 폭행·낙태 종용” 전 연인 실종…마지막 행적은 마포대교",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-27T23:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000329396"
+     "title": "트럼프 \"종전 걸림돌은 푸틴·젤렌스키 증오\"…우크라이나에도 확전 자...",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-27T23:18:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087492"
     },
     {
-     "title": "폭로·고소 그리고 100일…홍민기 전 연인 실종 ‘아직 밝혀지지 않은 ...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-27T22:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001283978"
+     "title": "트럼프 “러·우크라 정상의 증오가 종전 걸림돌”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T22:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303072?sid=104"
     },
     {
-     "title": "홍민기 전 연인 A씨 실종…가족이 새벽에 신고, 경찰 수색 나서",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T21:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001148552"
+     "title": "트럼프 \"러·우크라 정상의 상호 증오가 종전 최대 걸림돌\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T22:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468593?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1973,
+  "flagged": 1974,
   "matched": 973,
   "avgLeadMin": 655,
   "recent": [
