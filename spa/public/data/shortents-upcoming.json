@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T11:56:45.592Z",
+ "builtAt": "2026-11-27T12:06:49.134Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,19 +11,51 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "철도노조 준법투쟁 지연",
+   "keyword": "최민희 당원권 정지",
    "sources": [
     "nate"
    ],
    "articles90": 16,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-27T10:40:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[단독] 공소청, 이화영이 낸 형집행정지 신청 '불허'",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-27T12:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653885?sid=102"
+    },
+    {
+     "title": "민주, 최민희 ‘당원권 정지 2년’…崔 “재심 신청”",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-27T11:58:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=921500"
+    },
+    {
+     "title": "'당원권 2년 정지' 중징계…최민희 \"재심 신청\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T11:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930681?sid=161"
+    }
+   ]
+  },
+  {
+   "keyword": "철도노조 준법투쟁 지연",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 13,
    "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-27T10:29:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-27T10:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "철도노조 준법투쟁...동대구역 최대 1시간 40분 열차 지연",
+     "title": "철도노조 준법투쟁…동대구역 최대 1시간 40분 열차 지연",
      "press": "tbc.co.kr",
      "publishedAt": "2026-11-27T11:50:00.000Z",
      "link": "https://www.tbc.co.kr/news/view?pno=20261127204218AE09276&id=213870"
@@ -43,52 +75,25 @@
    ]
   },
   {
-   "keyword": "최민희 당원권 2년 정지",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 17,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T10:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'당원권 2년 정지' 중징계…최민희 \"재심 신청\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T11:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930681?sid=161"
-    },
-    {
-     "title": "정청래 “최민희가 중징계면 김민석 신천지 해당 행위는?”",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-27T11:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053687?sid=100"
-    },
-    {
-     "title": "최민희 ‘당원권 정지 2년’… 총선 공천까지 막히나, 정청래 “김민석...",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-27T11:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000087168?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "김범수 무죄 확정",
    "sources": [
     "signal.bz",
     "nate",
     "daum"
    ],
-   "articles90": 13,
+   "articles90": 12,
    "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-27T10:27:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-27T10:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "카카오 김범수 'SM 시세조종' 무죄 확정…공소청, 상고 포기",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T12:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930690?sid=102"
+    },
     {
      "title": "김범수, 3년 사법 리스크 털었다…SM 시세조종 의혹 무죄 확정",
      "press": "newsinside.kr",
@@ -100,12 +105,6 @@
      "press": "gukjenews.com",
      "publishedAt": "2026-11-27T11:48:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765718"
-    },
-    {
-     "title": "카카오 SM엔터 인수부터 김범수 무죄 확정까지 '격랑의 3년 9개월'",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-27T11:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001079237?sid=105"
     }
    ]
   },
@@ -115,12 +114,18 @@
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 3,
+   "recent20": 2,
    "press": 10,
-   "firstArticleAt": "2026-11-27T10:36:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-27T10:44:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[단독] 선관위 특검, '공추비 의혹' 노태악 압수수색",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930687?sid=102"
+    },
     {
      "title": "선관위 특검, 노태악 2차 압수수색…'증거인멸 정황'(종합)",
      "press": "news1.kr",
@@ -132,76 +137,6 @@
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-27T11:46:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001207878?sid=102"
-    },
-    {
-     "title": "선관위 특검, 노태악 전 선관위원장 추가 압수수색…증거인멸 정황",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-27T11:42:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2654140"
-    }
-   ]
-  },
-  {
-   "keyword": "이나인페이 해킹 피해",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T10:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "해킹에 뚫린 이나인페이, 금감원 현장점검 착수…코스닥 상장에도 '빨간...",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-27T11:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359235?sid=101"
-    },
-    {
-     "title": "이나인페이, 해킹으로 25억원 피해…금감원 긴급 현장조사",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-27T11:44:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848686"
-    },
-    {
-     "title": "'소액 해외송금업체' 이나인페이 해킹으로 자금 유출 피해, 금감원 현장...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-27T11:40:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453185"
-    }
-   ]
-  },
-  {
-   "keyword": "서영교·박홍근 법사위 충돌",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T10:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"법사위가 상원?\" vs \"충격적\"…민주당끼리 충돌",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T11:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406420?sid=100"
-    },
-    {
-     "title": "\"법사위가 상원이냐\" \"이런 장관 처음\"‥예산 앞에선 한편?",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-27T11:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538590?sid=100"
-    },
-    {
-     "title": "서영교 법사위원장 \"질문 막지 마라\" vs 박홍근 장관 \"고압적\" 당정 충돌",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-27T11:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193765?sid=100"
     }
    ]
   },
@@ -210,48 +145,144 @@
    "sources": [
     "daum"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 6,
+   "articles90": 11,
+   "recent20": 3,
+   "press": 7,
    "firstArticleAt": "2026-11-27T10:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'그냥사람친구' 촬영지…장소 암스테르담 여행지 방문",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-27T11:42:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611270273"
-    },
-    {
-     "title": "‘그냥사람친구’ 이서진, 드디어 신분 상승? 주헌, 일당백 역할 톡톡",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-27T11:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000329377"
-    },
-    {
-     "title": "'그냥사람친구' 주헌·정연, 나이 초월 우정 여행지 GO…촬영 시작 장소...",
+     "title": "'신랑수업2’ 김상혁, 유채련 친구들과 조개찜 식당서 ‘엉가남’ 매력...",
      "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-27T11:30:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305870"
+     "publishedAt": "2026-11-27T12:02:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305875"
+    },
+    {
+     "title": "트와이스 정연· 몬스타엑스 주헌 '그냥 사람 친구'",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-27T12:00:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6944281"
+    },
+    {
+     "title": "한지민 숍 다녀왔는데‥이서진, 보자마자 “화장 떴다” 공격(그냥사람...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T11:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191987"
+    }
+   ]
+  },
+  {
+   "keyword": "신지아 6차 쇼트 2위",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T10:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "메달 보인다! 피겨 신지아, 그랑프리 6차 대회 쇼트 2위 ‘개인 최고 75...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-27T11:23:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/396/0000762179"
+    },
+    {
+     "title": "'개인 최고점 경신' 신지아, 피겨 시니어 그랑프리 6차 쇼트 2위...유영...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T11:21:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127001367"
+    },
+    {
+     "title": "피겨 신지아, '개인 최고점' 75.31점…시니어 GP 6차 쇼트 2위",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-27T11:01:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001406407"
+    }
+   ]
+  },
+  {
+   "keyword": "황교안",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T11:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'12·3 계엄 지지글' 황교안에 징역 10년 구형…내년 1월28일 1심 선고",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-27T12:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122369?sid=102"
+    },
+    {
+     "title": "특검, “윤석열 방해하는 한동훈 체포하라”던 황교안 ‘SNS 내란선동 혐...",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-27T11:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053688?sid=100"
+    },
+    {
+     "title": "내란특검, 황교안에 징역 10년 구형…내년 1월 28일 선고",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-27T11:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729679?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "LJ 이혼할 사랑했다",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T10:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LJ, 이선정과 이혼 15년 만에 속내⋯\"그때도 사랑하고 있었다\"",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T11:58:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654142"
+    },
+    {
+     "title": "14년만에 최초고백..LJ \"이선정과 이혼할때도 사랑했다\" [순간포착]",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-27T11:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646192"
+    },
+    {
+     "title": "LJ, ‘전처’ 이선정과 이혼 14년 만 고백 “이혼 후에도 사랑했다”",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-27T11:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001152079"
     }
    ]
   },
   {
    "keyword": "김이현",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T10:27:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-27T11:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘복싱 유망주‘ 김이현, 뺑소니 사고로 숨져…향년 19세",
+     "title": "19세 복싱 유망주 김이현, 뺑소니 사고로 숨져",
      "press": "donga.com",
      "publishedAt": "2026-11-27T11:50:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003765807?sid=102"
@@ -269,78 +300,20 @@
      "link": "https://n.news.naver.com/mnews/article/015/0005359232?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "한동훈 자료유출 압수수색에",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T10:27:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경찰, '수사자료 유출 의혹' 법무부·공소청 압수수색",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-27T11:44:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545261"
-    },
-    {
-     "title": "[단독] '검찰 내부문건'을 한동훈에?‥\"유출자 찾는다\" 압수수색",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-27T11:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538581?sid=102"
-    },
-    {
-     "title": "경찰, '한동훈 자료 유출 의혹' 압수수색..9시간만에 종료",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-27T10:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447605?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "황교안",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T11:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "특검, “윤석열 방해하는 한동훈 체포하라”던 황교안 ‘SNS 내란선동 혐...",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-27T11:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053688?sid=100"
-    },
-    {
-     "title": "내란특검, 황교안에 징역 10년 구형…내년 1월 28일 선고",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-27T11:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729679?sid=102"
-    },
-    {
-     "title": "'SNS 계엄 지지글' 황교안에 징역 10년 구형…1월28일 선고(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T11:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468482?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1947,
-  "matched": 974,
-  "avgLeadMin": 656,
+  "flagged": 1950,
+  "matched": 975,
+  "avgLeadMin": 657,
   "recent": [
+   {
+    "keyword": "3분기 실질소득 감소",
+    "hitKeyword": "국민연금 3분기 수익률",
+    "hitAt": "2026-11-27T21:00:00+09:00",
+    "leadMin": 1944
+   },
    {
     "keyword": "최교진 교육부 장관 사의",
     "hitKeyword": "비정규직 파업 교육부 대응",
@@ -394,12 +367,6 @@
     "hitKeyword": "카카오 김범수 무죄 확정",
     "hitAt": "2026-11-27T20:00:00+09:00",
     "leadMin": 1774
-   },
-   {
-    "keyword": "윤석열 한덕수 위증 무죄 확정",
-    "hitKeyword": "카카오 김범수 무죄 확정",
-    "hitAt": "2026-11-27T20:00:00+09:00",
-    "leadMin": 1724
    }
   ]
  }
