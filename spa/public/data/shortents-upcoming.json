@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T15:48:15.566Z",
+ "builtAt": "2026-11-27T15:58:19.160Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,23 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "최민희 중징계 결정",
+   "keyword": "최민희 중징계 의결",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T14:22:00.000Z",
+   "articles90": 9,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T14:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "민주, 최민희에 '당원자격정지 2년' 중징계...\"수용 못 해\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T15:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439196?sid=100"
+    },
     {
      "title": "최민희 중징계에 정청래 \"김민석 해당 행위는 무엇이냐\"",
      "press": "gukjenews.com",
@@ -33,12 +39,6 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-27T15:40:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004012240?sid=100"
-    },
-    {
-     "title": "최민희 '당원자격정지 2년' 중징계…재심 신청 예고",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T15:16:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765806"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T14:28:00.000Z",
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T14:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "인터넷우체국 해킹에 개인정보 유출… 하루치만 11만명 넘어",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-27T15:54:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452812"
+    },
+    {
+     "title": "인터넷우체국도 개인정보 유출…하루치만 11.3만명",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-27T15:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834358?sid=102"
+    },
     {
      "title": "인터넷우체국 해킹으로 개인정보 유출…하루치만 11만3천여명",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-27T15:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016468511?sid=102"
-    },
-    {
-     "title": "인터넷우체국 해킹에 개인정보 유출…하루 치 분석만 11만3855명 확인",
-     "press": "news-s.kr",
-     "publishedAt": "2026-11-27T15:06:00.000Z",
-     "link": "https://news-s.kr/view.html?id=L261128000103a3cd"
-    },
-    {
-     "title": "인터넷우체국 개인정보 유출 사고…하루치만 11만명 넘어",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-27T14:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207890?sid=102"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T14:19:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-27T14:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -112,7 +112,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-27T14:40:00.000Z",
    "exclusive": false,
