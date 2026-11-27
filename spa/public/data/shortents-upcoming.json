@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T21:59:59.231Z",
+ "builtAt": "2026-11-27T22:10:02.675Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,66 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "AI 반등에 증시 상승",
+   "keyword": "부동산",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 17,
-   "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-27T20:31:00.000Z",
+   "articles90": 9,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[뉴욕증시] “AI 공매도는 자살 행위”...나스닥 543P 급등",
-     "press": "g-enews.com",
+     "title": "강남 부자들도 계산기를 두드리기 시작했다[손바닥부동산]",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T22:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416790?sid=101"
+    },
+    {
+     "title": "\"한강뷰 좋아하는 한국인들\"…뉴욕 부동산 여왕의 뜻밖의 조언 [황정수...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359280?sid=104"
+    },
+    {
+     "title": "\"땅값 10배 뛴다\"며 200억 사기…기획부동산 회장 1심 징역 12년",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468566?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이란 해상봉쇄 돌파",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T20:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "호르무즈 해협 다시 전운…美 봉쇄 돌파 상선 타격, 이란 강경 맞불",
+     "press": "mt.co.kr",
      "publishedAt": "2026-11-27T21:58:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611280654579798e250e8e188_1"
+     "link": "https://n.news.naver.com/mnews/article/008/0005447648?sid=104"
     },
     {
-     "title": "뉴욕증시, AIㆍ칩 반등에 상승⋯나스닥 2.3%↑ [상보]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-27T21:56:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2654160"
-    },
-    {
-     "title": "뉴욕증시, AI·기술주 반등에 일제히 상승…나스닥 2.3%↑",
-     "press": "slist.kr",
+     "title": "이란, 미 해상봉쇄 돌파 결의...트럼프 \"원할 때 끝낼 것\"",
+     "press": "ytn.co.kr",
      "publishedAt": "2026-11-27T21:48:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785445"
+     "link": "https://n.news.naver.com/mnews/article/052/0002439248?sid=104"
+    },
+    {
+     "title": "트럼프 “이란전, 언제든 원할때 끝내…곡괭이산 타격할 것”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T21:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303039?sid=104"
     }
    ]
   },
@@ -49,7 +81,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-27T21:00:00.000Z",
    "exclusive": false,
@@ -68,52 +100,82 @@
      "link": "http://www.dailypop.kr/news/articleView.html?idxno=104287"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 28일 띠별 운세",
+     "title": "[오늘의 운세] 2026년 11월 28일 별자리 운세",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-27T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416785?sid=103"
+     "link": "https://n.news.naver.com/mnews/article/018/0006416786?sid=103"
     }
    ]
   },
   {
-   "keyword": "물",
+   "keyword": "박홍근 서영교 충돌",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-27T21:01:00.000Z",
+   "firstArticleAt": "2026-11-27T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "바닷물에 잠긴 미국 서부...기차 멈추고 부두 붕괴",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T21:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439246?sid=104"
+     "title": "‘예산 민원’ 때문?…박홍근 예산장관, 법사위서 “예산 질의에 답변 ...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T21:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303049?sid=100"
     },
     {
-     "title": "\"물티슈 한 장이면 충분\" 33년 세탁 장인의 세탁조 관리법",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-27T21:24:00.000Z",
-     "link": "https://www.insight.co.kr/news/581288"
+     "title": "\"법사위가 상원?\" vs \"충격적\"…민주당끼리 충돌",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-27T21:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406457?sid=100"
     },
     {
-     "title": "오렌지 껍질 속 천연물질 활용...나노 플라스틱 제거",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439240?sid=105"
+     "title": "법사위 파행 여진 SNS서 장외설전… 박홍근 “‘국회법 원칙” vs 서영교...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-27T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061586?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1969,
-  "matched": 970,
-  "avgLeadMin": 646,
+  "flagged": 1966,
+  "matched": 972,
+  "avgLeadMin": 652,
   "recent": [
+   {
+    "keyword": "배연정 췌장암 수술",
+    "hitKeyword": "췌장암 증상",
+    "hitAt": "2026-11-28T07:00:00+09:00",
+    "leadMin": 3469
+   },
+   {
+    "keyword": "뉴욕증시 AI 불안 혼조 마감",
+    "hitKeyword": "뉴욕증시 기술주 반등",
+    "hitAt": "2026-11-28T07:00:00+09:00",
+    "leadMin": 2796
+   },
+   {
+    "keyword": "트럼프 가짜 성장률 조사",
+    "hitKeyword": "트럼프 중국 기술 규제",
+    "hitAt": "2026-11-28T07:00:00+09:00",
+    "leadMin": 1368
+   },
+   {
+    "keyword": "트럼프 관세 경제적 자해",
+    "hitKeyword": "트럼프 중국 기술 규제",
+    "hitAt": "2026-11-28T07:00:00+09:00",
+    "leadMin": 1358
+   },
+   {
+    "keyword": "트럼프 푸틴 유럽 공격 중단",
+    "hitKeyword": "트럼프 중국 기술 규제",
+    "hitAt": "2026-11-28T07:00:00+09:00",
+    "leadMin": 805
+   },
    {
     "keyword": "미세먼지",
     "hitKeyword": "수도권 초미세먼지 주의보",
@@ -143,36 +205,6 @@
     "hitKeyword": "손새은 임찬규 결혼",
     "hitAt": "2026-11-28T00:00:00+09:00",
     "leadMin": 22
-   },
-   {
-    "keyword": "연우 다이어트 부작용",
-    "hitKeyword": "스시자로 열풍 부작용",
-    "hitAt": "2026-11-27T23:30:00+09:00",
-    "leadMin": 676
-   },
-   {
-    "keyword": "박정수 정을영 통화",
-    "hitKeyword": "박정수 정을영 감독",
-    "hitAt": "2026-11-27T23:30:00+09:00",
-    "leadMin": 53
-   },
-   {
-    "keyword": "박정수",
-    "hitKeyword": "박정수 정을영 감독",
-    "hitAt": "2026-11-27T23:30:00+09:00",
-    "leadMin": 22
-   },
-   {
-    "keyword": "그냥 사람 친구",
-    "hitKeyword": "그냥사람친구 이서진",
-    "hitAt": "2026-11-27T23:00:00+09:00",
-    "leadMin": 747
-   },
-   {
-    "keyword": "SK하이닉스 자사주 매입 2배 확대",
-    "hitKeyword": "95년생 SK하이닉스 투자",
-    "hitAt": "2026-11-27T23:00:00+09:00",
-    "leadMin": 53
    }
   ]
  }
