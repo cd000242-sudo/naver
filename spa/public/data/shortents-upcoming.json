@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T06:44:49.940Z",
+ "builtAt": "2026-11-27T06:54:53.383Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 6,
-   "press": 22,
-   "firstArticleAt": "2026-11-27T05:18:00.000Z",
+   "articles90": 25,
+   "recent20": 7,
+   "press": 23,
+   "firstArticleAt": "2026-11-27T05:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정년연장 또 불발...쉴 수 없는 노후의 투쟁",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-27T06:42:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108416"
+     "title": "정년 65세 노사 합의 불발, 내달 2일 마지막 회의…노동부 \"결과 지켜볼...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T06:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314612?sid=101"
     },
     {
-     "title": "정년연장 특위, 노사 합의 불발…내달 2일 활동 종료",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-27T06:42:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611271523080130975"
+     "title": "65세 정년연장, 27일 특위서 합의 불발… 민주노총 \"노동자의 고용과 노...",
+     "press": "worknworld.kctu.org",
+     "publishedAt": "2026-11-27T06:48:00.000Z",
+     "link": "http://worknworld.kctu.org/news/articleView.html?idxno=510402"
     },
     {
-     "title": "10개월 만에 재개된 정년연장 논의, 또 합의 불발…공은 여당에?",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-27T06:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485547?sid=102"
+     "title": "여당 정년연장특위, 열 달 만에 재개한 노사협의 불발",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-27T06:46:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545218"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 22,
-   "recent20": 1,
-   "press": 22,
-   "firstArticleAt": "2026-11-27T05:17:00.000Z",
+   "articles90": 20,
+   "recent20": 2,
+   "press": 20,
+   "firstArticleAt": "2026-11-27T05:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령 \"'억까'와 '무조건 반대'가 성과공유형 재정지원 가로막아\"",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-27T06:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143193?sid=100"
+    },
+    {
+     "title": "이 대통령 \"욕먹어도 할 일 해야\"…성과공유형 재정지원 힘실어",
+     "press": "busan.com",
+     "publishedAt": "2026-11-27T06:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001409319?sid=100"
+    },
     {
      "title": "李 \"R&D, 지원·투자 중간 형태 필요…'억까언론·반대정치'가 큰 장애\"",
      "press": "inews24.com",
      "publishedAt": "2026-11-27T06:25:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/031/0001079105?sid=100"
-    },
-    {
-     "title": "李대통령 “욕먹어도 할 일 해야”…성과공유형 재정지원 필요성 강조",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-27T06:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686928?sid=100"
-    },
-    {
-     "title": "李 대통령 \"연 50조 원 R&D 성과 환수 장치 필요…욕먹어도 할 일 해야\"",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-27T06:16:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=173258"
     }
    ]
   },
@@ -79,62 +79,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 27,
-   "recent20": 5,
-   "press": 14,
+   "articles90": 32,
+   "recent20": 8,
+   "press": 18,
    "firstArticleAt": "2026-11-27T05:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서영교·박홍근 뜻밖의 충돌‥\"답변 태도에 문제\" \"여기가 상원인가\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-27T06:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538520?sid=100"
+     "title": "예산 질의 두고 장관·위원장 설전…여권 집안싸움에 법사위 정회",
+     "press": "busan.com",
+     "publishedAt": "2026-11-27T06:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001409318?sid=100"
     },
     {
-     "title": "[포토] 박홍근 기획예산처 장관 \"법사위서 지역 현안 묻지 말라\"",
+     "title": "김의겸 “새만금 사업 잘 아시죠?”…박홍근 “예산 답변 안 드리겠다”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-27T06:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703969?sid=100"
+    },
+    {
+     "title": "[포토] 박홍근 장관 답변 거부로 정회된 법사위",
      "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-27T06:40:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/27/2026112750267.html"
-    },
-    {
-     "title": "박홍근 \"여기가 상원이냐\", 서영교 \"이런 경우 처음\"…정부·여당 충돌",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-27T06:36:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=368139"
-    }
-   ]
-  },
-  {
-   "keyword": "FIFA·AFC 12월 방한",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-27T05:21:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[공식발표] '결국 FIFA와 AFC가 직접 한국에 온다!'…대한축구협회 회장...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-27T06:37:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/411/0000090548"
-    },
-    {
-     "title": "FIFA·AFC, KFA 회장 선거 관련 미팅 위해 다음 주 방한… 해결책 나올까",
-     "press": "footballist.co.kr",
-     "publishedAt": "2026-11-27T06:14:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/436/0000115290"
-    },
-    {
-     "title": "FIFA·AFC 대표단, 12월 4~5일 방한…축구협회장 선거 논의",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-27T06:12:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/005/0001887869"
+     "publishedAt": "2026-11-27T06:48:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/27/2026112750273.html"
     }
    ]
   },
@@ -144,7 +112,7 @@
     "nate"
    ],
    "articles90": 43,
-   "recent20": 17,
+   "recent20": 9,
    "press": 10,
    "firstArticleAt": "2026-11-27T05:33:00.000Z",
    "exclusive": false,
@@ -163,10 +131,10 @@
      "link": "https://n.news.naver.com/mnews/article/015/0005359078?sid=100"
     },
     {
-     "title": "대한민국 사회연대경제박람회 찾은 한성숙-윤호중-추미애",
+     "title": "대한민국 사회연대경제박람회 개막",
      "press": "newspim.com",
      "publishedAt": "2026-11-27T06:35:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127001117"
+     "link": "https://www.newspim.com/news/view/20261127001115"
     }
    ]
   },
@@ -176,7 +144,7 @@
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 3,
+   "recent20": 1,
    "press": 10,
    "firstArticleAt": "2026-11-27T05:58:00.000Z",
    "exclusive": false,
@@ -203,34 +171,34 @@
    ]
   },
   {
-   "keyword": "이규한 솔비 결혼 4월 25일",
+   "keyword": "FIFA·AFC 12월 방한",
    "sources": [
     "nate"
    ],
    "articles90": 10,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T05:17:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-27T05:40:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "솔비♥이규한, 내년 4월 25일 결혼식 확정‥비공개 야외 웨딩[공식입장...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T06:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191877"
+     "title": "[공식발표] '결국 FIFA와 AFC가 직접 한국에 온다!'…대한축구협회 회장...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-27T06:37:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/411/0000090548"
     },
     {
-     "title": "솔비♥이규한, 내년 4월 25일 결혼식...\"비공개 야외 예식\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-27T06:22:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785377"
+     "title": "FIFA·AFC, KFA 회장 선거 관련 미팅 위해 다음 주 방한… 해결책 나올까",
+     "press": "footballist.co.kr",
+     "publishedAt": "2026-11-27T06:14:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/436/0000115290"
     },
     {
-     "title": "솔비·이규한, 내년 4월 25일 결혼한다 \"서울서 야외 예식\"",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-27T06:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000762159"
+     "title": "FIFA·AFC 대표단, 12월 4~5일 방한…축구협회장 선거 논의",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-27T06:12:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/005/0001887869"
     }
    ]
   },
@@ -239,30 +207,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 6,
+   "articles90": 20,
+   "recent20": 12,
    "press": 8,
    "firstArticleAt": "2026-11-27T05:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 축사하는 박정훈 농식품부 식량정책실장 (K-라이스 페스타)",
+     "title": "[포토] 축사하는 박정 더불어민주당 국회의원 (K-라이스 페스타)",
      "press": "ajunews.com",
-     "publishedAt": "2026-11-27T06:42:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127154023854"
+     "publishedAt": "2026-11-27T06:54:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127155040884"
     },
     {
-     "title": "[포토] 축사하는 박찬수 한겨레신문 대표이사 (K-라이스 페스타)",
+     "title": "[포토] 축사하는 신성범 국민의힘 국회의원 (K-라이스 페스타)",
      "press": "ajunews.com",
-     "publishedAt": "2026-11-27T06:42:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127153833850"
+     "publishedAt": "2026-11-27T06:52:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127154958882"
     },
     {
-     "title": "[포토] '2026 우리쌀 우리술 K-라이스 페스타' 개막",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-27T06:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359076?sid=102"
+     "title": "[포토] 축사하는 신정훈 더불어민주당 국회의원 (K-라이스 페스타)",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T06:50:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127154854877"
+    }
+   ]
+  },
+  {
+   "keyword": "교통",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 8,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T06:32:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "'세종~청주공항 20분 시대 열리나'…행정수도 광역교통망 대폭 확충",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-27T06:52:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106621"
+    },
+    {
+     "title": "사관학교 통합 추진단 다음 달 출범‥생도 20% \"각 군 특성 유지\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-27T06:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538523?sid=100"
+    },
+    {
+     "title": "도로 28조·철도 59조…전남광주, 87조 교통망 구축 정부에 건의",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-27T06:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447471?sid=102"
     }
    ]
   },
@@ -272,7 +272,7 @@
     "nate"
    ],
    "articles90": 8,
-   "recent20": 2,
+   "recent20": 1,
    "press": 8,
    "firstArticleAt": "2026-11-27T05:27:00.000Z",
    "exclusive": false,
@@ -303,24 +303,24 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T05:21:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-27T05:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "중수청·경찰 합동 '내란 특수본', 다음 달 1일 출범 예정",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T06:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438975?sid=102"
-    },
     {
      "title": "비상계엄 수사 ‘중수청·경찰 특수본’ 출범…검·경·공수처·2차 특검...",
      "press": "hani.co.kr",
      "publishedAt": "2026-11-27T06:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002834297?sid=102"
+    },
+    {
+     "title": "중수청·경찰 합동 '내란 특수본', 다음 달 1일 출범 예정",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T06:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438975?sid=102"
     },
     {
      "title": "중수청·경찰 ‘내란 특수본’ 임박…내달 1일 출범 예정",
@@ -331,34 +331,34 @@
    ]
   },
   {
-   "keyword": "교통",
+   "keyword": "이규한 솔비 결혼 4월 25일",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 8,
-   "recent20": 8,
+   "articles90": 7,
+   "recent20": 0,
    "press": 7,
-   "firstArticleAt": "2026-11-27T06:26:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-27T05:40:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "포항시, 민·관·군 뭉쳐 교통사고 예방 결의···안전문화 확산",
-     "press": "tk.newdaily.co.kr",
-     "publishedAt": "2026-11-27T06:42:00.000Z",
-     "link": "https://tk.newdaily.co.kr/site/data/html/2026/11/27/2026112750242.html"
+     "title": "솔비♥이규한, 내년 4월 25일 결혼식 확정‥비공개 야외 웨딩[공식입장...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T06:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191877"
     },
     {
-     "title": "서울지하철 파업 막았지만…준법투쟁 철도노조, 연말 교통대란 우려 확...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-27T06:42:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261127010010843"
+     "title": "솔비♥이규한, 내년 4월 25일 결혼식...\"비공개 야외 예식\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-27T06:22:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785377"
     },
     {
-     "title": "[속보] 서해안고속도로 몽탄터널 인근 양방향 교통사고 발생",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T06:40:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765373"
+     "title": "솔비·이규한, 내년 4월 25일 결혼한다 \"서울서 야외 예식\"",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-27T06:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000762159"
     }
    ]
   },
@@ -368,14 +368,20 @@
     "daum"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-27T05:24:00.000Z",
+   "firstArticleAt": "2026-11-27T05:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "남경필 전 경기지사 장남 체포…전 연인 폭행·성관계 영상 유포 협박 ...",
+     "title": "‘마약사범’ 남경필 장남 체포···전 여친에 ‘성관계 영상 유포’ 협...",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-27T06:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053681?sid=102"
+    },
+    {
+     "title": "남경필 장남, 전 연인에 ‘성관계 영상 유포’ 협박한 혐의로 체포",
      "press": "hani.co.kr",
      "publishedAt": "2026-11-27T06:36:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002834307?sid=102"
@@ -385,12 +391,6 @@
      "press": "mdtoday.co.kr",
      "publishedAt": "2026-11-27T05:56:00.000Z",
      "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628179"
-    },
-    {
-     "title": "남경필 장남, 전 연인 영상 유포 협박 혐의로 체포…폭행 혐의도",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-27T05:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160296?sid=102"
     }
    ]
   },
@@ -400,12 +400,18 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 0,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-27T05:24:00.000Z",
+   "firstArticleAt": "2026-11-27T05:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "군포시, 제8차 미세먼지 계절 관리제 시행",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-27T06:50:00.000Z",
+     "link": "https://www.viva100.com/article/20261127500555"
+    },
     {
      "title": "제주도, 미세먼지 저감 '계절 관리제' 시행",
      "press": "jibs.co.kr",
@@ -417,12 +423,6 @@
      "press": "headlinejeju.co.kr",
      "publishedAt": "2026-11-27T06:02:00.000Z",
      "link": "https://www.headlinejeju.co.kr/news/articleView.html?idxno=602880"
-    },
-    {
-     "title": "군포시, 겨울철 미세먼지 대응 강화…5등급 차량 운행 제한",
-     "press": "siminilbo.co.kr",
-     "publishedAt": "2026-11-27T05:58:00.000Z",
-     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160262140438054"
     }
    ]
   },
@@ -451,7 +451,7 @@
      "link": "https://n.news.naver.com/mnews/article/079/0004214672?sid=104"
     },
     {
-     "title": "‘바이낸스서 8조 넘게 탈취’ 북 해킹조직, 본격 돈세탁 시작···‘토...",
+     "title": "‘바이낸스서 8조 탈취’ 북 해킹조직, 본격 돈세탁 시작··· 거래 흔적...",
      "press": "khan.co.kr",
      "publishedAt": "2026-11-27T05:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/032/0003485535?sid=100"
