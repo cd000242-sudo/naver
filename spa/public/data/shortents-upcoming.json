@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T00:32:42.362Z",
+ "builtAt": "2026-11-27T00:42:45.492Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,133 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "중기부 장관 표창 수상",
    "sources": [
     "nate"
    ],
-   "articles90": 37,
-   "recent20": 14,
-   "press": 27,
+   "articles90": 41,
+   "recent20": 11,
+   "press": 30,
    "firstArticleAt": "2026-11-26T23:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "세븐일레븐, 중기부 장관 표창…수상골목상권 보호 공로",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-27T00:30:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=567056"
+     "title": "NS홈쇼핑, ‘동반성장 주간 기념식’ 중소벤처기업부 장관 표창 수상",
+     "press": "hbnpress.com",
+     "publishedAt": "2026-11-27T00:40:00.000Z",
+     "link": "https://hbnpress.com/news/view/1065573387718520"
     },
     {
-     "title": "소비자원, '올해의 상생기업 대상' 중기부 장관 표창",
+     "title": "코레일유통물류 '상생물류 지원사업'…중기부 장관 표창 수상",
      "press": "news1.kr",
-     "publishedAt": "2026-11-27T00:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313572?sid=101"
+     "publishedAt": "2026-11-27T00:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009313597?sid=101"
     },
     {
-     "title": "해양교통안전공단, 납품대금 연동제 우수기관 선정…중기부 장관 표창",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T00:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014348671?sid=101"
+     "title": "SK인텔릭스, '올해의 상생기업 대상' 중기부 장관 표창 수상",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-27T00:36:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2024196"
     }
    ]
   },
   {
-   "keyword": "10대 피의자 송치",
+   "keyword": "성북 피의자 송치",
    "sources": [
     "nate"
    ],
-   "articles90": 28,
-   "recent20": 6,
-   "press": 24,
+   "articles90": 33,
+   "recent20": 5,
+   "press": 29,
    "firstArticleAt": "2026-11-26T23:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[속보] '성북구 여중생 살해' 50대 남성 전 연인...20대 김 씨 ‘구속 송...",
+     "press": "cjb.co.kr",
+     "publishedAt": "2026-11-27T00:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/655/0000033720?sid=102"
+    },
+    {
+     "title": "'성북 10대 소녀 살해' 관련 20대 女 송치 … 성매매·절도 지시 혐의",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-27T00:34:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/27/2026112750054.html"
+    },
     {
      "title": "10대 소녀에 성매매·절도 시킨 성북 살인사건 피의자 전 연인 공소청 송...",
      "press": "busan.com",
      "publishedAt": "2026-11-27T00:30:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/082/0001409233?sid=102"
-    },
-    {
-     "title": "10대 여성에 성매매·절도 지시…성북 살인사건 피의자 전 연인 송치",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T00:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406259?sid=102"
-    },
-    {
-     "title": "[속보] 50대 남성에게 살해당한 10대 소녀에게 생전 성매매와 절도 지시...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-27T00:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001233898?sid=102"
     }
    ]
   },
   {
-   "keyword": "문근영 기립성 저혈압 부상",
+   "keyword": "금융사 검사 제재 쇄신",
    "sources": [
     "daum"
    ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-26T23:03:00.000Z",
+   "articles90": 39,
+   "recent20": 6,
+   "press": 27,
+   "firstArticleAt": "2026-11-27T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "문근영, 청룡 앞머리 이유 있었다 “기립성 저혈압으로 쓰러져 다쳐”",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-27T00:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001283855"
+     "title": "금감원 노조 \"금융행정 쇄신방안은 반쪽짜리…금융위 구성부터 손봐야...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T00:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009313600?sid=101"
     },
     {
-     "title": "'정평 ♥' 문근영, 기립성 저혈압→얼굴 부상…\"앞머리 내릴 수 밖에\" [...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-27T00:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000493888"
+     "title": "금융감독 쇄신안 발표에도…금감원 노조 \"검사원 보호 빠졌다\"",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-27T00:36:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887903"
     },
     {
-     "title": "\"갑자기 눈앞이 캄캄\"…문근영·육성재도 쓰러뜨린 '이 질환' [건강!톡]",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-27T00:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358920?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "김가영 스롱 제압",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-26T23:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김보미, 챔피언 자신감 장착…김가영과 4강전 빅뱅",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-27T00:26:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/028/0002834235"
-    },
-    {
-     "title": "'당구 여제' 김가영, 스롱 꺾고 LPBA 준결승행…20승 도전 순항",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T00:18:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/003/0014348628"
-    },
-    {
-     "title": "‘당구 여왕’ 김가영 통산 20승 고지 보인다…8강서 스롱 피아비 제압...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-27T00:12:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/468/0001283852"
+     "title": "금감원 노조 \"감독 쇄신안 반쪽짜리\"…금융위 위원 구성 개편 요구",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-27T00:34:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088543"
     }
    ]
   },
@@ -143,100 +111,163 @@
    "sources": [
     "google"
    ],
-   "articles90": 18,
-   "recent20": 6,
-   "press": 14,
-   "firstArticleAt": "2026-11-26T23:05:00.000Z",
+   "articles90": 23,
+   "recent20": 10,
+   "press": 18,
+   "firstArticleAt": "2026-11-26T23:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "학교 비정규직 하루 총파업···임금·인력 충원 요구에 급식·돌봄 차...",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-27T00:26:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=160800"
+     "title": "경북 140개교 '빵·우유 등 대체식'·초등돌봄 2곳 중단…파업 여파",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T00:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009313598?sid=102"
     },
     {
-     "title": "부산 학비 파업참가 7.8%…학교 5곳중 1곳 대체급식",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T00:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014348666?sid=102"
+     "title": "학교 비정규직 4만여명, 오늘(27일) 총파업…급식·돌봄 등 차질 우려",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-27T00:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160146?sid=102"
     },
     {
-     "title": "급식 대신 빵·우유, 돌봄도 비상…학교 비정규직 오늘 총파업",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-27T00:22:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087136"
+     "title": "서울시교육청, 교육공무직 총파업 대비 학교 대응계획 마련",
+     "press": "news.unn.net",
+     "publishedAt": "2026-11-27T00:36:00.000Z",
+     "link": "https://news.unn.net/news/articleView.html?idxno=601553"
     }
    ]
   },
   {
    "keyword": "김정은, 러시아 공연 관람",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 14,
    "recent20": 4,
-   "press": 11,
+   "press": 13,
    "firstArticleAt": "2026-11-26T23:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "러 장관, 김정은에 '동지'…\"북러 정상이 논의한 인프라 계획 성과\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-27T00:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980121?sid=104"
+    },
+    {
+     "title": "러시아 방북 대표단 환대한 김정은…북러 밀착 가속화(종합)",
+     "press": "konas.net",
+     "publishedAt": "2026-11-27T00:36:00.000Z",
+     "link": "https://www.konas.net/article/article.asp?idx=64812"
+    },
+    {
      "title": "김정은, 사망설 후 러시아 접촉",
      "press": "topstarnews.net",
      "publishedAt": "2026-11-27T00:30:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287587"
-    },
-    {
-     "title": "김정은, 러시아 대표단 직접 맞아…북러 협력 경제·문화로 확대",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-27T00:28:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261127500069"
-    },
-    {
-     "title": "러시아 공연 즐긴 김정은…\"푸틴에 따뜻한 인사 전해달라\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-27T00:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653723?sid=100"
     }
    ]
   },
   {
-   "keyword": "금리인상",
+   "keyword": "닥터멜락신",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T23:07:00.000Z",
+   "articles90": 13,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-26T23:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘 금시세] 금 한돈 58만원 회복…美 추가 금리 인상 우려 여전",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T00:28:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287588"
+     "title": "에이피알, 닥터멜락신 품는다…글로벌 뷰티 '승부수'",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-27T00:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143137?sid=101"
     },
     {
-     "title": "ECB, 추가 금리 인상 시사‥10월 통화정책회의 의사록",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-27T00:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538423?sid=104"
+     "title": "에이피알, 닥터멜락신 인수…브랜드 M&A 이어져",
+     "press": "lcnews.co.kr",
+     "publishedAt": "2026-11-27T00:32:00.000Z",
+     "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=212128"
     },
     {
-     "title": "정희용 \"한은 금리 인상에도 정부는 확장재정…엇박자 멈춰야\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T00:03:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127000165"
+     "title": "한국투자 \"에이피알 '닥터멜락신' 인수, 기업가치 회복에 긍정적 요소\"",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-27T00:26:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453084"
     }
    ]
   },
   {
-   "keyword": "무쇠소녀단3 연우 눈물",
+   "keyword": "김가영, 라이벌 제압!",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-26T23:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "20승 보인다! ‘당구 여제’ 김가영 ‘라이벌’ 스롱 꺾고 준결승행…김...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-27T00:40:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/396/0000762124"
+    },
+    {
+     "title": "김가영, 스롱 피아비 꺾고 LPBA 4강 진출-통산 20승까지 두 걸음",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-27T00:04:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96050"
+    },
+    {
+     "title": "본격 '시즌 2승' 전쟁 막 올랐다…PBA 김영원 '홀로 생존'·LPBA 김가영-김...",
+     "press": "thebilliards.kr",
+     "publishedAt": "2026-11-26T23:58:00.000Z",
+     "link": "https://www.thebilliards.kr/news/articleView.html?idxno=32600"
+    }
+   ]
+  },
+  {
+   "keyword": "김용범",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 4,
+   "press": 7,
+   "firstArticleAt": "2026-11-26T23:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "거버넌스포럼, 김용범 위원장 내정 환영…\"대통령, 끝까지 힘 실어줘야...",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-27T00:42:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733190"
+    },
+    {
+     "title": "김용범 메리츠 부회장, '자본시장 대전환委' 수장 발탁…위원 전원 민간...",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-27T00:40:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=230413"
+    },
+    {
+     "title": "자본시장 개혁기구 위원장에 김용범 메리츠 부회장…대통령 직보",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-27T00:40:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=2026112709192018760f4390e77d_18"
+    }
+   ]
+  },
+  {
+   "keyword": "연우 무쇠소녀단3 눈물",
    "sources": [
     "daum"
    ],
@@ -268,66 +299,34 @@
    ]
   },
   {
-   "keyword": "김용범",
+   "keyword": "학교급식 빵으로 대체",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T23:56:00.000Z",
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T23:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김용범 메리츠 부회장, 자본시장 개혁 이끈다...민간 개혁기구 첫 발",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-27T00:26:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68564"
+     "title": "전남광주교육청, 비정규직 파업 속 학교급식 정상 운영",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-27T00:33:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087155"
     },
     {
-     "title": "거버넌스포럼 \"김용범 개혁위원장 내정 대환영…대통령 용단에 경의\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-27T00:20:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446888"
+     "title": "부산 학비 파업참가 7.8%…학교 5곳중 1곳 대체급식",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T00:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014348666?sid=102"
     },
     {
-     "title": "거버넌스포럼 \"김용범, 韓 최고 자본시장 전문가…李 용단에 경의 표해...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-27T00:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848629?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 관세 경제적 자해",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T23:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 물가 다시 뛰는데 관세까지 인상…트럼프 경제정책 비판 확산",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-27T00:16:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=230408"
-    },
-    {
-     "title": "인플레 재가속 속 트럼프 대대적 관세 인상…美 언론 비판 잇따라",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-26T23:52:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611270026"
-    },
-    {
-     "title": "美언론도 트럼프 관세 폭주 비판…\"경제적 자해 행위\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T23:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930404?sid=104"
+     "title": "학교 비정규직 오늘 총파업…전국 학교 급식·돌봄 차질 예상",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T23:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466911?sid=102"
     }
    ]
   },
@@ -380,7 +379,7 @@
      "title": "시장상황점검회의 앞서 환담하는 이형일 부총리",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T23:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466885?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/001/0016466886?sid=101"
     },
     {
      "title": "이형일 부총리, 시장상황점검회의 주재",
@@ -392,7 +391,39 @@
      "title": "이형일 부총리, 시장상황점검회의 발언",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T23:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466882?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/001/0016466881?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 관세 경제적 자해",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T23:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 물가 다시 뛰는데 관세까지 인상…트럼프 경제정책 비판 확산",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-27T00:16:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=230408"
+    },
+    {
+     "title": "인플레 재가속 속 트럼프 대대적 관세 인상…美 언론 비판 잇따라",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-26T23:52:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611270026"
+    },
+    {
+     "title": "美언론도 트럼프 관세 폭주 비판…\"경제적 자해 행위\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T23:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930404?sid=104"
     }
    ]
   },
@@ -432,10 +463,52 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1747,
-  "matched": 871,
-  "avgLeadMin": 586,
+  "flagged": 1752,
+  "matched": 878,
+  "avgLeadMin": 590,
   "recent": [
+   {
+    "keyword": "청해부대 임무 확대",
+    "hitKeyword": "이란 한국 청해부대 우려",
+    "hitAt": "2026-11-27T09:30:00+09:00",
+    "leadMin": 2330
+   },
+   {
+    "keyword": "청해부대 전쟁불개입 원칙 유지",
+    "hitKeyword": "이란 한국 청해부대 우려",
+    "hitAt": "2026-11-27T09:30:00+09:00",
+    "leadMin": 2189
+   },
+   {
+    "keyword": "청해부대 호르무즈 제외 원칙",
+    "hitKeyword": "이란 한국 청해부대 우려",
+    "hitAt": "2026-11-27T09:30:00+09:00",
+    "leadMin": 2179
+   },
+   {
+    "keyword": "청해부대 파견 연장 동의안",
+    "hitKeyword": "이란 한국 청해부대 우려",
+    "hitAt": "2026-11-27T09:30:00+09:00",
+    "leadMin": 1043
+   },
+   {
+    "keyword": "황윤성 농사 규모",
+    "hitKeyword": "황윤성 시골집 규모",
+    "hitAt": "2026-11-27T09:30:00+09:00",
+    "leadMin": 500
+   },
+   {
+    "keyword": "문근영, 기립성 저혈압으로 쓰러져",
+    "hitKeyword": "문근영 기립성 저혈압 부상",
+    "hitAt": "2026-11-27T09:30:00+09:00",
+    "leadMin": 27
+   },
+   {
+    "keyword": "남자농구, 카타르 완파 본선행 청신호",
+    "hitKeyword": "한국 농구 카타르 격파",
+    "hitAt": "2026-11-27T09:30:00+09:00",
+    "leadMin": 27
+   },
    {
     "keyword": "폭설",
     "hitKeyword": "엘니뇨 재난문자 폭설",
@@ -453,48 +526,6 @@
     "hitKeyword": "11월 말 포근한 날씨",
     "hitAt": "2026-11-27T09:00:00+09:00",
     "leadMin": 48
-   },
-   {
-    "keyword": "화장실",
-    "hitKeyword": "공중화장실 휴지 폭탄",
-    "hitAt": "2026-11-27T08:30:00+09:00",
-    "leadMin": 3760
-   },
-   {
-    "keyword": "삼성 준감위 주주환원 결정",
-    "hitKeyword": "SK하이닉스 주주환원",
-    "hitAt": "2026-11-27T08:30:00+09:00",
-    "leadMin": 3649
-   },
-   {
-    "keyword": "준감위 주주환원 결정",
-    "hitKeyword": "SK하이닉스 주주환원",
-    "hitAt": "2026-11-27T08:30:00+09:00",
-    "leadMin": 3629
-   },
-   {
-    "keyword": "u-17 월드컵",
-    "hitKeyword": "U17 월드컵 아시아 강세",
-    "hitAt": "2026-11-27T08:30:00+09:00",
-    "leadMin": 1949
-   },
-   {
-    "keyword": "추수감사절",
-    "hitKeyword": "미국 추수감사절 폭풍",
-    "hitAt": "2026-11-27T08:30:00+09:00",
-    "leadMin": 1546
-   },
-   {
-    "keyword": "코스피 소폭 상승 마감",
-    "hitKeyword": "코스피 급락 손실",
-    "hitAt": "2026-11-27T08:30:00+09:00",
-    "leadMin": 963
-   },
-   {
-    "keyword": "코스피 4700선 강보합 마감",
-    "hitKeyword": "코스피 급락 손실",
-    "hitAt": "2026-11-27T08:30:00+09:00",
-    "leadMin": 943
    }
   ]
  }
