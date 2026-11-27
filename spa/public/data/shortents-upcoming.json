@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T14:47:46.333Z",
+ "builtAt": "2026-11-27T14:57:53.988Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,14 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "GS칼텍스 5연승",
+   "keyword": "실바 30점 GS칼텍스 5연승",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 2,
+   "articles90": 8,
+   "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-27T13:20:00.000Z",
+   "firstArticleAt": "2026-11-27T13:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -29,16 +29,49 @@
      "link": "https://m.sports.naver.com/volleyball/article/450/0000155708"
     },
     {
-     "title": "'5연승' GS 칼텍스 선두 탈환…대한항공 3연승",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T14:28:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/422/0000930710"
-    },
-    {
      "title": "'실바 30점' GS칼텍스 5연승·선두 복귀...대한항공 3연승",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-27T14:21:00.000Z",
      "link": "https://m.sports.naver.com/general/article/052/0002439187"
+    },
+    {
+     "title": "프로배구 GS칼텍스, 흥국생명 꺾고 5연승… 선두 탈환",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-27T14:10:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888230"
+    }
+   ]
+  },
+  {
+   "keyword": "굿파트너2",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T13:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘굿파트너2’ 박해진, 선물 공세에도 박준면에 까였다… 장나라·김혜...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-27T14:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001152089"
+    },
+    {
+     "title": "'굿파트너2' 장나라 김혜윤 박해진, 의뢰인 사로잡기 경쟁",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T14:42:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288158"
+    },
+    {
+     "title": "'굿파트너2' 장나라X김혜윤, 불륜 커플 파탄냈다 '통쾌' [종합]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-27T14:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084926"
     }
    ]
   },
@@ -55,55 +88,22 @@
    "capped": false,
    "samples": [
     {
-     "title": "세계변호사협회도 조희대 탄핵 추진에 우려…\"위험한 선례\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-27T14:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522888?sid=104"
-    },
-    {
      "title": "[속보] 세계변호사협회 \"조희대 탄핵은 위험한 선례…중대한 후폭풍 낳...",
      "press": "imaeil.com",
      "publishedAt": "2026-11-27T14:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/088/0001042810?sid=102"
     },
     {
-     "title": "세계변호사협회, 조희대 대법원장 탄핵 우려 “중대한 후폭풍”",
+     "title": "세계변호사협회도 조희대 탄핵 추진에 우려…\"위험한 선례\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-27T14:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522888?sid=104"
+    },
+    {
+     "title": "“조희대 탄핵은 위험한 선례” 세계변호사협회도 우려 표명",
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-27T14:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003568535?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "굿파트너2",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T13:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'굿파트너2' 장나라 김혜윤 박해진, 의뢰인 사로잡기 경쟁",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T14:42:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288158"
-    },
-    {
-     "title": "'굿파트너2' 장나라X김혜윤, 불륜 커플 파탄냈다 '통쾌' [종합]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T14:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084926"
-    },
-    {
-     "title": "'굿파트너2' 박준면, 100만 유튜버 남편 외도에 분노 \"당장 나가\"",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T13:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084920"
     }
    ]
   },
@@ -136,38 +136,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-27T13:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012303002?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "임찬규 손새은 결혼",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T13:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "손나은, 제부 생긴다..임찬규♥손새은 12월 19일 결혼식[스타이슈]",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-27T13:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490748"
-    },
-    {
-     "title": "LG 임찬규, 손나은 동생 손새은과 결혼…5년 열애 결실",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-27T13:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005447619"
-    },
-    {
-     "title": "LG 임찬규, '손나은 동생' 손새은과 12월 19일 결혼",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T13:34:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009314982"
     }
    ]
   }
