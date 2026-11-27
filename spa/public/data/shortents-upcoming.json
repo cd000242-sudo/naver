@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T01:22:59.370Z",
+ "builtAt": "2026-11-27T01:33:02.845Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,102 +8,103 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "코스피 상승 출발",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 90,
-   "recent20": 9,
-   "press": 61,
-   "firstArticleAt": "2026-11-27T00:03:00.000Z",
+   "articles90": 88,
+   "recent20": 8,
+   "press": 58,
+   "firstArticleAt": "2026-11-27T00:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "코스닥 상승세 강해져 5%대 급등…매수 사이드카 발동",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T01:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467238?sid=101"
+    },
+    {
+     "title": "코스피 강보합…코스닥 4%대 급등",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T01:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930442?sid=101"
+    },
     {
      "title": "SK스퀘어 주가, 11월 27일 장중 657,000원 0.77% 상승",
      "press": "topstarnews.net",
      "publishedAt": "2026-11-27T01:20:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287676"
-    },
-    {
-     "title": "코스피,장 초반 4,700 보합권 등락…코스닥 3%대 상승",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-27T01:18:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95293"
-    },
-    {
-     "title": "코스닥 4%대 상승...보안·로봇주 강세에 안랩 14%↑·코스모로보틱스 상...",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-27T01:18:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=321135"
     }
    ]
   },
   {
    "keyword": "중기부 장관 표창 수상",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 47,
-   "recent20": 8,
-   "press": 41,
-   "firstArticleAt": "2026-11-26T23:54:00.000Z",
+   "articles90": 46,
+   "recent20": 11,
+   "press": 42,
+   "firstArticleAt": "2026-11-27T00:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "인천공항공사, 스마트 제방빙 시스템 국산화로 중기부 장관표창",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-27T01:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848706?sid=101"
+     "title": "삼양식품, '올해의 상생기업' 선정…중기부 장관 표창 수상",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-27T01:30:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887484"
     },
     {
-     "title": "세븐일레븐, 골목상권과 상생 확대..사업영역 보호 공로 중기부 장관 표...",
-     "press": "kpenews.com",
-     "publishedAt": "2026-11-27T01:16:00.000Z",
-     "link": "https://kpenews.com/View.aspx?No=4332245"
+     "title": "광업공단, ‘올해의 상생기업 대상’ 2관왕···중기부 장관상",
+     "press": "amenews.kr",
+     "publishedAt": "2026-11-27T01:30:00.000Z",
+     "link": "http://amenews.kr/news/view.php?idx=68886"
     },
     {
-     "title": "중소기업과 상생협력 성과 인정···삼양식품, 중기부 장관 표창 수상",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-27T01:15:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2497945"
+     "title": "삼양식품, ‘올해의 상생기업’ 선정…중기부 장관 표창",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-27T01:30:00.000Z",
+     "link": "https://www.swtvnews.com/news/newsview.php?ncode=1065571436293059"
     }
    ]
   },
   {
    "keyword": "경찰, 한동훈 유출 수사",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 36,
-   "recent20": 19,
-   "press": 33,
+   "articles90": 42,
+   "recent20": 15,
+   "press": 38,
    "firstArticleAt": "2026-11-27T00:28:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "'한동훈 수사자료 공개 의혹' 수사...경찰, 법무부·공소청 등 압수수색",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-27T01:22:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=567094"
+     "title": "'한동훈, 김승원 수사 검찰 자료 유출 의혹' 법무부·공소청 압수수색",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-27T01:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078981?sid=102"
     },
     {
-     "title": "한동훈 '기소계획서 유출 의혹' 법무부·공소청 압수수색",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T01:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406273?sid=102"
+     "title": "경찰, 한동훈 '수사자료 유출' 의혹 관련 법무부·공소청 압수수색",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-27T01:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165874?sid=102"
     },
     {
-     "title": "경찰, '한동훈 자료유출 의혹' 법무부·공소청 등 압수수색…강제수사 ...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-27T01:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834243?sid=102"
+     "title": "경찰, '한동훈 자료 유출' 법무부·공소청 압수수색",
+     "press": "lawtimes.co.kr",
+     "publishedAt": "2026-11-27T01:30:00.000Z",
+     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=230208"
     }
    ]
   },
@@ -112,30 +113,62 @@
    "sources": [
     "google"
    ],
-   "articles90": 37,
-   "recent20": 14,
-   "press": 31,
-   "firstArticleAt": "2026-11-27T00:44:00.000Z",
-   "exclusive": false,
+   "articles90": 35,
+   "recent20": 17,
+   "press": 29,
+   "firstArticleAt": "2026-11-27T00:58:00.000Z",
+   "exclusive": true,
    "capped": true,
    "samples": [
     {
-     "title": "[시선집중] 靑 이해민 “AI 커닝 방지, ‘전 세계 공조’ 한국이 제일 먼...",
-     "press": null,
-     "publishedAt": "2026-11-27T01:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538441?sid=100"
+     "title": "소비자 넘어 AI에 선택받아야…기업 광고·마케팅 공식 바뀐다",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T01:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416476?sid=105"
     },
     {
-     "title": "LG유플러스, 현대차·기아 배송로봇 5G SA 실증…피지컬 AI 협력 확대",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-27T01:20:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=173216"
+     "title": "靑 “‘모두의 AI’ 12월 출시…美中 AI 통제 속 독자 역량 필수”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-27T01:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729355?sid=100"
     },
     {
-     "title": "한·싱가포르, 내년 아세안+3 공동의장…'AI·금융안정' 새 의제 제안",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T01:20:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127000235"
+     "title": "AI가 생산·재고관리 바꿨다…콜마그룹, 품질혁신 8개상",
+     "press": "newsinside.kr",
+     "publishedAt": "2026-11-27T01:26:00.000Z",
+     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5057932"
+    }
+   ]
+  },
+  {
+   "keyword": "국가안보실 해킹 2차 피해 대응",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 21,
+   "recent20": 2,
+   "press": 21,
+   "firstArticleAt": "2026-11-27T00:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "청와대, 금융기관 긴급 소집...해킹 2차 피해 방지 점검",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T01:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438830?sid=100"
+    },
+    {
+     "title": "정부, 해킹 유출 계좌·카드 정보 FDS 신속 등록…AI 보이스피싱 탐지 가...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-27T01:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485482?sid=100"
+    },
+    {
+     "title": "靑 안보실, 해킹 2차 피해 차단 긴급회의…금융권 AI 보안 강화 주문",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-27T01:08:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446911"
     }
    ]
   },
@@ -144,68 +177,133 @@
    "sources": [
     "google"
    ],
-   "articles90": 17,
-   "recent20": 16,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T01:02:00.000Z",
+   "articles90": 14,
+   "recent20": 12,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T01:12:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "홍성군, 중국 반도체·의료기기 투자단 10명 유치 논의",
-     "press": "newsworker.co.kr",
-     "publishedAt": "2026-11-27T01:20:00.000Z",
-     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=516548"
+     "title": "HD현대사이트솔루션, 65조원 중국 건설기계 부품시장 공략",
+     "press": "megaeconomy.co.kr",
+     "publishedAt": "2026-11-27T01:28:00.000Z",
+     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065576120208857"
     },
     {
-     "title": "삼성바이오에피스, 중국 바이오텍과 신약 개발 협력",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-27T01:20:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611270076"
+     "title": "중국 후둥중화, LNG선 2척 추가수주...올해만 17척",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T01:28:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127102418883"
     },
     {
-     "title": "엔비디아 첨단칩 사들인 美기업 2곳, 실소유주는 중국 … 수출통제 허점...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-27T01:20:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/27/2026112750084.html"
+     "title": "인천시, 중국 진출 중소기업에 웨이하이 사무공간·컨설팅 지원",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-27T01:26:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261127500029"
     }
    ]
   },
   {
-   "keyword": "에이피알",
+   "keyword": "나주 오리농장 AI 항원 검출",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-26T23:54:00.000Z",
+   "articles90": 13,
+   "recent20": 5,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T00:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "에이피알, 닥터멜락신 운영사 3900억원에 인수…K뷰티 영토 확장",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-27T01:08:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628097"
+     "title": "나주 오리농장서 H5형 AI 검출…전남광주 24시간 이동중지 명령",
+     "press": "thepowernews.co.kr",
+     "publishedAt": "2026-11-27T01:30:00.000Z",
+     "link": "https://www.thepowernews.co.kr/view.php?ud=202611271003216097caa2b7671d_7"
     },
     {
-     "title": "에이피알 주가, 11월 27일 장중 303,500원 1.68% 상승",
+     "title": "나주 오리농장서 H5형 AI 검출…반경 10㎞ 이동 제한",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T01:27:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127000313"
+    },
+    {
+     "title": "나주 세지면 오리농장서 AI 항원 검출…방역지역 10㎞ 확대",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-27T01:26:00.000Z",
+     "link": "https://www.viva100.com/article/20261127500189"
+    }
+   ]
+  },
+  {
+   "keyword": "오정세 최성곤 미담",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T00:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "청룡 발칵 뒤집어 놓더니…뒤늦게 깜짝 미담까지 밝혀진 '남자 연예인'",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-27T01:28:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178244"
+    },
+    {
+     "title": "“평생 잊지 못할 큰 선물”…오정세, 병문안·조문·축가까지",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T01:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005769834"
+    },
+    {
+     "title": "오정세, 약속 지킨 미담",
      "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T00:50:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287609"
+     "publishedAt": "2026-11-27T01:10:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287647"
+    }
+   ]
+  },
+  {
+   "keyword": "김용범 위원장 내정",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T00:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이억원 금융위원장, 민간 자본시장 개혁기구 구성 및 운영방안 논의",
+     "press": "intn.co.kr",
+     "publishedAt": "2026-11-27T01:24:00.000Z",
+     "link": "https://www.intn.co.kr/news/articleView.html?idxno=3000565"
     },
     {
-     "title": "에이피알, 3900억원에 닥터멜락신 품는다…메디큐브와 독립 운영",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-27T00:44:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=756778"
+     "title": "[불편한 질문] 자본시장 개혁 맡은 김용범..그런데 메리츠 부회장은 적...",
+     "press": "peoplewatch.co.kr",
+     "publishedAt": "2026-11-27T01:16:00.000Z",
+     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611270004"
+    },
+    {
+     "title": "이남우 거버넌스포럼 회장 \"김용범 발탁 환영…메리츠식 밸류업 확산해...",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-27T01:04:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026112709564967808"
     }
    ]
   },
   {
    "keyword": "발언하는 정점식 원내대표",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 23,
@@ -238,12 +336,13 @@
   {
    "keyword": "김가영, 스롱 꺾고 4강 진출",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T23:58:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-27T00:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -264,6 +363,71 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-27T00:44:00.000Z",
      "link": "https://www.newspim.com/news/view/20261127000220"
+    }
+   ]
+  },
+  {
+   "keyword": "그냥 사람 친구",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T00:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "tvN ‘그냥사람친구’ 이서진·한지민·김용건·박정수·주헌·정연, 유...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-27T01:26:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178268"
+    },
+    {
+     "title": "'그냥사람친구' 이서진·한지민, 유럽 우정 여행",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-27T00:54:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611270159"
+    },
+    {
+     "title": "이서진 “한지민 갱년기” 선 넘은 발언 논란 속 유럽 여행 공개 (그냥...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T00:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191754"
+    }
+   ]
+  },
+  {
+   "keyword": "주주",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T00:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "더 시에나 그룹, 골프존카운티 1·2대 주주 지분 인수 추진",
+     "press": "e2news.com",
+     "publishedAt": "2026-11-27T01:06:00.000Z",
+     "link": "http://www.e2news.com/news/articleView.html?idxno=336539"
+    },
+    {
+     "title": "큐리언트, 706억원 유상증자 구주주 청약 106.33% 달성",
+     "press": "bokuennews.com",
+     "publishedAt": "2026-11-27T01:02:00.000Z",
+     "link": "http://www.bokuennews.com/news/article.html?no=287833"
+    },
+    {
+     "title": "법무법인 태평양 “내년 주총 법률 검토, 주주 표심 분석 병행해야”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-27T00:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729331?sid=101"
     }
    ]
   },
@@ -298,43 +462,11 @@
      "link": "https://m.entertain.naver.com/article/009/0005769800"
     }
    ]
-  },
-  {
-   "keyword": "김정은 참가자들과 기념촬영",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T23:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김정은, 당 세포비서대회 참가자들과 기념촬영",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T00:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467055?sid=100"
-    },
-    {
-     "title": "러시아 공연 즐긴 김정은…\"푸틴에 따뜻한 인사 전해달라\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-27T00:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653723?sid=100"
-    },
-    {
-     "title": "김정은, '최말단 조직 책임자' 당세포비서대회 참가자들과 기념촬영",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-26T23:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438776?sid=100"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1762,
+  "flagged": 1768,
   "matched": 879,
   "avgLeadMin": 590,
   "recent": [
