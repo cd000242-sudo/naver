@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T04:44:07.433Z",
+ "builtAt": "2026-11-27T04:54:11.113Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 19,
-   "recent20": 4,
-   "press": 19,
-   "firstArticleAt": "2026-11-27T03:15:00.000Z",
-   "exclusive": false,
+   "articles90": 18,
+   "recent20": 2,
+   "press": 18,
+   "firstArticleAt": "2026-11-27T03:27:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "손연재♥이준효 부부, 고위험 산모·태아 위해 30억 '통큰 기부'[공식]",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-27T04:53:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646041"
+    },
     {
      "title": "손연재 부부, 연세의료원에 30억원 기부…고위험 산모·태아 돕는다",
      "press": "mbn.mk.co.kr",
@@ -33,12 +39,70 @@
      "press": "cbci.co.kr",
      "publishedAt": "2026-11-27T04:30:00.000Z",
      "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631340"
+    }
+   ]
+  },
+  {
+   "keyword": "김대기 관저이전 예산전용",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T03:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'관저이전 예산 전용' 김대기 1심 징역형 집유…이상민 무죄",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T04:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930514?sid=102"
     },
     {
-     "title": "아이 생일마다 1억씩 내놓더니…손연재 부부 결단에 '깜짝'",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-27T04:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359022?sid=102"
+     "title": "김대기 전 비서실장, '윤 관저 이전비 전용' 1심 집행유예",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-27T04:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980165?sid=102"
+    },
+    {
+     "title": "'尹 관저 이전 예산 불법 전용' 김대기 1심 집행유예…'공범' 이상민은...",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-27T04:50:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=731330"
+    }
+   ]
+  },
+  {
+   "keyword": "북 주민 6명 송환",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-27T03:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'표류' 北어선, 24일만에 北으로…1명 남고 6명 송환",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-27T04:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000546312?sid=104"
+    },
+    {
+     "title": "\"구조된 북한 어선, 24일 만에 송환 완료...1명 귀순\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T04:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438923?sid=100"
+    },
+    {
+     "title": "울릉도 인근 표류 北 어선 24일 만에 송환… 1명은 국내 잔류",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-27T04:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193735?sid=100"
     }
    ]
   },
@@ -47,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 4,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T03:18:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T03:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,78 +139,14 @@
    ]
   },
   {
-   "keyword": "북 주민 6명 송환",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 4,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T03:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "울릉도 인근 표류 北 어선 24일 만에 송환… 1명은 국내 잔류",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-27T04:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193735?sid=100"
-    },
-    {
-     "title": "'동해 표류' 北 어선, 24일만에 송환…어민 1명 귀순",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-27T04:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160276?sid=100"
-    },
-    {
-     "title": "'동해 표류' 北 어민 6명 송환…1명은 귀순",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-27T04:32:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088641"
-    }
-   ]
-  },
-  {
-   "keyword": "김대기 관저이전 예산전용",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T03:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'윤 관저이전 예산전용' 김대기 전 실장 1심 징역형 집유",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-27T04:08:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545202"
-    },
-    {
-     "title": "'尹 관저 이전 예산 전용' 이상민 1심 무죄…김대기 징역형 집유",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-27T04:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160268?sid=102"
-    },
-    {
-     "title": "'尹관저 예산 불법 전용' 김대기 1심 징역 2년 집유...이상민 무죄",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-27T03:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610790?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "개인정보 유출 긴급대응",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T03:24:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T03:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -175,30 +175,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 4,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T03:22:00.000Z",
+   "articles90": 12,
+   "recent20": 7,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T03:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'밥 대신 빵과 우유'…학교 비정규직 오늘 총파업",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T04:52:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127134653486"
+    },
+    {
+     "title": "'밥 대신 빵'…학교비정규직 파업에 세종 97개 학교 대체식 지급",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T04:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467710?sid=102"
+    },
     {
      "title": "밥 대신 '빵·컵라면'…학교급식 '수 천 곳' 차질",
      "press": "biz.sbs.co.kr",
      "publishedAt": "2026-11-27T04:43:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/374/0000546308?sid=103"
-    },
-    {
-     "title": "'밥 대신 빵'…경기 학교비정규직 5582명 파업에 급식·돌봄 차질",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T04:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314202?sid=102"
-    },
-    {
-     "title": "밥 대신 빵",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T04:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314181?sid=102"
     }
    ]
   },
@@ -208,7 +208,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-27T04:00:00.000Z",
    "exclusive": false,
