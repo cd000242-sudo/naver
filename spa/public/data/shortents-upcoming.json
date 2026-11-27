@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T10:56:18.738Z",
+ "builtAt": "2026-11-27T11:06:26.630Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 21,
  "candidates": [
   {
    "keyword": "최민희",
    "sources": [
     "google"
    ],
-   "articles90": 79,
-   "recent20": 3,
-   "press": 64,
-   "firstArticleAt": "2026-11-27T09:27:00.000Z",
+   "articles90": 66,
+   "recent20": 7,
+   "press": 55,
+   "firstArticleAt": "2026-11-27T09:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최민희 '당원 자격정지 2년'…2028년 총선 공천 '빨간불'",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-27T10:50:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=316440"
+     "title": "\"수용 불가, 재심 신청\" 최민희 측 반발…다음 행보는?",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-27T11:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406408?sid=100"
     },
     {
-     "title": "최민희 중징계 의결에 친청계 반발…정청래 \"납득할 수 없어\"(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T10:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314942?sid=100"
+     "title": "[사설] 최민희 중징계 결정, ‘당내 내전’으로 이어져선 안돼",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-27T11:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834355?sid=110"
     },
     {
-     "title": "최민희 '총선 출마'까지 막힐 위기…민주당 계파 갈등 격화",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-27T10:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359225?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "철도노조 준법투쟁 지연",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 25,
-   "recent20": 6,
-   "press": 22,
-   "firstArticleAt": "2026-11-27T09:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'20분 이상 지연' 열차 수백대…'불금' 퇴근길 대란",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-27T10:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001274243?sid=102"
-    },
-    {
-     "title": "철도노조 준법투쟁 이틀째...퇴근길 전철 445대 지연",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T10:48:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127194207443"
-    },
-    {
-     "title": "철도노조 준법투쟁…광역전철 일부만 10분 지연",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T10:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302843?sid=101"
+     "title": "최민희 '당원자격정지 2년' 중징계에 與 내홍 커질 듯…친청계 \"김민석...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T10:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350259?sid=100"
     }
    ]
   },
@@ -79,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 2,
-   "press": 20,
-   "firstArticleAt": "2026-11-27T09:30:00.000Z",
+   "articles90": 18,
+   "recent20": 1,
+   "press": 18,
+   "firstArticleAt": "2026-11-27T09:37:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "선관위 특검, ‘공추비 부당 지급 의혹’ 노태악 2차 압수수색",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-27T11:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887908?sid=102"
+    },
     {
      "title": "선관위 특검, '공추비 의혹' 노태악 전 위원장 압수수색",
      "press": "daejonilbo.com",
@@ -97,12 +71,6 @@
      "press": "segye.com",
      "publishedAt": "2026-11-27T10:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004178701?sid=102"
-    },
-    {
-     "title": "선관위 특검, 노태악 자택 두 번째 압수수색…휴대전화 대상",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-27T10:36:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=321172"
     }
    ]
   },
@@ -112,7 +80,7 @@
     "daum"
    ],
    "articles90": 8,
-   "recent20": 3,
+   "recent20": 2,
    "press": 8,
    "firstArticleAt": "2026-11-27T09:55:00.000Z",
    "exclusive": false,
@@ -144,12 +112,18 @@
     "nate"
    ],
    "articles90": 11,
-   "recent20": 0,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-27T09:32:00.000Z",
+   "firstArticleAt": "2026-11-27T09:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "홍익표 통일장관 후보자, 재산 65억원 신고…'비거주1주택' 지적(종합2보...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T11:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468473?sid=100"
+    },
     {
      "title": "강금실, 재산 2억 원 신고… 중국 지방정부 고문 경력도 기재",
      "press": "hankookilbo.com",
@@ -161,24 +135,19 @@
      "press": "ichannela.com",
      "publishedAt": "2026-11-27T10:13:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/449/0000368933?sid=100"
-    },
-    {
-     "title": "강금실 국정원장 후보자, 예금 등 재산 약 2억6500만원 신고",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T10:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350235?sid=100"
     }
    ]
   },
   {
    "keyword": "신상훈 제네시스 대상 수상",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T09:28:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T10:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,47 +172,14 @@
    ]
   },
   {
-   "keyword": "남경필 장남 스토킹 혐의",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T09:27:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "남경필 장남 또 체포…“성관계 영상 유포하겠다” 협박 혐의",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-27T10:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568521?sid=102"
-    },
-    {
-     "title": "[단독] 남경필 장남, 스토킹 혐의 체포...성관계 영상 유포 협박도",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T09:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439117?sid=102"
-    },
-    {
-     "title": "남경필 전 경기지사 아들 '전 연인 성관계 영상 유포 협박' 등 혐의 체포...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T09:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314899?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "오세훈",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-27T09:36:00.000Z",
+   "firstArticleAt": "2026-11-27T09:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -268,135 +204,167 @@
    ]
   },
   {
-   "keyword": "삼성전자 배당금",
+   "keyword": "강유정 논문 표절 의혹",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T09:32:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-27T09:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'12배 더 꽂혔다' 삼성전자 30조 배당 잔치…'K-반도체' 쟁탈전에 일론 ...",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-27T10:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980207?sid=102"
+     "title": "김승수 “강유정 후보자 논문 자기 표절”…강 후보자 쪽 “연구윤리 위...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-27T10:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834353?sid=103"
     },
     {
-     "title": "[더나은미래 경제브리핑] 삼성전자 30조 ‘역대 최대’ 배당, 추가 주주...",
-     "press": "futurechosun.com",
+     "title": "강유정 문체부 장관 후보자, 논문 자기표절 의혹에 “사실 아니야”",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T10:24:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654132"
+    },
+    {
+     "title": "강유정 재산 46억 신고···논문 자기표절 의혹도",
+     "press": "thereport.co.kr",
      "publishedAt": "2026-11-27T09:58:00.000Z",
-     "link": "https://futurechosun.com/?p=167910"
-    },
-    {
-     "title": "[뉴스룸 오프닝] 배당금 '30조' 풀었다 / '노란 디올' 선물의 목적 / 당원...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-27T09:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522837?sid=100"
+     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93819"
     }
    ]
   },
   {
-   "keyword": "보현 결혼 발표",
+   "keyword": "남경필 장남 스토킹 혐의",
    "sources": [
     "daum"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-27T09:33:00.000Z",
+   "firstArticleAt": "2026-11-27T09:41:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "남경필 장남 또 체포…“성관계 영상 유포하겠다” 협박 혐의",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-27T10:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568521?sid=102"
+    },
+    {
+     "title": "[단독] 남경필 장남, 스토킹 혐의 체포...성관계 영상 유포 협박도",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T09:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439117?sid=102"
+    },
+    {
+     "title": "남경필 전 경기지사 아들 '전 연인 성관계 영상 유포 협박' 등 혐의 체포...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T09:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314899?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "베트남 당 중앙정책전략위원장",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-27T10:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'환승연애' 김보현, 내년 봄 결혼…예비 신랑 누구?",
-     "press": "topstarnews.net",
+     "title": "한성숙 국무총리, 베트남 당 중앙정책전략위원장 접견",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T10:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350239?sid=100"
+    },
+    {
+     "title": "韓총리, 베트남 당 중앙정책전략위원장 접견…\"양국 교류·협력 확대\"",
+     "press": "newsis.com",
      "publishedAt": "2026-11-27T10:08:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288036"
+     "link": "https://n.news.naver.com/mnews/article/003/0014350233?sid=100"
     },
     {
-     "title": "'환승연애' 김보현 깜짝 결혼 발표..\"매일매일 웃음 가득\" 웨딩화보[스타...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-27T09:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490719"
-    },
-    {
-     "title": "‘환승연애’ 보현, 내년 봄 결혼한다… “평생 함께할 사람 만나”",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-27T09:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001152066"
+     "title": "韓총리, 베트남 당 고위 인사 만나 \"상호 신뢰 심화 기대\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T10:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468452?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1936,
-  "matched": 960,
-  "avgLeadMin": 629,
+  "flagged": 1937,
+  "matched": 974,
+  "avgLeadMin": 656,
   "recent": [
    {
-    "keyword": "홍민기 배우",
-    "hitKeyword": "홍민기 전 여자친구 실종",
-    "hitAt": "2026-11-27T19:30:00+09:00",
-    "leadMin": 74
+    "keyword": "최교진 교육부 장관 사의",
+    "hitKeyword": "비정규직 파업 교육부 대응",
+    "hitAt": "2026-11-27T20:00:00+09:00",
+    "leadMin": 7544
    },
    {
-    "keyword": "홍민기",
-    "hitKeyword": "홍민기 전 여자친구 실종",
-    "hitAt": "2026-11-27T19:30:00+09:00",
-    "leadMin": 64
+    "keyword": "최교진 교육부 장관 면직",
+    "hitKeyword": "비정규직 파업 교육부 대응",
+    "hitAt": "2026-11-27T20:00:00+09:00",
+    "leadMin": 7192
    },
    {
-    "keyword": "김범수 무죄 확정",
-    "hitKeyword": "김범수 SM시세조종 무죄",
-    "hitAt": "2026-11-27T19:30:00+09:00",
-    "leadMin": 54
+    "keyword": "카카오",
+    "hitKeyword": "카카오 김범수 무죄 확정",
+    "hitAt": "2026-11-27T20:00:00+09:00",
+    "leadMin": 6093
    },
    {
-    "keyword": "국민연금 적립금 감소",
-    "hitKeyword": "국민연금 적립금 급감",
-    "hitAt": "2026-11-27T19:30:00+09:00",
-    "leadMin": 54
+    "keyword": "윤석열 위증 무죄 확정",
+    "hitKeyword": "카카오 김범수 무죄 확정",
+    "hitAt": "2026-11-27T20:00:00+09:00",
+    "leadMin": 1955
    },
    {
-    "keyword": "김범수 무죄, 공소청 상고 포기",
-    "hitKeyword": "김범수 SM시세조종 무죄",
-    "hitAt": "2026-11-27T19:30:00+09:00",
-    "leadMin": 34
+    "keyword": "윤석열 위증 혐의 무죄 확정",
+    "hitKeyword": "카카오 김범수 무죄 확정",
+    "hitAt": "2026-11-27T20:00:00+09:00",
+    "leadMin": 1925
    },
    {
-    "keyword": "내년 4월 야외 결혼식",
-    "hitKeyword": "인도 초호화 결혼식",
-    "hitAt": "2026-11-27T19:00:00+09:00",
-    "leadMin": 376
+    "keyword": "위증 무죄 확정",
+    "hitKeyword": "카카오 김범수 무죄 확정",
+    "hitAt": "2026-11-27T20:00:00+09:00",
+    "leadMin": 1884
    },
    {
-    "keyword": "솔비·이규한, 4월 25일 야외 결혼식",
-    "hitKeyword": "인도 초호화 결혼식",
-    "hitAt": "2026-11-27T19:00:00+09:00",
-    "leadMin": 296
+    "keyword": "대법원, 위증 무죄 확정",
+    "hitKeyword": "카카오 김범수 무죄 확정",
+    "hitAt": "2026-11-27T20:00:00+09:00",
+    "leadMin": 1854
    },
    {
-    "keyword": "학교 급식 차질",
-    "hitKeyword": "학교 파업 급식 중단",
-    "hitAt": "2026-11-27T19:00:00+09:00",
-    "leadMin": 135
+    "keyword": "한덕수 위증 무죄 확정",
+    "hitKeyword": "카카오 김범수 무죄 확정",
+    "hitAt": "2026-11-27T20:00:00+09:00",
+    "leadMin": 1824
    },
    {
-    "keyword": "학교 급식 차질 발생",
-    "hitKeyword": "학교 파업 급식 중단",
-    "hitAt": "2026-11-27T19:00:00+09:00",
-    "leadMin": 54
+    "keyword": "한덕수 재판 무죄 확정",
+    "hitKeyword": "카카오 김범수 무죄 확정",
+    "hitAt": "2026-11-27T20:00:00+09:00",
+    "leadMin": 1774
    },
    {
-    "keyword": "LG유플러스 AI 사업 강화",
-    "hitKeyword": "AI 커닝 대응 강화",
-    "hitAt": "2026-11-27T18:30:00+09:00",
-    "leadMin": 7726
+    "keyword": "윤석열 한덕수 위증 무죄 확정",
+    "hitKeyword": "카카오 김범수 무죄 확정",
+    "hitAt": "2026-11-27T20:00:00+09:00",
+    "leadMin": 1724
    }
   ]
  }
