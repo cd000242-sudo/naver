@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T16:28:28.482Z",
+ "builtAt": "2026-11-27T16:38:31.944Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,58 +8,53 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "인터넷우체국 개인정보 유출",
+   "keyword": "박홍근 서영교 법사위 충돌",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T15:06:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-27T15:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "인터넷우체국 개인정보 털렸다...하루치만 11만명 넘게 유출",
+     "title": "김의겸 새만금 예산 질의에 박홍근 답변 거부…법사위 파행",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T15:50:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765824"
+    },
+    {
+     "title": "박홍근 “법사위답게 하라” 서영교 “충격”… 민주당 장관·의원끼리...",
      "press": "chosun.com",
-     "publishedAt": "2026-11-27T16:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012241?sid=105"
+     "publishedAt": "2026-11-27T15:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004012231?sid=100"
     },
     {
-     "title": "인터넷우체국 해킹에 개인정보 유출… 하루치만 11만명 넘어",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-27T15:54:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452812"
-    },
-    {
-     "title": "인터넷우체국 등기우편 고객정보 유출…하루치만 11만3천명 확인",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-27T15:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834358?sid=102"
+     "title": "박홍근-서영교 충돌에 법사위 파행…\"상원인가\" vs \"고압적 장관 처음\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-27T15:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610957?sid=100"
     }
    ]
   },
   {
-   "keyword": "최민희 중징계 의결",
+   "keyword": "최민희 중징계 결정",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T15:01:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-27T15:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "민주, 최민희에 '당원자격정지 2년' 중징계...\"수용 못 해\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T15:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439196?sid=100"
-    },
     {
      "title": "최민희 중징계에 정청래 \"김민석 해당 행위는 무엇이냐\"",
      "press": "gukjenews.com",
@@ -71,47 +66,21 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-27T15:40:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004012240?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "지수 라우럴 밈 탄생",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T15:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "블랙핑크 지수, 228만 원 플렉스에 김광규 감격…이서진은 “창피하다 ...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-27T15:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000494142"
     },
     {
-     "title": "지수 \"'라우럴' 넣어도 돼요?\"…밈 탄생 현장 공개",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T15:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009314998"
-    },
-    {
-     "title": "\"라우럴을 넣는다고요?\"…블랙핑크 지수, 본인도 빵 터진 '레전드 밈' 결...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-27T15:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646269"
+     "title": "최민희 '당원자격정지 2년' 중징계…재심 신청 예고",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T15:16:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765806"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1979,
-  "matched": 980,
-  "avgLeadMin": 657,
+  "flagged": 1978,
+  "matched": 979,
+  "avgLeadMin": 651,
   "recent": [
    {
     "keyword": "임찬규 손새은 결혼",
