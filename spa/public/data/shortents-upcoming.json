@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T10:36:12.481Z",
+ "builtAt": "2026-11-27T10:46:15.439Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "최민희 중징계 의결",
+   "keyword": "최민희",
    "sources": [
-    "signal.bz",
-    "nate"
+    "google"
    ],
-   "articles90": 90,
-   "recent20": 14,
-   "press": 68,
-   "firstArticleAt": "2026-11-27T09:07:00.000Z",
+   "articles90": 91,
+   "recent20": 8,
+   "press": 66,
+   "firstArticleAt": "2026-11-27T09:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최민희 중징계 의결에 친청계 반발…정청래 \"납득할 수 없어\"(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T10:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314942?sid=100"
+    },
+    {
+     "title": "최민희 '총선 출마'까지 막힐 위기…민주당 계파 갈등 격화",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T10:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359225?sid=100"
+    },
     {
      "title": "민주당, 최민희 '당원자격 정지 2년' 중징계 의결",
      "press": "sisafocus.co.kr",
      "publishedAt": "2026-11-27T10:34:00.000Z",
      "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=368149"
-    },
-    {
-     "title": "최민희 중징계에 친청계 “김민석도 심사해야”…민주당 계파 갈등 격화",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-27T10:34:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261127500325"
-    },
-    {
-     "title": "與, 최민희 ‘당원권 2년 정지’ 중징계…친청계 “납득 못해” 반발",
-     "press": "segye.com",
-     "publishedAt": "2026-11-27T10:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178698?sid=100"
     }
    ]
   },
@@ -49,63 +48,62 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 20,
-   "recent20": 0,
-   "press": 19,
-   "firstArticleAt": "2026-11-27T09:08:00.000Z",
+   "articles90": 21,
+   "recent20": 3,
+   "press": 21,
+   "firstArticleAt": "2026-11-27T09:21:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[단독] 선관위 특검, 노태악·허철훈 등 증거인멸 정황 포착… 盧 2차 압...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-27T10:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012151?sid=102"
+     "title": "선관위 특검, '공추비 의혹' 노태악 전 위원장 압수수색",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-27T10:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193763?sid=102"
     },
     {
-     "title": "선관위 특검, 노태악 전 선관위원장 또 압수수색…공추비 의혹 관련",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-27T10:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522842?sid=102"
+     "title": "특검, 노태악 휴대전화 추가 압수수색…공명선거추진활동비 지급 경위 ...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-27T10:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178701?sid=102"
     },
     {
-     "title": "선관위특검, 노태악 추가 압수수색‥공추비 부당 지급 의혹",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-27T10:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538566?sid=102"
+     "title": "선관위 특검, 노태악 자택 두 번째 압수수색…휴대전화 대상",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-27T10:36:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=321172"
     }
    ]
   },
   {
    "keyword": "철도노조 준법투쟁",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 4,
-   "press": 18,
+   "articles90": 22,
+   "recent20": 6,
+   "press": 20,
    "firstArticleAt": "2026-11-27T09:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "철도노조 준법투쟁 이틀째…퇴근길 열차 지연에 승객 분통",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-27T10:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368946?sid=102"
+     "title": "철도노조 준법투쟁 이틀째…수도권 전철 445대 지연",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T10:42:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654134"
     },
     {
-     "title": "철도노조 준법투쟁 이틀째…수도권 광역전철 445대 지연",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-27T10:30:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=20261127191857584324debea800_1"
+     "title": "철도노조 준법투쟁 이틀째…수도권 전철 지연 445대",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-27T10:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653884?sid=101"
     },
     {
-     "title": "철도노조 준법투쟁 둘째날 서울 지하철 1호선 '퇴근길 대란'",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T10:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468463?sid=102"
+     "title": "철도노조 준법투쟁 이틀째… 수도권 전철 445대 20분 이상 지연",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-27T10:38:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452789"
     }
    ]
   },
@@ -114,30 +112,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-27T09:13:00.000Z",
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T09:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "법사위서 때아닌 與 내부 충돌…서영교, 박홍근에 \"이런 장관 처음\"",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-27T10:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002468006?sid=100"
+    },
+    {
+     "title": "박홍근 “미래대응기금, 연기금투자풀에 여유자금 위탁 검토”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T10:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005770156?sid=101"
+    },
     {
      "title": "법사위서 與 소속 박홍근-서영교 충돌... \"법사위가 상원이냐\" \"이런 장...",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-27T10:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000968236?sid=100"
-    },
-    {
-     "title": "예산 민원에 '법사위 내전'…서영교 \"고압적\" 박홍근 \"상원이냐\"",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-27T10:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980215?sid=100"
-    },
-    {
-     "title": "서영교·박홍근, 법사위서 충돌…\"이런 경우 처음\"·\"국회법대로\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T10:16:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127185724398"
     }
    ]
   },
@@ -174,15 +172,47 @@
    ]
   },
   {
+   "keyword": "신상훈 제네시스 대상 수상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T09:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘예비역의 힘’ 전역 후 리그 지배한 신상훈, 내달 PGA투어 직행 도전",
+     "press": "donga.com",
+     "publishedAt": "2026-11-27T10:40:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/020/0003765802"
+    },
+    {
+     "title": "KPGA 2026시즌 최고의 별은 신상훈",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T10:32:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/009/0005770153"
+    },
+    {
+     "title": "'생애 첫 KPGA 제네시스 대상' 신상훈 \"더 높은 곳으로 향할 것\"",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-27T10:28:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888217"
+    }
+   ]
+  },
+  {
    "keyword": "오세훈",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T09:09:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T09:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,39 +233,6 @@
      "press": "news.tvchosun.com",
      "publishedAt": "2026-11-27T09:49:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/448/0000653879?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "제네시스 대상 수상자들",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T09:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'생애 첫 KPGA 제네시스 대상' 신상훈 \"더 높은 곳으로 향할 것\"",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-27T10:28:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888217"
-    },
-    {
-     "title": "신상훈, 생애 첫 한국프로골프협회 대상 영예…장유빈은 상금왕",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-27T09:15:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/241/0003543935"
-    },
-    {
-     "title": "생애 첫 대상 품은 신상훈, 2억원에 GV80까지 ‘잭팟’",
-     "press": "feedapi.cloud.sbs.co.kr",
-     "publishedAt": "2026-11-27T09:12:00.000Z",
-     "link": "https://feedapi.cloud.sbs.co.kr/feed-api/article_hub/G20000002580"
     }
    ]
   },
@@ -306,7 +303,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1932,
+  "flagged": 1933,
   "matched": 960,
   "avgLeadMin": 629,
   "recent": [
