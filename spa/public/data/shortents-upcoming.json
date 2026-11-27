@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T21:09:45.431Z",
+ "builtAt": "2026-11-27T21:19:48.042Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -10,6 +10,39 @@
  },
  "measured": 23,
  "candidates": [
+  {
+   "keyword": "조희대 탄핵 우려",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T20:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "해외서도 대법원장 탄핵 우려…국제변호사협회 \"위험한 선례\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-27T21:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653913?sid=100"
+    },
+    {
+     "title": "‘계엄 2년’ 앞두고 조희대 탄핵 정국…국힘, ‘사법부 독립’ 여론전",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T21:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654017"
+    },
+    {
+     "title": "[뉴스 즉설]호남 빼면 4대 6, 민주당 조희대 탄핵 여론전 국힘에 완패",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-27T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193778?sid=004"
+    }
+   ]
+  },
   {
    "keyword": "2026년 11월 28일 운세",
    "sources": [
@@ -41,45 +74,12 @@
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260917001403514"
     }
    ]
-  },
-  {
-   "keyword": "조희대 탄핵 우려",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T20:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘계엄 2년’ 앞두고 조희대 탄핵 정국…국힘, ‘사법부 독립’ 여론전",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-27T21:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2654017"
-    },
-    {
-     "title": "[뉴스 즉설]호남 빼면 4대 6, 민주당 조희대 탄핵 여론전 국힘에 완패",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-27T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193778?sid=004"
-    },
-    {
-     "title": "\"曺 탄핵, 사법 독립 침해\" 75% \"침해 안 해\" 13%",
-     "press": "lawtimes.co.kr",
-     "publishedAt": "2026-11-27T20:02:00.000Z",
-     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=230193"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1972,
-  "matched": 974,
+  "flagged": 1971,
+  "matched": 973,
   "avgLeadMin": 643,
   "recent": [
    {
