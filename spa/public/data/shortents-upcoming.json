@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T13:17:12.317Z",
+ "builtAt": "2026-11-27T13:27:15.271Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,177 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "삼성생명 공동 선두",
+   "keyword": "최민희 중징계 의결에",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T11:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정청래, 최민희 중징계에 \"납득 못 해\"…친청계 \"당원주권 맞나\"(종합2보...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T13:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314979?sid=100"
+    },
+    {
+     "title": "최민희 당원권 2년 정지 중징계… 친청계 일제 반발",
+     "press": "m.skyedaily.com",
+     "publishedAt": "2026-11-27T13:12:00.000Z",
+     "link": "https://m.skyedaily.com/news_view.html?ID=315322"
+    },
+    {
+     "title": "민주, 최민희에 '당원자격정지 2년' 중징계...\"수용 못 해\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T13:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439153?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "대한항공 3연승",
    "sources": [
     "daum"
    ],
-   "articles90": 16,
+   "articles90": 14,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-27T12:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "외국인 선수 없이 대한항공 끝까지 괴롭혔다…패배에도 희망 본 라미레...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-27T13:22:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/117/0004128726"
+    },
+    {
+     "title": "'케트진스키 25점' 대한항공, KB손해보험 3-1 제압…3연승 질주",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-27T12:52:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110128963868"
+    },
+    {
+     "title": "'실바 30점' GS칼텍스 5연승·선두 복귀...대한항공 3연승",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T12:46:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/052/0002439149"
+    }
+   ]
+  },
+  {
+   "keyword": "야간근로 3일 제한",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
    "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T11:55:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-27T12:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정부, 연속 야간근로 3일 이하 권고 추진…새벽배송은 제외",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-27T13:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004687062?sid=102"
+    },
+    {
+     "title": "정부 ‘연속 야간근로 3일 이하 제한’ 추진…초심야시간대는 별도 관리",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-27T13:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162476?sid=102"
+    },
+    {
+     "title": "정부, 연속 야간근무 ‘3일 이하’ 권고안 마련…새벽 배송은 제외",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T12:32:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654144"
+    }
+   ]
+  },
+  {
+   "keyword": "서영교 박홍근 충돌",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T12:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "초유의 법사위-장관 충돌...\"상원이냐\" vs \"이런 장관 처음\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T13:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439162?sid=100"
+    },
+    {
+     "title": "박홍근 “법사위가 상원이냐” VS 서영교 “이런 장관 처음봤다”",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-27T13:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053689?sid=100"
+    },
+    {
+     "title": "박홍근 장관, 법사위서 與-與 충돌…“이런 장관 처음”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-27T13:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887913?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "김범수 무죄 확정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T12:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김범수, SM 시세조종 혐의 무죄 확정… 공소청 상고 포기",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-27T13:26:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452802"
+    },
+    {
+     "title": "김범수 카카오 창업자 'SM 시세조종' 무죄 확정...3년 사법 리스크 종결",
+     "press": "newsbrite.net",
+     "publishedAt": "2026-11-27T12:48:00.000Z",
+     "link": "http://www.newsbrite.net/news/articleView.html?idxno=201819"
+    },
+    {
+     "title": "SM 시세조종 혐의 벗은 김범수…공소청 상고 포기 '무죄 확정'",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-27T12:28:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749465"
+    }
+   ]
+  },
+  {
+   "keyword": "이해란 삼성생명 신한은행 제압!",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T11:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -35,106 +195,10 @@
      "link": "https://m.sports.naver.com/basketball/article/421/0009314976"
     },
     {
-     "title": "‘이해란 21P·강유림 더블더블’ 삼성생명, 신한은행 잡고 공동 1위 점...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-27T12:50:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/396/0000762180"
-    }
-   ]
-  },
-  {
-   "keyword": "SK하이닉스 자사주 매입 2배 확대",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-27T11:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "SK하이닉스, 자사주 매수 주문량 2배 확대…하루 70만 주",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-27T13:06:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=20261127214810761824debea800_1"
-    },
-    {
-     "title": "SK하이닉스, 자사주 매입 속도 2배로…하루 매수 주문 35만주→70만주",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-27T12:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002395017?sid=101"
-    },
-    {
-     "title": "SK하이닉스, 자사주 매입 속도 2배로 높인다…주주가치 제고 강화",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-27T12:22:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611270186"
-    }
-   ]
-  },
-  {
-   "keyword": "대한항공 KB손해보험 승리",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 15,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T12:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'케트진스키 25점' 대한항공, KB손해보험 3-1 제압…3연승 질주",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-27T12:52:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110128963868"
-    },
-    {
-     "title": "대한항공, '국내 선수만 뛴' KB손보 꺾고 3연승…여자부 GS 5연승(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T12:46:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/421/0009314975"
-    },
-    {
-     "title": "대한항공 ‘홈에서 기분 좋은 승리’[포토]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T12:38:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/311/0002084900"
-    }
-   ]
-  },
-  {
-   "keyword": "실바 30점으로 5연승 질주",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T11:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'실바 30점 폭발' 여자배구 GS칼텍스, 흥국생명 완파하고 5연승·선두 탈...",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-27T13:04:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=436044"
-    },
-    {
-     "title": "'실바 30점' GS칼텍스 5연승·선두 복귀...대한항공 3연승",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T12:46:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/052/0002439149"
-    },
-    {
-     "title": "‘실바 30점 폭발’ GS칼텍스, 흥국생명 꺾고 5연승 질주 ‘선두 탈환’...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-27T12:39:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/468/0001283965"
+     "title": "‘1R MVP’ 이해란, 전반만 20점 폭격···삼성생명, 신한은행 74-64 꺾고...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-27T12:25:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/144/0001152086"
     }
    ]
   },
@@ -144,7 +208,7 @@
     "daum"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-27T11:58:00.000Z",
    "exclusive": false,
@@ -171,34 +235,34 @@
    ]
   },
   {
-   "keyword": "야간근로 3일 제한",
+   "keyword": "후보자 재산 신고",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T12:13:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T11:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정부 ‘연속 야간근로 3일 이하 제한’ 추진…초심야시간대는 별도 관리",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-27T13:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162476?sid=102"
+     "title": "홍익표 통일장관 후보자, 재산 65억원 신고...비거주 1주택 논란",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T12:38:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127213130534"
     },
     {
-     "title": "정부, 연속 야간근무 ‘3일 이하’ 권고안 마련…새벽 배송은 제외",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-27T12:32:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2654144"
+     "title": "홍익표 후보자, 재산 65억원 신고…비거주 아파트·방배동엔 전세",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T12:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930696?sid=100"
     },
     {
-     "title": "야간근무 연속 3일로 제한 권고…\"0-4시 특별관리·새벽배송 제외\"",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-27T12:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193769?sid=101"
+     "title": "재산 ‘2억6500만원’…강금실 후보자 신고, 홍익표 후보는 65억",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-27T12:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002836112?sid=100"
     }
    ]
   },
@@ -233,11 +297,43 @@
      "link": "https://m.entertain.naver.com/article/311/0002084891"
     }
    ]
+  },
+  {
+   "keyword": "한동훈 의혹 압수수색에",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T12:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한동훈 '기소계획서 유출' 의혹…경찰, 법무부·공소청 압수수색",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-27T12:52:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=321159"
+    },
+    {
+     "title": "경찰, ‘한동훈 자료 유출 의혹’ 법무부·공소청 압수수색",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T12:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302873?sid=102"
+    },
+    {
+     "title": "'막강 권한' 경찰, 법무부·공소청 압수수색…'한동훈 유출' 수사",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-27T12:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653888?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1966,
+  "flagged": 1971,
   "matched": 978,
   "avgLeadMin": 660,
   "recent": [
