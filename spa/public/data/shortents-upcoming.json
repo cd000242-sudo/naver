@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T22:40:11.813Z",
+ "builtAt": "2026-11-27T22:50:14.772Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "시장",
+   "keyword": "AI 관련주 상승",
    "sources": [
-    "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 9,
-   "recent20": 7,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T22:02:00.000Z",
+   "articles90": 15,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-27T21:36:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "팔란티어, 유럽 국방 AI 시장서 영토 확장…폴란드 수주에 주가 강세",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-27T22:38:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848715"
+     "title": "AI·반도체가 끌어올린 뉴욕증시…나스닥 2.3% 급등, '변동성은 계속된...",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-27T22:48:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68628"
     },
     {
-     "title": "김성제 의왕시장, \"선제적인 제설 대응으로 겨울철 시민 불편 최소화할...",
-     "press": "globalepic.co.kr",
-     "publishedAt": "2026-11-27T22:34:00.000Z",
-     "link": "https://www.globalepic.co.kr/view.php?ud=2026112710310596785f69d33b22_29"
+     "title": "앤트로픽에 128억달러 몰렸다…삼성SDS·LG CNS도 AI 수혜 기대",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-27T22:42:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=509092"
     },
     {
-     "title": "KAI, 초음속 전투기 KF-21 전자전기 개발 계획 공개…글로벌 방산 시장 ...",
-     "press": "theguru.co.kr",
-     "publishedAt": "2026-11-27T22:32:00.000Z",
-     "link": "https://www.theguru.co.kr/news/article.html?no=110256"
+     "title": "뉴욕증시, 저가 매수에 일제히 상승…샌디스크 16%·앤트로픽 11%↑",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-27T22:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002395023?sid=101"
     }
    ]
   },
@@ -49,7 +48,7 @@
     "google"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-27T21:31:00.000Z",
    "exclusive": false,
@@ -76,15 +75,14 @@
    ]
   },
   {
-   "keyword": "젠슨 황 디올 재킷 착용",
+   "keyword": "젠슨 황 디올 재킷 복귀",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T21:20:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-27T21:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -105,6 +103,39 @@
      "press": "slist.kr",
      "publishedAt": "2026-11-27T22:06:00.000Z",
      "link": "https://www.slist.kr/news/articleView.html?idxno=785450"
+    }
+   ]
+  },
+  {
+   "keyword": "시장",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T22:26:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "팔란티어, 유럽 국방 AI 시장서 영토 확장…폴란드 수주에 주가 강세",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-27T22:38:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848715"
+    },
+    {
+     "title": "김성제 의왕시장, \"선제적인 제설 대응으로 겨울철 시민 불편 최소화할...",
+     "press": "globalepic.co.kr",
+     "publishedAt": "2026-11-27T22:34:00.000Z",
+     "link": "https://www.globalepic.co.kr/view.php?ud=2026112710310596785f69d33b22_29"
+    },
+    {
+     "title": "KAI, 초음속 전투기 KF-21 전자전기 개발 계획 공개…글로벌 방산 시장 ...",
+     "press": "theguru.co.kr",
+     "publishedAt": "2026-11-27T22:32:00.000Z",
+     "link": "https://www.theguru.co.kr/news/article.html?no=110256"
     }
    ]
   },
@@ -141,34 +172,34 @@
    ]
   },
   {
-   "keyword": "손새은 임찬규 결혼",
+   "keyword": "한지민",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 7,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-27T21:27:00.000Z",
+   "firstArticleAt": "2026-11-27T22:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "손나은, 모친상 한 달만에 기쁜 소식 전했다…동생 손새은, 임찬규와 결...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-27T22:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646305"
+     "title": "'그냥사람친구' 첫 방송 시청률 5.0%…이서진·한지민 예능 1위",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T22:46:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288211"
     },
     {
-     "title": "LG 임찬규·손새은 12월 결혼식 올린다",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-27T21:54:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087477"
+     "title": "“팬티만 빼고 다 벗어야” 박정수 각오에 한지민 당황 “옷 벗으라고요...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T22:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192055"
     },
     {
-     "title": "손나은 동생 골퍼 손새은, LG 임찬규 프러포즈에 감격",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-27T21:50:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96099"
+     "title": "한지민, 이서진 장난에 표정관리 실패 “인성 논란 나와도 내보내주길”...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T22:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192057"
     }
    ]
   },
@@ -178,7 +209,7 @@
     "daum"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-27T21:38:00.000Z",
    "exclusive": false,
@@ -203,45 +234,13 @@
      "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96097"
     }
    ]
-  },
-  {
-   "keyword": "한지민",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T21:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“팬티만 빼고 다 벗어야” 박정수 각오에 한지민 당황 “옷 벗으라고요...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T22:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192055"
-    },
-    {
-     "title": "한지민, 이서진 장난에 표정관리 실패 “인성 논란 나와도 내보내주길”...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T22:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192057"
-    },
-    {
-     "title": "이서진, 한지민 태도 지적에 “이게 내 자세”라더니 김용건 박정수 등...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T22:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192056"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 1968,
-  "matched": 972,
-  "avgLeadMin": 656,
+  "matched": 970,
+  "avgLeadMin": 657,
   "recent": [
    {
     "keyword": "김장",
