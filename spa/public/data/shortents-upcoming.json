@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T12:06:49.134Z",
+ "builtAt": "2026-11-27T12:16:52.151Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 16,
+   "articles90": 17,
    "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-27T10:40:00.000Z",
+   "press": 15,
+   "firstArticleAt": "2026-11-27T10:50:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "최민희 '당원권 2년 정지' 중징계…崔 \"수용하기 어렵다\"",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-27T12:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063399?sid=100"
+    },
+    {
+     "title": "'최고위원'도 '파란 점퍼'도 날아가나…최민희 중징계에 與 내전 일촉즉...",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-27T12:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143216?sid=100"
+    },
     {
      "title": "[단독] 공소청, 이화영이 낸 형집행정지 신청 '불허'",
      "press": "news.tvchosun.com",
      "publishedAt": "2026-11-27T12:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/448/0000653885?sid=102"
-    },
-    {
-     "title": "민주, 최민희 ‘당원권 정지 2년’…崔 “재심 신청”",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-27T11:58:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=921500"
-    },
-    {
-     "title": "'당원권 2년 정지' 중징계…최민희 \"재심 신청\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T11:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930681?sid=161"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 10,
    "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T10:38:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-27T10:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "철도노조 준법투쟁 이틀째…전철 400여대 지연",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T12:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930693?sid=101"
+    },
     {
      "title": "철도노조 준법투쟁…동대구역 최대 1시간 40분 열차 지연",
      "press": "tbc.co.kr",
@@ -65,46 +71,6 @@
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-27T11:32:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001207877?sid=102"
-    },
-    {
-     "title": "열차는 줄줄이 지연에 사람 밀치고 고성…철도 준법투쟁 이틀째, ‘최악...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-27T11:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000134116?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김범수 무죄 확정",
-   "sources": [
-    "signal.bz",
-    "nate",
-    "daum"
-   ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-27T10:37:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "카카오 김범수 'SM 시세조종' 무죄 확정…공소청, 상고 포기",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T12:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930690?sid=102"
-    },
-    {
-     "title": "김범수, 3년 사법 리스크 털었다…SM 시세조종 의혹 무죄 확정",
-     "press": "newsinside.kr",
-     "publishedAt": "2026-11-27T11:50:00.000Z",
-     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5058238"
-    },
-    {
-     "title": "김범수 카카오 창업자 SM 시세조종 무죄 확정…공소청 상고 포기",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T11:48:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765718"
     }
    ]
   },
@@ -113,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-27T10:44:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T11:02:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -145,30 +111,64 @@
    "sources": [
     "daum"
    ],
-   "articles90": 11,
-   "recent20": 3,
+   "articles90": 12,
+   "recent20": 5,
    "press": 7,
-   "firstArticleAt": "2026-11-27T10:42:00.000Z",
+   "firstArticleAt": "2026-11-27T11:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김용건, 트와이스 정연에 조언 “명품관 기웃거리지 마”(그냥사람친구...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T12:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191993"
+    },
+    {
+     "title": "“하정우, 미술 좋아해”…‘그냥사람친구’ 김용건, 박정숙에 ‘넉살...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-27T12:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054481"
+    },
     {
      "title": "'신랑수업2’ 김상혁, 유채련 친구들과 조개찜 식당서 ‘엉가남’ 매력...",
      "press": "enter.etoday.co.kr",
      "publishedAt": "2026-11-27T12:02:00.000Z",
      "link": "https://enter.etoday.co.kr/news/view/305875"
+    }
+   ]
+  },
+  {
+   "keyword": "김범수 무죄 확정",
+   "sources": [
+    "signal.bz",
+    "nate",
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T10:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "카카오 김범수 'SM 시세조종' 무죄 확정…공소청, 상고 포기",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T12:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930690?sid=102"
     },
     {
-     "title": "트와이스 정연· 몬스타엑스 주헌 '그냥 사람 친구'",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-27T12:00:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6944281"
+     "title": "김범수, 3년 사법 리스크 털었다…SM 시세조종 의혹 무죄 확정",
+     "press": "newsinside.kr",
+     "publishedAt": "2026-11-27T11:50:00.000Z",
+     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5058238"
     },
     {
-     "title": "한지민 숍 다녀왔는데‥이서진, 보자마자 “화장 떴다” 공격(그냥사람...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T11:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191987"
+     "title": "김범수 카카오 창업자 SM 시세조종 무죄 확정…공소청 상고 포기",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T11:48:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765718"
     }
    ]
   },
@@ -177,30 +177,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T10:38:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T10:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "女피겨 신지아, 쇼트 개인 최고점 경신 ‘75.31점’…시니어 GP 6차 2위,...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-27T12:11:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/468/0001283962"
+    },
+    {
+     "title": "신지아, 피겨 시니어 그랑프리 6차 SP 개인 최고점 '75.31점' 2위…선두...",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-27T12:06:00.000Z",
+     "link": "https://swtvnews.com/news/newsview.php?ncode=1065614129604706"
+    },
     {
      "title": "메달 보인다! 피겨 신지아, 그랑프리 6차 대회 쇼트 2위 ‘개인 최고 75...",
      "press": "sportsworldi.com",
      "publishedAt": "2026-11-27T11:23:00.000Z",
      "link": "https://m.sports.naver.com/general/article/396/0000762179"
-    },
-    {
-     "title": "'개인 최고점 경신' 신지아, 피겨 시니어 그랑프리 6차 쇼트 2위...유영...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T11:21:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127001367"
-    },
-    {
-     "title": "피겨 신지아, '개인 최고점' 75.31점…시니어 GP 6차 쇼트 2위",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T11:01:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001406407"
     }
    ]
   },
@@ -211,7 +211,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-27T11:12:00.000Z",
    "exclusive": false,
@@ -242,10 +242,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T10:42:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-27T11:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -275,7 +275,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-27T11:10:00.000Z",
    "exclusive": false,
@@ -300,11 +300,43 @@
      "link": "https://n.news.naver.com/mnews/article/015/0005359232?sid=102"
     }
    ]
+  },
+  {
+   "keyword": "박홍근 서영교 당정 충돌",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T10:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서영교 법사위원장 \"질문 막지 마라\" vs 박홍근 장관 \"고압적\" 당정 충돌",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-27T11:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193765?sid=100"
+    },
+    {
+     "title": "“여기가 상원인가” “이런 장관 처음”…박홍근·서영교 與-與 충돌",
+     "press": "donga.com",
+     "publishedAt": "2026-11-27T11:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765803?sid=100"
+    },
+    {
+     "title": "“법사위는 법사위답게만” 박홍근에 與도 발끈…때아닌 당정 충돌",
+     "press": "segye.com",
+     "publishedAt": "2026-11-27T10:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178702?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1950,
+  "flagged": 1951,
   "matched": 975,
   "avgLeadMin": 657,
   "recent": [
