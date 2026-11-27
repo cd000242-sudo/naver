@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T05:44:29.437Z",
+ "builtAt": "2026-11-27T05:54:32.992Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "정년연장 노사 합의 불발",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 6,
-   "press": 24,
-   "firstArticleAt": "2026-11-27T04:19:00.000Z",
+   "articles90": 25,
+   "recent20": 7,
+   "press": 25,
+   "firstArticleAt": "2026-11-27T04:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보]“노사합의 또 결렬” 정년 65세 불발",
-     "press": "magazine.hankyung.com",
-     "publishedAt": "2026-11-27T05:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/050/0000113861?sid=101"
+     "title": "민주 정년연장특위, 노사 합의 불발…내달 2일 마지막 논의",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-27T05:50:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088684"
     },
     {
-     "title": "'10개월만 회동' 정년연장특위 노사합의 불발",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T05:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406340?sid=100"
+     "title": "10개월 만에 마주앉은 노사…정년연장 합의 불발",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-27T05:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274205?sid=100"
     },
     {
-     "title": "[정년연장 합의 불발] 12월로 넘어간 65세 정년…적용 시기·방식 간극 ...",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-27T05:40:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611271433009190971"
+     "title": "한국노총, '65세 정년연장' 합의 불발에 \"연내 입법 서둘러야\"",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T05:44:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653978"
     }
    ]
   },
@@ -48,40 +48,72 @@
     "nate",
     "daum"
    ],
-   "articles90": 31,
-   "recent20": 6,
-   "press": 16,
-   "firstArticleAt": "2026-11-27T04:46:00.000Z",
+   "articles90": 42,
+   "recent20": 21,
+   "press": 15,
+   "firstArticleAt": "2026-11-27T04:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "강원 학교 3분의 2 '대체식'…비정규직 총파업, 급식·돌봄 차질",
+     "title": "학교비정규직 총파업 여파…울산 유치원·학교 117곳 급식 차질",
      "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-27T05:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214654?sid=102"
+     "publishedAt": "2026-11-27T05:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214662?sid=102"
     },
     {
-     "title": "학교비정규직 4만 명 총파업 “교육재정 삭감 중단하고 차별 철폐하라”",
-     "press": "vop.co.kr",
-     "publishedAt": "2026-11-27T05:40:00.000Z",
-     "link": "https://vop.co.kr/A00001697798.html"
+     "title": "경기 학교비정규직 5582명 총파업…학교 3곳 중 1곳 대체급식",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-27T05:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214663?sid=102"
     },
     {
-     "title": "학교비정규직 총파업에 전남광주 400여 개 학교 대체 급식…돌봄도 차질",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-27T05:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000556288?sid=102"
+     "title": "학교비정규직 총파업.. 충북 학교 급식·돌봄 차질",
+     "press": "news.mbccb.co.kr",
+     "publishedAt": "2026-11-27T05:48:00.000Z",
+     "link": "http://news.mbccb.co.kr/home/sub.php?menukey=61&mod=view&RECEIVE_DATE=20261127&SEQUENCE=0113"
     }
    ]
   },
   {
-   "keyword": "남경필 아들 협박 혐의 체포",
+   "keyword": "AI 가짜 의사 광고 금지",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-27T04:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 \"AI 가짜 의사 광고, 영업정지 등 강력 제재\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T05:52:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127141409587"
+    },
+    {
+     "title": "유튜브 속 'AI 가짜 의사' 퇴출…건강기능식품·의약품 광고 금지 시행",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-27T05:33:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087320"
+    },
+    {
+     "title": "이 대통령 \"AI 가짜 의사 광고, 오늘부터 강력히 제재\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T05:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930532?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "남경필 아들 스토킹 혐의",
    "sources": [
     "daum"
    ],
    "articles90": 11,
-   "recent20": 3,
+   "recent20": 1,
    "press": 11,
    "firstArticleAt": "2026-11-27T04:29:00.000Z",
    "exclusive": true,
@@ -108,44 +140,12 @@
    ]
   },
   {
-   "keyword": "AI 가짜 의사 광고 금지",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-27T04:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유튜브 속 'AI 가짜 의사' 퇴출…건강기능식품·의약품 광고 금지 시행",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-27T05:33:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087320"
-    },
-    {
-     "title": "이 대통령 \"AI 가짜 의사 광고, 오늘부터 강력히 제재\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T05:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930532?sid=100"
-    },
-    {
-     "title": "AI 가짜 의사·전문가의 건강제품 추천 광고 오늘부터 금지",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-27T05:22:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628172"
-    }
-   ]
-  },
-  {
    "keyword": "북한 MDL 침범",
    "sources": [
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-27T04:36:00.000Z",
    "exclusive": false,
@@ -168,6 +168,38 @@
      "press": "insight.co.kr",
      "publishedAt": "2026-11-27T05:06:00.000Z",
      "link": "https://www.insight.co.kr/news/583796"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 정부",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T04:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최휘영, '교체 통보' 보도 반박…이재명 대통령도 정정 요구",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-27T05:46:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628177"
+    },
+    {
+     "title": "장동혁 \"이재명이 있어야 할 곳은 감옥\" … 박준태 \"배신의 정치 끊어내...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-27T05:42:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/27/2026112750212.html"
+    },
+    {
+     "title": "[정책 인사이트] 유망기업 투자자 되겠단 정부… 先 투자·後 지분 정산...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-27T05:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207788?sid=101"
     }
    ]
   },
@@ -208,10 +240,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 20,
-   "recent20": 2,
+   "articles90": 11,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-27T04:23:00.000Z",
+   "firstArticleAt": "2026-11-27T04:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -231,7 +263,7 @@
      "title": "2026 우리쌀 우리술 K-라이스 페스타",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-27T05:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467790?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/001/0016467789?sid=101"
     }
    ]
   },
@@ -240,10 +272,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T04:24:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-27T04:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -266,11 +298,43 @@
      "link": "https://www.dailysecu.com/news/articleView.html?idxno=209788"
     }
    ]
+  },
+  {
+   "keyword": "현대모비스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-27T04:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "현대모비스 33만8500원…부품사 3분기 영업익 17.2% 늘어",
+     "press": "job-post.co.kr",
+     "publishedAt": "2026-11-27T05:46:00.000Z",
+     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=241537"
+    },
+    {
+     "title": "[D리그] ‘이대균 연장전 5점’ 현대모비스, 연장 끝에 소노 격파",
+     "press": "basketkorea.com",
+     "publishedAt": "2026-11-27T04:54:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/351/0000089617"
+    },
+    {
+     "title": "[화보] 26-27 KBL D리그 현대모비스, 소노에 82-73으로 승리",
+     "press": null,
+     "publishedAt": "2026-11-27T04:33:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/065/0000305283"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1841,
+  "flagged": 1843,
   "matched": 918,
   "avgLeadMin": 609,
   "recent": [
