@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T14:17:33.172Z",
+ "builtAt": "2026-11-27T14:27:36.951Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "최민희 중징계 의결에",
@@ -16,41 +16,41 @@
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T12:48:00.000Z",
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T13:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“이재명은 탄핵 반대” 최민희, 당원권 정지 2년 중징계…“재심 신청...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T13:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012303000?sid=100"
+     "title": "최민희 중징계와 장동혁 폭로 정국…여야 또다른 공천관리위원회 '윤리...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-27T14:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001042809?sid=100"
     },
     {
-     "title": "[포커스] 최민희 '중징계' 결론...초유의 법사위-장관 충돌",
+     "title": "최민희 '당원자격정지 2년' 중징계에 與 내홍 격화…정청래·친청계 \"김...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-27T14:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610951?sid=100"
+    },
+    {
+     "title": "민주, 최민희에 '당원자격정지 2년' 중징계...\"수용 못 해\"",
      "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T13:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439164?sid=100"
-    },
-    {
-     "title": "[속보]최민희 자격정지 2년…“당 품위 훼손 판단” 윤리심판원 처분",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-27T13:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002836117?sid=100"
+     "publishedAt": "2026-11-27T14:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439177?sid=100"
     }
    ]
   },
   {
-   "keyword": "GS칼텍스 5연승",
+   "keyword": "실바 30점 GS칼텍스 5연승",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 10,
+   "articles90": 11,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T12:48:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-27T13:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -61,16 +61,16 @@
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888230"
     },
     {
+     "title": "이영택 감독 믿음에 화답한 실바 \"첫 시즌과 똑같진 않지만…정신력으...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-27T14:06:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110129548182"
+    },
+    {
      "title": "GS칼텍스 실바, 흥국생명 상대로 30점 폭발…\"몸은 달라도 해낼 수 있다...",
      "press": "topstarnews.net",
      "publishedAt": "2026-11-27T13:50:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288138"
-    },
-    {
-     "title": "이영택 GS칼텍스 감독 30점 올린 실바에 “폭발력 여전하다” [쿠키 현장...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-27T13:44:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611270189"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T12:52:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T13:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -113,10 +113,10 @@
     "nate",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T12:57:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-27T13:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,43 +139,11 @@
      "link": "https://m.entertain.naver.com/article/311/0002084911"
     }
    ]
-  },
-  {
-   "keyword": "삼성생명 신한은행 공동 1위",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T12:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘신한은행 또 잡았는데’ 하상윤 감독 “우리가 우위? 절대 아냐”…순...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-27T13:31:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/468/0001283972"
-    },
-    {
-     "title": "'이해란 21득점' 용인 삼성생명, 인천 신한은행 또 잡고 '공동 1위' 점프",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-27T13:30:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/076/0004470341"
-    },
-    {
-     "title": "“미치겠어요” 최윤아 감독, 삼성생명전 ‘8연패’에 이 악물었다…“...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-27T12:54:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/468/0001283967"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1978,
+  "flagged": 1979,
   "matched": 984,
   "avgLeadMin": 657,
   "recent": [
