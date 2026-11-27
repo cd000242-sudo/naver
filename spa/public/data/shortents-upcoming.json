@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T02:43:27.166Z",
+ "builtAt": "2026-11-27T02:53:30.217Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "코스닥 매수 사이드카 발동",
@@ -16,30 +16,30 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 78,
-   "recent20": 7,
+   "articles90": 77,
+   "recent20": 6,
    "press": 62,
-   "firstArticleAt": "2026-11-27T01:23:00.000Z",
+   "firstArticleAt": "2026-11-27T01:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[개장시황] 외국인·기관 '쌍끌이' 매수에 코스피·코스닥 반등 출발",
+     "press": "businesskorea.co.kr",
+     "publishedAt": "2026-11-27T02:44:00.000Z",
+     "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=282369"
+    },
+    {
+     "title": "코스피 장중 2% 올라 4800선…코스닥 6%대 급등",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-27T02:44:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785329"
+    },
     {
      "title": "코스닥 장중 5% '불기둥'에 매수사이드카…로봇·방산주 강세",
      "press": "biz.sbs.co.kr",
      "publishedAt": "2026-11-27T02:38:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/374/0000546279?sid=101"
-    },
-    {
-     "title": "코스닥 5%대 급등에 매수 사이드카 발동…3거래일 만",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-27T02:38:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96071"
-    },
-    {
-     "title": "코스피, 상승폭 확대...코스닥, 매수 사이드카 발동",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T02:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438874?sid=101"
     }
    ]
   },
@@ -48,30 +48,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 75,
-   "recent20": 12,
-   "press": 55,
-   "firstArticleAt": "2026-11-27T01:22:00.000Z",
+   "articles90": 74,
+   "recent20": 8,
+   "press": 52,
+   "firstArticleAt": "2026-11-27T01:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장동혁 “한동훈 복당하면 다시 징계하면 돼…추가 사유 있어”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-27T02:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207759?sid=100"
+     "title": "장동혁 “한동훈 복당해도 재징계…추경호 유죄 바랐다면 해당행위”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-27T02:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703876?sid=100"
     },
     {
-     "title": "한동훈 관련 법무부·공소청 압수수색…공무상 비밀누설 고발 사건 수사",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-27T02:36:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=400948"
+     "title": "장동혁 \"한동훈 복당해도 재징계\"…국힘, 계파 난타전 격화",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-27T02:48:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088613"
     },
     {
-     "title": "[정국진단] 정은혜 \"한동훈, 억울하면 가처분 내야…창당 못할 수준이면...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T02:36:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127000604"
+     "title": "'한동훈 자료유출 의혹' 법무부 등 압수수색…수사 본격화",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T02:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930483?sid=102"
     }
    ]
   },
@@ -81,13 +81,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 54,
-   "recent20": 15,
-   "press": 45,
-   "firstArticleAt": "2026-11-27T01:15:00.000Z",
+   "articles90": 48,
+   "recent20": 10,
+   "press": 43,
+   "firstArticleAt": "2026-11-27T01:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "KT, 중소·벤처기업 협력 과제 6건 시상…AI 기술 사업화 지원 확대",
+     "press": "newsquest.co.kr",
+     "publishedAt": "2026-11-27T02:48:00.000Z",
+     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=306006"
+    },
     {
      "title": "“AI 안경 쓰고 컨닝해 보니”…AI 안경 컨닝 vs 방어 해커톤 열기 후끈...",
      "press": "donga.com",
@@ -99,12 +105,6 @@
      "press": "widedaily.com",
      "publishedAt": "2026-11-27T02:40:00.000Z",
      "link": "https://www.widedaily.com/news/articleView.html?idxno=305007"
-    },
-    {
-     "title": "국립순천대, 개방형 기업 AI 플랫폼 'SCOA' 공개... 지역 AI 생태계 조성",
-     "press": "newsworker.co.kr",
-     "publishedAt": "2026-11-27T02:38:00.000Z",
-     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=516573"
     }
    ]
   },
@@ -113,30 +113,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 40,
-   "recent20": 7,
-   "press": 39,
-   "firstArticleAt": "2026-11-27T01:18:00.000Z",
+   "articles90": 39,
+   "recent20": 6,
+   "press": 37,
+   "firstArticleAt": "2026-11-27T01:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보]李대통령지지 41%…민주37%·국힘30%-한국갤럽",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-27T02:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002835997?sid=100"
+     "title": "李 지지율 2주 연속 올라 41%…갤럽 \"사실상 7주째 횡보\"",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-27T02:52:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1429749"
     },
     {
-     "title": "이 대통령 국정 지지율 41%…긍정·부정 모두 상승",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-27T02:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165893?sid=100"
+     "title": "李대통령 지지율 41%…지난주 대비 1%p 상승",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T02:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769906?sid=100"
     },
     {
-     "title": "이 대통령 현재 지지율, 7개월 전과 비교했더니... 화들짝",
+     "title": "이 대통령 지지하는지 이들에게 물었더니... 94%서 47%로 급락",
      "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-27T02:34:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1178319"
+     "publishedAt": "2026-11-27T02:44:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178324"
     }
    ]
   },
@@ -145,30 +145,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 32,
-   "recent20": 7,
-   "press": 26,
+   "articles90": 44,
+   "recent20": 14,
+   "press": 34,
    "firstArticleAt": "2026-11-27T01:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김대기 집행유예, 이상민 무죄... 대통령관저 이전 예산 전용 의혹",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-27T02:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002537448?sid=102"
+     "title": "'관저 예산 불법 전용' 김대기 석방…이상민은 1심 무죄",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-27T02:52:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=230432"
     },
     {
-     "title": "'윤석열 관저 이전 예산 전용' 김대기 전 비서실장 1심 징역형 집유",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T02:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406298?sid=102"
+     "title": "'윤석열 관저이전 예산전용' 김대기 1심 징역형 집유",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-27T02:52:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322125&inflow=N"
     },
     {
-     "title": "'尹관저이전 예산전용' 김대기·윤재순·김오진, 1심서 징역형 집행유예",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-27T02:32:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653888"
+     "title": "‘관저 이전 예산 전용’ 김대기 전 비서실장 징역형 집행유예…이상민...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T02:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302577?sid=102"
     }
    ]
   },
@@ -178,29 +178,29 @@
     "nate"
    ],
    "articles90": 30,
-   "recent20": 8,
+   "recent20": 6,
    "press": 16,
-   "firstArticleAt": "2026-11-27T01:18:00.000Z",
+   "firstArticleAt": "2026-11-27T01:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한민수 \"최민희·김민석 윤리심판원 잣대 같아야\"",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T02:52:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765117"
+    },
+    {
+     "title": "최민희 최고위원 발언 쳐다보는 김민석 민주당 대표",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T02:46:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765113"
+    },
     {
      "title": "민주당 최민희 징계 심의에 친청계 반발...“김민석 대표도 공정하게 심...",
      "press": "m-economynews.com",
      "publishedAt": "2026-11-27T02:42:00.000Z",
      "link": "https://www.m-economynews.com/news/article.html?no=73673"
-    },
-    {
-     "title": "친청계 \"최민희 징계 절차 민주적인가...김민석도 심의해야\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T02:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438878?sid=100"
-    },
-    {
-     "title": "최민희 징계 앞두고 친청계 반발…김민석 책임론 제기",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-27T02:38:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611270081"
     }
    ]
   },
@@ -209,10 +209,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 4,
-   "press": 16,
-   "firstArticleAt": "2026-11-27T01:23:00.000Z",
+   "articles90": 16,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-27T01:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -241,30 +241,62 @@
    "sources": [
     "google"
    ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-27T02:02:00.000Z",
+   "articles90": 12,
+   "recent20": 5,
+   "press": 12,
+   "firstArticleAt": "2026-11-27T02:08:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "SK하이닉스 배당금 지급일 언제? 주당 2만원…100조원 주주환원도 주목",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-27T02:42:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631319"
+     "title": "정승일의 한국 진보 비판: “사회혁명이 주주혁명으로, 민중이 개미로,...",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-27T02:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053670?sid=100"
     },
     {
-     "title": "한국예탁결제원, eVOP 정착 위한 '전자주주총회 운영 효율화 워크숍' 개...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T02:37:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127000468"
+     "title": "SK하이닉스, 1년 새 순현금 8배…내년 주주환원 '120조' 가시권",
+     "press": "greened.kr",
+     "publishedAt": "2026-11-27T02:51:00.000Z",
+     "link": "https://www.greened.kr/news/articleView.html?idxno=355757"
     },
     {
-     "title": "위세아이텍, 자사주 소각 추진 ··· 주주환원 정책 강화",
-     "press": "datanet.co.kr",
-     "publishedAt": "2026-11-27T02:24:00.000Z",
-     "link": "https://www.datanet.co.kr/news/articleView.html?idxno=300633"
+     "title": "삼성전자, 오늘 역대 최대 30조 배당금 지급…추가 주주환원도 예고",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T02:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014349172?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "폭설 영어 리메이크 확정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T01:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김윤석ⅹ구교환 ‘폭설’, 영어 리메이크 제작 확정… 홍의정 감독 직접...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-27T02:52:00.000Z",
+     "link": "https://www.viva100.com/article/20261127500306"
+    },
+    {
+     "title": "김윤석·구교환 ‘폭설’, 캐나다서 영어 리메이크…홍의정 감독 직접 ...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-27T02:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003160222"
+    },
+    {
+     "title": "한국 극장가 덮친 ‘폭설’, 캐나다에도 내린다… 영어 리메이크 확정",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T02:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/018/0006416509"
     }
    ]
   },
@@ -302,81 +334,23 @@
    ]
   },
   {
-   "keyword": "폭설 영어 리메이크 확정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T01:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김윤석·구교환 ‘폭설’, 캐나다서 영어 리메이크…홍의정 감독 직접 ...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-27T02:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003160222"
-    },
-    {
-     "title": "한국 극장가 덮친 ‘폭설’, 캐나다에도 내린다… 영어 리메이크 확정",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T02:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/018/0006416509"
-    },
-    {
-     "title": "김윤석·구교환 ‘폭설’, 영어 리메이크 확정…홍의정 감독 연출",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-27T01:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887841?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "원민경 장관 회의 참석",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T01:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "제5차 인신매매 등 방지정책 조정협의회 참석하는 원민경 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T01:30:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127000332"
-    },
-    {
-     "title": "웃으며 인사하는 원민경 장관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T01:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313715?sid=102"
-    },
-    {
-     "title": "인신매매등 방지 방안 논의하는 원민경 성평등가족부 장관 [TF사진관]",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-27T01:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000556168?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "병무청",
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
+   "articles90": 5,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-27T01:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "병무청, 한국생명존중희망재단과 업무협약 체결",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T02:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467507?sid=100"
+    },
     {
      "title": "병무청, 한국생명존중희망재단과 협력 청년 병역의무자 정신건강 지원",
      "press": "munhwa.com",
@@ -388,12 +362,38 @@
      "press": "news.bbsi.co.kr",
      "publishedAt": "2026-11-27T02:16:00.000Z",
      "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121371"
+    }
+   ]
+  },
+  {
+   "keyword": "무쇠소녀단 3",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T01:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "또다시 설인아 시간이 열렸다…3연속 개근, ‘무쇠소녀단3’로 또 증명...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T02:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001148505"
     },
     {
-     "title": "병무청, '병역면탈 의심' 질병 조기전역자 자료확보 근거 마련",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T02:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467364?sid=100"
+     "title": "'무쇠소녀단3' 한지현, 등장하자마자 체력왕 등극",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-27T02:12:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96064"
+    },
+    {
+     "title": "한지현, ‘무쇠소녀단3’ 첫 방송부터 활약..‘지트리버’ 반전 매력",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-27T02:10:00.000Z",
+     "link": "http://www.breaknews.com/1254568"
     }
    ]
   },
@@ -428,11 +428,43 @@
      "link": "https://m.sports.naver.com/wfootball/article/108/0003490627"
     }
    ]
+  },
+  {
+   "keyword": "원민경 장관 회의 참석",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T01:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "제5차 인신매매 등 방지정책 조정협의회 참석하는 원민경 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T01:30:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127000332"
+    },
+    {
+     "title": "인신매매등 방지 방안 논의하는 원민경 성평등가족부 장관 [TF사진관]",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-27T01:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000556168?sid=102"
+    },
+    {
+     "title": "웃으며 인사하는 원민경 장관",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T01:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009313715?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1787,
+  "flagged": 1788,
   "matched": 894,
   "avgLeadMin": 608,
   "recent": [
