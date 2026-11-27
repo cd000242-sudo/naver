@@ -1,20 +1,20 @@
 {
-  "publishedAt": "2026-11-26T21:40:19.128Z",
+  "publishedAt": "2026-11-27T18:39:24.316Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
-    "issues": 18,
-    "candidates": 240,
-    "niche": 3,
-    "preemption": 19,
+    "issues": 17,
+    "candidates": 217,
+    "niche": 0,
+    "preemption": 9,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-11-27",
+    "day": "2026-11-28",
     "keywords": [
-      "김가영 기자",
       "인핸스 공홈",
-      "오픈ai 김정원"
+      "오픈ai 김정원",
+      "인핸스 코리아"
     ]
   },
   "rows": [
@@ -106,14 +106,48 @@
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0,
+          0,
+          8,
+          96,
+          100,
+          24,
+          68,
+          42,
+          38,
+          16,
+          30,
+          27,
+          16,
+          18
+        ],
+        "measuredAt": "2026-11-27T18:39:25.011Z"
+      },
       "kinCount": 2,
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "오픈ai 김정원",
@@ -203,14 +237,48 @@
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          69,
+          100,
+          79,
+          50,
+          69,
+          59
+        ],
+        "measuredAt": "2026-11-27T18:39:25.011Z"
+      },
       "kinCount": 0,
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "인핸스 코리아",
@@ -300,14 +368,48 @@
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          13,
+          16,
+          11,
+          13,
+          22,
+          23,
+          20,
+          27,
+          23,
+          16,
+          11,
+          14,
+          20,
+          19,
+          15,
+          15,
+          27,
+          12,
+          99,
+          100,
+          51,
+          42,
+          38,
+          18,
+          22,
+          30,
+          33,
+          31,
+          39
+        ],
+        "measuredAt": "2026-11-27T18:39:25.011Z"
+      },
       "kinCount": 16,
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "김가영 기자",
@@ -453,7 +555,6 @@
       ],
       "trend": {
         "series": [
-          52,
           96,
           65,
           43,
@@ -481,9 +582,10 @@
           26,
           87,
           100,
-          22
+          22,
+          48
         ],
-        "measuredAt": "2026-11-26T18:50:11.387Z"
+        "measuredAt": "2026-11-27T18:39:25.011Z"
       },
       "kinCount": 11,
       "kinTop": [
@@ -503,6 +605,475 @@
     }
   ],
   "observations": [
+    {
+      "keyword": "브이엠에스솔루션스 연봉",
+      "issue": "브이엠에스 솔루션스",
+      "topic": "브이엠에스 솔루션스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 3,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 3",
+        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-27T18:36:11.870Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "래블업 인턴 월급",
+      "issue": "래블업",
+      "topic": "래블업",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 3,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "declining",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 3",
+        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-27T18:36:11.870Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "도산소옥 스킨",
+      "issue": "도산소옥",
+      "topic": "도산소옥",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 5,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 5",
+        "선점 후보 — 경쟁 문서 5건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-27T18:36:11.870Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "도산소옥 바니걸",
+      "issue": "도산소옥",
+      "topic": "도산소옥",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 5,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 5",
+        "선점 후보 — 경쟁 문서 5건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-27T18:36:11.870Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "래블업 채용",
+      "issue": "래블업",
+      "topic": "래블업",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 188,
+      "documentCountMeasured": true,
+      "searchVolume": 20,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "declining",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 20",
+        "문서수 188",
+        "선점 후보 — 경쟁 문서 188건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-27T18:36:11.870Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "브이엠에스솔루션스 매출",
+      "issue": "브이엠에스 솔루션스",
+      "topic": "브이엠에스 솔루션스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 18,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 18",
+        "선점 후보 — 경쟁 문서 18건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-27T18:36:11.870Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "래블업 사원수",
+      "issue": "래블업",
+      "topic": "래블업",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 24,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "declining",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 24",
+        "선점 후보 — 경쟁 문서 24건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-27T18:36:11.870Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "교사 리틀팍스 금액",
+      "issue": "교사",
+      "topic": "교사",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 56,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 56",
+        "선점 후보 — 경쟁 문서 56건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-27T18:36:11.870Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "래블업 컨퍼런스",
+      "issue": "래블업",
+      "topic": "래블업",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 288,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "declining",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 288",
+        "선점 후보 — 경쟁 문서 288건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-27T18:36:11.870Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "인핸스 연봉",
       "issue": "인핸스",
@@ -554,7 +1125,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인핸스 블라인드",
@@ -614,7 +1186,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인핸스 이승현",
@@ -667,7 +1240,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "glm-5.5 release date",
@@ -719,7 +1293,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "glm-5.5-flash opencode",
@@ -771,7 +1346,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인핸스 부가세",
@@ -823,7 +1399,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "glm-5.5 32b",
@@ -875,7 +1452,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "glm 5.5 release",
@@ -927,7 +1505,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "glm 5.5 size",
@@ -979,7 +1558,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인핸스 세금",
@@ -1031,7 +1611,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인핸스 관세",
@@ -1083,7 +1664,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인핸스 매출액",
@@ -1135,7 +1717,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "glm 5.5 free",
@@ -1187,7 +1770,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인핸스 상장",
@@ -1239,7 +1823,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인핸스 배송비",
@@ -1291,7 +1876,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인핸스 주관사",
@@ -1343,7 +1929,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인핸스 제조국",
@@ -1395,7 +1982,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "glm 5.5 news",
@@ -1447,7 +2035,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인핸스 연마",
@@ -1506,7 +2095,8 @@
       "monetize": null,
       "measuredAt": "2026-11-26T21:35:58.031Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인핸스 통관수수료",
@@ -2510,7 +3100,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 2
+      "rowCount": 2,
+      "carried": true
     },
     {
       "issue": "오픈AI",
@@ -2582,7 +3173,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "김가영",
@@ -2930,22 +3522,5 @@
       "rowCount": 0,
       "carried": true
     }
-  ],
-  "enrichedAt": "2026-11-26T21:40:38.072Z",
-  "enrichStats": {
-    "enriched": 0,
-    "subsAdded": 0,
-    "titleUpgraded": 0,
-    "proposed": 0,
-    "verified": 0,
-    "judged": 0,
-    "judgedBad": 0,
-    "related": 0,
-    "picked": 0,
-    "pooled": 0,
-    "aiTitled": 0,
-    "trended": 0,
-    "aiCalls": 3,
-    "partial": false
-  }
+  ]
 }
