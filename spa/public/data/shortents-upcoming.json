@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T14:27:36.951Z",
+ "builtAt": "2026-11-27T14:37:40.902Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,79 +8,80 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "최민희 중징계 의결에",
+   "keyword": "GS칼텍스 5연승",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 10,
-   "recent20": 3,
+   "recent20": 2,
    "press": 8,
-   "firstArticleAt": "2026-11-27T13:12:00.000Z",
+   "firstArticleAt": "2026-11-27T13:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최민희 중징계와 장동혁 폭로 정국…여야 또다른 공천관리위원회 '윤리...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-27T14:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042809?sid=100"
+     "title": "'5연승' GS 칼텍스 선두 탈환…대한항공 3연승",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T14:28:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/422/0000930710"
     },
     {
-     "title": "최민희 '당원자격정지 2년' 중징계에 與 내홍 격화…정청래·친청계 \"김...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-27T14:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610951?sid=100"
-    },
-    {
-     "title": "민주, 최민희에 '당원자격정지 2년' 중징계...\"수용 못 해\"",
+     "title": "'실바 30점' GS칼텍스 5연승·선두 복귀...대한항공 3연승",
      "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T14:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439177?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "실바 30점 GS칼텍스 5연승",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T13:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
+     "publishedAt": "2026-11-27T14:21:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/052/0002439187"
+    },
     {
      "title": "프로배구 GS칼텍스, 흥국생명 꺾고 5연승… 선두 탈환",
      "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-27T14:10:00.000Z",
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888230"
-    },
-    {
-     "title": "이영택 감독 믿음에 화답한 실바 \"첫 시즌과 똑같진 않지만…정신력으...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-27T14:06:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110129548182"
-    },
-    {
-     "title": "GS칼텍스 실바, 흥국생명 상대로 30점 폭발…\"몸은 달라도 해낼 수 있다...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T13:50:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288138"
     }
    ]
   },
   {
-   "keyword": "한동훈 자료유출 압수수색에",
+   "keyword": "조희대 탄핵 국제 우려",
    "sources": [
     "signal.bz"
    ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T13:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "세계변호사협회도 조희대 탄핵 추진에 우려…\"위험한 선례\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-27T14:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522888?sid=104"
+    },
+    {
+     "title": "[속보] 세계변호사협회 \"조희대 탄핵은 위험한 선례…중대한 후폭풍 낳...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-27T14:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001042810?sid=102"
+    },
+    {
+     "title": "세계변호사협회, 조희대 대법원장 탄핵 우려 “중대한 후폭풍”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-27T14:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568535?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "한동훈 자료유출 의혹 경찰",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-27T13:53:00.000Z",
    "exclusive": false,
@@ -103,6 +104,38 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-27T13:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012303002?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "임찬규 손새은 결혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T13:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "손나은, 제부 생긴다..임찬규♥손새은 12월 19일 결혼식[스타이슈]",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-27T13:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490748"
+    },
+    {
+     "title": "LG 임찬규, 손나은 동생 손새은과 결혼…5년 열애 결실",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-27T13:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005447619"
+    },
+    {
+     "title": "LG 임찬규, '손나은 동생' 손새은과 12월 19일 결혼",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T13:34:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009314982"
     }
    ]
   },
@@ -143,10 +176,28 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1979,
-  "matched": 984,
-  "avgLeadMin": 657,
+  "flagged": 1981,
+  "matched": 987,
+  "avgLeadMin": 656,
   "recent": [
+   {
+    "keyword": "연우 다이어트 부작용",
+    "hitKeyword": "스시자로 열풍 부작용",
+    "hitAt": "2026-11-27T23:30:00+09:00",
+    "leadMin": 676
+   },
+   {
+    "keyword": "박정수 정을영 통화",
+    "hitKeyword": "박정수 정을영 감독",
+    "hitAt": "2026-11-27T23:30:00+09:00",
+    "leadMin": 53
+   },
+   {
+    "keyword": "박정수",
+    "hitKeyword": "박정수 정을영 감독",
+    "hitAt": "2026-11-27T23:30:00+09:00",
+    "leadMin": 22
+   },
    {
     "keyword": "그냥 사람 친구",
     "hitKeyword": "그냥사람친구 이서진",
@@ -188,24 +239,6 @@
     "hitKeyword": "손새은 임찬규 12월 결혼",
     "hitAt": "2026-11-27T22:00:00+09:00",
     "leadMin": 3170
-   },
-   {
-    "keyword": "황정민 염정아 크로스2 12월 공개",
-    "hitKeyword": "손새은 임찬규 12월 결혼",
-    "hitAt": "2026-11-27T22:00:00+09:00",
-    "leadMin": 2095
-   },
-   {
-    "keyword": "김이현",
-    "hitKeyword": "김이현 뺑소니 사망",
-    "hitAt": "2026-11-27T22:00:00+09:00",
-    "leadMin": 93
-   },
-   {
-    "keyword": "3분기 실질소득 감소",
-    "hitKeyword": "국민연금 3분기 수익률",
-    "hitAt": "2026-11-27T21:00:00+09:00",
-    "leadMin": 1944
    }
   ]
  }
