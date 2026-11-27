@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T22:50:14.772Z",
+ "builtAt": "2026-11-27T23:00:17.905Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "AI 관련주 상승",
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 2,
+   "articles90": 16,
+   "recent20": 3,
    "press": 11,
    "firstArticleAt": "2026-11-27T21:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "AI 데이터센터가 부른 구리 확보 전쟁…LS·풍산 수혜 기대 커지나",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-27T22:54:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=509096"
+    },
     {
      "title": "AI·반도체가 끌어올린 뉴욕증시…나스닥 2.3% 급등, '변동성은 계속된...",
      "press": "newsroad.co.kr",
@@ -33,76 +39,38 @@
      "press": "pinpointnews.co.kr",
      "publishedAt": "2026-11-27T22:42:00.000Z",
      "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=509092"
-    },
-    {
-     "title": "뉴욕증시, 저가 매수에 일제히 상승…샌디스크 16%·앤트로픽 11%↑",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-27T22:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002395023?sid=101"
     }
    ]
   },
   {
-   "keyword": "연금",
+   "keyword": "필라델피아 반도체 지수",
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 9,
    "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-27T21:31:00.000Z",
+   "firstArticleAt": "2026-11-27T21:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "내년 저소득층 국민연금 보험료 지원 대상 98만5천명…2년새 5배로",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-27T22:34:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785455"
+     "title": "AI·반도체가 끌어올린 뉴욕증시…나스닥 2.3% 급등, '변동성은 계속된...",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-27T22:48:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68628"
     },
     {
-     "title": "국민연금 보험료 지원 25만명 늘린다…월소득 100만원 미만까지",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-27T22:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729709?sid=101"
-    },
-    {
-     "title": "“국민연금 보험료 지원 문턱 낮춘다”…소득 기준 80만→100만원",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-27T22:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000134125?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 디올 재킷 복귀",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T21:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "가죽 재킷 벗고 고개 숙인 젠슨 황…옷값 보니 '깜짝'",
-     "press": "hankyung.com",
+     "title": "'주간반등' 메모리 반도체주, '이익절벽' 우려 해소될까?",
+     "press": "getnews.co.kr",
      "publishedAt": "2026-11-27T22:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359289?sid=104"
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888757"
     },
     {
-     "title": "가죽 잠바 벗은 젠슨 황…‘반성 패션’에 걸친 명품만 700만원",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-27T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002836130?sid=101"
-    },
-    {
-     "title": "젠슨 황, '디올 면재킷·에르메스 운동화'로 복귀...패션계 \"겸손 연출\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-27T22:06:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785450"
+     "title": "폭락 딛고 반등했지만…반도체주에 날아든 서늘한 경고",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-27T22:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274260?sid=101"
     }
    ]
   },
@@ -113,7 +81,7 @@
     "google"
    ],
    "articles90": 7,
-   "recent20": 3,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-27T22:26:00.000Z",
    "exclusive": false,
@@ -172,6 +140,39 @@
    ]
   },
   {
+   "keyword": "이동연 팬레터 폐기 사과",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T22:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이동연 “저걸 아직도 갖고 있어?” 모아둔 선물+편지 ‘증거들’ 여론...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T22:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192062"
+    },
+    {
+     "title": "'팬레터 폐기' 뭇매 맞던 이동연, 2차 사과·인증샷에 비난 여론 '반전'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T22:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014350418"
+    },
+    {
+     "title": "'팬레터 폐기 논란' 이동연, 2차 사과+보관함 인증 공개하자…여론 급반...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-27T22:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004470381"
+    }
+   ]
+  },
+  {
    "keyword": "한지민",
    "sources": [
     "signal.bz"
@@ -200,6 +201,38 @@
      "press": "newsen.com",
      "publishedAt": "2026-11-27T22:14:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001192057"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 디올 재킷 복귀",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T21:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "가죽 재킷 벗고 고개 숙인 젠슨 황…옷값 보니 '깜짝'",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T22:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359289?sid=104"
+    },
+    {
+     "title": "가죽 잠바 벗은 젠슨 황…‘반성 패션’에 걸친 명품만 700만원",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-27T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002836130?sid=101"
+    },
+    {
+     "title": "젠슨 황, '디올 면재킷·에르메스 운동화'로 복귀...패션계 \"겸손 연출\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-27T22:06:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785450"
     }
    ]
   },
@@ -238,7 +271,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1968,
+  "flagged": 1970,
   "matched": 970,
   "avgLeadMin": 657,
   "recent": [
