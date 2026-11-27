@@ -1,5 +1,6 @@
 import type { Frame, KeyInput, Page } from 'puppeteer';
 import { balanceMobileLineBreaks } from '../content/mobileLineBalance.js';
+import { normalizeBarePipeTables } from './barePipeTable.js';
 import { paragraphGroupSizes } from '../content/sentenceParagraphs.js';
 import {
   PASTE_FALLBACK_ARRIVAL_MAX_WAIT_MS,
@@ -1735,7 +1736,9 @@ export function buildPastePreviewHtml(text: string): string {
 }
 
 export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions = {}): MobileRichHtmlResult {
-  const normalized = normalizeMateReadableText(normalizeText(text));
+  // [2026-11-27] A pasted table without outer pipes ("구분 | A | B" rows) becomes a markdown table first, before any
+  //   inline list expander can cut its rows.
+  const normalized = normalizeMateReadableText(normalizeBarePipeTables(normalizeText(text)));
   const maxChunkChars = options.maxChunkChars ?? DEFAULT_MAX_CHUNK_CHARS;
   const maxHighlights = options.maxHighlights ?? DEFAULT_MAX_HIGHLIGHTS;
   const fontSizePx = options.fontSizePx ?? 19;

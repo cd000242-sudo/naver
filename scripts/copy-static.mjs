@@ -415,6 +415,11 @@ try {
       filePath: path.join(projectRoot, 'dist', 'automation', 'pasteArrival.js'),
     },
     {
+      // [2026-11-27] richTextPaste(렌더러 번들)가 막대 없는 표를 마크다운 표로 바꾸는 헬퍼를 import 한다.
+      label: 'automation/barePipeTable.js',
+      filePath: path.join(projectRoot, 'dist', 'automation', 'barePipeTable.js'),
+    },
+    {
       // [2026-08-26] 붙여넣기 줄바꿈 미리보기 — fullAutoFlow 가 값으로 가져온다.
       //   미리보기와 발행 결과가 갈리지 않도록 같은 함수를 쓴다.
       label: 'automation/richTextPaste.js',
