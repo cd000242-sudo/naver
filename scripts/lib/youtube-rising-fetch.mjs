@@ -4,11 +4,12 @@
  * status, the API's error reason and the error name.
  *
  * Time: requests run one after another, each with its own timeout (REQUEST_TIMEOUT_MS) and all of them share one run
- * budget (RUN_BUDGET_MS = 100 s, previous-board read included). Typical run = 14 chart + 11 search + up to 12
- * videos.list calls (~40 x 0.3-0.5 s = 15-20 s); when the budget is spent the remaining calls are skipped, so the
+ * budget (RUN_BUDGET_MS = 100 s, previous-board read included). Typical run = 14 chart + 13 search + up to 14
+ * videos.list calls (~41 x 0.3-0.5 s = 12-21 s); when the budget is spent the remaining calls are skipped, so the
  * script always ends inside the workflow's `timeout 120`.
  */
 import { normalizeVideo } from './youtube-rising-core.mjs';
+import { DEFAULT_DURATION } from './youtube-rising-genres.mjs';
 
 export const RUN_BUDGET_MS = 100_000;
 export const REQUEST_TIMEOUT_MS = 15_000;
@@ -59,11 +60,16 @@ export function createYoutubeClient({ key, fetchImpl = fetch, log = () => {}, bu
       const items = await request(categoryId ? `카테고리 ${categoryId}` : '전체', 'videos', categoryId ? { ...params, videoCategoryId: categoryId } : params);
       return videosOf(items);
     },
-    /** Top viewed Shorts-length videos of one genre since `publishedAfter` → video ids, or null when the search failed. */
+    /**
+     * Top viewed videos of one genre row since `publishedAfter` → video ids, or null when the search failed. The row says
+     * how it searches: `duration` (default 'short'), `categoryId` → videoCategoryId and `q` are sent only when the row has them.
+     */
     async searchGenre(genre, publishedAfter) {
       const items = await request(`검색 ${genre.id}`, 'search', {
-        part: 'id', type: 'video', order: 'viewCount', videoDuration: 'short', regionCode: 'KR', relevanceLanguage: 'ko',
-        maxResults: 50, publishedAfter, q: genre.q,
+        part: 'id', type: 'video', order: 'viewCount', videoDuration: genre.duration || DEFAULT_DURATION, regionCode: 'KR',
+        relevanceLanguage: 'ko', maxResults: 50, publishedAfter,
+        ...(genre.categoryId ? { videoCategoryId: genre.categoryId } : {}),
+        ...(genre.q ? { q: genre.q } : {}),
       });
       if (items === null) return null;
       return [...new Set(items.map((item) => String(item?.id?.videoId || '')).filter((id) => VIDEO_ID.test(id)))];

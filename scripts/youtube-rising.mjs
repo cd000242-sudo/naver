@@ -8,16 +8,16 @@
  * into the deploy output only. Always exits 0 — a missing board must not stop the site deploy.
  * The API key is read from YOUTUBE_API_KEY and is never printed (request URLs are not logged).
  *
- * Sources (2026-11-10): the popular chart (14 calls) + per-genre Shorts search (youtube-rising-genres.mjs; the search
- * itself runs at most once per 6 h, in between only the numbers of the last search ids are refreshed). Everything runs
+ * Sources (2026-11-10): the popular chart (14 calls) + per-genre search (youtube-rising-genres.mjs: Shorts, medium or long
+ * videos per row; the search itself runs at most once per 6 h — or at once when the genre table changed (genresKey) — and in
+ * between only the numbers of the last search ids are refreshed). Everything runs
  * one request after another inside one 100 s budget (youtube-rising-fetch.mjs), under the workflow's `timeout 120`.
  */
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { boardItems, buildRisingBoard, planRebuild, readPreviousBoard, splitBoard } from './lib/youtube-rising-core.mjs';
 import { RUN_BUDGET_MS, createBudget, createYoutubeClient } from './lib/youtube-rising-fetch.mjs';
-import { BOARD_MAX_ITEMS, GENRE_CAP, GENRE_FLOOR } from './lib/youtube-rising-genres.mjs';
-import { gatherSearchItems, mergeSources } from './lib/youtube-rising-search.mjs';
+import { boardOptionsOf, gatherSearchItems, mergeSources } from './lib/youtube-rising-search.mjs';
 
 const argValue = (name, fallback) => {
   const at = process.argv.indexOf(name);
@@ -81,7 +81,7 @@ async function main() {
     else log('새로 받지 못했고 6시간 안의 보드도 없습니다 — 이번 배포는 보드 없이 나갑니다.');
     return;
   }
-  write(buildRisingBoard(items, previous, now, { maxItems: BOARD_MAX_ITEMS, genreCap: GENRE_CAP, genreFloor: GENRE_FLOOR, searchedAt: search.searchedAt }), '새 보드');
+  write(buildRisingBoard(items, previous, now, boardOptionsOf(search, previous)), '새 보드');
 }
 
 main().catch((error) => {

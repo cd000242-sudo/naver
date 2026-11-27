@@ -1,11 +1,13 @@
 // [2026-11-10] "떡상 영상 보드" head/tail split: `items` keeps the fastest 200 (the already installed extension reads exactly that
 // many and reports the rest as "dropped"), everything after them goes into the new `more` array (up to 600 in total).
 // Loaded by youtube-rising-floor.test.mjs -> youtube-rising.test.mjs (the deploy workflow runs that one file).
+// This file loads youtube-rising-genres.test.mjs, so the genre table checks also run before every deploy.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import * as core from '../lib/youtube-rising-core.mjs';
-import { BOARD_MAX_ITEMS, GENRE_CAP, GENRE_FLOOR } from '../lib/youtube-rising-genres.mjs';
+import { BOARD_MAX_ITEMS, GENRES_KEY, GENRE_CAP, GENRE_FLOOR } from '../lib/youtube-rising-genres.mjs';
 import { carriedEntries, gatherSearchItems } from '../lib/youtube-rising-search.mjs';
+import './youtube-rising-genres.test.mjs';
 
 const { buildRisingBoard, readPreviousBoard } = core;
 const NOW = Date.parse('2026-11-10T09:00:00Z');
@@ -40,17 +42,17 @@ test('head/tail split: 200 or fewer items give an empty more; no options keeps t
 
 test('head/tail split: genre floor and genres count the whole board, not only the head 200', () => {
   const tips = [
-    ...Array.from({ length: 10 }, (_, n) => item(id('t', n), 2_000_000 - n, 'tips')),
-    ...Array.from({ length: 15 }, (_, n) => item(id('s', n), 2_000 - n * 10, 'tips')),
+    ...Array.from({ length: 10 }, (_, n) => item(id('t', n), 2_000_000 - n, 'ent-issue')),
+    ...Array.from({ length: 15 }, (_, n) => item(id('s', n), 2_000 - n * 10, 'ent-issue')),
   ];
-  const history = Array.from({ length: 30 }, (_, n) => item(id('h', n), 3_000 - n * 100, 'history'));
+  const history = Array.from({ length: 30 }, (_, n) => item(id('h', n), 3_000 - n * 100, 'story'));
   const built = buildRisingBoard([...chartOf(700), ...tips, ...history], null, NOW, OPTIONS);
   const all = [...built.items, ...built.more];
   assert.equal(all.length, BOARD_MAX_ITEMS);
   const countIn = (list, genre) => list.filter((entry) => entry.genre === genre).length;
-  assert.deepEqual([countIn(built.items, 'tips'), countIn(built.more, 'tips')], [10, 10], 'the genre spans both arrays');
-  assert.deepEqual([countIn(built.items, 'history'), countIn(built.more, 'history')], [0, 20], 'a slow genre keeps its 20 in more');
-  assert.deepEqual(built.genres, [{ id: 'tips', name: '꿀팁', count: 20 }, { id: 'history', name: '역사', count: 20 }]);
+  assert.deepEqual([countIn(built.items, 'ent-issue'), countIn(built.more, 'ent-issue')], [10, 10], 'the genre spans both arrays');
+  assert.deepEqual([countIn(built.items, 'story'), countIn(built.more, 'story')], [0, 20], 'a slow genre keeps its 20 in more');
+  assert.deepEqual(built.genres, [{ id: 'ent-issue', name: '연예 이슈', count: 20 }, { id: 'story', name: '사연·썰', count: 20 }]);
   const speeds = all.map((entry) => entry.viewsPerHour);
   assert.deepEqual(speeds, [...speeds].sort((a, b) => b - a));
 });
@@ -66,24 +68,24 @@ test('previous board: a video that sat in `more` still gets a measured (delta) s
 });
 
 test('previous board: carried search entries and numbers come from items and more together', async () => {
-  const previous = previousOf({ searchedAt: ago(120), items: [found(id('p', 1), 'tips')], more: [found(id('p', 2), 'funny'), { videoId: id('p', 3) }, found('bad', 'tips')] });
-  assert.deepEqual(carriedEntries(previous), [{ videoId: id('p', 1), genre: 'tips' }, { videoId: id('p', 2), genre: 'funny' }]);
+  const previous = previousOf({ searchedAt: ago(120), genresKey: GENRES_KEY, items: [found(id('p', 1), 'ent-issue')], more: [found(id('p', 2), 'funny'), { videoId: id('p', 3) }, found('bad', 'ent-issue')] });
+  assert.deepEqual(carriedEntries(previous), [{ videoId: id('p', 1), genre: 'ent-issue' }, { videoId: id('p', 2), genre: 'funny' }]);
   const asked = [];
   const client = { fetchVideos: async (ids) => { asked.push(ids); return ids.map((videoId) => ({ videoId, viewCount: 1 })); }, searchGenre: async () => null };
   const reused = await gatherSearchItems(client, previous, NOW);
   assert.deepEqual(asked, [[id('p', 1), id('p', 2)]]);
-  assert.deepEqual(reused.items.map((entry) => [entry.videoId, entry.genre]), [[id('p', 1), 'tips'], [id('p', 2), 'funny']]);
+  assert.deepEqual(reused.items.map((entry) => [entry.videoId, entry.genre]), [[id('p', 1), 'ent-issue'], [id('p', 2), 'funny']]);
   const failedRound = await gatherSearchItems(client, { ...previous, searchedAt: ago(400) }, NOW);
   assert.deepEqual(failedRound.items.map((entry) => entry.videoId), [id('p', 1), id('p', 2)], 'every search failed -> ids in more are carried on');
   assert.equal(failedRound.searched, false);
 });
 
 test('previous board: an old-format board (no `more`) or a broken `more` is read as items only', () => {
-  const items = [found(id('p', 1), 'tips')];
+  const items = [found(id('p', 1), 'ent-issue')];
   for (const more of [undefined, null, 'text', 42, { 0: found(id('p', 2), 'funny') }]) {
     const previous = previousOf({ items, ...(more === undefined ? {} : { more }) });
     assert.deepEqual(core.boardItems(previous), items);
-    assert.deepEqual(carriedEntries(previous), [{ videoId: id('p', 1), genre: 'tips' }]);
+    assert.deepEqual(carriedEntries(previous), [{ videoId: id('p', 1), genre: 'ent-issue' }]);
     assert.equal(readPreviousBoard(previous, NOW), previous, 'still a usable previous board');
     assert.equal(buildRisingBoard([item(id('p', 1), 6_000, 'tips')], { ...previous, items: [{ videoId: id('p', 1), viewCount: 1_000 }] }, NOW).items[0].velocity, 'delta');
   }

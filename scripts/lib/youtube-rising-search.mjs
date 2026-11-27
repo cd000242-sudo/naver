@@ -7,16 +7,33 @@
  * asked again with videos.list (1 unit per 50 ids).
  */
 import { boardItems } from './youtube-rising-core.mjs';
-import { GENRES, SEARCH_CARRY_MAX_MS, SEARCH_REFRESH_MS, SEARCH_WINDOW_MS } from './youtube-rising-genres.mjs';
+import {
+  BOARD_MAX_ITEMS, GENRES, GENRES_KEY, GENRE_CAP, GENRE_FLOOR, SEARCH_CARRY_MAX_MS, SEARCH_REFRESH_MS, SEARCH_WINDOW_MS,
+} from './youtube-rising-genres.mjs';
 
 const KNOWN_GENRES = new Set(GENRES.map((genre) => genre.id));
 const VIDEO_ID = /^[A-Za-z0-9_-]{11}$/;
 const ageOf = (previous, now) => now - Date.parse(previous?.searchedAt);
 
-/** reuse = the previous search is younger than 6 h; search = ask again (also: never searched, unreadable or future time). */
+/**
+ * reuse = the previous search is younger than 6 h AND was made with today's genre table (same genresKey);
+ * search = ask again (also: never searched, unreadable or future time, another or no genresKey = the table changed).
+ */
 export function planSearch(previous, now) {
   const age = ageOf(previous, now);
-  return age >= 0 && age < SEARCH_REFRESH_MS ? { action: 'reuse' } : { action: 'search' };
+  return previous?.genresKey === GENRES_KEY && age >= 0 && age < SEARCH_REFRESH_MS ? { action: 'reuse' } : { action: 'search' };
+}
+
+/**
+ * Options for buildRisingBoard. The board's genresKey is today's key only when a search round really ran; otherwise the
+ * previous board's key stays (null when it had none), so a table change keeps being searched until one round succeeds.
+ */
+export function boardOptionsOf(search, previous) {
+  const kept = typeof previous?.genresKey === 'string' ? previous.genresKey : null;
+  return {
+    maxItems: BOARD_MAX_ITEMS, genreCap: GENRE_CAP, genreFloor: GENRE_FLOOR,
+    searchedAt: search.searchedAt, genresKey: search.searched ? GENRES_KEY : kept,
+  };
 }
 
 /** Search ids kept on a previous board (`items` and `more`): items with a known genre (an old-format board has none). */

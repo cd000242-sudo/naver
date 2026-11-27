@@ -1,4 +1,4 @@
-// [2026-11-10] Per-genre floor of the "떡상 영상 보드": a slow genre (역사 …) must not vanish behind the popular chart.
+// [2026-11-10] Per-genre floor of the "떡상 영상 보드": a slow genre (사연·썰 …) must not vanish behind the popular chart.
 // Loaded by youtube-rising.test.mjs (the deploy workflow runs that one file).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -14,14 +14,14 @@ const OPTIONS = { maxItems: BOARD_MAX_ITEMS, genreCap: GENRE_CAP, genreFloor: GE
 
 test('genre floor: the fastest 20 of a slow genre stay on a full board, and the board is still fastest first', () => {
   const chart = Array.from({ length: 700 }, (_, n) => item(id('c', n), 1_000_000 - n * 100, ''));
-  const history = Array.from({ length: 30 }, (_, n) => item(id('h', n), 3_000 - n * 100, 'history'));
+  const history = Array.from({ length: 30 }, (_, n) => item(id('h', n), 3_000 - n * 100, 'story'));
   const built = buildRisingBoard([...chart, ...history], null, NOW, OPTIONS);
   assert.equal(GENRE_FLOOR, 20);
   const all = boardItems(built);
   assert.equal(all.length, BOARD_MAX_ITEMS);
-  const kept = all.filter((entry) => entry.genre === 'history');
+  const kept = all.filter((entry) => entry.genre === 'story');
   assert.deepEqual(kept.map((entry) => entry.videoId), history.slice(0, 20).map((entry) => entry.videoId));
-  assert.deepEqual(built.genres, [{ id: 'history', name: '역사', count: 20 }]);
+  assert.deepEqual(built.genres, [{ id: 'story', name: '사연·썰', count: 20 }]);
   const speeds = all.map((entry) => entry.viewsPerHour);
   assert.deepEqual(speeds, [...speeds].sort((a, b) => b - a));
 });

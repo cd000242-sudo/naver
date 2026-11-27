@@ -6,7 +6,7 @@ import {
   BOARD_SCHEMA_VERSION, CARRY_FORWARD_MAX_MS, MIN_REBUILD_MS, boardItems, buildRisingBoard, classifyForm, normalizeVideo,
   parseIsoDuration, planRebuild, readPreviousBoard,
 } from '../lib/youtube-rising-core.mjs';
-import { BOARD_MAX_ITEMS, GENRES, GENRE_CAP, SEARCH_REFRESH_MS, SEARCH_WINDOW_MS } from '../lib/youtube-rising-genres.mjs';
+import { BOARD_MAX_ITEMS, GENRES, GENRES_KEY, GENRE_CAP, SEARCH_REFRESH_MS, SEARCH_WINDOW_MS } from '../lib/youtube-rising-genres.mjs';
 import { carriedEntries, gatherSearchItems, mergeSources, planSearch } from '../lib/youtube-rising-search.mjs';
 import { createBudget, createYoutubeClient } from '../lib/youtube-rising-fetch.mjs'; import './youtube-rising-floor.test.mjs';
 
@@ -142,67 +142,67 @@ function fakeClient({ search = {}, gone = [] } = {}) {
 }
 
 test('genre table is one data list; refresh 6 h, window 7 days, genre cap 50, board cap 600', () => {
-  assert.deepEqual(GENRES.map((g) => g.id), ['tips', 'funny', 'animal', 'movie', 'shopping', 'travel', 'knowledge', 'house', 'story', 'mystery', 'history']);
-  assert.ok(GENRES.every((g) => /[가-힣]/.test(g.name) && g.q.endsWith(' #shorts')));
-  assert.equal(GENRES[0].q, '꿀팁 #shorts');
+  assert.deepEqual(GENRES.map((g) => g.id), ['ent-issue', 'ent', 'ent-long', 'variety', 'drama', 'movie', 'issue', 'case', 'comedy', 'funny', 'prank', 'story', 'house']);
+  assert.ok(GENRES.every((g) => /[가-힣]/.test(g.name) && (g.q || g.categoryId)), 'every row says what to search for');
+  assert.equal(GENRES[0].q, '연예 이슈');
   assert.deepEqual([SEARCH_REFRESH_MS, SEARCH_WINDOW_MS, GENRE_CAP, BOARD_MAX_ITEMS], [6 * HOUR, 7 * 24 * HOUR, 50, 600]);
 });
 
 test('search plan: reuse inside 6 hours; search at 6 hours, older, never (old-format board), unreadable or future', () => {
-  const at = (minutes) => board({ searchedAt: ago(minutes) });
+  const at = (minutes) => board({ searchedAt: ago(minutes), genresKey: GENRES_KEY });
   assert.deepEqual(planSearch(at(359), NOW), { action: 'reuse' });
   for (const previous of [at(360), at(420), at(-60), board(), board({ searchedAt: 'nope' }), null]) assert.deepEqual(planSearch(previous, NOW), { action: 'search' });
 });
 
 test('carried entries: items with a known genre and a valid id; an old-format board carries none', () => {
-  const items = [found(1, 'tips'), found(2, 'ghost'), { videoId: vid(3) }, { videoId: 'bad', genre: 'funny' }, { ...found(4, 'funny'), source: 'chart' }];
-  assert.deepEqual(carriedEntries(board({ items })), [{ videoId: vid(1), genre: 'tips' }, { videoId: vid(4), genre: 'funny' }]);
+  const items = [found(1, 'ent-issue'), found(2, 'ghost'), { videoId: vid(3) }, { videoId: 'bad', genre: 'funny' }, { ...found(4, 'funny'), source: 'chart' }];
+  assert.deepEqual(carriedEntries(board({ items })), [{ videoId: vid(1), genre: 'ent-issue' }, { videoId: vid(4), genre: 'funny' }]);
   assert.deepEqual([carriedEntries(board({ items: [{ videoId: vid(3), viewCount: 5 }] })), carriedEntries(null)], [[], []]);
 });
 
 test('gather inside 6 hours: no search call, the same ids get fresh numbers, searchedAt is kept', async () => {
   const client = fakeClient();
-  const out = await gatherSearchItems(client, board({ searchedAt: ago(120), items: [found(1, 'tips'), found(2, 'funny')] }), NOW);
+  const out = await gatherSearchItems(client, board({ searchedAt: ago(120), genresKey: GENRES_KEY, items: [found(1, 'ent-issue'), found(2, 'funny')] }), NOW);
   assert.equal(client.calls.search.length, 0);
   assert.deepEqual(client.calls.videos, [[vid(1), vid(2)]]);
-  assert.deepEqual(out.items.map((i) => [i.videoId, i.genre, i.source]), [[vid(1), 'tips', 'search'], [vid(2), 'funny', 'search']]);
+  assert.deepEqual(out.items.map((i) => [i.videoId, i.genre, i.source]), [[vid(1), 'ent-issue', 'search'], [vid(2), 'funny', 'search']]);
   assert.deepEqual([out.searchedAt, out.searched], [ago(120), false]);
 });
 
 test('gather after 6 hours / never / old format: one search per genre in table order, 7-day window, first genre wins a shared id', async () => {
   for (const previous of [null, board(), board({ searchedAt: ago(400) })]) {
-    const client = fakeClient({ search: { tips: [vid(1), vid(2)], funny: [vid(2), vid(3)] } });
+    const client = fakeClient({ search: { 'ent-issue': [vid(1), vid(2)], funny: [vid(2), vid(3)] } });
     const out = await gatherSearchItems(client, previous, NOW);
     assert.deepEqual(client.calls.search.map(([id]) => id), GENRES.map((g) => g.id));
     assert.ok(client.calls.search.every(([, after]) => after === new Date(NOW - SEARCH_WINDOW_MS).toISOString()));
     assert.deepEqual(client.calls.videos, [[vid(1), vid(2), vid(3)]]);
-    assert.deepEqual(out.items.map((i) => i.genre), ['tips', 'tips', 'funny']);
+    assert.deepEqual(out.items.map((i) => i.genre), ['ent-issue', 'ent-issue', 'funny']);
     assert.deepEqual([out.searchedAt, out.searched], [new Date(NOW).toISOString(), true]);
   }
 });
 
 test('gather: a failed genre keeps its previous ids, the other genres use the new search; searchedAt is renewed', async () => {
-  const previous = board({ searchedAt: ago(400), items: [found(8, 'animal'), found(9, 'tips')] });
-  const client = fakeClient({ search: { tips: [vid(1)] } });
+  const previous = board({ searchedAt: ago(400), items: [found(8, 'issue'), found(9, 'ent-issue')] });
+  const client = fakeClient({ search: { 'ent-issue': [vid(1)] } });
   const out = await gatherSearchItems(client, previous, NOW);
-  assert.deepEqual(client.calls.videos, [[vid(1), vid(8)]], 'tips searched anew (9 dropped); animal failed (8 kept)');
+  assert.deepEqual(client.calls.videos, [[vid(1), vid(8)]], 'ent-issue searched anew (9 dropped); issue failed (8 kept)');
   assert.equal(out.searchedAt, new Date(NOW).toISOString());
 });
 
 test('gather: every search fails (quota) -> previous search items go on with fresh numbers, searchedAt is not renewed', async () => {
-  const previous = board({ searchedAt: ago(400), items: [found(1, 'tips'), found(2, 'funny')] });
+  const previous = board({ searchedAt: ago(400), items: [found(1, 'ent-issue'), found(2, 'funny')] });
   const client = fakeClient();
   const out = await gatherSearchItems(client, previous, NOW);
   assert.equal(client.calls.search.length, GENRES.length, 'each genre is still tried');
   assert.deepEqual(client.calls.videos, [[vid(1), vid(2)]]);
   assert.deepEqual([out.items.length, out.searchedAt, out.searched], [2, ago(400), false]);
   assert.deepEqual(await gatherSearchItems(fakeClient(), null, NOW), { items: [], searchedAt: null, searched: false });
-  const stale = board({ searchedAt: ago(8 * 24 * 60), items: [found(1, 'tips')] });
+  const stale = board({ searchedAt: ago(8 * 24 * 60), items: [found(1, 'ent-issue')] });
   assert.equal((await gatherSearchItems(fakeClient(), stale, NOW)).items.length, 0, 'a search older than 7 days is not carried');
 });
 
 test('gather: numbers that cannot be fetched after a good search do not renew searchedAt', async () => {
-  const out = await gatherSearchItems(fakeClient({ search: { tips: [vid(1)] }, gone: [vid(1)] }), board({ searchedAt: ago(400) }), NOW);
+  const out = await gatherSearchItems(fakeClient({ search: { 'ent-issue': [vid(1)] }, gone: [vid(1)] }), board({ searchedAt: ago(400) }), NOW);
   assert.deepEqual([out.items.length, out.searchedAt, out.searched], [0, ago(400), false]);
 });
 
@@ -227,23 +227,23 @@ test('board: per-genre cap keeps the fastest of each genre; total cap 600; no op
 });
 
 test('new board fields are additions only: schemaVersion stays 1, old fields keep their names', () => {
-  const raw = [speedy(1, 'tips', 900), speedy(2, 'tips', 800), speedy(3, 'funny', 700), speedy(4, '', 600)];
+  const raw = [speedy(1, 'ent-issue', 900), speedy(2, 'ent-issue', 800), speedy(3, 'funny', 700), speedy(4, '', 600)];
   const out = buildRisingBoard(raw, null, NOW, { searchedAt: ago(90) });
   assert.equal(out.schemaVersion, 1);
   assert.equal(out.searchedAt, ago(90));
-  assert.deepEqual(out.genres, [{ id: 'tips', name: '꿀팁', count: 2 }, { id: 'funny', name: '예능·웃긴', count: 1 }]);
+  assert.deepEqual(out.genres, [{ id: 'ent-issue', name: '연예 이슈', count: 2 }, { id: 'funny', name: '웃긴 영상 모음', count: 1 }]);
   for (const key of ['builtAt', 'source', 'region', 'attribution', 'windowMin', 'items', 'more']) assert.ok(key in out, key);
-  assert.deepEqual([out.items[0].genre, out.items[0].source, out.items[3].genre, out.items[3].source], ['tips', 'search', '', 'chart']);
+  assert.deepEqual([out.items[0].genre, out.items[0].source, out.items[3].genre, out.items[3].source], ['ent-issue', 'search', '', 'chart']);
   assert.equal(buildRisingBoard([], null, NOW).searchedAt, null);
 });
 
 test('an old-format previous board (no genre, source, searchedAt, genres) works end to end', async () => {
   const previous = { schemaVersion: 1, builtAt: ago(60), items: [{ videoId: vid(1), viewCount: 30000 }] };
-  const search = await gatherSearchItems(fakeClient({ search: { tips: [vid(1), vid(2)] } }), previous, NOW);
+  const search = await gatherSearchItems(fakeClient({ search: { 'ent-issue': [vid(1), vid(2)] } }), previous, NOW);
   const out = buildRisingBoard(mergeSources([], search.items), previous, NOW, { ...OPTIONS, searchedAt: search.searchedAt });
   const byId = Object.fromEntries(out.items.map((i) => [i.videoId, i]));
   assert.deepEqual([out.windowMin, byId[vid(1)].viewsPerHour, byId[vid(1)].velocity, byId[vid(2)].velocity], [60, 6000, 'delta', 'average']);
-  assert.deepEqual(out.genres, [{ id: 'tips', name: '꿀팁', count: 2 }]);
+  assert.deepEqual(out.genres, [{ id: 'ent-issue', name: '연예 이슈', count: 2 }]);
 });
 
 const reply = (body, status = 200) => ({ status, ok: status < 400, json: async () => body });
@@ -271,14 +271,14 @@ test('client.searchGenre sends the agreed query; failures give null and the log 
   const ok = fakeFetch(() => reply({ items: [{ id: { videoId: vid(1) } }, { id: { videoId: 'bad' } }, { id: { videoId: vid(1) } }, { id: { videoId: vid(2) } }] }));
   assert.deepEqual(await clientOf(ok).client.searchGenre(GENRES[0], after), [vid(1), vid(2)]);
   assert.ok(ok.urls[0].startsWith('https://www.googleapis.com/youtube/v3/search?'));
-  assert.deepEqual(Object.fromEntries(new URL(ok.urls[0]).searchParams), { part: 'id', type: 'video', order: 'viewCount', videoDuration: 'short',
-    regionCode: 'KR', relevanceLanguage: 'ko', maxResults: '50', publishedAfter: after, q: '꿀팁 #shorts', key: 'SECRET-KEY-9' });
+  assert.deepEqual(Object.fromEntries(new URL(ok.urls[0]).searchParams), { part: 'id', type: 'video', order: 'viewCount', videoDuration: 'medium',
+    regionCode: 'KR', relevanceLanguage: 'ko', maxResults: '50', publishedAfter: after, q: '연예 이슈', key: 'SECRET-KEY-9' });
   const quota = clientOf(fakeFetch(() => reply({ error: { errors: [{ reason: 'quotaExceeded' }] } }, 403)));
   const boom = clientOf(async () => { throw Object.assign(new Error('https://x/?key=SECRET-KEY-9'), { name: 'TimeoutError' }); });
   assert.equal(await quota.client.searchGenre(GENRES[0], after), null);
   assert.equal(await boom.client.searchGenre(GENRES[0], after), null);
   assert.match(quota.logs.join(), /403 · quotaExceeded/);
-  assert.doesNotMatch([...quota.logs, ...boom.logs].join('\n'), /SECRET-KEY-9|googleapis|꿀팁/);
+  assert.doesNotMatch([...quota.logs, ...boom.logs].join('\n'), /SECRET-KEY-9|googleapis|연예/);
 });
 
 test('time budget: no request once the run budget is spent; the chart request keeps its old shape', async () => {

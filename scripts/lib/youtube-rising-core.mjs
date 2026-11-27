@@ -14,6 +14,8 @@
  *   already installed reads at most 200 items and reports every further one as "dropped". The rest goes into the new
  *   `more` array (items first, then more = one fastest-first order). Anything that reads a previous board must read both
  *   (boardItems); a board without `more` (old format) reads as items only.
+ * - 2026-11-27: the board header gets `genresKey` (fingerprint of the genre table of the last search round; an addition,
+ *   schemaVersion stays 1). A previous board with another or no key makes the search run at once (youtube-rising-search.mjs).
  */
 import { GENRES } from './youtube-rising-genres.mjs';
 
@@ -160,7 +162,8 @@ function capItems(sorted, maxItems, genreCap, genreFloor) {
 /**
  * Deduplicate, attach views per hour (delta against the previous deploy when it was seen there), sort, cap.
  * options (all optional): maxItems (default MAX_ITEMS = chart-only size), genreCap (default none), genreFloor (default 0), searchedAt (ISO of
- * the last per-genre search, written to the board as is). Plain chart callers pass nothing and get the old behavior.
+ * the last per-genre search, written to the board as is), genresKey (fingerprint of the genre table the search used, written
+ * as is; null when not given). Plain chart callers pass nothing and get the old behavior.
  */
 export function buildRisingBoard(rawItems, previous, now, options = {}) {
   const { maxItems = MAX_ITEMS, genreCap = Infinity, genreFloor = 0 } = options;
@@ -180,6 +183,7 @@ export function buildRisingBoard(rawItems, previous, now, options = {}) {
     attribution: 'YouTube 인기 차트 (YouTube Data API)',
     windowMin: prior ? Math.round((now - previousAt) / 60_000) : null,
     searchedAt: isoTime(options.searchedAt) || null,
+    genresKey: typeof options.genresKey === 'string' && options.genresKey !== '' ? options.genresKey : null,
     genres: summarizeGenres(all),
     items: all.slice(0, HEAD_ITEMS),
     more: all.slice(HEAD_ITEMS),
