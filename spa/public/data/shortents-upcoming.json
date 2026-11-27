@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T11:06:26.630Z",
+ "builtAt": "2026-11-27T11:16:30.137Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 66,
+   "articles90": 54,
    "recent20": 7,
-   "press": 55,
-   "firstArticleAt": "2026-11-27T09:37:00.000Z",
+   "press": 45,
+   "firstArticleAt": "2026-11-27T09:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"수용 불가, 재심 신청\" 최민희 측 반발…다음 행보는?",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T11:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406408?sid=100"
+     "title": "최민희 ‘당원권 2년 정지’ 징계에 계파 갈등 폭발(종합)",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-27T11:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003704065?sid=100"
     },
     {
-     "title": "[사설] 최민희 중징계 결정, ‘당내 내전’으로 이어져선 안돼",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-27T11:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834355?sid=110"
+     "title": "\"최민희, 당원권 정지 2년\"…김민석 청원도 심사",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-27T11:12:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545247"
     },
     {
-     "title": "최민희 '당원자격정지 2년' 중징계에 與 내홍 커질 듯…친청계 \"김민석...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T10:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350259?sid=100"
+     "title": "최민희 ‘당원 자격정지 2년’ 확정 땐 28년 총선 출마 불가능···계파...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-27T11:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485583?sid=100"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
+   "articles90": 13,
    "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-27T09:37:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-27T09:56:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -79,30 +79,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 8,
+   "articles90": 10,
    "recent20": 2,
-   "press": 8,
+   "press": 9,
    "firstArticleAt": "2026-11-27T09:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "“여기가 상원인가” “이런 장관 처음”…박홍근·서영교 與끼리 충돌",
+     "press": "donga.com",
+     "publishedAt": "2026-11-27T11:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765803?sid=100"
+    },
+    {
+     "title": "\"지금껏 법사위 잘못 운영\"…박홍근 '버럭'에 서영교 당황 [영상]",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T11:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359231?sid=100"
+    },
+    {
      "title": "“법사위는 법사위답게만” 박홍근에 與도 발끈…때아닌 당정 충돌",
      "press": "segye.com",
      "publishedAt": "2026-11-27T10:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004178702?sid=100"
-    },
-    {
-     "title": "박홍근-서영교 '법사위 충돌'…\"예산답변 못해\" \"이런 일 처음\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-27T10:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359227?sid=100"
-    },
-    {
-     "title": "법사위서 때아닌 與 내부 충돌…서영교, 박홍근에 \"이런 장관 처음\"",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-27T10:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002468006?sid=100"
     }
    ]
   },
@@ -111,13 +111,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 1,
+   "articles90": 7,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-27T09:38:00.000Z",
+   "firstArticleAt": "2026-11-27T09:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "강금실 재산 2.6억 신고…임웅순 20억·홍익표 65억",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-27T11:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447608?sid=100"
+    },
     {
      "title": "홍익표 통일장관 후보자, 재산 65억원 신고…'비거주1주택' 지적(종합2보...",
      "press": "yna.co.kr",
@@ -129,12 +135,6 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-27T10:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000968237?sid=100"
-    },
-    {
-     "title": "강금실 재산 2억 6500만 원 신고…강유정은 46억",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-27T10:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368933?sid=100"
     }
    ]
   },
@@ -172,38 +172,6 @@
    ]
   },
   {
-   "keyword": "오세훈",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T09:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국힘 행안위원 \"與, '오세훈 죽이기' 억지 고발·하명 수사 규탄\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T10:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350247?sid=100"
-    },
-    {
-     "title": "경찰 조사 오세훈, 왜?",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-27T10:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368925?sid=115"
-    },
-    {
-     "title": "野 행안위 \"민주당, '오세훈 죽이기' 억지고발…경찰 길들이기 중단하라...",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-27T09:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653879?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "강유정 논문 표절 의혹",
    "sources": [
     "signal.bz"
@@ -236,34 +204,34 @@
    ]
   },
   {
-   "keyword": "남경필 장남 스토킹 혐의",
+   "keyword": "오세훈",
    "sources": [
-    "daum"
+    "google"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-27T09:41:00.000Z",
-   "exclusive": true,
+   "firstArticleAt": "2026-11-27T09:49:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "남경필 장남 또 체포…“성관계 영상 유포하겠다” 협박 혐의",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-27T10:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568521?sid=102"
+     "title": "국힘 행안위원 \"與, '오세훈 죽이기' 억지 고발·하명 수사 규탄\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T10:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350247?sid=100"
     },
     {
-     "title": "[단독] 남경필 장남, 스토킹 혐의 체포...성관계 영상 유포 협박도",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T09:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439117?sid=102"
+     "title": "경찰 조사 오세훈, 왜?",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-27T10:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368925?sid=115"
     },
     {
-     "title": "남경필 전 경기지사 아들 '전 연인 성관계 영상 유포 협박' 등 혐의 체포...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T09:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314899?sid=102"
+     "title": "野 행안위 \"민주당, '오세훈 죽이기' 억지고발…경찰 길들이기 중단하라...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-27T09:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653879?sid=100"
     }
    ]
   },
@@ -283,7 +251,7 @@
      "title": "한성숙 국무총리, 베트남 당 중앙정책전략위원장 접견",
      "press": "newsis.com",
      "publishedAt": "2026-11-27T10:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350239?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/003/0014350241?sid=100"
     },
     {
      "title": "韓총리, 베트남 당 중앙정책전략위원장 접견…\"양국 교류·협력 확대\"",
