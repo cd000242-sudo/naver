@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T00:12:35.340Z",
+ "builtAt": "2026-11-27T00:22:38.423Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 27,
  "candidates": [
+  {
+   "keyword": "중기부 장관 표창 수상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 31,
+   "recent20": 16,
+   "press": 23,
+   "firstArticleAt": "2026-11-26T23:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "SK인텔릭스, 상생협력 공로로 중기부 장관 표창 수상",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-27T00:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002250105?sid=105"
+    },
+    {
+     "title": "[유통갤러리] 콜마그룹, 국가품질경영대회 ‘8관왕’…국무총리·장관표...",
+     "press": "theviewers.co.kr",
+     "publishedAt": "2026-11-27T00:20:00.000Z",
+     "link": "https://theviewers.co.kr/View.aspx?No=4332137"
+    },
+    {
+     "title": "한국소비자원, '올해의 상생기업 대상' 중기부 장관 표창 수상",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T00:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466999?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "10대 피의자 송치",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 7,
+   "press": 22,
+   "firstArticleAt": "2026-11-26T23:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘성북 10대 살해’ 피의자 전 연인 구속 송치…성매매·절도 지시 혐의",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-27T00:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834234?sid=102"
+    },
+    {
+     "title": "성매매·절도 지시했나…'성북 10대 살해' 피의자 전 연인 송치",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-27T00:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406255?sid=102"
+    },
+    {
+     "title": "성매매·절도 지시…'성북구 10대 살해' 피의자 전 연인 20대 여성 송치",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T00:14:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127000168"
+    }
+   ]
+  },
   {
    "keyword": "문근영, 기립성 저혈압으로 쓰러져",
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-26T22:51:00.000Z",
+   "articles90": 17,
+   "recent20": 3,
+   "press": 17,
+   "firstArticleAt": "2026-11-26T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "배우 얼굴에 상처라니…문근영·육성재, 기립성 저혈압에 위험천만 [건...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T00:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005358920?sid=103"
+    },
+    {
+     "title": "\"기립성 저혈압으로 쓰러져\"…문근영, 청룡서 앞머리 내린 사연",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-27T00:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000762119"
+    },
     {
      "title": "육성재 턱봉합·문근영 이마부상…\"기립성 저혈압으로 쓰러져\"",
      "press": "sidae.com",
      "publishedAt": "2026-11-27T00:09:00.000Z",
      "link": "https://m.entertain.naver.com/article/417/0001165854"
-    },
-    {
-     "title": "육성재 이어 문근영도…”기립성 저혈압으로 쓰러져 다쳐”",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-26T23:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000522730"
-    },
-    {
-     "title": "문근영 앞머리·육성재 마스크, 이유 있었다…'기립성 저혈압' 부상 잇...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T23:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128552"
     }
    ]
   },
@@ -47,30 +111,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 9,
+   "articles90": 13,
+   "recent20": 2,
+   "press": 11,
    "firstArticleAt": "2026-11-26T22:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "러시아 공연 찾은 김정은…북러, 문화·경제 협력까지 확대",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-27T00:15:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087130"
+    },
+    {
+     "title": "러시아 공연 즐긴 김정은…\"푸틴에 따뜻한 인사 전해달라\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-27T00:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653723?sid=100"
+    },
+    {
      "title": "방북한 러 장관, 김정은에 '동지'…\"북러 관계 긍정적 진전\"",
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-26T23:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000930410?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "김가영, 라이벌 제압!",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-26T23:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김가영, 스롱 피아비 꺾고 LPBA 4강 진출-통산 20승까지 두 걸음",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-27T00:04:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96050"
     },
     {
-     "title": "김정은 \"북러 협력, 보다 긴밀하고 확대돼\"...러 방북단과 공연관람",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-26T23:52:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127000123"
+     "title": "본격 '시즌 2승' 전쟁 막 올랐다…PBA 김영원 '홀로 생존'·LPBA 김가영-김...",
+     "press": "thebilliards.kr",
+     "publishedAt": "2026-11-26T23:58:00.000Z",
+     "link": "https://www.thebilliards.kr/news/articleView.html?idxno=32600"
     },
     {
-     "title": "北김정은, 러 대표단과 공연 관람하며 친선 과시…\"각 분야 협력 확대\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-26T23:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848600?sid=100"
+     "title": "10-0에서 10-9까지 '아찔'…'당구 여제' 김가영, 스롱 꺾고 통산 20승 성...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-26T23:56:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178215"
     }
    ]
   },
@@ -80,7 +176,7 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 1,
+   "recent20": 0,
    "press": 9,
    "firstArticleAt": "2026-11-26T22:58:00.000Z",
    "exclusive": false,
@@ -107,14 +203,46 @@
    ]
   },
   {
-   "keyword": "이란 외국군 주둔은 분쟁 확대",
+   "keyword": "무쇠소녀단3 연우 눈물",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-26T22:48:00.000Z",
+   "firstArticleAt": "2026-11-26T23:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'무쇠소녀단3' 첫방부터 피·땀·눈물...시즌 전체 첫방 최고 시청률 2....",
+     "press": "ize.co.kr",
+     "publishedAt": "2026-11-27T00:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000021323"
+    },
+    {
+     "title": "‘무쇠소녀단3’ 설인아, 체력 약체 연우 끝까지 챙겼다… 결국 터진 눈...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-27T00:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543861"
+    },
+    {
+     "title": "무쇠소녀단3 설인아·한지현, 스타디움 레이스 완주",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-26T23:46:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287553"
+    }
+   ]
+  },
+  {
+   "keyword": "이란 외국군 주둔은 분쟁 확대",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-26T22:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -143,10 +271,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T22:46:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T22:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,34 +299,34 @@
    ]
   },
   {
-   "keyword": "연우 10kg 감량",
+   "keyword": "김용범",
    "sources": [
-    "daum"
+    "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-26T23:06:00.000Z",
+   "firstArticleAt": "2026-11-26T23:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "설인아, 동갑 연우 꼬셨다…다이어트 후유증 딛고 '무쇠소녀단3'도 호흡",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-27T00:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004470189"
+     "title": "거버넌스포럼 \"김용범 개혁위원장 내정 대환영…대통령 용단에 경의\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-27T00:20:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446888"
     },
     {
-     "title": "연우 “2달만에 10kg 감량…온몸 두드러기, 많이 울어” (무쇠소녀단3)",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-26T23:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001307115"
+     "title": "거버넌스포럼 \"김용범, 韓 최고 자본시장 전문가…李 용단에 경의 표해...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-27T00:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848629?sid=101"
     },
     {
-     "title": "연우, 10kg 감량 후 전신 두드러기…\"이렇게 살면 안 되겠더라\"",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-26T23:06:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628071"
+     "title": "자본시장 개혁 밑그림 민간에 맡긴다…수장에 김용범 메리츠 부회장",
+     "press": "greened.kr",
+     "publishedAt": "2026-11-26T23:56:00.000Z",
+     "link": "https://www.greened.kr/news/articleView.html?idxno=355719"
     }
    ]
   },
@@ -218,7 +346,7 @@
      "title": "시장상황점검회의 앞서 환담하는 이형일 부총리",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T23:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466885?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/001/0016466886?sid=101"
     },
     {
      "title": "이형일 부총리, 시장상황점검회의 주재",
@@ -230,14 +358,14 @@
      "title": "이형일 부총리, 시장상황점검회의 발언",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T23:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466882?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/001/0016466881?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1740,
+  "flagged": 1744,
   "matched": 873,
   "avgLeadMin": 584,
   "recent": [
