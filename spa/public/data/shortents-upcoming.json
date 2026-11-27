@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T05:14:18.998Z",
+ "builtAt": "2026-11-27T05:24:22.689Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,98 +11,34 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "장동혁 국민의힘 대표",
+   "keyword": "한동훈 수사자료 유출 압수수색",
    "sources": [
     "nate"
    ],
-   "articles90": 32,
-   "recent20": 15,
-   "press": 20,
-   "firstArticleAt": "2026-11-27T03:57:00.000Z",
+   "articles90": 13,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-27T04:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박수치는 장동혁 국민의힘 대표",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T05:12:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765235"
-    },
-    {
-     "title": "국산 쌀 축제 찾은 국민의힘",
+     "title": "한동훈 \"경찰, 김승원 돕기 수사…'민주당의 지팡이'로 나서\"",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T05:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467780?sid=100"
+     "publishedAt": "2026-11-27T05:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467793?sid=100"
     },
     {
-     "title": "국민의례하는 장동혁 국민의힘 대표",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T05:12:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765239"
-    }
-   ]
-  },
-  {
-   "keyword": "남경필",
-   "sources": [
-    "google"
-   ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 11,
-   "firstArticleAt": "2026-11-27T03:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "남경필 전 경기지사 아들, 전 연인 폭행·스토킹 혐의로 체포",
-     "press": "kihoilbo.co.kr",
-     "publishedAt": "2026-11-27T05:10:00.000Z",
-     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3042357"
-    },
-    {
-     "title": "‘마약 복역’ 남경필 장남, 이번엔 전 연인 협박 혐의…징역형 땐 누범...",
-     "press": "ilyo.co.kr",
-     "publishedAt": "2026-11-27T05:06:00.000Z",
-     "link": "https://ilyo.co.kr/?ac=article_view&entry_id=513834"
-    },
-    {
-     "title": "남경필 전 경기지사 장남, 전 연인 영상 유포 협박·스토킹 혐의 체포",
-     "press": "todaykorea.co.kr",
-     "publishedAt": "2026-11-27T05:06:00.000Z",
-     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=409351"
-    }
-   ]
-  },
-  {
-   "keyword": "김대기 관저이전 예산전용",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-27T03:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김대기, 관저 공사 행안부 예산 전용 지시로 징역형 집행유예...이상민...",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-27T05:04:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250619"
-    },
-    {
-     "title": "‘尹 관저 예산전용’ 김대기 1심서 집유…이상민은 ‘무죄’",
+     "title": "경찰, ‘한동훈 자료유출 의혹’ 법무부·공소청 등 압수수색",
      "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T05:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302637?sid=102"
+     "publishedAt": "2026-11-27T05:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302639?sid=102"
     },
     {
-     "title": "'관저 이전 예산 전용' 김대기 1심 징역형 집행유예·석방…이유는",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-27T04:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447405?sid=102"
+     "title": "'한동훈 자료유출 의혹'‥법무부·공소청 압수수색",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-27T05:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538499?sid=102"
     }
    ]
   },
@@ -112,7 +48,7 @@
     "signal.bz"
    ],
    "articles90": 11,
-   "recent20": 3,
+   "recent20": 0,
    "press": 11,
    "firstArticleAt": "2026-11-27T04:14:00.000Z",
    "exclusive": false,
@@ -139,98 +75,162 @@
    ]
   },
   {
-   "keyword": "솔비·이규한, 4월 25일 야외 결혼식",
+   "keyword": "남경필 아들 성관계 유포 혐의",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 10,
    "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T04:02:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-27T03:56:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[공식] 연예계 공식 커플 부부 된다…솔비♥이규한, 내년 4월 결혼",
-     "press": "sportsseoul.com",
+     "title": "[단독] 남경필 전 지사 아들 '스토킹 혐의' 체포...약물 의혹도",
+     "press": "ytn.co.kr",
      "publishedAt": "2026-11-27T05:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001283921"
+     "link": "https://n.news.naver.com/mnews/article/052/0002438940?sid=102"
     },
     {
-     "title": "솔비♡이규한, 내년 4월25일 결혼한다",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-27T05:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001152023"
+     "title": "남경필 전 경기지사 아들, 전 연인 폭행·스토킹 혐의로 체포",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-27T05:10:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3042357"
     },
     {
-     "title": "[공식] 연예계 부부 또 탄생했다…솔비♥이규한, 내년 4월 결혼 확정",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-27T05:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786465"
+     "title": "남경필 전 경기지사 장남, 전 연인 영상 유포 협박·스토킹 혐의 체포",
+     "press": "todaykorea.co.kr",
+     "publishedAt": "2026-11-27T05:06:00.000Z",
+     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=409351"
     }
    ]
   },
   {
-   "keyword": "아일릿 모카 5개월 만 복귀",
+   "keyword": "김대기 관저이전 예산전용",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-27T04:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'관저 이전 예산 불법 전용' 김대기 전 비서실장 1심 집행유예…이상민...",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-27T05:17:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087314"
+    },
+    {
+     "title": "김대기, 관저 공사 행안부 예산 전용 지시로 징역형 집행유예...이상민...",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-27T05:04:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250619"
+    },
+    {
+     "title": "‘尹 관저 예산전용’ 김대기 1심서 집유…이상민은 ‘무죄’",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T05:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302637?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "행안부 예산 관저?",
    "sources": [
     "nate"
    ],
    "articles90": 7,
    "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-27T03:52:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "아일릿 모카, 활동 중단 5개월 만에 복귀…\"이날만 기다려\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-27T05:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000556267"
-    },
-    {
-     "title": "'연속 활동 중단' 아일릿 모카, 5개월만 복귀…\"여러분 덕분에\" [공식]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T04:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084718"
-    },
-    {
-     "title": "아일릿 모카, 5개월만에 활동 재개 \"기다려준 글릿 감사...이날만 기다렸...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-27T04:50:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785346"
-    }
-   ]
-  },
-  {
-   "keyword": "학교 파업 밥 대신 빵",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T03:46:00.000Z",
+   "firstArticleAt": "2026-11-27T04:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'밥 대신 빵과 우유'…학교 비정규직 오늘 총파업",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T04:52:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127134653486"
+     "title": "'관저 이전 예산 불법 전용' 김대기 전 비서실장 1심 집행유예…이상민...",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-27T05:17:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087314"
     },
     {
-     "title": "'밥 대신 빵'…학교비정규직 파업에 세종 97개 학교 대체식 지급",
+     "title": "김대기, 관저 공사 행안부 예산 전용 지시로 징역형 집행유예...이상민...",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-27T05:04:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250619"
+    },
+    {
+     "title": "‘尹 관저 예산전용’ 김대기 1심서 집유…이상민은 ‘무죄’",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T05:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302637?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "학교 비정규직 총파업 진행",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T03:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "학교비정규직 파업에 전남광주 초·중·고 400여 곳 간편식 지급",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-27T05:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887859?sid=102"
+    },
+    {
+     "title": "전국학교비정규직 오늘 총파업...\"비정규직 차별 해소\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T05:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438945?sid=102"
+    },
+    {
+     "title": "학교비정규직 총파업에 대체식 받는 아이들",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T04:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467710?sid=102"
+     "publishedAt": "2026-11-27T05:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467735?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "과학기술인공제회 해킹",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T04:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "과학기술인공제회도 해킹 피해…회원정보 21만건 유출",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-27T05:16:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026112714154880272"
     },
     {
-     "title": "\"밥 대신 빵\" 충북 학교 251곳 급식 차질…큰 혼란은 없어",
+     "title": "과학기술인 정보도 털렸다…과기인공제회, 해킹으로 21만건 유출",
      "press": "news1.kr",
-     "publishedAt": "2026-11-27T04:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314204?sid=102"
+     "publishedAt": "2026-11-27T05:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314269?sid=105"
+    },
+    {
+     "title": "과학기술인공제회도 뚫렸다…전·현 회원 개인정보 20만건 유출",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-27T04:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447403?sid=105"
     }
    ]
   },
@@ -240,7 +240,7 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-27T03:59:00.000Z",
    "exclusive": false,
@@ -267,41 +267,201 @@
    ]
   },
   {
-   "keyword": "과학기술인공제회 해킹",
+   "keyword": "2026 K-라이스 페스타",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 5,
-   "recent20": 2,
+   "articles90": 20,
+   "recent20": 3,
    "press": 5,
-   "firstArticleAt": "2026-11-27T04:12:00.000Z",
+   "firstArticleAt": "2026-11-27T04:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "과학기술인 정보도 털렸다…과기인공제회, 해킹으로 21만건 유출",
+     "title": "2026 우리쌀 우리술 K-라이스 페스타",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T05:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467789?sid=101"
+    },
+    {
+     "title": "[포토] 'K-라이스 페스타' 개막 퍼포먼스 하는 서삼석·강호동·정준호",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T05:10:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127140627559"
+    },
+    {
+     "title": "[포토] '2026 우리쌀 우리술 K-라이스 페스타' 파이팅!",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T05:10:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127140841566"
+    }
+   ]
+  },
+  {
+   "keyword": "김정관, 베트남 면담",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T04:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "면담하는 김정관 장관",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T05:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014349584?sid=100"
+    },
+    {
+     "title": "김정관 장관, 베트남 중앙정책전략위원장 면담",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T05:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014349583?sid=100"
+    },
+    {
+     "title": "산업부 장관, 베트남 중앙정책전략위원장 만나 첨단산업·원전·공급망...",
+     "press": "hellot.net",
+     "publishedAt": "2026-11-27T05:06:00.000Z",
+     "link": "https://www.hellot.net/news/article.html?no=116707"
+    }
+   ]
+  },
+  {
+   "keyword": "아일릿 모카, 5개월 만에 활동 재개",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T04:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "아일릿 모카, 건강 문제로 활동 중단 5개월만 활동 재개 “이날만 기다...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T05:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191832"
+    },
+    {
+     "title": "'아일릿' 모카, 5개월 만에 활동 재개…\"기다려 준 팬들에 감사\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T05:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/422/0000930527"
+    },
+    {
+     "title": "아일릿 모카, 5개월만에 활동 재개 \"기다려준 글릿 감사...이날만 기다렸...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-27T04:50:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785346"
+    }
+   ]
+  },
+  {
+   "keyword": "7학년 교실 오세훈",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T05:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[동정] 오세훈 서울시장, 어르신 평생교육 '7학년 교실' 졸업식 참석",
      "press": "news1.kr",
-     "publishedAt": "2026-11-27T05:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314269?sid=105"
+     "publishedAt": "2026-11-27T05:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314300?sid=102"
     },
     {
-     "title": "과학기술인공제회도 뚫렸다…전·현 회원 개인정보 20만건 유출",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-27T04:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447403?sid=105"
+     "title": "오세훈 '7학년 교실' 졸업식 방문…\"어르신 배움 지원해나갈 것\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T05:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467792?sid=102"
     },
     {
-     "title": "과학기술인공제회 해킹…회원정보 21만건 유출, 국가 연구인력 표적공격...",
-     "press": "dailysecu.com",
-     "publishedAt": "2026-11-27T04:34:00.000Z",
-     "link": "https://www.dailysecu.com/news/articleView.html?idxno=209788"
+     "title": "[현장] 오세훈 시장 \"배움·관계가 행복의 지름길\"…'7학년 교실' 400여명...",
+     "press": "news.ifm.kr",
+     "publishedAt": "2026-11-27T05:12:00.000Z",
+     "link": "https://news.ifm.kr/news/articleView.html?idxno=485740"
+    }
+   ]
+  },
+  {
+   "keyword": "KB손보 아히 영입 결정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T04:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'일주일 새 두 명 보강' KB손보, 아시아 쿼터 보이 이어 외국인 아히 영...",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-27T05:21:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/425/0000215444"
+    },
+    {
+     "title": "KB손보, 외국인 교체한다... 'V리그 경력직' 아히 영입",
+     "press": "stnsports.co.kr",
+     "publishedAt": "2026-11-27T05:15:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/450/0000155696"
+    },
+    {
+     "title": "최하위 KB손보 승부수! 리누스 방출→아히 영입 완료…새 亞 쿼터 보이...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-27T04:29:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/477/0000641226"
+    }
+   ]
+  },
+  {
+   "keyword": "현대모비스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-27T04:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[D리그] ‘이대균 연장전 5점’ 현대모비스, 연장 끝에 소노 격파",
+     "press": "basketkorea.com",
+     "publishedAt": "2026-11-27T04:54:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/351/0000089617"
+    },
+    {
+     "title": "[화보] 26-27 KBL D리그 현대모비스, 소노에 82-73으로 승리",
+     "press": null,
+     "publishedAt": "2026-11-27T04:33:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/065/0000305283"
+    },
+    {
+     "title": "[D리그] ‘D리그 첫 연장’ 현대모비스, 혈투 끝에 소노 꺾고 2연승",
+     "press": null,
+     "publishedAt": "2026-11-27T04:20:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/065/0000305282"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1825,
+  "flagged": 1834,
   "matched": 916,
   "avgLeadMin": 610,
   "recent": [
