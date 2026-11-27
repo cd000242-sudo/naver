@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-27T13:32:21.638Z",
+  "generatedAt": "2026-11-27T19:52:57.311Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -1956,74 +1956,6 @@
           "views": 143,
           "answers": 1,
           "askedAt": "2026.01.03"
-        }
-      ]
-    },
-    {
-      "id": "d32f0ec406003893",
-      "urls": [
-        "https://4jsm.com/entry/%EB%8C%80%ED%95%9C%ED%95%AD%EA%B3%B5-%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B0%94%EB%A1%9C%EA%B0%80%EA%B8%B0%EF%BD%9C%ED%95%AD%EA%B3%B5%EA%B6%8C-%EC%98%88%EC%95%BD%C2%B7%EC%B2%B4%ED%81%AC%EC%9D%B8%C2%B7%EB%A7%88%EC%9D%BC%EB%A6%AC%EC%A7%80",
-        "https://anotherdifference.tistory.com/2641",
-        "https://sy1s.tistory.com/entry/%EB%8C%80%ED%95%9C%ED%95%AD%EA%B3%B5-%EB%B3%B4%EB%84%88%EC%8A%A4-%ED%95%AD%EA%B3%B5%EA%B6%8C-%EC%98%88%EC%95%BD-%EB%B0%A9%EB%B2%95-%EC%B4%9D%EC%A0%95%EB%A6%AC-%ED%8E%B8%EB%8F%84-%EA%B2%80%EC%83%89%EB%B6%80%ED%84%B0-%EA%B0%80%EC%A1%B1-%EB%A7%88%EC%9D%BC%EB%A6%AC%EC%A7%80-%ED%95%A9%EC%82%B0%EA%B9%8C%EC%A7%80"
-      ],
-      "guide": {
-        "direction": "검색자는 가족 마일리지를 합산한 뒤 발권을 누구 계정에서 어떤 순서로 해야 하는지, 좌석을 승급했는데 기종이 옛날 거면 손해인지에서 막힌다. 고수 글들은 카드 적립 혜택과 예약 방법을 따로 다뤄 합산 후 발권 순서, 동시발권 시 좌석 갈림 같은 실전 함정을 못 짚었다. 가족합산 차감순서·동시발권 주의사항·공제표를 한 번에 정리해 예약 전에 막히지 않게 한다.",
-        "searchTargets": [
-          "대한항공 마일리지 공제표",
-          "대한항공 마일리지 항공권",
-          "대한항공 마일리지 사용처",
-          "대한항공 마일리지 적립"
-        ],
-        "mustInclude": [
-          "가족 마일리지 합산 시 발권은 탑승자 계정에서, 합산 동의 상태와 차감 순서 사전 확인 필요",
-          "같은 날 같은 편이라도 동반인 표를 따로 끊으면 좌석이 갈릴 수 있어 동시발권 권장",
-          "국내선 편도 공제는 비수기 기준 약 5,000마일, 성수기엔 더 필요 (확인 필요: 공식 공제표로 날짜별 재확인)",
-          "좌석 승급 전 해당 노선·날짜의 기종 확인(기종에 따라 좌석 품질 차이)"
-        ],
-        "mustAvoid": [
-          "특정 제휴카드를 광고성으로 과장 추천하는 서술",
-          "마일리지 소멸시점 등 약관을 추측으로 단정하는 서술",
-          "성수기·비수기 구분 없이 공제 마일리지를 단일 수치처럼 제시하는 서술"
-        ],
-        "checkBefore": [
-          "대한항공 공식 홈페이지 마일리지 공제표에서 날짜별 비수기/성수기 기준 확인",
-          "고객센터에서 가족합산 차감순서·동시발권 가능여부 확인"
-        ],
-        "solves": [
-          "가족 마일리지 합산했는데 발권은 어떻게 하나 → 합산 동의 상태·차감순서 확인 절차 정리",
-          "좌석 승급했는데 기종이 옛날 거면 손해 아닌가 → 승급 전 기종 확인하는 법 안내",
-          "국내선 편도 공제 마일리지가 날짜마다 다른가 → 성수기/비수기 공제표로 정리"
-        ],
-        "actionTitles": [
-          "대한항공 마일리지 가족합산 신청부터 발권 순서까지 정리",
-          "대한항공 마일리지 좌석승급 전 기종 확인하는 법 총정리",
-          "대한항공 마일리지 국내선 공제표 성수기 비수기 비교"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "대한항공 항공권 마일리지 승급",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=90207&docId=433429296&answerNo=3&qb=64yA7ZWc7ZWt6rO166eI7J2866as7KeA",
-          "views": 3146,
-          "answers": 3,
-          "askedAt": "2026.11.11"
-        },
-        {
-          "title": "대한항공 마일리지 항공권 구입",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=90207&docId=487104187&answerNo=8&qb=64yA7ZWc7ZWt6rO166eI7J2866as7KeA",
-          "views": 1392,
-          "answers": 8,
-          "askedAt": "2026.11.12"
-        },
-        {
-          "title": "대한항공 항공권 마일리지 예약",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=90207&docId=490043107&answerNo=9&qb=64yA7ZWc7ZWt6rO166eI7J2866as7KeA",
-          "views": 1351,
-          "answers": 9,
-          "askedAt": "2026.11.12"
         }
       ]
     },
@@ -5441,139 +5373,6 @@
       ]
     },
     {
-      "id": "c53a5b34d9ff5e58",
-      "urls": [
-        "https://insight3429.tistory.com/entry/%EA%B5%AD%EB%82%B4-%EC%84%B1%EC%A7%80%EC%88%9C%EB%A1%80-%EC%99%84%EC%A0%84%EC%A0%95%EB%A6%AC-%ED%95%9C%EA%B5%AD-%EA%B8%B0%EB%8F%85%EA%B5%90-%EC%84%B1%EC%A7%80-BEST-12%EF%BD%9C%EC%96%91%ED%99%94%EC%A7%84%C2%B7%EC%A0%88%EB%91%90%EC%82%B0%C2%B7%ED%95%B4%EB%AF%B8%C2%B7%EC%97%BC%EC%82%B0%EA%B5%90%ED%9A%8C%EA%B9%8C%EC%A7%80-%ED%95%9C%EB%88%88",
-        "https://honeypencil.tistory.com/entry/%EA%B5%AD%EB%82%B4-%EC%98%A8%EC%B2%9C%EC%97%AC%ED%96%89-%EC%B6%94%EC%B2%9C-BEST-6-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "검색자는 '기독교 성지'에 가톨릭 순례지와 개신교 순교지를 섞어 묻다가 어디가 어느 쪽인지 못 가른다. 고수 글은 BEST 12 나열에 그쳐 가톨릭·개신교 구분표, 책자·스탬프 구하는 법을 안 준다. 이 글은 지역별로 종교 구분, 책자 구입처, 스탬프 유무까지 표로 끝낸다.",
-        "searchTargets": [
-          "국내 성지순례지",
-          "국내 성지순례 코스",
-          "국내 성지순례 비용",
-          "국내 성지순례 스탬프"
-        ],
-        "mustInclude": [
-          "양화진·절두산·해미·염산교회 등 12곳을 가톨릭/개신교로 나눈 구분표",
-          "한국주교회의가 정한 '국내성지 111곳' 기준 언급",
-          "본당 성물방·바오로딸 서점에서 '천주교 성지순례' 책자 구입 가능하다는 안내",
-          "용인 기독교순교자기념관 등 개신교 쪽 추가 후보지(확인 필요: 해당 기념관 공식 안내)",
-          "순례지별 스탬프 투어 운영 여부(확인 필요: 각 성지 홈페이지)"
-        ],
-        "mustAvoid": [
-          "가톨릭 성지와 개신교 순교지를 구분 없이 하나의 리스트로 섞어 쓰기",
-          "특정 순교자·선교사의 사생활·죽음 경위를 자극적으로 추측"
-        ],
-        "checkBefore": [
-          "한국주교회의 공식 홈페이지에서 '111성지' 최신 명단 확인",
-          "각 성지 현지 순례자센터의 스탬프·투어 운영 여부 확인",
-          "바오로딸 서점 등에서 책자 판매 여부와 가격 확인"
-        ],
-        "solves": [
-          "기독교 성지와 가톨릭 성지가 섞여 헷갈린다 → 종교별 구분표로 정리",
-          "소책자를 어디서 구하는지 모른다 → 본당 성물방·바오로딸 서점 구입처 안내",
-          "코스를 어떻게 짜야 할지 막막하다 → 지역별 추천 코스 제시"
-        ],
-        "actionTitles": [
-          "국내 성지순례 책자·스탬프 받는 법 총정리"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "국내 기독교 성지순례 코스",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60901&docId=47920598&answerNo=1&qb=6rWt64K07ISx7KeA7Iic66GA",
-          "views": 28089,
-          "answers": 1,
-          "askedAt": "2006.09.11"
-        },
-        {
-          "title": "가톨릭 국내성지순례 어디서가나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60902&docId=200749074&answerNo=1&qb=6rWt64K07ISx7KeA7Iic66GA",
-          "views": 2732,
-          "answers": 2,
-          "askedAt": "2014.06.25"
-        },
-        {
-          "title": "&quot;국내 성지 111곳, 한국의 ‘산티아고 순례길....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60902&docId=270574515&answerNo=1&qb=6rWt64K07ISx7KeA7Iic66GA",
-          "views": 1874,
-          "answers": 1,
-          "askedAt": "2017.02.13"
-        }
-      ]
-    },
-    {
-      "id": "eac4ef8983b1aec0",
-      "urls": [
-        "https://hanu4.hanuhyunu.pw/entry/%EB%B3%B4%EC%9D%B4%EC%B0%A8-%ED%9A%A8%EB%8A%A5%EA%B3%BC-%EB%B6%80%EC%9E%91%EC%9A%A9-1",
-        "https://nitrogen.zncloud.pw/entry/%EB%B3%B4%EC%9D%B4%EC%B0%A8-%ED%9A%A8%EB%8A%A5%EA%B3%BC-%EB%B6%80%EC%9E%91%EC%9A%A9"
-      ],
-      "guide": {
-        "direction": "검색자는 보이차가 다이어트·디톡스에 실제로 효과가 있는지 궁금해 들어오지만 지식인 답변은 '효과 미미, 하루 10리터는 비현실적'이라는 반박과 뒤섞여 혼란스럽다. 고수 블로그의 '효능과 부작용' 제목은 당뇨·신장·변비·카페인·먹는법처럼 구체적으로 검색되는 증상·행동 키워드는 따로 짚지 않는다. 이 글은 효능 주장을 '식품 수준 효과'와 '과장된 주장'으로 나눈 표, 공복을 피하는 섭취법, 증상별 근거 유무 체크리스트로 이 궁금증을 끝낸다.",
-        "searchTargets": [
-          "보이차 효능과 부작용",
-          "보이차 효능 당뇨",
-          "보이차 효능 먹는법",
-          "보이차 효능 카페인"
-        ],
-        "mustInclude": [
-          "지식인 답변 속 '하루 10리터 마셔야 효과, 비현실적'이라는 과장 다이어트 주장 팩트체크",
-          "보이차는 건강기능식품이 아닌 식품 분류로 의약품·의약외품 효과 인정 안됨(지식인 근거)",
-          "공복에 마시면 위장 부담, 식후나 간식과 함께 섭취 권장(지식인 근거)",
-          "당뇨·신장·변비 관련 효능의 임상적 근거 유무 (확인 필요: 식약처/논문)",
-          "카페인 함량 수치 (확인 필요: 제품 성분표/식약처)"
-        ],
-        "mustAvoid": [
-          "당뇨·신장질환 치료제처럼 과장해 의약품으로 오인시키는 서술",
-          "지식인 답변이 부정한 다이어트 효과를 체험담처럼 지어내 쓰는 것",
-          "녹차·우롱차 등 다른 차 효능과 혼동해 서술하는 것"
-        ],
-        "checkBefore": [
-          "당뇨·신장·변비 관련 효능의 임상적 입증 여부를 식약처·논문에서 확인",
-          "카페인 함량 수치를 제품 성분표 또는 식약처 자료에서 확인"
-        ],
-        "solves": [
-          "보이차 효능이 진짜인가요? → 지식인 답변 기반 식품 수준 효과임을 팩트체크로 정리",
-          "보이차 효능 먹는법 → 공복 대신 식후·간식과 함께 마시는 섭취법 제시",
-          "보이차 효능 당뇨/신장/변비 → 증상별 근거 유무를 구분해 안내"
-        ],
-        "actionTitles": [
-          "보이차 효능과 부작용, 당뇨·신장·변비까지 한눈에 확인",
-          "보이차 효능 카페인 함량, 다이어트 효과 진짜인지 확인"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "보이차효능이어떻게되나요??",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020306&docId=331870066&answerNo=1&qb=67O07J207LCo7Zqo64ql",
-          "views": 2628,
-          "answers": 2,
-          "askedAt": "2019.07.23"
-        },
-        {
-          "title": "보이차 효능",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=384367883&answerNo=1&qb=67O07J207LCo7Zqo64ql",
-          "views": 1113,
-          "answers": 1,
-          "askedAt": "2021.03.15"
-        },
-        {
-          "title": "보이차효능?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020306&docId=477084008&answerNo=1&qb=67O07J207LCo7Zqo64ql",
-          "views": 832,
-          "answers": 5,
-          "askedAt": "2024.10.26"
-        }
-      ]
-    },
-    {
       "id": "97fe91aa43d83401",
       "urls": [
         "https://gaon1015.com/entry/%EB%8F%85%EA%B0%90-%EB%AC%B4%EB%A3%8C%EC%A0%91%EC%A2%85-14%EC%84%B8%C2%B7%EC%9E%84%EC%8B%A0%EB%B6%80%C2%B765%EC%84%B8-%EC%9D%B4%EC%83%81-%EA%B8%B0%EA%B0%84%EC%9D%80",
@@ -6027,68 +5826,6 @@
       ]
     },
     {
-      "id": "6185d87678a428f2",
-      "urls": [
-        "https://happycoiner.tistory.com/entry/%EA%B9%80%EC%9E%A5%EB%B9%84%EC%9A%A9-18%EB%A7%8C-vs-28%EB%A7%8C-%EA%B0%99%EC%9D%80-20%ED%8F%AC%EA%B8%B0%EA%B0%80-%EC%99%9C-10%EB%A7%8C-%EC%9B%90-%EC%B0%A8%EC%9D%B4-%EB%82%A0%EA%B9%8C",
-        "https://swhong858585.tistory.com/65"
-      ],
-      "guide": {
-        "direction": "20포기 김장을 직접 할지 사먹을지 고민하는 사람은 왜 10만원이나 차이나는지 궁금해 검색한다. 고수 글은 총액 비교만 보여주고 절임배추·새우젓 등 항목별 가격차 원인은 못 짚었다. 이 글은 배추·소금·양념·새우젓 항목별 가격표로 10만원 차이의 원인을 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "20포기 기준 배추·소금·양념·새우젓 등 항목별 가격 분해표",
-          "절임배추 구매 vs 생배추 직접 절이기 비용·수고 비교",
-          "새우젓 추젓/육젓 가격차이와 김장용 선택 기준",
-          "포장김치 20포기 분량 구매가와 직접 담그기 비용 비교"
-        ],
-        "mustAvoid": [
-          "특정 마트·브랜드 가격을 전국 시세처럼 단정하지 않기(시기·지역별 차이 존재)",
-          "작년 김장비용 시세를 올해 수치처럼 섞어 쓰지 않기",
-          "정부 김치 가격안정 대책 효과를 과장해서 단정하지 않기"
-        ],
-        "checkBefore": [
-          "올해 배추·절임배추 시세 - 농산물유통정보(KAMIS) 또는 마트 공지 확인",
-          "새우젓 추젓/육젓 시세 - 수산시장 공지 확인"
-        ],
-        "solves": [
-          "직접 담그기 vs 사먹기 중 어느게 쌀지 20포기 기준 항목별 가격표로 판단법 제공",
-          "절임배추 살지 생배추 살지 고민될 때 비용·수고 비교로 선택 기준 제시",
-          "김장용 새우젓 추젓/육젓 중 가성비 선택 기준 정리"
-        ],
-        "actionTitles": [
-          "김장비용 20포기 직접 vs 사먹기 비용 비교하고 계산하는 법",
-          "절임배추 vs 일반배추 김장비용 비교해서 선택하는 법",
-          "김장 새우젓 추젓 vs 육젓 가격 비교하고 고르는 법"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "김장 배추김치가격vs 사먹을가요???",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80501&docId=312610490&answerNo=7&qb=6rmA7J6l67mE7JqpIHZzIOuCoOq5jA==",
-          "views": 6027,
-          "answers": 15,
-          "askedAt": "2024.11.05"
-        },
-        {
-          "title": "전자담배 액상값 vs 연초값",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70602&docId=340564170&answerNo=3&qb=6rmA7J6l67mE7JqpIHZzIOuCoOq5jA==",
-          "views": 773,
-          "answers": 3,
-          "askedAt": "2019.11.17"
-        },
-        {
-          "title": "아파트 전세보증금 8000만원 인상VS임대인실거....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4020201&docId=419803471&answerNo=5&qb=6rmA7J6l67mE7JqpIHZzIOuCoOq5jA==",
-          "views": 669,
-          "answers": 5,
-          "askedAt": "2022.05.19"
-        }
-      ]
-    },
-    {
       "id": "ff25cb2da299f5d0",
       "urls": [
         "https://1sister.langsamsister.com/entry/GPT-62-%EC%95%84%EC%8A%A4%ED%8A%B8%EB%9D%BC%C2%B7%EC%86%94-%EA%B3%A0%EB%A5%B4%EB%8A%94-%EB%B2%95-%EC%A7%81%EC%9E%A5%EC%9D%B8%EC%9D%B4-%EC%B1%97GPT-%EC%9B%8C%ED%81%AC%EC%97%90%EC%84%9C-%EC%9D%BC%EB%A7%88%EB%8B%A4-%EB%AA%A8%EB%8D%B8%EC%9D%84-%EB%82%98%EB%88%A0-%EC%93%B0%EB%8A%94-%EC%88%9C%EC%84%9C-%EA%B0%95%EC%84%B1%ED%9D%AC-%EA%B0%95%EC%82%AC",
@@ -6149,72 +5886,6 @@
           "views": 360,
           "answers": 2,
           "askedAt": "2025.06.19"
-        }
-      ]
-    },
-    {
-      "id": "1b9e9e9d0dc7e526",
-      "urls": [
-        "https://honeypencil.tistory.com/entry/2027-%EC%88%98%EB%8A%A5-%EB%93%B1%EA%B8%89%EC%BB%B7-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://acecomm.tistory.com/entry/2027-%EC%88%98%EB%8A%A5-%EB%93%B1%EA%B8%89%EC%BB%B7-%EC%98%88%EC%83%81-%EB%A9%94%EA%B0%80%EC%8A%A4%ED%84%B0%EB%94%94-%EB%8C%80%EC%84%B1%EB%A7%88%EC%9D%B4%EB%A7%A5-%EC%9D%B4%ED%88%AC%EC%8A%A4-%EB%B6%84%EC%84%9D"
-      ],
-      "guide": {
-        "direction": "검색자는 EBS i 등급컷이 실제 수능 등급컷과 다를 수 있다는 점, 가채점 대 확정 등급컷의 차이, 세계사 같은 선택과목 등급컷 읽는 법에서 막힌다. 고수 블로그는 메가스터디·대성마이맥·이투스 예상치 비교까지만 다루고 EBS i와 확정치의 차이, 선택과목별 원점수표 읽는 법은 설명하지 않는다. 과목별 원점수·표준점수 표와 가채점→확정 발표 일정을 함께 제시해 이 글에서 끝내게 한다.",
-        "searchTargets": [
-          "2027 수능 등급컷",
-          "2027 수능 등급컷 예상",
-          "수능 등급컷 원점수",
-          "27수능 등급컷"
-        ],
-        "mustInclude": [
-          "EBS i 예상 등급컷과 실제(확정) 수능 등급컷의 차이 설명",
-          "국어·수학은 표준점수 반영, 선택과목별 원점수표는 예상치임을 명시",
-          "메가스터디·대성마이맥·이투스 등 입시업체별 예상 등급컷 비교표(확인 필요: 각 업체 공식 발표)",
-          "가채점 발표 시점과 확정 등급컷 발표 일정(확인 필요: 평가원 공식 일정)",
-          "세계사 등 선택과목 등급컷 표에서 '사회탐구 → 과목 → 원점수' 행 찾는 법"
-        ],
-        "mustAvoid": [
-          "가채점 예상 등급컷을 확정 등급컷처럼 단정해서 서술",
-          "2026학년도와 2027학년도 수능 수치를 섞어 혼동시키기"
-        ],
-        "checkBefore": [
-          "메가스터디·대성마이맥·이투스 등 입시업체 공식 등급컷 발표자료",
-          "EBSi 가채점 서비스 및 평가원 확정 등급컷 발표 일정"
-        ],
-        "solves": [
-          "EBS i 등급컷과 실제 수능 등급컷이 다른가 → 예상치와 확정치 차이를 표로 안내",
-          "국어·수학 등급컷을 원점수로 알 수 있나 → 표준점수 반영 구조와 예상치 한계 설명",
-          "세계사 등급컷처럼 특정 과목 등급컷을 어떻게 읽나 → 선택과목별 원점수표 읍는 법 안내"
-        ],
-        "actionTitles": [
-          "2027 수능 등급컷 예상 확인법과 EBS i 등급컷 차이 정리",
-          "2026학년도 수능 등급컷 원점수 조회, 선택과목별 보는 법"
-        ]
-      },
-      "at": "2026-11-24T03:03:47.531Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "Ebs i 등급컷과 수능등급컷이 다를 수 있나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1104&docId=496027018&answerNo=3&qb=7IiY64ql65Ox6riJ7Lu3",
-          "views": 581,
-          "answers": 4,
-          "askedAt": "2026.11.20"
-        },
-        {
-          "title": "27수능 등급컷 솔직히 예상 밖",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110812&docId=496029202&answerNo=1&qb=7IiY64ql65Ox6riJ7Lu3",
-          "views": 327,
-          "answers": 2,
-          "askedAt": "2026.11.20"
-        },
-        {
-          "title": "실제 수능 등급컷",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110303&docId=496034726&answerNo=2&qb=7IiY64ql65Ox6riJ7Lu3",
-          "views": 280,
-          "answers": 2,
-          "askedAt": "2026.11.20"
         }
       ]
     },
@@ -7392,74 +7063,6 @@
       ]
     },
     {
-      "id": "9160198d9b0257d3",
-      "urls": [
-        "https://refininfo.com/csat-2025-grade-cut-official/",
-        "https://futurefreelance.tistory.com/entry/2027-%EC%88%98%EB%8A%A5-%EB%93%B1%EA%B8%89%EC%BB%B7-%EC%9B%90%EC%A0%90%EC%88%98-%EB%AA%87-%EC%A0%90-2026%C2%B72025%ED%95%99%EB%85%84%EB%8F%84-%EA%B5%AD%EC%96%B4%C2%B7%EC%88%98%ED%95%99-%EB%B9%84%EA%B5%90",
-        "https://c.foqvjtm100.com/entry/2027-%EC%88%98%EB%8A%A5-%EA%B0%80%EC%B1%84%EC%A0%90-%EA%B2%B0%EA%B3%BC-%EB%82%98%EC%99%94%EB%8B%A4-%EA%B5%AD%EC%96%B4%C2%B7%EC%88%98%ED%95%99-%EB%93%B1%EA%B8%89%EC%BB%B7%EC%97%90-%EC%88%98%ED%97%98%EC%83%9D%EB%93%A4-%EC%88%A0%EB%A0%81"
-      ],
-      "guide": {
-        "direction": "수험생들은 가채점표를 안 쓰면 성적을 못 받는지, 언제 어떻게 적어야 하는지, 가채점 결과로 등급컷을 어떻게 가늠하는지 헷갈려 검색한다. 고수 블로그 제목은 확정 등급컷 숫자 비교에 집중해 가채점표 작성 시점(쉬는시간)이나 OMR 마킹 순서 같은 실전 작성법은 다루지 않는다. 이 글은 가채점표 작성법·평가원 정답 채점법·원점수별 예상 등급표까지 묶어 검색자가 가채점표만 보고 지원 전략을 세우게 한다.",
-        "searchTargets": [
-          "수능 가채점표",
-          "수능 가채점 등급컷",
-          "수능 가채점 방법",
-          "수능 가채점표 안쓰면"
-        ],
-        "mustInclude": [
-          "가채점표는 수험표 뒷면에 인쇄되어 있고 쉬는시간·과목 사이에 작성한다는 점",
-          "OMR 마킹을 먼저 하고 가채점표는 나중에 베끼면 실수 위험이 커진다는 점",
-          "가채점표를 안 써도 수능 성적표 수령 자체에는 영향이 없다는 오해 해소",
-          "평가원 홈페이지에 공개되는 정답으로 채점하는 절차",
-          "2025·2027학년도 등급컷 숫자 비교 여부(확인 필요: 한국교육과정평가원 발표)"
-        ],
-        "mustAvoid": [
-          "가채점표를 안 쓰면 성적이 무효가 된다는 과장",
-          "2024·2025·2027학년도 등급컷을 서로 혼동해 표기"
-        ],
-        "checkBefore": [
-          "해당 연도 수능 날짜와 등급컷 확정 여부를 한국교육과정평가원 공식 발표로 확인",
-          "기사에 인용된 과목별 원점수·등급컷 숫자가 평가원 자료와 일치하는지 확인"
-        ],
-        "solves": [
-          "가채점표 안 쓰면 성적 못 받냐는 걱정 -> 성적 수령과 무관함을 설명",
-          "가채점표를 언제 어떻게 적어야 하는지 모름 -> 작성 시점·순서 안내",
-          "OMR과 가채점표 베끼는 과정에서 실수가 남 -> 마킹 순서 체크리스트 제공"
-        ],
-        "actionTitles": [
-          "수능 가채점표 양식 pdf 다운로드와 작성법 총정리",
-          "2027 수능 가채점 등급컷으로 예상 성적 확인하는 법",
-          "2027 수능 가채점 결과 평가원 정답으로 채점하는 방법"
-        ]
-      },
-      "at": "2026-11-24T14:45:01.846Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "수능때 가채점표",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=495875422&answerNo=3&qb=7IiY64ql6rCA7LGE7KCQ",
-          "views": 370,
-          "answers": 5,
-          "askedAt": "2026.11.08"
-        },
-        {
-          "title": "수능 가채점표에 대해서",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=494841538&answerNo=2&qb=7IiY64ql6rCA7LGE7KCQ",
-          "views": 341,
-          "answers": 2,
-          "askedAt": "2026.11.23"
-        },
-        {
-          "title": "수능 가채점표",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=496012575&answerNo=1&qb=7IiY64ql6rCA7LGE7KCQ",
-          "views": 215,
-          "answers": 4,
-          "askedAt": "2026.11.19"
-        }
-      ]
-    },
-    {
       "id": "e027bffc41075089",
       "urls": [
         "https://2.happyfactorygraphic.com/entry/%EC%A0%84%EA%B8%B0%EB%B0%A5%EC%86%A5-IH-vs-%EC%97%B4%ED%8C%90-6%EC%9D%B8%EC%9A%A9-%EA%B3%A0%EB%A5%B4%EB%8A%94-%EB%B2%95%EA%B3%BC-%EB%B3%B4%EC%98%A8-%EC%A0%84%EA%B8%B0%EC%9A%94%EA%B8%88",
@@ -7700,74 +7303,6 @@
       "at": "2026-11-24T14:45:01.846Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "41d4fd412ca5a729",
-      "urls": [
-        "https://silentsang.tistory.com/988",
-        "https://sagyejeolhealthcare.com/entry/%EC%9E%90%EB%8F%99%EC%B0%A8-%ED%83%80%EC%9D%B4%EC%96%B4-4%EA%B0%9C-%EB%AA%A8%EB%91%90-%EA%B5%90%EC%B2%B4%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C-2%EA%B0%9C%EB%A7%8C-%EB%B0%94%EA%BF%80-%EB%95%8C-%ED%99%95%EC%9D%B8%ED%95%A0-%EA%B8%B0%EC%A4%80"
-      ],
-      "guide": {
-        "direction": "타이어 교체 공임비가 적정한지, 2개만 바꿔도 되는지 4개 다 바꿔야 하는지에서 검색자가 막힌다. 고수 글은 배터리 방전 교체비용과 타이어 4개 교체 기준만 다뤄 공임비 시세와 렌탈 시 사이즈 변경 주의점은 짚지 않았다. 이 글은 공임비 시세와 마모도·축 배치 기준, 렌탈 장단점 비교로 글을 끝낸다.",
-        "searchTargets": [
-          "자동차타이어가격",
-          "자동차타이어추천",
-          "자동차타이어교체",
-          "자동차타이어종류"
-        ],
-        "mustInclude": [
-          "타이어 교체 공임비 시세 약 2만원 내외(업체별 차이, 지식인 답변 근거)",
-          "2개만 교체 가능한 기준: 마모도·편마모 여부, 앞/뒤 축 배치",
-          "타이어 렌탈 시 폭·외경 변경되면 속도계·하중·차체간섭 문제 발생 가능",
-          "경고등 들어왔을 때 상황별 대응(지식인 사례: 수리점까지 1km 거리 등)",
-          "가격대별 추천 기준(확인 필요: 제조사·판매처 공지)"
-        ],
-        "mustAvoid": [
-          "배터리 방전과 타이어 교체를 같은 글에서 혼동해서 다루지 않기",
-          "특정 브랜드 타이어를 검증 없이 최고라고 단정하지 않기",
-          "렌탈 시 제휴카드 가입을 필수처럼 안내하지 않기(지식인 답변상 필수 아님)"
-        ],
-        "checkBefore": [
-          "타이어 교체 공임비 지역별·업체별 실제 시세(타이어 판매점 공식 안내)",
-          "2개만 교체해도 되는 안전 기준(제조사·정비업계 공식 가이드)",
-          "렌탈 시 사이즈 변경 허용 범위(렌탈업체 공식 약관)"
-        ],
-        "solves": [
-          "타이어 공임비 얼마가 적정한가? → 업체별 시세 2만원대 비교 정리",
-          "타이어 2개만 바꿔도 되나 4개 다 바꿔야 하나? → 마모도·축 배치 기준 제공",
-          "타이어 렌탈 해도 되나? → 렌탈 장단점과 사이즈 변경 주의점 정리"
-        ],
-        "actionTitles": [
-          "자동차타이어가격 공임비 시세 2만원대로 확인하는 방법",
-          "자동차타이어추천 렌탈 장단점 비교해서 고르는 방법"
-        ]
-      },
-      "at": "2026-11-24T14:45:01.846Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "자동차 타이어렌탈 장단점",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50704&docId=494657737&answerNo=11&qb=7J6Q64+Z7LCo7YOA7J207Ja0",
-          "views": 1344,
-          "answers": 12,
-          "askedAt": "2026.11.05"
-        },
-        {
-          "title": "차량 타이어 교체 공임비",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110101&docId=496041365&answerNo=3&qb=7J6Q64+Z7LCo7YOA7J207Ja0",
-          "views": 72,
-          "answers": 3,
-          "askedAt": "2026.11.21"
-        },
-        {
-          "title": "자동차 타이어 교체하고 싶은데",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110301&docId=496050559&answerNo=4&qb=7J6Q64+Z7LCo7YOA7J207Ja0",
-          "views": 62,
-          "answers": 4,
-          "askedAt": "2026.11.22"
-        }
-      ]
     },
     {
       "id": "77079d17c973f089",
@@ -9286,73 +8821,6 @@
       ]
     },
     {
-      "id": "17a6b04c1627c887",
-      "urls": [
-        "https://aljal.tistory.com/entry/2027-%EC%A0%95%EC%8B%9C-%EB%AA%A8%EC%A7%91%EA%B5%B0-%EB%B3%80%EA%B2%BD-%EC%9E%91%EB%85%84-%EB%82%98%EA%B5%B0%EC%9D%B4%EB%8D%98-%EC%9D%98%EC%98%88%EA%B3%BC%EA%B0%80-%EA%B0%80%EA%B5%B0%EC%9C%BC%EB%A1%9C-%EC%98%AE%EA%B8%B4-%EB%8C%80%ED%95%99%EA%B3%BC-%EB%8B%A4%EA%B5%B0-%EB%AA%A8%EC%A7%91%EC%9D%84-%EC%95%84%EC%98%88-%EC%97%86%EC%95%A4-%EB%8C%80%ED%95%99%EC%9D%B4-%EC%9E%88%EC%96%B4%EC%9A%94",
-        "https://aljal.tistory.com/entry/2027-%EC%A0%95%EC%8B%9C-%EC%9B%90%EC%84%9C%EC%A0%91%EC%88%98-%EB%A7%88%EA%B0%90-1%EC%9B%94-6%EC%9D%BC%EC%97%90-%EB%8B%AB%EB%8A%94-%EB%8C%80%ED%95%99%EA%B3%BC-1%EC%9B%94-7%EC%9D%BC-20%EC%8B%9C%EA%B9%8C%EC%A7%80-%EB%B0%9B%EB%8A%94-%EB%8C%80%ED%95%99%EC%9D%B4-%EC%9E%88%EC%96%B4%EC%9A%94"
-      ],
-      "guide": {
-        "direction": "수험생은 가군·나군·다군이 뭔지, 몇 개까지 지원 가능한지 헷갈리고(자동완성 '지원 몇개'), 올해 의예과가 어느 군으로 옮겼는지 궁금해한다. 고수 블로그 제목은 '어느 대학이 옮겼다'는 사실만 나열하고 지원 개수 원칙이나 마감일 비교는 풀지 않았다. 군별 1개씩 총 3개 지원 원칙, 대학별 모집군 변경표, 원서접수 마감일 비교표로 정리하면 끝난다.",
-        "searchTargets": [
-          "정시 모집군 차이",
-          "정시 모집군 지원 몇개",
-          "정시 모집 군",
-          "정시모집 군별 지원방법"
-        ],
-        "mustInclude": [
-          "가군·나군·다군 각 1개씩 총 3개 지원 가능 원칙(확인 필요: 2027 정시요강)",
-          "작년 나군→올해 가군으로 옮긴 의예과 대학명 리스트(확인 필요: 각 대학 2027 모집요강)",
-          "다군 모집을 없앤 대학명과 변경 사유(확인 필요: 대학 입학처 공지)",
-          "대학별 원서접수 마감일시 비교표(1월6일 17시 vs 1월7일 20시 등, 확인 필요: 각 대학 공지)"
-        ],
-        "mustAvoid": [
-          "작년 모집군과 올해 모집군을 혼동해 잘못된 비교표 작성",
-          "의예과 등 특정 학과 합격선·추합 가능성을 단정적으로 예측",
-          "수시 전형과 정시 전형을 혼동해 서술"
-        ],
-        "checkBefore": [
-          "각 대학 입학처 공식 2027 정시 모집요강에서 가나다군 배정 확인",
-          "대학별 원서접수 마감 일시는 대학 공식 입학처 공지로 재확인"
-        ],
-        "solves": [
-          "정시 모집군 지원 몇개 가능한지 모름 → 가군·나군·다군 1개씩 총 3개 지원 원칙 정리",
-          "정시 모집군 차이를 모름 → 가나다군별 선발 방식·일정 차이표로 설명",
-          "올해 의예과가 어느 군으로 옮겼는지 헷갈림 → 대학별 모집군 변경 비교표 제공"
-        ],
-        "actionTitles": [
-          "2027 정시 모집군 변경 대학 한눈에 비교하는 법",
-          "정시 모집군 지원은 몇 개까지 가능한지 확인하는 방법",
-          "대학별 정시 원서접수 마감일시 비교표로 확인하는 법"
-        ]
-      },
-      "at": "2026-11-24T14:45:01.846Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "인서울 대학교 의예과 정시 가군 나군 다군 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=394281313&answerNo=1&qb=7KCV7IucIOuqqOynkeq1sCDsnpHrhYQg7J2Y7JiI6rO8IOqwgOq1sA==",
-          "views": 2291,
-          "answers": 2,
-          "askedAt": "2021.07.10"
-        },
-        {
-          "title": "건국대 수의예과 정시 가군 전형으로",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=305204297&answerNo=1&qb=7KCV7IucIOuqqOynkeq1sCDsnpHrhYQg7J2Y7JiI6rO8IOqwgOq1sA==",
-          "views": 1666,
-          "answers": 1,
-          "askedAt": "2018.07.09"
-        },
-        {
-          "title": "원광대학교 정시 나군 의예과 추합 가능할까....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=215764110&answerNo=1&qb=7KCV7IucIOuqqOynkeq1sCDsnpHrhYQg7J2Y7JiI6rO8IOqwgOq1sA==",
-          "views": 1257,
-          "answers": 1,
-          "askedAt": "2015.01.24"
-        }
-      ]
-    },
-    {
       "id": "11a748a3330bfaf2",
       "urls": [
         "https://yjfreelifestyle.tistory.com/entry/%EC%B2%AD%EC%95%BD-%EB%B6%80%EC%A0%81%EA%B2%A9-%EB%8B%B9%EC%B2%A8-%EC%A0%9C%ED%95%9C%EA%B8%B0%EA%B0%84%EA%B3%BC-%EC%86%8C%EB%AA%85%EB%B0%A9%EB%B2%95-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%A7%80%EC%97%AD%EB%B3%84-1%EB%85%84%C2%B76%EA%B0%9C%EC%9B%94%C2%B73%EA%B0%9C%EC%9B%94-2026%EB%85%84-11%EC%9B%94-%EA%B8%B0%EC%A4%80"
@@ -9605,69 +9073,6 @@
       ]
     },
     {
-      "id": "f5623499f7568f51",
-      "urls": [
-        "https://story7880.tistory.com/entry/%E2%9A%96%EF%B8%8F-%EA%B5%BF%ED%8C%8C%ED%8A%B8%EB%84%882-%EC%B6%9C%EC%97%B0%EC%A7%84-%EB%B0%B0%EC%97%AD-%EC%B4%9D%EC%A0%95%EB%A6%ACbr%EB%AA%87%EB%B6%80%EC%9E%91-%EC%96%B8%EC%A0%9C-%EC%96%B4%EB%94%94%EC%84%9C-%EC%8B%9C%EC%9E%91-%ED%95%9C-%EB%B2%88%EC%97%90-%EB%81%9D%EB%82%B4%EB%8A%94-%EC%99%84%EB%B2%BD-%EA%B0%80%EC%9D%B4%EB%93%9C",
-        "https://reviewer77.tistory.com/374"
-      ],
-      "guide": {
-        "direction": "검색자는 '몇부작·언제 시작'보다 시즌1과 뭐가 달라졌는지, 표지훈·김혜윤이 맡은 역할의 매력이 뭔지에서 막힌다. 고수 블로그 제목은 출연진·OTT·몇부작 총정리에 그쳐 시즌1 대비 설정 변화와 캐릭터별 포인트는 비워뒀다. 이 글은 방영 정보표와 배우별 배역·전작 대비 변화 비교표로 한 번에 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "방송 시작일·채널/OTT 정보(확인 필요: 공식 편성 발표)",
-          "총 몇부작 여부(확인 필요: 제작사·방송사 공지)",
-          "출연진-배역 매칭표: 장나라-차은경, 김혜윤-강혜성, 표지훈-전은호",
-          "시즌1 대비 달라진 설정: 신입·베테랑 조합→경력직 변호사 강혜성 합류",
-          "전은호(표지훈) 캐릭터 성장 포인트: 시즌1보다 성장한 어쏘 변호사"
-        ],
-        "mustAvoid": [
-          "미확정 캐스팅·설정을 공식 발표처럼 단정하기",
-          "시즌1 '굿파트너'와 다른 법정물·동명 드라마 혼동",
-          "배우 개인 신상·사생활 추측성 서술"
-        ],
-        "checkBefore": [
-          "공식 편성표·방송사 공지에서 방송 시작일·몇부작 확인",
-          "제작사·언론 보도자료에서 출연진 캐스팅 확정 여부 확인"
-        ],
-        "solves": [
-          "시즌1과 뭐가 다른가? → 신입·베테랑 조합에서 경력직 파트너 합류로 바뀐 설정 비교표 제공",
-          "표지훈·김혜윤 역할 매력이 뭔가? → 전은호·강혜성 캐릭터 포인트 정리",
-          "몇부작, 언제 어디서 시작? → 편성 정보를 표로 한 번에 정리"
-        ],
-        "actionTitles": [
-          "굿파트너2 출연진 배역 총정리와 몇부작 방송 시작일 비교",
-          "굿파트너2 시즌1 대비 달라진 점, 강혜성 캐릭터 확인",
-          "굿파트너2 전은호 매력 포인트와 배역 총정리 한번에 확인"
-        ]
-      },
-      "at": "2026-11-24T15:31:42.313Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "'굿파트너2' 출연진, 이전 시즌과 비교해 달라....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=210&docId=495727930&answerNo=1&qb=6rW/7YyM7Yq464SIMuy2nOyXsOynhA==",
-          "views": 95,
-          "answers": 2,
-          "askedAt": "2026.10.28"
-        },
-        {
-          "title": "'굿파트너2' 출연진, 이전 시즌과 비교해 달라....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=2020703&docId=495727949&answerNo=1&qb=6rW/7YyM7Yq464SIMuy2nOyXsOynhA==",
-          "views": 74,
-          "answers": 2,
-          "askedAt": "2026.10.28"
-        },
-        {
-          "title": "'굿파트너2' 표지훈이 연기하는 전은호의 매....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30101&docId=495910080&answerNo=2&qb=6rW/7YyM7Yq464SIMuy2nOyXsOynhA==",
-          "views": 72,
-          "answers": 5,
-          "askedAt": "2026.11.11"
-        }
-      ]
-    },
-    {
       "id": "718e82ba4257a294",
       "urls": [
         "https://piwpiw.tistory.com/entry/2027-%EC%83%9D%EA%B3%84%EA%B8%89%EC%97%AC-1%EC%9D%B8-%EC%9B%94-87%EB%A7%8C-5533%EC%9B%90-2030%EB%85%84-35%EA%B9%8C%EC%A7%80-%EC%9D%B8%EC%83%81",
@@ -9702,52 +9107,6 @@
         "actionTitles": [
           "2027년 생계급여 인상, 가구별 지급액표로 확인하기",
           "27년 생계급여 인상 계산, 1인 87만원대 금액 정리"
-        ]
-      },
-      "at": "2026-11-25T00:35:23.007Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
-      "id": "dbda1b1e2a9b4738",
-      "urls": [
-        "https://flameleaf.tistory.com/entry/KT-%EC%8A%A4%EC%B9%B4%EC%9D%B4%EB%9D%BC%EC%9D%B4%ED%94%84-%EC%9D%B8%ED%84%B0%EB%84%B7-%EC%9A%94%EA%B8%88%EC%A0%9C-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95-%EB%B0%8F-%EC%8B%A0%EC%B2%AD-%EC%99%84%EB%B2%BD-%EA%B0%80%EC%9D%B4%EB%93%9C",
-        "https://info.kjchoi.co.kr/starlink-vs-home-internet/"
-      ],
-      "guide": {
-        "direction": "검색자는 KT 스카이라이프 인터넷과 KT 인터넷이 같은 회사인지, 고객센터·AS 번호가 왜 따로인지부터 헷갈린다. 고수 글은 설치 신청 절차는 다뤘지만 결합상품별 요금 비교, 고객센터·AS 접수 구분, 리모컨·셋톱박스 고장 대처까지는 정리하지 않았다. 이 글에서 단독/결합 요금제 비교표, 고객센터·AS 번호 구분표, 신청부터 설치까지 순서를 한 번에 정리해 끝낸다.",
-        "searchTargets": [
-          "kt 스카이라이프 요금제",
-          "kt스카이라이프 인터넷",
-          "kt스카이라이프 고객센터",
-          "kt 스카이라이프 as"
-        ],
-        "mustInclude": [
-          "단독 인터넷 vs 인터넷+방송 결합 요금 비교표 (확인 필요: KT스카이라이프 공식 홈페이지)",
-          "KT 고객센터와 스카이라이프 고객센터 번호 구분표 (확인 필요: 공식 고객지원 페이지)",
-          "설치 신청 순서(상담신청→기사 방문→개통일자 확인)",
-          "셋톱박스·리모컨 AS 접수 절차 체크리스트",
-          "알뜰폰 결합 시 할인 조건 (확인 필요: 결합상품 공지)"
-        ],
-        "mustAvoid": [
-          "KT 인터넷과 KT스카이라이프를 같은 고객센터·같은 회사로 혼동해 안내하는 것",
-          "위성방송 스카이라이프를 위성인터넷(스타링크 등)과 혼동하는 것",
-          "지역별 설치 가능 여부를 전국 동일한 것처럼 단정하는 것"
-        ],
-        "checkBefore": [
-          "요금제·결합 가격 - KT스카이라이프 공식 홈페이지",
-          "고객센터·AS 번호 구분 - 공식 고객지원 페이지",
-          "알뜰폰 결합 조건 - 공식 결합상품 공지"
-        ],
-        "solves": [
-          "스카이라이프 고객센터가 KT와 같은지 헷갈림 → 상담·AS 번호를 별도 표로 구분해 안내",
-          "요금제가 단독인지 결합인지 복잡함 → 단독/결합 비교표로 정리",
-          "셋톱박스·리모컨 고장 시 AS 접수처를 모름 → AS 신청 순서 체크리스트 제공"
-        ],
-        "actionTitles": [
-          "KT 스카이라이프 인터넷 요금제 비교, 신청 전 확인할 것",
-          "KT 스카이라이프 고객센터·AS 접수, 번호부터 다르게 하는 법",
-          "KT 스카이라이프 결합·알뜰폰, 할인 조건 확인하는 법"
         ]
       },
       "at": "2026-11-25T00:35:23.007Z",
@@ -11060,46 +10419,6 @@
       ]
     },
     {
-      "id": "486bc6781b558720",
-      "urls": [
-        "https://lab.stock-insight.app/358"
-      ],
-      "guide": {
-        "direction": "검색자는 '준감위 검토'가 확정 발표인지 아닌지부터 헷갈려 들어온다. 고수 글 제목은 규모(75조)만 강조해 검토 단계와 확정 집행의 차이, 세금 영향을 안 다룬다. 이 글은 검토→공시→집행까지 단계별 표와 배당소득세 계산 예시로 끝내준다.",
-        "searchTargets": [
-          "삼성전자 주주환원 뜻",
-          "삼성전자 주주환원 일정",
-          "삼성전자 주주환원 세금",
-          "삼성전자 주주환원 규모"
-        ],
-        "mustInclude": [
-          "75조원 규모의 실행 시점과 방식(배당·소각 비중) (확인 필요: 삼성전자 공시/IR)",
-          "준감위(준법감시위원회) 검토의 구속력 여부 (확인 필요: 준법감시위원회 발표)",
-          "검토 단계 → 이사회 결의 → 공시까지 절차 표"
-        ],
-        "mustAvoid": [
-          "검토 단계를 확정 지급 일정처럼 단정하는 표현",
-          "자사주 소각과 현금배당을 구분 없이 '주주환원'으로 뭉뚱그리기"
-        ],
-        "checkBefore": [
-          "삼성전자 DART 공시 확인 여부",
-          "이사회 결의 날짜 확정 여부"
-        ],
-        "solves": [
-          "준감위 검토가 뜻하는 게 뭔지 모름 → 검토·결의·공시 단계를 표로 구분",
-          "세금이 얼마나 나오는지 모름 → 배당소득세 계산 예시 제공",
-          "규모·일정이 확정인지 예상인지 헷갈림 → 확정/미확정 구간을 명시한 일정표"
-        ],
-        "actionTitles": [
-          "삼성전자 주주환원 일정 확인하는 법 정리",
-          "삼성전자 주주환원 세금 계산해보기"
-        ]
-      },
-      "at": "2026-11-25T01:12:19.500Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
       "id": "2474153b6574f4ae",
       "urls": [
         "https://bookshelf-journey.tistory.com/entry/%EC%BC%80%EC%9D%B4%EB%B1%85%ED%81%AC-AI-%ED%80%B4%EC%A6%88-%EC%B1%8C%EB%A6%B0%EC%A7%80-%EC%A0%95%EB%8B%B5-%EC%B4%9D-1%EC%B2%9C%EB%A7%8C%EC%9B%90-%EC%83%81%EA%B8%88%EC%9D%98-%EC%A3%BC%EC%9D%B8%EA%B3%B5%EC%9D%80",
@@ -11167,43 +10486,6 @@
           "askedAt": "2026.04.08"
         }
       ]
-    },
-    {
-      "id": "aa14fdc28e70ab22",
-      "urls": [
-        "https://infodemic.kr/4171",
-        "https://money-phd.com/2095",
-        "https://yoanarc.com/1824",
-        "https://hanbre.tistory.com/2035"
-      ],
-      "guide": {
-        "direction": "검색자는 진시몬과 진명진 변호사의 관계, 그리고 변호사의 나이·학력·경력 프로필을 궁금해하지만 고수 글들은 방송 출연 소식만 나열하고 구체 프로필 정리가 빠져 있다. 큰아들·막내아들 관계를 사실관계 그대로 짚고 프로필표로 정리해야 검색이 끝까지 읽힌다. 동명이인 변호사와 혼동하지 않도록 구분해주는 것도 필요하다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "진시몬과 진명진 변호사의 관계(큰아들)",
-          "진명진 변호사 프로필: 나이·학력·경력(확인 필요: 원문 기사 또는 방송 소개)",
-          "아침마당 출연 날짜/회차(확인 필요: KBS 아침마당 편성표)"
-        ],
-        "mustAvoid": [
-          "막내아들을 떠나보낸 사연에 대한 사생활 추측·감정적 서술 지어내지 않기",
-          "동명이인 변호사와 혼동해서 잘못된 경력을 붙이지 않기"
-        ],
-        "checkBefore": [
-          "KBS 아침마당 공식 편성표/다시보기에서 출연 날짜와 소개 내용 확인",
-          "원문 기사에서 진명진 변호사의 학력·경력 사실 확인"
-        ],
-        "solves": [
-          "진시몬 큰아들이 누구인지 몰라 검색 → 진명진 변호사와의 관계를 사실관계로 정리",
-          "진명진 변호사 프로필(나이·학력·경력)이 궁금함 → 확인된 정보로 프로필표 정리(확인 필요 표시)",
-          "아침마당 출연 날짜/회차를 모름 → 방송 출연 정보 정리(확인 필요)"
-        ],
-        "actionTitles": [
-          "진명진 변호사 아침마당 출연 정보 확인하기"
-        ]
-      },
-      "at": "2026-11-25T09:37:33.944Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "85f34e6af3caf3a3",
@@ -12330,68 +11612,6 @@
           "title": "겨울 커플 국내 여행지 추천",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=90109&docId=344199521&answerNo=8&qb=6rWw7IKw6rCA67O866eM7ZWc6rOz",
           "views": 1507,
-          "answers": 9,
-          "askedAt": "2026.11.13"
-        }
-      ]
-    },
-    {
-      "id": "24139cac14b3f371",
-      "urls": [
-        "https://seniorguides.tistory.com/138",
-        "https://coolmool-economy.tistory.com/entry/2027-senior-jobs-basic-pension-reduction-check"
-      ],
-      "guide": {
-        "direction": "검색자는 노인일자리 활동비(공익활동형 월29만원 등)가 기초연금 소득인정액에 포함돼 감액되는지, 받는 중에 시작해도 괜찮은지 헷갈려 한다. 고수 글은 '소득 제외'라는 결론만 주고 유형별(공익활동형·역량활용형·사회서비스형) 차이와 복지로 모의계산 순서는 안 짚었다. 유형별 소득인정 여부 비교표와 모의계산 순서로 이 글에서 확인을 끝낼 수 있게 한다.",
-        "searchTargets": [
-          "노인일자리 기초연금수급자"
-        ],
-        "mustInclude": [
-          "공익활동형(월 29만원)·역량활용형·사회서비스형 구분과 소득 인정 여부 비교표",
-          "노인일자리 소득은 근로소득 계산에서 제외되고 기초연금수급자가 우선 선발된다는 점(지식인 답변 기준)",
-          "복지로 모의계산으로 본인 예상 기초연금 금액 확인하는 순서",
-          "2026년 기초연금 소득인정액 기준(확인 필요: 복지로·보건복지부 공식 공지)"
-        ],
-        "mustAvoid": [
-          "노인일자리와 일반 공공근로·단기 공무직 채용을 같은 것으로 혼동해서 쓰기",
-          "감액 기준을 노인일자리 소득 포함처럼 단정해 독자에게 불필요한 불안 주기"
-        ],
-        "checkBefore": [
-          "2026년(또는 2027년) 기초연금 소득인정액 기준·노인일자리 소득 제외 여부 최신 공지(복지로·보건복지부)",
-          "공익활동형 활동비 월 29만원이 최신 금액인지(한국노인인력개발원 공지)"
-        ],
-        "solves": [
-          "노인일자리 활동비 받으면 기초연금 깎이나요 → 소득 계산에서 제외된다는 근거와 예외 조건 정리",
-          "기초연금 받는 중 노인일자리 시작하면 어떻게 되나요 → 유형별 소득 인정 여부 표로 확인"
-        ],
-        "actionTitles": [
-          "노인일자리 기초연금수급자 감액 여부 한번에 확인하기",
-          "노인일자리 활동비 기초연금 소득인정액 포함 여부 계산법",
-          "노인일자리 기초연금수급자 우선선발 조건 최신 확인하기"
-        ]
-      },
-      "at": "2026-11-25T09:37:33.944Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "기초연금과 노인일자리",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100103&docId=479344177&answerNo=2&qb=64W47J247J287J6Q66as6riw7LSI7Jew6riI",
-          "views": 3795,
-          "answers": 17,
-          "askedAt": "2024.12.20"
-        },
-        {
-          "title": "노인일자리소득이기초노령연금소득으로인정....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100103&docId=489351439&answerNo=2&qb=64W47J247J287J6Q66as6riw7LSI7Jew6riI",
-          "views": 706,
-          "answers": 11,
-          "askedAt": "2025.10.07"
-        },
-        {
-          "title": "기초노령연금, 소득인정액 계산할 때 공제되....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100103&docId=495833378&answerNo=8&qb=64W47J247J287J6Q66as6riw7LSI7Jew6riI",
-          "views": 179,
           "answers": 9,
           "askedAt": "2026.11.13"
         }
@@ -14132,73 +13352,6 @@
       ]
     },
     {
-      "id": "d9f8196e94eefdb7",
-      "urls": [
-        "https://spylab.tistory.com/843"
-      ],
-      "guide": {
-        "direction": "검색자는 '언제까지 팔아야 올해 양도세에 반영되는지'와 '250만원 공제를 어떻게 계산하는지'에서 막힌다. 고수 글은 '팔 것과 남길 것'만 던지고, 체결일이 아니라 결제일(T+2~3) 때문에 29일이 마감인 이유와 증여 활용 시 이월과세 조건은 짚지 않는다. 과세기간·공제·손익통산 계산표와 증권사 신고대행 신청 순서를 주면 글이 끝난다.",
-        "searchTargets": [
-          "해외주식 양도세 절세 방법",
-          "해외주식 양도세 계산",
-          "해외주식 양도세 신고",
-          "해외주식 양도세 기간"
-        ],
-        "mustInclude": [
-          "결제일(통상 체결일+2~3영업일) 기준으로 12월 29일이 매도 마감인 이유",
-          "연간 250만원 기본공제와 양도세율 22%(소득세20%+지방소득세2%) 계산 구조",
-          "국내외 종목 손익통산 가능 범위(확인 필요: 국세청 안내)",
-          "배우자 증여 후 이월과세가 적용되는 보유기간 조건(확인 필요: 국세청)",
-          "각 증권사 양도세 신고대행 서비스 신청 방법과 수수료(확인 필요: 증권사 공지)"
-        ],
-        "mustAvoid": [
-          "증여 후 즉시 매도하면 무조건 비과세라고 단정하는 것(이월과세 조건 생략 위험)",
-          "국내 상장 해외ETF 과세(보유기간 중 과세)와 해외 직접투자 양도세를 같은 것으로 섞는 것"
-        ],
-        "checkBefore": [
-          "국세청 홈택스 해외주식 양도소득세 신고 안내(과세기간·공제·세율)",
-          "이용 증권사의 2026년 결제 마감일·신고대행 공지",
-          "배우자 증여 이월과세 적용 기준(국세청 또는 세무사 확인)"
-        ],
-        "solves": [
-          "언제까지 팔아야 올해 양도세에 들어가는지 모름 → 결제일 역산한 매도 마감일 제시",
-          "250만원 공제·세율 계산이 헷갈림 → 계산 구조를 수치로 정리",
-          "증여로 절세된다는데 조건을 모름 → 이월과세 적용 조건을 짚어 혼동 방지"
-        ],
-        "actionTitles": [
-          "해외주식 양도세 절세 방법과 12월 29일 매도 마감 계산",
-          "해외주식 양도세 계산, 250만원 공제 세율까지 정리",
-          "해외주식 양도세 신고 대행 신청하는 법과 마감일 확인"
-        ]
-      },
-      "at": "2026-11-25T20:04:30.843Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "미국 주식 양도소득세 절세 전략은?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=486000792&answerNo=3&qb=7ZW07Jm47KO87IudIOyWkeuPhOyEuCDsoIjshLgg6rKD6rO8IOuCqOq4uA==",
-          "views": 1143,
-          "answers": 9,
-          "askedAt": "2025.06.09"
-        },
-        {
-          "title": "키움증권 해외주식 양도세 대행 서비스",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=491368170&answerNo=2&qb=7ZW07Jm47KO87IudIOyWkeuPhOyEuCDsoIjshLgg6rKD6rO8IOuCqOq4uA==",
-          "views": 538,
-          "answers": 3,
-          "askedAt": "2026.01.15"
-        },
-        {
-          "title": "해외주식 양도세 절세 실수",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40305&docId=479515147&answerNo=1&qb=7ZW07Jm47KO87IudIOyWkeuPhOyEuCDsoIjshLgg6rKD6rO8IOuCqOq4uA==",
-          "views": 321,
-          "answers": 4,
-          "askedAt": "2024.12.24"
-        }
-      ]
-    },
-    {
       "id": "d167a44a504fc522",
       "urls": [
         "https://danielnamy.tistory.com/entry/%EC%A0%84-%EA%B5%AD%EB%AF%BC-%EB%AC%B4%EB%A3%8C-%EB%AA%A8%EB%91%90%EC%9D%98-AI-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%B6%9C%EC%8B%9C%EC%99%80-%EC%9C%A0%EB%A3%8C-%EA%B5%AC%EB%8F%85-%EC%8B%9C%EC%9E%A5-%EC%98%81%ED%96%A5-%EB%B6%84%EC%84%9D"
@@ -14381,69 +13534,6 @@
           "views": 132,
           "answers": 8,
           "askedAt": "2026.11.20"
-        }
-      ]
-    },
-    {
-      "id": "7bcbd910c7c29be4",
-      "urls": [
-        "https://money-phd.com/2091"
-      ],
-      "guide": {
-        "direction": "검색자는 박준영 변호사의 연락처·소속 법률사무소와 학력·경력을 찾는 경우가 많고, '악행' 루머의 진위도 궁금해한다. 고수 블로그 제목은 자극적 문구만 걸고 정작 프로필·사건 경력·연락 경로는 못 채웠다. 이 글은 약력표와 주요 변호사건·방송출연 이력, 루머 출처 확인으로 끝낸다.",
-        "searchTargets": [
-          "박준영 변호사"
-        ],
-        "mustInclude": [
-          "주요 변호사건(약촌오거리 살인사건, 삼례 나라슈퍼 사건 재심 등)",
-          "방송출연 이력(대화의 희열 시즌3, 유 퀴즈 온 더 블럭)",
-          "소속 법률사무소명(확인 필요: 공식 프로필)",
-          "학력(확인 필요: 공식 자료)",
-          "'악행' 루머의 출처 매체와 사실관계(확인 필요: 원 기사)"
-        ],
-        "mustAvoid": [
-          "확인 안 된 '악행' 루머를 사실처럼 단정",
-          "SNS 사진·가족 등 사생활 추측성 서술",
-          "다른 재심 전문 변호사와 이력 혼동"
-        ],
-        "checkBefore": [
-          "소속 법률사무소 공식 홈페이지에서 학력·경력 확인",
-          "'악행' 관련 보도의 원 기사 출처와 매체 확인"
-        ],
-        "solves": [
-          "연락처를 못 찾겠다 → 소속 법률사무소·상담경로 정리",
-          "학력·경력이 궁금하다 → 약력표로 정리",
-          "어린시절 악행이 뭔지 모르겠다 → 출처와 사실관계 확인"
-        ],
-        "actionTitles": [
-          "박준영 변호사 연락처·법률사무소 찾는 법",
-          "박준영 변호사 어린시절 논란, 출처 확인하기"
-        ]
-      },
-      "at": "2026-11-25T20:04:30.843Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "박준영변호사 법률사무소",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6020602&docId=491323114&answerNo=5&qb=67CV7KSA7JiBIOuzgO2YuOyCrCDtlITroZztlYQg64KY7J20IO2VmeugpQ==",
-          "views": 2678,
-          "answers": 6,
-          "askedAt": "2026.06.05"
-        },
-        {
-          "title": "박준영 변호사 진실된 사람인데 압박",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61303&docId=382529482&answerNo=2&qb=67CV7KSA7JiBIOuzgO2YuOyCrCDtlITroZztlYQg64KY7J20IO2VmeugpQ==",
-          "views": 2260,
-          "answers": 2,
-          "askedAt": "2021.02.21"
-        },
-        {
-          "title": "재심 전문 박준영 변호사님",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30102&docId=414026632&answerNo=1&qb=67CV7KSA7JiBIOuzgO2YuOyCrCDtlITroZztlYQg64KY7J20IO2VmeugpQ==",
-          "views": 918,
-          "answers": 1,
-          "askedAt": "2022.03.07"
         }
       ]
     },
