@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T02:13:17.087Z",
+ "builtAt": "2026-11-27T02:23:20.250Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,70 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "코스닥 매수 사이드카 발동",
    "sources": [
+    "nate",
     "daum"
    ],
-   "articles90": 63,
+   "articles90": 71,
    "recent20": 12,
-   "press": 57,
+   "press": 59,
    "firstArticleAt": "2026-11-27T01:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스닥, 5%대 급등하며 매수 사이드카 발동",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-27T02:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490666?sid=101"
-    },
-    {
-     "title": "코스닥 5% 오르며 ‘매수 사이드카’…반도체 주춤하자 로봇·바이오 강...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-27T02:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834253?sid=101"
-    },
-    {
-     "title": "코스닥, '외국인·기관' 매수에 5%대 급등...매수 사이드카 발동",
+     "title": "가파른 상승세 보이는 코스닥",
      "press": "newspim.com",
-     "publishedAt": "2026-11-27T02:05:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127000353"
+     "publishedAt": "2026-11-27T02:17:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127000498"
+    },
+    {
+     "title": "코스닥 5% 급등...사이드카 발동",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T02:17:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127000504"
+    },
+    {
+     "title": "5% 급등으로 사이드카 발동한 코스닥",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T02:17:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127000502"
     }
    ]
   },
   {
-   "keyword": "한동훈 수사자료 압수수색",
+   "keyword": "한동훈 자료 유출 의혹 압수수색",
    "sources": [
     "nate"
    ],
-   "articles90": 61,
-   "recent20": 8,
-   "press": 55,
-   "firstArticleAt": "2026-11-27T00:46:00.000Z",
+   "articles90": 60,
+   "recent20": 10,
+   "press": 53,
+   "firstArticleAt": "2026-11-27T00:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'내부자료 유출' 의혹에 공소청 압수수색 들어간 경찰…한동훈 \"국무회...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-27T02:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522757?sid=100"
+     "title": "경찰, '한동훈 자료유출 의혹' 수사 본격화...법무부 등 압수수색",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-27T02:22:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121370"
     },
     {
-     "title": "경찰, '한동훈 수사자료 유출 의혹'...법무부·공소청 등 압수수색",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-27T02:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394971?sid=100"
+     "title": "경찰, '한동훈 자료 유출 의혹' 법무부·공소청 등 압수수색",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T02:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438864?sid=102"
     },
     {
-     "title": "경찰, '한동훈 자료유출 의혹' 법무부·공소청 압수수색",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-27T02:04:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653871"
+     "title": "한동훈, ‘수사자료 유출’ 경찰 압수수색에 “국무회의서 잘못된 교육...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-27T02:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178598?sid=100"
     }
    ]
   },
@@ -79,62 +80,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 51,
-   "recent20": 14,
-   "press": 39,
-   "firstArticleAt": "2026-11-27T00:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "NH농협은행, 비정형데이터 품질인증 최고등급 획득 … 금융 AI 기반 마련",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-27T02:12:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/27/2026112750123.html"
-    },
-    {
-     "title": "벤츠 코리아, 국내 스타트업과 AI·무선충전 기술 검증 성과 공유",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-27T02:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729413?sid=101"
-    },
-    {
-     "title": "\"광고에서 의료까지\"...AI 솔루션 도입 확대에 코스닥 기업 '주목'",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T02:10:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127000434"
-    }
-   ]
-  },
-  {
-   "keyword": "중기부 장관 표창 수상",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 39,
+   "articles90": 49,
    "recent20": 10,
-   "press": 32,
-   "firstArticleAt": "2026-11-27T00:45:00.000Z",
+   "press": 40,
+   "firstArticleAt": "2026-11-27T00:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼양식품, '올해의 상생기업' 중기부 장관 표창",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-27T02:12:00.000Z",
-     "link": "http://www.breaknews.com/1254560"
+     "title": "벤츠 코리아, 국내 스타트업과 AI 기반 미래 모빌리티 기술 확보 나서",
+     "press": "dizzotv.com",
+     "publishedAt": "2026-11-27T02:22:00.000Z",
+     "link": "https://www.dizzotv.com/site/data/html_dir/2026/11/27/2026112780056.html"
     },
     {
-     "title": "기보, ‘2026 올해의 상생기업 대상’ 중기부 장관 표창 수상",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-27T02:12:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611270104"
+     "title": "빅테크플러스, 코리아 핀테크위크 2026서 대화형 AI 부동산 서비스 선봬",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-27T02:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061494?sid=105"
     },
     {
-     "title": "SK인텔릭스, '올해의 상생기업 대상' 중기부 장관 표창",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-27T02:10:00.000Z",
-     "link": "http://www.breaknews.com/1254576"
+     "title": "래블업, 'AI:GO 2.0' 출시...개인 PC에서 파일 읽고 수정하는 AI 에이전트",
+     "press": "the-stock.kr",
+     "publishedAt": "2026-11-27T02:16:00.000Z",
+     "link": "https://www.the-stock.kr/news/articleView.html?idxno=33940"
     }
    ]
   },
@@ -143,30 +112,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 11,
-   "press": 31,
+   "articles90": 35,
+   "recent20": 4,
+   "press": 33,
    "firstArticleAt": "2026-11-27T01:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "李 대통령, 조작기소 특검 이르면 오늘, 늦어도 29일 임명… 안 하면 연...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-27T02:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004012100?sid=100"
+    },
+    {
+     "title": "李 지지율 41%…민주 37%·국힘 30% [갤럽]",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-27T02:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207752?sid=100"
+    },
+    {
      "title": "李대통령 지지율 41%, 2주 연속 상승…부정평가 50%[갤럽]",
      "press": "fnnews.com",
      "publishedAt": "2026-11-27T02:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005610749?sid=100"
-    },
-    {
-     "title": "[한국갤럽] 李 대통령 국정 지지율 41%…민주 37% 국힘 30%",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-27T02:04:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=173221"
-    },
-    {
-     "title": "이 대통령 '잘함' 41%-'잘못함' 50%... 7주째 횡보",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-27T02:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002537442?sid=100"
     }
    ]
   },
@@ -175,30 +144,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 1,
-   "press": 27,
-   "firstArticleAt": "2026-11-27T00:45:00.000Z",
+   "articles90": 26,
+   "recent20": 2,
+   "press": 25,
+   "firstArticleAt": "2026-11-27T00:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "증안펀드 기대·외국인 매수에 코스닥 6%대 급등…코스피 4,800대",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-27T02:14:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446944"
+    },
+    {
+     "title": "코스피 장중 상승폭 커져 2% 안팎 강세…코스닥 6%대 급등",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T02:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467389?sid=101"
+    },
     {
      "title": "코스닥 700선 회복하나 ‘매수 사이드카’…코스피도 상승 흐름 [투자36...",
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-27T01:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002729390?sid=101"
-    },
-    {
-     "title": "코스닥, 5% 급등 속 '매수 사이드카' 발동…코스피 1.7%↑",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-27T01:48:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088585"
-    },
-    {
-     "title": "[오늘의 증시] 코스피 4790선 회복·코스닥 5%대 급등…외국인·기관 동...",
-     "press": "job-post.co.kr",
-     "publishedAt": "2026-11-27T01:46:00.000Z",
-     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=241380"
     }
    ]
   },
@@ -207,62 +176,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 0,
-   "press": 21,
-   "firstArticleAt": "2026-11-27T00:44:00.000Z",
+   "articles90": 15,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-27T00:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "안보실, 해킹 2차 피해 방지 점검... 금융권 보안 대응 긴급 소집",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-27T02:18:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=567132"
+    },
+    {
+     "title": "금융정보 유출에 청와대 긴급회의...2차 인증·이상거래 차단 강화",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-27T02:17:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=323366"
+    },
     {
      "title": "靑 국가안보실, 금융당국 긴급 소집…해킹 2차 피해 근본 차단",
      "press": "joseilbo.com",
      "publishedAt": "2026-11-27T01:51:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/123/0002394967?sid=100"
-    },
-    {
-     "title": "靑, ‘해킹피해 방지’ 금융기관 긴급회의…“사이트 차단·수사 강화”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-27T01:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703839?sid=100"
-    },
-    {
-     "title": "靑, 금융당국 긴급소집…'해킹 2차 피해' 방지 위한 선제 대응 강조",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-27T01:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214526?sid=100"
     }
    ]
   },
   {
-   "keyword": "김민석 대표 발언",
+   "keyword": "오정세 미담 장례식",
    "sources": [
     "nate"
    ],
-   "articles90": 28,
-   "recent20": 7,
+   "articles90": 14,
+   "recent20": 2,
    "press": 14,
-   "firstArticleAt": "2026-11-27T00:50:00.000Z",
+   "firstArticleAt": "2026-11-27T01:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최민희 징계 심의 날…친청계, '김민석 신천지 책임론' 재점화(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T02:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313874?sid=100"
+     "title": "오정세, 암 투병 팬 母 빈소 조문에 결혼식 축가까지…\"평생 잊지 못할...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-27T02:18:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785321"
     },
     {
-     "title": "김민석 \"청해부대 파견 연장은 필수 조치\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T02:05:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127000443"
+     "title": "오정세, 암 투병 팬 모친 병문안·장례식 조문에 결혼식 축가까지... 감...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-27T02:16:00.000Z",
+     "link": "https://www.insight.co.kr/news/583824"
     },
     {
-     "title": "김민석 대표, 최고위원회의 발언",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T02:05:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127000440"
+     "title": "오정세, 악역 전문? 실제 미담 제조기-팬 병문안-결혼식 축가",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-27T02:00:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96062"
     }
    ]
   },
@@ -271,24 +240,24 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
-   "recent20": 9,
-   "press": 10,
+   "articles90": 11,
+   "recent20": 7,
+   "press": 11,
    "firstArticleAt": "2026-11-27T01:50:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
+     "title": "(저PBR 제약바이오)③“제약사, 주주가치 제고 이대론 안된다”",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-27T02:22:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322117&inflow=N"
+    },
+    {
      "title": "SK스퀘어 주주환원, 최소 4.3조원..\"연초 계획보다 14배 많아\"",
      "press": "breaknews.com",
      "publishedAt": "2026-11-27T02:12:00.000Z",
      "link": "http://www.breaknews.com/1254553"
-    },
-    {
-     "title": "삼성SDI, 자사주 351만주 소각⋯주주가치 제고 속도 낸다",
-     "press": "autodaily.co.kr",
-     "publishedAt": "2026-11-27T02:10:00.000Z",
-     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602501"
     },
     {
      "title": "한국예탁결제원, 전자주주총회 운영 효율화 워크숍 개최",
@@ -299,15 +268,47 @@
    ]
   },
   {
+   "keyword": "유한양행",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-27T01:10:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유한양행, '버들장터'서 30일까지 블랙프라이데이 행사 진행",
+     "press": "weekly.hankooki.com",
+     "publishedAt": "2026-11-27T02:22:00.000Z",
+     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7196061"
+    },
+    {
+     "title": "'내부 승계' 공식 깨려는 유한양행…'R&D·생산' 투톱 실험",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-27T02:16:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733205"
+    },
+    {
+     "title": "유한양행, '버들장터' 블랙프라이데이 프로모션",
+     "press": "bosa.co.kr",
+     "publishedAt": "2026-11-27T02:14:00.000Z",
+     "link": "https://www.bosa.co.kr/news/articleView.html?idxno=3017542"
+    }
+   ]
+  },
+  {
    "keyword": "발언하는 정점식 원내대표",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 15,
+   "articles90": 12,
    "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T00:46:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-27T00:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -332,66 +333,67 @@
    ]
   },
   {
-   "keyword": "유한양행",
+   "keyword": "병무청",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T00:48:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유한양행, 공식 온라인몰 '버들장터'서 연말 할인 기획전 운영",
-     "press": "popcornnews.net",
-     "publishedAt": "2026-11-27T02:04:00.000Z",
-     "link": "http://www.popcornnews.net/news/articleView.html?idxno=141849"
-    },
-    {
-     "title": "유한양행, 공식몰 '버들장터' 블랙프라이데이 프로모션 진행",
-     "press": "dailysmart.co.kr",
-     "publishedAt": "2026-11-27T01:50:00.000Z",
-     "link": "http://www.dailysmart.co.kr/news/articleView.html?idxno=133248"
-    },
-    {
-     "title": "유한양행 버들장터, 블랙프라이데이 할인 행사 연다",
-     "press": "newsmap.co.kr",
-     "publishedAt": "2026-11-27T01:44:00.000Z",
-     "link": "https://www.newsmap.co.kr/news/articleView.html?idxno=5890"
-    }
-   ]
-  },
-  {
-   "keyword": "김가영, 스롱 꺾고 4강 진출!",
-   "sources": [
-    "nate"
-   ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 3,
    "press": 4,
-   "firstArticleAt": "2026-11-27T00:44:00.000Z",
+   "firstArticleAt": "2026-11-27T01:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'라이벌' 스롱 잡았다! '당구 여제' 김가영, 역사적인 '20승' 대기록까지...",
-     "press": "sportalkorea.com",
-     "publishedAt": "2026-11-27T01:40:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/139/0002256624"
+     "title": "병무청, 한국생명존중희망재단과 협력 청년 병역의무자 정신건강 지원",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-27T02:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835973?sid=100"
     },
     {
-     "title": "이제 20승까지 단 두 걸음! '당구 여제' 김가영, '라이벌' 스롱 꺾고 준...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-27T01:14:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/076/0004470206"
+     "title": "병무청, '허위 질병 조기 전역' 사후 검증 강화…다음 달 10일 시행",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-27T02:16:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121371"
     },
     {
-     "title": "20승 보인다…'당구 여제' 김가영, 라이벌 스롱 꺾고 준결승행→정수빈...",
+     "title": "병무청, '병역면탈 의심' 질병 조기전역자 자료확보 근거 마련",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T02:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467364?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "연우 10kg 감량",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T01:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "연우, 종일 밥 두 숟갈…10kg 감량 후 두드러기 부작용 \"힘들어서 많이...",
      "press": "mhnse.com",
-     "publishedAt": "2026-11-27T00:55:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/445/0000493901"
+     "publishedAt": "2026-11-27T02:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000493932"
+    },
+    {
+     "title": "“하루 밥 두 숟갈로 두 달에 10kg 뺐더니”… 연우가 겪은 끔찍한 부작...",
+     "press": "kormedi.com",
+     "publishedAt": "2026-11-27T02:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/296/0000107891?sid=103"
+    },
+    {
+     "title": "연우, 하루 밥 두 숟갈로 10kg 감량…“전신 두드러기에 많이 울었다”...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-27T01:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543871"
     }
    ]
   },
@@ -414,16 +416,48 @@
      "link": "https://www.newspim.com/news/view/20261127000332"
     },
     {
-     "title": "인신매매등 방지 방안 논의하는 원민경 성평등가족부 장관 [TF사진관]",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-27T01:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000556168?sid=102"
-    },
-    {
      "title": "웃으며 인사하는 원민경 장관",
      "press": "news1.kr",
      "publishedAt": "2026-11-27T01:25:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009313715?sid=102"
+    },
+    {
+     "title": "인신매매등 방지 방안 논의하는 원민경 성평등가족부 장관 [TF사진관]",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-27T01:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000556168?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "김가영, 스롱 꺾고 준결승행",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T00:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘당구 여제’ 김가영, 스롱 꺾고 LPBA 준결승행⋯김보미와 격돌",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T02:12:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653877"
+    },
+    {
+     "title": "이제 20승까지 단 두 걸음! '당구 여제' 김가영, '라이벌' 스롱 꺾고 준...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-27T01:14:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/076/0004470206"
+    },
+    {
+     "title": "20승 보인다…'당구 여제' 김가영, 라이벌 스롱 꺾고 준결승행→정수빈...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-27T00:55:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/445/0000493901"
     }
    ]
   },
@@ -433,7 +467,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-27T01:16:00.000Z",
    "exclusive": false,
@@ -462,7 +496,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1776,
+  "flagged": 1780,
   "matched": 890,
   "avgLeadMin": 585,
   "recent": [
