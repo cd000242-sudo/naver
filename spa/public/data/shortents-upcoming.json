@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-25T10:40:17.960Z",
+ "builtAt": "2026-11-27T05:14:18.998Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,172 +8,362 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "발언하는 이재명 대통령",
+   "keyword": "장동혁 국민의힘 대표",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-25T09:16:00.000Z",
+   "articles90": 32,
+   "recent20": 15,
+   "press": 20,
+   "firstArticleAt": "2026-11-27T03:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 \"재정 부족해 주택 공급 못하는 일 없도록 하라\"",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-25T10:36:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904464"
+     "title": "박수치는 장동혁 국민의힘 대표",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T05:12:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765235"
     },
     {
-     "title": "李 대통령 \"공적임대주택, 중산층도 선택하는 '주거 사다리'로 대전환\"...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-25T10:27:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749241"
+     "title": "국산 쌀 축제 찾은 국민의힘",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T05:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467780?sid=100"
     },
     {
-     "title": "李대통령 “임대 주택서 공적 주택으로, 2030년까지 매년 24만호 공급”",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-25T10:24:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261125518216?OutUrl=naver"
+     "title": "국민의례하는 장동혁 국민의힘 대표",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T05:12:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765239"
     }
    ]
   },
   {
-   "keyword": "베트남전 국군전사자 유해봉환식",
+   "keyword": "남경필",
    "sources": [
-    "signal.bz",
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 4,
+   "press": 11,
+   "firstArticleAt": "2026-11-27T03:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "남경필 전 경기지사 아들, 전 연인 폭행·스토킹 혐의로 체포",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-27T05:10:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3042357"
+    },
+    {
+     "title": "‘마약 복역’ 남경필 장남, 이번엔 전 연인 협박 혐의…징역형 땐 누범...",
+     "press": "ilyo.co.kr",
+     "publishedAt": "2026-11-27T05:06:00.000Z",
+     "link": "https://ilyo.co.kr/?ac=article_view&entry_id=513834"
+    },
+    {
+     "title": "남경필 전 경기지사 장남, 전 연인 영상 유포 협박·스토킹 혐의 체포",
+     "press": "todaykorea.co.kr",
+     "publishedAt": "2026-11-27T05:06:00.000Z",
+     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=409351"
+    }
+   ]
+  },
+  {
+   "keyword": "김대기 관저이전 예산전용",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-27T03:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김대기, 관저 공사 행안부 예산 전용 지시로 징역형 집행유예...이상민...",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-27T05:04:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250619"
+    },
+    {
+     "title": "‘尹 관저 예산전용’ 김대기 1심서 집유…이상민은 ‘무죄’",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T05:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302637?sid=102"
+    },
+    {
+     "title": "'관저 이전 예산 전용' 김대기 1심 징역형 집행유예·석방…이유는",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-27T04:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447405?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "추미애 산불 대응",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-27T04:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "추미애 지사, 산불 대비 총력 주문…\"국민 생명부터 확보\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-27T05:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214642?sid=102"
+    },
+    {
+     "title": "추미애 경기도지사, 산불 대응 골든타임 확보…초동 진화·주민 선제 대...",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-27T05:02:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261127024535733"
+    },
+    {
+     "title": "추미애 \"산불, 초기 진화가 승부\"… 주민 대피·진화자원 총동원 지시",
+     "press": "gg.newdaily.co.kr",
+     "publishedAt": "2026-11-27T05:00:00.000Z",
+     "link": "https://gg.newdaily.co.kr/site/data/html/2026/11/27/2026112750165.html"
+    }
+   ]
+  },
+  {
+   "keyword": "솔비·이규한, 4월 25일 야외 결혼식",
+   "sources": [
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 8,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T04:02:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[공식] 연예계 공식 커플 부부 된다…솔비♥이규한, 내년 4월 결혼",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-27T05:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001283921"
+    },
+    {
+     "title": "솔비♡이규한, 내년 4월25일 결혼한다",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-27T05:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001152023"
+    },
+    {
+     "title": "[공식] 연예계 부부 또 탄생했다…솔비♥이규한, 내년 4월 결혼 확정",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-27T05:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786465"
+    }
+   ]
+  },
+  {
+   "keyword": "아일릿 모카 5개월 만 복귀",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T03:52:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "아일릿 모카, 활동 중단 5개월 만에 복귀…\"이날만 기다려\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-27T05:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000556267"
+    },
+    {
+     "title": "'연속 활동 중단' 아일릿 모카, 5개월만 복귀…\"여러분 덕분에\" [공식]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-27T04:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084718"
+    },
+    {
+     "title": "아일릿 모카, 5개월만에 활동 재개 \"기다려준 글릿 감사...이날만 기다렸...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-27T04:50:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785346"
+    }
+   ]
+  },
+  {
+   "keyword": "학교 파업 밥 대신 빵",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
    "recent20": 0,
    "press": 7,
-   "firstArticleAt": "2026-11-25T09:12:00.000Z",
+   "firstArticleAt": "2026-11-27T03:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "베트남전 국군전사자, 59년 만에 고국 품으로[노컷네컷]",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T09:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213921?sid=100"
+     "title": "'밥 대신 빵과 우유'…학교 비정규직 오늘 총파업",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T04:52:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127134653486"
     },
     {
-     "title": "베트남전 전사자 故안규태 병장 유해, 59년 만에 고국 품으로",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-25T09:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847846?sid=100"
+     "title": "'밥 대신 빵'…학교비정규직 파업에 세종 97개 학교 대체식 지급",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T04:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467710?sid=102"
     },
     {
-     "title": "베트남전 국군전사자 유해봉환식",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-25T09:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213914?sid=100"
+     "title": "\"밥 대신 빵\" 충북 학교 251곳 급식 차질…큰 혼란은 없어",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T04:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314204?sid=102"
     }
    ]
   },
   {
-   "keyword": "미국 과잉생산 관세 조사",
+   "keyword": "북한 해커 바이낸스 세탁",
    "sources": [
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 0,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-25T09:20:00.000Z",
+   "firstArticleAt": "2026-11-27T03:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "중국, 미국 과잉생산 관세 발표 앞두고 \"정치적 조작\" 비판",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-25T10:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538016?sid=104"
+     "title": "북한 해커, 바이낸스 탈취 63억달러 세탁…9조원대 자금 추적 비상",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-27T05:04:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250615"
     },
     {
-     "title": "다시 시작된 美 관세 압박… 15% 상한 지켜도 디지털 규제 복병",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-25T09:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887434?sid=104"
+     "title": "北 해커들, 바이낸스서 훔친 9조7000억원 가상자산 세탁 본격화",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-27T05:02:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=731333"
     },
     {
-     "title": "美 '과잉생산 관세' 전망에 中 \"거짓 명제로 정치적 조작\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-25T09:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014345471?sid=104"
+     "title": "\"북 해커, 바이낸스 탈취한 암호화폐 본격 세탁 시작\"…북한은 '관여 의...",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-27T04:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406319?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "과학기술인공제회 해킹",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T04:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "과학기술인 정보도 털렸다…과기인공제회, 해킹으로 21만건 유출",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T05:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314269?sid=105"
+    },
+    {
+     "title": "과학기술인공제회도 뚫렸다…전·현 회원 개인정보 20만건 유출",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-27T04:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447403?sid=105"
+    },
+    {
+     "title": "과학기술인공제회 해킹…회원정보 21만건 유출, 국가 연구인력 표적공격...",
+     "press": "dailysecu.com",
+     "publishedAt": "2026-11-27T04:34:00.000Z",
+     "link": "https://www.dailysecu.com/news/articleView.html?idxno=209788"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1494,
-  "matched": 764,
-  "avgLeadMin": 506,
+  "flagged": 1825,
+  "matched": 916,
+  "avgLeadMin": 610,
   "recent": [
    {
-    "keyword": "음악실 방화 20대 징역 2년",
-    "hitKeyword": "모친 흉기 20대 남성 징역",
-    "hitAt": "2026-11-25T19:00:00+09:00",
-    "leadMin": 4876
+    "keyword": "시청률",
+    "hitKeyword": "무쇠소녀단3 시청률",
+    "hitAt": "2026-11-27T14:00:00+09:00",
+    "leadMin": 1645
    },
    {
-    "keyword": "초등학교 방화 20대 징역 2년",
-    "hitKeyword": "모친 흉기 20대 남성 징역",
-    "hitAt": "2026-11-25T19:00:00+09:00",
-    "leadMin": 4856
+    "keyword": "부부",
+    "hitKeyword": "손연재 부부 30억 기부",
+    "hitAt": "2026-11-27T14:00:00+09:00",
+    "leadMin": 368
    },
    {
-    "keyword": "삼성증권 8241명 정보 유출",
-    "hitKeyword": "앨리스 황 정보 유출",
-    "hitAt": "2026-11-25T19:00:00+09:00",
-    "leadMin": 3153
+    "keyword": "나인 식스 시청률 하락",
+    "hitKeyword": "무쇠소녀단3 시청률",
+    "hitAt": "2026-11-27T14:00:00+09:00",
+    "leadMin": 318
    },
    {
-    "keyword": "김민솔 3관왕",
-    "hitKeyword": "김민솔 3관왕 달성",
-    "hitAt": "2026-11-25T19:00:00+09:00",
-    "leadMin": 10
+    "keyword": "베식타시 경기 30분 중단",
+    "hitKeyword": "유로파리그 30분 중단",
+    "hitAt": "2026-11-27T14:00:00+09:00",
+    "leadMin": 137
    },
    {
-    "keyword": "증안 펀드",
-    "hitKeyword": "증안펀드 확대 추진",
-    "hitAt": "2026-11-25T19:00:00+09:00",
-    "leadMin": 10
+    "keyword": "오현규 30분 경기 중단",
+    "hitKeyword": "유로파리그 30분 중단",
+    "hitAt": "2026-11-27T14:00:00+09:00",
+    "leadMin": 116
    },
    {
-    "keyword": "이장우 조혜원 결혼 1주년 사진 공개",
-    "hitKeyword": "이세영 학창시절 사진 공개",
-    "hitAt": "2026-11-25T18:30:00+09:00",
-    "leadMin": 2880
+    "keyword": "손연재 부부 30억 기부",
+    "hitKeyword": "손연재 부부 30억 기부",
+    "hitAt": "2026-11-27T14:00:00+09:00",
+    "leadMin": 86
    },
    {
-    "keyword": "황인범 포르투 UCL 2연승",
-    "hitKeyword": "황인범 페예노르트 환대",
-    "hitAt": "2026-11-25T18:30:00+09:00",
-    "leadMin": 601
+    "keyword": "무쇠소녀단 3",
+    "hitKeyword": "무쇠소녀단3 시청률",
+    "hitAt": "2026-11-27T14:00:00+09:00",
+    "leadMin": 86
    },
    {
-    "keyword": "황인범 교체 승리 1-0",
-    "hitKeyword": "황인범 페예노르트 환대",
-    "hitAt": "2026-11-25T18:30:00+09:00",
-    "leadMin": 581
+    "keyword": "현대차 6년 수상",
+    "hitKeyword": "현대차 아이오닉M 중국",
+    "hitAt": "2026-11-27T13:30:00+09:00",
+    "leadMin": 1585
    },
    {
-    "keyword": "황인범 포르투 2연승",
-    "hitKeyword": "황인범 페예노르트 환대",
-    "hitAt": "2026-11-25T18:30:00+09:00",
-    "leadMin": 541
+    "keyword": "중국",
+    "hitKeyword": "현대차 아이오닉M 중국",
+    "hitAt": "2026-11-27T13:30:00+09:00",
+    "leadMin": 197
    },
    {
-    "keyword": "하이닉스",
-    "hitKeyword": "삼성전자 SK하이닉스 급락",
-    "hitAt": "2026-11-25T18:30:00+09:00",
-    "leadMin": 42
+    "keyword": "투컷 존박 디스랩",
+    "hitKeyword": "존박 투컷 디스",
+    "hitAt": "2026-11-27T13:00:00+09:00",
+    "leadMin": 851
    }
   ]
  }
