@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T14:57:53.988Z",
+ "builtAt": "2026-11-27T15:08:01.127Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "실바 30점 GS칼텍스 5연승",
+   "keyword": "GS칼텍스 5연승",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T13:36:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T13:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -29,16 +29,48 @@
      "link": "https://m.sports.naver.com/volleyball/article/450/0000155708"
     },
     {
+     "title": "'5연승' GS 칼텍스 선두 탈환…대한항공 3연승",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T14:28:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/422/0000930710"
+    },
+    {
      "title": "'실바 30점' GS칼텍스 5연승·선두 복귀...대한항공 3연승",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-27T14:21:00.000Z",
      "link": "https://m.sports.naver.com/general/article/052/0002439187"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 탄핵 우려",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T14:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[주간政談<상>] 만만치 않은 반발…與, 조희대 탄핵 준비 심혈",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-27T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000556428?sid=100"
     },
     {
-     "title": "프로배구 GS칼텍스, 흥국생명 꺾고 5연승… 선두 탈환",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-27T14:10:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888230"
+     "title": "세계변호사협회도 조희대 탄핵 추진에 우려…\"위험한 선례\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-27T14:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522888?sid=104"
+    },
+    {
+     "title": "[속보] 세계변호사협회 \"조희대 탄핵은 위험한 선례…중대한 후폭풍 낳...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-27T14:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001042810?sid=102"
     }
    ]
   },
@@ -46,10 +78,11 @@
    "keyword": "굿파트너2",
    "sources": [
     "signal.bz",
+    "nate",
     "google"
    ],
    "articles90": 5,
-   "recent20": 3,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-27T13:42:00.000Z",
    "exclusive": false,
@@ -76,39 +109,39 @@
    ]
   },
   {
-   "keyword": "조희대 탄핵 국제 우려",
+   "keyword": "이종석 신민아에 재혼황후",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T14:10:00.000Z",
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T14:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 세계변호사협회 \"조희대 탄핵은 위험한 선례…중대한 후폭풍 낳...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-27T14:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042810?sid=102"
+     "title": "[TF초점] '재혼 황후', 호불호 넘어선 유의미한 도전",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-27T15:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000556426"
     },
     {
-     "title": "세계변호사협회도 조희대 탄핵 추진에 우려…\"위험한 선례\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-27T14:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522888?sid=104"
+     "title": "신민아, '재혼 황후' 인터뷰 \"남편 김우빈도 나비에 팬\"",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T14:54:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288164"
     },
     {
-     "title": "“조희대 탄핵은 위험한 선례” 세계변호사협회도 우려 표명",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-27T14:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568535?sid=102"
+     "title": "‘재혼 황후’ 스튜디오N 역대 최대 제작비·캐스팅 고사 비화, 타임 인...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-27T14:26:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178495"
     }
    ]
   },
   {
-   "keyword": "한동훈 자료유출 의혹 경찰",
+   "keyword": "한동훈 자료유출 압수수색에",
    "sources": [
     "signal.bz"
    ],
@@ -142,10 +175,16 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1981,
-  "matched": 987,
+  "flagged": 1979,
+  "matched": 985,
   "avgLeadMin": 656,
   "recent": [
+   {
+    "keyword": "임찬규 손새은 결혼",
+    "hitKeyword": "손새은 임찬규 결혼",
+    "hitAt": "2026-11-28T00:00:00+09:00",
+    "leadMin": 22
+   },
    {
     "keyword": "연우 다이어트 부작용",
     "hitKeyword": "스시자로 열풍 부작용",
@@ -199,12 +238,6 @@
     "hitKeyword": "민혜연 딩크 선언 번복",
     "hitAt": "2026-11-27T22:30:00+09:00",
     "leadMin": 43
-   },
-   {
-    "keyword": "김건희 매관매직 12월 3일 선고",
-    "hitKeyword": "손새은 임찬규 12월 결혼",
-    "hitAt": "2026-11-27T22:00:00+09:00",
-    "leadMin": 3170
    }
   ]
  }
