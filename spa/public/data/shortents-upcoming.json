@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T21:39:54.021Z",
+ "builtAt": "2026-11-27T21:49:56.628Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,12 +11,77 @@
  "measured": 23,
  "candidates": [
   {
+   "keyword": "AI 반등에 증시 상승",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T20:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "뉴욕증시, AI·기술주 반등에 일제히 상승…나스닥 2.3%↑",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-27T21:48:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785445"
+    },
+    {
+     "title": "AI 공포 잦아들자 반도체주 폭발…삼성전자·SK하이닉스도 본격 반등 '신...",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-27T21:46:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=509079"
+    },
+    {
+     "title": "[글로벌 마켓뷰] 한중일 증시 급등에 뉴욕증시도 화답했나 …나스닥 2.3...",
+     "press": "moneystorm.kr",
+     "publishedAt": "2026-11-27T21:38:00.000Z",
+     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8949"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 28일 운세",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 28일 토요일 띠별 운세… 양띠 '대길', 쥐띠·...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-27T21:44:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3084619"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 28일 (토) 띠별운세 '집 안의 온기를 챙기자...",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-27T21:30:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104287"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 28일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416786?sid=103"
+    }
+   ]
+  },
+  {
    "keyword": "물",
    "sources": [
     "google"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-27T21:01:00.000Z",
    "exclusive": false,
@@ -41,77 +106,12 @@
      "link": "https://n.news.naver.com/mnews/article/052/0002439240?sid=105"
     }
    ]
-  },
-  {
-   "keyword": "2026년 11월 28일 운세",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 28일 (토) 띠별운세 '집 안의 온기를 챙기자...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-27T21:30:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104287"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 28일 띠별 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416785?sid=103"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 28일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416786?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "동탄서 인도 돌진 3명 부상",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T20:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "화성 동탄서 SUV 인도로 돌진…오토바이 운전자 등 3명 부상",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-27T21:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000134123?sid=102"
-    },
-    {
-     "title": "동탄서 승용차가 오토바이와 부딪힌 뒤 인도 돌진…3명 부상",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T20:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930729?sid=102"
-    },
-    {
-     "title": "화성 동탄서 승용차가 오토바이와 부딪힌뒤 인도 돌진…3명 부상",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T20:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468541?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 1970,
-  "matched": 972,
+  "matched": 971,
   "avgLeadMin": 645,
   "recent": [
    {
