@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T09:05:40.308Z",
+ "builtAt": "2026-11-27T09:15:43.589Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "최민희 중징계 의결",
+   "keyword": "최민희 징계",
    "sources": [
-    "signal.bz",
-    "nate"
+    "google"
    ],
    "articles90": 92,
-   "recent20": 32,
-   "press": 71,
+   "recent20": 24,
+   "press": 76,
    "firstArticleAt": "2026-11-27T08:19:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "與 윤리심판원 \"최민희 중징계 의결…일부 발언 당 품위 훼손\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T09:04:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127172940230"
+     "title": "민주 윤리심판원, 최민희 최고위원에 '중징계' 처분 의결",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-27T09:14:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466765"
     },
     {
-     "title": "[속보] 민주당 윤리심판원 \"최민희 품위훼손 중징계…김민석 징계청원 ...",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-27T09:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138988?sid=100"
+     "title": "민주당, 최민희 중징계 의결, 최소 '당직자격정지' … 김민석도 징계 심...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-27T09:12:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/27/2026112750318.html"
     },
     {
-     "title": "'李 대통령, 尹 탄핵 반대' 발언 논란 최민희 결국 중징계...내홍 격화되...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-27T09:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610926?sid=100"
+     "title": "與 \"최민희 당직자격정지 이상 중징계\"…구체 수위는 발표안해",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-27T09:12:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785404"
     }
    ]
   },
@@ -48,11 +47,11 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 4,
-   "press": 40,
-   "firstArticleAt": "2026-11-27T07:36:00.000Z",
-   "exclusive": true,
+   "articles90": 33,
+   "recent20": 0,
+   "press": 31,
+   "firstArticleAt": "2026-11-27T07:48:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
@@ -80,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 31,
-   "recent20": 2,
-   "press": 31,
-   "firstArticleAt": "2026-11-27T07:37:00.000Z",
+   "articles90": 23,
+   "recent20": 0,
+   "press": 23,
+   "firstArticleAt": "2026-11-27T07:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,66 +107,66 @@
    ]
   },
   {
-   "keyword": "박홍근",
+   "keyword": "신상훈 제네시스 대상 수상",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 31,
-   "recent20": 4,
-   "press": 20,
-   "firstArticleAt": "2026-11-27T07:41:00.000Z",
+   "articles90": 85,
+   "recent20": 6,
+   "press": 22,
+   "firstArticleAt": "2026-11-27T07:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박홍근 \"미래기금, 연기금투자풀에 일정 기간 위탁 검토\"",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-27T08:52:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005972047"
+     "title": "생애 첫 대상 품은 신상훈, 2억원에 GV80까지 ‘잭팟’",
+     "press": "feedapi.cloud.sbs.co.kr",
+     "publishedAt": "2026-11-27T09:12:00.000Z",
+     "link": "https://feedapi.cloud.sbs.co.kr/feed-api/article_hub/G20000002580"
+    },
+    {
+     "title": "2026시즌 KPGA 시상식, 신상훈 대상 수상...상금왕 장유빈",
+     "press": "thegolftimes.co.kr",
+     "publishedAt": "2026-11-27T09:10:00.000Z",
+     "link": "https://www.thegolftimes.co.kr/news/articleView.html?idxno=82392"
+    },
+    {
+     "title": "신상훈, 2026시즌 KPGA 제네시스 대상…\"더 높은 곳 가겠다\"(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T09:06:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/003/0014350190"
+    }
+   ]
+  },
+  {
+   "keyword": "박홍근",
+   "sources": [
+    "google"
+   ],
+   "articles90": 32,
+   "recent20": 2,
+   "press": 22,
+   "firstArticleAt": "2026-11-27T07:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박홍근 기획예산처 장관, 연기금투자풀 출범 25주년 기념행사",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T09:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350196?sid=100"
+    },
+    {
+     "title": "박홍근 \"예산 답변 안 한다\"-서영교 \"처음 본다\"",
+     "press": "thereport.co.kr",
+     "publishedAt": "2026-11-27T09:06:00.000Z",
+     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93812"
     },
     {
      "title": "'중랑 4선' 서영교·박홍근 법사위서 정면충돌…여야도 '지역 예산'엔 뭉...",
      "press": "hankyung.com",
      "publishedAt": "2026-11-27T08:52:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005359175?sid=100"
-    },
-    {
-     "title": "박홍근 \"법사위가 상원이냐\" vs 서영교 \"朴 태도 충격적\"",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T08:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005770132?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "채령, A형 독감으로 팬사인회 연기",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T07:40:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "있지 채령, A형 독감 확진…\"팬사인회 연기\"",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-27T08:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000329376"
-    },
-    {
-     "title": "있지 채령, A형 독감 진단…\"팬사인회 등 일정 연기\"",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-27T08:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786503"
-    },
-    {
-     "title": "있지 채령, A형 독감 확진…팬사인회 연기",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T08:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014350164"
     }
    ]
   },
@@ -178,12 +177,18 @@
     "google"
    ],
    "articles90": 16,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T07:45:00.000Z",
+   "recent20": 2,
+   "press": 16,
+   "firstArticleAt": "2026-11-27T07:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "허은아 국민통합비서관 사직…문체비서관 사의도 수용",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-27T09:14:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545240"
+    },
     {
      "title": "청와대 2기 참모진 개편 본격화…허은아 등 비서관 3명 사직",
      "press": "ajunews.com",
@@ -195,12 +200,38 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-27T08:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000930624?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "채령, A형 독감으로 팬사인회 연기",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-27T07:47:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'솔로 데뷔' 있지 채령, A형 독감 진단…팬사인회 미뤘다",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T09:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/018/0006416726"
     },
     {
-     "title": "허은아·이동연·이주한 청와대 떠난다...2기 참모진 개편 속도",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-27T08:36:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=567287"
+     "title": "있지 채령, A형 독감 확진…\"팬사인회 연기\"",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-27T08:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329376"
+    },
+    {
+     "title": "있지 채령, A형 독감 진단…\"팬사인회 등 일정 연기\"",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-27T08:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786503"
     }
    ]
   },
@@ -209,10 +240,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-27T07:44:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-27T07:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -241,13 +272,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-27T07:36:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T07:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "대장동 민간사업자들 2심 결심...검사 \"뒤집을 내용 없다\" 기각 요청",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-27T09:10:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121503"
+    },
     {
      "title": "눈물 흘린 김만배, '윗선' 언급한 유동규… 대장동 2심 변론 종결",
      "press": "hankookilbo.com",
@@ -259,12 +296,6 @@
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-27T08:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003568506?sid=102"
-    },
-    {
-     "title": "'대장동 개발비리' 항소심 결심… 공소청 \"항소 기각\" 요청",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-27T08:22:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452758"
     }
    ]
   },
@@ -273,10 +304,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-27T07:36:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-27T07:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -301,67 +332,66 @@
    ]
   },
   {
-   "keyword": "2026 제네시스 시상식 수상자들",
+   "keyword": "홍민기 배우",
    "sources": [
-    "signal.bz",
-    "nate"
+    "daum"
    ],
-   "articles90": 19,
-   "recent20": 6,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T07:39:00.000Z",
-   "exclusive": false,
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T08:16:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[mhn포토] 제네시스 대상 수상하는 신상훈",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-27T08:50:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/445/0000494107"
+     "title": "홍민기 전 여친, 마포대교에서 실종",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T09:10:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288025"
     },
     {
-     "title": "2026 KPGA 제네시스 대상 시상식",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T08:50:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/003/0014350168"
+     "title": "'홍민기 사생활 폭로' 전여친 실종…마지막 신호 확인은 마포대교",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-27T09:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084806"
     },
     {
-     "title": "[ST포토] 2026 KPGA 제네시스 대상 시상식 수상자들 한자리에 모여",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-27T08:50:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110127880232"
+     "title": "[속보] '낙태 종용 주장' 홍민기 前여친 실종…마포대교서 마지막 신호...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-27T09:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409842"
     }
    ]
   },
   {
-   "keyword": "남경필 장남 체포",
+   "keyword": "학교 급식 차질 발생",
    "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 5,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T07:43:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-27T07:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "남경필 장남 또 체포…이번엔 성범죄 혐의",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-27T09:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359194?sid=102"
+     "title": "학교 4014곳 급식 중단… 전국 2만3562명 교육공무직 총파업 나서",
+     "press": "news.cpbc.co.kr",
+     "publishedAt": "2026-11-27T09:06:00.000Z",
+     "link": "https://news.cpbc.co.kr/article/1177331?division=NAVER"
     },
     {
-     "title": "남경필 전 지사 아들, 출소 1년만에 '긴급체포'... 전 연인 폭행·스토킹...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-27T08:30:00.000Z",
-     "link": "https://www.insight.co.kr/news/583914"
+     "title": "학교비정규직 총파업…인천 145개교 급식 차질",
+     "press": "siminsori.com",
+     "publishedAt": "2026-11-27T08:52:00.000Z",
+     "link": "https://www.siminsori.com/news/articleView.html?idxno=402585"
     },
     {
-     "title": "남경필 전 지사 장남, 전 연인 영상 유포 협박·폭행 혐의 체포",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T08:16:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765550"
+     "title": "“밥 대신 빵·우유”… 파업 참여 제주 48개교, 급식 차질 빚었다",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-27T08:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003704035?sid=102"
     }
    ]
   },
@@ -397,43 +427,11 @@
      "link": "http://www.ikld.kr/news/articleView.html?idxno=345073"
     }
    ]
-  },
-  {
-   "keyword": "학교 급식 차질 발생",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T07:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "학교비정규직 총파업…인천 145개교 급식 차질",
-     "press": "siminsori.com",
-     "publishedAt": "2026-11-27T08:52:00.000Z",
-     "link": "https://www.siminsori.com/news/articleView.html?idxno=402585"
-    },
-    {
-     "title": "“밥 대신 빵·우유”… 파업 참여 제주 48개교, 급식 차질 빚었다",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-27T08:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003704035?sid=102"
-    },
-    {
-     "title": "비정규직 총파업에 충청권 급식·돌봄 '차질'… 대체식·현장학습 대응",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-27T07:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193750?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1910,
+  "flagged": 1912,
   "matched": 947,
   "avgLeadMin": 617,
   "recent": [
