@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T07:04:57.505Z",
+ "builtAt": "2026-11-27T07:15:01.067Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
+  {
+   "keyword": "코스피 코스닥 급등",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 76,
+   "recent20": 47,
+   "press": 67,
+   "firstArticleAt": "2026-11-27T06:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코스피 4.34% 상승해 4900선 회복…코스닥 8%대 급등",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-27T07:14:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1140696"
+    },
+    {
+     "title": "코스피, 4% 상승...4900선 회복",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-27T07:14:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=729804"
+    },
+    {
+     "title": "양대 호재, 코스피 '급등'...한화·효성·한국금융지주 '껑충'",
+     "press": "choicenews.co.kr",
+     "publishedAt": "2026-11-27T07:14:00.000Z",
+     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173571"
+    }
+   ]
+  },
   {
    "keyword": "장선익, 사장 승진",
    "sources": [
     "nate"
    ],
    "articles90": 49,
-   "recent20": 7,
+   "recent20": 8,
    "press": 48,
-   "firstArticleAt": "2026-11-27T05:41:00.000Z",
+   "firstArticleAt": "2026-11-27T05:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "동국제강, ‘오너 4세’ 장선익 사장 승진…경영부문 총괄",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-27T07:02:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322168&inflow=N"
+     "title": "오너 4세 장선익 사장 승진…동국제강, 경영·생산 '투톱 체제'로 바꾼다",
+     "press": "newsinside.kr",
+     "publishedAt": "2026-11-27T07:14:00.000Z",
+     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5058221"
     },
     {
-     "title": "동국제강 '오너 4세' 장선익, 사장 승진…경영부문장 보임",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-27T07:02:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026112715582006737"
+     "title": "동국제강, '오너 4세' 장선익 사장 승진… 경영 보폭 넓힌다",
+     "press": "biztribune.co.kr",
+     "publishedAt": "2026-11-27T07:12:00.000Z",
+     "link": "http://www.biztribune.co.kr/news/articleView.html?idxno=363340"
     },
     {
-     "title": "동국제강그룹, 오너 4세 장선익 사장 승진 등 17명 임원인사...책임경영...",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-27T06:58:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=567216"
+     "title": "동국제강, '오너 4세' 장선익 사장 승진…\"구매 담당서 핵심 계열사 경...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T07:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014349957?sid=101"
     }
    ]
   },
   {
    "keyword": "학교 비정규직 총파업",
    "sources": [
-    "nate",
-    "daum"
+    "nate"
    ],
-   "articles90": 67,
-   "recent20": 29,
-   "press": 35,
-   "firstArticleAt": "2026-11-27T05:56:00.000Z",
+   "articles90": 70,
+   "recent20": 32,
+   "press": 38,
+   "firstArticleAt": "2026-11-27T05:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "학비노조 총파업에 전국 학교 31.9% 급식 차질… 파업 규모는 전년보다...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-27T07:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178657?sid=102"
-    },
-    {
-     "title": "학교 비정규직 총파업…임금차별 해소·급식실 인력 충원 촉구",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-27T07:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610879?sid=102"
-    },
-    {
-     "title": "학교 비정규직 총파업…급식 대신 빵·돌봄교실도 일부 닫혀",
+     "title": "[모멘트] 학교 비정규직 총파업... 오늘은 밥 대신 빵",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T07:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468142?sid=102"
+     "publishedAt": "2026-11-27T07:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468174?sid=102"
+    },
+    {
+     "title": "오늘 빵으로 버틴 학교 4014곳…총파업에 급식 멈춘 학교 역대 최고",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-27T07:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447484?sid=102"
+    },
+    {
+     "title": "“초과세수 교육에 투자하고 임금 올려 달라” 학교 비정규직 총파업…...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-27T07:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568488?sid=102"
     }
    ]
   },
@@ -80,30 +111,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 49,
-   "recent20": 10,
-   "press": 22,
+   "articles90": 54,
+   "recent20": 11,
+   "press": 25,
    "firstArticleAt": "2026-11-27T05:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 물 마시는 박홍근 장관",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-27T07:02:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452726"
+     "title": "박홍근 '답변 거부'에 법사위 고성 충돌…한때 정회",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-27T07:10:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088732"
     },
     {
-     "title": "박홍근 \"법사위는 법사위답게만 하라\"…여야 의원들과 언쟁",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-27T07:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214702?sid=100"
+     "title": "박홍근 \"국회법대로 하자\" 서영교 \"태도 고압적\"…법사위서 '여 정면충...",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-27T07:10:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322162&inflow=N"
     },
     {
-     "title": "김의겸 새만금 질의에 박홍근 \"여기가 예결위냐\"…서영교와 설전 끝 정...",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-27T07:00:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904744"
+     "title": "與끼리 고성 주고받으며 충돌…“여기가 상원이냐” 박홍근 vs “고압적...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-27T07:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061544?sid=100"
     }
    ]
   },
@@ -112,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-27T05:38:00.000Z",
+   "articles90": 15,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-27T05:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령 \"욕먹어도 할 일 해야\"…성과공유형 재정지원 강조",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-27T07:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610886?sid=100"
+    },
     {
      "title": "李 대통령, R&D 투자 언급하며 \"일부 '억까' 언론·무조건 반대정치 장애...",
      "press": "segye.com",
@@ -130,12 +167,6 @@
      "press": "sisajournal.com",
      "publishedAt": "2026-11-27T06:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/586/0000143193?sid=100"
-    },
-    {
-     "title": "이 대통령 \"욕먹어도 할 일 해야\"…성과공유형 재정지원 힘실어",
-     "press": "busan.com",
-     "publishedAt": "2026-11-27T06:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001409319?sid=100"
     }
    ]
   },
@@ -145,30 +176,63 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 43,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-27T05:40:00.000Z",
+   "articles90": 39,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-27T05:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한 총리 \"사회연대금융 전담기관 지정…500억원 이상 펀드 조성\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T07:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930586?sid=100"
+    },
+    {
+     "title": "한 총리 “사회연대금융 전담기관 지정…500억 이상 전용 펀드 조성”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T07:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302719?sid=100"
+    },
     {
      "title": "'제8회 대한민국 사회연대경제박람회 및 국제컨퍼런스' 고양 킨텍스서 ...",
      "press": "incheonilbo.com",
      "publishedAt": "2026-11-27T06:56:00.000Z",
      "link": "https://www.incheonilbo.com/news/articleView.html?idxno=1338014"
+    }
+   ]
+  },
+  {
+   "keyword": "신태일",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T06:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "BJ 신태일, 미성년자 성착취물 생중계…항소심도 징역 6년",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-27T07:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543924"
     },
     {
-     "title": "[포토] 고양시 부스 체험 즐기는 한성숙 총리",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-27T06:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359081?sid=100"
+     "title": "[TOP이슈] 신태일, 항소심도 징역 6년",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T06:54:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287935"
     },
     {
-     "title": "[포토] 제8회 대한민국 사회연대경제박람회 개막",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-27T06:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359078?sid=100"
+     "title": "'미성년 성 착취 생방' BJ 신태일, 항소심도 징역 6년",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-27T06:52:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110121855395"
     }
    ]
   },
@@ -177,12 +241,12 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 6,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T06:42:00.000Z",
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T06:52:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
      "title": "남양주시 교통유발부담금 18억 징수… 교통혼잡 개선에는 얼마나 쓰였나",
@@ -205,47 +269,14 @@
    ]
   },
   {
-   "keyword": "신태일",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T06:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[TOP이슈] 신태일, 항소심도 징역 6년",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T06:54:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287935"
-    },
-    {
-     "title": "'미성년 성 착취 생방' BJ 신태일, 항소심도 징역 6년",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-27T06:52:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110121855395"
-    },
-    {
-     "title": "'미성년자 성 착취물 방송' BJ신태일, 1심 항소→기각…징역 6년 유지 \"...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-27T06:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409809"
-    }
-   ]
-  },
-  {
    "keyword": "남경필 아들 폭행 협박",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T05:39:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T05:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -266,70 +297,6 @@
      "press": "getnews.co.kr",
      "publishedAt": "2026-11-27T06:44:00.000Z",
      "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888710"
-    }
-   ]
-  },
-  {
-   "keyword": "재혼 황후 신민아 김우빈 반응",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T05:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘재혼 황후’ 신민아 “남편 김우빈 완전 팬, 나비에라 부른다”…이종...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-27T06:36:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1178406"
-    },
-    {
-     "title": "[SC인터뷰] \"김우빈♥, 집에서도 나비에로 불러\"…'재혼황후' 신민아, 왕...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-27T06:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004470281"
-    },
-    {
-     "title": "'재혼 황후' 신민아 \"남편 김우빈 반응? 너무 재밌게 봐서 놀랐다\" [인터...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-27T06:16:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110121664537"
-    }
-   ]
-  },
-  {
-   "keyword": "미세먼지",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T05:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "군포시, 제8차 미세먼지 계절 관리제 시행",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-27T06:50:00.000Z",
-     "link": "https://www.viva100.com/article/20261127500555"
-    },
-    {
-     "title": "제주도, 미세먼지 저감 '계절 관리제' 시행",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-27T06:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000087153?sid=100"
-    },
-    {
-     "title": "제주, 겨울철 '미세먼지 차단' 공사장·차량배출가스 단속 강화",
-     "press": "headlinejeju.co.kr",
-     "publishedAt": "2026-11-27T06:02:00.000Z",
-     "link": "https://www.headlinejeju.co.kr/news/articleView.html?idxno=602880"
     }
    ]
   },
@@ -364,11 +331,75 @@
      "link": "https://n.news.naver.com/mnews/article/032/0003485535?sid=100"
     }
    ]
+  },
+  {
+   "keyword": "미세먼지",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T05:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "군포시, 제8차 미세먼지 계절 관리제 시행",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-27T06:50:00.000Z",
+     "link": "https://www.viva100.com/article/20261127500555"
+    },
+    {
+     "title": "제주도, 미세먼지 저감 '계절 관리제' 시행",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-27T06:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000087153?sid=100"
+    },
+    {
+     "title": "제주, 겨울철 '미세먼지 차단' 공사장·차량배출가스 단속 강화",
+     "press": "headlinejeju.co.kr",
+     "publishedAt": "2026-11-27T06:02:00.000Z",
+     "link": "https://www.headlinejeju.co.kr/news/articleView.html?idxno=602880"
+    }
+   ]
+  },
+  {
+   "keyword": "재혼 황후 신민아 김우빈 반응",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T06:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘재혼 황후’ 신민아 “남편 김우빈 완전 팬, 나비에라 부른다”…이종...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-27T06:36:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178406"
+    },
+    {
+     "title": "[SC인터뷰] \"김우빈♥, 집에서도 나비에로 불러\"…'재혼황후' 신민아, 왕...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-27T06:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004470281"
+    },
+    {
+     "title": "'재혼 황후' 신민아 \"남편 김우빈 반응? 너무 재밌게 봐서 놀랐다\" [인터...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-27T06:16:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110121664537"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1870,
+  "flagged": 1871,
   "matched": 926,
   "avgLeadMin": 611,
   "recent": [
