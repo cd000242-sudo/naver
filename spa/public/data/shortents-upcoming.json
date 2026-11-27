@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T10:46:15.439Z",
+ "builtAt": "2026-11-27T10:56:18.738Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "최민희",
    "sources": [
     "google"
    ],
-   "articles90": 91,
-   "recent20": 8,
-   "press": 66,
-   "firstArticleAt": "2026-11-27T09:20:00.000Z",
+   "articles90": 79,
+   "recent20": 3,
+   "press": 64,
+   "firstArticleAt": "2026-11-27T09:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최민희 '당원 자격정지 2년'…2028년 총선 공천 '빨간불'",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-27T10:50:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=316440"
+    },
     {
      "title": "최민희 중징계 의결에 친청계 반발…정청래 \"납득할 수 없어\"(종합)",
      "press": "news1.kr",
@@ -33,25 +39,50 @@
      "press": "hankyung.com",
      "publishedAt": "2026-11-27T10:40:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005359225?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "철도노조 준법투쟁 지연",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 6,
+   "press": 22,
+   "firstArticleAt": "2026-11-27T09:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'20분 이상 지연' 열차 수백대…'불금' 퇴근길 대란",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-27T10:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274243?sid=102"
     },
     {
-     "title": "민주당, 최민희 '당원자격 정지 2년' 중징계 의결",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-27T10:34:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=368149"
+     "title": "철도노조 준법투쟁 이틀째...퇴근길 전철 445대 지연",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T10:48:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127194207443"
+    },
+    {
+     "title": "철도노조 준법투쟁…광역전철 일부만 10분 지연",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T10:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302843?sid=101"
     }
    ]
   },
   {
    "keyword": "노태악 압수수색",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 3,
-   "press": 21,
-   "firstArticleAt": "2026-11-27T09:21:00.000Z",
+   "articles90": 20,
+   "recent20": 2,
+   "press": 20,
+   "firstArticleAt": "2026-11-27T09:30:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -76,66 +107,34 @@
    ]
   },
   {
-   "keyword": "철도노조 준법투쟁",
+   "keyword": "박홍근 법사위 충돌",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 22,
-   "recent20": 6,
-   "press": 20,
-   "firstArticleAt": "2026-11-27T09:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "철도노조 준법투쟁 이틀째…수도권 전철 445대 지연",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-27T10:42:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2654134"
-    },
-    {
-     "title": "철도노조 준법투쟁 이틀째…수도권 전철 지연 445대",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-27T10:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653884?sid=101"
-    },
-    {
-     "title": "철도노조 준법투쟁 이틀째… 수도권 전철 445대 20분 이상 지연",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-27T10:38:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452789"
-    }
-   ]
-  },
-  {
-   "keyword": "박홍근",
-   "sources": [
-    "google"
-   ],
-   "articles90": 13,
+   "articles90": 8,
    "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T09:18:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-27T09:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“법사위는 법사위답게만” 박홍근에 與도 발끈…때아닌 당정 충돌",
+     "press": "segye.com",
+     "publishedAt": "2026-11-27T10:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178702?sid=100"
+    },
+    {
+     "title": "박홍근-서영교 '법사위 충돌'…\"예산답변 못해\" \"이런 일 처음\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T10:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359227?sid=100"
+    },
     {
      "title": "법사위서 때아닌 與 내부 충돌…서영교, 박홍근에 \"이런 장관 처음\"",
      "press": "pressian.com",
      "publishedAt": "2026-11-27T10:40:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/002/0002468006?sid=100"
-    },
-    {
-     "title": "박홍근 “미래대응기금, 연기금투자풀에 여유자금 위탁 검토”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T10:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005770156?sid=101"
-    },
-    {
-     "title": "법사위서 與 소속 박홍근-서영교 충돌... \"법사위가 상원이냐\" \"이런 장...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-27T10:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968236?sid=100"
     }
    ]
   },
@@ -144,10 +143,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T09:19:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T09:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -177,7 +176,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 3,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-27T09:28:00.000Z",
    "exclusive": false,
@@ -204,15 +203,47 @@
    ]
   },
   {
+   "keyword": "남경필 장남 스토킹 혐의",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T09:27:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "남경필 장남 또 체포…“성관계 영상 유포하겠다” 협박 혐의",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-27T10:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568521?sid=102"
+    },
+    {
+     "title": "[단독] 남경필 장남, 스토킹 혐의 체포...성관계 영상 유포 협박도",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T09:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439117?sid=102"
+    },
+    {
+     "title": "남경필 전 경기지사 아들 '전 연인 성관계 영상 유포 협박' 등 혐의 체포...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T09:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314899?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "오세훈",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T09:26:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-27T09:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -237,34 +268,34 @@
    ]
   },
   {
-   "keyword": "남경필 장남 스토킹 혐의",
+   "keyword": "삼성전자 배당금",
    "sources": [
     "daum"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T09:27:00.000Z",
-   "exclusive": true,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T09:32:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[단독] 남경필 장남, 스토킹 혐의 체포...성관계 영상 유포 협박도",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T09:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439117?sid=102"
+     "title": "'12배 더 꽂혔다' 삼성전자 30조 배당 잔치…'K-반도체' 쟁탈전에 일론 ...",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-27T10:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980207?sid=102"
     },
     {
-     "title": "남경필 전 경기지사 아들 '전 연인 성관계 영상 유포 협박' 등 혐의 체포...",
-     "press": "news1.kr",
+     "title": "[더나은미래 경제브리핑] 삼성전자 30조 ‘역대 최대’ 배당, 추가 주주...",
+     "press": "futurechosun.com",
+     "publishedAt": "2026-11-27T09:58:00.000Z",
+     "link": "https://futurechosun.com/?p=167910"
+    },
+    {
+     "title": "[뉴스룸 오프닝] 배당금 '30조' 풀었다 / '노란 디올' 선물의 목적 / 당원...",
+     "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-27T09:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314899?sid=102"
-    },
-    {
-     "title": "'마약 투약 전력' 남경필 장남, 전 연인 폭행·스토킹으로 체포",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-27T09:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005849000?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/437/0000522837?sid=100"
     }
    ]
   },
@@ -303,7 +334,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1933,
+  "flagged": 1936,
   "matched": 960,
   "avgLeadMin": 629,
   "recent": [
