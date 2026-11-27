@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T16:18:25.492Z",
+ "builtAt": "2026-11-27T16:28:28.482Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "인터넷우체국 개인정보 유출",
@@ -16,7 +16,7 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-27T15:06:00.000Z",
    "exclusive": false,
@@ -39,38 +39,6 @@
      "press": "hani.co.kr",
      "publishedAt": "2026-11-27T15:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002834358?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "박홍근 서영교 법사위 충돌",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T14:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김의겸 새만금 예산 질의에 박홍근 답변 거부…법사위 파행",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T15:50:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765824"
-    },
-    {
-     "title": "박홍근 “법사위답게 하라” 서영교 “충격”… 민주당 장관·의원끼리...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-27T15:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012231?sid=100"
-    },
-    {
-     "title": "박홍근-서영교 충돌에 법사위 파행…\"상원인가\" vs \"고압적 장관 처음\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-27T15:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610957?sid=100"
     }
    ]
   },
@@ -141,8 +109,8 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1980,
-  "matched": 981,
+  "flagged": 1979,
+  "matched": 980,
   "avgLeadMin": 657,
   "recent": [
    {
