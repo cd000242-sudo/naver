@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T08:45:30.494Z",
+ "builtAt": "2026-11-27T08:55:34.824Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 56,
-   "recent20": 33,
-   "press": 49,
+   "articles90": 75,
+   "recent20": 31,
+   "press": 63,
    "firstArticleAt": "2026-11-27T07:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민주당 윤리심판원, 최민희 최고위원 '중징계' 의결",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-27T08:44:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244433"
+     "title": "민주당, 최민희 최고위원 '당직자격 정지' 이상 중징계 의결",
+     "press": "joongboo.com",
+     "publishedAt": "2026-11-27T08:54:00.000Z",
+     "link": "https://www.joongboo.com/news/articleView.html?idxno=363743803"
     },
     {
-     "title": "與 \"최민희 당직자격정지 이상 중징계\"…구체 수위는 발표안해",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T08:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468387?sid=100"
+     "title": "\"당 품위 훼손\" 최민희, 윤리심판원서 중징계 처분 받았다",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-27T08:54:00.000Z",
+     "link": "https://www.insight.co.kr/news/583916"
     },
     {
-     "title": "민주당 윤리심판원, 최민희 중징계 의결…\"당 품위 훼손\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-27T08:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848985?sid=100"
+     "title": "민주당, 최민희 중징계 의결… 당원권 정지 땐 최고위원직 상실",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-27T08:54:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452769"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 48,
-   "recent20": 4,
-   "press": 42,
-   "firstArticleAt": "2026-11-27T07:16:00.000Z",
+   "articles90": 46,
+   "recent20": 5,
+   "press": 43,
+   "firstArticleAt": "2026-11-27T07:26:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "이용철 청문보고서 채택에 국민의힘 반발…\"지명 철회하라\"",
-     "press": "newswhoplus.com",
-     "publishedAt": "2026-11-27T08:44:00.000Z",
-     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=75679"
+     "title": "법사위, 이용철 법무장관 후보자 청문보고서 범여권 주도 채택",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-27T08:54:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466763"
     },
     {
-     "title": "법사위 이용철 청문보고서 채택… 국힘 퇴장 \"공소취소 다름없어\"",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-27T08:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138986?sid=100"
+     "title": "법사위, 이용철 청문보고서 채택…국민의힘 표결 불참",
+     "press": "newstopkorea.com",
+     "publishedAt": "2026-11-27T08:48:00.000Z",
+     "link": "https://www.newstopkorea.com/ko-kr/articles/49370"
     },
     {
-     "title": "[퇴근길 정치 픽] 이용철 청문보고서 민주당 주도 채택…최민희 징계 수...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T08:30:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127001303"
+     "title": "與, 이용철 법무장관 인사보고서 강행",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T08:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005770131?sid=100"
     }
    ]
   },
@@ -79,62 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 38,
-   "recent20": 3,
-   "press": 34,
-   "firstArticleAt": "2026-11-27T07:17:00.000Z",
+   "articles90": 34,
+   "recent20": 5,
+   "press": 33,
+   "firstArticleAt": "2026-11-27T07:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "황교안, SNS에 '계엄 지지' 글 올린 혐의 징역 10년 구형",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-27T08:52:00.000Z",
+     "link": "https://www.insight.co.kr/news/583917"
+    },
+    {
+     "title": "특검, '내란 선동' 혐의 황교안 징역 10년 구형",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-27T08:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538555?sid=102"
+    },
     {
      "title": "특검, '내란 선동' 황교안에 징역 10년 구형…\"법리 알고도 선 넘었다\"",
      "press": "sisajournal.com",
      "publishedAt": "2026-11-27T08:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/586/0000143207?sid=102"
-    },
-    {
-     "title": "내란특검, 내란선동혐의 황교안에게 징역 10년 구형",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-27T08:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485572?sid=102"
-    },
-    {
-     "title": "특검, '내란선동 혐의' 황교안에 징역 10년 구형...\"단순 지지나 정당화...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T08:36:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127172518208"
-    }
-   ]
-  },
-  {
-   "keyword": "발언하는 이재명 대통령",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 27,
-   "recent20": 2,
-   "press": 26,
-   "firstArticleAt": "2026-11-27T07:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령 “내란 책임자에 합당한 책임 물어야…불공정 해소가 빛의 혁...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-27T08:36:00.000Z",
-     "link": "https://www.viva100.com/article/20261127500784"
-    },
-    {
-     "title": "이 대통령 \"광장의 요구, 국민이 체감하는 변화로 만들어야\"",
-     "press": "korea.kr",
-     "publishedAt": "2026-11-27T08:29:00.000Z",
-     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148976680&call_from=naver_news"
-    },
-    {
-     "title": "이 대통령 “내란 책임자에 합당한 책임 물어야 완전한 내란 종식”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T08:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005770085?sid=100"
     }
    ]
   },
@@ -144,62 +112,94 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 36,
-   "recent20": 1,
-   "press": 24,
-   "firstArticleAt": "2026-11-27T07:18:00.000Z",
+   "articles90": 38,
+   "recent20": 5,
+   "press": 27,
+   "firstArticleAt": "2026-11-27T07:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박홍근, 서영교 들이박았다...\"법사위가 이렇게 하니까 문제\"",
-     "press": "pennmike.com",
-     "publishedAt": "2026-11-27T08:36:00.000Z",
-     "link": "https://www.pennmike.com/news/articleView.html?idxno=132947"
+     "title": "박홍근 \"미래기금, 연기금투자풀에 일정 기간 위탁 검토\"",
+     "press": "mbnmoney.mbn.co.kr",
+     "publishedAt": "2026-11-27T08:52:00.000Z",
+     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005972047"
     },
     {
-     "title": "서영교·박홍근 법사위 이례적 충돌…국힘, 서영교 편들어",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-27T08:20:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326758/?sc=Naver"
+     "title": "'중랑 4선' 서영교·박홍근 법사위서 정면충돌…여야도 '지역 예산'엔 뭉...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T08:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359175?sid=100"
     },
     {
-     "title": "법사위 당정 충돌...서영교 \"답변 태도 문제\" 박홍근 \"여기가 상원이냐...",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-27T08:20:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731368"
+     "title": "박홍근 \"법사위가 상원이냐\" vs 서영교 \"朴 태도 충격적\"",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T08:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005770132?sid=100"
     }
    ]
   },
   {
-   "keyword": "주택 신속공급 점검회의",
+   "keyword": "발언하는 이재명 대통령",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 20,
+   "articles90": 24,
    "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T07:16:00.000Z",
+   "press": 23,
+   "firstArticleAt": "2026-11-27T07:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한성숙 \"올해 주택공급 목표 달성 위해 총력…내년 미리 준비해야\"",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-27T08:34:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=321168"
+     "title": "민주당, '이재명 탄핵 관련 발언' 최민희 최고위원 중징계",
+     "press": "kado.net",
+     "publishedAt": "2026-11-27T08:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213859?sid=100"
     },
     {
-     "title": "한 총리 \"올해 주택공급 목표 달성 총력…내년 준비도 서둘러야\"",
+     "title": "이 대통령 \"내란 책임 묻고 불공정 해소해야 '빛의 혁명' 완성\"",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-27T08:46:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=155027"
+    },
+    {
+     "title": "이 대통령 “내란 책임자에 합당한 책임 물어야…불공정 해소가 빛의 혁...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-27T08:36:00.000Z",
+     "link": "https://www.viva100.com/article/20261127500784"
+    }
+   ]
+  },
+  {
+   "keyword": "허은아",
+   "sources": [
+    "google"
+   ],
+   "articles90": 16,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-27T07:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령, 허은아·이동연 등 사표 수리…1기 참모 8명과 오찬",
      "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T08:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930618?sid=100"
+     "publishedAt": "2026-11-27T08:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930624?sid=100"
     },
     {
-     "title": "韓총리 \"연내 주택공급 목표 달성 총력…내년 착공도 선제 준비\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T08:26:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127171140165"
+     "title": "허은아·이동연·이주한 청와대 떠난다...2기 참모진 개편 속도",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-27T08:36:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=567287"
+    },
+    {
+     "title": "대선 때 李 지지 선언했던 허은아, 청와대 떠난다…비서관 3명 사직",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-27T08:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653860?sid=100"
     }
    ]
   },
@@ -222,16 +222,48 @@
      "link": "https://n.news.naver.com/mnews/article/469/0000968213?sid=102"
     },
     {
-     "title": "'대장동 개발비리' 항소심 결심… 공소청 \"항소 기각\" 요청",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-27T08:22:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452758"
-    },
-    {
      "title": "‘대장동 항소포기’ 공소청, 2심 법원에 “1심 유지해달라” 요청",
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-27T08:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003568506?sid=102"
+    },
+    {
+     "title": "'대장동 개발비리' 항소심 결심… 공소청 \"항소 기각\" 요청",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-27T08:22:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452758"
+    }
+   ]
+  },
+  {
+   "keyword": "주택 신속공급 점검회의",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T07:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한성숙 총리 \"주택시장 하향 안정지표 지속 강화…공급여건 개선될 것\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T08:47:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127001244"
+    },
+    {
+     "title": "한성숙 \"올해 주택공급 목표 달성 위해 총력…내년 미리 준비해야\"",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-27T08:34:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=321168"
+    },
+    {
+     "title": "한 총리 \"올해 주택공급 목표 달성 총력…내년 준비도 서둘러야\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T08:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930618?sid=100"
     }
    ]
   },
@@ -240,30 +272,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
+   "articles90": 23,
    "recent20": 8,
-   "press": 11,
-   "firstArticleAt": "2026-11-27T07:19:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-27T07:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "보너스 2억에 제네시스 GV80이 내 품에...신상훈의 날, 제네시스 대상 이...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-27T08:37:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/076/0004470307"
-    },
-    {
-     "title": "신상훈, 생애 첫 제네시스 대상 수상…장유빈 상금왕·왕정훈 신인상",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-27T08:36:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110123927346"
-    },
-    {
      "title": "[mhn포토] 제네시스 대상 수상하는 신상훈",
      "press": "mhnse.com",
-     "publishedAt": "2026-11-27T08:34:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/445/0000494100"
+     "publishedAt": "2026-11-27T08:50:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/445/0000494107"
+    },
+    {
+     "title": "[ST포토] 2026 KPGA 제네시스 대상 시상식 수상자들 한자리에 모여",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-27T08:50:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110127880232"
+    },
+    {
+     "title": "[mhn포토] 신상훈, 제네시스 대상 수상",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-27T08:50:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/445/0000494104"
     }
    ]
   },
@@ -272,10 +304,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T07:16:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T07:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -305,7 +337,7 @@
     "daum"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-27T07:43:00.000Z",
    "exclusive": false,
@@ -332,44 +364,12 @@
    ]
   },
   {
-   "keyword": "코레일",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T07:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"수화기 너머 세상의 온도를 높이는 25년 차 베테랑\"...코레일네트웍스...",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-27T08:34:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244431"
-    },
-    {
-     "title": "코레일, 폐안전모로 이웃 보행 안전 지킨다",
-     "press": "ikld.kr",
-     "publishedAt": "2026-11-27T08:28:00.000Z",
-     "link": "http://www.ikld.kr/news/articleView.html?idxno=345073"
-    },
-    {
-     "title": "코레일, 폐안전모로 만든 안전우산 500개 취약계층에 기부",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-27T07:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002467970?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "트럼프 푸틴 유럽 공격 중단",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-27T07:49:00.000Z",
    "exclusive": false,
@@ -396,74 +396,41 @@
    ]
   },
   {
-   "keyword": "최휘영",
+   "keyword": "코레일",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-27T07:19:00.000Z",
+   "firstArticleAt": "2026-11-27T07:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령, '최휘영 기습 교체' 보도에 \"대통령·총리·장관 명예 훼손\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T08:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439062?sid=100"
+     "title": "\"수화기 너머 세상의 온도를 높이는 25년 차 베테랑\"...코레일네트웍스...",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-27T08:34:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244431"
     },
     {
-     "title": "'기습 교체' 보도에 최휘영 \"오보\"…이재명 대통령 \"명예훼손, 정정해주...",
-     "press": "news.jtbc.co.kr",
+     "title": "코레일, 폐안전모로 이웃 보행 안전 지킨다",
+     "press": "ikld.kr",
+     "publishedAt": "2026-11-27T08:28:00.000Z",
+     "link": "http://www.ikld.kr/news/articleView.html?idxno=345073"
+    },
+    {
+     "title": "코레일, 폐안전모로 만든 안전우산 500개 취약계층에 기부",
+     "press": "pressian.com",
      "publishedAt": "2026-11-27T07:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522813?sid=100"
-    },
-    {
-     "title": "‘교체 기습통보’ 주장에 최휘영 “납득 안돼…한참 전에 알아” 발끈",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-27T07:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686961?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "신태일",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T07:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'미성년자 성착취 방송' 신태일, 2심서도 실형…징역 6년 유지",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-27T07:56:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848674"
-    },
-    {
-     "title": "‘미성년자 성착취 생방송’ BJ 신태일, 2심도 징역 6년",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-27T07:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207853?sid=102"
-    },
-    {
-     "title": "[속보] '미성년자 성착취물 생중계' BJ 신태일, 항소심도 징역 6년",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-27T07:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000494024"
+     "link": "https://n.news.naver.com/mnews/article/002/0002467970?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1902,
+  "flagged": 1903,
   "matched": 947,
   "avgLeadMin": 617,
   "recent": [
