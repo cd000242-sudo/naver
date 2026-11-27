@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T06:14:40.231Z",
+ "builtAt": "2026-11-27T06:24:43.243Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,29 +16,29 @@
     "signal.bz"
    ],
    "articles90": 27,
-   "recent20": 4,
+   "recent20": 3,
    "press": 27,
-   "firstArticleAt": "2026-11-27T04:47:00.000Z",
+   "firstArticleAt": "2026-11-27T04:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“연내 입법 불발 땐 더 이상 대화 없다”…정년연장 지연에 노동계 반...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-27T06:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686931?sid=102"
+    },
+    {
+     "title": "민주당 정년특위, 10개월 만에 노사 협의 재개에도 합의 불발",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-27T06:18:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466751"
+    },
     {
      "title": "與정년연장 특위, 10개월만 노사협의 합의 불발…내달 2일 종료(종합2보...",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-27T06:12:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016467960?sid=100"
-    },
-    {
-     "title": "65세 정년연장 노사 합의 또 불발…노동계 \"더 이상 입법 미뤄선 안 돼\"",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-27T06:04:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=323476"
-    },
-    {
-     "title": "與정년연장특위 노사합의 이견차로 또 불발… 내달 2일 전체회의 막판 ...",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-27T05:58:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=202611271455156558b3279dfb36_12"
     }
    ]
   },
@@ -49,30 +49,30 @@
     "nate",
     "daum"
    ],
-   "articles90": 60,
-   "recent20": 21,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T05:02:00.000Z",
+   "articles90": 63,
+   "recent20": 9,
+   "press": 21,
+   "firstArticleAt": "2026-11-27T05:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"빵·주스·귤 챙겨 이른 하교길\"…총파업에 강원 학교 454곳 차질",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T06:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314469?sid=102"
+     "title": "학교 비정규직 총파업···392개 학교 운영 차질",
+     "press": "jtv.co.kr",
+     "publishedAt": "2026-11-27T06:22:00.000Z",
+     "link": "https://www.jtv.co.kr/news/article.php?id=72360"
     },
     {
-     "title": "총파업대회 구호 외치는 학교 비정규직 노조",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314464?sid=102"
+     "title": "학교비정규직 노동자 파업…급식 대신 도시락 먹는 학생들",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-27T06:22:00.000Z",
+     "link": "https://www.kyeongin.com/article/1775531"
     },
     {
-     "title": "전국 학교 비정규직 노동조합 총파업대회",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314466?sid=102"
+     "title": "학교비정규직노조, 여의도 일대서 대규모 총파업 집회 [포토]",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T06:20:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654003"
     }
    ]
   },
@@ -81,10 +81,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-27T04:54:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T04:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -109,82 +109,23 @@
    ]
   },
   {
-   "keyword": "한동훈 수사자료 유출",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-27T04:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한동훈 “경찰이 민주당의 지팡이”…김승원 수사자료 유출 의혹 압수수...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T06:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005769978?sid=100"
-    },
-    {
-     "title": "한동훈, 경찰 법무부·공소청 압수수색에 \"참 속보이고 치졸한 정권\"",
-     "press": "kado.net",
-     "publishedAt": "2026-11-27T05:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213842?sid=100"
-    },
-    {
-     "title": "경찰, '한동훈 수사자료 유출 의혹' 수사 본격화···법무부·공소청 압...",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-27T05:40:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=160871"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 정부",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-27T04:53:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "이재명 \"연 50조원 R&D 성과 국가 환수 장치 필요\" \"지원과 투자의 중간...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-27T06:04:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453132"
-    },
-    {
-     "title": "정부 돈 받아 대박 난 기업…李 “욕먹어도” 이익 환수 추진",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416616?sid=100"
-    },
-    {
-     "title": "류경완 남해군수, 대전~남해선 국가철도망 반영 위해 국회·정부 방문",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-27T05:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848886?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "솔비·이규한 4월 결혼",
+   "keyword": "솔비♥이규한, 4월 25일 결혼",
    "sources": [
     "nate"
    ],
    "articles90": 11,
-   "recent20": 2,
+   "recent20": 3,
    "press": 10,
    "firstArticleAt": "2026-11-27T05:01:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "솔비♥이규한, 내년 4월 25일 결혼식...\"비공개 야외 예식\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-27T06:22:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785377"
+    },
     {
      "title": "솔비·이규한, 내년 4월 25일 결혼한다 \"서울서 야외 예식\"",
      "press": "sportsworldi.com",
@@ -196,44 +137,6 @@
      "press": "sportschosun.com",
      "publishedAt": "2026-11-27T06:06:00.000Z",
      "link": "https://m.entertain.naver.com/article/076/0004470274"
-    },
-    {
-     "title": "솔비♥이규한, 내년 4월 25일 결혼 \"서울 종로서 야외 웨딩\"[공식입장]",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-27T05:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000641238"
-    }
-   ]
-  },
-  {
-   "keyword": "김우빈 재혼 황후 팬",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-27T04:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신민아, ♥김우빈 절친 이종석과 멜로 어땠나 “남편 ‘재혼 황후’ 팬...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-27T05:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003814620"
-    },
-    {
-     "title": "신민아 “♥김우빈 ‘재혼황후’ 완전 팬…나비에라고 불러” [인터뷰③...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T05:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005769955"
-    },
-    {
-     "title": "신민아 \"남편 김우빈도 '나비에'라 불러…'재혼황후' 열혈 팬\" [N인터뷰...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T05:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009314330"
     }
    ]
   },
@@ -242,13 +145,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T04:46:00.000Z",
-   "exclusive": true,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T05:18:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "아일릿 모카, 5개월 만에 복귀 시동…\"조금씩 함께할 것\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T06:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014349835"
+    },
     {
      "title": "아일릿 멤버 모카 근황…복귀 예고",
      "press": "topstarnews.net",
@@ -260,12 +169,6 @@
      "press": "insight.co.kr",
      "publishedAt": "2026-11-27T06:06:00.000Z",
      "link": "https://www.insight.co.kr/news/583859"
-    },
-    {
-     "title": "아일릿 모카, 활동 중단 5개월 만에 복귀…\"이날만 기다려\"",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-27T05:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786476"
     }
    ]
   },
@@ -275,10 +178,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 6,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T05:50:00.000Z",
+   "articles90": 6,
+   "recent20": 5,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T06:04:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
@@ -303,14 +206,47 @@
    ]
   },
   {
-   "keyword": "남경필 아들 협박 혐의",
+   "keyword": "이재명 정부",
    "sources": [
-    "nate"
+    "signal.bz",
+    "google"
    ],
    "articles90": 7,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T04:55:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-27T05:11:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "\"주적은 이재명\" 당내 자성에도 … 윤상현·우재준은 또 '장동혁 책임론...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-27T06:14:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/27/2026112750221.html"
+    },
+    {
+     "title": "이재명 \"연 50조원 R&D 성과 국가 환수 장치 필요\" \"지원과 투자의 중간...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-27T06:04:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453132"
+    },
+    {
+     "title": "정부 돈 받아 대박 난 기업…李 “욕먹어도” 이익 환수 추진",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T06:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416616?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "남경필 아들 체포",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T05:06:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -335,34 +271,34 @@
    ]
   },
   {
-   "keyword": "이강혁 박동규 영입",
+   "keyword": "항소",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T04:46:00.000Z",
+   "articles90": 5,
+   "recent20": 4,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T06:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "울산웨일즈, 지역 출신 투수 이강혁·박동규 영입…'울산 쿼터' 첫발",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T05:32:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009314341"
+     "title": "[속보] 공소청, ‘대장동 개발’ 민간업자들 2심서 항소 기각 요청",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-27T06:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004012124?sid=102"
     },
     {
-     "title": "울산시민야구단, '울산 쿼터' 적용해 투수 이강혁·박동규 영입",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T05:19:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/055/0001406328"
+     "title": "[속보] 공소청, '대장동 비리' 민간업자들 항소 기각 요청",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-27T06:20:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326728/?sc=Naver"
     },
     {
-     "title": "울산시민야구단, '울산 쿼터' 적용 투수 이강혁·박동규 영입",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T05:01:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/052/0002438932"
+     "title": "[속보]공소청, '대장동 민간업자' 2심서 항소기각 요청",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T06:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014349818?sid=102"
     }
    ]
   },
@@ -372,12 +308,18 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-27T04:50:00.000Z",
+   "firstArticleAt": "2026-11-27T05:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "제주도, 미세먼지 저감 '계절 관리제' 시행",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-27T06:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000087153?sid=100"
+    },
     {
      "title": "제주, 겨울철 '미세먼지 차단' 공사장·차량배출가스 단속 강화",
      "press": "headlinejeju.co.kr",
@@ -389,12 +331,6 @@
      "press": "siminilbo.co.kr",
      "publishedAt": "2026-11-27T05:58:00.000Z",
      "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160262140438054"
-    },
-    {
-     "title": "군포시, 겨울철 미세먼지와 전쟁… 5등급 차량 운행 과태료 10만원",
-     "press": "gg.newdaily.co.kr",
-     "publishedAt": "2026-11-27T05:26:00.000Z",
-     "link": "https://gg.newdaily.co.kr/site/data/html/2026/11/27/2026112750186.html"
     }
    ]
   },
@@ -403,10 +339,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T04:51:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-27T04:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -429,11 +365,43 @@
      "link": "https://www.insight.co.kr/news/583796"
     }
    ]
+  },
+  {
+   "keyword": "투수 박동규 영입",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T04:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "울산웨일즈, 지역 출신 투수 이강혁·박동규 영입…'울산 쿼터' 첫발",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T05:32:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009314341"
+    },
+    {
+     "title": "울산시민야구단, '울산 쿼터' 적용해 투수 이강혁·박동규 영입",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-27T05:19:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/055/0001406328"
+    },
+    {
+     "title": "울산시민야구단, '울산 쿼터' 적용 투수 이강혁·박동규 영입",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T05:01:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/052/0002438932"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1852,
+  "flagged": 1856,
   "matched": 920,
   "avgLeadMin": 610,
   "recent": [
