@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T12:47:01.659Z",
+ "builtAt": "2026-11-27T12:57:05.209Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "30점 GS칼텍스 5연승",
+   "keyword": "GS칼텍스 5연승",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 14,
+   "articles90": 32,
+   "recent20": 5,
+   "press": 17,
    "firstArticleAt": "2026-11-27T11:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'실바 30점' GS칼텍스, 흥국생명 꺾고 5연승 선두 탈환(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T12:39:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/003/0014350287"
+     "title": "'실바 30점' GS칼텍스, 흥국생명 꺾고 5연승…선두 탈환(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T12:48:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/001/0016468498"
     },
     {
-     "title": "‘실바 30점 폭발’ GS칼텍스, 흥국생명 꺾고 5연승 질주 ‘선두 탈환’...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-27T12:39:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/468/0001283965"
+     "title": "'실바 30점' GS칼텍스 5연승·선두 복귀...대한항공 3연승",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T12:46:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/052/0002439149"
     },
     {
-     "title": "[V리그] '실바 30점' GS칼텍스, 흥국생명 5연승 몰고 5연승 '선두 탈환'",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-27T12:32:00.000Z",
-     "link": "https://swtvnews.com/news/newsview.php?ncode=1065615383656013"
+     "title": "대한항공, '국내 선수만 뛴' KB손보 꺾고 3연승…여자부 GS 5연승(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T12:46:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/421/0009314975"
     }
    ]
   },
@@ -47,30 +47,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-27T11:18:00.000Z",
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T11:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최민희 최고위원 '당원권 정지 2년' 중징계...최고위원직 유지 관건",
+     "press": "newsbrite.net",
+     "publishedAt": "2026-11-27T12:50:00.000Z",
+     "link": "http://www.newsbrite.net/news/articleView.html?idxno=201820"
+    },
+    {
+     "title": "與 최민희 ‘당원권 2년 정지’ 중징계…친청계 “도저히 납득 불가”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-27T12:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207881?sid=100"
+    },
     {
      "title": "민주당, 최민희 ‘당원권 2년 정지’ 중징계…친청계 반발",
      "press": "kwnews.co.kr",
      "publishedAt": "2026-11-27T12:37:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/087/0001233957?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 탄핵 국제 우려",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-27T11:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "세계변호사협회, 조희대 대법원장 탄핵 추진에 우려…“사법 독립 존중...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T12:50:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654147"
     },
     {
-     "title": "최민희 당원권 2년 정지…박경미 \"무거운 징계…심각한 타격\" 권영현 \"중...",
-     "press": "natv.go.kr",
-     "publishedAt": "2026-11-27T12:26:00.000Z",
-     "link": "https://www.natv.go.kr/natv/news/newsView.do?newsId=514674"
+     "title": "세계변호사협회도 ‘조희대 탄핵’ 우려…“위험한 선례 될 것”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-27T12:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729691?sid=102"
     },
     {
-     "title": "최민희 '당원권 2년 정지' 중징계…崔 \"수용하기 어렵다\"",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-27T12:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063399?sid=100"
+     "title": "국제변호사협회도 '曺 탄핵' 우려…\"위험한 선례 될 것\"",
+     "press": "lawtimes.co.kr",
+     "publishedAt": "2026-11-27T12:40:00.000Z",
+     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=230240"
     }
    ]
   },
@@ -79,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-27T11:20:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T11:36:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -107,46 +139,46 @@
    ]
   },
   {
-   "keyword": "조희대 탄핵 국제 우려",
+   "keyword": "김범수 무죄 확정",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 7,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T11:38:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-27T11:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국제변호사협회도 '曺 탄핵' 우려…\"위험한 선례 될 것\"",
-     "press": "lawtimes.co.kr",
-     "publishedAt": "2026-11-27T12:40:00.000Z",
-     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=230240"
+     "title": "김범수 카카오 창업자 'SM 시세조종' 무죄 확정...3년 사법 리스크 종결",
+     "press": "newsbrite.net",
+     "publishedAt": "2026-11-27T12:48:00.000Z",
+     "link": "http://www.newsbrite.net/news/articleView.html?idxno=201819"
     },
     {
-     "title": "조희대 탄핵 우려하는 로아시아·IBA 등 세계 변호사들, 여권은 뭐라고...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-27T12:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042802?sid=104"
+     "title": "SM 시세조종 혐의 벗은 김범수…공소청 상고 포기 '무죄 확정'",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-27T12:28:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749465"
     },
     {
-     "title": "세계변호사협회 “조희대 탄핵 재검토 촉구” 성명 발표",
-     "press": "donga.com",
-     "publishedAt": "2026-11-27T12:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765810?sid=102"
+     "title": "김범수 카카오 창업주, 'SM시세조종 혐의' 무죄 확정...공소청 상고 포기",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-27T12:28:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=207007"
     }
    ]
   },
   {
-   "keyword": "그냥 사람 친구",
+   "keyword": "그냥 사람 친구예요",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 10,
+   "articles90": 7,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T11:20:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-27T11:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -163,74 +195,10 @@
      "link": "https://m.entertain.naver.com/article/440/0000054481"
     },
     {
-     "title": "'신랑수업2’ 김상혁, 유채련 친구들과 조개찜 식당서 ‘엉가남’ 매력...",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-27T12:02:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305875"
-    }
-   ]
-  },
-  {
-   "keyword": "김범수 무죄 확정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T11:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김범수 카카오 창업주, 'SM시세조종 혐의' 무죄 확정...공소청 상고 포기",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-27T12:28:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=207007"
-    },
-    {
-     "title": "SM 시세조종 혐의 벗은 김범수…공소청 상고 포기 '무죄 확정'",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-27T12:28:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749465"
-    },
-    {
-     "title": "카카오 김범수 'SM 시세조종' 무죄 확정…공소청, 상고 포기",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T12:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930690?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "신지아 6차 쇼트 2위",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T11:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신지아, 쇼트 개인 최고점 경신…시니어 첫 그랑프리 메달 보인다",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-27T12:22:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/241/0003543958"
-    },
-    {
-     "title": "'NEW 김연아' 신지아, 첫 메달 보인다!…NHK 트로피서 개인 최고 75.31점 ...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T12:20:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/311/0002084892"
-    },
-    {
-     "title": "女피겨 신지아, 쇼트 개인 최고점 경신 ‘75.31점’…시니어 GP 6차 2위,...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-27T12:11:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/468/0001283962"
+     "title": "트와이스 정연· 몬스타엑스 주헌 '그냥 사람 친구'",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-27T12:00:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6944281"
     }
    ]
   },
@@ -240,7 +208,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-27T11:37:00.000Z",
    "exclusive": false,
@@ -272,7 +240,7 @@
     "nate"
    ],
    "articles90": 12,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-27T11:32:00.000Z",
    "exclusive": false,
@@ -295,6 +263,38 @@
      "press": "ajunews.com",
      "publishedAt": "2026-11-27T11:40:00.000Z",
      "link": "https://www.ajunews.com/view/20261127203725493"
+    }
+   ]
+  },
+  {
+   "keyword": "신지아 6차 쇼트 2위",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T12:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신지아, 쇼트 개인 최고점 경신…시니어 첫 그랑프리 메달 보인다",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-27T12:22:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/241/0003543958"
+    },
+    {
+     "title": "'NEW 김연아' 신지아, 첫 메달 보인다!…NHK 트로피서 개인 최고 75.31점 ...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-27T12:20:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/311/0002084892"
+    },
+    {
+     "title": "女피겨 신지아, 쇼트 개인 최고점 경신 ‘75.31점’…시니어 GP 6차 2위,...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-27T12:11:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/468/0001283962"
     }
    ]
   },
@@ -334,7 +334,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1960,
+  "flagged": 1961,
   "matched": 975,
   "avgLeadMin": 657,
   "recent": [
