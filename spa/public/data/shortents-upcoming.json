@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T01:12:56.218Z",
+ "builtAt": "2026-11-27T01:22:59.370Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "코스피 상승 출발",
    "sources": [
     "nate"
    ],
-   "articles90": 85,
-   "recent20": 10,
-   "press": 57,
-   "firstArticleAt": "2026-11-27T00:02:00.000Z",
+   "articles90": 90,
+   "recent20": 9,
+   "press": 61,
+   "firstArticleAt": "2026-11-27T00:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피 4700선 공방…개인·기관 '팔자'에 외국인 홀로 매수",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-27T01:12:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611270067"
+     "title": "SK스퀘어 주가, 11월 27일 장중 657,000원 0.77% 상승",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T01:20:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287676"
     },
     {
-     "title": "코스피 4730선 강보합 속 코스닥 4%대 반등",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-27T01:10:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=316382"
+     "title": "코스피,장 초반 4,700 보합권 등락…코스닥 3%대 상승",
+     "press": "seouleconews.com",
+     "publishedAt": "2026-11-27T01:18:00.000Z",
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95293"
     },
     {
-     "title": "코스피, 외인 매수에 반등···4740선 회복",
-     "press": "finomy.com",
-     "publishedAt": "2026-11-27T01:04:00.000Z",
-     "link": "http://www.finomy.com/news/articleView.html?idxno=268124"
+     "title": "코스닥 4%대 상승...보안·로봇주 강세에 안랩 14%↑·코스모로보틱스 상...",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-27T01:18:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=321135"
     }
    ]
   },
@@ -48,30 +48,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 48,
-   "recent20": 9,
-   "press": 39,
-   "firstArticleAt": "2026-11-26T23:43:00.000Z",
+   "articles90": 47,
+   "recent20": 8,
+   "press": 41,
+   "firstArticleAt": "2026-11-26T23:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "기보, '2026년 올해의 상생기업 대상' 중기부 장관 표창 수상",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-27T01:12:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088566"
+     "title": "인천공항공사, 스마트 제방빙 시스템 국산화로 중기부 장관표창",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-27T01:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848706?sid=101"
     },
     {
-     "title": "오토텔릭 김태훈 대표 장관 표창...복합신약 중동 수출 성과 인정",
-     "press": "pharmnews.com",
-     "publishedAt": "2026-11-27T01:10:00.000Z",
-     "link": "https://www.pharmnews.com/news/articleView.html?idxno=308380"
+     "title": "세븐일레븐, 골목상권과 상생 확대..사업영역 보호 공로 중기부 장관 표...",
+     "press": "kpenews.com",
+     "publishedAt": "2026-11-27T01:16:00.000Z",
+     "link": "https://kpenews.com/View.aspx?No=4332245"
     },
     {
-     "title": "삼양식품, '올해의 상생기업' 선정...중기부 장관 표창",
-     "press": "womentimes.co.kr",
-     "publishedAt": "2026-11-27T01:04:00.000Z",
-     "link": "https://www.womentimes.co.kr/news/articleView.html?idxno=108334"
+     "title": "중소기업과 상생협력 성과 인정···삼양식품, 중기부 장관 표창 수상",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-27T01:15:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2497945"
+    }
+   ]
+  },
+  {
+   "keyword": "경찰, 한동훈 유출 수사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 36,
+   "recent20": 19,
+   "press": 33,
+   "firstArticleAt": "2026-11-27T00:28:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'한동훈 수사자료 공개 의혹' 수사...경찰, 법무부·공소청 등 압수수색",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-27T01:22:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=567094"
+    },
+    {
+     "title": "한동훈 '기소계획서 유출 의혹' 법무부·공소청 압수수색",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-27T01:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406273?sid=102"
+    },
+    {
+     "title": "경찰, '한동훈 자료유출 의혹' 법무부·공소청 등 압수수색…강제수사 ...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-27T01:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834243?sid=102"
     }
    ]
   },
@@ -80,30 +112,62 @@
    "sources": [
     "google"
    ],
-   "articles90": 36,
-   "recent20": 19,
-   "press": 32,
-   "firstArticleAt": "2026-11-27T00:30:00.000Z",
+   "articles90": 37,
+   "recent20": 14,
+   "press": 31,
+   "firstArticleAt": "2026-11-27T00:44:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "스카이레브, AI 사용 통제·감사 솔루션 '나루가드' 슈어소프트테크 시...",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-27T01:10:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=508757"
+     "title": "[시선집중] 靑 이해민 “AI 커닝 방지, ‘전 세계 공조’ 한국이 제일 먼...",
+     "press": null,
+     "publishedAt": "2026-11-27T01:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538441?sid=100"
     },
     {
-     "title": "상미당홀딩스, AI로 준법경영 강화…6개사 우수 사례 공유",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-27T01:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002447219?sid=103"
+     "title": "LG유플러스, 현대차·기아 배송로봇 5G SA 실증…피지컬 AI 협력 확대",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-27T01:20:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=173216"
     },
     {
-     "title": "국립순천대, 지역 기업 AX 지원 AI 플랫폼 ‘SCOA’ 공개",
-     "press": "dhnews.co.kr",
-     "publishedAt": "2026-11-27T01:10:00.000Z",
-     "link": "https://dhnews.co.kr/news/view/1065575115702060"
+     "title": "한·싱가포르, 내년 아세안+3 공동의장…'AI·금융안정' 새 의제 제안",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T01:20:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127000235"
+    }
+   ]
+  },
+  {
+   "keyword": "중국",
+   "sources": [
+    "google"
+   ],
+   "articles90": 17,
+   "recent20": 16,
+   "press": 15,
+   "firstArticleAt": "2026-11-27T01:02:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "홍성군, 중국 반도체·의료기기 투자단 10명 유치 논의",
+     "press": "newsworker.co.kr",
+     "publishedAt": "2026-11-27T01:20:00.000Z",
+     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=516548"
+    },
+    {
+     "title": "삼성바이오에피스, 중국 바이오텍과 신약 개발 협력",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-27T01:20:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611270076"
+    },
+    {
+     "title": "엔비디아 첨단칩 사들인 美기업 2곳, 실소유주는 중국 … 수출통제 허점...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-27T01:20:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/27/2026112750084.html"
     }
    ]
   },
@@ -112,10 +176,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 22,
+   "articles90": 16,
    "recent20": 1,
-   "press": 21,
-   "firstArticleAt": "2026-11-26T23:44:00.000Z",
+   "press": 15,
+   "firstArticleAt": "2026-11-26T23:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,98 +204,34 @@
    ]
   },
   {
-   "keyword": "중국",
-   "sources": [
-    "google"
-   ],
-   "articles90": 17,
-   "recent20": 17,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T00:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성바이오에피스, 중국 오픈이노베이션 대상 기업에 '이노타 테라퓨틱...",
-     "press": "pharmnews.com",
-     "publishedAt": "2026-11-27T01:12:00.000Z",
-     "link": "https://www.pharmnews.com/news/articleView.html?idxno=308382"
-    },
-    {
-     "title": "중국 리그서 뛰는 유명 롤 프로게이머, 35억 세금 '쾅' [과세전적부심...",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-27T01:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394964?sid=101"
-    },
-    {
-     "title": "유니트리 창업자 \"중국 10년내 로봇 年 2000만대 생산…車 추월\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T01:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014348824?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "문근영, 기립성 저혈압으로 쓰러져",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-26T23:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "문근영, 청룡영화상 시상식서 '앞머리' 내린 이유... \"기립성 저혈압으...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-27T01:04:00.000Z",
-     "link": "https://www.insight.co.kr/news/583788"
-    },
-    {
-     "title": "'기립성 저혈압' 쓰러진 문근영, 이마 부상...'청룡 혹평' 속사정",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-27T00:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005447272"
-    },
-    {
-     "title": "문근영, 청룡영화상서 앞머리 내린 이유 있었다 \"기립성 저혈압으로 쓰...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-27T00:34:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795737629531639005"
-    }
-   ]
-  },
-  {
    "keyword": "발언하는 정점식 원내대표",
    "sources": [
     "nate"
    ],
-   "articles90": 21,
-   "recent20": 2,
+   "articles90": 23,
+   "recent20": 4,
    "press": 8,
-   "firstArticleAt": "2026-11-27T00:14:00.000Z",
+   "firstArticleAt": "2026-11-27T00:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정점식 \"공소취소 탈옥 열차 종착역은 교도소\"",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T01:02:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3764937"
+     "title": "[포토] 정점식 원내대표, 원내대책회의 발언",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-27T01:18:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452582"
     },
     {
-     "title": "정점식 \"민주당은 법맹 집단…曺 탄핵소추안이나 제대로 쓰겠나\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T00:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313658?sid=100"
+     "title": "[포토] 원내대책회의 발언하는 정점식",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-27T01:14:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452578"
     },
     {
-     "title": "천준호 \"쇼츠 찍었으면 나가!\" 정점식 \"당 꼬라지 하고는..\" [앵커리포트...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T00:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438808?sid=100"
+     "title": "「M포토」 발언하는 정점식 국민의힘 원내대표",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-27T01:14:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73665"
     }
    ]
   },
@@ -240,13 +240,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 1,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-26T23:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이제 20승까지 단 두 걸음! '당구 여제' 김가영, '라이벌' 스롱 꺾고 준...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-27T01:14:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/076/0004470206"
+    },
     {
      "title": "20승 보인다…'당구 여제' 김가영, 라이벌 스롱 꺾고 준결승행→정수빈...",
      "press": "mhnse.com",
@@ -258,12 +264,38 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-27T00:44:00.000Z",
      "link": "https://www.newspim.com/news/view/20261127000220"
+    }
+   ]
+  },
+  {
+   "keyword": "연우 다이어트 감량",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T00:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "연우, 하루 밥 두 숟갈로 10kg 감량…“전신 두드러기에 많이 울었다”...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-27T01:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543871"
     },
     {
-     "title": "김보미, 챔피언 자신감 장착…김가영과 4강전 빅뱅",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-27T00:26:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/028/0002834235"
+     "title": "두 달 만에 10kg 뺐다는 연우, 비법 뭔가 했더니…\"밥 두 숟갈\" ('무쇠소...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-27T01:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786424"
+    },
+    {
+     "title": "연우 “밥 두 숟갈 먹으며 10kg 감량…전신 두드러기 생겨” (무쇠소녀...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T00:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005769800"
     }
    ]
   },
@@ -272,10 +304,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T23:48:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-26T23:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -283,7 +315,7 @@
      "title": "김정은, 당 세포비서대회 참가자들과 기념촬영",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-27T00:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467058?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/001/0016467055?sid=100"
     },
     {
      "title": "러시아 공연 즐긴 김정은…\"푸틴에 따뜻한 인사 전해달라\"",
@@ -298,43 +330,11 @@
      "link": "https://n.news.naver.com/mnews/article/052/0002438776?sid=100"
     }
    ]
-  },
-  {
-   "keyword": "연우 다이어트 감량",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T00:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "두 달 만에 10kg 뺐다는 연우, 비법 뭔가 했더니…\"밥 두 숟갈\" ('무쇠소...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-27T01:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786424"
-    },
-    {
-     "title": "연우 “밥 두 숟갈 먹으며 10kg 감량…전신 두드러기 생겨” (무쇠소녀...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T00:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005769800"
-    },
-    {
-     "title": "설인아, 동갑 연우 꼬셨다…다이어트 후유증 딛고 '무쇠소녀단3'도 호흡",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-27T00:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004470189"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1761,
+  "flagged": 1762,
   "matched": 879,
   "avgLeadMin": 590,
   "recent": [
