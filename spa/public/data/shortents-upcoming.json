@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T08:55:34.824Z",
+ "builtAt": "2026-11-27T09:05:40.308Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,50 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "최민희 중징계 의결",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 75,
-   "recent20": 31,
-   "press": 63,
-   "firstArticleAt": "2026-11-27T07:51:00.000Z",
-   "exclusive": false,
+   "articles90": 92,
+   "recent20": 32,
+   "press": 71,
+   "firstArticleAt": "2026-11-27T08:19:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "민주당, 최민희 최고위원 '당직자격 정지' 이상 중징계 의결",
-     "press": "joongboo.com",
-     "publishedAt": "2026-11-27T08:54:00.000Z",
-     "link": "https://www.joongboo.com/news/articleView.html?idxno=363743803"
+     "title": "與 윤리심판원 \"최민희 중징계 의결…일부 발언 당 품위 훼손\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T09:04:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127172940230"
     },
     {
-     "title": "\"당 품위 훼손\" 최민희, 윤리심판원서 중징계 처분 받았다",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-27T08:54:00.000Z",
-     "link": "https://www.insight.co.kr/news/583916"
+     "title": "[속보] 민주당 윤리심판원 \"최민희 품위훼손 중징계…김민석 징계청원 ...",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-27T09:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138988?sid=100"
     },
     {
-     "title": "민주당, 최민희 중징계 의결… 당원권 정지 땐 최고위원직 상실",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-27T08:54:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452769"
+     "title": "'李 대통령, 尹 탄핵 반대' 발언 논란 최민희 결국 중징계...내홍 격화되...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-27T09:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610926?sid=100"
     }
    ]
   },
   {
-   "keyword": "법사위, 이용철 보고서 채택",
+   "keyword": "법사위 이용철 채택",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 46,
-   "recent20": 5,
-   "press": 43,
-   "firstArticleAt": "2026-11-27T07:26:00.000Z",
+   "articles90": 43,
+   "recent20": 4,
+   "press": 40,
+   "firstArticleAt": "2026-11-27T07:36:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -79,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 34,
-   "recent20": 5,
-   "press": 33,
-   "firstArticleAt": "2026-11-27T07:27:00.000Z",
+   "articles90": 31,
+   "recent20": 2,
+   "press": 31,
+   "firstArticleAt": "2026-11-27T07:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -109,13 +110,12 @@
   {
    "keyword": "박홍근",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 38,
-   "recent20": 5,
-   "press": 27,
-   "firstArticleAt": "2026-11-27T07:26:00.000Z",
+   "articles90": 31,
+   "recent20": 4,
+   "press": 20,
+   "firstArticleAt": "2026-11-27T07:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,49 +140,56 @@
    ]
   },
   {
-   "keyword": "발언하는 이재명 대통령",
+   "keyword": "채령, A형 독감으로 팬사인회 연기",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 24,
+   "articles90": 15,
    "recent20": 3,
-   "press": 23,
-   "firstArticleAt": "2026-11-27T07:37:00.000Z",
-   "exclusive": false,
+   "press": 15,
+   "firstArticleAt": "2026-11-27T07:40:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "민주당, '이재명 탄핵 관련 발언' 최민희 최고위원 중징계",
-     "press": "kado.net",
-     "publishedAt": "2026-11-27T08:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213859?sid=100"
+     "title": "있지 채령, A형 독감 확진…\"팬사인회 연기\"",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-27T08:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329376"
     },
     {
-     "title": "이 대통령 \"내란 책임 묻고 불공정 해소해야 '빛의 혁명' 완성\"",
-     "press": "ziksir.com",
+     "title": "있지 채령, A형 독감 진단…\"팬사인회 등 일정 연기\"",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-27T08:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786503"
+    },
+    {
+     "title": "있지 채령, A형 독감 확진…팬사인회 연기",
+     "press": "newsis.com",
      "publishedAt": "2026-11-27T08:46:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=155027"
-    },
-    {
-     "title": "이 대통령 “내란 책임자에 합당한 책임 물어야…불공정 해소가 빛의 혁...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-27T08:36:00.000Z",
-     "link": "https://www.viva100.com/article/20261127500784"
+     "link": "https://m.entertain.naver.com/article/003/0014350164"
     }
    ]
   },
   {
    "keyword": "허은아",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 16,
-   "recent20": 2,
+   "recent20": 1,
    "press": 15,
-   "firstArticleAt": "2026-11-27T07:29:00.000Z",
+   "firstArticleAt": "2026-11-27T07:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "청와대 2기 참모진 개편 본격화…허은아 등 비서관 3명 사직",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T08:56:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127174740257"
+    },
     {
      "title": "이 대통령, 허은아·이동연 등 사표 수리…1기 참모 8명과 오찬",
      "press": "yonhapnewstv.co.kr",
@@ -194,24 +201,50 @@
      "press": "joongangenews.com",
      "publishedAt": "2026-11-27T08:36:00.000Z",
      "link": "https://www.joongangenews.com/news/articleView.html?idxno=567287"
-    },
-    {
-     "title": "대선 때 李 지지 선언했던 허은아, 청와대 떠난다…비서관 3명 사직",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-27T08:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653860?sid=100"
     }
    ]
   },
   {
-   "keyword": "공소청 대장동 항소 기각 요청",
+   "keyword": "범부처 주택 신속공급 점검회의",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-27T07:31:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-27T07:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한성숙 총리 “올해 주택공급 목표 달성 총력⋯ 달성 현황 투명하게 공...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-27T08:56:00.000Z",
+     "link": "https://www.viva100.com/article/20261127500793"
+    },
+    {
+     "title": "한성숙 총리 \"주택시장 하향 안정지표 지속 강화…공급여건 개선될 것\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T08:47:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127001244"
+    },
+    {
+     "title": "한성숙 \"올해 주택공급 목표 달성 위해 총력…내년 미리 준비해야\"",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-27T08:34:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=321168"
+    }
+   ]
+  },
+  {
+   "keyword": "대장동 2심 공소청 항소기각",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-27T07:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -236,46 +269,47 @@
    ]
   },
   {
-   "keyword": "주택 신속공급 점검회의",
+   "keyword": "대구 아파트 화재 5명 경상",
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T07:29:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T07:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한성숙 총리 \"주택시장 하향 안정지표 지속 강화…공급여건 개선될 것\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T08:47:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127001244"
+     "title": "대구 수성구 고층 아파트서 불… 소방관·주민 5명 부상",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-27T09:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003704042?sid=102"
     },
     {
-     "title": "한성숙 \"올해 주택공급 목표 달성 위해 총력…내년 미리 준비해야\"",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-27T08:34:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=321168"
+     "title": "[속보] 대구 수성구 아파트 14층서 불…소방관 포함 5명 경상",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-27T08:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001079204?sid=102"
     },
     {
-     "title": "한 총리 \"올해 주택공급 목표 달성 총력…내년 준비도 서둘러야\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T08:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930618?sid=100"
+     "title": "대구 수성구 고층 아파트에서 대낮에 화재… 17명 구조·5명 경상",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-27T08:32:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=543610"
     }
    ]
   },
   {
-   "keyword": "제네시스 대상 시상식 수상자들",
+   "keyword": "2026 제네시스 시상식 수상자들",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 23,
-   "recent20": 8,
-   "press": 12,
-   "firstArticleAt": "2026-11-27T07:28:00.000Z",
+   "articles90": 19,
+   "recent20": 6,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T07:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -286,48 +320,16 @@
      "link": "https://m.sports.naver.com/golf/article/445/0000494107"
     },
     {
+     "title": "2026 KPGA 제네시스 대상 시상식",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T08:50:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/003/0014350168"
+    },
+    {
      "title": "[ST포토] 2026 KPGA 제네시스 대상 시상식 수상자들 한자리에 모여",
      "press": "stoo.com",
      "publishedAt": "2026-11-27T08:50:00.000Z",
      "link": "http://www.stoo.com/article.php?aid=110127880232"
-    },
-    {
-     "title": "[mhn포토] 신상훈, 제네시스 대상 수상",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-27T08:50:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/445/0000494104"
-    }
-   ]
-  },
-  {
-   "keyword": "대구 수성구 아파트 화재 발생",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T07:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대구 수성구 고층 아파트에서 대낮에 화재… 17명 구조·5명 경상",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-27T08:32:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=543610"
-    },
-    {
-     "title": "대구 수성구 아파트 14층서 불…17명 구조·5명 경상",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-27T07:58:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566682"
-    },
-    {
-     "title": "\"딸 무사한가요\" 발 동동 구른 어머니…대구 아파트 화재 완진",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-27T07:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447524?sid=102"
     }
    ]
   },
@@ -336,13 +338,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-27T07:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "남경필 장남 또 체포…이번엔 성범죄 혐의",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T09:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359194?sid=102"
+    },
     {
      "title": "남경필 전 지사 아들, 출소 1년만에 '긴급체포'... 전 연인 폭행·스토킹...",
      "press": "insight.co.kr",
@@ -354,59 +362,28 @@
      "press": "gukjenews.com",
      "publishedAt": "2026-11-27T08:16:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765550"
-    },
-    {
-     "title": "남경필 아들, 출소 1년 만에 또 체포…전 연인 협박·스토킹 혐의",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-27T08:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447533?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 푸틴 유럽 공격 중단",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T07:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"매달 수천 명 죽는다\"…트럼프가 푸틴에 직접 꺼낸 말",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-27T08:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042780?sid=104"
-    },
-    {
-     "title": "\"푸틴에 공격중단 요구\" 트럼프, 조기종전 강조",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T08:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005770092?sid=104"
-    },
-    {
-     "title": "\"트럼프, 우크라에도 확전 자제 요구…나토 성명 일방적 수정\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T07:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314765?sid=104"
     }
    ]
   },
   {
    "keyword": "코레일",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-27T07:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "코레일유통물류, '올해의 상생기업 대상' 중기부장관 표창 수상",
+     "press": "weekly.hankooki.com",
+     "publishedAt": "2026-11-27T09:00:00.000Z",
+     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7196133"
+    },
     {
      "title": "\"수화기 너머 세상의 온도를 높이는 25년 차 베테랑\"...코레일네트웍스...",
      "press": "ngonews.kr",
@@ -418,19 +395,45 @@
      "press": "ikld.kr",
      "publishedAt": "2026-11-27T08:28:00.000Z",
      "link": "http://www.ikld.kr/news/articleView.html?idxno=345073"
+    }
+   ]
+  },
+  {
+   "keyword": "학교 급식 차질 발생",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T07:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "학교비정규직 총파업…인천 145개교 급식 차질",
+     "press": "siminsori.com",
+     "publishedAt": "2026-11-27T08:52:00.000Z",
+     "link": "https://www.siminsori.com/news/articleView.html?idxno=402585"
     },
     {
-     "title": "코레일, 폐안전모로 만든 안전우산 500개 취약계층에 기부",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-27T07:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002467970?sid=102"
+     "title": "“밥 대신 빵·우유”… 파업 참여 제주 48개교, 급식 차질 빚었다",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-27T08:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003704035?sid=102"
+    },
+    {
+     "title": "비정규직 총파업에 충청권 급식·돌봄 '차질'… 대체식·현장학습 대응",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-27T07:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193750?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1903,
+  "flagged": 1910,
   "matched": 947,
   "avgLeadMin": 617,
   "recent": [
