@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T23:20:24.813Z",
+ "builtAt": "2026-11-27T23:30:27.983Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "AI 반등으로 뉴욕증시 상승",
+   "keyword": "서현진 긴급 체포",
    "sources": [
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 4,
+   "articles90": 18,
+   "recent20": 0,
    "press": 15,
-   "firstArticleAt": "2026-11-27T21:56:00.000Z",
+   "firstArticleAt": "2026-11-27T22:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美증시, 간만에 일제히 상승…AI·기술주 반등",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-27T23:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729716?sid=104"
+     "title": "'라이어' 유연석 사망도 충격인데…서현진, 살해 용의자로 '긴급 체포' ...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-27T23:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084980"
     },
     {
-     "title": "메타, AI 기술주 매수 열기에 3%대 상승…주간 수익률 12% 돌파",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-27T23:12:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848718"
+     "title": "'라이어' 서현진, 유연석 살해 용의자 긴급 체포⋯시청률 4.8%",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-27T23:02:00.000Z",
+     "link": "http://www.joynews24.com/view/2031483"
     },
     {
-     "title": "뉴욕증시, AI 강세에 일제히 상승… 국제유가는 하락",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-27T23:08:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452822"
+     "title": "‘라이어’ 서현진, 유연석 살해 용의자로 긴급 체포…5.7% 최고의 1분",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T23:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192063"
     }
    ]
   },
   {
-   "keyword": "장나라 이혼 기각",
+   "keyword": "굿파트너 2",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
+   "articles90": 13,
    "recent20": 0,
    "press": 12,
-   "firstArticleAt": "2026-11-27T21:56:00.000Z",
+   "firstArticleAt": "2026-11-27T22:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -61,10 +61,10 @@
      "link": "https://m.entertain.naver.com/article/609/0001192061"
     },
     {
-     "title": "김혜윤, 장나라의 진짜 이혼 전략에 눈떴다…11.1% 돌파 '상승세'(굿파트...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-27T22:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000641307"
+     "title": "'굿파트너2' 시청률 9.8% 자체 최고…장나라·김혜윤, '라이어' 앞서",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T22:56:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288222"
     },
     {
      "title": "장나라의 '이혼 노하우'..\"찾았다\" 김혜윤, '굿파트너'..자체 최고 11.1%...",
@@ -75,17 +75,55 @@
    ]
   },
   {
+   "keyword": "AI 관련주 상승",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T22:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "채굴에서 AI 데이터센터로…아이렌·테라울프 주가 뛰었다",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-27T23:06:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=509099"
+    },
+    {
+     "title": "머스크 합병설부터 AI 쇼핑까지…빅테크 지각변동",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-27T23:02:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087479"
+    },
+    {
+     "title": "AI 데이터센터가 부른 구리 확보 전쟁…LS·풍산 수혜 기대 커지나",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-27T22:54:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=509096"
+    }
+   ]
+  },
+  {
    "keyword": "인터넷우체국 개인정보 유출",
    "sources": [
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-27T22:00:00.000Z",
+   "firstArticleAt": "2026-11-27T22:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "인터넷우체국 해킹…우편물 접수 정보 유출 확인",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-27T23:28:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121529"
+    },
     {
      "title": "인터넷우체국 해킹…하루치 개인정보 유출만 11만명 넘어",
      "press": "sentv.co.kr",
@@ -97,59 +135,59 @@
      "press": "ikbc.co.kr",
      "publishedAt": "2026-11-27T23:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/660/0000122386?sid=102"
-    },
-    {
-     "title": "인터넷우체국도 개인정보 털렸다…\"하루치만 11만여명\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-27T23:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359292?sid=105"
     }
    ]
   },
   {
-   "keyword": "이동연 팬레터 논란",
+   "keyword": "젠슨 황 복귀와 불륜 의혹",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T22:19:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T22:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이동연, 팬레터 폐기 논란에 '인증샷' 공개…고이 보관된 봉투들",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-27T23:18:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785480"
+     "title": "'젠슨황 불륜 상대' 연계 中시설서 엔비디아 최첨단 칩 발견",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-27T23:10:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888761"
     },
     {
-     "title": "이동연 “저걸 아직도 갖고 있어?” 모아둔 선물+편지 ‘증거들’ 여론...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T22:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192062"
+     "title": "사임 11일 만에 복귀했는데…'불륜상대' 연계 中시설서 발견된 물건 '발...",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-27T23:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274262?sid=104"
     },
     {
-     "title": "'팬레터 폐기' 뭇매 맞던 이동연, 2차 사과·인증샷에 비난 여론 '반전'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T22:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014350418"
+     "title": "'블랙웰' 엔비디아 최첨단 칩 '젠슨황 불륜 상대' 연계 中시설에서 발견",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-27T23:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000546420?sid=104"
     }
    ]
   },
   {
-   "keyword": "홍민기 전 연인 실종",
+   "keyword": "홍민기 배우",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 2,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-27T22:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "홍민기, 데이트폭행·낙태 종용 의혹 제기 전 연인 실종…마포대교서 신...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-27T23:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000641310"
+    },
     {
      "title": "'낙태-폭력 주장' 홍민기 전 연인, 마지막 종적은 마포대교",
      "press": "mediafine.co.kr",
@@ -161,44 +199,6 @@
      "press": "enews.imbc.com",
      "publishedAt": "2026-11-27T23:02:00.000Z",
      "link": "https://m.entertain.naver.com/article/408/0000329396"
-    },
-    {
-     "title": "폭로·고소 그리고 100일…홍민기 전 연인 실종 ‘아직 밝혀지지 않은 ...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-27T22:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001283978"
-    }
-   ]
-  },
-  {
-   "keyword": "신민아 재혼 황후 이야기",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T22:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신민아, '개비에슈' 주지훈의 뻔뻔한 궤변에 설득당했다…\"하면서 열받...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-27T23:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786549"
-    },
-    {
-     "title": "신민아, 이종석 이어 '이종새'와도 멜로…CG팀에 특별 주문 \"꼭 귀엽길\"...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-27T22:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786542"
-    },
-    {
-     "title": "이세영, 조롱마저 웃어 넘긴 악녀…\"시즌2서 더 욕 먹고 싶다\" ('재혼황...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-27T22:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786539"
     }
    ]
   },
@@ -233,12 +233,76 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016468593?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "신민아, 재혼 황후 이야기",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T22:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신민아, '개비에슈' 주지훈의 뻔뻔한 궤변에 설득당했다…\"하면서 열받...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-27T23:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786549"
+    },
+    {
+     "title": "이세영, 조롱마저 웃어 넘긴 악녀…\"시즌2서 더 욕 먹고 싶다\" ('재혼황...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-27T22:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786539"
+    },
+    {
+     "title": "신민아, 이종석 이어 '이종새'와도 멜로…CG팀에 특별 주문 \"꼭 귀엽길\"...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-27T22:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786542"
+    }
+   ]
+  },
+  {
+   "keyword": "국제유가 하락 마감",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T22:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국제유가, 중동 정세 불안에도 하락 마감… 브렌트유 1.17%↓",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-27T22:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207912?sid=104"
+    },
+    {
+     "title": "중동 불안에도 국제유가 하락…OPEC+ 회의 주목",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-27T22:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274259?sid=101"
+    },
+    {
+     "title": "국제유가, 1% 안팎 하락 마감⋯OPEC+ 회의 앞두고 관망 [상보]",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T22:12:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654161"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1974,
-  "matched": 973,
+  "flagged": 1976,
+  "matched": 972,
   "avgLeadMin": 655,
   "recent": [
    {
