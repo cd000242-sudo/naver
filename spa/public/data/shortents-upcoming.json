@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T07:25:04.217Z",
+ "builtAt": "2026-11-27T07:35:07.677Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 21,
  "candidates": [
   {
-   "keyword": "코스피 4.34% 상승 4915.68 마감",
+   "keyword": "코스피 코스닥 급등",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 68,
-   "recent20": 22,
-   "press": 58,
-   "firstArticleAt": "2026-11-27T06:34:00.000Z",
+   "articles90": 79,
+   "recent20": 16,
+   "press": 69,
+   "firstArticleAt": "2026-11-27T06:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[KDF 시황] 코스피 4915 마감·코스닥 708… 증안펀드 기대에 증권·바이...",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-27T07:20:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191559"
+     "title": "‘증안펀드’ 기대감?…코스피 4%·코스닥 8% 급등",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-27T07:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834324?sid=101"
     },
     {
-     "title": "증안펀드 가동 기대감? 코스피 3거래일 만에 4900선 회복",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-27T07:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703983?sid=101"
+     "title": "코스피 4.3% 상승...코스닥 8% 급등해 700선 탈환",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-27T07:34:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1429954"
     },
     {
-     "title": "코스피, 美 지수선물 강세·증안펀드 기대에 '4900선 회복'…코스닥 8.13...",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-27T07:20:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=756884"
+     "title": "코스피, 외국인 1.1조 매수에 방긋...4900선 회복 마감",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-27T07:34:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=303748"
+    }
+   ]
+  },
+  {
+   "keyword": "이용철 인사청문보고서 채택",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 43,
+   "recent20": 9,
+   "press": 35,
+   "firstArticleAt": "2026-11-27T06:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "법사위, 이용철 법무장관 후보자 청문보고서 채택…국힘 퇴장",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-27T07:32:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=173271"
+    },
+    {
+     "title": "국회 법사위, 이용철 인사청문보고서 與 주도 채택…국힘은 퇴장",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-27T07:30:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446995"
+    },
+    {
+     "title": "법사위, 이용철 법무장관 후보자 인사청문보고서 與 주도 채택",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T07:26:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127155959908"
     }
    ]
   },
@@ -47,77 +79,85 @@
    "sources": [
     "nate"
    ],
-   "articles90": 55,
+   "articles90": 50,
    "recent20": 8,
-   "press": 26,
-   "firstArticleAt": "2026-11-27T05:57:00.000Z",
+   "press": 27,
+   "firstArticleAt": "2026-11-27T06:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박홍근 \"법사위가 상원이냐\" 서영교 \"이런 장관 처음\"…與 법사위원장과...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T07:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014349990?sid=100"
+     "title": "박홍근 \"미래대응기금 여유자금 연기금투자풀 위탁 검토\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-27T07:32:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446996"
     },
     {
-     "title": "박홍근 \"국회법대로 하자\" 서영교 \"태도 고압적\"…법사위서 '여 정면충...",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-27T07:10:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322162&inflow=N"
+     "title": "박홍근 \"미래대응기금 여유자금 투자풀 위탁 검토\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T07:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416680?sid=101"
     },
     {
-     "title": "與끼리 고성 주고받으며 충돌…“여기가 상원이냐” 박홍근 vs “고압적...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-27T07:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061544?sid=100"
+     "title": "\"법안만 질문하라, 법사위답게 하라\" 박홍근 장관 고압적 태도 파문…서...",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-27T07:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138985?sid=100"
     }
    ]
   },
   {
-   "keyword": "한성숙 총리, 사회연대경제 박람회",
+   "keyword": "발언하는 이재명 대통령",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 40,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T05:56:00.000Z",
+   "articles90": 21,
+   "recent20": 5,
+   "press": 14,
+   "firstArticleAt": "2026-11-27T06:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "추미애 \"사회연대경제가 뿌리내리도록 경기도가 앞장서겠다\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-27T07:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848951?sid=102"
+     "title": "李대통령 \"연 50조 R&D 성과 국가가 환수해야…욕먹더라도 할 일 할 것\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-27T07:28:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446994"
     },
     {
-     "title": "한 총리 \"사회연대금융 전담기관 지정…500억원 이상 펀드 조성\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T07:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930586?sid=100"
+     "title": "사회대개혁위원회 출범 1주년 간담회 주재하는 이 대통령",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T07:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359101?sid=100"
     },
     {
-     "title": "한 총리 “사회연대금융 전담기관 지정…500억 이상 전용 펀드 조성”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T07:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302719?sid=100"
+     "title": "李대통령 \"12.3 책임자에 합당한 책임 물을 때 완전한 내란 종식\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-27T07:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214721?sid=100"
     }
    ]
   },
   {
    "keyword": "최민희 징계",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T05:57:00.000Z",
+   "articles90": 14,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-27T06:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정청래 \"당대표라도 징계 앞에 예외일 수 없어\" 김민석 직격",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-27T07:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160363?sid=100"
+    },
     {
      "title": "[여의도1번지] 징계 심판대 오른 최민희…민주당 계파갈등 분수령",
      "press": "yonhapnewstv.co.kr",
@@ -129,77 +169,6 @@
      "press": "khan.co.kr",
      "publishedAt": "2026-11-27T07:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/032/0003485553?sid=100"
-    },
-    {
-     "title": "정청래, 김민석 겨냥 \"당대표라도 징계 앞에 예외 없다\" 공세",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-27T06:46:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/27/2026112750265.html"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 R&D 성과 환수",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-27T05:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 \"연 50조 R&D 성과 국가환수 필요…욕먹어도 할 일 해야\"",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-27T07:14:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95316"
-    },
-    {
-     "title": "李대통령 \"욕먹어도 할 일 해야\"…성과공유형 재정지원 강조",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-27T07:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610886?sid=100"
-    },
-    {
-     "title": "李 대통령, R&D 투자 언급하며 \"일부 '억까' 언론·무조건 반대정치 장애...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-27T06:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178654?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "신태일",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T06:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보] '미성년자 성착취물 생중계' BJ 신태일, 항소심도 징역 6년",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-27T07:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000494024"
-    },
-    {
-     "title": "'미성년 성착취 생중계' 신태일 징역 6년...시청도 처벌",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T07:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416668?sid=102"
-    },
-    {
-     "title": "BJ 신태일, 미성년자 성착취물 생중계…항소심도 징역 6년",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-27T07:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543924"
     }
    ]
   },
@@ -208,13 +177,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 9,
+   "articles90": 12,
+   "recent20": 1,
+   "press": 10,
    "firstArticleAt": "2026-11-27T06:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경찰, '수사자료 유출 의혹' 법무부·공소청 압수수색",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-27T07:32:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545210"
+    },
     {
      "title": "한동훈 “경찰이 민주당의 지팡이” vs 김승원 “속은 여전히 정치검찰...",
      "press": "dt.co.kr",
@@ -226,24 +201,51 @@
      "press": "sisajournal.com",
      "publishedAt": "2026-11-27T06:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/586/0000143192?sid=100"
-    },
-    {
-     "title": "한동훈, 법무부·공소청 압수수색에…\"경찰이 '민주당의 지팡이'로 나서...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T06:50:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127001130"
     }
    ]
   },
   {
-   "keyword": "남경필 아들 폭행 협박",
+   "keyword": "한성숙 총리, 박람회 개막축사",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 4,
+   "articles90": 10,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T06:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "고양시, 행안부·경기도 등과 제8회 사회연대경제박람회 공동 주관",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-27T07:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000134096?sid=102"
+    },
+    {
+     "title": "한 총리 \"사회연대금융 전담기관 지정…500억원 이상 펀드 조성\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T07:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930586?sid=100"
+    },
+    {
+     "title": "제8회 대한민국 사회연대경제 박람회 및 국제컨퍼런스, 킨텍스에서 개막",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-27T06:34:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2024373"
+    }
+   ]
+  },
+  {
+   "keyword": "남경필 장남 협박 혐의 체포",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T05:56:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-27T06:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -260,106 +262,10 @@
      "link": "https://n.news.naver.com/mnews/article/033/0000053681?sid=102"
     },
     {
-     "title": "남경필 전 경기지사 아들, 前 연인 성관계영상 유포 협박.스토킹 혐의로...",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-27T06:44:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888710"
-    }
-   ]
-  },
-  {
-   "keyword": "북한 해커 바이낸스 세탁",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T05:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"북한 해커, 바이낸스서 탈취한 암호화폐 온라인서 본격 세탁\"",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-27T06:12:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82797"
-    },
-    {
-     "title": "\"北 해커, 바이낸스서 탈취 가상화폐 세탁 본격화\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-27T06:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214672?sid=104"
-    },
-    {
-     "title": "‘바이낸스서 8조 탈취’ 북 해킹조직, 본격 돈세탁 시작··· 거래 흔적...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-27T05:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485535?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "미세먼지",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T05:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "군포시, 제8차 미세먼지 계절 관리제 시행",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-27T06:50:00.000Z",
-     "link": "https://www.viva100.com/article/20261127500555"
-    },
-    {
-     "title": "제주도, 미세먼지 저감 '계절 관리제' 시행",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-27T06:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000087153?sid=100"
-    },
-    {
-     "title": "제주, 겨울철 '미세먼지 차단' 공사장·차량배출가스 단속 강화",
-     "press": "headlinejeju.co.kr",
-     "publishedAt": "2026-11-27T06:02:00.000Z",
-     "link": "https://www.headlinejeju.co.kr/news/articleView.html?idxno=602880"
-    }
-   ]
-  },
-  {
-   "keyword": "재혼 황후 신민아 김우빈 반응",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T06:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘재혼 황후’ 신민아 “남편 김우빈 완전 팬, 나비에라 부른다”…이종...",
-     "press": "wikitree.co.kr",
+     "title": "남경필 장남 체포…전 연인 폭행·스토킹·‘영상 유포’ 협박 혐의",
+     "press": "hani.co.kr",
      "publishedAt": "2026-11-27T06:36:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1178406"
-    },
-    {
-     "title": "[SC인터뷰] \"김우빈♥, 집에서도 나비에로 불러\"…'재혼황후' 신민아, 왕...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-27T06:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004470281"
-    },
-    {
-     "title": "'재혼 황후' 신민아 \"남편 김우빈 반응? 너무 재밌게 봐서 놀랐다\" [인터...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-27T06:16:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110121664537"
+     "link": "https://n.news.naver.com/mnews/article/028/0002834307?sid=102"
     }
    ]
   },
@@ -369,7 +275,7 @@
     "nate"
    ],
    "articles90": 21,
-   "recent20": 4,
+   "recent20": 0,
    "press": 2,
    "firstArticleAt": "2026-11-27T06:32:00.000Z",
    "exclusive": false,
@@ -382,26 +288,56 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009314690?sid=102"
     },
     {
-     "title": "묵념하는 신임 장교들",
+     "title": "임관 후 첫 경례하는 신임 해군·해병대 장교들",
      "press": "news1.kr",
      "publishedAt": "2026-11-27T07:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314675?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/421/0009314688?sid=102"
     },
     {
      "title": "힘차게 경례하는 신임 해군·해병대 장교들",
      "press": "news1.kr",
      "publishedAt": "2026-11-27T07:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314676?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/421/0009314678?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1875,
-  "matched": 926,
-  "avgLeadMin": 611,
+  "flagged": 1877,
+  "matched": 931,
+  "avgLeadMin": 614,
   "recent": [
+   {
+    "keyword": "수능 부정신고 5억 포상",
+    "hitKeyword": "수능 부정행위 신고 포상",
+    "hitAt": "2026-11-27T16:30:00+09:00",
+    "leadMin": 5469
+   },
+   {
+    "keyword": "준법투쟁",
+    "hitKeyword": "철도노조 준법투쟁",
+    "hitAt": "2026-11-27T16:30:00+09:00",
+    "leadMin": 417
+   },
+   {
+    "keyword": "시험 부정행위",
+    "hitKeyword": "수능 부정행위 신고 포상",
+    "hitAt": "2026-11-27T16:30:00+09:00",
+    "leadMin": 85
+   },
+   {
+    "keyword": "학교 비정규직 총파업",
+    "hitKeyword": "학교 비정규직 파업",
+    "hitAt": "2026-11-27T16:30:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "신태일",
+    "hitKeyword": "신태일 미성년자 성 착취",
+    "hitAt": "2026-11-27T16:30:00+09:00",
+    "leadMin": 25
+   },
    {
     "keyword": "유승민 FIFA 서한 정관 충돌",
     "hitKeyword": "FIFA AFC 방한",
@@ -431,36 +367,6 @@
     "hitKeyword": "비정규직 파업 대체급식",
     "hitAt": "2026-11-27T15:30:00+09:00",
     "leadMin": 46
-   },
-   {
-    "keyword": "아일릿 모카, 5개월 만에 복귀",
-    "hitKeyword": "지나 10년 만에 복귀",
-    "hitAt": "2026-11-27T15:30:00+09:00",
-    "leadMin": 46
-   },
-   {
-    "keyword": "가수",
-    "hitKeyword": "가수 지나 10년 복귀",
-    "hitAt": "2026-11-27T15:00:00+09:00",
-    "leadMin": 1645
-   },
-   {
-    "keyword": "빅뱅",
-    "hitKeyword": "김유정 빅뱅 팬심",
-    "hitAt": "2026-11-27T15:00:00+09:00",
-    "leadMin": 327
-   },
-   {
-    "keyword": "학교 급식 대신 빵",
-    "hitKeyword": "학교 급식 파업",
-    "hitAt": "2026-11-27T14:30:00+09:00",
-    "leadMin": 56
-   },
-   {
-    "keyword": "학교 파업 밥 대신 빵",
-    "hitKeyword": "학교 급식 파업",
-    "hitAt": "2026-11-27T14:30:00+09:00",
-    "leadMin": 26
    }
   ]
  }
