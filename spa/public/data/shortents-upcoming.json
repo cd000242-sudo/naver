@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T10:16:04.975Z",
+ "builtAt": "2026-11-27T10:26:08.711Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -14,33 +14,32 @@
    "keyword": "최민희 중징계 의결",
    "sources": [
     "signal.bz",
-    "nate",
-    "daum"
+    "nate"
    ],
-   "articles90": 97,
+   "articles90": 96,
    "recent20": 12,
-   "press": 68,
-   "firstArticleAt": "2026-11-27T08:52:00.000Z",
+   "press": 66,
+   "firstArticleAt": "2026-11-27T08:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최민희 의원 '당원권 정지 2년' 중징계…\"재심 신청할 것\"",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-27T10:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980212?sid=100"
+     "title": "최민희 '당원권 정지 2년' 중징계에…\"수용 불가\" 재심 신청",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-27T10:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522848?sid=100"
     },
     {
-     "title": "'최민희 중징계'에 친청계 \"김민석은?\"…與계파갈등 벼랑끝으로",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T10:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468458?sid=100"
+     "title": "친청계, 최민희 중징계에 일제히 반발…정청래 \"김민석 '반·분·신' 해당...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T10:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350244?sid=100"
     },
     {
-     "title": "[속보] 與, 최민희 '당원권 2년 정지' 중징계…崔 \"수용 불가, 재심 신청...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-27T10:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122366?sid=100"
+     "title": "민주당 윤리심판원 중징계에 최민희·정청래 \"납득할 수 없다\" 반발",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-27T10:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193759?sid=100"
     }
    ]
   },
@@ -50,45 +49,52 @@
     "nate",
     "daum"
    ],
-   "articles90": 65,
-   "recent20": 16,
-   "press": 53,
-   "firstArticleAt": "2026-11-27T08:52:00.000Z",
-   "exclusive": true,
+   "articles90": 66,
+   "recent20": 8,
+   "press": 54,
+   "firstArticleAt": "2026-11-27T09:00:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "카카오 김범수 센터장, SM엔터 시세조종 혐의 무죄 확정",
-     "press": "globale.co.kr",
-     "publishedAt": "2026-11-27T10:14:00.000Z",
-     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41892"
+     "title": "김범수 ‘SM시세조종 혐의’무죄 확정…공소청 상고 포기",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T10:24:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654131"
     },
     {
-     "title": "'SM엔터 시세조종' 김범수 무죄 확정…공소청 상고 포기",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T10:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406402?sid=102"
+     "title": "김범수 카카오 창업자, SM엔터 시세조종 혐의 무죄 확정",
+     "press": "byline.network",
+     "publishedAt": "2026-11-27T10:22:00.000Z",
+     "link": "https://byline.network/?p=9004111222629571"
     },
     {
-     "title": "'SM 시세조종 혐의' 카카오 김범수 무죄 확정… 공소청 상고 포기",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-27T10:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968234?sid=102"
+     "title": "카카오 김범수 SM시세조종 무죄 확정",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T10:20:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288074"
     }
    ]
   },
   {
    "keyword": "노태악 압수수색",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 19,
-   "recent20": 6,
-   "press": 18,
+   "articles90": 20,
+   "recent20": 3,
+   "press": 19,
    "firstArticleAt": "2026-11-27T09:08:00.000Z",
-   "exclusive": false,
+   "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[단독] 선관위 특검, 노태악·허철훈 등 증거인멸 정황 포착… 盧 2차 압...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-27T10:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004012151?sid=102"
+    },
     {
      "title": "선관위 특검, 노태악 전 선관위원장 또 압수수색…공추비 의혹 관련",
      "press": "news.jtbc.co.kr",
@@ -100,12 +106,38 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-27T10:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001538566?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "홍민기",
+   "sources": [
+    "google"
+   ],
+   "articles90": 17,
+   "recent20": 2,
+   "press": 16,
+   "firstArticleAt": "2026-11-27T09:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'홍민기 스캔들 폭로' 전여친 A씨, 실종돼 수색 中",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-27T10:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054479"
     },
     {
-     "title": "선관위 특검, 노태악 휴대폰 압수수색…공추비 부당 지급 의혹",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-27T10:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000556417?sid=102"
+     "title": "‘홍민기 사생활 폭로’ 전 여자친구 실종…마포대교 일대서 수색 작업...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T10:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191944"
+    },
+    {
+     "title": "배우 홍민기 전 여자친구 실종…마포대교 일대서 수색",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-27T09:56:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628233"
     }
    ]
   },
@@ -114,13 +146,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 0,
-   "press": 17,
-   "firstArticleAt": "2026-11-27T08:54:00.000Z",
+   "articles90": 17,
+   "recent20": 1,
+   "press": 16,
+   "firstArticleAt": "2026-11-27T08:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국민연금 3개월 만에 202조원 증발...상반기 수익 절반 반납",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-27T10:24:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261127500359"
+    },
     {
      "title": "국민연금 1∼9월 국내주식 수익률 66%…상반기 견주면 반토막",
      "press": "hani.co.kr",
@@ -132,76 +170,6 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-27T09:40:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005610933?sid=101"
-    },
-    {
-     "title": "국민연금 적립금 석달새 202조원 감소…9월말 1664조원",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-27T09:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447587?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "홍민기",
-   "sources": [
-    "google"
-   ],
-   "articles90": 15,
-   "recent20": 0,
-   "press": 14,
-   "firstArticleAt": "2026-11-27T09:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "배우 홍민기 전 여자친구 실종…마포대교 일대서 수색",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-27T09:56:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628233"
-    },
-    {
-     "title": "홍민기 전 여자친구 실종 신고…경찰, 마포대교 인근 수색",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-27T09:50:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848681"
-    },
-    {
-     "title": "홍민기 ‘사생활 의혹’ 제기한 전 여자친구 실종... 경찰 수색 中",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-27T09:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543939"
-    }
-   ]
-  },
-  {
-   "keyword": "2026 제네시스 시상식",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-27T08:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2026 KPGA 제네시스 대상 시상식",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T10:12:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/001/0016468455"
-    },
-    {
-     "title": "신상훈, 2026 한국프로골프협회 대상 영예",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T10:12:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/001/0016468457"
-    },
-    {
-     "title": "[포토] '제네시스 대상' 신상훈, '숨길 수 없는 입꼬리'",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-27T10:10:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749460"
     }
    ]
   },
@@ -210,10 +178,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 22,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-27T08:50:00.000Z",
+   "articles90": 16,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T08:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -242,13 +210,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T08:47:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-27T08:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "강유정 문체부 장관 후보자, 논문 자기표절 의혹에 “사실 아니야”",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T10:24:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654132"
+    },
     {
      "title": "강유정 재산 46억 신고···논문 자기표절 의혹도",
      "press": "thereport.co.kr",
@@ -260,76 +234,6 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-27T09:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001538560?sid=100"
-    },
-    {
-     "title": "국힘 \"강유정, 자기논문 표절\"…姜측 \"연구윤리 위반 아냐\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-27T09:22:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785406"
-    }
-   ]
-  },
-  {
-   "keyword": "박홍근 서영교 법사위 충돌",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T08:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박홍근 \"이러니까 법사위가 문제\" 서영교 \"상당히 불편\"…與 장관·위원...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-27T10:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042794?sid=100"
-    },
-    {
-     "title": "박홍근, 법사위 충돌 정면 반박...\"관행에 휘둘려 소신 바꾸지 않을 것...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T09:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439115?sid=100"
-    },
-    {
-     "title": "법사위, 새만금 예산 질의 놓고 박홍근·서영교 충돌…회의 한때 중단",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-27T09:24:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1429923"
-    }
-   ]
-  },
-  {
-   "keyword": "IM금융 차기 회장 3명 압축",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T08:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "iM금융 차기 회장 숏리스트 3명…황병우 회장 포함",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-27T09:56:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261127500397"
-    },
-    {
-     "title": "iM금융, 차기 회장 후보 3명 압축…황병우 회장 포함",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-27T09:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004687034?sid=101"
-    },
-    {
-     "title": "iM금융그룹 차기 회장 후보 3명 압축…황병우 회장 연임 도전 속 외부인...",
-     "press": "queen.co.kr",
-     "publishedAt": "2026-11-27T09:26:00.000Z",
-     "link": "http://www.queen.co.kr/news/articleView.html?idxno=467079"
     }
    ]
   },
@@ -340,7 +244,7 @@
     "google"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-27T08:58:00.000Z",
    "exclusive": false,
@@ -367,15 +271,46 @@
    ]
   },
   {
+   "keyword": "박홍근 법사위 충돌 반박",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T09:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서영교·박홍근, 법사위서 충돌…\"이런 경우 처음\"·\"국회법대로\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T10:16:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127185724398"
+    },
+    {
+     "title": "박홍근 \"이러니까 법사위가 문제\" 서영교 \"상당히 불편\"…與 장관·위원...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-27T10:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001042794?sid=100"
+    },
+    {
+     "title": "박홍근, 법사위 충돌 정면 반박...\"관행에 휘둘려 소신 바꾸지 않을 것...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T09:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439115?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "채령 A형 독감 팬사인회 연기",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T08:50:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T09:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -400,105 +335,73 @@
    ]
   },
   {
-   "keyword": "황교안 내란선동 구형",
+   "keyword": "남경필 장남 협박 혐의 체포",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-27T08:47:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-27T09:03:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "특검, 'SNS 내란선동' 혐의 황교안에 징역 10년 구형",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T09:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930648?sid=102"
+     "title": "[단독] 남경필 장남, 스토킹 혐의 체포...성관계 영상 유포 협박도",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T09:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439117?sid=102"
     },
     {
-     "title": "내란특검, ‘SNS 내란선동’ 황교안에 징역 10년 구형",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T09:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005770149?sid=102"
-    },
-    {
-     "title": "황교안, SNS에 '계엄 지지' 글 올린 혐의 징역 10년 구형",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-27T08:52:00.000Z",
-     "link": "https://www.insight.co.kr/news/583917"
-    }
-   ]
-  },
-  {
-   "keyword": "보현 결혼 발표",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T09:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'환승연애' 김보현, 내년 봄 결혼…예비 신랑 누구?",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T10:08:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288036"
-    },
-    {
-     "title": "'환승연애' 김보현 깜짝 결혼 발표..\"매일매일 웃음 가득\" 웨딩화보[스타...",
-     "press": "starnewskorea.com",
+     "title": "남경필 전 경기지사 아들 '전 연인 성관계 영상 유포 협박' 등 혐의 체포...",
+     "press": "news1.kr",
      "publishedAt": "2026-11-27T09:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490719"
+     "link": "https://n.news.naver.com/mnews/article/421/0009314899?sid=102"
     },
     {
-     "title": "‘환승연애’ 보현, 내년 봄 결혼한다… “평생 함께할 사람 만나”",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-27T09:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001152066"
+     "title": "'마약 투약 전력' 남경필 장남, 전 연인 폭행·스토킹으로 체포",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-27T09:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005849000?sid=102"
     }
    ]
   },
   {
-   "keyword": "허은아",
+   "keyword": "제네시스 대상 수상자들",
    "sources": [
-    "google"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-27T08:56:00.000Z",
+   "firstArticleAt": "2026-11-27T09:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "청와대 2기 참모진 개편 속도…허은아·이동연·이주한 비서관 사직",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-27T09:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000134112?sid=100"
+     "title": "신상훈, 생애 첫 한국프로골프협회 대상 영예…장유빈은 상금왕",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-27T09:15:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/241/0003543935"
     },
     {
-     "title": "허은아 국민통합비서관 사직…문체비서관 사의도 수용",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-27T09:14:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545240"
+     "title": "생애 첫 대상 품은 신상훈, 2억원에 GV80까지 ‘잭팟’",
+     "press": "feedapi.cloud.sbs.co.kr",
+     "publishedAt": "2026-11-27T09:12:00.000Z",
+     "link": "https://feedapi.cloud.sbs.co.kr/feed-api/article_hub/G20000002580"
     },
     {
-     "title": "청와대 2기 참모진 개편 본격화…허은아 등 비서관 3명 사직",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T08:56:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127174740257"
+     "title": "신상훈, 2026시즌 KPGA 제네시스 대상…\"더 높은 곳 가겠다\"(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T09:06:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/003/0014350190"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1928,
+  "flagged": 1930,
   "matched": 955,
   "avgLeadMin": 632,
   "recent": [
