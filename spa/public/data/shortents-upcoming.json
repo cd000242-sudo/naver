@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T07:15:01.067Z",
+ "builtAt": "2026-11-27T07:25:04.217Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "코스피 코스닥 급등",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 76,
-   "recent20": 47,
-   "press": 67,
-   "firstArticleAt": "2026-11-27T06:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코스피 4.34% 상승해 4900선 회복…코스닥 8%대 급등",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-27T07:14:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1140696"
-    },
-    {
-     "title": "코스피, 4% 상승...4900선 회복",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-27T07:14:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=729804"
-    },
-    {
-     "title": "양대 호재, 코스피 '급등'...한화·효성·한국금융지주 '껑충'",
-     "press": "choicenews.co.kr",
-     "publishedAt": "2026-11-27T07:14:00.000Z",
-     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173571"
-    }
-   ]
-  },
-  {
-   "keyword": "장선익, 사장 승진",
+   "keyword": "코스피 4.34% 상승 4915.68 마감",
    "sources": [
     "nate"
    ],
-   "articles90": 49,
-   "recent20": 8,
-   "press": 48,
-   "firstArticleAt": "2026-11-27T05:51:00.000Z",
+   "articles90": 68,
+   "recent20": 22,
+   "press": 58,
+   "firstArticleAt": "2026-11-27T06:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "오너 4세 장선익 사장 승진…동국제강, 경영·생산 '투톱 체제'로 바꾼다",
-     "press": "newsinside.kr",
-     "publishedAt": "2026-11-27T07:14:00.000Z",
-     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5058221"
+     "title": "[KDF 시황] 코스피 4915 마감·코스닥 708… 증안펀드 기대에 증권·바이...",
+     "press": "kdfnews.com",
+     "publishedAt": "2026-11-27T07:20:00.000Z",
+     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191559"
     },
     {
-     "title": "동국제강, '오너 4세' 장선익 사장 승진… 경영 보폭 넓힌다",
-     "press": "biztribune.co.kr",
-     "publishedAt": "2026-11-27T07:12:00.000Z",
-     "link": "http://www.biztribune.co.kr/news/articleView.html?idxno=363340"
+     "title": "증안펀드 가동 기대감? 코스피 3거래일 만에 4900선 회복",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-27T07:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703983?sid=101"
     },
     {
-     "title": "동국제강, '오너 4세' 장선익 사장 승진…\"구매 담당서 핵심 계열사 경...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T07:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014349957?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "학교 비정규직 총파업",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 70,
-   "recent20": 32,
-   "press": 38,
-   "firstArticleAt": "2026-11-27T05:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[모멘트] 학교 비정규직 총파업... 오늘은 밥 대신 빵",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T07:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468174?sid=102"
-    },
-    {
-     "title": "오늘 빵으로 버틴 학교 4014곳…총파업에 급식 멈춘 학교 역대 최고",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-27T07:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447484?sid=102"
-    },
-    {
-     "title": "“초과세수 교육에 투자하고 임금 올려 달라” 학교 비정규직 총파업…...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-27T07:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568488?sid=102"
+     "title": "코스피, 美 지수선물 강세·증안펀드 기대에 '4900선 회복'…코스닥 8.13...",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-27T07:20:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=756884"
     }
    ]
   },
@@ -111,18 +47,18 @@
    "sources": [
     "nate"
    ],
-   "articles90": 54,
-   "recent20": 11,
-   "press": 25,
-   "firstArticleAt": "2026-11-27T05:46:00.000Z",
+   "articles90": 55,
+   "recent20": 8,
+   "press": 26,
+   "firstArticleAt": "2026-11-27T05:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박홍근 '답변 거부'에 법사위 고성 충돌…한때 정회",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-27T07:10:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088732"
+     "title": "박홍근 \"법사위가 상원이냐\" 서영교 \"이런 장관 처음\"…與 법사위원장과...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T07:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014349990?sid=100"
     },
     {
      "title": "박홍근 \"국회법대로 하자\" 서영교 \"태도 고압적\"…법사위서 '여 정면충...",
@@ -139,50 +75,23 @@
    ]
   },
   {
-   "keyword": "이재명 R&D 성과 환수",
+   "keyword": "한성숙 총리, 사회연대경제 박람회",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T05:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 \"욕먹어도 할 일 해야\"…성과공유형 재정지원 강조",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-27T07:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610886?sid=100"
-    },
-    {
-     "title": "李 대통령, R&D 투자 언급하며 \"일부 '억까' 언론·무조건 반대정치 장애...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-27T06:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178654?sid=100"
-    },
-    {
-     "title": "李대통령 \"'억까'와 '무조건 반대'가 성과공유형 재정지원 가로막아\"",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-27T06:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000143193?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "한성숙 총리, 사회연대경제 박람회",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 39,
+   "articles90": 40,
    "recent20": 3,
-   "press": 12,
+   "press": 13,
    "firstArticleAt": "2026-11-27T05:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "추미애 \"사회연대경제가 뿌리내리도록 경기도가 앞장서겠다\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-27T07:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848951?sid=102"
+    },
     {
      "title": "한 총리 \"사회연대금융 전담기관 지정…500억원 이상 펀드 조성\"",
      "press": "yonhapnewstv.co.kr",
@@ -194,12 +103,70 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-27T07:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012302719?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "최민희 징계",
+   "sources": [
+    "google"
+   ],
+   "articles90": 15,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T05:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[여의도1번지] 징계 심판대 오른 최민희…민주당 계파갈등 분수령",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T07:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930588?sid=100"
     },
     {
-     "title": "'제8회 대한민국 사회연대경제박람회 및 국제컨퍼런스' 고양 킨텍스서 ...",
-     "press": "incheonilbo.com",
+     "title": "최민희 ‘운명의 날’…윤리심판원 중징계 전망 속 ‘전운’ 감도는 민...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-27T07:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485553?sid=100"
+    },
+    {
+     "title": "정청래, 김민석 겨냥 \"당대표라도 징계 앞에 예외 없다\" 공세",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-27T06:46:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/27/2026112750265.html"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 R&D 성과 환수",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-27T05:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 \"연 50조 R&D 성과 국가환수 필요…욕먹어도 할 일 해야\"",
+     "press": "seouleconews.com",
+     "publishedAt": "2026-11-27T07:14:00.000Z",
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95316"
+    },
+    {
+     "title": "李대통령 \"욕먹어도 할 일 해야\"…성과공유형 재정지원 강조",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-27T07:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610886?sid=100"
+    },
+    {
+     "title": "李 대통령, R&D 투자 언급하며 \"일부 '억까' 언론·무조건 반대정치 장애...",
+     "press": "segye.com",
      "publishedAt": "2026-11-27T06:56:00.000Z",
-     "link": "https://www.incheonilbo.com/news/articleView.html?idxno=1338014"
+     "link": "https://n.news.naver.com/mnews/article/022/0004178654?sid=100"
     }
    ]
   },
@@ -209,62 +176,62 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
    "firstArticleAt": "2026-11-27T06:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "[속보] '미성년자 성착취물 생중계' BJ 신태일, 항소심도 징역 6년",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-27T07:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000494024"
+    },
+    {
+     "title": "'미성년 성착취 생중계' 신태일 징역 6년...시청도 처벌",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T07:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416668?sid=102"
+    },
+    {
      "title": "BJ 신태일, 미성년자 성착취물 생중계…항소심도 징역 6년",
      "press": "isplus.com",
      "publishedAt": "2026-11-27T07:11:00.000Z",
      "link": "https://m.entertain.naver.com/article/241/0003543924"
-    },
-    {
-     "title": "[TOP이슈] 신태일, 항소심도 징역 6년",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T06:54:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287935"
-    },
-    {
-     "title": "'미성년 성 착취 생방' BJ 신태일, 항소심도 징역 6년",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-27T06:52:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110121855395"
     }
    ]
   },
   {
-   "keyword": "교통",
+   "keyword": "유출 경찰 압수수색에",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T06:52:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-27T06:11:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "남양주시 교통유발부담금 18억 징수… 교통혼잡 개선에는 얼마나 쓰였나",
-     "press": "ohmynews.com",
+     "title": "한동훈 “경찰이 민주당의 지팡이” vs 김승원 “속은 여전히 정치검찰...",
+     "press": "dt.co.kr",
      "publishedAt": "2026-11-27T07:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002537498?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/029/0003061542?sid=102"
     },
     {
-     "title": "청라하늘대교 통행료 감면 주소지 기준…인권위 \"국적 차별\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T06:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468134?sid=102"
+     "title": "한동훈, '檢수사자료 유출 의혹' 압색에 \"참 속보이고 치졸한 정권\"",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-27T06:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143192?sid=100"
     },
     {
-     "title": "행복청, 행정수도 광역교통기반 확충...대광위 통과",
-     "press": "ccreview.co.kr",
-     "publishedAt": "2026-11-27T06:56:00.000Z",
-     "link": "https://www.ccreview.co.kr/news/articleView.html?idxno=363846"
+     "title": "한동훈, 법무부·공소청 압수수색에…\"경찰이 '민주당의 지팡이'로 나서...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T06:50:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127001130"
     }
    ]
   },
@@ -274,7 +241,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-27T05:56:00.000Z",
    "exclusive": false,
@@ -395,11 +362,43 @@
      "link": "http://www.stoo.com/article.php?aid=110121664537"
     }
    ]
+  },
+  {
+   "keyword": "신임 해군 해병대 장교들 임관식",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 21,
+   "recent20": 4,
+   "press": 2,
+   "firstArticleAt": "2026-11-27T06:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "임관사령장 받은 신임 장교들의 힘찬 경례",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T07:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314690?sid=102"
+    },
+    {
+     "title": "묵념하는 신임 장교들",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T07:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314675?sid=102"
+    },
+    {
+     "title": "힘차게 경례하는 신임 해군·해병대 장교들",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T07:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314676?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1871,
+  "flagged": 1875,
   "matched": 926,
   "avgLeadMin": 611,
   "recent": [
