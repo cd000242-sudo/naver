@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T05:24:22.689Z",
+ "builtAt": "2026-11-27T05:34:26.400Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,84 +8,186 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 23,
  "candidates": [
   {
-   "keyword": "한동훈 수사자료 유출 압수수색",
+   "keyword": "HDC그룹 강민석 대표 선임",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-27T04:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한동훈 \"경찰, 김승원 돕기 수사…'민주당의 지팡이'로 나서\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T05:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467793?sid=100"
-    },
-    {
-     "title": "경찰, ‘한동훈 자료유출 의혹’ 법무부·공소청 등 압수수색",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T05:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302639?sid=102"
-    },
-    {
-     "title": "'한동훈 자료유출 의혹'‥법무부·공소청 압수수색",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-27T05:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538499?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "추미애 산불 대응",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 11,
+   "articles90": 39,
+   "recent20": 7,
+   "press": 38,
    "firstArticleAt": "2026-11-27T04:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "추미애 지사, 산불 대비 총력 주문…\"국민 생명부터 확보\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-27T05:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214642?sid=102"
+     "title": "IPARK현대산업개발 신임 대표이사에 강민석 부사장",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T05:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930538?sid=101"
     },
     {
-     "title": "추미애 경기도지사, 산불 대응 골든타임 확보…초동 진화·주민 선제 대...",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-27T05:02:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261127024535733"
+     "title": "[인사] HDC그룹",
+     "press": "newsinside.kr",
+     "publishedAt": "2026-11-27T05:32:00.000Z",
+     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5058206"
     },
     {
-     "title": "추미애 \"산불, 초기 진화가 승부\"… 주민 대피·진화자원 총동원 지시",
-     "press": "gg.newdaily.co.kr",
-     "publishedAt": "2026-11-27T05:00:00.000Z",
-     "link": "https://gg.newdaily.co.kr/site/data/html/2026/11/27/2026112750165.html"
+     "title": "IPARK현대산업개발 대표에 강민석…HDC그룹, 정기인사 단행",
+     "press": "goodkyung.com",
+     "publishedAt": "2026-11-27T05:30:00.000Z",
+     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293956"
     }
    ]
   },
   {
-   "keyword": "남경필 아들 성관계 유포 혐의",
+   "keyword": "한화시스템 품질인증 획득",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 31,
+   "recent20": 5,
+   "press": 31,
+   "firstArticleAt": "2026-11-27T04:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한화시스템, 나토 품질인증 획득…유럽 방산시장 공략 확대",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-27T05:32:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=508862"
+    },
+    {
+     "title": "한화시스템, 나토 품질인증 획득…유럽 방산 수출 기반 넓힌다",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-27T05:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610831?sid=101"
+    },
+    {
+     "title": "한화시스템, 나토 품질인증 획득… 글로벌 방산 경쟁력 제고",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-27T05:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703911?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "정년연장 노사 합의 불발",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 21,
+   "recent20": 4,
+   "press": 21,
+   "firstArticleAt": "2026-11-27T04:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "與정년연장특위 노사합의 불발…정부 자체안 발표 주목",
+     "press": "seouleconews.com",
+     "publishedAt": "2026-11-27T05:32:00.000Z",
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95310"
+    },
+    {
+     "title": "민주당, 65세 정년연장 노사 합의 불발…플랜 B도 '연내 입법'",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-27T05:30:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322136&inflow=N"
+    },
+    {
+     "title": "정년 연장 노사 합의 불발…5대 은행 주담대 금리 5% 넘어 [오후 뉴스 3...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-27T05:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178624?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "한동훈 수사자료 유출 압수수색",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T04:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한동훈 \"공익제보자 색출 압수수색… 치졸한 정권\"",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-27T05:32:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3084533"
+    },
+    {
+     "title": "한동훈 \"경찰, 김승원 수사는 안 하고 김승원 돕기 수사…'민주당의 지...",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-27T05:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406331?sid=100"
+    },
+    {
+     "title": "한동훈 \"경찰, 김승원 돕기 수사…'민주당의 지팡이'로 나서\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T05:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467793?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "AI 가짜 의사 광고 금지",
    "sources": [
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 3,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T04:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령 \"AI 가짜 의사 광고, 오늘부터 강력히 제재\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T05:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930532?sid=100"
+    },
+    {
+     "title": "AI 가짜 의사·전문가의 건강제품 추천 광고 오늘부터 금지",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-27T05:22:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628172"
+    },
+    {
+     "title": "오늘부터 ‘AI 가짜 전문가’ 광고 금지",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T05:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302640?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "남경필 아들 협박 혐의 체포",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 9,
+   "recent20": 1,
    "press": 9,
-   "firstArticleAt": "2026-11-27T03:56:00.000Z",
+   "firstArticleAt": "2026-11-27T04:29:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[자막뉴스] '마약사범' 입길 오르다 또 수갑찬 남경필 아들…전 연인 스...",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-27T05:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406332?sid=102"
+    },
     {
      "title": "[단독] 남경필 전 지사 아들 '스토킹 혐의' 체포...약물 의혹도",
      "press": "ytn.co.kr",
@@ -97,44 +199,38 @@
      "press": "kihoilbo.co.kr",
      "publishedAt": "2026-11-27T05:10:00.000Z",
      "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3042357"
-    },
-    {
-     "title": "남경필 전 경기지사 장남, 전 연인 영상 유포 협박·스토킹 혐의 체포",
-     "press": "todaykorea.co.kr",
-     "publishedAt": "2026-11-27T05:06:00.000Z",
-     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=409351"
     }
    ]
   },
   {
-   "keyword": "김대기 관저이전 예산전용",
+   "keyword": "북한 MDL 침범",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T04:08:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-27T04:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'관저 이전 예산 불법 전용' 김대기 전 비서실장 1심 집행유예…이상민...",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-27T05:17:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087314"
+     "title": "\"두 달간 40회 MDL 침범\"...軍의 '경고사격' 비웃는 北",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T05:16:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653966"
     },
     {
-     "title": "김대기, 관저 공사 행안부 예산 전용 지시로 징역형 집행유예...이상민...",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-27T05:04:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250619"
+     "title": "\"北, 지뢰 도발 이후 두 달간 MDL 40번 침범\"",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-27T05:06:00.000Z",
+     "link": "https://www.insight.co.kr/news/583796"
     },
     {
-     "title": "‘尹 관저 예산전용’ 김대기 1심서 집유…이상민은 ‘무죄’",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T05:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302637?sid=102"
+     "title": "북한군, 지뢰 폭발 이후에도 MDL 40여회 침범…軍 대응 실효성 도마",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T04:58:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127134615485"
     }
    ]
   },
@@ -171,14 +267,47 @@
    ]
   },
   {
-   "keyword": "학교 비정규직 총파업 진행",
+   "keyword": "2026 K-라이스 페스타",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 20,
    "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T03:58:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-27T04:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"우리 쌀로 빚은 모든 것\"…K-라이스페스타",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T05:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930533?sid=103"
+    },
+    {
+     "title": "2026 우리쌀 우리술 K-라이스 페스타",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T05:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467789?sid=101"
+    },
+    {
+     "title": "[포토] 'K-라이스 페스타' 개막 퍼포먼스 하는 서삼석·강호동·정준호",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T05:10:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127140627559"
+    }
+   ]
+  },
+  {
+   "keyword": "학교 비정규직 총파업 진행",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T04:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,22 +332,22 @@
    ]
   },
   {
-   "keyword": "과학기술인공제회 해킹",
+   "keyword": "개인정보 유출 긴급대응",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T04:12:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T04:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "과학기술인공제회도 해킹 피해…회원정보 21만건 유출",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-27T05:16:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026112714154880272"
+     "title": "개인정보 유출 신고 벌써 지난해 2.3배…정부 긴급 대응",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-27T05:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686893?sid=105"
     },
     {
      "title": "과학기술인 정보도 털렸다…과기인공제회, 해킹으로 21만건 유출",
@@ -227,74 +356,10 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009314269?sid=105"
     },
     {
-     "title": "과학기술인공제회도 뚫렸다…전·현 회원 개인정보 20만건 유출",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-27T04:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447403?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "북한 해커 바이낸스 세탁",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T03:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "북한 해커, 바이낸스 탈취 63억달러 세탁…9조원대 자금 추적 비상",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-27T05:04:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250615"
-    },
-    {
-     "title": "北 해커들, 바이낸스서 훔친 9조7000억원 가상자산 세탁 본격화",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-27T05:02:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731333"
-    },
-    {
-     "title": "\"북 해커, 바이낸스 탈취한 암호화폐 본격 세탁 시작\"…북한은 '관여 의...",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T04:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406319?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "2026 K-라이스 페스타",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 20,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T04:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2026 우리쌀 우리술 K-라이스 페스타",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T05:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467789?sid=101"
-    },
-    {
-     "title": "[포토] 'K-라이스 페스타' 개막 퍼포먼스 하는 서삼석·강호동·정준호",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T05:10:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127140627559"
-    },
-    {
-     "title": "[포토] '2026 우리쌀 우리술 K-라이스 페스타' 파이팅!",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T05:10:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127140841566"
+     "title": "과학기술인공제회 해킹…회원정보 21만건 유출, 국가 연구인력 표적공격...",
+     "press": "dailysecu.com",
+     "publishedAt": "2026-11-27T04:34:00.000Z",
+     "link": "https://www.dailysecu.com/news/articleView.html?idxno=209788"
     }
    ]
   },
@@ -304,7 +369,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 3,
+   "recent20": 2,
    "press": 4,
    "firstArticleAt": "2026-11-27T04:23:00.000Z",
    "exclusive": false,
@@ -314,13 +379,13 @@
      "title": "면담하는 김정관 장관",
      "press": "newsis.com",
      "publishedAt": "2026-11-27T05:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014349584?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/003/0014349589?sid=100"
     },
     {
      "title": "김정관 장관, 베트남 중앙정책전략위원장 면담",
      "press": "newsis.com",
      "publishedAt": "2026-11-27T05:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014349583?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/003/0014349587?sid=100"
     },
     {
      "title": "산업부 장관, 베트남 중앙정책전략위원장 만나 첨단산업·원전·공급망...",
@@ -333,10 +398,11 @@
   {
    "keyword": "아일릿 모카, 5개월 만에 활동 재개",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-27T04:41:00.000Z",
    "exclusive": false,
@@ -359,38 +425,6 @@
      "press": "slist.kr",
      "publishedAt": "2026-11-27T04:50:00.000Z",
      "link": "https://www.slist.kr/news/articleView.html?idxno=785346"
-    }
-   ]
-  },
-  {
-   "keyword": "7학년 교실 오세훈",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T05:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[동정] 오세훈 서울시장, 어르신 평생교육 '7학년 교실' 졸업식 참석",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T05:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314300?sid=102"
-    },
-    {
-     "title": "오세훈 '7학년 교실' 졸업식 방문…\"어르신 배움 지원해나갈 것\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T05:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467792?sid=102"
-    },
-    {
-     "title": "[현장] 오세훈 시장 \"배움·관계가 행복의 지름길\"…'7학년 교실' 400여명...",
-     "press": "news.ifm.kr",
-     "publishedAt": "2026-11-27T05:12:00.000Z",
-     "link": "https://news.ifm.kr/news/articleView.html?idxno=485740"
     }
    ]
   },
@@ -461,10 +495,22 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1834,
-  "matched": 916,
-  "avgLeadMin": 610,
+  "flagged": 1838,
+  "matched": 918,
+  "avgLeadMin": 609,
   "recent": [
+   {
+    "keyword": "학교 급식 대신 빵",
+    "hitKeyword": "학교 급식 파업",
+    "hitAt": "2026-11-27T14:30:00+09:00",
+    "leadMin": 56
+   },
+   {
+    "keyword": "학교 파업 밥 대신 빵",
+    "hitKeyword": "학교 급식 파업",
+    "hitAt": "2026-11-27T14:30:00+09:00",
+    "leadMin": 26
+   },
    {
     "keyword": "시청률",
     "hitKeyword": "무쇠소녀단3 시청률",
@@ -512,18 +558,6 @@
     "hitKeyword": "현대차 아이오닉M 중국",
     "hitAt": "2026-11-27T13:30:00+09:00",
     "leadMin": 1585
-   },
-   {
-    "keyword": "중국",
-    "hitKeyword": "현대차 아이오닉M 중국",
-    "hitAt": "2026-11-27T13:30:00+09:00",
-    "leadMin": 197
-   },
-   {
-    "keyword": "투컷 존박 디스랩",
-    "hitKeyword": "존박 투컷 디스",
-    "hitAt": "2026-11-27T13:00:00+09:00",
-    "leadMin": 851
    }
   ]
  }
