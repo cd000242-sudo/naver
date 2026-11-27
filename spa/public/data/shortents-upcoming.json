@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T03:13:38.666Z",
+ "builtAt": "2026-11-27T03:23:41.840Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "한동훈",
@@ -16,30 +16,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 68,
-   "recent20": 10,
-   "press": 50,
-   "firstArticleAt": "2026-11-27T01:44:00.000Z",
-   "exclusive": false,
+   "articles90": 57,
+   "recent20": 8,
+   "press": 45,
+   "firstArticleAt": "2026-11-27T01:54:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "'한동훈 수사자료 유출 의혹'에 법무부·공소청 압수수색",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T03:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406305?sid=102"
+     "title": "경찰, ‘한동훈 수사자료 유출 의혹’ 강제수사… 한동훈 “민주당의 지...",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-27T03:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000087144?sid=100"
     },
     {
-     "title": "\"한동훈, 복당해도 다시 징계하면 된다\"…장동혁, 법정 다툼도 불사",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-27T03:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042666?sid=100"
+     "title": "장동혁 \"한동훈, 법정서 해결하라⋯복당해도 추가 징계 가능\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-27T03:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001079043?sid=100"
     },
     {
-     "title": "‘한동훈, 김승원 자료 유출’ 의혹… 경찰, 법무부·공소청 압수수색",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-27T03:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002836056?sid=102"
+     "title": "'조작 징계' 주장 국힘 전 윤리위원들, 한동훈에 \"사과하겠다\" 만남 제안",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T03:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014349231?sid=100"
     }
    ]
   },
@@ -48,30 +48,63 @@
    "sources": [
     "google"
    ],
-   "articles90": 52,
-   "recent20": 10,
-   "press": 44,
-   "firstArticleAt": "2026-11-27T01:46:00.000Z",
+   "articles90": 48,
+   "recent20": 4,
+   "press": 43,
+   "firstArticleAt": "2026-11-27T01:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[강원 AI 활용지원] 모브주식회사 \"고성 바닷가 카페서 푸드테크 기업으...",
-     "press": "it.donga.com",
-     "publishedAt": "2026-11-27T03:04:00.000Z",
-     "link": "https://it.donga.com/110028/"
+     "title": "알리바바, AI 기술을 사회적 가치 창출로…안전·의료·과학·교육 등 8...",
+     "press": "aitimes.kr",
+     "publishedAt": "2026-11-27T03:18:00.000Z",
+     "link": "https://www.aitimes.kr/news/articleView.html?idxno=42922"
     },
     {
-     "title": "스위스 정부 \"AI 에이전트 활용 사이버 공격 5건 확인…4건 침해 성공\"",
-     "press": "aitimes.com",
-     "publishedAt": "2026-11-27T03:02:00.000Z",
-     "link": "https://www.aitimes.com/news/articleView.html?idxno=217851"
+     "title": "AI 금융 경쟁력은 데이터부터… NH농협은행, 품질인증 최고등급",
+     "press": "newsmap.co.kr",
+     "publishedAt": "2026-11-27T03:16:00.000Z",
+     "link": "https://www.newsmap.co.kr/news/articleView.html?idxno=5913"
     },
     {
-     "title": "클로봇, 美 MIT 연구진과 제조 '피지컬 AI' 공동개발 착수… 글로벌 로봇...",
-     "press": "irobotnews.com",
-     "publishedAt": "2026-11-27T03:02:00.000Z",
-     "link": "https://www.irobotnews.com/news/articleView.html?idxno=49838"
+     "title": "아모레퍼시픽, 인공지능(AI) 기반 뷰티기업 전환 가속",
+     "press": "thebk.co.kr",
+     "publishedAt": "2026-11-27T03:14:00.000Z",
+     "link": "https://www.thebk.co.kr/news/articleView.html?idxno=313056"
+    }
+   ]
+  },
+  {
+   "keyword": "북한 어선 송환",
+   "sources": [
+    "signal.bz",
+    "daum"
+   ],
+   "articles90": 44,
+   "recent20": 7,
+   "press": 37,
+   "firstArticleAt": "2026-11-27T02:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'표류' 北어선, 24일만에 돌아갔다…1명은 귀순",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T03:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359015?sid=100"
+    },
+    {
+     "title": "'동해 표류' 북한 어선 송환…1명은 귀순 의사 밝혀",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-27T03:20:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261127507016?OutUrl=naver"
+    },
+    {
+     "title": "울릉도 표류 北 어민 7명 중 1명 한국 잔류...나머지 6명 24일 만에 송환",
+     "press": "wikileaks-kr.org",
+     "publishedAt": "2026-11-27T03:20:00.000Z",
+     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=195387"
     }
    ]
   },
@@ -80,94 +113,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 52,
-   "recent20": 8,
-   "press": 38,
-   "firstArticleAt": "2026-11-27T01:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'尹관저 예산 전용' 김대기 전 비서실장 1심서 징역형 집유...이상민 '무...",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-27T03:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394981?sid=100"
-    },
-    {
-     "title": "법원, '尹 관저 예산 전용 혐의' 김대기에 집행유예 3년 선고",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-27T03:02:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904683"
-    },
-    {
-     "title": "‘관저 이전 예산 전용’ 김대기 전 비서실장, 징역형 집유…이상민은...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-27T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834274?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "북한 어선 송환",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 39,
-   "recent20": 6,
+   "articles90": 47,
+   "recent20": 4,
    "press": 34,
-   "firstArticleAt": "2026-11-27T02:07:00.000Z",
+   "firstArticleAt": "2026-11-27T01:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'동해 표류' 북한 어선, 24일 만에 북으로…7명 중 1명은 귀순",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-27T03:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653774?sid=100"
+     "title": "'윤 관저 이전 예산 전용' 김대기 1심서 징역형 집행유예",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-27T03:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406307?sid=102"
     },
     {
-     "title": "北 어선 24일 만에 송환…7명 중 1명 국내 보호 요청, 6명 북한으로",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-27T03:04:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631314"
+     "title": "‘尹 관저 예산전용’ 김대기 1심서 징역형 집유",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-27T03:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002836073?sid=102"
     },
     {
-     "title": "'표류' 北어선 동해상으로 송환…어민 7명 중 1명 귀순의사",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-27T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848811?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "낸시랭 불구속 송치",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 36,
-   "recent20": 3,
-   "press": 34,
-   "firstArticleAt": "2026-11-27T01:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경찰, 낸시랭 음주운전 혐의로 불구속 송치…면허 취소 수준",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-27T03:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359014?sid=102"
-    },
-    {
-     "title": "연예계 덮친 11월의 저주…고경표 이어 낸시랭도 음주운전 적발",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-27T03:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042665?sid=102"
-    },
-    {
-     "title": "\"만취 아니었다\" 해명한 낸시랭…'음주운전 혐의'로 결국 불구속 송치",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-27T02:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000493939"
+     "title": "‘尹 관저 예산전용’ 김대기 1심서 집유…이상민은 ‘무죄’",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302592?sid=102"
     }
    ]
   },
@@ -176,13 +145,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 27,
-   "recent20": 0,
-   "press": 22,
+   "articles90": 28,
+   "recent20": 1,
+   "press": 23,
    "firstArticleAt": "2026-11-27T02:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "개인정보 침해 신고 1000건 돌파…정부, 공공·민간 보안망 긴급 점검",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-27T03:14:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848656"
+    },
     {
      "title": "'AI 해킹' 올해 정보유출 신고건수 3배 급증...석달간 집중점검",
      "press": "seouleconews.com",
@@ -194,44 +169,71 @@
      "press": "biz.sbs.co.kr",
      "publishedAt": "2026-11-27T02:37:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/374/0000546278?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "학교 비정규직 총파업에",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 35,
+   "recent20": 4,
+   "press": 22,
+   "firstArticleAt": "2026-11-27T01:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "학비연대 총파업에 도시락 먹는 초등학생",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T03:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314076?sid=102"
     },
     {
-     "title": "개인정보위 “다음달 정보보호 강화 대책 발표…노후시스템 정비 시급”...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-27T02:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002250144?sid=105"
+     "title": "전국 학교 비정규직 총파업…일부 학교 '급식·돌봄' 차질",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-27T03:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406304?sid=102"
+    },
+    {
+     "title": "학교 비정규직 총파업…급식·돌봄 차질 예상",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T03:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302593?sid=102"
     }
    ]
   },
   {
    "keyword": "수능 부정행위 급증",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 18,
-   "firstArticleAt": "2026-11-27T01:47:00.000Z",
+   "articles90": 17,
+   "recent20": 3,
+   "press": 17,
+   "firstArticleAt": "2026-11-27T02:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "올 수능 부정행위 474건 70% 급증··· 스마트기기 적발만 112건",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-27T03:20:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=562414"
+    },
+    {
+     "title": "올 수능 부정행위 474건-70% 급증…스마트기기 적발 작년 3.6배",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-27T03:14:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121379"
+    },
     {
      "title": "포상금 1억원 효과? ... 일주일 새 수능 부정행위 신고·제보 306건 쏟아...",
      "press": "hidomin.com",
      "publishedAt": "2026-11-27T03:12:00.000Z",
      "link": "https://www.hidomin.com/news/articleView.html?idxno=731321"
-    },
-    {
-     "title": "수능 시험장 파고든 첨단기기…부정행위 474건 적발, 교육당국 대응 비...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-27T02:58:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848655"
-    },
-    {
-     "title": "수능 부정행위 1년새 70% 급증… 스마트기기·카메라 악용 6명 형사고발",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-27T02:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610779?sid=102"
     }
    ]
   },
@@ -240,10 +242,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-27T01:50:00.000Z",
+   "articles90": 16,
+   "recent20": 0,
+   "press": 15,
+   "firstArticleAt": "2026-11-27T01:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -270,65 +272,32 @@
   {
    "keyword": "발언하는 김민석 대표",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 12,
+   "articles90": 23,
+   "recent20": 4,
+   "press": 14,
    "firstArticleAt": "2026-11-27T02:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민석의 위태로운 100일…'조희대 탄핵'은 與 내전의 출구 될까",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-27T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000143159?sid=100"
+     "title": "'최민희 징계' 앞두고 與 파열음…친청계 \"김민석은 언제 심의하나\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-27T03:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214604?sid=100"
     },
     {
-     "title": "한민수 \"최민희·김민석 윤리심판원 잣대 같아야\"",
+     "title": "최고위서 발언하는 김민석 민주당 대표",
      "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T02:52:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765117"
+     "publishedAt": "2026-11-27T03:20:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765127"
     },
     {
-     "title": "최민희 최고위원 발언 쳐다보는 김민석 민주당 대표",
+     "title": "발언하는 김민석 민주당 대표",
      "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T02:46:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765113"
-    }
-   ]
-  },
-  {
-   "keyword": "유한양행",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T01:44:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유한양행, '버들장터'서 30일까지 블랙프라이데이 행사 진행",
-     "press": "weekly.hankooki.com",
-     "publishedAt": "2026-11-27T02:22:00.000Z",
-     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7196061"
-    },
-    {
-     "title": "'내부 승계' 공식 깨려는 유한양행…'R&D·생산' 투톱 실험",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-27T02:16:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733205"
-    },
-    {
-     "title": "유한양행, '버들장터' 블랙프라이데이 프로모션",
-     "press": "bosa.co.kr",
-     "publishedAt": "2026-11-27T02:14:00.000Z",
-     "link": "https://www.bosa.co.kr/news/articleView.html?idxno=3017542"
+     "publishedAt": "2026-11-27T03:18:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765118"
     }
    ]
   },
@@ -337,13 +306,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
    "firstArticleAt": "2026-11-27T02:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "병무청, 병역면탈 의심 전역자 검증 강화…개정 병역법 12월 10일 시행",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-27T03:22:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088575"
+    },
     {
      "title": "병무청, ‘병역면탈 의심’ 질병 조기전역자 자료확보 근거 마련",
      "press": "news.kbs.co.kr",
@@ -355,44 +330,38 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-27T02:56:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009313956?sid=100"
-    },
-    {
-     "title": "병무청, 한국생명존중희망재단과 업무협약 체결",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T02:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467507?sid=100"
     }
    ]
   },
   {
-   "keyword": "오현규 30분 경기 중단",
+   "keyword": "연우 다이어트",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T02:04:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "충격! 오현규 출전 경기에서 팬들과 경찰 충돌이라니…'팔레스타인 지지...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-27T03:06:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/117/0004128616"
+     "title": "“두 달 만에 10kg 뺐다”… 모모랜드 연우, 이후 겪은 ‘두드러기 부작...",
+     "press": "health.chosun.com",
+     "publishedAt": "2026-11-27T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/346/0000119564?sid=103"
     },
     {
-     "title": "'오현규 선발·슈팅 단 1회' 베식타시, 팔레스타인 지지 현수막에 경찰...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T02:11:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/311/0002084679"
+     "title": "\"하루 밥 두 숟갈…10kg 뺐다\" 연우, 극단적 다이어트에 두드러기까지",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-27T02:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000641213"
     },
     {
-     "title": "오현규의 베식타시 팬들, 경찰과 충돌...경기 30분 중단",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T02:05:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/052/0002438854"
+     "title": "연우 \"하루 밥 두 숟가락 먹으며 10kg 감량…전신 두드러기에 눈물까지...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T02:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009313927"
     }
    ]
   },
@@ -429,41 +398,41 @@
    ]
   },
   {
-   "keyword": "연우 다이어트 부작용",
+   "keyword": "유한양행",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T02:16:00.000Z",
-   "exclusive": false,
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T02:04:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "“두 달 만에 10kg 뺐다”… 모모랜드 연우, 이후 겪은 ‘두드러기 부작...",
-     "press": "health.chosun.com",
-     "publishedAt": "2026-11-27T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/346/0000119564?sid=103"
-    },
-    {
-     "title": "연우, 종일 밥 두 숟갈…10kg 감량 후 두드러기 부작용 \"힘들어서 많이...",
-     "press": "mhnse.com",
+     "title": "유한양행, '버들장터'서 30일까지 블랙프라이데이 행사 진행",
+     "press": "weekly.hankooki.com",
      "publishedAt": "2026-11-27T02:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000493932"
+     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7196061"
     },
     {
-     "title": "“하루 밥 두 숟갈로 두 달에 10kg 뺐더니”… 연우가 겪은 끔찍한 부작...",
-     "press": "kormedi.com",
+     "title": "'내부 승계' 공식 깨려는 유한양행…'R&D·생산' 투톱 실험",
+     "press": "ebn.co.kr",
      "publishedAt": "2026-11-27T02:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/296/0000107891?sid=103"
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733205"
+    },
+    {
+     "title": "유한양행, '버들장터' 블랙프라이데이 프로모션",
+     "press": "bosa.co.kr",
+     "publishedAt": "2026-11-27T02:14:00.000Z",
+     "link": "https://www.bosa.co.kr/news/articleView.html?idxno=3017542"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1796,
+  "flagged": 1798,
   "matched": 897,
   "avgLeadMin": 614,
   "recent": [
