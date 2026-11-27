@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-26T23:52:28.603Z",
+ "builtAt": "2026-11-27T00:02:32.308Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,122 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "김정은, 러시아 공연 관람",
+   "keyword": "문근영, 기립성 저혈압으로 쓰러져",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-26T22:31:00.000Z",
+   "articles90": 15,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-26T22:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "육성재 이어 문근영도…”기립성 저혈압으로 쓰러져 다쳐”",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-26T23:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000522730"
+    },
+    {
+     "title": "문근영 앞머리·육성재 마스크, 이유 있었다…'기립성 저혈압' 부상 잇...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-26T23:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128552"
+    },
+    {
+     "title": "문근영, '혹평' 앞머리 이유 있었다..\"기립성 저혈압으로 쓰러져 부상\"[...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-26T23:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005645954"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은, 러시아 공연 관람",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 5,
+   "press": 10,
+   "firstArticleAt": "2026-11-26T22:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "방북한 러 장관, 김정은에 '동지'…\"북러 관계 긍정적 진전\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-26T23:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930410?sid=104"
+    },
+    {
+     "title": "김정은 \"북러 협력, 보다 긴밀하고 확대돼\"...러 방북단과 공연관람",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-26T23:52:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127000123"
+    },
     {
      "title": "北김정은, 러 대표단과 공연 관람하며 친선 과시…\"각 분야 협력 확대\"",
      "press": "view.asiae.co.kr",
      "publishedAt": "2026-11-26T23:48:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/277/0005848600?sid=100"
-    },
-    {
-     "title": "러시아 방북 대표단 환대한 김정은…북러 밀착 가속화(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T23:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466898?sid=100"
-    },
-    {
-     "title": "북한 방문 러 장관, 김정은에 ‘동지’…“북러 관계 성과”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T23:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302386?sid=104"
     }
    ]
   },
   {
-   "keyword": "이란 외국군 주둔은 분쟁",
+   "keyword": "SAP 1만명 구조조정",
    "sources": [
     "signal.bz"
    ],
    "articles90": 9,
    "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-26T22:24:00.000Z",
+   "firstArticleAt": "2026-11-26T22:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "유럽 최대 소프트웨어 기업 SAP, 1만명 일자리 감축 추진",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-26T23:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000556107?sid=104"
+    },
+    {
+     "title": "'AI 시대' 대비 인력 재편…SAP \"최소 1만명 축소 검토\"",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-26T23:44:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=230399"
+    },
+    {
+     "title": "유럽 최대 SW기업 SAP, AI 전환에 1만명 감원 검토",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-26T23:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416394?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이란 외국군 주둔은 분쟁 확대",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-26T22:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이란 외무, 조현과 통화서 \"외국군 주둔은 분쟁 범위 확대\"",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-26T23:54:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545164"
+    },
     {
      "title": "이란 외무, 조현에 “외국군 주둔은 분쟁 키워”…한국 “전쟁 불개입”",
      "press": "ichannela.com",
@@ -65,27 +135,27 @@
      "press": "ebn.co.kr",
      "publishedAt": "2026-11-26T23:40:00.000Z",
      "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733179"
-    },
-    {
-     "title": "이란 외무장관 \"외국군 주둔은 역내 긴장·분쟁 키울 것\"…조현과 통화",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-26T22:56:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244359"
     }
    ]
   },
   {
    "keyword": "나인 식스 시청률 하락",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
    "firstArticleAt": "2026-11-26T22:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "박민영·육성재 '나인 투 식스', 로맨스 시동에도 시청률 하락",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-26T23:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000556108"
+    },
     {
      "title": "'나인 투 식스' 박민영·육성재 공조 본격화…3.1% 소폭 하락[시청률 VS...",
      "press": "celuvmedia.com",
@@ -97,76 +167,70 @@
      "press": "ize.co.kr",
      "publishedAt": "2026-11-26T23:00:00.000Z",
      "link": "https://m.entertain.naver.com/article/465/0000021311"
-    },
-    {
-     "title": "박민영, 갑질 누명에 법무팀 퇴출…'나인 투 식스' 3.1% 하락",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-26T22:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128536"
     }
    ]
   },
   {
-   "keyword": "트럼프 관세 경제적 자해",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T22:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美언론도 트럼프 관세 폭주 비판…\"경제적 자해 행위\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T23:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930404?sid=104"
-    },
-    {
-     "title": "\"트럼프,물가고 상황서 관세 인상카드로 '최악의 경제적 자해'\"",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-26T23:12:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888647"
-    },
-    {
-     "title": "트럼프, 물가 불안 속 추가 관세 추진…'경제적 자해' 비판 확산",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-26T22:58:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733175"
-    }
-   ]
-  },
-  {
-   "keyword": "중부 곳곳 약한 비",
+   "keyword": "남자농구, 카타르 완파 본선행 청신호",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T22:30:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T22:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울 낮 최고 16도 '포근'…중부 흐리고 오후 곳곳 약한 비",
+     "title": "한국 남자농구, 카타르에 22점 차 대승… 월드컵 본선행 청신호",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-26T23:48:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887887"
+    },
+    {
+     "title": "'마줄스호' 농구 대표팀, 카타르 74-52 완파…월드컵 본선행 청신호",
      "press": "newsis.com",
-     "publishedAt": "2026-11-26T22:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014348518?sid=102"
+     "publishedAt": "2026-11-26T23:30:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/003/0014348556"
     },
     {
-     "title": "[출근길 날씨] 어제보다 더 온화해…중부 중심 약한 비",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T22:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302353?sid=103"
+     "title": "'주축 줄부상' 남자농구, 카타르 22점 차 완파…월드컵 본선행 청신호",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-26T23:26:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/421/0009313387"
+    }
+   ]
+  },
+  {
+   "keyword": "이형일 부총리 시장상황점검회의",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-26T23:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "시장상황점검회의 앞서 환담하는 이형일 부총리",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T23:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466886?sid=101"
     },
     {
-     "title": "[날씨] 오늘 초봄처럼 포근…남부 곳곳 20도 이상",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T22:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930393?sid=103"
+     "title": "이형일 부총리, 시장상황점검회의 주재",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T23:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466887?sid=101"
+    },
+    {
+     "title": "이형일 부총리, 시장상황점검회의 발언",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-26T23:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016466881?sid=101"
     }
    ]
   },
@@ -205,9 +269,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1743,
-  "matched": 875,
-  "avgLeadMin": 580,
+  "flagged": 1746,
+  "matched": 874,
+  "avgLeadMin": 581,
   "recent": [
    {
     "keyword": "화장실",
