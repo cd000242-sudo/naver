@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T06:04:36.995Z",
+ "builtAt": "2026-11-27T06:14:40.231Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
-  {
-   "keyword": "시험 부정행위",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 64,
-   "recent20": 18,
-   "press": 45,
-   "firstArticleAt": "2026-11-27T04:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국가자격시험 부정행위 대응 강화…내년 전파탐지기 도입",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-27T06:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000546332?sid=101"
-    },
-    {
-     "title": "AI 수능 부정행위 막는다···교육부, 스마트안경 탐지기 상용화 추진",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-27T06:02:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=154990"
-    },
-    {
-     "title": "인천 고등학교, 다음 달 기말고사부터 금속탐지기 등 부정 행위 강력 차...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T06:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302660?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "구본현 구속 기소",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 29,
-   "recent20": 5,
-   "press": 29,
-   "firstArticleAt": "2026-11-27T04:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'주가조작' 범LG家 3세 구본현 구속기소…8년 해외 도피 끝 재판행",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-27T06:02:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785368"
-    },
-    {
-     "title": "범LG가 구본현, 허위 공시 주가조작·횡령 혐의로 구속기소…8년 도피 끝...",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-27T06:00:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628181"
-    },
-    {
-     "title": "주가조작 후 8년 간 도망다녔다…범LG家 3세 구본현 구속 기소 [세상&]",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-27T05:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729594?sid=102"
-    }
-   ]
-  },
   {
    "keyword": "정년연장 노사 합의 불발",
    "sources": [
     "signal.bz"
    ],
    "articles90": 27,
-   "recent20": 5,
+   "recent20": 4,
    "press": 27,
-   "firstArticleAt": "2026-11-27T04:39:00.000Z",
+   "firstArticleAt": "2026-11-27T04:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "與정년연장 특위, 10개월만 노사협의 합의 불발…내달 2일 종료(종합2보...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T06:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467960?sid=100"
+    },
+    {
+     "title": "65세 정년연장 노사 합의 또 불발…노동계 \"더 이상 입법 미뤄선 안 돼\"",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-27T06:04:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=323476"
+    },
     {
      "title": "與정년연장특위 노사합의 이견차로 또 불발… 내달 2일 전체회의 막판 ...",
      "press": "lawissue.co.kr",
      "publishedAt": "2026-11-27T05:58:00.000Z",
      "link": "https://www.lawissue.co.kr/view.php?ud=202611271455156558b3279dfb36_12"
-    },
-    {
-     "title": "정년 연장 노사 합의 불발…한국노총 \"노사 이견 이유로 미루지 말라\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-27T05:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653813?sid=102"
-    },
-    {
-     "title": "與 정년연장특위, 노사합의 불발…내달 2일 전체회의서 결론",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T05:54:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127143621678"
     }
    ]
   },
@@ -114,14 +50,14 @@
     "daum"
    ],
    "articles90": 60,
-   "recent20": 27,
+   "recent20": 21,
    "press": 15,
    "firstArticleAt": "2026-11-27T05:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"식판 대신 교실서 빵·주스·귤\"…총파업에 강원 학교 454곳 차질",
+     "title": "\"빵·주스·귤 챙겨 이른 하교길\"…총파업에 강원 학교 454곳 차질",
      "press": "news1.kr",
      "publishedAt": "2026-11-27T06:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009314469?sid=102"
@@ -145,13 +81,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 14,
    "recent20": 2,
-   "press": 13,
+   "press": 14,
    "firstArticleAt": "2026-11-27T04:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李 “AI 가짜 의사 광고 오늘부터 금지…걸려도 남는 장사 안 통한다”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-27T06:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765734?sid=100"
+    },
     {
      "title": "'AI가짜 의사' 추천 '건강기능식품-의약품' 영업금지",
      "press": "gametoc.co.kr",
@@ -163,12 +105,6 @@
      "press": "ajunews.com",
      "publishedAt": "2026-11-27T05:52:00.000Z",
      "link": "https://www.ajunews.com/view/20261127141409587"
-    },
-    {
-     "title": "유튜브 속 'AI 가짜 의사' 퇴출…건강기능식품·의약품 광고 금지 시행",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-27T05:33:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087320"
     }
    ]
   },
@@ -177,13 +113,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 16,
+   "articles90": 15,
    "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T04:38:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-27T04:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한동훈 “경찰이 민주당의 지팡이”…김승원 수사자료 유출 의혹 압수수...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T06:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769978?sid=100"
+    },
     {
      "title": "한동훈, 경찰 법무부·공소청 압수수색에 \"참 속보이고 치졸한 정권\"",
      "press": "kado.net",
@@ -195,12 +137,168 @@
      "press": "smartbizn.com",
      "publishedAt": "2026-11-27T05:40:00.000Z",
      "link": "https://www.smartbizn.com/news/articleView.html?idxno=160871"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 정부",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T04:53:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "이재명 \"연 50조원 R&D 성과 국가 환수 장치 필요\" \"지원과 투자의 중간...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-27T06:04:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453132"
     },
     {
-     "title": "한동훈 \"경찰, 與 지팡이 자처\"…김승원 \"조선제일 법꾸라지\"(종합)",
+     "title": "정부 돈 받아 대박 난 기업…李 “욕먹어도” 이익 환수 추진",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T06:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416616?sid=100"
+    },
+    {
+     "title": "류경완 남해군수, 대전~남해선 국가철도망 반영 위해 국회·정부 방문",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-27T05:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848886?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "솔비·이규한 4월 결혼",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T05:01:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "솔비·이규한, 내년 4월 25일 결혼한다 \"서울서 야외 예식\"",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-27T06:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000762159"
+    },
+    {
+     "title": "솔비♥이규한, 내년 4월 25일 결혼 확정…종로서 비공개 야외 예식",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-27T06:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004470274"
+    },
+    {
+     "title": "솔비♥이규한, 내년 4월 25일 결혼 \"서울 종로서 야외 웨딩\"[공식입장]",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-27T05:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000641238"
+    }
+   ]
+  },
+  {
+   "keyword": "김우빈 재혼 황후 팬",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T04:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신민아, ♥김우빈 절친 이종석과 멜로 어땠나 “남편 ‘재혼 황후’ 팬...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-27T05:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003814620"
+    },
+    {
+     "title": "신민아 “♥김우빈 ‘재혼황후’ 완전 팬…나비에라고 불러” [인터뷰③...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T05:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005769955"
+    },
+    {
+     "title": "신민아 \"남편 김우빈도 '나비에'라 불러…'재혼황후' 열혈 팬\" [N인터뷰...",
      "press": "news1.kr",
-     "publishedAt": "2026-11-27T05:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314346?sid=100"
+     "publishedAt": "2026-11-27T05:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009314330"
+    }
+   ]
+  },
+  {
+   "keyword": "아일릿 모카, 5개월 만에 복귀",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-27T04:46:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "아일릿 멤버 모카 근황…복귀 예고",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T06:08:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287899"
+    },
+    {
+     "title": "아일릿 모카 건강 회복 후 복귀 \"조금씩 멤버들과 활동할 것\"",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-27T06:06:00.000Z",
+     "link": "https://www.insight.co.kr/news/583859"
+    },
+    {
+     "title": "아일릿 모카, 활동 중단 5개월 만에 복귀…\"이날만 기다려\"",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-27T05:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786476"
+    }
+   ]
+  },
+  {
+   "keyword": "교통",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 6,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T05:50:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "삼성라이온즈 카퍼레이드 오는 29일 개최... 대구 도심 교통 전면통제",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-27T06:12:00.000Z",
+     "link": "https://www.insight.co.kr/news/583869"
+    },
+    {
+     "title": "평택시, 중앙아시아로 행정 교류 넓힌다…교통·안전 분야 협력 모색",
+     "press": "weekly.hankooki.com",
+     "publishedAt": "2026-11-27T06:10:00.000Z",
+     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7196102"
+    },
+    {
+     "title": "반세기 도시철도 운영 노하우 전수…서울교통공사, 스리랑카 교통·철도...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-27T06:08:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=95808"
     }
    ]
   },
@@ -209,10 +307,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T04:38:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-27T04:55:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -229,139 +327,10 @@
      "link": "https://n.news.naver.com/mnews/article/119/0003160296?sid=102"
     },
     {
-     "title": "남경필 장남, 이번엔 전 연인 스토킹·폭행 혐의로 체포",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-27T05:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207795?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "솔비·이규한 4월 결혼",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T05:01:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "솔비♥이규한, 내년 4월 25일 결혼 \"서울 종로서 야외 웨딩\"[공식입장]",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-27T05:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000641238"
-    },
-    {
-     "title": "솔비♥이규한, 결혼식 날짜 잡혔다... \"내년 4월 25일, 비공개로\"",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-27T05:42:00.000Z",
-     "link": "https://www.insight.co.kr/news/583846"
-    },
-    {
-     "title": "'오만추3' 인연 솔비·이규한, 내년 4월 25일 결혼…비공개 야외 결혼식",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-27T05:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054434"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 정부",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T04:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "류경완 남해군수, 대전~남해선 국가철도망 반영 위해 국회·정부 방문",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-27T05:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848886?sid=102"
-    },
-    {
-     "title": "최휘영, '교체 통보' 보도 반박…이재명 대통령도 정정 요구",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-27T05:46:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628177"
-    },
-    {
-     "title": "장동혁 \"이재명이 있어야 할 곳은 감옥\" … 박준태 \"배신의 정치 끊어내...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-27T05:42:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/27/2026112750212.html"
-    }
-   ]
-  },
-  {
-   "keyword": "북한 MDL 침범",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T04:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경고사격에도 반복되는 북한군 MDL 침범…유용원 \"넉 달간 90여 회\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-27T05:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653804?sid=100"
-    },
-    {
-     "title": "\"두 달간 40회 MDL 침범\"...軍의 '경고사격' 비웃는 北",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-27T05:16:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2653966"
-    },
-    {
-     "title": "\"北, 지뢰 도발 이후 두 달간 MDL 40번 침범\"",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-27T05:06:00.000Z",
-     "link": "https://www.insight.co.kr/news/583796"
-    }
-   ]
-  },
-  {
-   "keyword": "아일릿 모카, 5개월 만에 복귀",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T04:46:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "아일릿 모카, 활동 중단 5개월 만에 복귀…\"이날만 기다려\"",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-27T05:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786476"
-    },
-    {
-     "title": "'활동 중단' 아일릿 모카, 5개월 만에 복귀 예고",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T05:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/018/0006416614"
-    },
-    {
-     "title": "아일릿 모카, 건강 회복 후 5개월 만에 활동 재개",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-27T05:36:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611270238"
+     "title": "또 수갑찬 남경필 아들…이번에는 전 연인 스토킹·폭행 혐의",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-27T05:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406332?sid=102"
     }
    ]
   },
@@ -398,74 +367,73 @@
    ]
   },
   {
-   "keyword": "교통",
+   "keyword": "미세먼지",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T05:42:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "바로손해사정, KB미소금융과 배달 라이더 교통사고 대응 지원",
-     "press": "newscape.co.kr",
-     "publishedAt": "2026-11-27T05:50:00.000Z",
-     "link": "http://www.newscape.co.kr/news/articleView.html?idxno=126168"
-    },
-    {
-     "title": "인천교통공사, 전국 17개 철도운영·환경 관계기관과 쾌적한 철도 이용...",
-     "press": "kmaeil.com",
-     "publishedAt": "2026-11-27T05:48:00.000Z",
-     "link": "https://www.kmaeil.com/news/articleView.html?idxno=660148"
-    },
-    {
-     "title": "[해킹의 표적 된 일상] ⑤ 선박부터 항공·철도까지...AI 시대 교통망 노...",
-     "press": "ekoreanews.co.kr",
-     "publishedAt": "2026-11-27T05:48:00.000Z",
-     "link": "https://www.ekoreanews.co.kr/news/articleView.html?idxno=89425"
-    }
-   ]
-  },
-  {
-   "keyword": "현대모비스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
    "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T04:54:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-27T04:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "현대모비스 자사주 소각에…기아, 지분율 상승",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-27T06:00:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888029"
+     "title": "제주, 겨울철 '미세먼지 차단' 공사장·차량배출가스 단속 강화",
+     "press": "headlinejeju.co.kr",
+     "publishedAt": "2026-11-27T06:02:00.000Z",
+     "link": "https://www.headlinejeju.co.kr/news/articleView.html?idxno=602880"
     },
     {
-     "title": "현대모비스 33만8500원…부품사 3분기 영업익 17.2% 늘어",
-     "press": "job-post.co.kr",
-     "publishedAt": "2026-11-27T05:46:00.000Z",
-     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=241537"
+     "title": "군포시, 겨울철 미세먼지 대응 강화…5등급 차량 운행 제한",
+     "press": "siminilbo.co.kr",
+     "publishedAt": "2026-11-27T05:58:00.000Z",
+     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160262140438054"
     },
     {
-     "title": "[D리그] ‘이대균 연장전 5점’ 현대모비스, 연장 끝에 소노 격파",
-     "press": "basketkorea.com",
-     "publishedAt": "2026-11-27T04:54:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/351/0000089617"
+     "title": "군포시, 겨울철 미세먼지와 전쟁… 5등급 차량 운행 과태료 10만원",
+     "press": "gg.newdaily.co.kr",
+     "publishedAt": "2026-11-27T05:26:00.000Z",
+     "link": "https://gg.newdaily.co.kr/site/data/html/2026/11/27/2026112750186.html"
+    }
+   ]
+  },
+  {
+   "keyword": "북한 MDL 침범",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T04:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경고사격에도 반복되는 북한군 MDL 침범…유용원 \"넉 달간 90여 회\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-27T05:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653804?sid=100"
+    },
+    {
+     "title": "\"두 달간 40회 MDL 침범\"...軍의 '경고사격' 비웃는 北",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T05:16:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653966"
+    },
+    {
+     "title": "\"北, 지뢰 도발 이후 두 달간 MDL 40번 침범\"",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-27T05:06:00.000Z",
+     "link": "https://www.insight.co.kr/news/583796"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1850,
+  "flagged": 1852,
   "matched": 920,
   "avgLeadMin": 610,
   "recent": [
