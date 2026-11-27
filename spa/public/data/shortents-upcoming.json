@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T12:36:58.581Z",
+ "builtAt": "2026-11-27T12:47:01.659Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,22 +11,54 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "최민희 당원권 2년 정지",
+   "keyword": "30점 GS칼텍스 5연승",
    "sources": [
     "nate"
    ],
-   "articles90": 16,
+   "articles90": 15,
    "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-27T11:12:00.000Z",
-   "exclusive": true,
+   "press": 14,
+   "firstArticleAt": "2026-11-27T11:46:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최민희 중징계에 반발 \"재심 신청\" 정청래 이성윤 \"납득 못해\"",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-27T12:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138992?sid=100"
+     "title": "'실바 30점' GS칼텍스, 흥국생명 꺾고 5연승 선두 탈환(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T12:39:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/003/0014350287"
+    },
+    {
+     "title": "‘실바 30점 폭발’ GS칼텍스, 흥국생명 꺾고 5연승 질주 ‘선두 탈환’...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-27T12:39:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/468/0001283965"
+    },
+    {
+     "title": "[V리그] '실바 30점' GS칼텍스, 흥국생명 5연승 몰고 5연승 '선두 탈환'",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-27T12:32:00.000Z",
+     "link": "https://swtvnews.com/news/newsview.php?ncode=1065615383656013"
+    }
+   ]
+  },
+  {
+   "keyword": "최민희 당원정지 2년 확정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-27T11:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주당, 최민희 ‘당원권 2년 정지’ 중징계…친청계 반발",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-27T12:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001233957?sid=100"
     },
     {
      "title": "최민희 당원권 2년 정지…박경미 \"무거운 징계…심각한 타격\" 권영현 \"중...",
@@ -35,42 +67,42 @@
      "link": "https://www.natv.go.kr/natv/news/newsView.do?newsId=514674"
     },
     {
-     "title": "“이재명은 탄핵 반대” 최민희, 당원권 정지 2년 중징계…“재심 신청...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T12:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302871?sid=100"
+     "title": "최민희 '당원권 2년 정지' 중징계…崔 \"수용하기 어렵다\"",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-27T12:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063399?sid=100"
     }
    ]
   },
   {
-   "keyword": "GS칼텍스 5연승",
+   "keyword": "선관위 특검, 노태악 압수수색",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 27,
-   "recent20": 8,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T11:46:00.000Z",
-   "exclusive": false,
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T11:20:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[V리그] '실바 30점' GS칼텍스, 흥국생명 5연승 몰고 5연승 '선두 탈환'",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-27T12:32:00.000Z",
-     "link": "https://swtvnews.com/news/newsview.php?ncode=1065615383656013"
+     "title": "선관위 특검, '공추비 부당지급' 의혹 노태악 압수수색",
+     "press": "lawtimes.co.kr",
+     "publishedAt": "2026-11-27T12:40:00.000Z",
+     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=230235"
     },
     {
-     "title": "[사진]뜨겁게 포효하는 GS칼텍스 실바",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-27T12:24:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/109/0005646224"
+     "title": "선관위 특검, '공추비 부당 지급 의혹' 노태악 압수수색…증거인멸 정황...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T12:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350286?sid=102"
     },
     {
-     "title": "[사진]GS칼텍스 이영택 감독, '높은 곳으로'",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-27T12:24:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/109/0005646222"
+     "title": "[단독] “선관위 사무총장, 선거 1주일 뒤 휴대전화 초기화”…특검, 노...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T12:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302879?sid=102"
     }
    ]
   },
@@ -79,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 4,
-   "press": 8,
+   "articles90": 10,
+   "recent20": 1,
+   "press": 9,
    "firstArticleAt": "2026-11-27T11:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국제변호사협회도 '曺 탄핵' 우려…\"위험한 선례 될 것\"",
+     "press": "lawtimes.co.kr",
+     "publishedAt": "2026-11-27T12:40:00.000Z",
+     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=230240"
+    },
     {
      "title": "조희대 탄핵 우려하는 로아시아·IBA 등 세계 변호사들, 여권은 뭐라고...",
      "press": "imaeil.com",
@@ -97,45 +135,6 @@
      "press": "donga.com",
      "publishedAt": "2026-11-27T12:26:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003765810?sid=102"
-    },
-    {
-     "title": "조희대 탄핵 추진에 세계변호사협회도 우려…“위험한 선례 될 것”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-27T12:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004687057?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김범수 무죄 확정",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T11:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "SM 시세조종 혐의 벗은 김범수…공소청 상고 포기 '무죄 확정'",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-27T12:28:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749465"
-    },
-    {
-     "title": "김범수 카카오 창업주, 'SM시세조종 혐의' 무죄 확정...공소청 상고 포기",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-27T12:28:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=207007"
-    },
-    {
-     "title": "카카오 김범수 'SM 시세조종' 무죄 확정…공소청, 상고 포기",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T12:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930690?sid=102"
     }
    ]
   },
@@ -172,46 +171,44 @@
    ]
   },
   {
-   "keyword": "선관위 특검, 노태악 압수수색",
+   "keyword": "김범수 무죄 확정",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T11:20:00.000Z",
-   "exclusive": true,
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T11:39:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[단독] 선관위 특검, '공추비 의혹' 노태악 압수수색",
+     "title": "김범수 카카오 창업주, 'SM시세조종 혐의' 무죄 확정...공소청 상고 포기",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-27T12:28:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=207007"
+    },
+    {
+     "title": "SM 시세조종 혐의 벗은 김범수…공소청 상고 포기 '무죄 확정'",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-27T12:28:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749465"
+    },
+    {
+     "title": "카카오 김범수 'SM 시세조종' 무죄 확정…공소청, 상고 포기",
      "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T12:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930687?sid=102"
-    },
-    {
-     "title": "선관위 특검, 노태악 2차 압수수색…'증거인멸 정황'(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T11:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314958?sid=102"
-    },
-    {
-     "title": "선관위 특검, 노태악 추가 압수수색…“증거인멸 정황 포착”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-27T11:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207878?sid=102"
+     "publishedAt": "2026-11-27T12:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930690?sid=102"
     }
    ]
   },
   {
    "keyword": "신지아 6차 쇼트 2위",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-27T11:21:00.000Z",
    "exclusive": false,
@@ -238,15 +235,79 @@
    ]
   },
   {
+   "keyword": "주진모 민혜연 임신에 오열",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T11:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "주진모, 운전 중 아내 민혜연 옆에서 갑자기 눈물... 힘들게 숨겨왔던 ...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-27T12:44:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178479"
+    },
+    {
+     "title": "'딩크' 부부였는데…주진모, ♥민혜연 8년만 임신에 오열 \"다 키워줄게...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-27T12:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786513"
+    },
+    {
+     "title": "주진모, ♥민혜연 7년만 임신에 오열 \"옛날부터 갖고 싶었다, 여보 고마...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-27T12:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084891"
+    }
+   ]
+  },
+  {
+   "keyword": "연기금투자풀 25주년 기념행사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T11:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미래에셋자산운용, 연기금투자풀 25주년 기념식",
+     "press": "businesskorea.co.kr",
+     "publishedAt": "2026-11-27T12:36:00.000Z",
+     "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=282413"
+    },
+    {
+     "title": "연기금투자풀 출범 25주년...삼성·미래에셋운용 감사패 수상",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-27T11:52:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=718859"
+    },
+    {
+     "title": "[포토] KG제로인, '연기금투자풀 25주년 기념행사'서 감사패 수상",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T11:40:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127203725493"
+    }
+   ]
+  },
+  {
    "keyword": "황교안",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T11:12:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-27T11:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -269,139 +330,11 @@
      "link": "https://n.news.naver.com/mnews/article/016/0002729679?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "이선정과 이혼 후 친구처럼",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T11:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LJ, 이선정과 이혼 15년 만에 속내⋯\"그때도 사랑하고 있었다\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-27T11:58:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2654142"
-    },
-    {
-     "title": "'이선정과 이혼' LJ, 뒤늦게 털어놓은 속마음..\"아이 너무 갖고 싶다\"",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-27T11:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646173"
-    },
-    {
-     "title": "LJ, ‘전처’ 이선정과 이혼 14년 만 고백 “이혼 후에도 사랑했다”",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-27T11:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001152079"
-    }
-   ]
-  },
-  {
-   "keyword": "김이현",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T11:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "19세 복싱 유망주 김이현, 뺑소니 사고로 숨져",
-     "press": "donga.com",
-     "publishedAt": "2026-11-27T11:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765807?sid=102"
-    },
-    {
-     "title": "“거기선 못 이룬 챔피언 꼭 되길…” 19세 복싱 유망주 김이현, 뺑소니...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-27T11:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178708?sid=102"
-    },
-    {
-     "title": "스무살 생일 앞두고…복싱 유망주 김이현, 뺑소니 사고로 사망",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-27T11:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359232?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김용건 나이",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T11:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“하정우, 미술 좋아해”…‘그냥사람친구’ 김용건, 박정숙에 ‘넉살...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-27T12:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054481"
-    },
-    {
-     "title": "'늦둥이 아빠' 김용건, 허리 수술 고백하더니…\"병원 부지런히\"",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-27T11:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001274245?sid=103"
-    },
-    {
-     "title": "'그냥사람친구' 주헌·정연, 나이 초월 우정 여행지 GO…촬영 시작 장소...",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-27T11:30:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305870"
-    }
-   ]
-  },
-  {
-   "keyword": "남경필 아들 협박 혐의 체포",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T11:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "남경필 아들, 마약 이어…'협박·스토킹' 혐의로 체포",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-27T12:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522863?sid=102"
-    },
-    {
-     "title": "[뉴스퀘어 8PM] 남경필 전 지사 아들, 스토킹 혐의로 체포...약물 의혹도...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T11:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439134?sid=102"
-    },
-    {
-     "title": "\"달라질 거예요\" 1년 만에‥남경필 아들 이번엔 '성범죄'",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-27T11:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538587?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1956,
+  "flagged": 1960,
   "matched": 975,
   "avgLeadMin": 657,
   "recent": [
