@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T18:08:59.034Z",
+ "builtAt": "2026-11-27T18:19:02.344Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,40 +9,7 @@
   "minPress": 2
  },
  "measured": 25,
- "candidates": [
-  {
-   "keyword": "최민희 당원권 2년 정지",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-27T16:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최민희 ‘당원권 정지 2년’… 전면전 치닫는 명청갈등",
-     "press": "donga.com",
-     "publishedAt": "2026-11-27T16:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765863?sid=100"
-    },
-    {
-     "title": "최민희 징계 확정땐 차기 총선 출마 못해… 친청 “김민석도 징계”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-27T16:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765858?sid=100"
-    },
-    {
-     "title": "최민희 당원권 정지…격화하는 여당 내홍",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-27T16:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/353/0000057440?sid=100"
-    }
-   ]
-  }
- ],
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 1976,
