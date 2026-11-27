@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T01:02:52.843Z",
+ "builtAt": "2026-11-27T01:12:56.218Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,102 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 19,
+ "measured": 21,
  "candidates": [
+  {
+   "keyword": "코스피 상승 출발",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 85,
+   "recent20": 10,
+   "press": 57,
+   "firstArticleAt": "2026-11-27T00:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코스피 4700선 공방…개인·기관 '팔자'에 외국인 홀로 매수",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-27T01:12:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611270067"
+    },
+    {
+     "title": "코스피 4730선 강보합 속 코스닥 4%대 반등",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-27T01:10:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=316382"
+    },
+    {
+     "title": "코스피, 외인 매수에 반등···4740선 회복",
+     "press": "finomy.com",
+     "publishedAt": "2026-11-27T01:04:00.000Z",
+     "link": "http://www.finomy.com/news/articleView.html?idxno=268124"
+    }
+   ]
+  },
   {
    "keyword": "중기부 장관 표창 수상",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 45,
-   "recent20": 6,
-   "press": 35,
-   "firstArticleAt": "2026-11-26T23:40:00.000Z",
+   "articles90": 48,
+   "recent20": 9,
+   "press": 39,
+   "firstArticleAt": "2026-11-26T23:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼양식품, '2026 올해의 상생기업' 선정…중기부 장관 표창 영예",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-27T01:00:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68562"
+     "title": "기보, '2026년 올해의 상생기업 대상' 중기부 장관 표창 수상",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-27T01:12:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088566"
     },
     {
-     "title": "코레일유통물류, '올해의 상생기업 대상' 중기부 장관 표창 수상",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-27T00:58:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261127500074"
+     "title": "오토텔릭 김태훈 대표 장관 표창...복합신약 중동 수출 성과 인정",
+     "press": "pharmnews.com",
+     "publishedAt": "2026-11-27T01:10:00.000Z",
+     "link": "https://www.pharmnews.com/news/articleView.html?idxno=308380"
     },
     {
-     "title": "SK인텔릭스, '올해의 상생기업 대상' 중기부 장관 표창",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-27T00:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002447213?sid=105"
+     "title": "삼양식품, '올해의 상생기업' 선정...중기부 장관 표창",
+     "press": "womentimes.co.kr",
+     "publishedAt": "2026-11-27T01:04:00.000Z",
+     "link": "https://www.womentimes.co.kr/news/articleView.html?idxno=108334"
     }
    ]
   },
   {
-   "keyword": "성북 피의자 송치",
+   "keyword": "모두의 ai",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 25,
-   "recent20": 3,
-   "press": 23,
-   "firstArticleAt": "2026-11-26T23:35:00.000Z",
+   "articles90": 36,
+   "recent20": 19,
+   "press": 32,
+   "firstArticleAt": "2026-11-27T00:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'성북구 10대 살해' 피의자 前연인 송치…성매매·절도지시 혐의",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-27T00:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005358952?sid=102"
+     "title": "스카이레브, AI 사용 통제·감사 솔루션 '나루가드' 슈어소프트테크 시...",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-27T01:10:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=508757"
     },
     {
-     "title": "‘살해된 성북구 여중생 가스라이팅’ 또 다른 피의자…20대 여성 구속...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-27T00:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729321?sid=102"
+     "title": "상미당홀딩스, AI로 준법경영 강화…6개사 우수 사례 공유",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-27T01:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002447219?sid=103"
     },
     {
-     "title": "성북구 10대 살해사건 피의자 전 연인도 송치···피해자에 성매매·절...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-27T00:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485474?sid=102"
+     "title": "국립순천대, 지역 기업 AX 지원 AI 플랫폼 ‘SCOA’ 공개",
+     "press": "dhnews.co.kr",
+     "publishedAt": "2026-11-27T01:10:00.000Z",
+     "link": "https://dhnews.co.kr/news/view/1065575115702060"
     }
    ]
   },
@@ -81,12 +113,18 @@
     "google"
    ],
    "articles90": 22,
-   "recent20": 2,
+   "recent20": 1,
    "press": 21,
-   "firstArticleAt": "2026-11-26T23:42:00.000Z",
+   "firstArticleAt": "2026-11-26T23:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "에이피알, 닥터멜락신 운영사 3900억원에 인수…K뷰티 영토 확장",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-27T01:08:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628097"
+    },
     {
      "title": "에이피알 주가, 11월 27일 장중 303,500원 1.68% 상승",
      "press": "topstarnews.net",
@@ -98,12 +136,70 @@
      "press": "newsprime.co.kr",
      "publishedAt": "2026-11-27T00:44:00.000Z",
      "link": "http://www.newsprime.co.kr/news/article.html?no=756778"
+    }
+   ]
+  },
+  {
+   "keyword": "중국",
+   "sources": [
+    "google"
+   ],
+   "articles90": 17,
+   "recent20": 17,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T00:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성바이오에피스, 중국 오픈이노베이션 대상 기업에 '이노타 테라퓨틱...",
+     "press": "pharmnews.com",
+     "publishedAt": "2026-11-27T01:12:00.000Z",
+     "link": "https://www.pharmnews.com/news/articleView.html?idxno=308382"
     },
     {
-     "title": "에이피알, 닥터멜락신 품는다…글로벌 뷰티 '승부수'",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-27T00:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000143137?sid=101"
+     "title": "중국 리그서 뛰는 유명 롤 프로게이머, 35억 세금 '쾅' [과세전적부심...",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-27T01:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394964?sid=101"
+    },
+    {
+     "title": "유니트리 창업자 \"중국 10년내 로봇 年 2000만대 생산…車 추월\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T01:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014348824?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "문근영, 기립성 저혈압으로 쓰러져",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-26T23:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "문근영, 청룡영화상 시상식서 '앞머리' 내린 이유... \"기립성 저혈압으...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-27T01:04:00.000Z",
+     "link": "https://www.insight.co.kr/news/583788"
+    },
+    {
+     "title": "'기립성 저혈압' 쓰러진 문근영, 이마 부상...'청룡 혹평' 속사정",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-27T00:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005447272"
+    },
+    {
+     "title": "문근영, 청룡영화상서 앞머리 내린 이유 있었다 \"기립성 저혈압으로 쓰...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-27T00:34:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795737629531639005"
     }
    ]
   },
@@ -112,13 +208,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 20,
-   "recent20": 4,
+   "articles90": 21,
+   "recent20": 2,
    "press": 8,
    "firstArticleAt": "2026-11-27T00:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정점식 \"공소취소 탈옥 열차 종착역은 교도소\"",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T01:02:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3764937"
+    },
     {
      "title": "정점식 \"민주당은 법맹 집단…曺 탄핵소추안이나 제대로 쓰겠나\"",
      "press": "news1.kr",
@@ -130,12 +232,6 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-27T00:52:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002438808?sid=100"
-    },
-    {
-     "title": "발언하는 정점식 국민의힘 원내대표",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T00:48:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3764927"
     }
    ]
   },
@@ -145,7 +241,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-26T23:58:00.000Z",
    "exclusive": false,
@@ -204,76 +300,50 @@
    ]
   },
   {
-   "keyword": "삼성전자 배당금 지급일",
+   "keyword": "연우 다이어트 감량",
    "sources": [
     "daum"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-26T23:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오늘 삼성전자 배당금 30조 들어온다, 이재용 얼마 받을까?",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-27T00:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887818?sid=101"
-    },
-    {
-     "title": "삼성전자 배당금 지급일…기준일은",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-27T00:30:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611270154"
-    },
-    {
-     "title": "[속보]코스피, 4740선 강보합…삼성전자 30조 배당금 유입 촉각",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T00:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416414?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 관세 경제적 자해",
-   "sources": [
-    "signal.bz"
-   ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-26T23:38:00.000Z",
+   "firstArticleAt": "2026-11-27T00:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 물가 다시 뛰는데 관세까지 인상…트럼프 경제정책 비판 확산",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-27T00:16:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=230408"
+     "title": "두 달 만에 10kg 뺐다는 연우, 비법 뭔가 했더니…\"밥 두 숟갈\" ('무쇠소...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-27T01:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786424"
     },
     {
-     "title": "인플레 재가속 속 트럼프 대대적 관세 인상…美 언론 비판 잇따라",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-26T23:52:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611270026"
+     "title": "연우 “밥 두 숟갈 먹으며 10kg 감량…전신 두드러기 생겨” (무쇠소녀...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T00:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005769800"
     },
     {
-     "title": "美언론도 트럼프 관세 폭주 비판…\"경제적 자해 행위\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T23:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930404?sid=104"
+     "title": "설인아, 동갑 연우 꼬셨다…다이어트 후유증 딛고 '무쇠소녀단3'도 호흡",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-27T00:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004470189"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1756,
-  "matched": 878,
+  "flagged": 1761,
+  "matched": 879,
   "avgLeadMin": 590,
   "recent": [
+   {
+    "keyword": "성북 피의자 송치",
+    "hitKeyword": "성북 살인사건 전 연인 송치",
+    "hitAt": "2026-11-27T10:00:00+09:00",
+    "leadMin": 17
+   },
    {
     "keyword": "청해부대 임무 확대",
     "hitKeyword": "이란 한국 청해부대 우려",
@@ -327,12 +397,6 @@
     "hitKeyword": "11월 말 포근한 날씨",
     "hitAt": "2026-11-27T09:00:00+09:00",
     "leadMin": 78
-   },
-   {
-    "keyword": "2026년 11월 운세",
-    "hitKeyword": "11월 말 포근한 날씨",
-    "hitAt": "2026-11-27T09:00:00+09:00",
-    "leadMin": 48
    }
   ]
  }
