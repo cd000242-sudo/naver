@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T00:52:48.708Z",
+ "builtAt": "2026-11-27T01:02:52.843Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,50 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 19,
  "candidates": [
   {
    "keyword": "중기부 장관 표창 수상",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 43,
-   "recent20": 7,
-   "press": 32,
-   "firstArticleAt": "2026-11-26T23:30:00.000Z",
+   "articles90": 45,
+   "recent20": 6,
+   "press": 35,
+   "firstArticleAt": "2026-11-26T23:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "NS홈쇼핑, 동반성장 주간 기념식서 중기부 장관 표창 수상",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-27T00:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490611?sid=101"
-    },
-    {
-     "title": "삼양식품, '올해의 상생기업' 선정…중기부 장관 표창 수상",
-     "press": "newsmap.co.kr",
-     "publishedAt": "2026-11-27T00:42:00.000Z",
-     "link": "https://www.newsmap.co.kr/news/articleView.html?idxno=5874"
+     "title": "삼양식품, '2026 올해의 상생기업' 선정…중기부 장관 표창 영예",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-27T01:00:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68562"
     },
     {
      "title": "코레일유통물류, '올해의 상생기업 대상' 중기부 장관 표창 수상",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-27T00:42:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121332"
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-27T00:58:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261127500074"
+    },
+    {
+     "title": "SK인텔릭스, '올해의 상생기업 대상' 중기부 장관 표창",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-27T00:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002447213?sid=105"
     }
    ]
   },
   {
    "keyword": "성북 피의자 송치",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 35,
-   "recent20": 5,
-   "press": 31,
-   "firstArticleAt": "2026-11-26T23:30:00.000Z",
+   "articles90": 25,
+   "recent20": 3,
+   "press": 23,
+   "firstArticleAt": "2026-11-26T23:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,46 +76,14 @@
    ]
   },
   {
-   "keyword": "급식 파업",
-   "sources": [
-    "google"
-   ],
-   "articles90": 30,
-   "recent20": 13,
-   "press": 24,
-   "firstArticleAt": "2026-11-26T23:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“오늘 급식 안 나오나요?”…각급 학교 비정규직 하루 총파업·여의도...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-27T00:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061477?sid=102"
-    },
-    {
-     "title": "전남광주교육청, 학교비정규직 총파업 대응 급식·돌봄 공백 최소화",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-27T00:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214492?sid=102"
-    },
-    {
-     "title": "학교 비정규직 총파업…급식·방과후돌봄 차질",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-27T00:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000546240?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "에이피알",
    "sources": [
     "google"
    ],
-   "articles90": 27,
-   "recent20": 3,
-   "press": 23,
-   "firstArticleAt": "2026-11-26T23:26:00.000Z",
+   "articles90": 22,
+   "recent20": 2,
+   "press": 21,
+   "firstArticleAt": "2026-11-26T23:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,49 +108,55 @@
    ]
   },
   {
-   "keyword": "김정은, 러시아 공연 관람",
+   "keyword": "발언하는 정점식 원내대표",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 17,
-   "recent20": 5,
-   "press": 13,
-   "firstArticleAt": "2026-11-26T23:30:00.000Z",
+   "articles90": 20,
+   "recent20": 4,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T00:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "러시아와 초밀착하는 북한…김정은, 방북한 러 예술인 공연 관람",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-27T00:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980123?sid=100"
+     "title": "정점식 \"민주당은 법맹 집단…曺 탄핵소추안이나 제대로 쓰겠나\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T00:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009313658?sid=100"
     },
     {
-     "title": "김정은, 러시아 예술인들과 기념촬영",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T00:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467085?sid=100"
+     "title": "천준호 \"쇼츠 찍었으면 나가!\" 정점식 \"당 꼬라지 하고는..\" [앵커리포트...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T00:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438808?sid=100"
     },
     {
-     "title": "러시아 가수 돌리나와 악수하는 김정은",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T00:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467083?sid=100"
+     "title": "발언하는 정점식 국민의힘 원내대표",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T00:48:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3764927"
     }
    ]
   },
   {
-   "keyword": "김가영, 라이벌 제압!",
+   "keyword": "김가영, 스롱 꺾고 4강 진출",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 11,
+   "articles90": 6,
    "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-26T23:26:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-26T23:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "20승 보인다…'당구 여제' 김가영, 라이벌 스롱 꺾고 준결승행→정수빈...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-27T00:55:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/445/0000493901"
+    },
     {
      "title": "[LPBA] 김가영, 스롱 꺾고 4강 진출...김보미와 결승행 다툼",
      "press": "newspim.com",
@@ -189,48 +164,42 @@
      "link": "https://www.newspim.com/news/view/20261127000220"
     },
     {
-     "title": "20승 보인다! ‘당구 여제’ 김가영 ‘라이벌’ 스롱 꺾고 준결승행…김...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-27T00:40:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/396/0000762124"
-    },
-    {
-     "title": "김가영, 스롱 피아비 꺾고 LPBA 4강 진출-통산 20승까지 두 걸음",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-27T00:04:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96050"
+     "title": "김보미, 챔피언 자신감 장착…김가영과 4강전 빅뱅",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-27T00:26:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/028/0002834235"
     }
    ]
   },
   {
-   "keyword": "김용범",
+   "keyword": "김정은 참가자들과 기념촬영",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 8,
-   "recent20": 4,
-   "press": 8,
-   "firstArticleAt": "2026-11-26T23:56:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T23:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김용범 메리츠 부회장, 자본시장 개혁기구 이끈다…민간 주도 개혁 시동",
-     "press": "paxetv.com",
-     "publishedAt": "2026-11-27T00:44:00.000Z",
-     "link": "http://www.paxetv.com/news/articleView.html?idxno=288045"
+     "title": "김정은, 당 세포비서대회 참가자들과 기념촬영",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T00:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467058?sid=100"
     },
     {
-     "title": "거버넌스포럼, 김용범 위원장 내정 환영…\"대통령, 끝까지 힘 실어줘야...",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-27T00:42:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733190"
+     "title": "러시아 공연 즐긴 김정은…\"푸틴에 따뜻한 인사 전해달라\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-27T00:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653723?sid=100"
     },
     {
-     "title": "김용범 메리츠 부회장, '자본시장 대전환委' 수장 발탁…위원 전원 민간...",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-27T00:40:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=230413"
+     "title": "김정은, '최말단 조직 책임자' 당세포비서대회 참가자들과 기념촬영",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-26T23:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438776?sid=100"
     }
    ]
   },
@@ -239,10 +208,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-26T23:28:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-26T23:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -263,71 +232,6 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-27T00:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006416414?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "학교급식 빵으로 대체",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T23:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "부산 학교 비정규직 파업으로 150개 학교 급식 차질",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T00:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467100?sid=102"
-    },
-    {
-     "title": "전남광주교육청, 비정규직 파업 속 학교급식 정상 운영",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-27T00:33:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087155"
-    },
-    {
-     "title": "부산 학비 파업참가 7.8%…학교 5곳중 1곳 대체급식",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T00:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014348666?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "이형일 부총리 시장상황점검회의",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T23:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "시장상황점검회의 앞서 환담하는 이형일 부총리",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T23:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466886?sid=101"
-    },
-    {
-     "title": "이형일 부총리, 시장상황점검회의 주재",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T23:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466887?sid=101"
-    },
-    {
-     "title": "이형일 부총리, 시장상황점검회의 발언",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-26T23:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466881?sid=101"
     }
    ]
   },
@@ -362,75 +266,11 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000930404?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "빅뱅",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T23:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김보미, 챔피언 자신감 장착…김가영과 4강전 빅뱅",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-27T00:26:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/028/0002834235"
-    },
-    {
-     "title": "김유정, 빅뱅 앞 팬심 터졌다…입틀막·떼창에 지드래곤도 '좋아요' [★...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T00:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084653"
-    },
-    {
-     "title": "김유정, 빅뱅 무대에 입 틀어막았다..지드래곤 '좋아요'로 화답",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-26T23:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490604"
-    }
-   ]
-  },
-  {
-   "keyword": "준법투쟁",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-27T00:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "준법투쟁 이틀째 출근길, 큰 혼란 없지만 '수 분 지연' 이어져",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T00:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467107?sid=102"
-    },
-    {
-     "title": "철도노조 준법투쟁 이틀째…",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T00:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467038?sid=102"
-    },
-    {
-     "title": "철도노조 준법투쟁 이틀째 대전역 상황은?",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T00:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467036?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1753,
+  "flagged": 1756,
   "matched": 878,
   "avgLeadMin": 590,
   "recent": [
