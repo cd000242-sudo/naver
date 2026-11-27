@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T00:02:32.308Z",
+ "builtAt": "2026-11-27T00:12:35.340Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 14,
+   "articles90": 16,
+   "recent20": 1,
+   "press": 15,
    "firstArticleAt": "2026-11-26T22:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "육성재 턱봉합·문근영 이마부상…\"기립성 저혈압으로 쓰러져\"",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-27T00:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/417/0001165854"
+    },
     {
      "title": "육성재 이어 문근영도…”기립성 저혈압으로 쓰러져 다쳐”",
      "press": "news.jtbc.co.kr",
@@ -33,12 +39,6 @@
      "press": "mydaily.co.kr",
      "publishedAt": "2026-11-26T23:50:00.000Z",
      "link": "https://m.entertain.naver.com/article/117/0004128552"
-    },
-    {
-     "title": "문근영, '혹평' 앞머리 이유 있었다..\"기립성 저혈압으로 쓰러져 부상\"[...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-26T23:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005645954"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 5,
-   "press": 10,
-   "firstArticleAt": "2026-11-26T22:36:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-26T22:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -80,7 +80,7 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 1,
    "press": 9,
    "firstArticleAt": "2026-11-26T22:58:00.000Z",
    "exclusive": false,
@@ -111,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T22:34:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-26T22:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -143,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-26T22:33:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-26T22:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,34 +171,34 @@
    ]
   },
   {
-   "keyword": "남자농구, 카타르 완파 본선행 청신호",
+   "keyword": "연우 10kg 감량",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 6,
+   "articles90": 3,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-26T22:44:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-26T23:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한국 남자농구, 카타르에 22점 차 대승… 월드컵 본선행 청신호",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-26T23:48:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=887887"
+     "title": "설인아, 동갑 연우 꼬셨다…다이어트 후유증 딛고 '무쇠소녀단3'도 호흡",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-27T00:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004470189"
     },
     {
-     "title": "'마줄스호' 농구 대표팀, 카타르 74-52 완파…월드컵 본선행 청신호",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-26T23:30:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/003/0014348556"
+     "title": "연우 “2달만에 10kg 감량…온몸 두드러기, 많이 울어” (무쇠소녀단3)",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-26T23:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001307115"
     },
     {
-     "title": "'주축 줄부상' 남자농구, 카타르 22점 차 완파…월드컵 본선행 청신호",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-26T23:26:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/421/0009313387"
+     "title": "연우, 10kg 감량 후 전신 두드러기…\"이렇게 살면 안 되겠더라\"",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-26T23:06:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628071"
     }
    ]
   },
@@ -218,7 +218,7 @@
      "title": "시장상황점검회의 앞서 환담하는 이형일 부총리",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T23:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466886?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/001/0016466885?sid=101"
     },
     {
      "title": "이형일 부총리, 시장상황점검회의 주재",
@@ -230,49 +230,35 @@
      "title": "이형일 부총리, 시장상황점검회의 발언",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-26T23:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016466881?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 중국 자동차 규제법",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-26T22:37:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미국 의회, ‘중국 자동차 규제법’ 내달 처리 추진…미중 긴장 커지나",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-26T22:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302354?sid=104"
-    },
-    {
-     "title": "美의회, '中 자동차 규제법' 다음달 내 처리 추진",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-26T22:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930392?sid=104"
-    },
-    {
-     "title": "美 여야, ‘中 자동차 규제법’ 연내 처리 추진",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-26T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207671?sid=104"
+     "link": "https://n.news.naver.com/mnews/article/001/0016466882?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1746,
-  "matched": 874,
-  "avgLeadMin": 581,
+  "flagged": 1740,
+  "matched": 873,
+  "avgLeadMin": 584,
   "recent": [
+   {
+    "keyword": "폭설",
+    "hitKeyword": "엘니뇨 재난문자 폭설",
+    "hitAt": "2026-11-27T09:00:00+09:00",
+    "leadMin": 2740
+   },
+   {
+    "keyword": "2026년 11월 27일 운세",
+    "hitKeyword": "11월 말 포근한 날씨",
+    "hitAt": "2026-11-27T09:00:00+09:00",
+    "leadMin": 78
+   },
+   {
+    "keyword": "2026년 11월 운세",
+    "hitKeyword": "11월 말 포근한 날씨",
+    "hitAt": "2026-11-27T09:00:00+09:00",
+    "leadMin": 48
+   },
    {
     "keyword": "화장실",
     "hitKeyword": "공중화장실 휴지 폭탄",
@@ -314,24 +300,6 @@
     "hitKeyword": "코스피 급락 손실",
     "hitAt": "2026-11-27T08:30:00+09:00",
     "leadMin": 943
-   },
-   {
-    "keyword": "코스피 강보합 마감",
-    "hitKeyword": "코스피 급락 손실",
-    "hitAt": "2026-11-27T08:30:00+09:00",
-    "leadMin": 923
-   },
-   {
-    "keyword": "코스피, 강보합 마감",
-    "hitKeyword": "코스피 급락 손실",
-    "hitAt": "2026-11-27T08:30:00+09:00",
-    "leadMin": 903
-   },
-   {
-    "keyword": "크리스마스 빌리지 개막",
-    "hitKeyword": "크리스마스 시즌 트렌드",
-    "hitAt": "2026-11-27T08:30:00+09:00",
-    "leadMin": 883
    }
   ]
  }
