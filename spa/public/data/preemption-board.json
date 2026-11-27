@@ -1431,6 +1431,11 @@
     "tier": "low",
     "pc": 680,
     "mobile": 570
+   },
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-27T04:29:08.707Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -40335,7 +40340,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-26T04:22:41.826Z",
+    "checkedAt": "2026-11-27T04:28:50.714Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -44183,6 +44188,11 @@
     "tier": "none",
     "pc": 70,
     "mobile": 70
+   },
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-27T04:29:07.798Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -69572,7 +69582,12 @@
    "effectiveVolume": 1480,
    "peakConfidence": "",
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-27T04:28:52.505Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -109978,7 +109993,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-26T04:22:42.731Z",
+    "checkedAt": "2026-11-27T04:28:51.605Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -123581,5 +123596,6 @@
     "SERP 2번째 구획이 쇼핑 — 검색 화면이 상품판이다"
    ]
   }
- ]
+ ],
+ "revalidatedAt": "2026-11-27T04:29:08.707Z"
 }
