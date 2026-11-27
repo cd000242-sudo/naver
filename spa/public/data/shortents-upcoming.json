@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T03:33:45.283Z",
+ "builtAt": "2026-11-27T03:43:48.199Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "한동훈",
    "sources": [
     "google"
    ],
-   "articles90": 48,
+   "articles90": 45,
    "recent20": 2,
-   "press": 39,
-   "firstArticleAt": "2026-11-27T02:04:00.000Z",
+   "press": 37,
+   "firstArticleAt": "2026-11-27T02:15:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "장동혁, 한동훈 복당해도 재징계 시사···국민의힘 '조작징계' 내홍 확...",
+     "press": "todaykorea.co.kr",
+     "publishedAt": "2026-11-27T03:40:00.000Z",
+     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=409337"
+    },
+    {
+     "title": "장동혁 \"한동훈, 법원서 제명 취소돼도 다시 징계 가능\"",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-27T03:38:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328782"
+    },
     {
      "title": "경찰, ‘한동훈 수사자료 유출 의혹’ 강제수사… 한동훈 “민주당의 지...",
      "press": "jibs.co.kr",
      "publishedAt": "2026-11-27T03:20:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/661/0000087144?sid=100"
-    },
-    {
-     "title": "장동혁 \"한동훈, 법정서 해결하라⋯복당해도 추가 징계 가능\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-27T03:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001079043?sid=100"
-    },
-    {
-     "title": "'조작 징계' 주장 국힘 전 윤리위원들, 한동훈에 \"사과하겠다\" 만남 제안",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T03:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014349231?sid=100"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 45,
-   "recent20": 6,
-   "press": 38,
-   "firstArticleAt": "2026-11-27T02:07:00.000Z",
+   "articles90": 37,
+   "recent20": 1,
+   "press": 33,
+   "firstArticleAt": "2026-11-27T02:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,49 +75,23 @@
    ]
   },
   {
-   "keyword": "ai 에이전트",
-   "sources": [
-    "google"
-   ],
-   "articles90": 42,
-   "recent20": 5,
-   "press": 36,
-   "firstArticleAt": "2026-11-27T02:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "SK에코플랜트, AI 데이터센터 기술 확보",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T03:32:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287770"
-    },
-    {
-     "title": "앤트로픽, MCP 서버에 '스킬' 도입…AI 에이전트에 업무 노하우까지 전...",
-     "press": "aitimes.com",
-     "publishedAt": "2026-11-27T03:24:00.000Z",
-     "link": "https://www.aitimes.com/news/articleView.html?idxno=217847"
-    },
-    {
-     "title": "알리바바, AI 기술을 사회적 가치 창출로…안전·의료·과학·교육 등 8...",
-     "press": "aitimes.kr",
-     "publishedAt": "2026-11-27T03:18:00.000Z",
-     "link": "https://www.aitimes.kr/news/articleView.html?idxno=42922"
-    }
-   ]
-  },
-  {
    "keyword": "김대기 관저이전 예산전용",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 39,
-   "recent20": 4,
-   "press": 33,
-   "firstArticleAt": "2026-11-27T02:04:00.000Z",
+   "articles90": 35,
+   "recent20": 2,
+   "press": 29,
+   "firstArticleAt": "2026-11-27T02:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘尹 관저 예산 불법 전용’ 김대기 1심 징역형 집유…이상민은 무죄",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-27T03:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686869?sid=102"
+    },
     {
      "title": "'尹 관저 공사비' 메우려 행안부 예산 끌어다 쓴 김대기 유죄",
      "press": "sisajournal.com",
@@ -129,90 +103,82 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-27T03:20:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001406307?sid=102"
-    },
-    {
-     "title": "‘尹 관저 예산전용’ 김대기 1심서 징역형 집유",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-27T03:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002836073?sid=102"
     }
    ]
   },
   {
    "keyword": "학교 비정규직 총파업에",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 36,
-   "recent20": 5,
-   "press": 21,
-   "firstArticleAt": "2026-11-27T02:05:00.000Z",
+   "articles90": 39,
+   "recent20": 8,
+   "press": 23,
+   "firstArticleAt": "2026-11-27T02:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "학교 비정규직 총파업 영향으로 급식 차질",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T03:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467556?sid=102"
+     "title": "전국 학교 비정규직 노동자 총파업…\"차별 철폐\"",
+     "press": "news.ebs.co.kr",
+     "publishedAt": "2026-11-27T03:40:00.000Z",
+     "link": "http://news.ebs.co.kr/ebsnews/allView/60794933/N"
     },
     {
-     "title": "오늘은 학교 급식 대신 빵",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T03:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467549?sid=102"
+     "title": "경기도 학교비정규직 총파업에 5582명 참여…학교 42% 동참",
+     "press": "incheonilbo.com",
+     "publishedAt": "2026-11-27T03:40:00.000Z",
+     "link": "https://www.incheonilbo.com/news/articleView.html?idxno=1338004"
     },
     {
-     "title": "\"급식 선생님 돌아오셨으면\"…학비연대 파업 첫날, 울산 학교 급식 차질",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T03:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314101?sid=102"
+     "title": "학교 비정규직 총파업... 급식 대체식 제공",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T03:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467583?sid=102"
     }
    ]
   },
   {
-   "keyword": "손연재 부부 30억 기부",
+   "keyword": "내년 4월 야외 결혼식",
    "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 15,
-   "recent20": 4,
+   "recent20": 3,
    "press": 15,
-   "firstArticleAt": "2026-11-27T02:07:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-27T02:15:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "'리듬체조 국가대표 출신' 손연재 부부, 연세의료원에 30억 기부…태아...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-27T03:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122333?sid=102"
+     "title": "솔비♥이규한, 내년 4월 25일 결혼… 서울 종로서 야외 웨딩 [공식]",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-27T03:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543888"
     },
     {
-     "title": "손연재 부부, 고위험 산모·태아 위해 30억 통 큰 기부…'연재태아협진...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-27T03:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004470233"
+     "title": "솔비·이규한, 내년 4월 25일 결혼한다…비공개 야외 웨딩 [공식입장]",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-27T03:26:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110120287464"
     },
     {
-     "title": "손연재 부부, 30억 통 큰 기부…“산모와 아이들에 작은 힘 되길”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T03:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005769913"
+     "title": "솔비·이규한, 4월 25일 결혼 확정… 야외 예식 진행",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-27T03:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000968129"
     }
    ]
   },
   {
    "keyword": "강호동 아들 준우승",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 9,
    "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T02:05:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-27T02:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -241,69 +207,133 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
-   "recent20": 8,
+   "articles90": 17,
+   "recent20": 17,
    "press": 7,
-   "firstArticleAt": "2026-11-27T03:22:00.000Z",
+   "firstArticleAt": "2026-11-27T03:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[신간] \"2026년, 'AGI경제' 원년이 열렸다\"…지능이 구독되는 시대, 부와...",
+     "title": "광진소방서, ‘2026년 다수사상자 구급대응훈련 평가’ 1등급 달성",
+     "press": "fpn119.co.kr",
+     "publishedAt": "2026-11-27T03:42:00.000Z",
+     "link": "http://fpn119.co.kr/260146"
+    },
+    {
+     "title": "[포토] 레드카펫 밟는 주민형 (2026 청룡영화상)",
      "press": "ajunews.com",
-     "publishedAt": "2026-11-27T03:32:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127122235241"
+     "publishedAt": "2026-11-27T03:42:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127124006267"
     },
     {
-     "title": "한국e스포츠협회, 문체부 '2026 체육단체 혁신평가' 매우 우수(S) 획득",
-     "press": "fomos.kr",
-     "publishedAt": "2026-11-27T03:30:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/236/0000258283"
-    },
-    {
-     "title": "한화그룹, 늦가을 저녁 바로크 선율 전한 '한화클래식 2026' 성공적 마무...",
-     "press": "womentimes.co.kr",
-     "publishedAt": "2026-11-27T03:30:00.000Z",
-     "link": "https://www.womentimes.co.kr/news/articleView.html?idxno=108343"
+     "title": "[포토] 레드카펫 밟는 서수빈 (2026 청룡영화상)",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T03:42:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127124047278"
     }
    ]
   },
   {
-   "keyword": "무쇠소녀단 3",
+   "keyword": "대만",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 3,
+   "articles90": 6,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T02:10:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-27T02:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "또다시 설인아 시간이 열렸다…3연속 개근, ‘무쇠소녀단3’로 또 증명...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T02:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001148505"
+     "title": "이 대통령 요청한 ‘판다 한 쌍’…‘대만관’ 논란에 무산",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T03:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302591?sid=100"
     },
     {
-     "title": "'무쇠소녀단3' 한지현, 등장하자마자 체력왕 등극",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-27T02:12:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96064"
+     "title": "대만첩보-휴민트 교환? … 중국과 석방협상 무산說",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-27T02:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002836040?sid=100"
     },
     {
-     "title": "한지현, ‘무쇠소녀단3’ 첫 방송부터 활약..‘지트리버’ 반전 매력",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-27T02:10:00.000Z",
-     "link": "http://www.breaknews.com/1254568"
+     "title": "[AI 쇼크 흔들린 亞증시] ②젠슨 황 복귀시킨 미국·공매도 막은 대만…...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-27T02:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207765?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "남경필 아들 협박 폭행",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T02:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "벌써 몇번째…남경필 장남, 前연인에 촬영물 유포 협박·흉기 위협·폭행...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-27T03:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001042667?sid=102"
+    },
+    {
+     "title": "“남경필 장남 체포”…오늘(27일) 갑자기 전해진 소식",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-27T03:18:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178330"
+    },
+    {
+     "title": "‘마약 투약’ 남경필 아들, 또?…결별 통보한 前 연인에 “성관계 영상...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-27T03:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729538?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "오세훈 시장 졸업식 축사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T02:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울시민대학 7학년 교실 졸업식 찾은 오세훈 시장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T03:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314023?sid=102"
+    },
+    {
+     "title": "서울시민대학 졸업식 축사하는 오세훈 시장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T03:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314015?sid=102"
+    },
+    {
+     "title": "서울시민대학 7학년 교실 졸업식 축사하는 오세훈 시장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T03:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314016?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1801,
+  "flagged": 1805,
   "matched": 903,
   "avgLeadMin": 613,
   "recent": [
