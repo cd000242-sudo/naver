@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T14:07:30.099Z",
+ "builtAt": "2026-11-27T14:17:33.172Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 1,
+   "recent20": 0,
    "press": 9,
    "firstArticleAt": "2026-11-27T12:48:00.000Z",
    "exclusive": false,
@@ -43,34 +43,66 @@
    ]
   },
   {
-   "keyword": "GS칼텍스 선두 탈환",
+   "keyword": "GS칼텍스 5연승",
    "sources": [
     "daum"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T12:39:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T12:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "실바 30점 폭발…GS칼텍스, 흥국생명 꺾고 5연승·선두 탈환",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-27T13:37:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/241/0003543964"
+     "title": "프로배구 GS칼텍스, 흥국생명 꺾고 5연승… 선두 탈환",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-27T14:10:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888230"
     },
     {
-     "title": "'실바 30점 폭발' 여자배구 GS칼텍스, 흥국생명 완파하고 5연승·선두 탈...",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-27T13:04:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=436044"
+     "title": "GS칼텍스 실바, 흥국생명 상대로 30점 폭발…\"몸은 달라도 해낼 수 있다...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T13:50:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288138"
     },
     {
-     "title": "'실바 30점' GS칼텍스, 흥국생명 꺾고 5연승…선두 탈환(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T12:48:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/001/0016468498"
+     "title": "이영택 GS칼텍스 감독 30점 올린 실바에 “폭발력 여전하다” [쿠키 현장...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-27T13:44:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611270189"
+    }
+   ]
+  },
+  {
+   "keyword": "한동훈 자료유출 압수수색에",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T12:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'한동훈 자료 유출' 강제 수사...법무부·공소청 압수수색",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T14:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439172?sid=102"
+    },
+    {
+     "title": "한동훈 의혹 압수수색에 본인은 제외…수사 쟁점은?",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T14:02:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288142"
+    },
+    {
+     "title": "경찰, ‘한동훈 자료 유출 의혹’ 법무부·공소청 압수수색",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T13:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303002?sid=102"
     }
    ]
   },
@@ -81,10 +113,10 @@
     "nate",
     "google"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T12:40:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T12:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -113,10 +145,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T12:44:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-27T12:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -137,70 +169,6 @@
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-27T12:54:00.000Z",
      "link": "https://m.sports.naver.com/basketball/article/468/0001283967"
-    }
-   ]
-  },
-  {
-   "keyword": "박정수",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T12:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘25년째 사실혼’ 박정수, ‘정경호父’ ♥정을영에 “사랑해”..여전...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-27T13:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646250"
-    },
-    {
-     "title": "박정수, 남사친과 여행 전 '사실혼 ♥정경호 父'에 \"사랑해\"…김용건도...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T12:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084909"
-    },
-    {
-     "title": "김용건·박정수, 깊이가 다른 반세기 우정",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-27T12:46:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6944283"
-    }
-   ]
-  },
-  {
-   "keyword": "한동훈 자료유출 압수수색에",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T12:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한동훈 의혹 압수수색에 본인은 제외…수사 쟁점은?",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T14:02:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288142"
-    },
-    {
-     "title": "경찰, ‘한동훈 자료 유출 의혹’ 법무부·공소청 압수수색",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T13:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012303002?sid=102"
-    },
-    {
-     "title": "한동훈 '기소계획서 유출' 의혹…경찰, 법무부·공소청 압수수색",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-27T12:52:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=321159"
     }
    ]
   }
