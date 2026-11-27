@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T23:40:31.478Z",
+ "builtAt": "2026-11-27T23:50:34.614Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "서현진 긴급 체포",
@@ -16,10 +16,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 18,
+   "articles90": 17,
    "recent20": 0,
    "press": 15,
-   "firstArticleAt": "2026-11-27T22:20:00.000Z",
+   "firstArticleAt": "2026-11-27T22:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -30,16 +30,16 @@
      "link": "https://m.entertain.naver.com/article/311/0002084980"
     },
     {
-     "title": "‘라이어’ 서현진, 유연석 살해 용의자로 긴급 체포…5.7% 최고의 1분",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T23:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192063"
-    },
-    {
      "title": "'라이어' 서현진, 유연석 살해 용의자 긴급 체포⋯시청률 4.8%",
      "press": "joynews24.com",
      "publishedAt": "2026-11-27T23:02:00.000Z",
      "link": "http://www.joynews24.com/view/2031483"
+    },
+    {
+     "title": "‘라이어’ 서현진, 유연석 살해 용의자로 긴급 체포…5.7% 최고의 1분",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T23:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192063"
     }
    ]
   },
@@ -50,61 +50,61 @@
     "nate"
    ],
    "articles90": 12,
-   "recent20": 0,
+   "recent20": 2,
    "press": 12,
-   "firstArticleAt": "2026-11-27T22:16:00.000Z",
+   "firstArticleAt": "2026-11-27T22:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "장나라에 배운 김혜윤…'굿파트너2' 최고 11.1% 상승 [시청률]",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-27T23:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054489"
+    },
+    {
+     "title": "장나라+김혜윤 콤비 통했다-'굿파트너2' 9.8%",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-27T23:42:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96113"
+    },
     {
      "title": "‘굿파트너2’ 김혜윤에 깨달음 준 장나라, 9.8% 자체 최고 시청률",
      "press": "newsen.com",
      "publishedAt": "2026-11-27T22:58:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001192061"
-    },
-    {
-     "title": "'굿파트너2' 시청률 9.8% 자체 최고…장나라·김혜윤, '라이어' 앞서",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T22:56:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288222"
-    },
-    {
-     "title": "장나라의 '이혼 노하우'..\"찾았다\" 김혜윤, '굿파트너'..자체 최고 11.1%...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-27T22:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490783"
     }
    ]
   },
   {
-   "keyword": "젠슨 황 복귀와 불륜 의혹",
+   "keyword": "그냥 사람 친구",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T22:23:00.000Z",
+   "articles90": 6,
+   "recent20": 4,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T22:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'젠슨황 불륜 상대' 연계 中시설서 엔비디아 최첨단 칩 발견",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-27T23:10:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888761"
+     "title": "'그냥사람친구' 시청률 6.5% 동시간 1위",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T23:48:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288253"
     },
     {
-     "title": "사임 11일 만에 복귀했는데…'불륜상대' 연계 中시설서 발견된 물건 '발...",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-27T23:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001274262?sid=104"
+     "title": "그냥사람친구, 첫방 최고 6.5%",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-27T23:48:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611280050"
     },
     {
-     "title": "'블랙웰' 엔비디아 최첨단 칩 '젠슨황 불륜 상대' 연계 中시설에서 발견",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-27T23:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000546420?sid=104"
+     "title": "이서진vs한지민 통했다…‘그냥사람친구’ 첫방송 5%",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-27T23:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001307248"
     }
    ]
   },
@@ -113,13 +113,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 2,
    "press": 5,
    "firstArticleAt": "2026-11-27T22:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“홍민기가 임신중절 종용” 주장한 전 여친 실종…경찰, 마포대교 인근...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T23:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005770200"
+    },
     {
      "title": "마포대교 일대서 마지막 신호…홍민기 전 연인 ‘실종’, 경찰 수사",
      "press": "mk.co.kr",
@@ -131,90 +137,82 @@
      "press": "spotvnews.co.kr",
      "publishedAt": "2026-11-27T23:25:00.000Z",
      "link": "https://m.entertain.naver.com/article/477/0000641310"
-    },
-    {
-     "title": "'낙태-폭력 주장' 홍민기 전 연인, 마지막 종적은 마포대교",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-27T23:16:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96108"
     }
    ]
   },
   {
-   "keyword": "최민희 당원권 정지",
+   "keyword": "이동연 보관 인증 공개",
    "sources": [
     "daum"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-27T23:01:00.000Z",
+   "firstArticleAt": "2026-11-27T22:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최민희 '당원권 정지 2년'에 정청래 \"김민석은?\"…민주당 내홍 격화",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-27T23:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042816?sid=100"
+     "title": "이동연, 팬레터 폐기 논란에 '인증샷' 공개…고이 보관된 봉투들",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-27T23:18:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785480"
     },
     {
-     "title": "'당원권 2년 정지' 최민희 중징계...확정땐 최고위원직 상실",
-     "press": "newsverse.kr",
-     "publishedAt": "2026-11-27T23:08:00.000Z",
-     "link": "https://www.newsverse.kr/news/articleView.html?idxno=12071"
+     "title": "이동연 “저걸 아직도 갖고 있어?” 모아둔 선물+편지 ‘증거들’ 여론...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T22:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192062"
     },
     {
-     "title": "'친청계' 최민희 공천 못 받나…중징계에 민주당 갈등 '폭풍 속으로'",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-27T23:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160461?sid=100"
+     "title": "'팬레터 폐기' 뭇매 맞던 이동연, 2차 사과·인증샷에 비난 여론 '반전'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T22:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014350418"
     }
    ]
   },
   {
-   "keyword": "국제유가 하락 마감",
+   "keyword": "남경주 제자 성관계 인정",
    "sources": [
-    "signal.bz",
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-27T22:12:00.000Z",
+   "firstArticleAt": "2026-11-27T22:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국제유가, 중동 정세 불안에도 하락 마감… 브렌트유 1.17%↓",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-27T22:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207912?sid=104"
+     "title": "남경주, 제자와 성관계 인정-피감독자간음 부인",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-27T23:12:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96107"
     },
     {
-     "title": "중동 불안에도 국제유가 하락…OPEC+ 회의 주목",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-27T22:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001274259?sid=101"
+     "title": "‘제자 성폭행 혐의’ 남경주, 사건 열흘 뒤 편지…“세상에 알리지 말...",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-27T23:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001233958?sid=102"
     },
     {
-     "title": "국제유가, 1% 안팎 하락 마감⋯OPEC+ 회의 앞두고 관망 [상보]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-27T22:12:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2654161"
+     "title": "성관계 인정했다가 진술 번복…남경주 측, 제자와 키스 장면엔 “로맨틱...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-27T22:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001283981"
     }
    ]
   },
   {
    "keyword": "신민아, 재혼 황후 이야기",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
    "press": 2,
-   "firstArticleAt": "2026-11-27T22:15:00.000Z",
+   "firstArticleAt": "2026-11-27T22:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -241,7 +239,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1972,
+  "flagged": 1975,
   "matched": 971,
   "avgLeadMin": 656,
   "recent": [
