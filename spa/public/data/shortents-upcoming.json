@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T21:49:56.628Z",
+ "builtAt": "2026-11-27T21:59:59.231Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "AI 반등에 증시 상승",
    "sources": [
     "nate"
    ],
-   "articles90": 15,
+   "articles90": 17,
    "recent20": 4,
-   "press": 13,
+   "press": 14,
    "firstArticleAt": "2026-11-27T20:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "[뉴욕증시] “AI 공매도는 자살 행위”...나스닥 543P 급등",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-27T21:58:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611280654579798e250e8e188_1"
+    },
+    {
+     "title": "뉴욕증시, AIㆍ칩 반등에 상승⋯나스닥 2.3%↑ [상보]",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T21:56:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654160"
+    },
+    {
      "title": "뉴욕증시, AI·기술주 반등에 일제히 상승…나스닥 2.3%↑",
      "press": "slist.kr",
      "publishedAt": "2026-11-27T21:48:00.000Z",
      "link": "https://www.slist.kr/news/articleView.html?idxno=785445"
-    },
-    {
-     "title": "AI 공포 잦아들자 반도체주 폭발…삼성전자·SK하이닉스도 본격 반등 '신...",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-27T21:46:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=509079"
-    },
-    {
-     "title": "[글로벌 마켓뷰] 한중일 증시 급등에 뉴욕증시도 화답했나 …나스닥 2.3...",
-     "press": "moneystorm.kr",
-     "publishedAt": "2026-11-27T21:38:00.000Z",
-     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8949"
     }
    ]
   },
@@ -49,7 +49,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-27T21:00:00.000Z",
    "exclusive": false,
@@ -68,10 +68,10 @@
      "link": "http://www.dailypop.kr/news/articleView.html?idxno=104287"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 28일 별자리 운세",
+     "title": "[오늘의 운세] 2026년 11월 28일 띠별 운세",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-27T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416786?sid=103"
+     "link": "https://n.news.naver.com/mnews/article/018/0006416785?sid=103"
     }
    ]
   },
@@ -110,9 +110,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1970,
-  "matched": 971,
-  "avgLeadMin": 645,
+  "flagged": 1969,
+  "matched": 970,
+  "avgLeadMin": 646,
   "recent": [
    {
     "keyword": "미세먼지",
