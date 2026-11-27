@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T03:03:35.832Z",
+ "builtAt": "2026-11-27T03:13:38.666Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "한동훈",
@@ -16,30 +16,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 72,
+   "articles90": 68,
    "recent20": 10,
    "press": 50,
-   "firstArticleAt": "2026-11-27T01:34:00.000Z",
+   "firstArticleAt": "2026-11-27T01:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경찰, 법무부·공소청 강제수사…한동훈 “민중 아닌 민주당의 지팡이”",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-27T02:58:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1178331"
+     "title": "'한동훈 수사자료 유출 의혹'에 법무부·공소청 압수수색",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-27T03:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406305?sid=102"
     },
     {
-     "title": "한동훈 ‘수사자료 유출’ 압수수색에 “경찰, 민주당의 지팡이”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-27T02:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686864?sid=100"
+     "title": "\"한동훈, 복당해도 다시 징계하면 된다\"…장동혁, 법정 다툼도 불사",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-27T03:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001042666?sid=100"
     },
     {
-     "title": "장동혁 \"한동훈, 복당해도 다시 징계…추가 징계 사유 있어\"",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-27T02:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000143157?sid=100"
+     "title": "‘한동훈, 김승원 자료 유출’ 의혹… 경찰, 법무부·공소청 압수수색",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-27T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002836056?sid=102"
     }
    ]
   },
@@ -48,13 +48,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 54,
+   "articles90": 52,
    "recent20": 10,
-   "press": 46,
-   "firstArticleAt": "2026-11-27T01:38:00.000Z",
+   "press": 44,
+   "firstArticleAt": "2026-11-27T01:46:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
+    {
+     "title": "[강원 AI 활용지원] 모브주식회사 \"고성 바닷가 카페서 푸드테크 기업으...",
+     "press": "it.donga.com",
+     "publishedAt": "2026-11-27T03:04:00.000Z",
+     "link": "https://it.donga.com/110028/"
+    },
     {
      "title": "스위스 정부 \"AI 에이전트 활용 사이버 공격 5건 확인…4건 침해 성공\"",
      "press": "aitimes.com",
@@ -66,12 +72,6 @@
      "press": "irobotnews.com",
      "publishedAt": "2026-11-27T03:02:00.000Z",
      "link": "https://www.irobotnews.com/news/articleView.html?idxno=49838"
-    },
-    {
-     "title": "공장이 원하는 AI 따로 있다…산업 특화 AI 경쟁 본격화",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-27T02:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002447252?sid=105"
     }
    ]
   },
@@ -80,13 +80,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 51,
-   "recent20": 16,
-   "press": 37,
+   "articles90": 52,
+   "recent20": 8,
+   "press": 38,
    "firstArticleAt": "2026-11-27T01:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'尹관저 예산 전용' 김대기 전 비서실장 1심서 징역형 집유...이상민 '무...",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-27T03:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394981?sid=100"
+    },
     {
      "title": "법원, '尹 관저 예산 전용 혐의' 김대기에 집행유예 3년 선고",
      "press": "newsworks.co.kr",
@@ -94,16 +100,10 @@
      "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904683"
     },
     {
-     "title": "‘관저 이전 예산 전용’ 김대기 전 비서실장, 1심 징역형 집행유예…이...",
+     "title": "‘관저 이전 예산 전용’ 김대기 전 비서실장, 징역형 집유…이상민은...",
      "press": "hani.co.kr",
      "publishedAt": "2026-11-27T03:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002834274?sid=102"
-    },
-    {
-     "title": "'尹 관저 이전 예산 전용' 김대기 1심 징역형 집행유예… 이상민 무죄",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-27T02:58:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452629"
     }
    ]
   },
@@ -112,30 +112,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 36,
-   "recent20": 8,
-   "press": 32,
+   "articles90": 39,
+   "recent20": 6,
+   "press": 34,
    "firstArticleAt": "2026-11-27T02:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정부, 울릉도 인근서 구조한 북한 어민 6명 송환... 1명은 국내 잔류",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-27T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002537452?sid=100"
+     "title": "'동해 표류' 북한 어선, 24일 만에 북으로…7명 중 1명은 귀순",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-27T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653774?sid=100"
     },
     {
-     "title": "'동해 표류' 北 주민 6명 24일 만에 송환…1명은 귀순",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-27T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000556223?sid=100"
+     "title": "北 어선 24일 만에 송환…7명 중 1명 국내 보호 요청, 6명 북한으로",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-27T03:04:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631314"
     },
     {
-     "title": "탈북 여성, 다시 월북하다 잡혀… 표류 北어민은 7명 중 6명 송환",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-27T02:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002836042?sid=100"
+     "title": "'표류' 北어선 동해상으로 송환…어민 7명 중 1명 귀순의사",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-27T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848811?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "낸시랭 불구속 송치",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 36,
+   "recent20": 3,
+   "press": 34,
+   "firstArticleAt": "2026-11-27T01:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰, 낸시랭 음주운전 혐의로 불구속 송치…면허 취소 수준",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T03:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359014?sid=102"
+    },
+    {
+     "title": "연예계 덮친 11월의 저주…고경표 이어 낸시랭도 음주운전 적발",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-27T03:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001042665?sid=102"
+    },
+    {
+     "title": "\"만취 아니었다\" 해명한 낸시랭…'음주운전 혐의'로 결국 불구속 송치",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-27T02:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000493939"
     }
    ]
   },
@@ -145,7 +177,7 @@
     "signal.bz"
    ],
    "articles90": 27,
-   "recent20": 1,
+   "recent20": 0,
    "press": 22,
    "firstArticleAt": "2026-11-27T02:00:00.000Z",
    "exclusive": false,
@@ -174,16 +206,21 @@
   {
    "keyword": "수능 부정행위 급증",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 20,
+   "articles90": 18,
    "recent20": 2,
-   "press": 20,
-   "firstArticleAt": "2026-11-27T01:36:00.000Z",
+   "press": 18,
+   "firstArticleAt": "2026-11-27T01:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "포상금 1억원 효과? ... 일주일 새 수능 부정행위 신고·제보 306건 쏟아...",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-27T03:12:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=731321"
+    },
     {
      "title": "수능 시험장 파고든 첨단기기…부정행위 474건 적발, 교육당국 대응 비...",
      "press": "jemin.com",
@@ -195,12 +232,6 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-27T02:50:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005610779?sid=102"
-    },
-    {
-     "title": "사전 경고했는데 더 늘었다…수능 부정행위 474건으로 급증",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T02:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930476?sid=102"
     }
    ]
   },
@@ -209,10 +240,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 19,
+   "articles90": 18,
    "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-27T01:35:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-27T01:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -242,10 +273,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 29,
-   "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-27T01:36:00.000Z",
+   "articles90": 19,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-27T02:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -274,10 +305,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T01:34:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-27T01:44:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -302,76 +333,12 @@
    ]
   },
   {
-   "keyword": "폭설 영어 리메이크 확정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T01:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김윤석ⅹ구교환 ‘폭설’, 영어 리메이크 제작 확정… 홍의정 감독 직접...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-27T02:52:00.000Z",
-     "link": "https://www.viva100.com/article/20261127500306"
-    },
-    {
-     "title": "김윤석·구교환 ‘폭설’, 캐나다서 영어 리메이크…홍의정 감독 직접 ...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-27T02:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003160222"
-    },
-    {
-     "title": "한국 극장가 덮친 ‘폭설’, 캐나다에도 내린다… 영어 리메이크 확정",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T02:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/018/0006416509"
-    }
-   ]
-  },
-  {
-   "keyword": "정영란 9급 시험 발언",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T01:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"고졸이 죄 지었냐\"…'9급 공무원 비하' 논란에 작심 발언한 충주맨",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-27T02:38:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61489"
-    },
-    {
-     "title": "\"9급 시험, 고졸 수준\" 전 부산인재개발원장 발언…인권위 진정",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T02:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416517?sid=102"
-    },
-    {
-     "title": "정영란 '9급 공무원 고졸 수준' 발언 논란…충주맨 김선태 \"고졸이 죄지...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-27T02:14:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631303"
-    }
-   ]
-  },
-  {
    "keyword": "병무청",
    "sources": [
     "google"
    ],
    "articles90": 6,
-   "recent20": 3,
+   "recent20": 2,
    "press": 5,
    "firstArticleAt": "2026-11-27T02:06:00.000Z",
    "exclusive": false,
@@ -402,13 +369,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-27T02:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "충격! 오현규 출전 경기에서 팬들과 경찰 충돌이라니…'팔레스타인 지지...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-27T03:06:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/117/0004128616"
+    },
     {
      "title": "'오현규 선발·슈팅 단 1회' 베식타시, 팔레스타인 지지 현수막에 경찰...",
      "press": "xportsnews.com",
@@ -420,19 +393,77 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-27T02:05:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/052/0002438854"
+    }
+   ]
+  },
+  {
+   "keyword": "폭설 영어 리메이크 확정",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T01:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김윤석ⅹ구교환 ‘폭설’, 영어 리메이크 제작 확정… 홍의정 감독 직접...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-27T02:52:00.000Z",
+     "link": "https://www.viva100.com/article/20261127500306"
     },
     {
-     "title": "오현규 뛰던 유로파리그, 경찰이 관중석으로... 팬들과 충돌해 30분 중단...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-27T02:04:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/108/0003490627"
+     "title": "김윤석·구교환 ‘폭설’, 캐나다서 영어 리메이크…홍의정 감독 직접 ...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-27T02:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003160222"
+    },
+    {
+     "title": "한국 극장가 덮친 ‘폭설’, 캐나다에도 내린다… 영어 리메이크 확정",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T02:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/018/0006416509"
+    }
+   ]
+  },
+  {
+   "keyword": "연우 다이어트 부작용",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T02:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“두 달 만에 10kg 뺐다”… 모모랜드 연우, 이후 겪은 ‘두드러기 부작...",
+     "press": "health.chosun.com",
+     "publishedAt": "2026-11-27T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/346/0000119564?sid=103"
+    },
+    {
+     "title": "연우, 종일 밥 두 숟갈…10kg 감량 후 두드러기 부작용 \"힘들어서 많이...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-27T02:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000493932"
+    },
+    {
+     "title": "“하루 밥 두 숟갈로 두 달에 10kg 뺐더니”… 연우가 겪은 끔찍한 부작...",
+     "press": "kormedi.com",
+     "publishedAt": "2026-11-27T02:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/296/0000107891?sid=103"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1794,
+  "flagged": 1796,
   "matched": 897,
   "avgLeadMin": 614,
   "recent": [
