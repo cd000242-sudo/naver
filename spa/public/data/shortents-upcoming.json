@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T02:53:30.217Z",
+ "builtAt": "2026-11-27T03:03:35.832Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,135 +8,70 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 24,
  "candidates": [
-  {
-   "keyword": "코스닥 매수 사이드카 발동",
-   "sources": [
-    "signal.bz",
-    "daum"
-   ],
-   "articles90": 77,
-   "recent20": 6,
-   "press": 62,
-   "firstArticleAt": "2026-11-27T01:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[개장시황] 외국인·기관 '쌍끌이' 매수에 코스피·코스닥 반등 출발",
-     "press": "businesskorea.co.kr",
-     "publishedAt": "2026-11-27T02:44:00.000Z",
-     "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=282369"
-    },
-    {
-     "title": "코스피 장중 2% 올라 4800선…코스닥 6%대 급등",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-27T02:44:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785329"
-    },
-    {
-     "title": "코스닥 장중 5% '불기둥'에 매수사이드카…로봇·방산주 강세",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-27T02:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000546279?sid=101"
-    }
-   ]
-  },
   {
    "keyword": "한동훈",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 74,
-   "recent20": 8,
-   "press": 52,
-   "firstArticleAt": "2026-11-27T01:28:00.000Z",
+   "articles90": 72,
+   "recent20": 10,
+   "press": 50,
+   "firstArticleAt": "2026-11-27T01:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장동혁 “한동훈 복당해도 재징계…추경호 유죄 바랐다면 해당행위”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-27T02:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703876?sid=100"
+     "title": "경찰, 법무부·공소청 강제수사…한동훈 “민중 아닌 민주당의 지팡이”",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-27T02:58:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178331"
     },
     {
-     "title": "장동혁 \"한동훈 복당해도 재징계\"…국힘, 계파 난타전 격화",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-27T02:48:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088613"
+     "title": "한동훈 ‘수사자료 유출’ 압수수색에 “경찰, 민주당의 지팡이”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-27T02:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004686864?sid=100"
     },
     {
-     "title": "'한동훈 자료유출 의혹' 법무부 등 압수수색…수사 본격화",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T02:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930483?sid=102"
+     "title": "장동혁 \"한동훈, 복당해도 다시 징계…추가 징계 사유 있어\"",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-27T02:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143157?sid=100"
     }
    ]
   },
   {
    "keyword": "ai 에이전트",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 48,
+   "articles90": 54,
    "recent20": 10,
-   "press": 43,
-   "firstArticleAt": "2026-11-27T01:24:00.000Z",
+   "press": 46,
+   "firstArticleAt": "2026-11-27T01:38:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "KT, 중소·벤처기업 협력 과제 6건 시상…AI 기술 사업화 지원 확대",
-     "press": "newsquest.co.kr",
-     "publishedAt": "2026-11-27T02:48:00.000Z",
-     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=306006"
+     "title": "스위스 정부 \"AI 에이전트 활용 사이버 공격 5건 확인…4건 침해 성공\"",
+     "press": "aitimes.com",
+     "publishedAt": "2026-11-27T03:02:00.000Z",
+     "link": "https://www.aitimes.com/news/articleView.html?idxno=217851"
     },
     {
-     "title": "“AI 안경 쓰고 컨닝해 보니”…AI 안경 컨닝 vs 방어 해커톤 열기 후끈...",
-     "press": "donga.com",
-     "publishedAt": "2026-11-27T02:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765706?sid=102"
+     "title": "클로봇, 美 MIT 연구진과 제조 '피지컬 AI' 공동개발 착수… 글로벌 로봇...",
+     "press": "irobotnews.com",
+     "publishedAt": "2026-11-27T03:02:00.000Z",
+     "link": "https://www.irobotnews.com/news/articleView.html?idxno=49838"
     },
     {
-     "title": "아마존·메타, AI 쇼핑 연동 협상 급물살…네이버·쿠팡도 개방 고심",
-     "press": "widedaily.com",
-     "publishedAt": "2026-11-27T02:40:00.000Z",
-     "link": "https://www.widedaily.com/news/articleView.html?idxno=305007"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 대통령 지지율",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 39,
-   "recent20": 6,
-   "press": 37,
-   "firstArticleAt": "2026-11-27T01:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李 지지율 2주 연속 올라 41%…갤럽 \"사실상 7주째 횡보\"",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-27T02:52:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1429749"
-    },
-    {
-     "title": "李대통령 지지율 41%…지난주 대비 1%p 상승",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005769906?sid=100"
-    },
-    {
-     "title": "이 대통령 지지하는지 이들에게 물었더니... 94%서 47%로 급락",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-27T02:44:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1178324"
+     "title": "공장이 원하는 AI 따로 있다…산업 특화 AI 경쟁 본격화",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-27T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002447252?sid=105"
     }
    ]
   },
@@ -145,45 +80,181 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 44,
-   "recent20": 14,
-   "press": 34,
+   "articles90": 51,
+   "recent20": 16,
+   "press": 37,
    "firstArticleAt": "2026-11-27T01:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'관저 예산 불법 전용' 김대기 석방…이상민은 1심 무죄",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-27T02:52:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=230432"
+     "title": "법원, '尹 관저 예산 전용 혐의' 김대기에 집행유예 3년 선고",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-27T03:02:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904683"
     },
     {
-     "title": "'윤석열 관저이전 예산전용' 김대기 1심 징역형 집유",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-27T02:52:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322125&inflow=N"
+     "title": "‘관저 이전 예산 전용’ 김대기 전 비서실장, 1심 징역형 집행유예…이...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-27T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834274?sid=102"
     },
     {
-     "title": "‘관저 이전 예산 전용’ 김대기 전 비서실장 징역형 집행유예…이상민...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T02:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302577?sid=102"
+     "title": "'尹 관저 이전 예산 전용' 김대기 1심 징역형 집행유예… 이상민 무죄",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-27T02:58:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452629"
+    }
+   ]
+  },
+  {
+   "keyword": "북한 어선 송환",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 36,
+   "recent20": 8,
+   "press": 32,
+   "firstArticleAt": "2026-11-27T02:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정부, 울릉도 인근서 구조한 북한 어민 6명 송환... 1명은 국내 잔류",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-27T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002537452?sid=100"
+    },
+    {
+     "title": "'동해 표류' 北 주민 6명 24일 만에 송환…1명은 귀순",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-27T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000556223?sid=100"
+    },
+    {
+     "title": "탈북 여성, 다시 월북하다 잡혀… 표류 北어민은 7명 중 6명 송환",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-27T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002836042?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "개인정보 유출 긴급대응",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 27,
+   "recent20": 1,
+   "press": 22,
+   "firstArticleAt": "2026-11-27T02:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'AI 해킹' 올해 정보유출 신고건수 3배 급증...석달간 집중점검",
+     "press": "seouleconews.com",
+     "publishedAt": "2026-11-27T02:50:00.000Z",
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95303"
+    },
+    {
+     "title": "올해 개인정보 유출신고 '3배' 될 듯",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-27T02:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000546278?sid=103"
+    },
+    {
+     "title": "개인정보위 “다음달 정보보호 강화 대책 발표…노후시스템 정비 시급”...",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-27T02:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002250144?sid=105"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 부정행위 급증",
+   "sources": [
+    "signal.bz",
+    "daum"
+   ],
+   "articles90": 20,
+   "recent20": 2,
+   "press": 20,
+   "firstArticleAt": "2026-11-27T01:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능 시험장 파고든 첨단기기…부정행위 474건 적발, 교육당국 대응 비...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-27T02:58:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848655"
+    },
+    {
+     "title": "수능 부정행위 1년새 70% 급증… 스마트기기·카메라 악용 6명 형사고발",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-27T02:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610779?sid=102"
+    },
+    {
+     "title": "사전 경고했는데 더 늘었다…수능 부정행위 474건으로 급증",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T02:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930476?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "강호동 아들 준우승",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 3,
+   "press": 18,
+   "firstArticleAt": "2026-11-27T01:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강호동 子 강시후, 전국 규모 학생 골프대회 준우승 차지",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-27T02:56:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795747094531654006"
+    },
+    {
+     "title": "강호동 子, 전국 학생 골프대회서 준우승..키 188cm 피지컬에 '천하장사...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-27T02:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490638"
+    },
+    {
+     "title": "핏줄이 남다르네…강호동 아들, 이번에 집안 경사 제대로 터뜨렸다",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-27T02:54:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178311"
     }
    ]
   },
   {
    "keyword": "발언하는 김민석 대표",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 30,
-   "recent20": 6,
+   "articles90": 29,
+   "recent20": 3,
    "press": 16,
-   "firstArticleAt": "2026-11-27T01:26:00.000Z",
+   "firstArticleAt": "2026-11-27T01:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김민석의 위태로운 100일…'조희대 탄핵'은 與 내전의 출구 될까",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-27T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143159?sid=100"
+    },
     {
      "title": "한민수 \"최민희·김민석 윤리심판원 잣대 같아야\"",
      "press": "gukjenews.com",
@@ -195,115 +266,12 @@
      "press": "gukjenews.com",
      "publishedAt": "2026-11-27T02:46:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765113"
-    },
-    {
-     "title": "민주당 최민희 징계 심의에 친청계 반발...“김민석 대표도 공정하게 심...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-27T02:42:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73673"
-    }
-   ]
-  },
-  {
-   "keyword": "강호동 아들 강시후 준우승",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T01:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강호동 DNA 이어받았나…子 강시후, 전국 학생 골프대회 남자고등부 준...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-27T02:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054405"
-    },
-    {
-     "title": "씨름 천하장사 아들은 골프 유망주…강호동 아들 강시후, 전국대회 준우...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-27T02:34:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61488"
-    },
-    {
-     "title": "강호동 아들 강시후, 전국 골프 대회 준우승-DNA의 쾌거",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-27T02:28:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96067"
-    }
-   ]
-  },
-  {
-   "keyword": "주주",
-   "sources": [
-    "google"
-   ],
-   "articles90": 12,
-   "recent20": 5,
-   "press": 12,
-   "firstArticleAt": "2026-11-27T02:08:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정승일의 한국 진보 비판: “사회혁명이 주주혁명으로, 민중이 개미로,...",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-27T02:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053670?sid=100"
-    },
-    {
-     "title": "SK하이닉스, 1년 새 순현금 8배…내년 주주환원 '120조' 가시권",
-     "press": "greened.kr",
-     "publishedAt": "2026-11-27T02:51:00.000Z",
-     "link": "https://www.greened.kr/news/articleView.html?idxno=355757"
-    },
-    {
-     "title": "삼성전자, 오늘 역대 최대 30조 배당금 지급…추가 주주환원도 예고",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T02:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014349172?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "폭설 영어 리메이크 확정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T01:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김윤석ⅹ구교환 ‘폭설’, 영어 리메이크 제작 확정… 홍의정 감독 직접...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-27T02:52:00.000Z",
-     "link": "https://www.viva100.com/article/20261127500306"
-    },
-    {
-     "title": "김윤석·구교환 ‘폭설’, 캐나다서 영어 리메이크…홍의정 감독 직접 ...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-27T02:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003160222"
-    },
-    {
-     "title": "한국 극장가 덮친 ‘폭설’, 캐나다에도 내린다… 영어 리메이크 확정",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T02:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/018/0006416509"
     }
    ]
   },
   {
    "keyword": "유한양행",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 7,
@@ -334,71 +302,103 @@
    ]
   },
   {
+   "keyword": "폭설 영어 리메이크 확정",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T01:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김윤석ⅹ구교환 ‘폭설’, 영어 리메이크 제작 확정… 홍의정 감독 직접...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-27T02:52:00.000Z",
+     "link": "https://www.viva100.com/article/20261127500306"
+    },
+    {
+     "title": "김윤석·구교환 ‘폭설’, 캐나다서 영어 리메이크…홍의정 감독 직접 ...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-27T02:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003160222"
+    },
+    {
+     "title": "한국 극장가 덮친 ‘폭설’, 캐나다에도 내린다… 영어 리메이크 확정",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T02:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/018/0006416509"
+    }
+   ]
+  },
+  {
+   "keyword": "정영란 9급 시험 발언",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T01:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"고졸이 죄 지었냐\"…'9급 공무원 비하' 논란에 작심 발언한 충주맨",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-27T02:38:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61489"
+    },
+    {
+     "title": "\"9급 시험, 고졸 수준\" 전 부산인재개발원장 발언…인권위 진정",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T02:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416517?sid=102"
+    },
+    {
+     "title": "정영란 '9급 공무원 고졸 수준' 발언 논란…충주맨 김선태 \"고졸이 죄지...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-27T02:14:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631303"
+    }
+   ]
+  },
+  {
    "keyword": "병무청",
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T01:26:00.000Z",
+   "articles90": 6,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T02:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "병무청, ‘병역면탈 의심’ 질병 조기전역자 자료확보 근거 마련",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302587?sid=100"
+    },
+    {
+     "title": "병무청·한국생명존중희망재단, '불안한 청년' 도와 병역 의무 이행 지...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T02:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009313956?sid=100"
+    },
     {
      "title": "병무청, 한국생명존중희망재단과 업무협약 체결",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-27T02:51:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016467507?sid=100"
-    },
-    {
-     "title": "병무청, 한국생명존중희망재단과 협력 청년 병역의무자 정신건강 지원",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-27T02:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002835973?sid=100"
-    },
-    {
-     "title": "병무청, '허위 질병 조기 전역' 사후 검증 강화…다음 달 10일 시행",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-27T02:16:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121371"
     }
    ]
   },
   {
-   "keyword": "무쇠소녀단 3",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T01:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "또다시 설인아 시간이 열렸다…3연속 개근, ‘무쇠소녀단3’로 또 증명...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T02:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001148505"
-    },
-    {
-     "title": "'무쇠소녀단3' 한지현, 등장하자마자 체력왕 등극",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-27T02:12:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96064"
-    },
-    {
-     "title": "한지현, ‘무쇠소녀단3’ 첫 방송부터 활약..‘지트리버’ 반전 매력",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-27T02:10:00.000Z",
-     "link": "http://www.breaknews.com/1254568"
-    }
-   ]
-  },
-  {
-   "keyword": "베식타시 경기 30분 중단",
+   "keyword": "오현규 30분 경기 중단",
    "sources": [
     "nate"
    ],
@@ -428,46 +428,32 @@
      "link": "https://m.sports.naver.com/wfootball/article/108/0003490627"
     }
    ]
-  },
-  {
-   "keyword": "원민경 장관 회의 참석",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T01:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "제5차 인신매매 등 방지정책 조정협의회 참석하는 원민경 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T01:30:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127000332"
-    },
-    {
-     "title": "인신매매등 방지 방안 논의하는 원민경 성평등가족부 장관 [TF사진관]",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-27T01:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000556168?sid=102"
-    },
-    {
-     "title": "웃으며 인사하는 원민경 장관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T01:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313715?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1788,
-  "matched": 894,
-  "avgLeadMin": 608,
+  "flagged": 1794,
+  "matched": 897,
+  "avgLeadMin": 614,
   "recent": [
+   {
+    "keyword": "코스닥",
+    "hitKeyword": "코스닥 매수 사이드카",
+    "hitAt": "2026-11-27T12:00:00+09:00",
+    "leadMin": 6863
+   },
+   {
+    "keyword": "코스닥 매수 사이드카 발동",
+    "hitKeyword": "코스닥 매수 사이드카",
+    "hitAt": "2026-11-27T12:00:00+09:00",
+    "leadMin": 57
+   },
+   {
+    "keyword": "무쇠소녀단 3",
+    "hitKeyword": "무쇠소녀단3 설인아",
+    "hitAt": "2026-11-27T12:00:00+09:00",
+    "leadMin": 6
+   },
    {
     "keyword": "수능 신고 최소 1억 포상",
     "hitKeyword": "수능 부정행위 신고 포상금",
@@ -509,24 +495,6 @@
     "hitKeyword": "선우용여 분노",
     "hitAt": "2026-11-27T11:00:00+09:00",
     "leadMin": 218
-   },
-   {
-    "keyword": "선우용여, 젠슨 황 불륜 소식에 분노",
-    "hitKeyword": "선우용여 분노",
-    "hitAt": "2026-11-27T11:00:00+09:00",
-    "leadMin": 178
-   },
-   {
-    "keyword": "선우용여, 젠슨 황 불륜에 분노",
-    "hitKeyword": "선우용여 분노",
-    "hitAt": "2026-11-27T11:00:00+09:00",
-    "leadMin": 158
-   },
-   {
-    "keyword": "무쇠소녀단3 연우 눈물",
-    "hitKeyword": "설인아 무쇠소녀단3",
-    "hitAt": "2026-11-27T11:00:00+09:00",
-    "leadMin": 97
    }
   ]
  }
