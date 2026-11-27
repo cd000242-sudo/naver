@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T15:38:12.363Z",
+ "builtAt": "2026-11-27T15:48:15.566Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
+  {
+   "keyword": "최민희 중징계 결정",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-27T14:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최민희 중징계에 정청래 \"김민석 해당 행위는 무엇이냐\"",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T15:44:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765822"
+    },
+    {
+     "title": "최민희 당원권 2년 정지… 與 내전 격화",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-27T15:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004012240?sid=100"
+    },
+    {
+     "title": "최민희 '당원자격정지 2년' 중징계…재심 신청 예고",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T15:16:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765806"
+    }
+   ]
+  },
   {
    "keyword": "인터넷우체국 개인정보 유출",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T14:11:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T14:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -39,39 +71,6 @@
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-27T14:47:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001207890?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "최민희 중징계 결정",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T14:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최민희 '당원자격정지 2년' 중징계…재심 신청 예고",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T15:16:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765806"
-    },
-    {
-     "title": "최민희 중징계에 김민석도 징계 심사…與, 내홍 출구는",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-27T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000556423?sid=100"
-    },
-    {
-     "title": "민주 윤리심판원, 최민희 최고위원 ‘당원자격정지 2년’ 의결…당내 징...",
-     "press": "news-s.kr",
-     "publishedAt": "2026-11-27T14:48:00.000Z",
-     "link": "https://news-s.kr/view.html?id=L261127234008ca47"
     }
    ]
   },
@@ -104,38 +103,6 @@
      "press": "sportschosun.com",
      "publishedAt": "2026-11-27T14:41:00.000Z",
      "link": "https://m.entertain.naver.com/article/076/0004470348"
-    }
-   ]
-  },
-  {
-   "keyword": "박홍근 서영교 충돌",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T14:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박홍근-서영교 충돌에 법사위 파행…\"상원인가\" vs \"고압적 장관 처음\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-27T15:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610957?sid=100"
-    },
-    {
-     "title": "박홍근·서영교 ‘與·與 충돌’에 법사위 파행",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-27T15:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887917?sid=100"
-    },
-    {
-     "title": "박홍근-서영교 충돌에 법사위 파행…\"상원인가\"\"이런 장관 처음\"(종합2보...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T14:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468508?sid=100"
     }
    ]
   },
@@ -206,7 +173,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1981,
+  "flagged": 1980,
   "matched": 982,
   "avgLeadMin": 657,
   "recent": [
