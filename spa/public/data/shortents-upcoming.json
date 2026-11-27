@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T01:33:02.845Z",
+ "builtAt": "2026-11-27T01:43:06.467Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "코스피 상승 출발",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 88,
-   "recent20": 8,
-   "press": 58,
-   "firstArticleAt": "2026-11-27T00:07:00.000Z",
+   "articles90": 84,
+   "recent20": 4,
+   "press": 57,
+   "firstArticleAt": "2026-11-27T00:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[속보] 코스닥 5%대 급등에 매수 사이드카 발동…코스피도 2%대 강세",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-27T01:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968099?sid=101"
+    },
+    {
+     "title": "SK하이닉스 주가 장중 1%대 강세, 배당락일 하락 출발 뒤 상승 전환",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-27T01:34:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453098"
+    },
     {
      "title": "코스닥 상승세 강해져 5%대 급등…매수 사이드카 발동",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-27T01:29:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016467238?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "경찰, 한동훈 유출 수사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 50,
+   "recent20": 13,
+   "press": 45,
+   "firstArticleAt": "2026-11-27T00:28:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰, '한동훈 자료유출 의혹' 법무부·공소청 압수수색",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-27T01:42:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=316384"
     },
     {
-     "title": "코스피 강보합…코스닥 4%대 급등",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T01:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930442?sid=101"
+     "title": "한동훈, ‘자료유출 의혹’ 압수수색에 “경찰, 민주당 지팡이 자처”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-27T01:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703828?sid=100"
     },
     {
-     "title": "SK스퀘어 주가, 11월 27일 장중 657,000원 0.77% 상승",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T01:20:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287676"
+     "title": "경찰, 공소청 압수수색에 한동훈 “민중의 지팡이가 아니라 ‘민주당의...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-27T01:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004012092?sid=100"
     }
    ]
   },
@@ -48,63 +79,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 46,
-   "recent20": 11,
-   "press": 42,
-   "firstArticleAt": "2026-11-27T00:06:00.000Z",
+   "articles90": 45,
+   "recent20": 13,
+   "press": 40,
+   "firstArticleAt": "2026-11-27T00:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼양식품, '올해의 상생기업' 선정…중기부 장관 표창 수상",
+     "title": "세븐일레븐, 골목상권 보호 공로…중기부 장관 표창",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-27T01:42:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=303623"
+    },
+    {
+     "title": "세븐일레븐, 사업영역 보호 공로 중기부 장관 표창 수상",
      "press": "gokorea.kr",
-     "publishedAt": "2026-11-27T01:30:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887484"
+     "publishedAt": "2026-11-27T01:42:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887488"
     },
     {
-     "title": "광업공단, ‘올해의 상생기업 대상’ 2관왕···중기부 장관상",
-     "press": "amenews.kr",
-     "publishedAt": "2026-11-27T01:30:00.000Z",
-     "link": "http://amenews.kr/news/view.php?idx=68886"
-    },
-    {
-     "title": "삼양식품, ‘올해의 상생기업’ 선정…중기부 장관 표창",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-27T01:30:00.000Z",
-     "link": "https://www.swtvnews.com/news/newsview.php?ncode=1065571436293059"
-    }
-   ]
-  },
-  {
-   "keyword": "경찰, 한동훈 유출 수사",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 42,
-   "recent20": 15,
-   "press": 38,
-   "firstArticleAt": "2026-11-27T00:28:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'한동훈, 김승원 수사 검찰 자료 유출 의혹' 법무부·공소청 압수수색",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-27T01:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078981?sid=102"
-    },
-    {
-     "title": "경찰, 한동훈 '수사자료 유출' 의혹 관련 법무부·공소청 압수수색",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-27T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165874?sid=102"
-    },
-    {
-     "title": "경찰, '한동훈 자료 유출' 법무부·공소청 압수수색",
-     "press": "lawtimes.co.kr",
-     "publishedAt": "2026-11-27T01:30:00.000Z",
-     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=230208"
+     "title": "레피소드, '2026 중소기업 혁신주간'서 지역혁신 유공 국무총리 표창",
+     "press": "businesskorea.co.kr",
+     "publishedAt": "2026-11-27T01:42:00.000Z",
+     "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=282360"
     }
    ]
   },
@@ -113,30 +111,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 35,
-   "recent20": 17,
+   "articles90": 33,
+   "recent20": 16,
    "press": 29,
-   "firstArticleAt": "2026-11-27T00:58:00.000Z",
+   "firstArticleAt": "2026-11-27T01:02:00.000Z",
    "exclusive": true,
    "capped": true,
    "samples": [
     {
-     "title": "소비자 넘어 AI에 선택받아야…기업 광고·마케팅 공식 바뀐다",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416476?sid=105"
+     "title": "[IT는 지금] LG유플러스, 현대차기아 로보틱스랩과 5G SA로 ‘피지컬 AI’...",
+     "press": "dealsite.co.kr",
+     "publishedAt": "2026-11-27T01:42:00.000Z",
+     "link": "https://dealsite.co.kr/articles/173647"
     },
     {
-     "title": "靑 “‘모두의 AI’ 12월 출시…美中 AI 통제 속 독자 역량 필수”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-27T01:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729355?sid=100"
+     "title": "심텍, 3000억 CB·BW 발행…AI 기판 증설 속도",
+     "press": "dealsite.co.kr",
+     "publishedAt": "2026-11-27T01:42:00.000Z",
+     "link": "https://dealsite.co.kr/articles/173648"
     },
     {
-     "title": "AI가 생산·재고관리 바꿨다…콜마그룹, 품질혁신 8개상",
-     "press": "newsinside.kr",
-     "publishedAt": "2026-11-27T01:26:00.000Z",
-     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5057932"
+     "title": "동서발전, 정부박람회서 'AI 기반 에너지 산업기술 혁신' 선보여",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T01:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467271?sid=101"
     }
    ]
   },
@@ -145,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
+   "articles90": 22,
    "recent20": 2,
-   "press": 21,
+   "press": 22,
    "firstArticleAt": "2026-11-27T00:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "靑, 금융당국 긴급소집…'해킹 2차 피해' 방지 위한 선제 대응 강조",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-27T01:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214526?sid=100"
+    },
     {
      "title": "청와대, 금융기관 긴급 소집...해킹 2차 피해 방지 점검",
      "press": "ytn.co.kr",
@@ -163,12 +167,6 @@
      "press": "khan.co.kr",
      "publishedAt": "2026-11-27T01:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/032/0003485482?sid=100"
-    },
-    {
-     "title": "靑 안보실, 해킹 2차 피해 차단 긴급회의…금융권 AI 보안 강화 주문",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-27T01:08:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446911"
     }
    ]
   },
@@ -177,30 +175,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 14,
+   "articles90": 16,
    "recent20": 12,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T01:12:00.000Z",
+   "press": 15,
+   "firstArticleAt": "2026-11-27T01:20:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "HD현대사이트솔루션, 65조원 중국 건설기계 부품시장 공략",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-27T01:28:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065576120208857"
+     "title": "HD현대사이트솔루션, 중국서 부품사업 확대",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-27T01:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165879?sid=101"
     },
     {
-     "title": "중국 후둥중화, LNG선 2척 추가수주...올해만 17척",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T01:28:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127102418883"
+     "title": "“21년 만의 월드컵 토너먼트행” 중국 신났다···U-17 월드컵 피지에...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-27T01:39:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/144/0001151989"
     },
     {
-     "title": "인천시, 중국 진출 중소기업에 웨이하이 사무공간·컨설팅 지원",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-27T01:26:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261127500029"
+     "title": "中 짝퉁 고발 운동가 제주에?…중국대사 신병확보 요청",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T01:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467264?sid=100"
     }
    ]
   },
@@ -209,13 +207,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 5,
-   "press": 13,
+   "articles90": 14,
+   "recent20": 4,
+   "press": 14,
    "firstArticleAt": "2026-11-27T00:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "나주 오리농장서 조류독감 항원 검출···24시간 이동 통제",
+     "press": "greened.kr",
+     "publishedAt": "2026-11-27T01:32:00.000Z",
+     "link": "https://www.greened.kr/news/articleView.html?idxno=355746"
+    },
     {
      "title": "나주 오리농장서 H5형 AI 검출…전남광주 24시간 이동중지 명령",
      "press": "thepowernews.co.kr",
@@ -227,76 +231,70 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-27T01:27:00.000Z",
      "link": "https://www.newspim.com/news/view/20261127000313"
-    },
-    {
-     "title": "나주 세지면 오리농장서 AI 항원 검출…방역지역 10㎞ 확대",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-27T01:26:00.000Z",
-     "link": "https://www.viva100.com/article/20261127500189"
     }
    ]
   },
   {
-   "keyword": "오정세 최성곤 미담",
+   "keyword": "성북구 10대 피의자 송치",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 13,
-   "recent20": 2,
+   "articles90": 14,
+   "recent20": 1,
    "press": 13,
-   "firstArticleAt": "2026-11-27T00:13:00.000Z",
+   "firstArticleAt": "2026-11-27T00:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "청룡 발칵 뒤집어 놓더니…뒤늦게 깜짝 미담까지 밝혀진 '남자 연예인'",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-27T01:28:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1178244"
+     "title": "'성북 살해 10대'에 성매매 강요 20대 여성 구속 송치… 살인 교사 혐의...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-27T01:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968095?sid=102"
     },
     {
-     "title": "“평생 잊지 못할 큰 선물”…오정세, 병문안·조문·축가까지",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T01:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005769834"
+     "title": "10대 소녀에 성매매·절도 지시한 20대 여성 송치…살인교사도 수사",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-27T01:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122319?sid=102"
     },
     {
-     "title": "오정세, 약속 지킨 미담",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T01:10:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287647"
+     "title": "10대 소녀에 성매매·절도지시…성북 살인사건 피의자 전 연인 송치",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-27T01:08:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611270042"
     }
    ]
   },
   {
-   "keyword": "김용범 위원장 내정",
+   "keyword": "김민석 대표 발언",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-27T00:13:00.000Z",
+   "articles90": 22,
+   "recent20": 12,
+   "press": 12,
+   "firstArticleAt": "2026-11-27T00:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이억원 금융위원장, 민간 자본시장 개혁기구 구성 및 운영방안 논의",
-     "press": "intn.co.kr",
-     "publishedAt": "2026-11-27T01:24:00.000Z",
-     "link": "https://www.intn.co.kr/news/articleView.html?idxno=3000565"
+     "title": "김민석 “청해부대 파견 연장은 필수 조치...전쟁 불개입 명시”",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-27T01:42:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1140537"
     },
     {
-     "title": "[불편한 질문] 자본시장 개혁 맡은 김용범..그런데 메리츠 부회장은 적...",
-     "press": "peoplewatch.co.kr",
-     "publishedAt": "2026-11-27T01:16:00.000Z",
-     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611270004"
+     "title": "민주당 윤리심판원, 최민희 징계 심의…김민석 청원도 논의",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-27T01:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000134046?sid=100"
     },
     {
-     "title": "이남우 거버넌스포럼 회장 \"김용범 발탁 환영…메리츠식 밸류업 확산해...",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-27T01:04:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026112709564967808"
+     "title": "최민희 발언 듣는 민주당 지도부",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T01:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009313770?sid=100"
     }
    ]
   },
@@ -306,13 +304,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 23,
-   "recent20": 4,
-   "press": 8,
+   "articles90": 24,
+   "recent20": 1,
+   "press": 9,
    "firstArticleAt": "2026-11-27T00:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정점식 \"이재명·한성숙·이용철, 공소취소 열차 탑승...종착역 교도소...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-27T01:36:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1140528"
+    },
     {
      "title": "[포토] 정점식 원내대표, 원내대책회의 발언",
      "press": "newscj.com",
@@ -320,32 +324,31 @@
      "link": "https://www.newscj.com/news/articleView.html?idxno=3452582"
     },
     {
-     "title": "[포토] 원내대책회의 발언하는 정점식",
+     "title": "[포토] 발언하는 정점식 원내대표",
      "press": "newscj.com",
      "publishedAt": "2026-11-27T01:14:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452578"
-    },
-    {
-     "title": "「M포토」 발언하는 정점식 국민의힘 원내대표",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-27T01:14:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73665"
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452581"
     }
    ]
   },
   {
    "keyword": "김가영, 스롱 꺾고 4강 진출",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T00:04:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-27T00:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'라이벌' 스롱 잡았다! '당구 여제' 김가영, 역사적인 '20승' 대기록까지...",
+     "press": "sportalkorea.com",
+     "publishedAt": "2026-11-27T01:40:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/139/0002256624"
+    },
     {
      "title": "이제 20승까지 단 두 걸음! '당구 여제' 김가영, '라이벌' 스롱 꺾고 준...",
      "press": "sportschosun.com",
@@ -357,119 +360,34 @@
      "press": "mhnse.com",
      "publishedAt": "2026-11-27T00:55:00.000Z",
      "link": "https://m.sports.naver.com/general/article/445/0000493901"
-    },
-    {
-     "title": "[LPBA] 김가영, 스롱 꺾고 4강 진출...김보미와 결승행 다툼",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T00:44:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127000220"
-    }
-   ]
-  },
-  {
-   "keyword": "그냥 사람 친구",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T00:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "tvN ‘그냥사람친구’ 이서진·한지민·김용건·박정수·주헌·정연, 유...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-27T01:26:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1178268"
-    },
-    {
-     "title": "'그냥사람친구' 이서진·한지민, 유럽 우정 여행",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-27T00:54:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611270159"
-    },
-    {
-     "title": "이서진 “한지민 갱년기” 선 넘은 발언 논란 속 유럽 여행 공개 (그냥...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T00:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191754"
-    }
-   ]
-  },
-  {
-   "keyword": "주주",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T00:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "더 시에나 그룹, 골프존카운티 1·2대 주주 지분 인수 추진",
-     "press": "e2news.com",
-     "publishedAt": "2026-11-27T01:06:00.000Z",
-     "link": "http://www.e2news.com/news/articleView.html?idxno=336539"
-    },
-    {
-     "title": "큐리언트, 706억원 유상증자 구주주 청약 106.33% 달성",
-     "press": "bokuennews.com",
-     "publishedAt": "2026-11-27T01:02:00.000Z",
-     "link": "http://www.bokuennews.com/news/article.html?no=287833"
-    },
-    {
-     "title": "법무법인 태평양 “내년 주총 법률 검토, 주주 표심 분석 병행해야”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-27T00:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729331?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "연우 다이어트 감량",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T00:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "연우, 하루 밥 두 숟갈로 10kg 감량…“전신 두드러기에 많이 울었다”...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-27T01:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543871"
-    },
-    {
-     "title": "두 달 만에 10kg 뺐다는 연우, 비법 뭔가 했더니…\"밥 두 숟갈\" ('무쇠소...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-27T01:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786424"
-    },
-    {
-     "title": "연우 “밥 두 숟갈 먹으며 10kg 감량…전신 두드러기 생겨” (무쇠소녀...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T00:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005769800"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1768,
-  "matched": 879,
-  "avgLeadMin": 590,
+  "flagged": 1769,
+  "matched": 882,
+  "avgLeadMin": 588,
   "recent": [
+   {
+    "keyword": "문근영 기립성 저혈압 부상",
+    "hitKeyword": "문근영 기립성 저혈압 부상",
+    "hitAt": "2026-11-27T10:30:00+09:00",
+    "leadMin": 57
+   },
+   {
+    "keyword": "삼성전자 배당금 지급일",
+    "hitKeyword": "삼성전자 배당금",
+    "hitAt": "2026-11-27T10:30:00+09:00",
+    "leadMin": 37
+   },
+   {
+    "keyword": "문근영, 기립성 저혈압으로 쓰러져",
+    "hitKeyword": "문근영 기립성 저혈압 부상",
+    "hitAt": "2026-11-27T10:30:00+09:00",
+    "leadMin": 17
+   },
    {
     "keyword": "성북 피의자 송치",
     "hitKeyword": "성북 살인사건 전 연인 송치",
@@ -511,24 +429,6 @@
     "hitKeyword": "문근영 기립성 저혈압 부상",
     "hitAt": "2026-11-27T09:30:00+09:00",
     "leadMin": 27
-   },
-   {
-    "keyword": "남자농구, 카타르 완파 본선행 청신호",
-    "hitKeyword": "한국 농구 카타르 격파",
-    "hitAt": "2026-11-27T09:30:00+09:00",
-    "leadMin": 27
-   },
-   {
-    "keyword": "폭설",
-    "hitKeyword": "엘니뇨 재난문자 폭설",
-    "hitAt": "2026-11-27T09:00:00+09:00",
-    "leadMin": 2740
-   },
-   {
-    "keyword": "2026년 11월 27일 운세",
-    "hitKeyword": "11월 말 포근한 날씨",
-    "hitAt": "2026-11-27T09:00:00+09:00",
-    "leadMin": 78
    }
   ]
  }
