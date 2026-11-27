@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T02:03:13.594Z",
+ "builtAt": "2026-11-27T02:13:17.087Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 60,
-   "recent20": 22,
-   "press": 54,
+   "articles90": 63,
+   "recent20": 12,
+   "press": 57,
    "firstArticleAt": "2026-11-27T01:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스닥 5% 급등…매수 사이드카 발동",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-27T02:02:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=729733"
+     "title": "코스닥, 5%대 급등하며 매수 사이드카 발동",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-27T02:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003490666?sid=101"
     },
     {
-     "title": "증안펀드·로봇주 강세에 코스닥 '매수 사이드카' 발동(종합)",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-27T02:02:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452602"
+     "title": "코스닥 5% 오르며 ‘매수 사이드카’…반도체 주춤하자 로봇·바이오 강...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-27T02:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834253?sid=101"
     },
     {
-     "title": "[특징주] 에코프로, 코스닥 급등·2차전지 테마 강세에 7만 1,000원 돌파",
-     "press": "widedaily.com",
-     "publishedAt": "2026-11-27T02:02:00.000Z",
-     "link": "https://www.widedaily.com/news/articleView.html?idxno=304988"
+     "title": "코스닥, '외국인·기관' 매수에 5%대 급등...매수 사이드카 발동",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T02:05:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127000353"
     }
    ]
   },
@@ -47,30 +47,126 @@
    "sources": [
     "nate"
    ],
-   "articles90": 59,
-   "recent20": 15,
-   "press": 53,
-   "firstArticleAt": "2026-11-27T00:43:00.000Z",
+   "articles90": 61,
+   "recent20": 8,
+   "press": 55,
+   "firstArticleAt": "2026-11-27T00:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경찰, '한동훈 기소계획서 유출 의혹' 법무부·공소청 압수수색",
-     "press": "newsverse.kr",
-     "publishedAt": "2026-11-27T02:00:00.000Z",
-     "link": "https://www.newsverse.kr/news/articleView.html?idxno=12062"
+     "title": "'내부자료 유출' 의혹에 공소청 압수수색 들어간 경찰…한동훈 \"국무회...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-27T02:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522757?sid=100"
     },
     {
-     "title": "경찰, '한동훈 자료유출 의혹' 법무부 등 압수수색",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T02:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930453?sid=102"
+     "title": "경찰, '한동훈 수사자료 유출 의혹'...법무부·공소청 등 압수수색",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-27T02:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394971?sid=100"
     },
     {
-     "title": "경찰, '한동훈 수사자료 유출 의혹' 법무부·공소청 압수수색",
+     "title": "경찰, '한동훈 자료유출 의혹' 법무부·공소청 압수수색",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T02:04:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2653871"
+    }
+   ]
+  },
+  {
+   "keyword": "ai 에이전트",
+   "sources": [
+    "google"
+   ],
+   "articles90": 51,
+   "recent20": 14,
+   "press": 39,
+   "firstArticleAt": "2026-11-27T00:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "NH농협은행, 비정형데이터 품질인증 최고등급 획득 … 금융 AI 기반 마련",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-27T02:12:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/27/2026112750123.html"
+    },
+    {
+     "title": "벤츠 코리아, 국내 스타트업과 AI·무선충전 기술 검증 성과 공유",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-27T02:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729413?sid=101"
+    },
+    {
+     "title": "\"광고에서 의료까지\"...AI 솔루션 도입 확대에 코스닥 기업 '주목'",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T02:10:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127000434"
+    }
+   ]
+  },
+  {
+   "keyword": "중기부 장관 표창 수상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 39,
+   "recent20": 10,
+   "press": 32,
+   "firstArticleAt": "2026-11-27T00:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼양식품, '올해의 상생기업' 중기부 장관 표창",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-27T02:12:00.000Z",
+     "link": "http://www.breaknews.com/1254560"
+    },
+    {
+     "title": "기보, ‘2026 올해의 상생기업 대상’ 중기부 장관 표창 수상",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-27T02:12:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611270104"
+    },
+    {
+     "title": "SK인텔릭스, '올해의 상생기업 대상' 중기부 장관 표창",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-27T02:10:00.000Z",
+     "link": "http://www.breaknews.com/1254576"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 대통령 지지율",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 33,
+   "recent20": 11,
+   "press": 31,
+   "firstArticleAt": "2026-11-27T01:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 지지율 41%, 2주 연속 상승…부정평가 50%[갤럽]",
      "press": "fnnews.com",
-     "publishedAt": "2026-11-27T01:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610744?sid=102"
+     "publishedAt": "2026-11-27T02:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610749?sid=100"
+    },
+    {
+     "title": "[한국갤럽] 李 대통령 국정 지지율 41%…민주 37% 국힘 30%",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-27T02:04:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=173221"
+    },
+    {
+     "title": "이 대통령 '잘함' 41%-'잘못함' 50%... 7주째 횡보",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-27T02:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002537442?sid=100"
     }
    ]
   },
@@ -79,10 +175,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 47,
-   "recent20": 4,
-   "press": 41,
-   "firstArticleAt": "2026-11-27T00:34:00.000Z",
+   "articles90": 33,
+   "recent20": 1,
+   "press": 27,
+   "firstArticleAt": "2026-11-27T00:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,78 +203,14 @@
    ]
   },
   {
-   "keyword": "중기부 장관 표창 수상",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 36,
-   "recent20": 4,
-   "press": 31,
-   "firstArticleAt": "2026-11-27T00:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "남부발전, 규제혁신 대상 중기부 장관상…3년 연속 수상",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T02:02:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765050"
-    },
-    {
-     "title": "부산항만공사, 상생협력 촉진 유공 '중기부 장관 표창' 수상",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T01:58:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765037"
-    },
-    {
-     "title": "소상공인과 동반성장 결실… 코레일유통물류, 중기부 장관표창 수상",
-     "press": "the-biz.co.kr",
-     "publishedAt": "2026-11-27T01:50:00.000Z",
-     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=732270"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 대통령 지지율",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 31,
-   "recent20": 13,
-   "press": 29,
-   "firstArticleAt": "2026-11-27T01:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령 국정 지지율 41%...민주 37%·국힘 30% [한국갤럽]",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-27T02:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394970?sid=100"
-    },
-    {
-     "title": "이 대통령 '잘함' 41%-'잘못함' 50%... 7주째 횡보",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-27T02:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002537442?sid=100"
-    },
-    {
-     "title": "李대통령 지지율 41%·1%p↑…국내주식 거래 69%는 손실권[갤럽]",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-27T02:00:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446932"
-    }
-   ]
-  },
-  {
    "keyword": "국가안보실 해킹 2차 피해 대응",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 2,
-   "press": 24,
-   "firstArticleAt": "2026-11-27T00:35:00.000Z",
+   "articles90": 21,
+   "recent20": 0,
+   "press": 21,
+   "firstArticleAt": "2026-11-27T00:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -207,30 +239,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 21,
-   "recent20": 0,
-   "press": 12,
+   "articles90": 28,
+   "recent20": 7,
+   "press": 14,
    "firstArticleAt": "2026-11-27T00:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민주당 윤리심판원, 최민희 징계 심의…김민석 청원도 논의",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-27T01:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000134046?sid=100"
+     "title": "최민희 징계 심의 날…친청계, '김민석 신천지 책임론' 재점화(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T02:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009313874?sid=100"
     },
     {
-     "title": "김민석 “청해부대 파견 연장은 필수 조치...전쟁 불개입 명시”",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-27T01:42:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1140537"
+     "title": "김민석 \"청해부대 파견 연장은 필수 조치\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T02:05:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127000443"
     },
     {
-     "title": "[포토] 발언하는 김민석 대표",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-27T01:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848731?sid=100"
+     "title": "김민석 대표, 최고위원회의 발언",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T02:05:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127000440"
+    }
+   ]
+  },
+  {
+   "keyword": "주주",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 9,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T01:50:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "SK스퀘어 주주환원, 최소 4.3조원..\"연초 계획보다 14배 많아\"",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-27T02:12:00.000Z",
+     "link": "http://www.breaknews.com/1254553"
+    },
+    {
+     "title": "삼성SDI, 자사주 351만주 소각⋯주주가치 제고 속도 낸다",
+     "press": "autodaily.co.kr",
+     "publishedAt": "2026-11-27T02:10:00.000Z",
+     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602501"
+    },
+    {
+     "title": "한국예탁결제원, 전자주주총회 운영 효율화 워크숍 개최",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-27T02:10:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2024244"
     }
    ]
   },
@@ -240,30 +304,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 2,
+   "articles90": 15,
+   "recent20": 3,
    "press": 9,
    "firstArticleAt": "2026-11-27T00:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'사상 초유' 검찰총장 후보 추가 천거…정점식 \"공소취소 실행 약속 안...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-27T01:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160211?sid=100"
+     "title": "정점식 원내대표 발언",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T02:08:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765066"
     },
     {
-     "title": "정점식 \"검찰총장 후보 추가 추천, 공소취소청장 찾고 있는 것 \"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T01:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406280?sid=100"
+     "title": "환하게 웃는 정점식 국민의힘 원내대표",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T02:08:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765069"
     },
     {
-     "title": "정점식 \"이재명·한성숙·이용철, 공소취소 열차 탑승...종착역 교도소...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-27T01:36:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1140528"
+     "title": "발언하는 정점식 원내대표",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T02:06:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3764932"
+    }
+   ]
+  },
+  {
+   "keyword": "유한양행",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-27T00:48:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유한양행, 공식 온라인몰 '버들장터'서 연말 할인 기획전 운영",
+     "press": "popcornnews.net",
+     "publishedAt": "2026-11-27T02:04:00.000Z",
+     "link": "http://www.popcornnews.net/news/articleView.html?idxno=141849"
+    },
+    {
+     "title": "유한양행, 공식몰 '버들장터' 블랙프라이데이 프로모션 진행",
+     "press": "dailysmart.co.kr",
+     "publishedAt": "2026-11-27T01:50:00.000Z",
+     "link": "http://www.dailysmart.co.kr/news/articleView.html?idxno=133248"
+    },
+    {
+     "title": "유한양행 버들장터, 블랙프라이데이 할인 행사 연다",
+     "press": "newsmap.co.kr",
+     "publishedAt": "2026-11-27T01:44:00.000Z",
+     "link": "https://www.newsmap.co.kr/news/articleView.html?idxno=5890"
     }
    ]
   },
@@ -318,48 +414,16 @@
      "link": "https://www.newspim.com/news/view/20261127000332"
     },
     {
-     "title": "웃으며 인사하는 원민경 장관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T01:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313715?sid=102"
-    },
-    {
      "title": "인신매매등 방지 방안 논의하는 원민경 성평등가족부 장관 [TF사진관]",
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-27T01:25:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000556168?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "주주",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T01:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "현대엘리베이터, 영업익 34% 줄고 순손실까지…배당에도 불안한 주주들",
-     "press": "newsmap.co.kr",
-     "publishedAt": "2026-11-27T02:02:00.000Z",
-     "link": "https://www.newsmap.co.kr/news/articleView.html?idxno=5908"
     },
     {
-     "title": "기업거버넌스포럼, 김용범 위원장 발탁 환영…\"주주평등으로 디스카운...",
-     "press": "popcornnews.net",
-     "publishedAt": "2026-11-27T02:00:00.000Z",
-     "link": "http://www.popcornnews.net/news/articleView.html?idxno=141848"
-    },
-    {
-     "title": "김용범 위원장 내정, '대주주와 일반주주 1주의 가치'…메리츠 경영 방...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-27T01:50:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631280"
+     "title": "웃으며 인사하는 원민경 장관",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T01:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009313715?sid=102"
     }
    ]
   },
@@ -398,7 +462,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1775,
+  "flagged": 1776,
   "matched": 890,
   "avgLeadMin": 585,
   "recent": [
