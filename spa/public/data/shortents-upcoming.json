@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T08:15:20.949Z",
+ "builtAt": "2026-11-27T08:25:23.932Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "법사위, 이용철 청문보고서 채택",
+   "keyword": "법사위, 이용철 보고서 채택",
    "sources": [
     "nate"
    ],
-   "articles90": 67,
-   "recent20": 12,
+   "articles90": 65,
+   "recent20": 10,
    "press": 51,
-   "firstArticleAt": "2026-11-27T06:46:00.000Z",
+   "firstArticleAt": "2026-11-27T06:56:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "이용철 법무부 장관 후보자 인사청문회경과보고서 채택 관련 규탄 기자...",
+     "title": "이용철 법무부 장관 후보자 청문보고서 與 주도 채택...국힘 표결 불참",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-27T08:22:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=567286"
+    },
+    {
+     "title": "기자회견하는 국민의힘 법사위원들",
      "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T08:14:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765430"
+     "publishedAt": "2026-11-27T08:20:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765554"
     },
     {
-     "title": "이용철 법무장관 후보자 인사청문보고서 與주도 채택",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-27T08:14:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121480"
-    },
-    {
-     "title": "[시포TV] 국힘 법사위원들 \"공소취소 선포식\"…이용철 지명 철회 촉구",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-27T08:08:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=368143"
+     "title": "법사위, 이용철 청문보고서 與 주도 채택…국힘 '지명 철회' 반발",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T08:18:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654086"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 49,
+   "articles90": 51,
    "recent20": 8,
-   "press": 36,
-   "firstArticleAt": "2026-11-27T06:54:00.000Z",
+   "press": 38,
+   "firstArticleAt": "2026-11-27T06:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "비정규직 총파업, 전국 학교 수천곳 급식 차질…“반차 쓰고 도시락 준...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-27T08:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568505?sid=102"
+    },
+    {
+     "title": "'학교비정규직 총파업' 충청권 급식·돌봄 차질… 큰 혼란은 피해",
+     "press": "chungnamilbo.co.kr",
+     "publishedAt": "2026-11-27T08:18:00.000Z",
+     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=923546"
+    },
     {
      "title": "전남광주교육청, 학교비정규직 총파업에도 급식·돌봄 공백 최소화",
      "press": "newstnt.com",
      "publishedAt": "2026-11-27T08:14:00.000Z",
      "link": "https://www.newstnt.com/news/articleView.html?idxno=731015"
-    },
-    {
-     "title": "학교비정규직 총파업…대전 51개 학교 급식 차질",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-27T08:12:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106627"
-    },
-    {
-     "title": "학교 비정규직 총파업…415개 학교 급식 차질",
-     "press": "ysmbc.co.kr",
-     "publishedAt": "2026-11-27T08:12:00.000Z",
-     "link": "https://ysmbc.co.kr/NewsArticle/1547721"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 39,
+   "articles90": 43,
    "recent20": 9,
-   "press": 33,
+   "press": 35,
    "firstArticleAt": "2026-11-27T07:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "특검, ‘SNS 내란선동’ 황교안 징역 10년 구형",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-27T08:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003704017?sid=102"
+     "title": "특검, 황교안에 징역10년 구형...\"펜으로 내란 중요 임무 종사\"",
+     "press": "newsverse.kr",
+     "publishedAt": "2026-11-27T08:24:00.000Z",
+     "link": "https://www.newsverse.kr/news/articleView.html?idxno=12069"
     },
     {
-     "title": "특검, '계엄 옹호 SNS 글' 황교안에 징역 10년 구형",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-27T08:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005848967?sid=102"
+     "title": "특검, 황교안에 징역 10년 구형... 내란 선전 선동 혐의",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-27T08:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002537519?sid=102"
     },
     {
-     "title": "\"이석기 단죄한 자가 내란 선동\"...특검, 황교안에 징역 10년 구형",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-27T08:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610911?sid=102"
+     "title": "특검, '내란 선동' 황교안 징역 10년 구형… \"이석기보다 죄책 무거워\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-27T08:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968206?sid=102"
     }
    ]
   },
@@ -112,62 +112,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 38,
-   "recent20": 7,
+   "articles90": 47,
+   "recent20": 17,
    "press": 28,
-   "firstArticleAt": "2026-11-27T06:46:00.000Z",
+   "firstArticleAt": "2026-11-27T06:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박홍근 “미래대응기금, 운용체계 갖출 때까지 연기금투자풀에 위탁 검...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-27T08:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485568?sid=101"
+     "title": "서영교·박홍근 법사위 이례적 충돌…국힘, 서영교 편들어",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-27T08:20:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326758/?sc=Naver"
     },
     {
-     "title": "기념사 하는 박홍근 기획예산처 장관",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T08:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468298?sid=102"
+     "title": "법사위 당정 충돌...서영교 \"답변 태도 문제\" 박홍근 \"여기가 상원이냐...",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-27T08:20:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=731368"
     },
     {
-     "title": "박홍근 “미래대응기금, 연기금투자풀에 일정 기간 맡기는 방향 검토”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-27T08:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178676?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "장선익 사장 승진",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 24,
-   "recent20": 5,
-   "press": 24,
-   "firstArticleAt": "2026-11-27T06:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "동국제강그룹, 2027년 정기 임원 인사…장선익 전무 사장 승진·경영부문...",
-     "press": "dizzotv.com",
-     "publishedAt": "2026-11-27T08:10:00.000Z",
-     "link": "https://www.dizzotv.com/site/data/html_dir/2026/11/27/2026112780168.html"
-    },
-    {
-     "title": "동국제강 오너 4세 장선익, 사장 승진 … 경영 전면 배치",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-27T08:08:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/27/2026112750304.html"
-    },
-    {
-     "title": "동국제강그룹, '오너 4세' 장선익 등 사장 4명 승진·선임…경영·생산부...",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-27T08:06:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=316430"
+     "title": "연기금투자풀 25주년 축사하는 박홍근 기획예산처 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T08:19:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127001318"
     }
    ]
   },
@@ -176,62 +144,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 23,
-   "recent20": 7,
-   "press": 20,
+   "articles90": 29,
+   "recent20": 11,
+   "press": 26,
    "firstArticleAt": "2026-11-27T06:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 “완전한 내란 종식” 강조…‘불공정 해소·체감 변화가 빛의...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-27T08:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061554?sid=100"
+     "title": "이 대통령 “내란 책임자에 합당한 책임 물어야 완전한 내란 종식”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T08:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005770085?sid=100"
     },
     {
-     "title": "이 대통령, '빛의 혁명' 강조하며 \"내란 책임자에 합당한 책임\"",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-27T08:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002395009?sid=100"
+     "title": "이재명 정부 기업 지원 '출연 넘어 지분투자로', 기업 성장 결실로 재정...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-27T08:20:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453164"
     },
     {
-     "title": "李대통령 \"광장 요구, 국민 체감 변화로\"…사회대개혁위에 '실질 성과' ...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T08:08:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127001301"
-    }
-   ]
-  },
-  {
-   "keyword": "학교 비정규직 총파업 발생",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-27T06:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "급식·돌봄 '학교 비정규직' 총파업 동시다발 집회…처우개선 촉구",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T08:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468277?sid=102"
-    },
-    {
-     "title": "\"방학은 생계 절벽, 일할수록 골병\"…여의도 메운 학교비정규직의 절규",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T07:54:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127163229028"
-    },
-    {
-     "title": "임종식 경북교육감, 학교급식 파업 현장 점검",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-27T07:50:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=368144"
+     "title": "[속보] 이 대통령 \"12·3 내란 책임자 합당한 책임 물어야 완전한 내란 ...",
+     "press": "kado.net",
+     "publishedAt": "2026-11-27T08:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213854?sid=100"
     }
    ]
   },
@@ -240,30 +176,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 27,
+   "articles90": 29,
    "recent20": 3,
-   "press": 11,
+   "press": 13,
    "firstArticleAt": "2026-11-27T07:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "韓총리 \"올해 주택공급 목표 달성 총력…내년 물량도 선제 준비\"",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-27T08:20:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=155025"
+    },
+    {
+     "title": "한 총리 “연내 계획된 물량 차질 없이 착공…내년 준비도 서둘러야”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T08:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302744?sid=100"
+    },
+    {
      "title": "韓총리 \"서울 집값 하락세 영등포·광진까지…연말 착공 차질 없게\"",
      "press": "news1.kr",
      "publishedAt": "2026-11-27T08:08:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009314799?sid=100"
-    },
-    {
-     "title": "한 총리 \"서울 주택시장 하향 안정 지표 강화...주택 공급 꾸준히\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T08:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439056?sid=100"
-    },
-    {
-     "title": "정부, 연말 주택공급 속도 낸다...내년 착공도 선제적 준비",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-27T08:00:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73690"
     }
    ]
   },
@@ -272,30 +208,62 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T06:46:00.000Z",
+   "articles90": 13,
+   "recent20": 8,
+   "press": 11,
+   "firstArticleAt": "2026-11-27T07:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 민주 윤리심판원, 최민희 징계 심의 종료...곧 발표",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T08:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439064?sid=100"
+     "title": "[속보] 민주당 윤리심판원, 최민희 중징계 의결",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-27T08:24:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904760"
     },
     {
-     "title": "최민희 징계 수위 오늘 결정될 듯…윤리심판원 심의 중",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T08:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406381?sid=100"
+     "title": "[속보] 민주당 윤리심판원, '최민희 중징계' 의결",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-27T08:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214751?sid=100"
     },
     {
-     "title": "최민희 징계 결론 나오나‥민주당 긴장 고조",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-27T07:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538539?sid=100"
+     "title": "[속보] 민주당 윤리심판원, 최민희 중징계 의결…김민석도 징계 심사 회...",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-27T08:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053684?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "제네시스 대상 시상식 수상자들",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 17,
+   "recent20": 7,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T06:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[mhn포토] 시상식 축사하는 제네시스 이시혁",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-27T08:21:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/445/0000494093"
+    },
+    {
+     "title": "[mhn포토] 제네시스 이시혁, 축사",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-27T08:21:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/445/0000494094"
+    },
+    {
+     "title": "신상훈, 2026시즌 KPGA 제네시스 대상 등 2관왕 영예",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T08:19:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/003/0014350113"
     }
    ]
   },
@@ -305,10 +273,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T06:55:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T06:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -337,10 +305,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T06:52:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T07:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -365,49 +333,23 @@
    ]
   },
   {
-   "keyword": "신임 해병대 장교들",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T06:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "해군·해병대 사관후보생 141기 110명 임관… 광복군·참전용사 후손 19...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T07:58:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127001282"
-    },
-    {
-     "title": "제141기 해군·해병대 신임 장교 110명 임관…\"해양 수호 첫발\"",
-     "press": "news.lghellovision.net",
-     "publishedAt": "2026-11-27T07:58:00.000Z",
-     "link": "http://news.lghellovision.net/news/articleView.html?idxno=564068"
-    },
-    {
-     "title": "임관사령장 받은 신임 장교들의 힘찬 경례",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T07:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314690?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "남경필 장남 체포",
    "sources": [
     "daum"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
    "firstArticleAt": "2026-11-27T06:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "남경필 전 지사 장남, 전 연인 영상 유포 협박·폭행 혐의 체포",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T08:16:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765550"
+    },
     {
      "title": "남경필 아들, 출소 1년 만에 또 체포…전 연인 협박·스토킹 혐의",
      "press": "mt.co.kr",
@@ -419,19 +361,45 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-27T07:43:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014350039?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "신임 해병대 장교들",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T06:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "제141기 해군·해병대 신임 장교 110명 임관…\"해양 수호 첫발\"",
+     "press": "news.lghellovision.net",
+     "publishedAt": "2026-11-27T07:58:00.000Z",
+     "link": "http://news.lghellovision.net/news/articleView.html?idxno=564068"
     },
     {
-     "title": "'마약 전과' 남경필 아들, 전 여친 성관계 영상 유포 협박 체포",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-27T06:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002395000?sid=102"
+     "title": "해군·해병대 사관후보생 141기 110명 임관… 광복군·참전용사 후손 19...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T07:58:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127001282"
+    },
+    {
+     "title": "임관사령장 받은 신임 장교들의 힘찬 경례",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T07:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314690?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1892,
+  "flagged": 1894,
   "matched": 937,
   "avgLeadMin": 611,
   "recent": [
