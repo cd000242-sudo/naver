@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T03:23:41.840Z",
+ "builtAt": "2026-11-27T03:33:45.283Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,18 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "한동훈",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 57,
-   "recent20": 8,
-   "press": 45,
-   "firstArticleAt": "2026-11-27T01:54:00.000Z",
+   "articles90": 48,
+   "recent20": 2,
+   "press": 39,
+   "firstArticleAt": "2026-11-27T02:04:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -44,61 +43,28 @@
    ]
   },
   {
-   "keyword": "ai 에이전트",
-   "sources": [
-    "google"
-   ],
-   "articles90": 48,
-   "recent20": 4,
-   "press": 43,
-   "firstArticleAt": "2026-11-27T01:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "알리바바, AI 기술을 사회적 가치 창출로…안전·의료·과학·교육 등 8...",
-     "press": "aitimes.kr",
-     "publishedAt": "2026-11-27T03:18:00.000Z",
-     "link": "https://www.aitimes.kr/news/articleView.html?idxno=42922"
-    },
-    {
-     "title": "AI 금융 경쟁력은 데이터부터… NH농협은행, 품질인증 최고등급",
-     "press": "newsmap.co.kr",
-     "publishedAt": "2026-11-27T03:16:00.000Z",
-     "link": "https://www.newsmap.co.kr/news/articleView.html?idxno=5913"
-    },
-    {
-     "title": "아모레퍼시픽, 인공지능(AI) 기반 뷰티기업 전환 가속",
-     "press": "thebk.co.kr",
-     "publishedAt": "2026-11-27T03:14:00.000Z",
-     "link": "https://www.thebk.co.kr/news/articleView.html?idxno=313056"
-    }
-   ]
-  },
-  {
    "keyword": "북한 어선 송환",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 44,
-   "recent20": 7,
-   "press": 37,
+   "articles90": 45,
+   "recent20": 6,
+   "press": 38,
    "firstArticleAt": "2026-11-27T02:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'표류' 北어선, 24일만에 돌아갔다…1명은 귀순",
+     "title": "동해 구조 北어민 6명 24일 만에 NLL송환…1명 '보호' 잔류",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-27T03:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214606?sid=100"
+    },
+    {
+     "title": "'표류' 北 어선, 24일 만에 돌아갔다…1명은 귀순",
      "press": "hankyung.com",
      "publishedAt": "2026-11-27T03:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005359015?sid=100"
-    },
-    {
-     "title": "'동해 표류' 북한 어선 송환…1명은 귀순 의사 밝혀",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-27T03:20:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261127507016?OutUrl=naver"
     },
     {
      "title": "울릉도 표류 北 어민 7명 중 1명 한국 잔류...나머지 6명 24일 만에 송환",
@@ -109,17 +75,55 @@
    ]
   },
   {
+   "keyword": "ai 에이전트",
+   "sources": [
+    "google"
+   ],
+   "articles90": 42,
+   "recent20": 5,
+   "press": 36,
+   "firstArticleAt": "2026-11-27T02:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "SK에코플랜트, AI 데이터센터 기술 확보",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T03:32:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287770"
+    },
+    {
+     "title": "앤트로픽, MCP 서버에 '스킬' 도입…AI 에이전트에 업무 노하우까지 전...",
+     "press": "aitimes.com",
+     "publishedAt": "2026-11-27T03:24:00.000Z",
+     "link": "https://www.aitimes.com/news/articleView.html?idxno=217847"
+    },
+    {
+     "title": "알리바바, AI 기술을 사회적 가치 창출로…안전·의료·과학·교육 등 8...",
+     "press": "aitimes.kr",
+     "publishedAt": "2026-11-27T03:18:00.000Z",
+     "link": "https://www.aitimes.kr/news/articleView.html?idxno=42922"
+    }
+   ]
+  },
+  {
    "keyword": "김대기 관저이전 예산전용",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 47,
+   "articles90": 39,
    "recent20": 4,
-   "press": 34,
-   "firstArticleAt": "2026-11-27T01:54:00.000Z",
+   "press": 33,
+   "firstArticleAt": "2026-11-27T02:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'尹 관저 공사비' 메우려 행안부 예산 끌어다 쓴 김대기 유죄",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-27T03:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143162?sid=102"
+    },
     {
      "title": "'윤 관저 이전 예산 전용' 김대기 1심서 징역형 집행유예",
      "press": "news.sbs.co.kr",
@@ -131,121 +135,84 @@
      "press": "munhwa.com",
      "publishedAt": "2026-11-27T03:16:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002836073?sid=102"
-    },
-    {
-     "title": "‘尹 관저 예산전용’ 김대기 1심서 집유…이상민은 ‘무죄’",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302592?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "개인정보 유출 긴급대응",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 28,
-   "recent20": 1,
-   "press": 23,
-   "firstArticleAt": "2026-11-27T02:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "개인정보 침해 신고 1000건 돌파…정부, 공공·민간 보안망 긴급 점검",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-27T03:14:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848656"
-    },
-    {
-     "title": "'AI 해킹' 올해 정보유출 신고건수 3배 급증...석달간 집중점검",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-27T02:50:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95303"
-    },
-    {
-     "title": "올해 개인정보 유출신고 '3배' 될 듯",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-27T02:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000546278?sid=103"
     }
    ]
   },
   {
    "keyword": "학교 비정규직 총파업에",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 35,
-   "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-27T01:56:00.000Z",
+   "articles90": 36,
+   "recent20": 5,
+   "press": 21,
+   "firstArticleAt": "2026-11-27T02:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "학비연대 총파업에 도시락 먹는 초등학생",
+     "title": "학교 비정규직 총파업 영향으로 급식 차질",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T03:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467556?sid=102"
+    },
+    {
+     "title": "오늘은 학교 급식 대신 빵",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T03:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467549?sid=102"
+    },
+    {
+     "title": "\"급식 선생님 돌아오셨으면\"…학비연대 파업 첫날, 울산 학교 급식 차질",
      "press": "news1.kr",
-     "publishedAt": "2026-11-27T03:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314076?sid=102"
-    },
-    {
-     "title": "전국 학교 비정규직 총파업…일부 학교 '급식·돌봄' 차질",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T03:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406304?sid=102"
-    },
-    {
-     "title": "학교 비정규직 총파업…급식·돌봄 차질 예상",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T03:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302593?sid=102"
+     "publishedAt": "2026-11-27T03:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314101?sid=102"
     }
    ]
   },
   {
-   "keyword": "수능 부정행위 급증",
+   "keyword": "손연재 부부 30억 기부",
    "sources": [
-    "signal.bz",
-    "nate"
+    "daum"
    ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-27T02:00:00.000Z",
+   "articles90": 15,
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-27T02:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "올 수능 부정행위 474건 70% 급증··· 스마트기기 적발만 112건",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-27T03:20:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=562414"
+     "title": "'리듬체조 국가대표 출신' 손연재 부부, 연세의료원에 30억 기부…태아...",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-27T03:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122333?sid=102"
     },
     {
-     "title": "올 수능 부정행위 474건-70% 급증…스마트기기 적발 작년 3.6배",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-27T03:14:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121379"
+     "title": "손연재 부부, 고위험 산모·태아 위해 30억 통 큰 기부…'연재태아협진...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-27T03:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004470233"
     },
     {
-     "title": "포상금 1억원 효과? ... 일주일 새 수능 부정행위 신고·제보 306건 쏟아...",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-27T03:12:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731321"
+     "title": "손연재 부부, 30억 통 큰 기부…“산모와 아이들에 작은 힘 되길”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T03:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005769913"
     }
    ]
   },
   {
    "keyword": "강호동 아들 준우승",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 16,
+   "articles90": 14,
    "recent20": 0,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T01:55:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-27T02:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -270,172 +237,112 @@
    ]
   },
   {
-   "keyword": "발언하는 김민석 대표",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 23,
-   "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-27T02:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'최민희 징계' 앞두고 與 파열음…친청계 \"김민석은 언제 심의하나\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-27T03:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214604?sid=100"
-    },
-    {
-     "title": "최고위서 발언하는 김민석 민주당 대표",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T03:20:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765127"
-    },
-    {
-     "title": "발언하는 김민석 민주당 대표",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T03:18:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765118"
-    }
-   ]
-  },
-  {
-   "keyword": "병무청",
+   "keyword": "2026",
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T02:06:00.000Z",
+   "articles90": 8,
+   "recent20": 8,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T03:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "병무청, 병역면탈 의심 전역자 검증 강화…개정 병역법 12월 10일 시행",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-27T03:22:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088575"
+     "title": "[신간] \"2026년, 'AGI경제' 원년이 열렸다\"…지능이 구독되는 시대, 부와...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T03:32:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127122235241"
     },
     {
-     "title": "병무청, ‘병역면탈 의심’ 질병 조기전역자 자료확보 근거 마련",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T02:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302587?sid=100"
+     "title": "한국e스포츠협회, 문체부 '2026 체육단체 혁신평가' 매우 우수(S) 획득",
+     "press": "fomos.kr",
+     "publishedAt": "2026-11-27T03:30:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/236/0000258283"
     },
     {
-     "title": "병무청·한국생명존중희망재단, '불안한 청년' 도와 병역 의무 이행 지...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T02:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313956?sid=100"
+     "title": "한화그룹, 늦가을 저녁 바로크 선율 전한 '한화클래식 2026' 성공적 마무...",
+     "press": "womentimes.co.kr",
+     "publishedAt": "2026-11-27T03:30:00.000Z",
+     "link": "https://www.womentimes.co.kr/news/articleView.html?idxno=108343"
     }
    ]
   },
   {
-   "keyword": "연우 다이어트",
+   "keyword": "무쇠소녀단 3",
    "sources": [
     "daum"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T02:16:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-27T02:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“두 달 만에 10kg 뺐다”… 모모랜드 연우, 이후 겪은 ‘두드러기 부작...",
-     "press": "health.chosun.com",
-     "publishedAt": "2026-11-27T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/346/0000119564?sid=103"
+     "title": "또다시 설인아 시간이 열렸다…3연속 개근, ‘무쇠소녀단3’로 또 증명...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T02:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001148505"
     },
     {
-     "title": "\"하루 밥 두 숟갈…10kg 뺐다\" 연우, 극단적 다이어트에 두드러기까지",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-27T02:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000641213"
+     "title": "'무쇠소녀단3' 한지현, 등장하자마자 체력왕 등극",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-27T02:12:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96064"
     },
     {
-     "title": "연우 \"하루 밥 두 숟가락 먹으며 10kg 감량…전신 두드러기에 눈물까지...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T02:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009313927"
-    }
-   ]
-  },
-  {
-   "keyword": "폭설 영어 리메이크 확정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T01:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김윤석ⅹ구교환 ‘폭설’, 영어 리메이크 제작 확정… 홍의정 감독 직접...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-27T02:52:00.000Z",
-     "link": "https://www.viva100.com/article/20261127500306"
-    },
-    {
-     "title": "김윤석·구교환 ‘폭설’, 캐나다서 영어 리메이크…홍의정 감독 직접 ...",
-     "press": "dailian.co.kr",
+     "title": "한지현, ‘무쇠소녀단3’ 첫 방송부터 활약..‘지트리버’ 반전 매력",
+     "press": "breaknews.com",
      "publishedAt": "2026-11-27T02:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003160222"
-    },
-    {
-     "title": "한국 극장가 덮친 ‘폭설’, 캐나다에도 내린다… 영어 리메이크 확정",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T02:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/018/0006416509"
-    }
-   ]
-  },
-  {
-   "keyword": "유한양행",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T02:04:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유한양행, '버들장터'서 30일까지 블랙프라이데이 행사 진행",
-     "press": "weekly.hankooki.com",
-     "publishedAt": "2026-11-27T02:22:00.000Z",
-     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7196061"
-    },
-    {
-     "title": "'내부 승계' 공식 깨려는 유한양행…'R&D·생산' 투톱 실험",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-27T02:16:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733205"
-    },
-    {
-     "title": "유한양행, '버들장터' 블랙프라이데이 프로모션",
-     "press": "bosa.co.kr",
-     "publishedAt": "2026-11-27T02:14:00.000Z",
-     "link": "https://www.bosa.co.kr/news/articleView.html?idxno=3017542"
+     "link": "http://www.breaknews.com/1254568"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1798,
-  "matched": 897,
-  "avgLeadMin": 614,
+  "flagged": 1801,
+  "matched": 903,
+  "avgLeadMin": 613,
   "recent": [
+   {
+    "keyword": "남태현, 음주운전 상고 5일 만에",
+    "hitKeyword": "낸시랭 음주운전",
+    "hitAt": "2026-11-27T12:30:00+09:00",
+    "leadMin": 2460
+   },
+   {
+    "keyword": "코스피 상승 출발",
+    "hitKeyword": "코스피 코스닥 강세",
+    "hitAt": "2026-11-27T12:30:00+09:00",
+    "leadMin": 137
+   },
+   {
+    "keyword": "코스피 출발 상승",
+    "hitKeyword": "코스피 코스닥 강세",
+    "hitAt": "2026-11-27T12:30:00+09:00",
+    "leadMin": 87
+   },
+   {
+    "keyword": "코스피 상승 시작",
+    "hitKeyword": "코스피 코스닥 강세",
+    "hitAt": "2026-11-27T12:30:00+09:00",
+    "leadMin": 57
+   },
+   {
+    "keyword": "수능 부정행위 급증",
+    "hitKeyword": "수능 부정행위 급증",
+    "hitAt": "2026-11-27T12:30:00+09:00",
+    "leadMin": 26
+   },
+   {
+    "keyword": "낸시랭 불구속 송치",
+    "hitKeyword": "낸시랭 음주운전",
+    "hitAt": "2026-11-27T12:30:00+09:00",
+    "leadMin": 16
+   },
    {
     "keyword": "코스닥",
     "hitKeyword": "코스닥 매수 사이드카",
@@ -459,42 +366,6 @@
     "hitKeyword": "수능 부정행위 신고 포상금",
     "hitAt": "2026-11-27T11:30:00+09:00",
     "leadMin": 8161
-   },
-   {
-    "keyword": "수능 신고 포상금 1억",
-    "hitKeyword": "수능 부정행위 신고 포상금",
-    "hitAt": "2026-11-27T11:30:00+09:00",
-    "leadMin": 8080
-   },
-   {
-    "keyword": "수능 부정 신고 포상 최대 5억",
-    "hitKeyword": "수능 부정행위 신고 포상금",
-    "hitAt": "2026-11-27T11:30:00+09:00",
-    "leadMin": 5069
-   },
-   {
-    "keyword": "철도 파업",
-    "hitKeyword": "철도 파업",
-    "hitAt": "2026-11-27T11:30:00+09:00",
-    "leadMin": 1555
-   },
-   {
-    "keyword": "설인아",
-    "hitKeyword": "설인아 무쇠소녀단3",
-    "hitAt": "2026-11-27T11:00:00+09:00",
-    "leadMin": 771
-   },
-   {
-    "keyword": "선우용여, 젠슨 황 불륜 분노",
-    "hitKeyword": "선우용여 분노",
-    "hitAt": "2026-11-27T11:00:00+09:00",
-    "leadMin": 711
-   },
-   {
-    "keyword": "선우용여, 돈만 벌면 불륜",
-    "hitKeyword": "선우용여 분노",
-    "hitAt": "2026-11-27T11:00:00+09:00",
-    "leadMin": 218
    }
   ]
  }
