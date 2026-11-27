@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T06:34:46.907Z",
+ "builtAt": "2026-11-27T06:44:49.940Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "지역재투자 평가 상대평가",
+   "keyword": "정년연장 노사 합의 불발",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
    "articles90": 24,
-   "recent20": 4,
-   "press": 24,
-   "firstArticleAt": "2026-11-27T05:30:00.000Z",
+   "recent20": 6,
+   "press": 22,
+   "firstArticleAt": "2026-11-27T05:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "은행 지역재투자 상대평가 도입… 서민금융·지역 중기 지원 배점↑",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-27T06:34:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=401050"
+     "title": "정년연장 또 불발...쉴 수 없는 노후의 투쟁",
+     "press": "00news.co.kr",
+     "publishedAt": "2026-11-27T06:42:00.000Z",
+     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108416"
     },
     {
-     "title": "은행권 지역재투자 평가 손질…서민금융 지원 따라 등급 갈린다",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-27T06:24:00.000Z",
-     "link": "https://www.viva100.com/article/20261127500502"
+     "title": "정년연장 특위, 노사 합의 불발…내달 2일 활동 종료",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-27T06:42:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611271523080130975"
     },
     {
-     "title": "광주은행 등 7곳 지역재투자 '최우수'…금융당국, 상대평가 도입",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-27T06:21:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087341"
+     "title": "10개월 만에 재개된 정년연장 논의, 또 합의 불발…공은 여당에?",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-27T06:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485547?sid=102"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "signal.bz"
    ],
    "articles90": 22,
-   "recent20": 4,
+   "recent20": 1,
    "press": 22,
    "firstArticleAt": "2026-11-27T05:17:00.000Z",
    "exclusive": false,
@@ -67,54 +67,150 @@
      "link": "https://n.news.naver.com/mnews/article/011/0004686928?sid=100"
     },
     {
-     "title": "이 대통령 \"욕먹어도 할 일 해야\"…성과공유형 재정지원 힘실어",
-     "press": "news.sbs.co.kr",
+     "title": "李 대통령 \"연 50조 원 R&D 성과 환수 장치 필요…욕먹어도 할 일 해야\"",
+     "press": "iminju.net",
      "publishedAt": "2026-11-27T06:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406349?sid=100"
+     "link": "http://www.iminju.net/news/articleView.html?idxno=173258"
     }
    ]
   },
   {
-   "keyword": "정년연장 노사 합의 불발",
+   "keyword": "답변하는 박홍근 장관",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 22,
-   "recent20": 3,
-   "press": 22,
-   "firstArticleAt": "2026-11-27T05:05:00.000Z",
+   "articles90": 27,
+   "recent20": 5,
+   "press": 14,
+   "firstArticleAt": "2026-11-27T05:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "與정년연장특위 노사합의 불발…10개월만 회동에도 접점 못찾아",
-     "press": "delighti.co.kr",
-     "publishedAt": "2026-11-27T06:28:00.000Z",
-     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125809"
+     "title": "서영교·박홍근 뜻밖의 충돌‥\"답변 태도에 문제\" \"여기가 상원인가\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-27T06:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538520?sid=100"
     },
     {
-     "title": "“연내 입법 불발 땐 더 이상 대화 없다”…정년연장 지연에 노동계 반...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-27T06:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004686931?sid=102"
+     "title": "[포토] 박홍근 기획예산처 장관 \"법사위서 지역 현안 묻지 말라\"",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-27T06:40:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/27/2026112750267.html"
     },
     {
-     "title": "민주당 정년특위, 10개월 만에 노사 협의 재개에도 합의 불발",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-27T06:18:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466751"
+     "title": "박홍근 \"여기가 상원이냐\", 서영교 \"이런 경우 처음\"…정부·여당 충돌",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-27T06:36:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=368139"
     }
    ]
   },
   {
-   "keyword": "솔비♥이규한, 4월 25일 결혼",
+   "keyword": "FIFA·AFC 12월 방한",
    "sources": [
     "nate"
    ],
    "articles90": 11,
-   "recent20": 2,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-27T05:21:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[공식발표] '결국 FIFA와 AFC가 직접 한국에 온다!'…대한축구협회 회장...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-27T06:37:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/411/0000090548"
+    },
+    {
+     "title": "FIFA·AFC, KFA 회장 선거 관련 미팅 위해 다음 주 방한… 해결책 나올까",
+     "press": "footballist.co.kr",
+     "publishedAt": "2026-11-27T06:14:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/436/0000115290"
+    },
+    {
+     "title": "FIFA·AFC 대표단, 12월 4~5일 방한…축구협회장 선거 논의",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-27T06:12:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/005/0001887869"
+    }
+   ]
+  },
+  {
+   "keyword": "한성숙 총리, 사회연대경제 박람회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 43,
+   "recent20": 17,
    "press": 10,
-   "firstArticleAt": "2026-11-27T05:11:00.000Z",
+   "firstArticleAt": "2026-11-27T05:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 고양시 부스 체험 즐기는 한성숙 총리",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T06:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359081?sid=100"
+    },
+    {
+     "title": "[포토] 제8회 대한민국 사회연대경제박람회 개막",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T06:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359078?sid=100"
+    },
+    {
+     "title": "대한민국 사회연대경제박람회 찾은 한성숙-윤호중-추미애",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T06:35:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127001117"
+    }
+   ]
+  },
+  {
+   "keyword": "개인정보 유출 긴급대응",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T05:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "AI 기반 해킹 급증에 유출 사고 2배... 개인정보위, 긴급대응·점검체계...",
+     "press": "boannews.com",
+     "publishedAt": "2026-11-27T06:38:00.000Z",
+     "link": "https://www.boannews.com/news/articleView.html?idxno=147601"
+    },
+    {
+     "title": "개인정보 유출 신고 벌써 작년 2배 넘어…개인정보위, 긴급 대응 돌입",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-27T06:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207819?sid=105"
+    },
+    {
+     "title": "과학기술인공제회 해킹…회원정보 21만건 유출",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-27T06:28:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000002014"
+    }
+   ]
+  },
+  {
+   "keyword": "이규한 솔비 결혼 4월 25일",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-27T05:17:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -139,34 +235,66 @@
    ]
   },
   {
-   "keyword": "개인정보 유출 긴급대응",
+   "keyword": "우리쌀 K-라이스 페스타",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T05:58:00.000Z",
+   "articles90": 10,
+   "recent20": 6,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T05:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "개인정보 유출 신고 벌써 작년 2배 넘어…개인정보위, 긴급 대응 돌입",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-27T06:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207819?sid=105"
+     "title": "[포토] 축사하는 박정훈 농식품부 식량정책실장 (K-라이스 페스타)",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T06:42:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127154023854"
     },
     {
-     "title": "과학기술인공제회 해킹…회원정보 21만건 유출",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-27T06:28:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000002014"
+     "title": "[포토] 축사하는 박찬수 한겨레신문 대표이사 (K-라이스 페스타)",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T06:42:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127153833850"
     },
     {
-     "title": "AI 기반 해킹 확산에 올해 개인정보유출 신고 전년 2배 훌쩍",
-     "press": "aitimes.com",
-     "publishedAt": "2026-11-27T06:18:00.000Z",
-     "link": "https://www.aitimes.com/news/articleView.html?idxno=217882"
+     "title": "[포토] '2026 우리쌀 우리술 K-라이스 페스타' 개막",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T06:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359076?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "재혼 황후 신민아 김우빈 반응",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T05:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘재혼 황후’ 신민아 “남편 김우빈 완전 팬, 나비에라 부른다”…이종...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-27T06:36:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178406"
+    },
+    {
+     "title": "[SC인터뷰] \"김우빈♥, 집에서도 나비에로 불러\"…'재혼황후' 신민아, 왕...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-27T06:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004470281"
+    },
+    {
+     "title": "'재혼 황후' 신민아 \"남편 김우빈 반응? 너무 재밌게 봐서 놀랐다\" [인터...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-27T06:16:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110121664537"
     }
    ]
   },
@@ -183,16 +311,16 @@
    "capped": false,
    "samples": [
     {
-     "title": "비상계엄 수사 ‘중수청·경찰 특수본’ 출범…검·경·공수처·2차 특검...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-27T06:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834297?sid=102"
-    },
-    {
      "title": "중수청·경찰 합동 '내란 특수본', 다음 달 1일 출범 예정",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-27T06:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002438975?sid=102"
+    },
+    {
+     "title": "비상계엄 수사 ‘중수청·경찰 특수본’ 출범…검·경·공수처·2차 특검...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-27T06:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834297?sid=102"
     },
     {
      "title": "중수청·경찰 ‘내란 특수본’ 임박…내달 1일 출범 예정",
@@ -203,17 +331,55 @@
    ]
   },
   {
-   "keyword": "남경필 아들 협박 혐의 체포",
+   "keyword": "교통",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 8,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T06:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "포항시, 민·관·군 뭉쳐 교통사고 예방 결의···안전문화 확산",
+     "press": "tk.newdaily.co.kr",
+     "publishedAt": "2026-11-27T06:42:00.000Z",
+     "link": "https://tk.newdaily.co.kr/site/data/html/2026/11/27/2026112750242.html"
+    },
+    {
+     "title": "서울지하철 파업 막았지만…준법투쟁 철도노조, 연말 교통대란 우려 확...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-27T06:42:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261127010010843"
+    },
+    {
+     "title": "[속보] 서해안고속도로 몽탄터널 인근 양방향 교통사고 발생",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T06:40:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765373"
+    }
+   ]
+  },
+  {
+   "keyword": "남경필 장남 협박 혐의 체포",
    "sources": [
     "daum"
    ],
    "articles90": 6,
-   "recent20": 0,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-27T05:06:00.000Z",
-   "exclusive": true,
+   "firstArticleAt": "2026-11-27T05:24:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "남경필 전 경기지사 장남 체포…전 연인 폭행·성관계 영상 유포 협박 ...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-27T06:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834307?sid=102"
+    },
     {
      "title": "남경필 전 지사 장남, 전 연인 영상 유포 협박·폭행 혐의 체포…경찰 ...",
      "press": "mdtoday.co.kr",
@@ -225,44 +391,6 @@
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-27T05:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003160296?sid=102"
-    },
-    {
-     "title": "또 수갑찬 남경필 아들…이번에는 전 연인 스토킹·폭행 혐의",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T05:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406332?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "교통",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T06:10:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "아산시, 내년 3월 까지 남부로(하나로마트) 우수관로 공사 구간 교통통...",
-     "press": "jbnews.com",
-     "publishedAt": "2026-11-27T06:32:00.000Z",
-     "link": "https://www.jbnews.com/news/articleView.html?idxno=1517071"
-    },
-    {
-     "title": "의왕시, 어르신 교통카드(G-PASS) 부정사용 예방 홍보 강화",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-27T06:30:00.000Z",
-     "link": "https://www.viva100.com/article/20261127500498"
-    },
-    {
-     "title": "이병숙 경기도의원, 망포지구 원거리 고교 통학 지원·버스노선 개선 협...",
-     "press": "kmaeil.com",
-     "publishedAt": "2026-11-27T06:26:00.000Z",
-     "link": "https://www.kmaeil.com/news/articleView.html?idxno=660171"
     }
    ]
   },
@@ -272,7 +400,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-27T05:24:00.000Z",
    "exclusive": false,
@@ -333,7 +461,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1859,
+  "flagged": 1865,
   "matched": 924,
   "avgLeadMin": 608,
   "recent": [
