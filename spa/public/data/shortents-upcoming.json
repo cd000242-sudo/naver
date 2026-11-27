@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T11:36:38.579Z",
+ "builtAt": "2026-11-27T11:46:42.032Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "최민희",
    "sources": [
     "google"
    ],
-   "articles90": 41,
-   "recent20": 4,
-   "press": 34,
-   "firstArticleAt": "2026-11-27T10:08:00.000Z",
+   "articles90": 38,
+   "recent20": 7,
+   "press": 31,
+   "firstArticleAt": "2026-11-27T10:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "與, 최민희 '당원권 2년 정지' 중징계…崔 \"수용불가, 재심신청\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-27T11:28:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326765/?sc=Naver"
+     "title": "최민희 ‘당원권 정지 2년’… 총선 공천까지 막히나, 정청래 “김민석...",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-27T11:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000087168?sid=100"
     },
     {
-     "title": "중징계 받은 최민희 “수용 어려워”…정청래도 “김민석은?” 반발",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T11:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005770162?sid=100"
+     "title": "\"최민희, 당원권 정지 2년\"…김민석 청원도 심사",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-27T11:44:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545247"
     },
     {
-     "title": "최민희 징계 2년…김민석은 왜 다른가, 당원들의 질문",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T11:28:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288095"
+     "title": "민주당, 최민희 당원자격 2년 정지 의결…최고위원직 상실 위기",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-27T11:41:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087442"
     }
    ]
   },
   {
-   "keyword": "철도노조 준법투쟁",
+   "keyword": "철도노조 준법투쟁 지연",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 18,
-   "firstArticleAt": "2026-11-27T10:08:00.000Z",
+   "articles90": 16,
+   "recent20": 1,
+   "press": 16,
+   "firstArticleAt": "2026-11-27T10:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -81,13 +81,19 @@
     "nate",
     "daum"
    ],
-   "articles90": 18,
-   "recent20": 0,
-   "press": 18,
-   "firstArticleAt": "2026-11-27T10:07:00.000Z",
+   "articles90": 14,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T10:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "카카오 SM엔터 인수부터 김범수 무죄 확정까지 '격랑의 3년 9개월'",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-27T11:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001079237?sid=105"
+    },
     {
      "title": "카카오 김범수 'SM엔터 시세조종' 무죄 확정, 공소청 상고 포기",
      "press": "businesspost.co.kr",
@@ -99,25 +105,50 @@
      "press": "segye.com",
      "publishedAt": "2026-11-27T11:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004178705?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "노태악 압수수색",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T10:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "선관위 특검, 노태악 전 선관위원장 추가 압수수색…증거인멸 정황",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T11:42:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654140"
     },
     {
-     "title": "'SM 시세조종 의혹' 김범수 무죄 확정",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-27T10:50:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026112719483375834"
+     "title": "선관위 특검, ‘공추비 부당 지급’ 의혹 노태악 추가 압수수색",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-27T11:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004687049?sid=102"
+    },
+    {
+     "title": "선관위특검, 노태악 추가 압수수색…선관위 증거인멸 정황 포착(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T11:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468477?sid=102"
     }
    ]
   },
   {
    "keyword": "서영교·박홍근 법사위 충돌",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T10:16:00.000Z",
+   "articles90": 9,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T10:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -142,34 +173,66 @@
    ]
   },
   {
-   "keyword": "노태악 압수수색",
+   "keyword": "이나인페이 해킹 피해",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T10:10:00.000Z",
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T10:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이나인페이, 해킹으로 25억원 피해…금감원 긴급 현장조사",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-27T11:44:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848686"
+    },
+    {
+     "title": "'소액 해외송금업체' 이나인페이 해킹으로 자금 유출 피해, 금감원 현장...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-27T11:40:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453185"
+    },
+    {
+     "title": "해외송금업체 이나인페이 해킹...25억원 탈취 금감원 현장점검",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T11:36:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127202435461"
+    }
+   ]
+  },
+  {
+   "keyword": "한동훈 자료유출 압수수색에",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T10:19:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "선관위특검, 노태악 추가 압수수색…선관위 증거인멸 정황 포착(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T11:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468477?sid=102"
+     "title": "경찰, '수사자료 유출 의혹' 법무부·공소청 압수수색",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-27T11:44:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545261"
     },
     {
-     "title": "선관위 특검, '공추비 부당 지급 의혹' 노태악 추가 압수수색",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-27T11:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160435?sid=102"
+     "title": "[단독] '검찰 내부문건'을 한동훈에?‥\"유출자 찾는다\" 압수수색",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-27T11:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538581?sid=102"
     },
     {
-     "title": "선관위 특검, ‘공추비 부당 지급 의혹’ 노태악 2차 압수수색",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-27T11:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887908?sid=102"
+     "title": "경찰, '한동훈 자료 유출 의혹' 압수수색..9시간만에 종료",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-27T10:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447605?sid=102"
     }
    ]
   },
@@ -178,13 +241,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 7,
-   "recent20": 4,
-   "press": 5,
+   "articles90": 8,
+   "recent20": 3,
+   "press": 6,
    "firstArticleAt": "2026-11-27T10:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'그냥사람친구' 촬영지…장소 암스테르담 여행지 방문",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-27T11:42:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611270273"
+    },
     {
      "title": "‘그냥사람친구’ 이서진, 드디어 신분 상승? 주헌, 일당백 역할 톡톡",
      "press": "enews.imbc.com",
@@ -196,44 +265,6 @@
      "press": "enter.etoday.co.kr",
      "publishedAt": "2026-11-27T11:30:00.000Z",
      "link": "https://enter.etoday.co.kr/news/view/305870"
-    },
-    {
-     "title": "이서진·한지민 '그냥 사람 친구'",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-27T11:20:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6944280"
-    }
-   ]
-  },
-  {
-   "keyword": "후보자 재산 신고",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T10:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강금실 재산 2.6억 신고…임웅순 20억·홍익표 65억",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-27T11:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447608?sid=100"
-    },
-    {
-     "title": "홍익표 통일장관 후보자, 재산 65억원 신고…'비거주1주택' 지적(종합2보...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T11:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468473?sid=100"
-    },
-    {
-     "title": "강금실, 재산 2억 원 신고… 중국 지방정부 고문 경력도 기재",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-27T10:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968237?sid=100"
     }
    ]
   },
@@ -244,7 +275,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-27T10:27:00.000Z",
    "exclusive": false,
@@ -269,75 +300,11 @@
      "link": "https://www.newspim.com/news/view/20261127001365"
     }
    ]
-  },
-  {
-   "keyword": "이혼 후에도 사랑했다",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T10:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "14년만에 최초고백..LJ \"이선정과 이혼할때도 사랑했다\" [순간포착]",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-27T11:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646192"
-    },
-    {
-     "title": "LJ, ‘전처’ 이선정과 이혼 14년 만 고백 “이혼 후에도 사랑했다”",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-27T11:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001152079"
-    },
-    {
-     "title": "LJ \"전부인 이선정과 이혼할 때도 사랑..친구처럼 지내는 상상\" 15년 만에...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-27T10:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490723"
-    }
-   ]
-  },
-  {
-   "keyword": "이나인페이 해킹 피해",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T10:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이나인페이, 해킹으로 25억원 피해…금감원 현장점검 돌입",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-27T11:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729676?sid=101"
-    },
-    {
-     "title": "국내 1호 소액해외송금 업체 이나인페이, 25억원 해킹 피해…금감원 현...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-27T11:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178703?sid=102"
-    },
-    {
-     "title": "이나인페이, 해킹으로 25억 피해…금감원 점검 착수",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-27T10:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005849014?sid=101"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1943,
+  "flagged": 1945,
   "matched": 974,
   "avgLeadMin": 656,
   "recent": [
