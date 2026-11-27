@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T03:53:51.216Z",
+ "builtAt": "2026-11-27T04:03:54.669Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,60 +11,28 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "한동훈",
-   "sources": [
-    "google"
-   ],
-   "articles90": 37,
-   "recent20": 4,
-   "press": 31,
-   "firstArticleAt": "2026-11-27T02:24:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보] 경찰, 한동훈 검찰자료 비밀누설 혐의 법무부·공소청 압수수색",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-27T03:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138979?sid=100"
-    },
-    {
-     "title": "경찰, '김승원 자료 유출 의혹' 법무부·공소청 압수수색...'한동훈 수사...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-27T03:46:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328812"
-    },
-    {
-     "title": "장동혁, 한동훈 복당해도 재징계 시사···국민의힘 '조작징계' 내홍 확...",
-     "press": "todaykorea.co.kr",
-     "publishedAt": "2026-11-27T03:40:00.000Z",
-     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=409337"
-    }
-   ]
-  },
-  {
    "keyword": "김대기 관저이전 예산전용",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 36,
-   "recent20": 4,
-   "press": 31,
-   "firstArticleAt": "2026-11-27T02:25:00.000Z",
+   "articles90": 31,
+   "recent20": 3,
+   "press": 28,
+   "firstArticleAt": "2026-11-27T02:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'윤석열 관저 예산 전용' 김대기 전 비서실장, 1심 징역형 집유",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-27T03:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165899?sid=102"
+    },
     {
      "title": "'尹관저 예산 불법 전용' 김대기 1심 징역 2년 집유...이상민 무죄",
      "press": "fnnews.com",
      "publishedAt": "2026-11-27T03:51:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005610790?sid=102"
-    },
-    {
-     "title": "'윤석열 관저 예산 전용' 김대기, 1심 징역형 집유…이상민 무죄",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-27T03:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165899?sid=102"
     },
     {
      "title": "윤석열 ‘관저 이전 예산 전용’ 김대기 1심 징역 2년형 집유",
@@ -79,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 31,
+   "articles90": 28,
    "recent20": 1,
-   "press": 29,
-   "firstArticleAt": "2026-11-27T02:28:00.000Z",
+   "press": 26,
+   "firstArticleAt": "2026-11-27T02:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -109,79 +77,53 @@
   {
    "keyword": "학교 비정규직 총파업에",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 33,
-   "recent20": 7,
-   "press": 19,
-   "firstArticleAt": "2026-11-27T02:33:00.000Z",
+   "articles90": 28,
+   "recent20": 6,
+   "press": 18,
+   "firstArticleAt": "2026-11-27T02:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "학교비정규직 총파업 돌입…급식 대신 빵과 우유",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T03:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314110?sid=102"
+     "title": "학교 비정규직 노동자 하루 총파업…급식 차질",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-27T04:02:00.000Z",
+     "link": "https://www.naeil.com/news/read/610307?ref=naver"
     },
     {
-     "title": "학교 비정규직 총파업... 오늘은 밥 대신 빵",
+     "title": "귤과 빵…총파업에 대체 급식",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T03:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467610?sid=102"
+     "publishedAt": "2026-11-27T04:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467626?sid=102"
     },
     {
-     "title": "학교 비정규직 총파업... 급식 대체식과 도시락",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T03:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467611?sid=102"
+     "title": "전국 학교 비정규직 노동자 파업에 점심 대체식으로 해결하는 학생들",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-27T03:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014349281?sid=102"
     }
    ]
   },
   {
-   "keyword": "정년 연장 노사 협의",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T02:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정년연장 노사 협의 10개월 만에 재개했지만 결렬…정부 자체안 주목",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-27T03:48:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96074"
-    },
-    {
-     "title": "[속보] 與정년연장특위 노사합의 불발…내달 2일 회의 정부안 발표 주목",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-27T03:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000546298?sid=101"
-    },
-    {
-     "title": "與정년연장특위 노사합의 불발",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-27T03:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610789?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "내년 4월 야외 결혼식",
+   "keyword": "솔비·이규한 4월 25일 결혼",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
+   "articles90": 11,
    "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-27T02:25:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-27T02:37:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "솔비♥이규한, 4월 25일 결혼",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T04:02:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16287774"
+    },
     {
      "title": "솔비♥이규한, 내년 4월 25일 결혼… 서울 종로서 야외 웨딩 [공식]",
      "press": "isplus.com",
@@ -193,12 +135,6 @@
      "press": "stoo.com",
      "publishedAt": "2026-11-27T03:26:00.000Z",
      "link": "http://www.stoo.com/article.php?aid=110120287464"
-    },
-    {
-     "title": "솔비·이규한, 4월 25일 결혼 확정… 야외 예식 진행",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-27T03:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000968129"
     }
    ]
   },
@@ -207,69 +143,199 @@
    "sources": [
     "google"
    ],
-   "articles90": 20,
-   "recent20": 20,
-   "press": 10,
-   "firstArticleAt": "2026-11-27T03:42:00.000Z",
+   "articles90": 13,
+   "recent20": 13,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T03:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 레드카펫 밟는 박지연 (2026 청룡영화상)",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T03:52:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127125108299"
+     "title": "베스트텍, ‘2026 일·생활 균형 우수기업’ 선정…근무환경 개선 성과",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-27T04:02:00.000Z",
+     "link": "https://swtvnews.com/news/newsview.php?ncode=1065573796158043"
     },
     {
-     "title": "서초구, '2026 서초V페스티벌' 개최…자원봉사자 헌신과 나눔 가치 조명",
-     "press": "job-post.co.kr",
-     "publishedAt": "2026-11-27T03:52:00.000Z",
-     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=241435"
+     "title": "빅터코리아, ‘2026 빅터 아시아 시니어 배드민턴 선수권대회’ 성공적...",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-27T04:02:00.000Z",
+     "link": "https://swtvnews.com/news/newsview.php?ncode=1065572912959959"
     },
     {
-     "title": "[포토] 레드카펫 밟는 김민 (2026 청룡영화상)",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T03:52:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127125001298"
+     "title": "'2026 제14회 인도영화제' 부산 영화의전당서 개막…나흘간 스크린 향연",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-27T04:02:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121391"
     }
    ]
   },
   {
-   "keyword": "강호동 아들 준우승",
+   "keyword": "남경필",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T02:27:00.000Z",
-   "exclusive": true,
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T02:46:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[단독] 강호동, 자식농사 대박났다…188cm 아들 시후, 전국골프대회 ‘...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-27T03:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646015"
+     "title": "'마약사범' 남경필 장남, 전 연인에 성관계 유포 협박·폭행 혐의 체포",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T03:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002438909?sid=102"
     },
     {
-     "title": "강호동 子 강시후, 전국 규모 학생 골프대회 준우승 차지",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-27T02:56:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795747094531654006"
+     "title": "남경필 전 경기지사 아들, 스토킹·협박 혐의로 체포",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-27T03:56:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326702/?sc=Naver"
     },
     {
-     "title": "강호동 子, 전국 학생 골프대회서 준우승..키 188cm 피지컬에 '천하장사...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-27T02:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490638"
+     "title": "남경필 전 지사 장남 또 체포…전 연인 성관계 영상 협박 혐의",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-27T03:46:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=731327"
     }
    ]
   },
   {
-   "keyword": "남경필 아들 협박 혐의 체포",
+   "keyword": "개인정보 유출 긴급대응",
    "sources": [
-    "daum"
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T02:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "개인정보 유출, 조사 끝나기 전부터 대응...정부, 위협정보 공유 강화",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-27T04:00:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026112712001882167"
+    },
+    {
+     "title": "한국투자저축은행, 개인정보 8만6611명 유출…긴급 보안조치에도 추가 ...",
+     "press": "newslock.co.kr",
+     "publishedAt": "2026-11-27T03:30:00.000Z",
+     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=141184"
+    },
+    {
+     "title": "靑, 해킹 2차 피해 차단 위해 금융당국 긴급 대응회의 개최",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-27T03:28:00.000Z",
+     "link": "https://www.viva100.com/article/20261127500336"
+    }
+   ]
+  },
+  {
+   "keyword": "대만",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T02:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대만 내일 지방선거…라이칭더 정권 중간평가 결과는?",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-27T04:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012302617?sid=104"
+    },
+    {
+     "title": "대만 내일 지방선거…'친미·반중' 라이칭더 정권 중간평가 무대",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-27T04:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000546299?sid=104"
+    },
+    {
+     "title": "대만 여야, 지방선거 전날 막판 총력전…수도권에 화력 집중",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T03:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016467622?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "장동혁 대표 참석",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T02:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "장동혁 대표, 2026 우리쌀 우리술 K-라이스 페스타 참석",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T03:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314048?sid=102"
+    },
+    {
+     "title": "대화 나누는 장동혁 대표와 강호동 회장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T03:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314050?sid=102"
+    },
+    {
+     "title": "축사 하는 장동혁 대표",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T03:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314043?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "뉴스",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 4,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T03:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[카드뉴스] 항구도 없는데 왜 '수출의 다리'일까? 구로공단 수출길의 사...",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-27T04:00:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250501"
+    },
+    {
+     "title": "유진그룹, 뉴스타파 기자·제보자 형사 고소",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-27T03:58:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2024281"
+    },
+    {
+     "title": "[부고] 박상돈(연합뉴스 부장급 기자·전 연합뉴스TV 경제금융부장)씨 ...",
+     "press": "issuenbiz.com",
+     "publishedAt": "2026-11-27T03:44:00.000Z",
+     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=82088"
+    }
+   ]
+  },
+  {
+   "keyword": "남편",
+   "sources": [
+    "signal.bz",
+    "google"
    ],
    "articles90": 5,
    "recent20": 1,
@@ -279,96 +345,88 @@
    "capped": false,
    "samples": [
     {
-     "title": "남경필 전 지사 장남 또 체포…전 연인 성관계 영상 협박 혐의",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-27T03:46:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731327"
+     "title": "손연재, 남편과 30억 쾌척 약속… 고위험 산모·태아 돕는다",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-27T04:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543894"
     },
     {
-     "title": "벌써 몇번째…남경필 장남, 前연인에 촬영물 유포 협박·흉기 위협·폭행...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-27T03:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042667?sid=102"
+     "title": "30억 흔쾌히 내놨다…손연재, 남편과 함께한 '깜짝 선행'",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-27T03:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274182?sid=102"
     },
     {
-     "title": "“남경필 장남 체포”…오늘(27일) 갑자기 전해진 소식",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-27T03:18:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1178330"
+     "title": "아내는 외도·남편은 아내 친구와 뽀뽀…서장훈 결국 \"이건 사랑 아니다...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-27T03:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084691"
     }
    ]
   },
   {
-   "keyword": "대만",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T02:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령 요청한 ‘판다 한 쌍’…‘대만관’ 논란에 무산",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T03:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302591?sid=100"
-    },
-    {
-     "title": "대만첩보-휴민트 교환? … 중국과 석방협상 무산說",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-27T02:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002836040?sid=100"
-    },
-    {
-     "title": "[AI 쇼크 흔들린 亞증시] ②젠슨 황 복귀시킨 미국·공매도 막은 대만…...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-27T02:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207765?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "오세훈 시장 졸업식 축사",
+   "keyword": "오세훈, 7학년 졸업식",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
+   "articles90": 25,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T02:32:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-27T02:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울시민대학 졸업식 축사하는 오세훈 시장",
+     "title": "서울시 웰니스 라운지 '다감' 찾은 오세훈 시장",
      "press": "news1.kr",
      "publishedAt": "2026-11-27T03:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314015?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/421/0009314019?sid=102"
     },
     {
-     "title": "서울시민대학 7학년 교실 졸업식 축사하는 오세훈 시장",
+     "title": "서울시 '7학년 교실' 졸업생에게 졸업장 수여하는 오세훈 시장",
      "press": "news1.kr",
      "publishedAt": "2026-11-27T03:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314016?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/421/0009314017?sid=102"
     },
     {
-     "title": "서울시민대학 7학년 교실 졸업식 찾은 오세훈 시장",
+     "title": "서울시민대학 7학년 교실 졸업식",
      "press": "news1.kr",
      "publishedAt": "2026-11-27T03:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314023?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/421/0009314025?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1807,
-  "matched": 903,
-  "avgLeadMin": 613,
+  "flagged": 1812,
+  "matched": 907,
+  "avgLeadMin": 611,
   "recent": [
+   {
+    "keyword": "투컷 존박 디스랩",
+    "hitKeyword": "존박 투컷 디스",
+    "hitAt": "2026-11-27T13:00:00+09:00",
+    "leadMin": 851
+   },
+   {
+    "keyword": "급식 파업",
+    "hitKeyword": "학교 파업 급식 돌봄 공백",
+    "hitAt": "2026-11-27T13:00:00+09:00",
+    "leadMin": 207
+   },
+   {
+    "keyword": "강호동 아들 강시후 준우승",
+    "hitKeyword": "강시후 전국대회 준우승",
+    "hitAt": "2026-11-27T13:00:00+09:00",
+    "leadMin": 77
+   },
+   {
+    "keyword": "강호동 아들 준우승",
+    "hitKeyword": "강시후 전국대회 준우승",
+    "hitAt": "2026-11-27T13:00:00+09:00",
+    "leadMin": 56
+   },
    {
     "keyword": "남태현, 음주운전 상고 5일 만에",
     "hitKeyword": "낸시랭 음주운전",
@@ -404,30 +462,6 @@
     "hitKeyword": "낸시랭 음주운전",
     "hitAt": "2026-11-27T12:30:00+09:00",
     "leadMin": 16
-   },
-   {
-    "keyword": "코스닥",
-    "hitKeyword": "코스닥 매수 사이드카",
-    "hitAt": "2026-11-27T12:00:00+09:00",
-    "leadMin": 6863
-   },
-   {
-    "keyword": "코스닥 매수 사이드카 발동",
-    "hitKeyword": "코스닥 매수 사이드카",
-    "hitAt": "2026-11-27T12:00:00+09:00",
-    "leadMin": 57
-   },
-   {
-    "keyword": "무쇠소녀단 3",
-    "hitKeyword": "무쇠소녀단3 설인아",
-    "hitAt": "2026-11-27T12:00:00+09:00",
-    "leadMin": 6
-   },
-   {
-    "keyword": "수능 신고 최소 1억 포상",
-    "hitKeyword": "수능 부정행위 신고 포상금",
-    "hitAt": "2026-11-27T11:30:00+09:00",
-    "leadMin": 8161
    }
   ]
  }
