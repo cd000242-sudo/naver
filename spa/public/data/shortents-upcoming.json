@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T15:28:07.792Z",
+ "builtAt": "2026-11-27T15:38:12.363Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,12 +11,45 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "최민희 중징계 결정",
+   "keyword": "인터넷우체국 개인정보 유출",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 8,
    "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T14:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "인터넷우체국 해킹으로 개인정보 유출…하루치만 11만3천여명",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T15:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468511?sid=102"
+    },
+    {
+     "title": "인터넷우체국 해킹에 개인정보 유출…하루 치 분석만 11만3855명 확인",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-27T15:06:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L261128000103a3cd"
+    },
+    {
+     "title": "인터넷우체국 개인정보 유출 사고…하루치만 11만명 넘어",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-27T14:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207890?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "최민희 중징계 결정",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-27T14:22:00.000Z",
    "exclusive": false,
@@ -48,7 +81,7 @@
     "daum"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-27T14:19:00.000Z",
    "exclusive": false,
@@ -75,34 +108,66 @@
    ]
   },
   {
-   "keyword": "김범수 무죄 확정",
+   "keyword": "박홍근 서영교 충돌",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T14:06:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T14:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김범수 'SM 시세조종' 무죄 확정…3년 사법 리스크 마침표",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-27T15:22:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=718977"
+     "title": "박홍근-서영교 충돌에 법사위 파행…\"상원인가\" vs \"고압적 장관 처음\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-27T15:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610957?sid=100"
     },
     {
-     "title": "카카오 김범수 ‘SM시세조종’ 혐의 무죄 확정",
+     "title": "박홍근·서영교 ‘與·與 충돌’에 법사위 파행",
      "press": "kmib.co.kr",
-     "publishedAt": "2026-11-27T15:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887918?sid=102"
+     "publishedAt": "2026-11-27T15:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887917?sid=100"
     },
     {
-     "title": "카카오 창업자 김범수, ‘SM 시세조종’ 무죄 확정..공소청 상고 포기",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-27T14:06:00.000Z",
-     "link": "http://www.breaknews.com/1254886"
+     "title": "박홍근-서영교 충돌에 법사위 파행…\"상원인가\"\"이런 장관 처음\"(종합2보...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T14:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468508?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "굿파트너2",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T14:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘굿파트너2’ 김혜윤, 시행착오 딛고 첫 사건 완벽 승소… ‘이혼 전문...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-27T15:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001152090"
+    },
+    {
+     "title": "‘굿파트너2’ 박해진, 선물 공세에도 박준면에 까였다… 장나라·김혜...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-27T14:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001152089"
+    },
+    {
+     "title": "'굿파트너2' 장나라 김혜윤 박해진, 의뢰인 사로잡기 경쟁",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T14:42:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288158"
     }
    ]
   },
@@ -112,7 +177,7 @@
     "daum"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-27T15:08:00.000Z",
    "exclusive": false,
@@ -137,45 +202,12 @@
      "link": "https://m.entertain.naver.com/article/109/0005646269"
     }
    ]
-  },
-  {
-   "keyword": "굿파트너2",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T14:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘굿파트너2’ 박해진, 선물 공세에도 박준면에 까였다… 장나라·김혜...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-27T14:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001152089"
-    },
-    {
-     "title": "'굿파트너2' 장나라 김혜윤 박해진, 의뢰인 사로잡기 경쟁",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T14:42:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288158"
-    },
-    {
-     "title": "'굿파트너2' 장나라X김혜윤, 불륜 커플 파탄냈다 '통쾌' [종합]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T14:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084926"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1982,
-  "matched": 984,
+  "flagged": 1981,
+  "matched": 982,
   "avgLeadMin": 657,
   "recent": [
    {
