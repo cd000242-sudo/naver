@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T22:30:08.244Z",
+ "builtAt": "2026-11-27T22:40:11.813Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,103 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "시장",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 8,
-   "recent20": 3,
+   "articles90": 9,
+   "recent20": 7,
    "press": 7,
-   "firstArticleAt": "2026-11-27T22:00:00.000Z",
+   "firstArticleAt": "2026-11-27T22:02:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "암호화폐 시장 '청산 악몽' 재현…비트코인 6만 달러 붕괴에 시총 연중...",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-27T22:28:00.000Z",
-     "link": "http://coinreaders.com/274104"
+     "title": "팔란티어, 유럽 국방 AI 시장서 영토 확장…폴란드 수주에 주가 강세",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-27T22:38:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848715"
     },
     {
-     "title": "바이낸스 63억 달러 해킹 사태 일단락…출금 전면 재개로 시장 신뢰 회...",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-27T22:26:00.000Z",
-     "link": "http://coinreaders.com/274103"
-    },
-    {
-     "title": "인천시, 인천기업 중국 시장 진출 ‘전방위 지원’",
+     "title": "김성제 의왕시장, \"선제적인 제설 대응으로 겨울철 시민 불편 최소화할...",
      "press": "globalepic.co.kr",
-     "publishedAt": "2026-11-27T22:26:00.000Z",
-     "link": "https://www.globalepic.co.kr/view.php?ud=2026112713294515906e1e092a28_29"
+     "publishedAt": "2026-11-27T22:34:00.000Z",
+     "link": "https://www.globalepic.co.kr/view.php?ud=2026112710310596785f69d33b22_29"
+    },
+    {
+     "title": "KAI, 초음속 전투기 KF-21 전자전기 개발 계획 공개…글로벌 방산 시장 ...",
+     "press": "theguru.co.kr",
+     "publishedAt": "2026-11-27T22:32:00.000Z",
+     "link": "https://www.theguru.co.kr/news/article.html?no=110256"
+    }
+   ]
+  },
+  {
+   "keyword": "연금",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T21:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "내년 저소득층 국민연금 보험료 지원 대상 98만5천명…2년새 5배로",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-27T22:34:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785455"
+    },
+    {
+     "title": "국민연금 보험료 지원 25만명 늘린다…월소득 100만원 미만까지",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-27T22:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729709?sid=101"
+    },
+    {
+     "title": "“국민연금 보험료 지원 문턱 낮춘다”…소득 기준 80만→100만원",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-27T22:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000134125?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 디올 재킷 착용",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T21:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "가죽 재킷 벗고 고개 숙인 젠슨 황…옷값 보니 '깜짝'",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T22:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359289?sid=104"
+    },
+    {
+     "title": "가죽 잠바 벗은 젠슨 황…‘반성 패션’에 걸친 명품만 700만원",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-27T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002836130?sid=101"
+    },
+    {
+     "title": "젠슨 황, '디올 면재킷·에르메스 운동화'로 복귀...패션계 \"겸손 연출\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-27T22:06:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785450"
     }
    ]
   },
@@ -47,10 +113,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
+   "articles90": 5,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T21:01:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-27T21:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,34 +141,34 @@
    ]
   },
   {
-   "keyword": "한지민",
+   "keyword": "손새은 임찬규 결혼",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 8,
-   "recent20": 3,
+   "articles90": 4,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-27T21:02:00.000Z",
+   "firstArticleAt": "2026-11-27T21:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한지민, 이서진 장난에 표정관리 실패 “인성 논란 나와도 내보내주길”...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T22:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192057"
+     "title": "손나은, 모친상 한 달만에 기쁜 소식 전했다…동생 손새은, 임찬규와 결...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-27T22:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646305"
     },
     {
-     "title": "“팬티만 빼고 다 벗어야” 박정수 각오에 한지민 당황 “옷 벗으라고요...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T22:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192055"
+     "title": "LG 임찬규·손새은 12월 결혼식 올린다",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-27T21:54:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087477"
     },
     {
-     "title": "이서진, 한지민 태도 지적에 “이게 내 자세”라더니 김용건 박정수 등...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T22:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192056"
+     "title": "손나은 동생 골퍼 손새은, LG 임찬규 프러포즈에 감격",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-27T21:50:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96099"
     }
    ]
   },
@@ -139,109 +205,68 @@
    ]
   },
   {
-   "keyword": "2026년 11월 28일 운세",
+   "keyword": "한지민",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 7,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-27T21:03:00.000Z",
+   "firstArticleAt": "2026-11-27T21:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 2026년 11월 28일 토요일 띠별 운세… 양띠 '대길', 쥐띠·...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-27T21:44:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3084619"
+     "title": "“팬티만 빼고 다 벗어야” 박정수 각오에 한지민 당황 “옷 벗으라고요...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T22:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192055"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 28일 (토) 띠별운세 '집 안의 온기를 챙기자...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-27T21:30:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104287"
+     "title": "한지민, 이서진 장난에 표정관리 실패 “인성 논란 나와도 내보내주길”...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T22:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192057"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 28일 띠별 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416785?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 디올 재킷 착용",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T21:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황, '디올 면재킷·에르메스 운동화'로 복귀...패션계 \"겸손 연출\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-27T22:06:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785450"
-    },
-    {
-     "title": "젠슨 황 '디올 재킷'에 패션계 \"470만 원짜리 겸손\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T21:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439242?sid=104"
-    },
-    {
-     "title": "가죽 재킷 벗고 470만원 디올 입은 젠슨 황…\"겸손한 패션 연출\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-27T21:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653914?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "이란 해상봉쇄 돌파",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T21:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "호르무즈 해협 다시 전운…美 봉쇄 돌파 상선 타격, 이란 강경 맞불",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-27T21:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447648?sid=104"
-    },
-    {
-     "title": "이란, 미 해상봉쇄 돌파 결의...트럼프 \"원할 때 끝낼 것\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T21:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439248?sid=104"
-    },
-    {
-     "title": "트럼프 “이란전, 언제든 원할때 끝내…곡괭이산 타격할 것”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T21:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012303039?sid=104"
+     "title": "이서진, 한지민 태도 지적에 “이게 내 자세”라더니 김용건 박정수 등...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T22:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192056"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1969,
-  "matched": 971,
-  "avgLeadMin": 652,
+  "flagged": 1968,
+  "matched": 972,
+  "avgLeadMin": 656,
   "recent": [
+   {
+    "keyword": "김장",
+    "hitKeyword": "김장환 부인 별세",
+    "hitAt": "2026-11-28T07:30:00+09:00",
+    "leadMin": 1549
+   },
+   {
+    "keyword": "CJ올리브영, 개인정보 유출",
+    "hitKeyword": "인터넷우체국 개인정보 유출",
+    "hitAt": "2026-11-28T07:30:00+09:00",
+    "leadMin": 1388
+   },
+   {
+    "keyword": "개인정보 유출 긴급대응",
+    "hitKeyword": "인터넷우체국 개인정보 유출",
+    "hitAt": "2026-11-28T07:30:00+09:00",
+    "leadMin": 1166
+   },
+   {
+    "keyword": "인터넷우체국 개인정보 유출",
+    "hitKeyword": "인터넷우체국 개인정보 유출",
+    "hitAt": "2026-11-28T07:30:00+09:00",
+    "leadMin": 412
+   },
    {
     "keyword": "배연정 췌장암 수술",
     "hitKeyword": "췌장암 증상",
@@ -277,30 +302,6 @@
     "hitKeyword": "수도권 초미세먼지 주의보",
     "hitAt": "2026-11-28T06:30:00+09:00",
     "leadMin": 915
-   },
-   {
-    "keyword": "김범수 무죄 확정",
-    "hitKeyword": "카카오 김범수 무죄",
-    "hitAt": "2026-11-28T06:30:00+09:00",
-    "leadMin": 593
-   },
-   {
-    "keyword": "미국 중국 자동차 규제법",
-    "hitKeyword": "중국 AI 미국 규제",
-    "hitAt": "2026-11-28T06:00:00+09:00",
-    "leadMin": 1308
-   },
-   {
-    "keyword": "이서진 지수 미모 감탄",
-    "hitKeyword": "이서진 갱년기 발언",
-    "hitAt": "2026-11-28T06:00:00+09:00",
-    "leadMin": 342
-   },
-   {
-    "keyword": "임찬규 손새은 결혼",
-    "hitKeyword": "손새은 임찬규 결혼",
-    "hitAt": "2026-11-28T00:00:00+09:00",
-    "leadMin": 22
    }
   ]
  }
