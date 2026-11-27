@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T16:08:22.501Z",
+ "builtAt": "2026-11-27T16:18:25.492Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,46 +11,14 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "최민희 중징계 의결",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T14:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "민주, 최민희에 '당원자격정지 2년' 중징계...\"수용 못 해\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T15:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439196?sid=100"
-    },
-    {
-     "title": "최민희 중징계에 정청래 \"김민석 해당 행위는 무엇이냐\"",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T15:44:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765822"
-    },
-    {
-     "title": "최민희 당원권 2년 정지… 與 내전 격화",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-27T15:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012240?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "인터넷우체국 개인정보 유출",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T14:47:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T15:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -80,7 +48,7 @@
     "daum"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-27T14:53:00.000Z",
    "exclusive": false,
@@ -107,12 +75,44 @@
    ]
   },
   {
+   "keyword": "최민희 중징계 의결",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T15:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주, 최민희에 '당원자격정지 2년' 중징계...\"수용 못 해\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T15:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439196?sid=100"
+    },
+    {
+     "title": "최민희 중징계에 정청래 \"김민석 해당 행위는 무엇이냐\"",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T15:44:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765822"
+    },
+    {
+     "title": "최민희 당원권 2년 정지… 與 내전 격화",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-27T15:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004012240?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "지수 라우럴 밈 탄생",
    "sources": [
     "daum"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-27T15:08:00.000Z",
    "exclusive": false,
@@ -135,38 +135,6 @@
      "press": "osen.co.kr",
      "publishedAt": "2026-11-27T15:08:00.000Z",
      "link": "https://m.entertain.naver.com/article/109/0005646269"
-    }
-   ]
-  },
-  {
-   "keyword": "굿파트너2",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T14:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘굿파트너2’ 김혜윤, 시행착오 딛고 첫 사건 완벽 승소… ‘이혼 전문...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-27T15:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001152090"
-    },
-    {
-     "title": "‘굿파트너2’ 박해진, 선물 공세에도 박준면에 까였다… 장나라·김혜...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-27T14:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001152089"
-    },
-    {
-     "title": "'굿파트너2' 장나라 김혜윤 박해진, 의뢰인 사로잡기 경쟁",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T14:42:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288158"
     }
    ]
   }
