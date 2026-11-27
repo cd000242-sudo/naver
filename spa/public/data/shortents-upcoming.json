@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T12:57:05.209Z",
+ "builtAt": "2026-11-27T13:07:09.061Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,98 +11,66 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "GS칼텍스 5연승",
+   "keyword": "조희대 탄핵 국제 우려",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 32,
-   "recent20": 5,
-   "press": 17,
-   "firstArticleAt": "2026-11-27T11:46:00.000Z",
+   "articles90": 14,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T11:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'실바 30점' GS칼텍스, 흥국생명 꺾고 5연승…선두 탈환(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T12:48:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/001/0016468498"
+     "title": "세계변호사협회, 조희대 탄핵 우려…\"중대한 후폭풍\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-27T13:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005849021?sid=102"
     },
     {
-     "title": "'실바 30점' GS칼텍스 5연승·선두 복귀...대한항공 3연승",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T12:46:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/052/0002439149"
+     "title": "조희대 탄핵 추진에 세계변호사협회도 우려…\"재검토 촉구\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-27T12:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447617?sid=102"
     },
     {
-     "title": "대한항공, '국내 선수만 뛴' KB손보 꺾고 3연승…여자부 GS 5연승(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T12:46:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/421/0009314975"
+     "title": "세계변호사협회, 조희대 대법원장 탄핵 추진에 우려…“사법 독립 존중...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T12:50:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654147"
     }
    ]
   },
   {
-   "keyword": "최민희 당원정지 2년 확정",
+   "keyword": "SK하이닉스 자사주 매입 2배 확대",
    "sources": [
     "nate"
    ],
    "articles90": 13,
    "recent20": 2,
    "press": 13,
-   "firstArticleAt": "2026-11-27T11:28:00.000Z",
+   "firstArticleAt": "2026-11-27T11:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최민희 최고위원 '당원권 정지 2년' 중징계...최고위원직 유지 관건",
-     "press": "newsbrite.net",
+     "title": "SK하이닉스, 자사주 매수 주문량 2배 확대…하루 70만 주",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-27T13:06:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=20261127214810761824debea800_1"
+    },
+    {
+     "title": "SK하이닉스, 자사주 매입 속도 2배로…하루 매수 주문 35만주→70만주",
+     "press": "joseilbo.com",
      "publishedAt": "2026-11-27T12:50:00.000Z",
-     "link": "http://www.newsbrite.net/news/articleView.html?idxno=201820"
+     "link": "https://n.news.naver.com/mnews/article/123/0002395017?sid=101"
     },
     {
-     "title": "與 최민희 ‘당원권 2년 정지’ 중징계…친청계 “도저히 납득 불가”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-27T12:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207881?sid=100"
-    },
-    {
-     "title": "민주당, 최민희 ‘당원권 2년 정지’ 중징계…친청계 반발",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-27T12:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001233957?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "조희대 탄핵 국제 우려",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-27T11:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "세계변호사협회, 조희대 대법원장 탄핵 추진에 우려…“사법 독립 존중...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-27T12:50:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2654147"
-    },
-    {
-     "title": "세계변호사협회도 ‘조희대 탄핵’ 우려…“위험한 선례 될 것”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-27T12:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729691?sid=102"
-    },
-    {
-     "title": "국제변호사협회도 '曺 탄핵' 우려…\"위험한 선례 될 것\"",
-     "press": "lawtimes.co.kr",
-     "publishedAt": "2026-11-27T12:40:00.000Z",
-     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=230240"
+     "title": "SK하이닉스, 자사주 매입 속도 2배로 높인다…주주가치 제고 강화",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-27T12:22:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611270186"
     }
    ]
   },
@@ -114,10 +82,16 @@
    "articles90": 8,
    "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-27T11:36:00.000Z",
+   "firstArticleAt": "2026-11-27T11:42:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "선관위특검, 노태악 추가 압수수색…선관위 증거인멸 정황 포착",
+     "press": "busan.com",
+     "publishedAt": "2026-11-27T12:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001409344?sid=102"
+    },
     {
      "title": "선관위 특검, '공추비 부당지급' 의혹 노태악 압수수색",
      "press": "lawtimes.co.kr",
@@ -129,12 +103,6 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-27T12:37:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014350286?sid=102"
-    },
-    {
-     "title": "[단독] “선관위 사무총장, 선거 1주일 뒤 휴대전화 초기화”…특검, 노...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T12:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302879?sid=102"
     }
    ]
   },
@@ -157,31 +125,69 @@
      "link": "http://www.newsbrite.net/news/articleView.html?idxno=201819"
     },
     {
-     "title": "SM 시세조종 혐의 벗은 김범수…공소청 상고 포기 '무죄 확정'",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-27T12:28:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749465"
-    },
-    {
      "title": "김범수 카카오 창업주, 'SM시세조종 혐의' 무죄 확정...공소청 상고 포기",
      "press": "livebiz.today",
      "publishedAt": "2026-11-27T12:28:00.000Z",
      "link": "https://www.livebiz.today/news/articleView.html?idxno=207007"
+    },
+    {
+     "title": "SM 시세조종 혐의 벗은 김범수…공소청 상고 포기 '무죄 확정'",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-27T12:28:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749465"
     }
    ]
   },
   {
-   "keyword": "그냥 사람 친구예요",
+   "keyword": "실바 30점으로 5연승 질주",
    "sources": [
     "nate"
    ],
    "articles90": 7,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T11:30:00.000Z",
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T11:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'실바 30점 폭발' 여자배구 GS칼텍스, 흥국생명 완파하고 5연승·선두 탈...",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-27T13:04:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=436044"
+    },
+    {
+     "title": "'실바 30점' GS칼텍스 5연승·선두 복귀...대한항공 3연승",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-27T12:46:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/052/0002439149"
+    },
+    {
+     "title": "‘실바 30점 폭발’ GS칼텍스, 흥국생명 꺾고 5연승 질주 ‘선두 탈환’...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-27T12:39:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/468/0001283965"
+    }
+   ]
+  },
+  {
+   "keyword": "그냥 사람 친구",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T11:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이서진, 메이크업 지운 정연에 \"딴 사람이 돼\"…\"예쁜데 왜 그러냐\" 선배...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-27T13:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084910"
+    },
     {
      "title": "김용건, 트와이스 정연에 조언 “명품관 기웃거리지 마”(그냥사람친구...",
      "press": "newsen.com",
@@ -193,76 +199,6 @@
      "press": "tvdaily.co.kr",
      "publishedAt": "2026-11-27T12:11:00.000Z",
      "link": "https://m.entertain.naver.com/article/440/0000054481"
-    },
-    {
-     "title": "트와이스 정연· 몬스타엑스 주헌 '그냥 사람 친구'",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-27T12:00:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6944281"
-    }
-   ]
-  },
-  {
-   "keyword": "주진모 민혜연 임신에 오열",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T11:37:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "주진모, 운전 중 아내 민혜연 옆에서 갑자기 눈물... 힘들게 숨겨왔던 ...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-27T12:44:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1178479"
-    },
-    {
-     "title": "'딩크' 부부였는데…주진모, ♥민혜연 8년만 임신에 오열 \"다 키워줄게...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-27T12:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786513"
-    },
-    {
-     "title": "주진모, ♥민혜연 7년만 임신에 오열 \"옛날부터 갖고 싶었다, 여보 고마...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T12:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084891"
-    }
-   ]
-  },
-  {
-   "keyword": "연기금투자풀 25주년 기념행사",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T11:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미래에셋자산운용, 연기금투자풀 25주년 기념식",
-     "press": "businesskorea.co.kr",
-     "publishedAt": "2026-11-27T12:36:00.000Z",
-     "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=282413"
-    },
-    {
-     "title": "연기금투자풀 출범 25주년...삼성·미래에셋운용 감사패 수상",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-27T11:52:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=718859"
-    },
-    {
-     "title": "[포토] KG제로인, '연기금투자풀 25주년 기념행사'서 감사패 수상",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T11:40:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127203725493"
     }
    ]
   },
@@ -299,15 +235,47 @@
    ]
   },
   {
+   "keyword": "연기금투자풀 25주년 기념행사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T11:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미래에셋자산운용, 연기금투자풀 25주년 기념식",
+     "press": "businesskorea.co.kr",
+     "publishedAt": "2026-11-27T12:36:00.000Z",
+     "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=282413"
+    },
+    {
+     "title": "연기금투자풀 출범 25주년...삼성·미래에셋운용 감사패 수상",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-27T11:52:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=718859"
+    },
+    {
+     "title": "[포토] KG제로인, '연기금투자풀 25주년 기념행사'서 감사패 수상",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-27T11:40:00.000Z",
+     "link": "https://www.ajunews.com/view/20261127203725493"
+    }
+   ]
+  },
+  {
    "keyword": "황교안",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T11:28:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-27T11:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -334,10 +302,28 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1961,
-  "matched": 975,
-  "avgLeadMin": 657,
+  "flagged": 1963,
+  "matched": 978,
+  "avgLeadMin": 660,
   "recent": [
+   {
+    "keyword": "김건희 매관매직 12월 3일 선고",
+    "hitKeyword": "손새은 임찬규 12월 결혼",
+    "hitAt": "2026-11-27T22:00:00+09:00",
+    "leadMin": 3170
+   },
+   {
+    "keyword": "황정민 염정아 크로스2 12월 공개",
+    "hitKeyword": "손새은 임찬규 12월 결혼",
+    "hitAt": "2026-11-27T22:00:00+09:00",
+    "leadMin": 2095
+   },
+   {
+    "keyword": "김이현",
+    "hitKeyword": "김이현 뺑소니 사망",
+    "hitAt": "2026-11-27T22:00:00+09:00",
+    "leadMin": 93
+   },
    {
     "keyword": "3분기 실질소득 감소",
     "hitKeyword": "국민연금 3분기 수익률",
@@ -379,24 +365,6 @@
     "hitKeyword": "카카오 김범수 무죄 확정",
     "hitAt": "2026-11-27T20:00:00+09:00",
     "leadMin": 1884
-   },
-   {
-    "keyword": "대법원, 위증 무죄 확정",
-    "hitKeyword": "카카오 김범수 무죄 확정",
-    "hitAt": "2026-11-27T20:00:00+09:00",
-    "leadMin": 1854
-   },
-   {
-    "keyword": "한덕수 위증 무죄 확정",
-    "hitKeyword": "카카오 김범수 무죄 확정",
-    "hitAt": "2026-11-27T20:00:00+09:00",
-    "leadMin": 1824
-   },
-   {
-    "keyword": "한덕수 재판 무죄 확정",
-    "hitKeyword": "카카오 김범수 무죄 확정",
-    "hitAt": "2026-11-27T20:00:00+09:00",
-    "leadMin": 1774
    }
   ]
  }
