@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T05:34:26.400Z",
+ "builtAt": "2026-11-27T05:44:29.437Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,130 +11,99 @@
  "measured": 23,
  "candidates": [
   {
-   "keyword": "HDC그룹 강민석 대표 선임",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 39,
-   "recent20": 7,
-   "press": 38,
-   "firstArticleAt": "2026-11-27T04:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "IPARK현대산업개발 신임 대표이사에 강민석 부사장",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T05:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930538?sid=101"
-    },
-    {
-     "title": "[인사] HDC그룹",
-     "press": "newsinside.kr",
-     "publishedAt": "2026-11-27T05:32:00.000Z",
-     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5058206"
-    },
-    {
-     "title": "IPARK현대산업개발 대표에 강민석…HDC그룹, 정기인사 단행",
-     "press": "goodkyung.com",
-     "publishedAt": "2026-11-27T05:30:00.000Z",
-     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293956"
-    }
-   ]
-  },
-  {
-   "keyword": "한화시스템 품질인증 획득",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 31,
-   "recent20": 5,
-   "press": 31,
-   "firstArticleAt": "2026-11-27T04:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한화시스템, 나토 품질인증 획득…유럽 방산시장 공략 확대",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-27T05:32:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=508862"
-    },
-    {
-     "title": "한화시스템, 나토 품질인증 획득…유럽 방산 수출 기반 넓힌다",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-27T05:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610831?sid=101"
-    },
-    {
-     "title": "한화시스템, 나토 품질인증 획득… 글로벌 방산 경쟁력 제고",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-27T05:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703911?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "정년연장 노사 합의 불발",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 4,
-   "press": 21,
-   "firstArticleAt": "2026-11-27T04:08:00.000Z",
+   "articles90": 24,
+   "recent20": 6,
+   "press": 24,
+   "firstArticleAt": "2026-11-27T04:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "與정년연장특위 노사합의 불발…정부 자체안 발표 주목",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-27T05:32:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95310"
+     "title": "[속보]“노사합의 또 결렬” 정년 65세 불발",
+     "press": "magazine.hankyung.com",
+     "publishedAt": "2026-11-27T05:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/050/0000113861?sid=101"
     },
     {
-     "title": "민주당, 65세 정년연장 노사 합의 불발…플랜 B도 '연내 입법'",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-27T05:30:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322136&inflow=N"
+     "title": "'10개월만 회동' 정년연장특위 노사합의 불발",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-27T05:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406340?sid=100"
     },
     {
-     "title": "정년 연장 노사 합의 불발…5대 은행 주담대 금리 5% 넘어 [오후 뉴스 3...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-27T05:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178624?sid=102"
+     "title": "[정년연장 합의 불발] 12월로 넘어간 65세 정년…적용 시기·방식 간극 ...",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-27T05:40:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611271433009190971"
     }
    ]
   },
   {
-   "keyword": "한동훈 수사자료 유출 압수수색",
+   "keyword": "학교 비정규직 총파업",
    "sources": [
-    "nate"
+    "nate",
+    "daum"
    ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T04:06:00.000Z",
+   "articles90": 31,
+   "recent20": 6,
+   "press": 16,
+   "firstArticleAt": "2026-11-27T04:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한동훈 \"공익제보자 색출 압수수색… 치졸한 정권\"",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-27T05:32:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3084533"
+     "title": "강원 학교 3분의 2 '대체식'…비정규직 총파업, 급식·돌봄 차질",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-27T05:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214654?sid=102"
     },
     {
-     "title": "한동훈 \"경찰, 김승원 수사는 안 하고 김승원 돕기 수사…'민주당의 지...",
+     "title": "학교비정규직 4만 명 총파업 “교육재정 삭감 중단하고 차별 철폐하라”",
+     "press": "vop.co.kr",
+     "publishedAt": "2026-11-27T05:40:00.000Z",
+     "link": "https://vop.co.kr/A00001697798.html"
+    },
+    {
+     "title": "학교비정규직 총파업에 전남광주 400여 개 학교 대체 급식…돌봄도 차질",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-27T05:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000556288?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "남경필 아들 협박 혐의 체포",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-27T04:29:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "남경필 장남, 전 연인 영상 유포 협박 혐의로 체포…폭행 혐의도",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-27T05:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160296?sid=102"
+    },
+    {
+     "title": "남경필 장남, 이번엔 전 연인 스토킹·폭행 혐의로 체포",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-27T05:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207795?sid=102"
+    },
+    {
+     "title": "[자막뉴스] '마약사범' 입길 오르다 또 수갑찬 남경필 아들…전 연인 스...",
      "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T05:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406331?sid=100"
-    },
-    {
-     "title": "한동훈 \"경찰, 김승원 돕기 수사…'민주당의 지팡이'로 나서\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T05:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467793?sid=100"
+     "publishedAt": "2026-11-27T05:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406332?sid=102"
     }
    ]
   },
@@ -143,13 +112,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
    "firstArticleAt": "2026-11-27T04:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "유튜브 속 'AI 가짜 의사' 퇴출…건강기능식품·의약품 광고 금지 시행",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-27T05:33:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087320"
+    },
     {
      "title": "이 대통령 \"AI 가짜 의사 광고, 오늘부터 강력히 제재\"",
      "press": "yonhapnewstv.co.kr",
@@ -161,44 +136,6 @@
      "press": "mdtoday.co.kr",
      "publishedAt": "2026-11-27T05:22:00.000Z",
      "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628172"
-    },
-    {
-     "title": "오늘부터 ‘AI 가짜 전문가’ 광고 금지",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T05:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302640?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "남경필 아들 협박 혐의 체포",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T04:29:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[자막뉴스] '마약사범' 입길 오르다 또 수갑찬 남경필 아들…전 연인 스...",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-27T05:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406332?sid=102"
-    },
-    {
-     "title": "[단독] 남경필 전 지사 아들 '스토킹 혐의' 체포...약물 의혹도",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T05:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438940?sid=102"
-    },
-    {
-     "title": "남경필 전 경기지사 아들, 전 연인 폭행·스토킹 혐의로 체포",
-     "press": "kihoilbo.co.kr",
-     "publishedAt": "2026-11-27T05:10:00.000Z",
-     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3042357"
     }
    ]
   },
@@ -207,13 +144,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 1,
-   "press": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-27T04:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경고사격에도 반복되는 북한군 MDL 침범…유용원 \"넉 달간 90여 회\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-27T05:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653804?sid=100"
+    },
     {
      "title": "\"두 달간 40회 MDL 침범\"...軍의 '경고사격' 비웃는 北",
      "press": "etoday.co.kr",
@@ -225,59 +168,59 @@
      "press": "insight.co.kr",
      "publishedAt": "2026-11-27T05:06:00.000Z",
      "link": "https://www.insight.co.kr/news/583796"
-    },
-    {
-     "title": "북한군, 지뢰 폭발 이후에도 MDL 40여회 침범…軍 대응 실효성 도마",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T04:58:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127134615485"
     }
    ]
   },
   {
-   "keyword": "행안부 예산 관저?",
+   "keyword": "아일릿 모카, 5개월 만에 복귀",
    "sources": [
     "nate"
    ],
    "articles90": 7,
    "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-27T04:46:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-27T04:30:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "'관저 이전 예산 불법 전용' 김대기 전 비서실장 1심 집행유예…이상민...",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-27T05:17:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087314"
+     "title": "아일릿 모카, 건강 회복 후 5개월 만에 활동 재개",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-27T05:36:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611270238"
     },
     {
-     "title": "김대기, 관저 공사 행안부 예산 전용 지시로 징역형 집행유예...이상민...",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-27T05:04:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250619"
+     "title": "아일릿 모카, 건강 문제로 활동 중단 5개월만 활동 재개 “이날만 기다...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T05:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001191832"
     },
     {
-     "title": "‘尹 관저 예산전용’ 김대기 1심서 집유…이상민은 ‘무죄’",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T05:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302637?sid=102"
+     "title": "아일릿 모카, 활동 중단 5개월 만에 복귀…\"이날만 기다려\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-27T05:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000556267"
     }
    ]
   },
   {
-   "keyword": "2026 K-라이스 페스타",
+   "keyword": "우리쌀 K-라이스 페스타",
    "sources": [
     "nate"
    ],
    "articles90": 20,
    "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T04:14:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-27T04:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "익산농협 고구마 찹쌀떡, K-라이스페스타 최우수상 수상",
+     "press": "jeollailbo.com",
+     "publishedAt": "2026-11-27T05:42:00.000Z",
+     "link": "http://www.jeollailbo.com/news/articleView.html?idxno=818083"
+    },
     {
      "title": "\"우리 쌀로 빚은 모든 것\"…K-라이스페스타",
      "press": "yonhapnewstv.co.kr",
@@ -288,46 +231,7 @@
      "title": "2026 우리쌀 우리술 K-라이스 페스타",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-27T05:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467789?sid=101"
-    },
-    {
-     "title": "[포토] 'K-라이스 페스타' 개막 퍼포먼스 하는 서삼석·강호동·정준호",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T05:10:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127140627559"
-    }
-   ]
-  },
-  {
-   "keyword": "학교 비정규직 총파업 진행",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T04:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "학교비정규직 파업에 전남광주 초·중·고 400여 곳 간편식 지급",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-27T05:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887859?sid=102"
-    },
-    {
-     "title": "전국학교비정규직 오늘 총파업...\"비정규직 차별 해소\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T05:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438945?sid=102"
-    },
-    {
-     "title": "학교비정규직 총파업에 대체식 받는 아이들",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T05:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467735?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/001/0016467790?sid=101"
     }
    ]
   },
@@ -336,10 +240,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T04:06:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-27T04:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -362,140 +266,11 @@
      "link": "https://www.dailysecu.com/news/articleView.html?idxno=209788"
     }
    ]
-  },
-  {
-   "keyword": "김정관, 베트남 면담",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T04:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "면담하는 김정관 장관",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T05:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014349589?sid=100"
-    },
-    {
-     "title": "김정관 장관, 베트남 중앙정책전략위원장 면담",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T05:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014349587?sid=100"
-    },
-    {
-     "title": "산업부 장관, 베트남 중앙정책전략위원장 만나 첨단산업·원전·공급망...",
-     "press": "hellot.net",
-     "publishedAt": "2026-11-27T05:06:00.000Z",
-     "link": "https://www.hellot.net/news/article.html?no=116707"
-    }
-   ]
-  },
-  {
-   "keyword": "아일릿 모카, 5개월 만에 활동 재개",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T04:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "아일릿 모카, 건강 문제로 활동 중단 5개월만 활동 재개 “이날만 기다...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T05:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001191832"
-    },
-    {
-     "title": "'아일릿' 모카, 5개월 만에 활동 재개…\"기다려 준 팬들에 감사\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-27T05:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/422/0000930527"
-    },
-    {
-     "title": "아일릿 모카, 5개월만에 활동 재개 \"기다려준 글릿 감사...이날만 기다렸...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-27T04:50:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785346"
-    }
-   ]
-  },
-  {
-   "keyword": "KB손보 아히 영입 결정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T04:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'일주일 새 두 명 보강' KB손보, 아시아 쿼터 보이 이어 외국인 아히 영...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-27T05:21:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/425/0000215444"
-    },
-    {
-     "title": "KB손보, 외국인 교체한다... 'V리그 경력직' 아히 영입",
-     "press": "stnsports.co.kr",
-     "publishedAt": "2026-11-27T05:15:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/450/0000155696"
-    },
-    {
-     "title": "최하위 KB손보 승부수! 리누스 방출→아히 영입 완료…새 亞 쿼터 보이...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-27T04:29:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/477/0000641226"
-    }
-   ]
-  },
-  {
-   "keyword": "현대모비스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-27T04:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[D리그] ‘이대균 연장전 5점’ 현대모비스, 연장 끝에 소노 격파",
-     "press": "basketkorea.com",
-     "publishedAt": "2026-11-27T04:54:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/351/0000089617"
-    },
-    {
-     "title": "[화보] 26-27 KBL D리그 현대모비스, 소노에 82-73으로 승리",
-     "press": null,
-     "publishedAt": "2026-11-27T04:33:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/065/0000305283"
-    },
-    {
-     "title": "[D리그] ‘D리그 첫 연장’ 현대모비스, 혈투 끝에 소노 꺾고 2연승",
-     "press": null,
-     "publishedAt": "2026-11-27T04:20:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/065/0000305282"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1838,
+  "flagged": 1841,
   "matched": 918,
   "avgLeadMin": 609,
   "recent": [
