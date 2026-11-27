@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T15:58:19.160Z",
+ "builtAt": "2026-11-27T16:08:22.501Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,15 +8,15 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "최민희 중징계 의결",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 3,
+   "recent20": 1,
    "press": 8,
    "firstArticleAt": "2026-11-27T14:39:00.000Z",
    "exclusive": false,
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T14:35:00.000Z",
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T14:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "인터넷우체국 개인정보 털렸다...하루치만 11만명 넘게 유출",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-27T16:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004012241?sid=105"
+    },
     {
      "title": "인터넷우체국 해킹에 개인정보 유출… 하루치만 11만명 넘어",
      "press": "newscj.com",
@@ -61,48 +67,74 @@
      "link": "https://www.newscj.com/news/articleView.html?idxno=3452812"
     },
     {
-     "title": "인터넷우체국도 개인정보 유출…하루치만 11.3만명",
+     "title": "인터넷우체국 등기우편 고객정보 유출…하루치만 11만3천명 확인",
      "press": "hani.co.kr",
      "publishedAt": "2026-11-27T15:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002834358?sid=102"
-    },
-    {
-     "title": "인터넷우체국 해킹으로 개인정보 유출…하루치만 11만3천여명",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T15:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468511?sid=102"
     }
    ]
   },
   {
-   "keyword": "이서진 지수 미모 감탄",
+   "keyword": "박홍근 서영교 법사위 충돌",
    "sources": [
     "daum"
    ],
    "articles90": 5,
-   "recent20": 0,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-27T14:32:00.000Z",
+   "firstArticleAt": "2026-11-27T14:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이서진, 지수 엔딩 포즈에 보조개 미소→응원가 수발까지 \"클래스 달라...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-27T15:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409883"
+     "title": "김의겸 새만금 예산 질의에 박홍근 답변 거부…법사위 파행",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-27T15:50:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765824"
     },
     {
-     "title": "블랙핑크 지수 고공 액티비티 제안…이서진·김광규 진땀",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-27T14:56:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628262"
+     "title": "박홍근 “법사위답게 하라” 서영교 “충격”… 민주당 장관·의원끼리...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-27T15:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004012231?sid=100"
     },
     {
-     "title": "이서진 맞나? 평소 무덤덤하더니 지수 실물에 광대 폭발 \"너무 예뻐\"",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-27T14:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004470348"
+     "title": "박홍근-서영교 충돌에 법사위 파행…\"상원인가\" vs \"고압적 장관 처음\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-27T15:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610957?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "지수 라우럴 밈 탄생",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T15:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "블랙핑크 지수, 228만 원 플렉스에 김광규 감격…이서진은 “창피하다 ...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-27T15:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000494142"
+    },
+    {
+     "title": "지수 \"'라우럴' 넣어도 돼요?\"…밈 탄생 현장 공개",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T15:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009314998"
+    },
+    {
+     "title": "\"라우럴을 넣는다고요?\"…블랙핑크 지수, 본인도 빵 터진 '레전드 밈' 결...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-27T15:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646269"
     }
    ]
   },
@@ -137,44 +169,12 @@
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288158"
     }
    ]
-  },
-  {
-   "keyword": "라우럴",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T15:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "지수 \"'라우럴' 넣어도 돼요?\"…밈 탄생 현장 공개",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T15:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009314998"
-    },
-    {
-     "title": "이서진, 블핑 지수의 '라우럴' 밈 직관했다…미모 충격받더니 성격에 놀...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T15:13:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084932"
-    },
-    {
-     "title": "\"라우럴을 넣는다고요?\"…블랙핑크 지수, 본인도 빵 터진 '레전드 밈' 결...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-27T15:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646269"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 1980,
-  "matched": 982,
+  "matched": 981,
   "avgLeadMin": 657,
   "recent": [
    {
