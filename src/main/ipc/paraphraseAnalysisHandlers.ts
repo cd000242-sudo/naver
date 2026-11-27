@@ -19,6 +19,7 @@ import {
 } from '../../runtime/modelRegistry.js';
 import { isOpenAiReasoningModel } from '../../runtime/openaiReasoningFamily.js';
 import { buildGeminiModelChain } from '../../contentGeminiModelPolicy.js';
+import { describeClaudeReplyShape, pickClaudeAnswerText } from './claudeAnswerText.js';
 
 /**
  * Utility-tier models: cheap models for mechanical side work (paraphrase source
@@ -97,8 +98,12 @@ async function callClaude(prompt: string, apiKey: string, options?: AnalysisCall
     signal: options?.signal,
   });
   if (!response.ok) throw new Error(`Claude ${response.status}`);
-  const data = (await response.json()) as { content?: Array<{ text?: string }> };
-  return data.content?.[0]?.text || '';
+  // [2026-11-27] Every text block, wherever it sits (the first block is not always text). An empty answer is logged
+  //   with the block types so the next empty reply names its cause.
+  const data = (await response.json()) as unknown;
+  const text = pickClaudeAnswerText(data);
+  if (!text) console.warn(`[SideTask] Claude 응답에 글자가 없습니다 (${describeClaudeReplyShape(data)})`);
+  return text;
 }
 
 async function callGemini(prompt: string, apiKey: string, model: string, options?: AnalysisCallOptions): Promise<string> {

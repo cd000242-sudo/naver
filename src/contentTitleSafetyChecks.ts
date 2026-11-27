@@ -116,9 +116,12 @@ export function detectPromptLeakageInTitle(title: string, keyword: string): {
   const titleWords = cleanTitle.split(/[\s\-–—\/|·:,]+/).filter(w => w.length >= 2);
 
   // 키워드의 단어가 제목에 하나도 없으면 의심
-  const hasKeywordMatch = keywordWords.some(kw =>
-    titleWords.some(tw => tw.includes(kw) || kw.includes(tw))
-  );
+  // [2026-11-27] Compared without letter case: keyword "ev7 가격" and title "… EV7 …" are the same word. The exact
+  //   comparison called a good number title a prompt leak and put the earlier question title back (live run 2026-11-24).
+  const hasKeywordMatch = keywordWords.some(kw => {
+    const keywordWord = kw.toLowerCase();
+    return titleWords.some(tw => { const titleWord = tw.toLowerCase(); return titleWord.includes(keywordWord) || keywordWord.includes(titleWord); });
+  });
 
   // 프롬프트 누출이 있거나, 키워드와 전혀 관련없는 제목
   const isLeaked = leakagePatterns.length > 0 || (keywordWords.length > 0 && !hasKeywordMatch);

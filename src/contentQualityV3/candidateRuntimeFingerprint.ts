@@ -598,6 +598,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/main/ipc/agentAccountHandlers.ts',
   'src/main/ipc/agentHandlers.ts',
   'src/main/ipc/blogHandlers.ts',
+  'src/main/ipc/claudeAnswerText.ts',
   'src/main/ipc/imageExtensionPolicy.ts',
   'src/main/ipc/imagePayloadPolicy.ts',
   'src/main/ipc/paraphraseAnalysisHandlers.ts',

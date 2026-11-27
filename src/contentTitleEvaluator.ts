@@ -200,7 +200,12 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
   // ✅ [v1.4.48 Stage A.3] 홈피드에서 "변화/비포애프터" 가점 제거
   //   원인: hf_before_after 공식과 결합 → 이중 가점으로 해당 공식 과선택
   const bonuses: { condition: boolean; points: number; reason: string }[] = [
-    { condition: /(\?|일까|할까|인가요)/.test(t), points: 5, reason: '질문형 종결 (호기심)' },
+    // [2026-11-27] Homefeed: the owner's own 96 posts — question titles 4% vs 14% (worse), number / money / grade
+    //   titles 15% vs 8% (better). The question bonus stays for the search modes only; the homefeed takes points off
+    //   for it and adds them for a number that carries its unit.
+    { condition: mode !== 'homefeed' && /(\?|일까|할까|인가요)/.test(t), points: 5, reason: '질문형 종결 (호기심)' },
+    { condition: mode === 'homefeed' && /(\?|일까|할까|인가요|뭘까|될까)/.test(t), points: -5, reason: '홈판 질문형 종결 (실측: 불리)' },
+    { condition: mode === 'homefeed' && /\d[\d,.]*\s*(?:만|억|조|원|%|퍼센트|위|배|명|개|점|승|패|골|kg|km|kWh|년|개월|주|일|시간|분|초)/.test(t), points: 5, reason: '홈판 숫자·금액·등급 (실측: 유리)' },
     // 홈피드 외 모드에서만 솔직 표현 가점
     { condition: mode !== 'homefeed' && mode !== 'affiliate' && /(솔직히|사실|실제로|진짜)/.test(t), points: 3, reason: '솔직한 표현 (신뢰)' },
     { condition: mode === 'seo' && titleWidth >= 22 && titleWidth <= 40, points: 5, reason: 'SEO 이상적 길이 (22~40폭)' },
@@ -212,7 +217,7 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
   for (const b of bonuses) {
     if (b.condition) {
       score += b.points;
-      console.log(`[TitleQuality] +${b.points}점: ${b.reason}`);
+      console.log(`[TitleQuality] ${b.points >= 0 ? '+' : ''}${b.points}점: ${b.reason}`);
     }
   }
 

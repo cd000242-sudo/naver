@@ -41,7 +41,7 @@ export function computeSeoTitleCriticalIssues(title: string, primaryKeyword?: st
     const kwWords = kw.split(/[\s,/\-]+/).filter(w => w.length >= 2);
     const firstKwWord = kwWords[0] || kw;
 
-    const kwIndex = t.indexOf(firstKwWord);
+    const kwIndex = t.toLowerCase().indexOf(firstKwWord.toLowerCase()); // [2026-11-27] "ev7" is in "EV7 …"
     if (kwIndex < 0) {
       issues.push(`키워드 미포함 (${firstKwWord})`);
     }
