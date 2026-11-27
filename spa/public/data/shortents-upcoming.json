@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T16:48:34.959Z",
+ "builtAt": "2026-11-27T17:08:40.224Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,13 +11,13 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "최민희 중징계 확정",
+   "keyword": "최민희 당원권 2년 정지",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 5,
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
    "firstArticleAt": "2026-11-27T15:40:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -41,13 +41,45 @@
      "link": "https://n.news.naver.com/mnews/article/353/0000057440?sid=100"
     }
    ]
+  },
+  {
+   "keyword": "후보자 재산 신고",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T15:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이달 급여 1.9억 실수령 강금실… 재산 총액 2억6495만원 신고",
+     "press": "donga.com",
+     "publishedAt": "2026-11-27T16:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765830?sid=100"
+    },
+    {
+     "title": "강은희 대구교육감 선거법 위반 혐의 송치…'30억 주식 재산 신고 누락...",
+     "press": "pennmike.com",
+     "publishedAt": "2026-11-27T16:12:00.000Z",
+     "link": "https://www.pennmike.com/news/articleView.html?idxno=132979"
+    },
+    {
+     "title": "개각 5명 검증 정국 돌입…재산·논문·경력 도마 위",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-27T15:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930720?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1977,
-  "matched": 978,
-  "avgLeadMin": 651,
+  "flagged": 1976,
+  "matched": 977,
+  "avgLeadMin": 648,
   "recent": [
    {
     "keyword": "임찬규 손새은 결혼",
