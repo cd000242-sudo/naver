@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T13:07:09.061Z",
+ "builtAt": "2026-11-27T13:17:12.317Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "조희대 탄핵 국제 우려",
+   "keyword": "삼성생명 공동 선두",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 14,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T11:38:00.000Z",
+   "articles90": 16,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-27T11:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "세계변호사협회, 조희대 탄핵 우려…\"중대한 후폭풍\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-27T13:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005849021?sid=102"
+     "title": "'이해란 21점' 삼성생명, 신한은행 74-64 제압…공동 선두 도약",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-27T13:10:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110129154382"
     },
     {
-     "title": "조희대 탄핵 추진에 세계변호사협회도 우려…\"재검토 촉구\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-27T12:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447617?sid=102"
+     "title": "'이해란 21점' 삼성생명, 신한은행 74-64 제압…공동 선두",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T13:03:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/421/0009314976"
     },
     {
-     "title": "세계변호사협회, 조희대 대법원장 탄핵 추진에 우려…“사법 독립 존중...",
-     "press": "etoday.co.kr",
+     "title": "‘이해란 21P·강유림 더블더블’ 삼성생명, 신한은행 잡고 공동 1위 점...",
+     "press": "sportsworldi.com",
      "publishedAt": "2026-11-27T12:50:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2654147"
+     "link": "https://m.sports.naver.com/basketball/article/396/0000762180"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T11:41:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T11:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,66 +75,34 @@
    ]
   },
   {
-   "keyword": "선관위 특검, 노태악 압수수색",
+   "keyword": "대한항공 KB손해보험 승리",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T11:42:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "선관위특검, 노태악 추가 압수수색…선관위 증거인멸 정황 포착",
-     "press": "busan.com",
-     "publishedAt": "2026-11-27T12:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001409344?sid=102"
-    },
-    {
-     "title": "선관위 특검, '공추비 부당지급' 의혹 노태악 압수수색",
-     "press": "lawtimes.co.kr",
-     "publishedAt": "2026-11-27T12:40:00.000Z",
-     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=230235"
-    },
-    {
-     "title": "선관위 특검, '공추비 부당 지급 의혹' 노태악 압수수색…증거인멸 정황...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T12:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350286?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김범수 무죄 확정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T11:39:00.000Z",
+   "articles90": 15,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-27T12:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김범수 카카오 창업자 'SM 시세조종' 무죄 확정...3년 사법 리스크 종결",
-     "press": "newsbrite.net",
-     "publishedAt": "2026-11-27T12:48:00.000Z",
-     "link": "http://www.newsbrite.net/news/articleView.html?idxno=201819"
+     "title": "'케트진스키 25점' 대한항공, KB손해보험 3-1 제압…3연승 질주",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-27T12:52:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110128963868"
     },
     {
-     "title": "김범수 카카오 창업주, 'SM시세조종 혐의' 무죄 확정...공소청 상고 포기",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-27T12:28:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=207007"
+     "title": "대한항공, '국내 선수만 뛴' KB손보 꺾고 3연승…여자부 GS 5연승(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T12:46:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/421/0009314975"
     },
     {
-     "title": "SM 시세조종 혐의 벗은 김범수…공소청 상고 포기 '무죄 확정'",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-27T12:28:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749465"
+     "title": "대한항공 ‘홈에서 기분 좋은 승리’[포토]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-27T12:38:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/311/0002084900"
     }
    ]
   },
@@ -175,10 +143,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T11:42:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-27T11:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,106 +171,73 @@
    ]
   },
   {
-   "keyword": "신지아 6차 쇼트 2위",
+   "keyword": "야간근로 3일 제한",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T12:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정부 ‘연속 야간근로 3일 이하 제한’ 추진…초심야시간대는 별도 관리",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-27T13:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162476?sid=102"
+    },
+    {
+     "title": "정부, 연속 야간근무 ‘3일 이하’ 권고안 마련…새벽 배송은 제외",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T12:32:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654144"
+    },
+    {
+     "title": "야간근무 연속 3일로 제한 권고…\"0-4시 특별관리·새벽배송 제외\"",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-27T12:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193769?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "주진모 민혜연 임신에 오열",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-27T12:06:00.000Z",
+   "firstArticleAt": "2026-11-27T12:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "신지아, 쇼트 개인 최고점 경신…시니어 첫 그랑프리 메달 보인다",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-27T12:22:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/241/0003543958"
+     "title": "주진모, 운전 중 아내 민혜연 옆에서 갑자기 눈물... 힘들게 숨겨왔던 ...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-27T12:44:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178479"
     },
     {
-     "title": "'NEW 김연아' 신지아, 첫 메달 보인다!…NHK 트로피서 개인 최고 75.31점 ...",
+     "title": "'딩크' 부부였는데…주진모, ♥민혜연 8년만 임신에 오열 \"다 키워줄게...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-27T12:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786513"
+    },
+    {
+     "title": "주진모, ♥민혜연 7년만 임신에 오열 \"옛날부터 갖고 싶었다, 여보 고마...",
      "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T12:20:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/311/0002084892"
-    },
-    {
-     "title": "女피겨 신지아, 쇼트 개인 최고점 경신 ‘75.31점’…시니어 GP 6차 2위,...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-27T12:11:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/468/0001283962"
-    }
-   ]
-  },
-  {
-   "keyword": "연기금투자풀 25주년 기념행사",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T11:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미래에셋자산운용, 연기금투자풀 25주년 기념식",
-     "press": "businesskorea.co.kr",
-     "publishedAt": "2026-11-27T12:36:00.000Z",
-     "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=282413"
-    },
-    {
-     "title": "연기금투자풀 출범 25주년...삼성·미래에셋운용 감사패 수상",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-27T11:52:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=718859"
-    },
-    {
-     "title": "[포토] KG제로인, '연기금투자풀 25주년 기념행사'서 감사패 수상",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-27T11:40:00.000Z",
-     "link": "https://www.ajunews.com/view/20261127203725493"
-    }
-   ]
-  },
-  {
-   "keyword": "황교안",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T11:43:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'12·3 계엄 지지글' 황교안에 징역 10년 구형…내년 1월28일 1심 선고",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-27T12:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122369?sid=102"
-    },
-    {
-     "title": "특검, “윤석열 방해하는 한동훈 체포하라”던 황교안 ‘SNS 내란선동 혐...",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-27T11:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053688?sid=100"
-    },
-    {
-     "title": "내란특검, 황교안에 징역 10년 구형…내년 1월 28일 선고",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-27T11:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729679?sid=102"
+     "publishedAt": "2026-11-27T12:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084891"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1963,
+  "flagged": 1966,
   "matched": 978,
   "avgLeadMin": 660,
   "recent": [
