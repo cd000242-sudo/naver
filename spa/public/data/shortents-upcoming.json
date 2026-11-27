@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T23:00:17.905Z",
+ "builtAt": "2026-11-27T23:10:21.654Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,147 +8,145 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "AI 관련주 상승",
+   "keyword": "AI 반등으로 뉴욕증시 상승",
    "sources": [
     "nate"
    ],
-   "articles90": 16,
+   "articles90": 17,
    "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-27T21:36:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-27T21:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "AI 데이터센터가 부른 구리 확보 전쟁…LS·풍산 수혜 기대 커지나",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-27T22:54:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=509096"
+     "title": "뉴욕증시, AI 강세에 일제히 상승… 국제유가는 하락",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-27T23:08:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452822"
     },
     {
-     "title": "AI·반도체가 끌어올린 뉴욕증시…나스닥 2.3% 급등, '변동성은 계속된...",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-27T22:48:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68628"
+     "title": "미 증시 3대 지수 일제히 상승…추수감사절 휴장 후 반등 랠리",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-27T23:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485601?sid=101"
     },
     {
-     "title": "앤트로픽에 128억달러 몰렸다…삼성SDS·LG CNS도 AI 수혜 기대",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-27T22:42:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=509092"
+     "title": "오라클, 100달러 붕괴 충격 딛고 반등…AI 인프라 투자 부담은 여전",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-27T22:58:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848716"
     }
    ]
   },
   {
-   "keyword": "필라델피아 반도체 지수",
+   "keyword": "장나라 이혼 기각",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T21:36:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-27T21:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "AI·반도체가 끌어올린 뉴욕증시…나스닥 2.3% 급등, '변동성은 계속된...",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-27T22:48:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68628"
+     "title": "‘굿파트너2’ 김혜윤에 깨달음 준 장나라, 9.8% 자체 최고 시청률",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-27T22:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192061"
     },
     {
-     "title": "'주간반등' 메모리 반도체주, '이익절벽' 우려 해소될까?",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-27T22:38:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888757"
+     "title": "김혜윤, 장나라의 진짜 이혼 전략에 눈떴다…11.1% 돌파 '상승세'(굿파트...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-27T22:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000641307"
     },
     {
-     "title": "폭락 딛고 반등했지만…반도체주에 날아든 서늘한 경고",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-27T22:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001274260?sid=101"
+     "title": "장나라의 '이혼 노하우'..\"찾았다\" 김혜윤, '굿파트너'..자체 최고 11.1%...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-27T22:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490783"
     }
    ]
   },
   {
    "keyword": "시장",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T22:26:00.000Z",
+   "articles90": 10,
+   "recent20": 10,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T22:55:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "팔란티어, 유럽 국방 AI 시장서 영토 확장…폴란드 수주에 주가 강세",
+     "title": "로켓랩, 101번째 우주 비행 완수…소형 위성 발사시장 입지 확대",
      "press": "jemin.com",
-     "publishedAt": "2026-11-27T22:38:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848715"
+     "publishedAt": "2026-11-27T23:04:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848717"
     },
     {
-     "title": "김성제 의왕시장, \"선제적인 제설 대응으로 겨울철 시민 불편 최소화할...",
-     "press": "globalepic.co.kr",
-     "publishedAt": "2026-11-27T22:34:00.000Z",
-     "link": "https://www.globalepic.co.kr/view.php?ud=2026112710310596785f69d33b22_29"
+     "title": "용인반도체클러스터 수도권 비규제지역 분양시장 다시 살펴보는 수요자...",
+     "press": "geconomy.co.kr",
+     "publishedAt": "2026-11-27T23:02:00.000Z",
+     "link": "https://www.geconomy.co.kr/news/article.html?no=326198"
     },
     {
-     "title": "KAI, 초음속 전투기 KF-21 전자전기 개발 계획 공개…글로벌 방산 시장 ...",
-     "press": "theguru.co.kr",
-     "publishedAt": "2026-11-27T22:32:00.000Z",
-     "link": "https://www.theguru.co.kr/news/article.html?no=110256"
+     "title": "[마켓엑세스] 시장지수 아래에 숨어있는 미국 증시의 새로운 기회",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T23:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416800?sid=101"
     }
    ]
   },
   {
-   "keyword": "부동산",
+   "keyword": "인터넷우체국 개인정보 유출",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T21:40:00.000Z",
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T22:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "강남 부자들도 계산기를 두드리기 시작했다[손바닥부동산]",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T22:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416790?sid=101"
+     "title": "인터넷우체국 해킹…하루치 개인정보 유출만 11만명 넘어",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-27T23:04:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611280002"
     },
     {
-     "title": "\"한강뷰 좋아하는 한국인들\"…뉴욕 부동산 여왕의 뜻밖의 조언 [황정수...",
+     "title": "\"인터넷우체국도 털렸다\"…하루치만 11만여 명 개인정보 유출",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-27T23:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122386?sid=102"
+    },
+    {
+     "title": "인터넷우체국도 개인정보 털렸다…\"하루치만 11만여명\"",
      "press": "hankyung.com",
-     "publishedAt": "2026-11-27T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359280?sid=104"
-    },
-    {
-     "title": "\"땅값 10배 뛴다\"며 200억 사기…기획부동산 회장 1심 징역 12년",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468566?sid=102"
+     "publishedAt": "2026-11-27T23:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359292?sid=105"
     }
    ]
   },
   {
-   "keyword": "이동연 팬레터 폐기 사과",
+   "keyword": "이동연 팬레터 논란",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T22:22:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-27T22:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -173,66 +171,66 @@
    ]
   },
   {
-   "keyword": "한지민",
+   "keyword": "부동산",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T22:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'그냥사람친구' 첫 방송 시청률 5.0%…이서진·한지민 예능 1위",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T22:46:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288211"
-    },
-    {
-     "title": "“팬티만 빼고 다 벗어야” 박정수 각오에 한지민 당황 “옷 벗으라고요...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T22:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192055"
-    },
-    {
-     "title": "한지민, 이서진 장난에 표정관리 실패 “인성 논란 나와도 내보내주길”...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T22:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192057"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 디올 재킷 복귀",
-   "sources": [
-    "nate"
+    "google"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-27T21:35:00.000Z",
+   "firstArticleAt": "2026-11-27T21:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "가죽 재킷 벗고 고개 숙인 젠슨 황…옷값 보니 '깜짝'",
+     "title": "강남 부자들도 계산기를 두드리기 시작했다[손바닥부동산]",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T22:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416790?sid=101"
+    },
+    {
+     "title": "\"한강뷰 좋아하는 한국인들\"…뉴욕 부동산 여왕의 뜻밖의 조언 [황정수...",
      "press": "hankyung.com",
-     "publishedAt": "2026-11-27T22:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359289?sid=104"
+     "publishedAt": "2026-11-27T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359280?sid=104"
     },
     {
-     "title": "가죽 잠바 벗은 젠슨 황…‘반성 패션’에 걸친 명품만 700만원",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-27T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002836130?sid=101"
+     "title": "\"땅값 10배 뛴다\"며 200억 사기…기획부동산 회장 1심 징역 12년",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-27T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468566?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "신민아 재혼 황후 이야기",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T22:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신민아, '개비에슈' 주지훈의 뻔뻔한 궤변에 설득당했다…\"하면서 열받...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-27T23:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786549"
     },
     {
-     "title": "젠슨 황, '디올 면재킷·에르메스 운동화'로 복귀...패션계 \"겸손 연출\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-27T22:06:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785450"
+     "title": "이세영, 조롱마저 웃어 넘긴 악녀…\"시즌2서 더 욕 먹고 싶다\" ('재혼황...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-27T22:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786539"
+    },
+    {
+     "title": "신민아, 이종석 이어 '이종새'와도 멜로…CG팀에 특별 주문 \"꼭 귀엽길\"...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-27T22:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786542"
     }
    ]
   },
@@ -242,12 +240,18 @@
     "daum"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-27T21:38:00.000Z",
+   "firstArticleAt": "2026-11-27T21:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“홍민기가 폭행·낙태 종용” 전 연인 실종…마지막 행적은 마포대교",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-27T23:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329396"
+    },
     {
      "title": "폭로·고소 그리고 100일…홍민기 전 연인 실종 ‘아직 밝혀지지 않은 ...",
      "press": "sportsseoul.com",
@@ -259,22 +263,40 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-27T21:49:00.000Z",
      "link": "https://m.entertain.naver.com/article/410/0001148552"
-    },
-    {
-     "title": "'홍민기에 임신 중절 강요' 전 연인 실종-경찰 출동",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-27T21:38:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96097"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1970,
-  "matched": 970,
-  "avgLeadMin": 657,
+  "flagged": 1973,
+  "matched": 973,
+  "avgLeadMin": 655,
   "recent": [
+   {
+    "keyword": "젠슨 황 디올 재킷 착용",
+    "hitKeyword": "젠슨 황 재킷",
+    "hitAt": "2026-11-28T08:00:00+09:00",
+    "leadMin": 30
+   },
+   {
+    "keyword": "연금",
+    "hitKeyword": "국민연금 적립금 202조 감소",
+    "hitAt": "2026-11-28T08:00:00+09:00",
+    "leadMin": 20
+   },
+   {
+    "keyword": "손새은 임찬규 결혼",
+    "hitKeyword": "임찬규 손새은 결혼",
+    "hitAt": "2026-11-28T08:00:00+09:00",
+    "leadMin": 20
+   },
+   {
+    "keyword": "젠슨 황 디올 재킷 복귀",
+    "hitKeyword": "젠슨 황 재킷",
+    "hitAt": "2026-11-28T08:00:00+09:00",
+    "leadMin": 10
+   },
    {
     "keyword": "김장",
     "hitKeyword": "김장환 부인 별세",
@@ -310,30 +332,6 @@
     "hitKeyword": "뉴욕증시 기술주 반등",
     "hitAt": "2026-11-28T07:00:00+09:00",
     "leadMin": 2796
-   },
-   {
-    "keyword": "트럼프 가짜 성장률 조사",
-    "hitKeyword": "트럼프 중국 기술 규제",
-    "hitAt": "2026-11-28T07:00:00+09:00",
-    "leadMin": 1368
-   },
-   {
-    "keyword": "트럼프 관세 경제적 자해",
-    "hitKeyword": "트럼프 중국 기술 규제",
-    "hitAt": "2026-11-28T07:00:00+09:00",
-    "leadMin": 1358
-   },
-   {
-    "keyword": "트럼프 푸틴 유럽 공격 중단",
-    "hitKeyword": "트럼프 중국 기술 규제",
-    "hitAt": "2026-11-28T07:00:00+09:00",
-    "leadMin": 805
-   },
-   {
-    "keyword": "미세먼지",
-    "hitKeyword": "수도권 초미세먼지 주의보",
-    "hitAt": "2026-11-28T06:30:00+09:00",
-    "leadMin": 915
    }
   ]
  }
