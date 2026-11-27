@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T21:19:48.042Z",
+ "builtAt": "2026-11-27T21:29:50.805Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,16 +8,15 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "조희대 탄핵 우려",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-27T20:02:00.000Z",
    "exclusive": false,
@@ -49,23 +48,23 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-27T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 2026년 11월 28일 띠별 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-27T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416785?sid=103"
-    },
-    {
      "title": "[오늘의 운세] 2026년 11월 28일 별자리 운세",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-27T21:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006416786?sid=103"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 28일 띠별 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416785?sid=103"
     },
     {
      "title": "[백운산 오늘의 운세] 2026년 11월 28일",
