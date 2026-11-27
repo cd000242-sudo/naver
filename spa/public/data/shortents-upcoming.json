@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T08:25:23.932Z",
+ "builtAt": "2026-11-27T08:35:27.463Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "법사위, 이용철 보고서 채택",
+   "keyword": "이용철 청문보고서 채택",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 65,
+   "articles90": 76,
    "recent20": 10,
-   "press": 51,
-   "firstArticleAt": "2026-11-27T06:56:00.000Z",
+   "press": 48,
+   "firstArticleAt": "2026-11-27T07:06:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "이용철 법무부 장관 후보자 청문보고서 與 주도 채택...국힘 표결 불참",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-27T08:22:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=567286"
+     "title": "[속보] 법사위 이용철 청문보고서 채택… 국힘 퇴장 \"공소취소 다름없어...",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-27T08:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138986?sid=100"
     },
     {
-     "title": "기자회견하는 국민의힘 법사위원들",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-27T08:20:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765554"
+     "title": "법사위, 이용철 청문보고서 與 주도 채택… 국힘 표결 불참",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-27T08:30:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452763"
     },
     {
-     "title": "법사위, 이용철 청문보고서 與 주도 채택…국힘 '지명 철회' 반발",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-27T08:18:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2654086"
-    }
-   ]
-  },
-  {
-   "keyword": "학교 급식 차질",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 51,
-   "recent20": 8,
-   "press": 38,
-   "firstArticleAt": "2026-11-27T06:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "비정규직 총파업, 전국 학교 수천곳 급식 차질…“반차 쓰고 도시락 준...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-27T08:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568505?sid=102"
-    },
-    {
-     "title": "'학교비정규직 총파업' 충청권 급식·돌봄 차질… 큰 혼란은 피해",
-     "press": "chungnamilbo.co.kr",
-     "publishedAt": "2026-11-27T08:18:00.000Z",
-     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=923546"
-    },
-    {
-     "title": "전남광주교육청, 학교비정규직 총파업에도 급식·돌봄 공백 최소화",
-     "press": "newstnt.com",
-     "publishedAt": "2026-11-27T08:14:00.000Z",
-     "link": "https://www.newstnt.com/news/articleView.html?idxno=731015"
+     "title": "[퇴근길 정치 픽] 이용철 청문보고서 민주당 주도 채택…최민희 징계 수...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T08:30:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127001303"
     }
    ]
   },
@@ -80,7 +48,7 @@
     "signal.bz"
    ],
    "articles90": 43,
-   "recent20": 9,
+   "recent20": 5,
    "press": 35,
    "firstArticleAt": "2026-11-27T07:09:00.000Z",
    "exclusive": false,
@@ -112,10 +80,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 47,
-   "recent20": 17,
-   "press": 28,
-   "firstArticleAt": "2026-11-27T06:58:00.000Z",
+   "articles90": 42,
+   "recent20": 12,
+   "press": 27,
+   "firstArticleAt": "2026-11-27T07:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -142,15 +110,22 @@
   {
    "keyword": "발언하는 이재명 대통령",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 29,
-   "recent20": 11,
+   "recent20": 6,
    "press": 26,
-   "firstArticleAt": "2026-11-27T06:56:00.000Z",
+   "firstArticleAt": "2026-11-27T07:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이 대통령 \"광장의 요구, 국민이 체감하는 변화로 만들어야\"",
+     "press": "korea.kr",
+     "publishedAt": "2026-11-27T08:29:00.000Z",
+     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148976680&call_from=naver_news"
+    },
     {
      "title": "이 대통령 “내란 책임자에 합당한 책임 물어야 완전한 내란 종식”",
      "press": "mk.co.kr",
@@ -162,44 +137,6 @@
      "press": "businesspost.co.kr",
      "publishedAt": "2026-11-27T08:20:00.000Z",
      "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453164"
-    },
-    {
-     "title": "[속보] 이 대통령 \"12·3 내란 책임자 합당한 책임 물어야 완전한 내란 ...",
-     "press": "kado.net",
-     "publishedAt": "2026-11-27T08:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213854?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "한성숙 총리 주택 회의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 29,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T07:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "韓총리 \"올해 주택공급 목표 달성 총력…내년 물량도 선제 준비\"",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-27T08:20:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=155025"
-    },
-    {
-     "title": "한 총리 “연내 계획된 물량 차질 없이 착공…내년 준비도 서둘러야”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-27T08:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012302744?sid=100"
-    },
-    {
-     "title": "韓총리 \"서울 집값 하락세 영등포·광진까지…연말 착공 차질 없게\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T08:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009314799?sid=100"
     }
    ]
   },
@@ -208,62 +145,63 @@
    "sources": [
     "google"
    ],
-   "articles90": 13,
-   "recent20": 8,
-   "press": 11,
-   "firstArticleAt": "2026-11-27T07:02:00.000Z",
+   "articles90": 28,
+   "recent20": 22,
+   "press": 23,
+   "firstArticleAt": "2026-11-27T07:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 민주당 윤리심판원, 최민희 중징계 의결",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-27T08:24:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904760"
+     "title": "[퇴근길 정치 픽] 이용철 청문보고서 민주당 주도 채택…최민희 징계 수...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T08:30:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127001303"
     },
     {
-     "title": "[속보] 민주당 윤리심판원, '최민희 중징계' 의결",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-27T08:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214751?sid=100"
+     "title": "[속보] 민주당 윤리심판원, 최민희 중징계 처분 의결",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-27T08:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000556400?sid=100"
     },
     {
-     "title": "[속보] 민주당 윤리심판원, 최민희 중징계 의결…김민석도 징계 심사 회...",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-27T08:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053684?sid=100"
+     "title": "[속보]與윤리심판원 “최민희 중징계 의결…당 품위 훼손”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-27T08:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765788?sid=100"
     }
    ]
   },
   {
    "keyword": "제네시스 대상 시상식 수상자들",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 7,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T06:57:00.000Z",
+   "articles90": 21,
+   "recent20": 11,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T07:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[mhn포토] 시상식 축사하는 제네시스 이시혁",
+     "title": "[mhn포토] 대상 수상 소감 밝히는 신상훈",
      "press": "mhnse.com",
-     "publishedAt": "2026-11-27T08:21:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/445/0000494093"
+     "publishedAt": "2026-11-27T08:34:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/445/0000494102"
     },
     {
-     "title": "[mhn포토] 제네시스 이시혁, 축사",
+     "title": "[mhn포토] 제네시스 대상 수상하는 신상훈",
      "press": "mhnse.com",
-     "publishedAt": "2026-11-27T08:21:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/445/0000494094"
+     "publishedAt": "2026-11-27T08:34:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/445/0000494099"
     },
     {
-     "title": "신상훈, 2026시즌 KPGA 제네시스 대상 등 2관왕 영예",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T08:19:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/003/0014350113"
+     "title": "신상훈 '대상 수상자의 포즈'",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-27T08:34:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/119/0003160402"
     }
    ]
   },
@@ -273,10 +211,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T06:56:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T07:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -340,10 +278,16 @@
    "articles90": 4,
    "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-27T06:57:00.000Z",
+   "firstArticleAt": "2026-11-27T07:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "남경필 전 지사 아들, 출소 1년만에 '긴급체포'... 전 연인 폭행·스토킹...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-27T08:30:00.000Z",
+     "link": "https://www.insight.co.kr/news/583914"
+    },
     {
      "title": "남경필 전 지사 장남, 전 연인 영상 유포 협박·폭행 혐의 체포",
      "press": "gukjenews.com",
@@ -355,12 +299,38 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-27T08:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005447533?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 푸틴 유럽 공격 중단",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T07:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"매달 수천 명 죽는다\"…트럼프가 푸틴에 직접 꺼낸 말",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-27T08:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001042780?sid=104"
     },
     {
-     "title": "'마약 투약 전력' 남경필 장남, 이번엔 스토킹으로 체포(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T07:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350039?sid=102"
+     "title": "\"푸틴에 공격중단 요구\" 트럼프, 조기종전 강조",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T08:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005770092?sid=104"
+    },
+    {
+     "title": "\"트럼프, 우크라에도 확전 자제 요구…나토 성명 일방적 수정\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T07:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314765?sid=104"
     }
    ]
   },
@@ -369,10 +339,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 6,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-27T06:57:00.000Z",
+   "firstArticleAt": "2026-11-27T07:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -395,72 +365,104 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009314690?sid=102"
     }
    ]
+  },
+  {
+   "keyword": "한성숙 총리 주택 회의 참석",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T07:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "주택 신속공급 점검회의",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-27T07:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009314734?sid=100"
+    },
+    {
+     "title": "주택 신속공급 점검회의 주재하는 한성숙 국무총리 [TF사진관]",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-27T07:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000556366?sid=102"
+    },
+    {
+     "title": "제5차 범부처 주택 신속공급 점검회의 참석하는 한성숙 총리",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-27T07:19:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261127001201"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1894,
-  "matched": 937,
-  "avgLeadMin": 611,
+  "flagged": 1897,
+  "matched": 947,
+  "avgLeadMin": 617,
   "recent": [
    {
-    "keyword": "버스",
-    "hitKeyword": "미스 유니버스 베트남 왕관 박탈",
-    "hitAt": "2026-11-27T17:00:00+09:00",
-    "leadMin": 628
+    "keyword": "테이블 생방송 중 주인은",
+    "hitKeyword": "증시 전문가 생방송 눈물",
+    "hitAt": "2026-11-27T17:30:00+09:00",
+    "leadMin": 7616
    },
    {
-    "keyword": "학교급식 빵으로 대체",
-    "hitKeyword": "학교급식 파업 영향",
-    "hitAt": "2026-11-27T17:00:00+09:00",
-    "leadMin": 437
+    "keyword": "생방송 투데이",
+    "hitKeyword": "증시 전문가 생방송 눈물",
+    "hitAt": "2026-11-27T17:30:00+09:00",
+    "leadMin": 1342
    },
    {
-    "keyword": "김정관, 베트남 면담",
-    "hitKeyword": "미스 유니버스 베트남 왕관 박탈",
-    "hitAt": "2026-11-27T17:00:00+09:00",
-    "leadMin": 156
+    "keyword": "김가영, 라이벌 제압!",
+    "hitKeyword": "김가영 당구 결승",
+    "hitAt": "2026-11-27T17:30:00+09:00",
+    "leadMin": 487
    },
    {
-    "keyword": "코스피 코스닥 급등",
-    "hitKeyword": "코스피 코스닥 급등",
-    "hitAt": "2026-11-27T17:00:00+09:00",
-    "leadMin": 45
+    "keyword": "김가영 스롱 제압",
+    "hitKeyword": "김가영 당구 결승",
+    "hitAt": "2026-11-27T17:30:00+09:00",
+    "leadMin": 477
    },
    {
-    "keyword": "코스피 4.34% 상승 4915.68 마감",
-    "hitKeyword": "코스피 코스닥 급등",
-    "hitAt": "2026-11-27T17:00:00+09:00",
-    "leadMin": 35
+    "keyword": "김가영, 스롱 꺾고 4강 진출",
+    "hitKeyword": "김가영 당구 결승",
+    "hitAt": "2026-11-27T17:30:00+09:00",
+    "leadMin": 447
    },
    {
-    "keyword": "코스피 급등",
-    "hitKeyword": "코스피 코스닥 급등",
-    "hitAt": "2026-11-27T17:00:00+09:00",
-    "leadMin": 5
-   },
-   {
-    "keyword": "수능 부정신고 5억 포상",
-    "hitKeyword": "수능 부정행위 신고 포상",
-    "hitAt": "2026-11-27T16:30:00+09:00",
-    "leadMin": 5469
-   },
-   {
-    "keyword": "준법투쟁",
-    "hitKeyword": "철도노조 준법투쟁",
-    "hitAt": "2026-11-27T16:30:00+09:00",
+    "keyword": "주주",
+    "hitKeyword": "삼전 배당금 주주 인증",
+    "hitAt": "2026-11-27T17:30:00+09:00",
     "leadMin": 417
    },
    {
-    "keyword": "시험 부정행위",
-    "hitKeyword": "수능 부정행위 신고 포상",
-    "hitAt": "2026-11-27T16:30:00+09:00",
-    "leadMin": 85
+    "keyword": "김가영, 스롱 꺾고 4강 진출!",
+    "hitKeyword": "김가영 당구 결승",
+    "hitAt": "2026-11-27T17:30:00+09:00",
+    "leadMin": 387
    },
    {
-    "keyword": "학교 비정규직 총파업",
+    "keyword": "김가영, 스롱 꺾고 준결승행",
+    "hitKeyword": "김가영 당구 결승",
+    "hitAt": "2026-11-27T17:30:00+09:00",
+    "leadMin": 367
+   },
+   {
+    "keyword": "KB손보 아히 영입 결정",
+    "hitKeyword": "KB손해보험 아히 영입",
+    "hitAt": "2026-11-27T17:30:00+09:00",
+    "leadMin": 186
+   },
+   {
+    "keyword": "학교 비정규직 총파업 발생",
     "hitKeyword": "학교 비정규직 파업",
-    "hitAt": "2026-11-27T16:30:00+09:00",
+    "hitAt": "2026-11-27T17:30:00+09:00",
     "leadMin": 25
    }
   ]
