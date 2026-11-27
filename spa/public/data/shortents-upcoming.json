@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T20:39:39.145Z",
+ "builtAt": "2026-11-27T21:09:45.431Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,14 +8,92 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
- "candidates": [],
+ "measured": 23,
+ "candidates": [
+  {
+   "keyword": "2026년 11월 28일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 28일 띠별 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416785?sid=103"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 28일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-27T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416786?sid=103"
+    },
+    {
+     "title": "[백운산 오늘의 운세] 2026년 11월 28일",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-27T21:00:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260917001403514"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 탄핵 우려",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T20:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘계엄 2년’ 앞두고 조희대 탄핵 정국…국힘, ‘사법부 독립’ 여론전",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-27T21:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654017"
+    },
+    {
+     "title": "[뉴스 즉설]호남 빼면 4대 6, 민주당 조희대 탄핵 여론전 국힘에 완패",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-27T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193778?sid=004"
+    },
+    {
+     "title": "\"曺 탄핵, 사법 독립 침해\" 75% \"침해 안 해\" 13%",
+     "press": "lawtimes.co.kr",
+     "publishedAt": "2026-11-27T20:02:00.000Z",
+     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=230193"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 1973,
+  "flagged": 1972,
   "matched": 974,
-  "avgLeadMin": 650,
+  "avgLeadMin": 643,
   "recent": [
+   {
+    "keyword": "미국 중국 자동차 규제법",
+    "hitKeyword": "중국 AI 미국 규제",
+    "hitAt": "2026-11-28T06:00:00+09:00",
+    "leadMin": 1308
+   },
+   {
+    "keyword": "이서진 지수 미모 감탄",
+    "hitKeyword": "이서진 갱년기 발언",
+    "hitAt": "2026-11-28T06:00:00+09:00",
+    "leadMin": 342
+   },
    {
     "keyword": "임찬규 손새은 결혼",
     "hitKeyword": "손새은 임찬규 결혼",
@@ -63,18 +141,6 @@
     "hitKeyword": "철도노조 준법투쟁 대란",
     "hitAt": "2026-11-27T22:30:00+09:00",
     "leadMin": 113
-   },
-   {
-    "keyword": "철도노조 준법투쟁 지연",
-    "hitKeyword": "철도노조 준법투쟁 대란",
-    "hitAt": "2026-11-27T22:30:00+09:00",
-    "leadMin": 103
-   },
-   {
-    "keyword": "주진모 민혜연 임신에 오열",
-    "hitKeyword": "민혜연 딩크 선언 번복",
-    "hitAt": "2026-11-27T22:30:00+09:00",
-    "leadMin": 43
    }
   ]
  }
