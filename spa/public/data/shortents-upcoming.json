@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T14:37:40.902Z",
+ "builtAt": "2026-11-27T14:47:46.333Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 2,
    "press": 8,
-   "firstArticleAt": "2026-11-27T13:09:00.000Z",
+   "firstArticleAt": "2026-11-27T13:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "GS칼텍스, 흥국생명 '셧아웃' 격파하고 5연승",
+     "press": "stnsports.co.kr",
+     "publishedAt": "2026-11-27T14:38:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/450/0000155708"
+    },
     {
      "title": "'5연승' GS 칼텍스 선두 탈환…대한항공 3연승",
      "press": "yonhapnewstv.co.kr",
@@ -33,12 +39,6 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-27T14:21:00.000Z",
      "link": "https://m.sports.naver.com/general/article/052/0002439187"
-    },
-    {
-     "title": "프로배구 GS칼텍스, 흥국생명 꺾고 5연승… 선두 탈환",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-27T14:10:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888230"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T13:09:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T14:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,10 +75,42 @@
    ]
   },
   {
-   "keyword": "한동훈 자료유출 의혹 경찰",
+   "keyword": "굿파트너2",
    "sources": [
     "signal.bz",
-    "nate"
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T13:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'굿파트너2' 장나라 김혜윤 박해진, 의뢰인 사로잡기 경쟁",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-27T14:42:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288158"
+    },
+    {
+     "title": "'굿파트너2' 장나라X김혜윤, 불륜 커플 파탄냈다 '통쾌' [종합]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-27T14:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084926"
+    },
+    {
+     "title": "'굿파트너2' 박준면, 100만 유튜버 남편 외도에 분노 \"당장 나가\"",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-27T13:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002084920"
+    }
+   ]
+  },
+  {
+   "keyword": "한동훈 자료유출 의혹 경찰",
+   "sources": [
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
@@ -136,40 +168,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-27T13:34:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/421/0009314982"
-    }
-   ]
-  },
-  {
-   "keyword": "굿파트너2",
-   "sources": [
-    "signal.bz",
-    "nate",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-27T13:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'굿파트너2' 박준면, 100만 유튜버 남편 외도에 분노 \"당장 나가\"",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T13:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084920"
-    },
-    {
-     "title": "'굿파트너2' 박준면, 배우자 외도 영상에 충격...\"절대 이혼 못합니다\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-27T13:42:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785427"
-    },
-    {
-     "title": "'굿파트너2' 김혜윤, 눈물 펑펑...\"엄마 없다고 생각한지 오래\"",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T13:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084911"
     }
    ]
   }
