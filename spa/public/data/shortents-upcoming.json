@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T01:43:06.467Z",
+ "builtAt": "2026-11-27T01:53:09.968Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "코스피 상승 출발",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 84,
-   "recent20": 4,
-   "press": 57,
-   "firstArticleAt": "2026-11-27T00:14:00.000Z",
+   "articles90": 66,
+   "recent20": 5,
+   "press": 52,
+   "firstArticleAt": "2026-11-27T00:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 코스닥 5%대 급등에 매수 사이드카 발동…코스피도 2%대 강세",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-27T01:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968099?sid=101"
+     "title": "코스닥, 5% 급등 속 '매수 사이드카' 발동…코스피 1.7%↑",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-27T01:48:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088585"
     },
     {
-     "title": "SK하이닉스 주가 장중 1%대 강세, 배당락일 하락 출발 뒤 상승 전환",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-27T01:34:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=453098"
+     "title": "[오늘의 증시] 코스피 4790선 회복·코스닥 5%대 급등…외국인·기관 동...",
+     "press": "job-post.co.kr",
+     "publishedAt": "2026-11-27T01:46:00.000Z",
+     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=241380"
     },
     {
-     "title": "코스닥 상승세 강해져 5%대 급등…매수 사이드카 발동",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T01:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467238?sid=101"
+     "title": "코스닥 '5%대 급등' 매수 사이드카…코스피도 상승폭 키워",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-27T01:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214549?sid=101"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 50,
-   "recent20": 13,
-   "press": 45,
+   "articles90": 58,
+   "recent20": 18,
+   "press": 51,
    "firstArticleAt": "2026-11-27T00:28:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "경찰, '한동훈 자료유출 의혹' 법무부·공소청 압수수색",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-27T01:42:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=316384"
+     "title": "경찰, 한동훈 ‘수사자료 유출 의혹’ 관련 법무부·공소청 등 압수수색",
+     "press": "segye.com",
+     "publishedAt": "2026-11-27T01:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178591?sid=102"
     },
     {
-     "title": "한동훈, ‘자료유출 의혹’ 압수수색에 “경찰, 민주당 지팡이 자처”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-27T01:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003703828?sid=100"
+     "title": "경찰, 한동훈 수사자료 유출 의혹 법무부·공소청 압수수색",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-27T01:46:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1316582"
     },
     {
-     "title": "경찰, 공소청 압수수색에 한동훈 “민중의 지팡이가 아니라 ‘민주당의...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-27T01:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012092?sid=100"
+     "title": "경찰, 법무부·공소청 압수수색…'한동훈 자료유출 의혹' 정조준",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-27T01:46:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088565"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 45,
-   "recent20": 13,
-   "press": 40,
-   "firstArticleAt": "2026-11-27T00:14:00.000Z",
+   "articles90": 40,
+   "recent20": 8,
+   "press": 34,
+   "firstArticleAt": "2026-11-27T00:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "세븐일레븐, 골목상권 보호 공로…중기부 장관 표창",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-27T01:42:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=303623"
+     "title": "소상공인과 동반성장 결실… 코레일유통물류, 중기부 장관표창 수상",
+     "press": "the-biz.co.kr",
+     "publishedAt": "2026-11-27T01:50:00.000Z",
+     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=732270"
+    },
+    {
+     "title": "기보, ‘올해의 상생기업 대상’ 중기부 장관 표창 수상",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-27T01:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729379?sid=101"
     },
     {
      "title": "세븐일레븐, 사업영역 보호 공로 중기부 장관 표창 수상",
      "press": "gokorea.kr",
      "publishedAt": "2026-11-27T01:42:00.000Z",
      "link": "https://www.gokorea.kr/news/articleView.html?idxno=887488"
-    },
-    {
-     "title": "레피소드, '2026 중소기업 혁신주간'서 지역혁신 유공 국무총리 표창",
-     "press": "businesskorea.co.kr",
-     "publishedAt": "2026-11-27T01:42:00.000Z",
-     "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=282360"
     }
    ]
   },
@@ -111,30 +111,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 33,
-   "recent20": 16,
-   "press": 29,
-   "firstArticleAt": "2026-11-27T01:02:00.000Z",
+   "articles90": 37,
+   "recent20": 23,
+   "press": 31,
+   "firstArticleAt": "2026-11-27T01:18:00.000Z",
    "exclusive": true,
    "capped": true,
    "samples": [
     {
-     "title": "[IT는 지금] LG유플러스, 현대차기아 로보틱스랩과 5G SA로 ‘피지컬 AI’...",
-     "press": "dealsite.co.kr",
-     "publishedAt": "2026-11-27T01:42:00.000Z",
-     "link": "https://dealsite.co.kr/articles/173647"
+     "title": "\"2027년 광고·마케팅 시장, AI 커머스·맥락 타겟팅 주목\"",
+     "press": "datanet.co.kr",
+     "publishedAt": "2026-11-27T01:52:00.000Z",
+     "link": "https://www.datanet.co.kr/news/articleView.html?idxno=300626"
     },
     {
-     "title": "심텍, 3000억 CB·BW 발행…AI 기판 증설 속도",
-     "press": "dealsite.co.kr",
-     "publishedAt": "2026-11-27T01:42:00.000Z",
-     "link": "https://dealsite.co.kr/articles/173648"
+     "title": "오아, '오아투엑스'로 사명 바꾸고 AI·로봇·물류자동화 본격 추진",
+     "press": "klnews.co.kr",
+     "publishedAt": "2026-11-27T01:52:00.000Z",
+     "link": "https://www.klnews.co.kr/news/articleView.html?idxno=323762"
     },
     {
-     "title": "동서발전, 정부박람회서 'AI 기반 에너지 산업기술 혁신' 선보여",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T01:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467271?sid=101"
+     "title": "케이메디허브, 의료데이터·AI로 의료기기산업 디지털 전환 가속",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-27T01:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005769861?sid=102"
     }
    ]
   },
@@ -143,62 +143,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 22,
-   "recent20": 2,
-   "press": 22,
+   "articles90": 24,
+   "recent20": 3,
+   "press": 24,
    "firstArticleAt": "2026-11-27T00:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "靑 국가안보실, 금융당국 긴급 소집…해킹 2차 피해 근본 차단",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-27T01:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394967?sid=100"
+    },
+    {
+     "title": "靑, ‘해킹피해 방지’ 금융기관 긴급회의…“사이트 차단·수사 강화”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-27T01:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703839?sid=100"
+    },
+    {
      "title": "靑, 금융당국 긴급소집…'해킹 2차 피해' 방지 위한 선제 대응 강조",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-27T01:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004214526?sid=100"
-    },
-    {
-     "title": "청와대, 금융기관 긴급 소집...해킹 2차 피해 방지 점검",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-27T01:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002438830?sid=100"
-    },
-    {
-     "title": "정부, 해킹 유출 계좌·카드 정보 FDS 신속 등록…AI 보이스피싱 탐지 가...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-27T01:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485482?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "중국",
-   "sources": [
-    "google"
-   ],
-   "articles90": 16,
-   "recent20": 12,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T01:20:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "HD현대사이트솔루션, 중국서 부품사업 확대",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-27T01:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165879?sid=101"
-    },
-    {
-     "title": "“21년 만의 월드컵 토너먼트행” 중국 신났다···U-17 월드컵 피지에...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-27T01:39:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/144/0001151989"
-    },
-    {
-     "title": "中 짝퉁 고발 운동가 제주에?…중국대사 신병확보 요청",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-27T01:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016467264?sid=100"
     }
    ]
   },
@@ -207,30 +175,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 4,
-   "press": 14,
+   "articles90": 16,
+   "recent20": 2,
+   "press": 15,
    "firstArticleAt": "2026-11-27T00:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "전남광주시, 나주 오리농장 ‘H5형 AI 항원’ 검출에 긴급 방역 실시",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-27T01:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003703832?sid=102"
+    },
+    {
+     "title": "나주 오리농장서 H5형 AI 항원 검출…24시간 이동중지",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-27T01:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653748?sid=102"
+    },
+    {
      "title": "나주 오리농장서 조류독감 항원 검출···24시간 이동 통제",
      "press": "greened.kr",
      "publishedAt": "2026-11-27T01:32:00.000Z",
      "link": "https://www.greened.kr/news/articleView.html?idxno=355746"
-    },
-    {
-     "title": "나주 오리농장서 H5형 AI 검출…전남광주 24시간 이동중지 명령",
-     "press": "thepowernews.co.kr",
-     "publishedAt": "2026-11-27T01:30:00.000Z",
-     "link": "https://www.thepowernews.co.kr/view.php?ud=202611271003216097caa2b7671d_7"
-    },
-    {
-     "title": "나주 오리농장서 H5형 AI 검출…반경 10㎞ 이동 제한",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-27T01:27:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261127000313"
     }
    ]
   },
@@ -239,30 +207,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 1,
+   "articles90": 13,
+   "recent20": 2,
    "press": 13,
-   "firstArticleAt": "2026-11-27T00:14:00.000Z",
+   "firstArticleAt": "2026-11-27T00:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "10대 소녀에 성매매·절도 지시…성북 살인사건 피의자 20대 前연인 송치",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-27T01:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568407?sid=102"
+    },
+    {
+     "title": "'성북구 10대 소녀 살해' 피의자 전 연인 구속 송치… 성매매·절도교사...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-27T01:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653756?sid=102"
+    },
     {
      "title": "'성북 살해 10대'에 성매매 강요 20대 여성 구속 송치… 살인 교사 혐의...",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-27T01:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000968095?sid=102"
-    },
-    {
-     "title": "10대 소녀에 성매매·절도 지시한 20대 여성 송치…살인교사도 수사",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-27T01:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122319?sid=102"
-    },
-    {
-     "title": "10대 소녀에 성매매·절도지시…성북 살인사건 피의자 전 연인 송치",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-27T01:08:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611270042"
     }
    ]
   },
@@ -271,13 +239,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 22,
-   "recent20": 12,
+   "articles90": 21,
+   "recent20": 11,
    "press": 12,
-   "firstArticleAt": "2026-11-27T00:14:00.000Z",
+   "firstArticleAt": "2026-11-27T00:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[포토] 발언하는 김민석 대표",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-27T01:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005848731?sid=100"
+    },
     {
      "title": "김민석 “청해부대 파견 연장은 필수 조치...전쟁 불개입 명시”",
      "press": "mediapen.com",
@@ -289,12 +263,6 @@
      "press": "kyeonggi.com",
      "publishedAt": "2026-11-27T01:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/666/0000134046?sid=100"
-    },
-    {
-     "title": "최민희 발언 듣는 민주당 지도부",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-27T01:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009313770?sid=100"
     }
    ]
   },
@@ -304,30 +272,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T00:22:00.000Z",
+   "articles90": 22,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-27T00:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'사상 초유' 검찰총장 후보 추가 천거…정점식 \"공소취소 실행 약속 안...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-27T01:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160211?sid=100"
+    },
+    {
+     "title": "정점식 \"검찰총장 후보 추가 추천, 공소취소청장 찾고 있는 것 \"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-27T01:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406280?sid=100"
+    },
     {
      "title": "정점식 \"이재명·한성숙·이용철, 공소취소 열차 탑승...종착역 교도소...",
      "press": "mediapen.com",
      "publishedAt": "2026-11-27T01:36:00.000Z",
      "link": "https://www.mediapen.com/news/view/1140528"
-    },
-    {
-     "title": "[포토] 정점식 원내대표, 원내대책회의 발언",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-27T01:18:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452582"
-    },
-    {
-     "title": "[포토] 발언하는 정점식 원내대표",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-27T01:14:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452581"
     }
    ]
   },
