@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T00:40:50.804Z",
+ "builtAt": "2026-11-28T00:50:54.196Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "주유소 기름값 하락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 5,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T23:14:00.000Z",
+   "articles90": 11,
+   "recent20": 4,
+   "press": 11,
+   "firstArticleAt": "2026-11-27T23:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,9 +47,9 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
    "firstArticleAt": "2026-11-27T23:34:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -75,6 +75,38 @@
    ]
   },
   {
+   "keyword": "곽시양 유지애 오늘 결혼 큰절 약속",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 5,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T23:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "곽시양♥유지애 오늘(28일) 결혼식, 큰절 올리며 “행복하게 살게요”",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-28T00:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192077"
+    },
+    {
+     "title": "곽시양♥유지애, 오늘(28일) 결혼…”행복하게 살게요” [왓IS]",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-28T00:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543988"
+    },
+    {
+     "title": "곽시양♥유지애, 오늘(28일) 결혼..방바닥서 큰절하며 \"행복하게 살게요...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-28T00:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490788"
+    }
+   ]
+  },
+  {
    "keyword": "젠슨 황 불륜 상대 연계",
    "sources": [
     "signal.bz"
@@ -82,10 +114,16 @@
    "articles90": 8,
    "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-27T23:14:00.000Z",
+   "firstArticleAt": "2026-11-27T23:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“젠슨 황 불륜 상대와 연계된 중국 데이터센터에 엔비디아 블랙웰 설치...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-28T00:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303091?sid=104"
+    },
     {
      "title": "젠슨 황 불륜 상대 연계 中 데이터센터서 ‘블랙웰’ 발견",
      "press": "busan.com",
@@ -97,12 +135,38 @@
      "press": "donga.com",
      "publishedAt": "2026-11-28T00:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003765886?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "서현 효연 폭로",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T23:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서현, 소녀시대 숙소시절 폭로 \"불금에 나가 놀려는 효연 막느라 진땀\"...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-28T00:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646339"
     },
     {
-     "title": "'젠슨황 불륜 상대' 연계 中시설서 엔비디아 최첨단 칩 발견",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-28T00:08:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=209305"
+     "title": "서현, 소녀시대 활동 시절 효연 폭로 “금요일마다 놀러나가” (전참시...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-28T00:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001152134"
+    },
+    {
+     "title": "서현, 소시 룸메이트 효연 과거 폭로…'불금'마다 외출 말린 사연",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T00:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009315126"
     }
    ]
   },
@@ -125,64 +189,37 @@
      "link": "https://m.entertain.naver.com/article/241/0003543984"
     },
     {
-     "title": "'굿파트너2' 장나라의 역발상 통했다…시청률 9.8%로 자체 기록 경신",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-27T23:58:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848720"
-    },
-    {
      "title": "장나라 “이혼은 정답 없는 길”…‘굿파트너2’ 최고 시청률 11.1%",
      "press": "enews.imbc.com",
      "publishedAt": "2026-11-27T23:58:00.000Z",
      "link": "https://m.entertain.naver.com/article/408/0000329398"
-    }
-   ]
-  },
-  {
-   "keyword": "과징금",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T23:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'동행복권' 75만명 개인정보 유출…법원 \"5억원 과징금 적법\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-28T00:28:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326771/?sc=Naver"
     },
     {
-     "title": "75만명 개인정보 유출 '동행복권'…법원 \"5억 과징금 적법\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-28T00:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000546426?sid=101"
-    },
-    {
-     "title": "'75만명 개인정보 유출' 동행복권, 과징금 취소 소송 패소... 법원 \"보안...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-28T00:22:00.000Z",
-     "link": "https://www.insight.co.kr/news/583932"
+     "title": "'굿파트너2' 장나라의 역발상 통했다…시청률 9.8%로 자체 기록 경신",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-27T23:58:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848720"
     }
    ]
   },
   {
    "keyword": "부산 날씨",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-27T23:20:00.000Z",
+   "firstArticleAt": "2026-11-28T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "아침 일찍 약속 있으면 반드시 알아야…내일(29일) 날씨 소식 심상치 않...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-28T00:40:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178547"
+    },
     {
      "title": "[날씨] 기온 최대 10도 ‘뚝’⋯충청·호남 눈·비, 일요일 영하권 추위",
      "press": "viva100.com",
@@ -194,44 +231,38 @@
      "press": "thefairnews.co.kr",
      "publishedAt": "2026-11-28T00:12:00.000Z",
      "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=95839"
-    },
-    {
-     "title": "아침 최저 -5도 '뚝'…강풍에 체감온도는 더 낮아[내일 날씨]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T00:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315107?sid=103"
     }
    ]
   },
   {
-   "keyword": "곽시양 유지애 오늘 결혼 큰절 약속",
+   "keyword": "과징금",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T23:34:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T00:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "곽시양·유지애, 오늘(28일) 결혼…큰절하며 \"행복하게 살게요\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-28T00:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000522897"
+     "title": "75만명 개인정보 유출 동행복권, 5억원 과징금 불복 1심 패소",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-28T00:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416820?sid=105"
     },
     {
-     "title": "'6살 차' 곽시양♥유지애, 오늘(28일) 부부 된다…나란히 큰절 \"행복하게...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-28T00:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409893"
+     "title": "'동행복권' 75만명 개인정보 유출…법원 \"5억원 과징금 적법\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-28T00:28:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326771/?sc=Naver"
     },
     {
-     "title": "배우♥걸그룹 출신 스타 부부 또 탄생한다…주인공은 곽시양♥유지애,...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-28T00:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786552"
+     "title": "75만명 개인정보 유출 '동행복권'…법원 \"5억 과징금 적법\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-28T00:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000546426?sid=101"
     }
    ]
   },
@@ -241,7 +272,7 @@
     "nate"
    ],
    "articles90": 8,
-   "recent20": 3,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-28T00:05:00.000Z",
    "exclusive": false,
@@ -274,7 +305,7 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-27T23:54:00.000Z",
    "exclusive": false,
@@ -303,7 +334,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1983,
+  "flagged": 1984,
   "matched": 974,
   "avgLeadMin": 646,
   "recent": [
