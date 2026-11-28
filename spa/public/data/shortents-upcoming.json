@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T00:30:47.053Z",
+ "builtAt": "2026-11-28T00:40:50.804Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,81 +8,81 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 21,
  "candidates": [
-  {
-   "keyword": "송민규 포르투갈 리그 데뷔골",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 14,
-   "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-27T23:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "송민규 유럽 무대 데뷔골 작렬, 나시오날 2-1 승리 이끈 선제골",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-28T00:30:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1140807"
-    },
-    {
-     "title": "송민규, 포르투갈 리그 데뷔골…나시오날 2-1 승리",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T00:25:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/003/0014350473"
-    },
-    {
-     "title": "'환상 드리블 후 칩샷'…송민규, 포르투갈 리그 데뷔골",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T00:21:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/421/0009315129"
-    }
-   ]
-  },
   {
    "keyword": "주유소 기름값 하락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-27T23:08:00.000Z",
+   "articles90": 13,
+   "recent20": 5,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T23:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "전국 주유소 기름값 28주 연속 하락…서울 휘발유 1898.8원",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-28T00:26:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326766/?sc=Naver"
+     "title": "주유소 기름값 28주째 하락...서울 2주 연속 평균 1천800원대",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-28T00:38:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73699"
     },
     {
-     "title": "기름값 28주 연속 내리막…국제유가도 하락",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-28T00:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001274267?sid=101"
+     "title": "전국 기름값 28주째 하락...서울 휘발윳값 1,800원대",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T00:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439265?sid=101"
     },
     {
-     "title": "주유소 기름값 28주째 하락…서울 휘발유 2주 연속 1800원대",
-     "press": "ftoday.co.kr",
-     "publishedAt": "2026-11-28T00:18:00.000Z",
-     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=370777"
+     "title": "전국 주유소 기름값 28주째 하락…서울 2주 연속 평균 1800원대",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-28T00:34:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178550"
+    }
+   ]
+  },
+  {
+   "keyword": "전국 기온 뚝 비 눈",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T23:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[날씨] 기온 최대 10도 ‘뚝’⋯충청·호남 눈·비, 일요일 영하권 추위",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-28T00:32:00.000Z",
+     "link": "https://www.viva100.com/article/20261128500024"
+    },
+    {
+     "title": "전국 기온 뚝…남부 곳곳 비·눈 예보 [오늘 날씨]",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-28T00:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416815?sid=102"
+    },
+    {
+     "title": "[날씨] 주말 전국 곳곳 비·눈…기온 최대 7도 뚝 떨어져 쌀쌀",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-28T00:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061590?sid=102"
     }
    ]
   },
   {
    "keyword": "젠슨 황 불륜 상대 연계",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-27T23:01:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T23:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,77 +107,12 @@
    ]
   },
   {
-   "keyword": "가죽 재킷",
-   "sources": [
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T23:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "20년 입던 가죽 재킷 어디 갔나…젠슨 황의 ‘반성 패션’",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-28T00:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887955?sid=104"
-    },
-    {
-     "title": "젠슨 황, 가죽 재킷 대신 입은 면 재킷…“470만원짜리 겸손 연출” 시...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-28T00:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568567?sid=104"
-    },
-    {
-     "title": "젠슨 황, 검은 가죽 재킷 대신 470만원대 디올 입고 복귀",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-28T00:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207916?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "100일의 거짓말",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 5,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T23:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'100일의 거짓말' 김현주, 박진영에 총구 겨눴다 '일촉즉발' [N컷]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T00:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009315130"
-    },
-    {
-     "title": "'100일의 거짓말' 박진영, 김현주와 총구 맞댄 대치",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-28T00:18:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288266"
-    },
-    {
-     "title": "김현주, 박진영에 총구 겨눴다 (100일의 거짓말)",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-28T00:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001307256"
-    }
-   ]
-  },
-  {
    "keyword": "굿파트너 2",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-27T23:42:00.000Z",
    "exclusive": false,
@@ -190,55 +125,22 @@
      "link": "https://m.entertain.naver.com/article/241/0003543984"
     },
     {
-     "title": "장나라 “이혼은 정답 없는 길”…‘굿파트너2’ 최고 시청률 11.1%",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-27T23:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000329398"
-    },
-    {
      "title": "'굿파트너2' 장나라의 역발상 통했다…시청률 9.8%로 자체 기록 경신",
      "press": "jemin.com",
      "publishedAt": "2026-11-27T23:58:00.000Z",
      "link": "https://www.jemin.com/news/articleView.html?idxno=848720"
-    }
-   ]
-  },
-  {
-   "keyword": "이상이 배우",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T23:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2026 미혼 남녀의 배우자 선택...결혼정보회사 엔노블, \"조건 넘어 가치...",
-     "press": "thebigdata.co.kr",
-     "publishedAt": "2026-11-28T00:02:00.000Z",
-     "link": "https://www.thebigdata.co.kr/view.php?ud=20261123105820153837600e7ec7_23"
     },
     {
-     "title": "'주스아저씨' 故박동빈 사망 7개월..아내 이상이, 남편 유언따라 배우 ...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T00:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646333"
-    },
-    {
-     "title": "가연, 결혼 가치관 변화 분석…\"배우자 선택, 조건보다 가치관과 소통 ...",
-     "press": "abcn.kr",
-     "publishedAt": "2026-11-28T00:00:00.000Z",
-     "link": "https://www.abcn.kr/news/articleView.html?idxno=95131"
+     "title": "장나라 “이혼은 정답 없는 길”…‘굿파트너2’ 최고 시청률 11.1%",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-27T23:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329398"
     }
    ]
   },
   {
    "keyword": "과징금",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 5,
@@ -271,15 +173,22 @@
   {
    "keyword": "부산 날씨",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-27T23:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[날씨] 기온 최대 10도 ‘뚝’⋯충청·호남 눈·비, 일요일 영하권 추위",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-28T00:32:00.000Z",
+     "link": "https://www.viva100.com/article/20261128500024"
+    },
     {
      "title": "[내일(29일) 날씨] 전국 맑은 가운데 영하권 아침 추위…새벽까지 호남...",
      "press": "thefairnews.co.kr",
@@ -291,22 +200,119 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-28T00:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009315107?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "곽시양 유지애 오늘 결혼 큰절 약속",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T23:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "곽시양·유지애, 오늘(28일) 결혼…큰절하며 \"행복하게 살게요\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-28T00:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000522897"
     },
     {
-     "title": "[내일날씨] 아침 영하권 추위…새벽까지 호남·제주 눈·비",
-     "press": "yna.co.kr",
+     "title": "'6살 차' 곽시양♥유지애, 오늘(28일) 부부 된다…나란히 큰절 \"행복하게...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-28T00:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409893"
+    },
+    {
+     "title": "배우♥걸그룹 출신 스타 부부 또 탄생한다…주인공은 곽시양♥유지애,...",
+     "press": "tenasia.co.kr",
      "publishedAt": "2026-11-28T00:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468635?sid=102"
+     "link": "https://m.entertain.naver.com/article/312/0000786552"
+    }
+   ]
+  },
+  {
+   "keyword": "서울시 중등교사 임용시험",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T00:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울 중등교사 임용시험 '모든 통신·전자기기 반입 금지' [TF사진관]",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-28T00:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000556437?sid=102"
+    },
+    {
+     "title": "서울 중등교사 임용 1차시험",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T00:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350477?sid=102"
+    },
+    {
+     "title": "교사냥이 막아라···'열화상 복합탐지기' 동원된 중등교사 임용시험 ...",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-28T00:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000556436?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "서현진 긴급 체포",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T23:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서현진, 유연석 살해 용의자로 긴급 체포…’라이어’ 시청률 4.8% [IS차...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-28T00:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543986"
+    },
+    {
+     "title": "'라이어' 서현진, 유연석 살인 용의자? '반전'",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-27T23:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054490"
+    },
+    {
+     "title": "‘라이어’ 유연석, 변사체로 발견→서현진 긴급 체포 ‘충격’",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-27T23:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329397"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1979,
-  "matched": 973,
-  "avgLeadMin": 647,
+  "flagged": 1983,
+  "matched": 974,
+  "avgLeadMin": 646,
   "recent": [
+   {
+    "keyword": "송민규 포르투갈 리그 데뷔골",
+    "hitKeyword": "송민규 데뷔골",
+    "hitAt": "2026-11-28T09:30:00+09:00",
+    "leadMin": 9
+   },
    {
     "keyword": "시장",
     "hitKeyword": "KBO FA 시장",
@@ -360,12 +366,6 @@
     "hitKeyword": "젠슨 황 재킷",
     "hitAt": "2026-11-28T08:00:00+09:00",
     "leadMin": 30
-   },
-   {
-    "keyword": "연금",
-    "hitKeyword": "국민연금 적립금 202조 감소",
-    "hitAt": "2026-11-28T08:00:00+09:00",
-    "leadMin": 20
    }
   ]
  }
