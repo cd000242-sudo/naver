@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T11:53:18.984Z",
+ "builtAt": "2026-11-28T12:03:23.061Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,50 +8,81 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "신지아 시니어 그랑프리",
    "sources": [
-    "nate",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 3,
+   "articles90": 16,
+   "recent20": 4,
    "press": 15,
-   "firstArticleAt": "2026-11-28T10:29:00.000Z",
+   "firstArticleAt": "2026-11-28T10:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[영상] ‘개인 최고점’ 신지아, 짜릿한 역전극으로 생애 첫 시니어 그...",
-     "press": "feedapi.cloud.sbs.co.kr",
-     "publishedAt": "2026-11-28T11:44:00.000Z",
-     "link": "https://feedapi.cloud.sbs.co.kr/feed-api/article_hub/S20000002584"
+     "title": "'일본 심장에 태극기 꽂았다!' 女 피겨 신지아 짜릿한 역전 우승…개인...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-28T11:59:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/076/0004470518"
     },
     {
-     "title": "1.81점 뒤졌던 신지아, 6.27점 차로 뒤집고 첫 피겨 그랑프리 金",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-28T11:37:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/018/0006416899"
+     "title": "'인생 연기' 신지아, 시니어 그랑프리서 첫 금메달",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T11:58:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001406591"
     },
     {
-     "title": "피겨 신지아, 일본서 '역전 우승'…韓 4년 만에 그랑프리 금메달",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-28T11:35:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/008/0005447745"
+     "title": "'김연아·김예림 다음은 나' 신지아, 日 도쿄서 역전 드라마... 시니어 ...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-28T11:55:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/108/0003490841"
+    }
+   ]
+  },
+  {
+   "keyword": "1252회 로또 당첨 번호",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 17,
+   "recent20": 11,
+   "press": 14,
+   "firstArticleAt": "2026-11-28T11:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "1252회 로또 1등 16명…당첨금 각 17억5909만 원",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-28T12:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162493?sid=101"
+    },
+    {
+     "title": "1252회 로또 1등번호 당첨자 16명...17억씩 배당",
+     "press": "headlinejeju.co.kr",
+     "publishedAt": "2026-11-28T12:00:00.000Z",
+     "link": "https://www.headlinejeju.co.kr/news/articleView.html?idxno=602945"
+    },
+    {
+     "title": "제1252회 로또 당첨번호조회…1등 '9·19·23·28·33·44' 보너스 '43'",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-28T12:00:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631640"
     }
    ]
   },
   {
    "keyword": "철도노조 전철 105대 지연",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T10:26:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-28T10:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,66 +107,34 @@
    ]
   },
   {
-   "keyword": "김용준 전 헌법재판소장 별세",
+   "keyword": "김용준 전 소장 별세 87세",
    "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 9,
-   "recent20": 1,
+   "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-28T10:24:00.000Z",
+   "firstArticleAt": "2026-11-28T10:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "19세 고시 수석·첫 지체장애인 대법관…김용준 전 헌재소장 별세",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-28T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568602?sid=102"
+    },
+    {
+     "title": "김용준 전 헌재소장 별세...22세 때 최연소 판사 임용",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T11:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439447?sid=102"
+    },
     {
      "title": "지체장애 딛고 대법관·헌재소장까지…김용준 전 소장 별세",
      "press": "kukinews.com",
      "publishedAt": "2026-11-28T11:42:00.000Z",
      "link": "https://www.kukinews.com/article/view/kuk202611280021"
-    },
-    {
-     "title": "김용준 전 헌법재판소장 별세…지체장애인 출신 첫 대법관",
-     "press": "donga.com",
-     "publishedAt": "2026-11-28T11:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765921?sid=102"
-    },
-    {
-     "title": "김용준 전 헌법재판소장 별세…향년 87세",
-     "press": "kado.net",
-     "publishedAt": "2026-11-28T11:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213910?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "최민정 월드투어 4연속 금",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-28T10:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "적수가 없다!…최민정, 4회 연속 금빛 질주",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-28T11:26:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001406584"
-    },
-    {
-     "title": "월드컵 메달 108개!…4개 대회 '싹쓸이'인데 왜 은퇴하나? 최민정, 쇼트...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-28T11:16:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/311/0002085069"
-    },
-    {
-     "title": "최민정, 쇼트트랙 월드투어 女1000m 4연속 금메달…배서찬 男1500m 금빛 ...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-28T11:04:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110134246253"
     }
    ]
   },
@@ -174,16 +173,23 @@
   {
    "keyword": "DL 이앤씨",
    "sources": [
+    "signal.bz",
     "nate",
     "daum"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-28T10:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'폭행 벌금형' DL 회장, 이번엔 직원 400명 심야 소집해 '물의'",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-28T12:02:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82816"
+    },
     {
      "title": "이해욱 DL그룹 회장, 직원 수백 명 한밤 호출 '물의'",
      "press": "imnews.imbc.com",
@@ -195,27 +201,27 @@
      "press": "cbci.co.kr",
      "publishedAt": "2026-11-28T10:58:00.000Z",
      "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631625"
-    },
-    {
-     "title": "[메가이슈] ‘흑역사’ 추가한 이해욱 DL그룹 회장…밤 10시 직원 수백명...",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-28T10:46:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065609585680347"
     }
    ]
   },
   {
-   "keyword": "연곡면 댐 공사 현장 방문",
+   "keyword": "연곡면 댐 공사 현장",
    "sources": [
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-28T10:30:00.000Z",
+   "firstArticleAt": "2026-11-28T10:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이재명 대통령, 강릉 가뭄 대비 지하수 저류 댐 공사 현장 점검",
+     "press": "mbceg.co.kr",
+     "publishedAt": "2026-11-28T11:04:00.000Z",
+     "link": "https://www.mbceg.co.kr/post/142417"
+    },
     {
      "title": "李대통령, 강릉 지하수저류댐 공사 현장 점검…가뭄 대응·취수원 살펴",
      "press": "newspim.com",
@@ -227,86 +233,58 @@
      "press": "kwnews.co.kr",
      "publishedAt": "2026-11-28T10:36:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/087/0001233994?sid=100"
-    },
-    {
-     "title": "이 대통령, 강릉 연곡면 지하수 저류댐 공사 현장 찾아 가뭄대책 점검",
-     "press": "kado.net",
-     "publishedAt": "2026-11-28T10:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213908?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "DL그룹 회장 400명 호출",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T10:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이해욱 DL그룹 회장, 직원 수백 명 한밤 호출 '물의'",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-28T11:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538683?sid=102"
-    },
-    {
-     "title": "[메가이슈] ‘흑역사’ 추가한 이해욱 DL그룹 회장…밤 10시 직원 수백명...",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-28T10:46:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065609585680347"
-    },
-    {
-     "title": "밤 10시에 \"다시 출근하라\"…회장 질책에 직원 수백 명 호출",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-28T10:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522936?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "남경필 아들 스토킹 혐의",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T10:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'마약 중독 子 살리려 감옥 보냈는데'…남경필 아들, 이번엔 전 연인 폭...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-28T11:13:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128869"
-    },
-    {
-     "title": "남경필 아들 측 \"영상 유포 협박 안 해\"…내일 구속 기로",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-28T11:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980301?sid=102"
-    },
-    {
-     "title": "경찰, ‘전 연인 협박·스토킹’ 남경필 전 경기지사 아들 구속영장 신...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-28T10:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485626?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2060,
-  "matched": 1005,
-  "avgLeadMin": 646,
+  "flagged": 2062,
+  "matched": 1012,
+  "avgLeadMin": 642,
   "recent": [
+   {
+    "keyword": "최민정 4연속 금메달",
+    "hitKeyword": "최민정 월드투어",
+    "hitAt": "2026-11-28T21:00:00+09:00",
+    "leadMin": 137
+   },
+   {
+    "keyword": "최민정 월드투어 4대회 금메달",
+    "hitKeyword": "최민정 월드투어",
+    "hitAt": "2026-11-28T21:00:00+09:00",
+    "leadMin": 117
+   },
+   {
+    "keyword": "최민정 1000M 금메달 4연속",
+    "hitKeyword": "최민정 월드투어",
+    "hitAt": "2026-11-28T21:00:00+09:00",
+    "leadMin": 97
+   },
+   {
+    "keyword": "최민정, 4개 대회 연속 금메달!",
+    "hitKeyword": "최민정 월드투어",
+    "hitAt": "2026-11-28T21:00:00+09:00",
+    "leadMin": 57
+   },
+   {
+    "keyword": "dl그룹",
+    "hitKeyword": "DL그룹 회장 논란",
+    "hitAt": "2026-11-28T21:00:00+09:00",
+    "leadMin": 27
+   },
+   {
+    "keyword": "최민정 월드투어 4연속 금",
+    "hitKeyword": "최민정 월드투어",
+    "hitAt": "2026-11-28T21:00:00+09:00",
+    "leadMin": 17
+   },
+   {
+    "keyword": "DL그룹 회장 400명 호출",
+    "hitKeyword": "DL그룹 회장 논란",
+    "hitAt": "2026-11-28T21:00:00+09:00",
+    "leadMin": 7
+   },
    {
     "keyword": "크라잉넛 특집",
     "hitKeyword": "불후의 명곡 크라잉넛",
@@ -324,48 +302,6 @@
     "hitKeyword": "100일의 거짓말",
     "hitAt": "2026-11-28T19:30:00+09:00",
     "leadMin": 3144
-   },
-   {
-    "keyword": "100일의 거짓말",
-    "hitKeyword": "100일의 거짓말",
-    "hitAt": "2026-11-28T19:30:00+09:00",
-    "leadMin": 609
-   },
-   {
-    "keyword": "DL그룹 회장 직원 호출",
-    "hitKeyword": "DL그룹 회장 논란",
-    "hitAt": "2026-11-28T19:30:00+09:00",
-    "leadMin": 309
-   },
-   {
-    "keyword": "DL그룹 회장 심야 직원 호출",
-    "hitKeyword": "DL그룹 회장 논란",
-    "hitAt": "2026-11-28T19:30:00+09:00",
-    "leadMin": 289
-   },
-   {
-    "keyword": "dl그룹",
-    "hitKeyword": "DL그룹 회장 논란",
-    "hitAt": "2026-11-28T19:30:00+09:00",
-    "leadMin": 269
-   },
-   {
-    "keyword": "우리은행 연승 성공",
-    "hitKeyword": "우리은행 강이슬 복귀",
-    "hitAt": "2026-11-28T18:30:00+09:00",
-    "leadMin": 4099
-   },
-   {
-    "keyword": "미래대응기금 전면 재검토 촉구",
-    "hitKeyword": "트럼프 관세 재검토",
-    "hitAt": "2026-11-28T18:30:00+09:00",
-    "leadMin": 3295
-   },
-   {
-    "keyword": "장나라 이혼 기각",
-    "hitKeyword": "굿파트너2 장나라",
-    "hitAt": "2026-11-28T18:30:00+09:00",
-    "leadMin": 620
    }
   ]
  }
