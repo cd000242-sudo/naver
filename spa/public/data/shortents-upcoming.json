@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-27T23:50:34.614Z",
+ "builtAt": "2026-11-28T00:00:37.652Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "서현진 긴급 체포",
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 0,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T22:24:00.000Z",
+   "articles90": 16,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-27T22:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'라이어' 서현진, 유연석 살인 용의자? '반전'",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-27T23:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054490"
+    },
+    {
+     "title": "‘라이어’ 유연석, 변사체로 발견→서현진 긴급 체포 ‘충격’",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-27T23:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329397"
+    },
     {
      "title": "'라이어' 유연석 사망도 충격인데…서현진, 살해 용의자로 '긴급 체포' ...",
      "press": "xportsnews.com",
      "publishedAt": "2026-11-27T23:10:00.000Z",
      "link": "https://m.entertain.naver.com/article/311/0002084980"
-    },
-    {
-     "title": "'라이어' 서현진, 유연석 살해 용의자 긴급 체포⋯시청률 4.8%",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-27T23:02:00.000Z",
-     "link": "http://www.joynews24.com/view/2031483"
-    },
-    {
-     "title": "‘라이어’ 서현진, 유연석 살해 용의자로 긴급 체포…5.7% 최고의 1분",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T23:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192063"
     }
    ]
   },
@@ -49,62 +49,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-27T22:24:00.000Z",
+   "articles90": 13,
+   "recent20": 5,
+   "press": 13,
+   "firstArticleAt": "2026-11-27T22:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장나라에 배운 김혜윤…'굿파트너2' 최고 11.1% 상승 [시청률]",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-27T23:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054489"
+     "title": "장나라 “이혼은 정답 없는 길”…‘굿파트너2’ 최고 시청률 11.1%",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-27T23:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329398"
     },
     {
-     "title": "장나라+김혜윤 콤비 통했다-'굿파트너2' 9.8%",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-27T23:42:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96113"
+     "title": "'굿파트너2' 장나라의 역발상 통했다…시청률 9.8%로 자체 기록 경신",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-27T23:58:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848720"
     },
     {
-     "title": "‘굿파트너2’ 김혜윤에 깨달음 준 장나라, 9.8% 자체 최고 시청률",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T22:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192061"
-    }
-   ]
-  },
-  {
-   "keyword": "그냥 사람 친구",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 4,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T22:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'그냥사람친구' 시청률 6.5% 동시간 1위",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-27T23:48:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288253"
-    },
-    {
-     "title": "그냥사람친구, 첫방 최고 6.5%",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-27T23:48:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611280050"
-    },
-    {
-     "title": "이서진vs한지민 통했다…‘그냥사람친구’ 첫방송 5%",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-27T23:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001307248"
+     "title": "‘굿파트너2’ 시청률 2.2%p 껑충 자체 최고 기록",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-27T23:50:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305892"
     }
    ]
   },
@@ -113,10 +81,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T22:26:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -205,41 +173,73 @@
    ]
   },
   {
-   "keyword": "신민아, 재혼 황후 이야기",
+   "keyword": "과징금",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-27T22:22:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-27T22:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "신민아, '개비에슈' 주지훈의 뻔뻔한 궤변에 설득당했다…\"하면서 열받...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-27T23:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786549"
+     "title": "75만명 정보 유출 책임 피하지 못했다…동행복권, 5억원 과징금 소송 패...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-27T23:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000134128?sid=102"
     },
     {
-     "title": "이세영, 조롱마저 웃어 넘긴 악녀…\"시즌2서 더 욕 먹고 싶다\" ('재혼황...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-27T22:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786539"
+     "title": "영풍 석포제련소, 환경 제재 지속…올해도 과징금 부과돼",
+     "press": "news.bizwatch.co.kr",
+     "publishedAt": "2026-11-27T22:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/648/0000053061?sid=101"
     },
     {
-     "title": "신민아, 이종석 이어 '이종새'와도 멜로…CG팀에 특별 주문 \"꼭 귀엽길\"...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-27T22:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786542"
+     "title": "'75만명 정보 유출' 동행복권 과징금 불복 소송서 패소",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-27T22:48:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452817"
+    }
+   ]
+  },
+  {
+   "keyword": "가죽 재킷",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T22:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨 황, 반성 의미 담은 패션 맞어?…재킷은 470만원짜리 디올, 신발은...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-27T23:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729720?sid=104"
+    },
+    {
+     "title": "가죽 재킷 벗고 고개 숙인 젠슨 황…옷값 보니 '깜짝'",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-27T22:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359289?sid=104"
+    },
+    {
+     "title": "가죽 잠바 벗은 젠슨 황…‘반성 패션’에 걸친 명품만 700만원",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-27T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002836130?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1975,
+  "flagged": 1977,
   "matched": 971,
   "avgLeadMin": 656,
   "recent": [
