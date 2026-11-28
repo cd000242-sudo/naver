@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T09:32:27.890Z",
+ "builtAt": "2026-11-28T09:42:31.287Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,146 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 30,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "포스코 임금교섭 타결",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 54,
-   "recent20": 5,
+   "articles90": 55,
+   "recent20": 6,
    "press": 46,
-   "firstArticleAt": "2026-11-28T08:06:00.000Z",
+   "firstArticleAt": "2026-11-28T08:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘파업 초읽기’ 포스코 노사 임금교섭 최종 타결",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-28T09:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162490?sid=102"
+     "title": "포항시의회, 포스코 임금협상 최종 타결 환영…\"노사 상생이 지역경제 ...",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-28T09:40:00.000Z",
+     "link": "http://www.breaknews.com/1255006"
     },
     {
-     "title": "파업까지 치달은 포스코 노사 갈등…5개월 만에 극적 타결",
-     "press": "magazine.hankyung.com",
-     "publishedAt": "2026-11-28T09:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/050/0000113896?sid=101"
+     "title": "포스코 노사, 임금교섭 5개월 만 최종 타결…찬성률 65.01%",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-28T09:38:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=303789"
     },
     {
-     "title": "포스코 노사, 두 차례 파업 끝 합의⋯조합원 65% 찬성 [종합]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-28T09:24:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2654215"
+     "title": "포스코, 5개월여 만에 임금협상 극적 타결…기본급 2.6% 인상",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-28T09:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160525?sid=101"
     }
    ]
   },
   {
-   "keyword": "이재명 강릉 바이오",
+   "keyword": "한성숙 총리 청년 채용 당부",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
+   "articles90": 19,
+   "recent20": 1,
+   "press": 19,
+   "firstArticleAt": "2026-11-28T08:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "韓총리 “삼전·하이닉스 채용 많이 해달라” 당부",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-28T09:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004687174?sid=100"
+    },
+    {
+     "title": "한 총리, 삼성·SK에 \"청년 채용 많이 해달라\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-28T09:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930863?sid=100"
+    },
+    {
+     "title": "[속보] 한 총리, 삼전·하이닉스에 \"신입사원 채용 많이 해달라\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-28T09:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001079288?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "최민정 4연속 금메달",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T08:03:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-28T08:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "라스트댄스 맞나…'상하이 접수' 최민정, ISU 쇼트트랙 월드투어 4연속...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-28T09:16:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261128000071"
+    },
+    {
+     "title": "쇼트트랙 최민정, 월드투어 1,000m 4개 대회 연속 금메달",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T09:11:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/052/0002439413"
+    },
+    {
+     "title": "쇼트트랙 국가대표 최민정, 여자 1000ｍ 4개 대회 연속 금메달 쾌거",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-28T08:46:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178614"
+    }
+   ]
+  },
+  {
+   "keyword": "FC서울 우승 대관식",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 43,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-28T08:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'10년 만의 우승' 서울 김기동 감독이 내쉰 안도의 한숨, \"팬들과 약속 ...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-28T09:41:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/117/0004128858"
+    },
+    {
+     "title": "10년 만의 대관식, 김기동 감독이 트로피 들고 내쉰 '안도의 한숨'...\"약...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-28T09:35:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/076/0004470507"
+    },
+    {
+     "title": "FC서울, 우승 파티서 대전 4-1 완파…광주는 5경기 무패(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T09:35:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014350871"
+    }
+   ]
+  },
+  {
+   "keyword": "강릉 천연물 바이오",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-28T08:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -67,57 +164,95 @@
      "link": "https://n.news.naver.com/mnews/article/014/0005611045?sid=100"
     },
     {
-     "title": "李대통령 \"강릉 천연물 혁신센터 예산 반영해 신속 추진\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-28T08:44:00.000Z",
-     "link": "https://www.ajunews.com/view/20261128172637930"
+     "title": "李대통령 \"강원 천연물 혁신센터 예산 반영…R&D부터 사업화까지 지원\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-28T08:56:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4447058"
     }
    ]
   },
   {
-   "keyword": "FC서울 우승 대관식",
+   "keyword": "북창 공군기지 운영재개",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 40,
+   "articles90": 8,
    "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-28T08:09:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-28T08:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "곤룡포 입은 정승원·김기동 헹가래…10년만의 우승 만끽한 서울",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-28T09:19:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/119/0003160524"
+     "title": "北 북창 공군기지, 3년만에 운영 재개 정황…미그-23 포착",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T09:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350870?sid=104"
     },
     {
-     "title": "FC서울 김기동 감독, 통산 7번째 K리그1 우승…\"팬들과의 약속 지켜 다행...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-28T09:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288502"
+     "title": "북 북창 공군기지 노후 전투기 포착...\"3년 만에 운영재개\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T08:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439407?sid=104"
     },
     {
-     "title": "FC서울, 10년 만의 대관식",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T09:02:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/421/0009315459"
+     "title": "北 북창 공군기지 노후 전투기 포착… 3년 만에 보수 끝 운영재개 정황",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-28T08:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193811?sid=100"
     }
    ]
   },
   {
-   "keyword": "아일릿 모카 활동 재개",
+   "keyword": "김영광, 보복운전 한 달 만에 복귀",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-28T08:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김영광, 보복운전 논란 이후 유튜브 복귀… \"죄송하고 면목없다\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T09:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000968303"
+    },
+    {
+     "title": "김영광, ‘보복운전 논란’ 한 달여 만 유튜브 복귀…“반성하는 시간 ...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-28T09:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005770284"
+    },
+    {
+     "title": "\"빠르다 빨라\"…'보복운전 논란' 김영광, 한 달여 만에 복귀→사죄 속 ...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-28T09:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409945"
+    }
+   ]
+  },
+  {
+   "keyword": "아일릿 모카, 일부 일정 참여",
    "sources": [
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-28T08:04:00.000Z",
-   "exclusive": true,
+   "firstArticleAt": "2026-11-28T08:42:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "아일릿 모카, 활동 중단 끝 복귀 시동",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-28T09:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128857"
+    },
     {
      "title": "아일릿 모카, 활동 중단 끝 복귀 시동…\"일부 일정부터 참여, 건강 최우...",
      "press": "xportsnews.com",
@@ -129,54 +264,46 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-28T09:20:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288484"
-    },
-    {
-     "title": "'활동 중단' 아일릿 모카, 불안 증세 딛고 돌아온다.. \"건강 살피며 활동...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-28T09:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409946"
-    }
-   ]
-  },
-  {
-   "keyword": "영국 미공군기지 드론",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T08:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"英 최대 미군 전투기 기지에 드론 6대 출몰…이란 소행 의심\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T09:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315468?sid=104"
-    },
-    {
-     "title": "\"영국 기지에 美 전투기 노린 드론 출몰‥이란 연루 의심\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-28T08:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538670?sid=104"
-    },
-    {
-     "title": "영국 미공군기지 드론 6대 격퇴…이란 배후설 물증은?",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-28T08:30:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288481"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2074,
-  "matched": 1015,
-  "avgLeadMin": 662,
+  "flagged": 2076,
+  "matched": 1018,
+  "avgLeadMin": 666,
   "recent": [
+   {
+    "keyword": "우리은행 연승 성공",
+    "hitKeyword": "우리은행 강이슬 복귀",
+    "hitAt": "2026-11-28T18:30:00+09:00",
+    "leadMin": 4099
+   },
+   {
+    "keyword": "미래대응기금 전면 재검토 촉구",
+    "hitKeyword": "트럼프 관세 재검토",
+    "hitAt": "2026-11-28T18:30:00+09:00",
+    "leadMin": 3295
+   },
+   {
+    "keyword": "장나라 이혼 기각",
+    "hitKeyword": "굿파트너2 장나라",
+    "hitAt": "2026-11-28T18:30:00+09:00",
+    "leadMin": 620
+   },
+   {
+    "keyword": "트럼프 푸틴 유럽 공격 중단",
+    "hitKeyword": "트럼프 관세 재검토",
+    "hitAt": "2026-11-28T18:30:00+09:00",
+    "leadMin": 610
+   },
+   {
+    "keyword": "성시경 쌈디",
+    "hitKeyword": "성시경 쌈디 절교",
+    "hitAt": "2026-11-28T18:30:00+09:00",
+    "leadMin": 199
+   },
    {
     "keyword": "2026",
     "hitKeyword": "해운대 빛축제 2026",
@@ -206,36 +333,6 @@
     "hitKeyword": "팔레스타인 인간방패 폭로",
     "hitAt": "2026-11-28T18:00:00+09:00",
     "leadMin": 229
-   },
-   {
-    "keyword": "GS AI 데이터센터 착공식 참석",
-    "hitKeyword": "중국 데이터센터 엔비디아",
-    "hitAt": "2026-11-28T17:30:00+09:00",
-    "leadMin": 290
-   },
-   {
-    "keyword": "동해 AI 데이터센터 착공",
-    "hitKeyword": "중국 데이터센터 엔비디아",
-    "hitAt": "2026-11-28T17:30:00+09:00",
-    "leadMin": 279
-   },
-   {
-    "keyword": "동해 AI 데이터센터 착공 첫 삽",
-    "hitKeyword": "중국 데이터센터 엔비디아",
-    "hitAt": "2026-11-28T17:30:00+09:00",
-    "leadMin": 239
-   },
-   {
-    "keyword": "이재명 AI 데이터센터 방문",
-    "hitKeyword": "중국 데이터센터 엔비디아",
-    "hitAt": "2026-11-28T17:30:00+09:00",
-    "leadMin": 109
-   },
-   {
-    "keyword": "이재명 AI 데이터센터",
-    "hitKeyword": "중국 데이터센터 엔비디아",
-    "hitAt": "2026-11-28T17:30:00+09:00",
-    "leadMin": 48
    }
   ]
  }
