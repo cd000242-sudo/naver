@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T00:20:44.082Z",
+ "builtAt": "2026-11-28T00:30:47.053Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-27T22:58:00.000Z",
+   "articles90": 14,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-27T23:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘마데이라 더비’서 터진 송민규의 포르투갈 데뷔골…나시오날 2연승",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-28T00:18:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/144/0001152132"
+     "title": "송민규 유럽 무대 데뷔골 작렬, 나시오날 2-1 승리 이끈 선제골",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-28T00:30:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1140807"
     },
     {
-     "title": "송민규, 마데이라 더비서 포르투갈 무대 데뷔골…나시오날 2-1 승리 이끌...",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-28T00:10:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=436046"
+     "title": "송민규, 포르투갈 리그 데뷔골…나시오날 2-1 승리",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T00:25:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/003/0014350473"
     },
     {
-     "title": "송민규, 포르투갈 리그서 데뷔골… 나시오날 2-1 승",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-27T23:46:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888243"
+     "title": "'환상 드리블 후 칩샷'…송민규, 포르투갈 리그 데뷔골",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T00:21:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/421/0009315129"
     }
    ]
   },
@@ -47,63 +47,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 10,
    "recent20": 3,
-   "press": 8,
+   "press": 10,
    "firstArticleAt": "2026-11-27T23:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "전국 주유소 기름값 28주 연속 하락…서울 휘발유 1898.8원",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-28T00:26:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326766/?sc=Naver"
+    },
+    {
+     "title": "기름값 28주 연속 내리막…국제유가도 하락",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-28T00:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274267?sid=101"
+    },
+    {
      "title": "주유소 기름값 28주째 하락…서울 휘발유 2주 연속 1800원대",
      "press": "ftoday.co.kr",
      "publishedAt": "2026-11-28T00:18:00.000Z",
      "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=370777"
-    },
-    {
-     "title": "국제유가 공급 과잉에 약세 … 주유소 기름값 1800원대, 28주 연속 하락",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-28T00:06:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/28/2026112850008.html"
-    },
-    {
-     "title": "주유소 기름값 28주째 내리막…서울 휘발유 2주 연속 1800원대",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-28T00:06:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68629"
     }
    ]
   },
   {
-   "keyword": "굿파트너 2",
+   "keyword": "젠슨 황 불륜 상대 연계",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T22:56:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-27T23:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장나라·김혜윤 ‘굿파트너2’, 거침없는 상승세…9.8% 자체 최고 경신...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-28T00:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543984"
+     "title": "젠슨 황 불륜 상대 연계 中 데이터센터서 ‘블랙웰’ 발견",
+     "press": "busan.com",
+     "publishedAt": "2026-11-28T00:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001409353?sid=104"
     },
     {
-     "title": "'굿파트너2' 장나라의 역발상 통했다…시청률 9.8%로 자체 기록 경신",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-27T23:58:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848720"
+     "title": "엔비디아 최첨단 AI칩, ‘불륜녀 연관’ 中데이터센터에 설치",
+     "press": "donga.com",
+     "publishedAt": "2026-11-28T00:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765886?sid=104"
     },
     {
-     "title": "장나라 “이혼은 정답 없는 길”…‘굿파트너2’ 최고 시청률 11.1%",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-27T23:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000329398"
+     "title": "'젠슨황 불륜 상대' 연계 中시설서 엔비디아 최첨단 칩 발견",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-28T00:08:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=209305"
     }
    ]
   },
@@ -112,30 +111,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 5,
-   "press": 6,
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
    "firstArticleAt": "2026-11-27T23:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "복귀한 젠슨 황, 가죽 재킷 벗고 입은 '반성 재킷' 알고 보니 '470만원 디...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-28T00:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610994?sid=101"
+     "title": "20년 입던 가죽 재킷 어디 갔나…젠슨 황의 ‘반성 패션’",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-28T00:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887955?sid=104"
     },
     {
-     "title": "젠슨 황, 시그니처 '가죽' 버리고 면 재킷 차림으로 복귀…알고 보니 47...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-28T00:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042821?sid=104"
+     "title": "젠슨 황, 가죽 재킷 대신 입은 면 재킷…“470만원짜리 겸손 연출” 시...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-28T00:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568567?sid=104"
     },
     {
-     "title": "가죽 재킷 대신 470만원 디올…젠슨 황의 '겸손 패션'",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-28T00:08:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888244"
+     "title": "젠슨 황, 검은 가죽 재킷 대신 470만원대 디올 입고 복귀",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-28T00:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207916?sid=104"
     }
    ]
   },
@@ -144,13 +143,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 4,
-   "press": 5,
+   "articles90": 6,
+   "recent20": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-27T23:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'100일의 거짓말' 김현주, 박진영에 총구 겨눴다 '일촉즉발' [N컷]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T00:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009315130"
+    },
     {
      "title": "'100일의 거짓말' 박진영, 김현주와 총구 맞댄 대치",
      "press": "topstarnews.net",
@@ -162,12 +167,71 @@
      "press": "sports.donga.com",
      "publishedAt": "2026-11-28T00:14:00.000Z",
      "link": "https://m.entertain.naver.com/article/382/0001307256"
+    }
+   ]
+  },
+  {
+   "keyword": "굿파트너 2",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T23:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "장나라·김혜윤 ‘굿파트너2’, 거침없는 상승세…9.8% 자체 최고 경신...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-28T00:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543984"
     },
     {
-     "title": "100일의 거짓말, 박진영·김현주 대치",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-28T00:14:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611280064"
+     "title": "장나라 “이혼은 정답 없는 길”…‘굿파트너2’ 최고 시청률 11.1%",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-27T23:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329398"
+    },
+    {
+     "title": "'굿파트너2' 장나라의 역발상 통했다…시청률 9.8%로 자체 기록 경신",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-27T23:58:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848720"
+    }
+   ]
+  },
+  {
+   "keyword": "이상이 배우",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-27T23:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2026 미혼 남녀의 배우자 선택...결혼정보회사 엔노블, \"조건 넘어 가치...",
+     "press": "thebigdata.co.kr",
+     "publishedAt": "2026-11-28T00:02:00.000Z",
+     "link": "https://www.thebigdata.co.kr/view.php?ud=20261123105820153837600e7ec7_23"
+    },
+    {
+     "title": "'주스아저씨' 故박동빈 사망 7개월..아내 이상이, 남편 유언따라 배우 ...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-28T00:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646333"
+    },
+    {
+     "title": "가연, 결혼 가치관 변화 분석…\"배우자 선택, 조건보다 가치관과 소통 ...",
+     "press": "abcn.kr",
+     "publishedAt": "2026-11-28T00:00:00.000Z",
+     "link": "https://www.abcn.kr/news/articleView.html?idxno=95131"
     }
    ]
   },
@@ -177,69 +241,69 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T22:55:00.000Z",
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T23:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'75만 명 개인정보 유출' 동행복권, 과징금 5억원 취소 소송 패소",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-28T00:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122390?sid=102"
+     "title": "'동행복권' 75만명 개인정보 유출…법원 \"5억원 과징금 적법\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-28T00:28:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326771/?sc=Naver"
     },
     {
-     "title": "75만명 정보 유출 책임 피하지 못했다…동행복권, 5억원 과징금 소송 패...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-27T23:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000134128?sid=102"
+     "title": "75만명 개인정보 유출 '동행복권'…법원 \"5억 과징금 적법\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-28T00:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000546426?sid=101"
     },
     {
-     "title": "영풍 석포제련소, 환경 제재 지속…올해도 과징금 부과돼",
-     "press": "news.bizwatch.co.kr",
-     "publishedAt": "2026-11-27T22:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/648/0000053061?sid=101"
+     "title": "'75만명 개인정보 유출' 동행복권, 과징금 취소 소송 패소... 법원 \"보안...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-28T00:22:00.000Z",
+     "link": "https://www.insight.co.kr/news/583932"
     }
    ]
   },
   {
-   "keyword": "이동연 팬레터 보관 인증",
+   "keyword": "부산 날씨",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T22:51:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T23:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이동연, 팬레터 폐기 논란에 '인증샷' 공개…고이 보관된 봉투들",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-27T23:18:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785480"
+     "title": "[내일(29일) 날씨] 전국 맑은 가운데 영하권 아침 추위…새벽까지 호남...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-28T00:12:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=95839"
     },
     {
-     "title": "이동연 “저걸 아직도 갖고 있어?” 모아둔 선물+편지 ‘증거들’ 여론...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-27T22:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192062"
+     "title": "아침 최저 -5도 '뚝'…강풍에 체감온도는 더 낮아[내일 날씨]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T00:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009315107?sid=103"
     },
     {
-     "title": "'팬레터 폐기' 뭇매 맞던 이동연, 2차 사과·인증샷에 비난 여론 '반전'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-27T22:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014350418"
+     "title": "[내일날씨] 아침 영하권 추위…새벽까지 호남·제주 눈·비",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-28T00:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468635?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1976,
+  "flagged": 1979,
   "matched": 973,
   "avgLeadMin": 647,
   "recent": [
