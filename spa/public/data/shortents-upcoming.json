@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T01:11:00.822Z",
+ "builtAt": "2026-11-28T01:21:03.868Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "주유소 기름값 하락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 14,
+   "articles90": 15,
+   "recent20": 4,
+   "press": 15,
    "firstArticleAt": "2026-11-27T23:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "주유소 기름값 28주째 하락‥서울 2주 연속 1천8백 원대",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-28T01:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538642?sid=101"
+    },
     {
      "title": "주유소 기름값 28주 연속 하락…서울 휘발유 2주째 1800원대",
      "press": "newstomato.com",
@@ -33,23 +39,49 @@
      "press": "viva100.com",
      "publishedAt": "2026-11-28T01:08:00.000Z",
      "link": "https://www.viva100.com/article/20261128500042"
-    },
-    {
-     "title": "주유소 기름값 28주 연속 하락",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-28T01:06:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888763"
     }
    ]
   },
   {
-   "keyword": "곽시양 유지애 오늘 결혼해요",
+   "keyword": "송민규 포르투갈 데뷔골",
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
+   "articles90": 14,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-28T00:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "송민규, 포르투갈 리그 데뷔골 폭발‥'경기 MVP' 선정",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-28T01:06:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/214/0001538641"
+    },
+    {
+     "title": "송민규, 포르투갈리그 데뷔골 폭발…나시오날 2-1 승리 견인",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-28T00:58:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785528"
+    },
+    {
+     "title": "송민규, 포르투갈 리그 데뷔골 '쾅'…나시오날 승리 견인",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-28T00:58:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110130544674"
+    }
+   ]
+  },
+  {
+   "keyword": "곽시양 유지애 결혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
    "firstArticleAt": "2026-11-28T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -107,45 +139,76 @@
    ]
   },
   {
-   "keyword": "그냥 사람 친구 시청률은",
+   "keyword": "북러 경제협조 활성화",
    "sources": [
     "nate"
    ],
    "articles90": 6,
    "recent20": 0,
    "press": 6,
-   "firstArticleAt": "2026-11-27T23:48:00.000Z",
+   "firstArticleAt": "2026-11-28T00:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이서진·한지민 절친 비결…'그냥사람친구' 최고 6.5% [시청률]",
-     "press": "tvdaily.co.kr",
+     "title": "북러 경제공동위 개최…“쌍방 경제분야 협조 사업 활성화”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-28T00:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303096?sid=100"
+    },
+    {
+     "title": "북러 경제공동위 개최…\"쌍방 경제분야 협조사업 활성화\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-28T00:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930748?sid=100"
+    },
+    {
+     "title": "북러 경제공동위 개최...\"경제분야 협조사업 활성화\"",
+     "press": "ytn.co.kr",
      "publishedAt": "2026-11-28T00:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054491"
+     "link": "https://n.news.naver.com/mnews/article/052/0002439264?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "굿파트너 2",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T23:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'굿파트너2', 두 자릿수 시청률 목전…9.8% '자체 최고'",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-28T01:14:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110130629359"
     },
     {
-     "title": "이서진·한지민 티격태격 케미…‘그냥사람친구’, 5% 시청률로 출발",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-28T00:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005770208"
+     "title": "김혜윤, 장나라의 '리봄' 의미 깨달았다…'굿파트너2' 9.8% 자체 최고[시...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-28T01:02:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795826145531691006"
     },
     {
-     "title": "'그냥사람친구' 이서진·한지민·주헌·정연으로 퀄리티 스타트…첫 방...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-27T23:50:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785496"
+     "title": "장나라·김혜윤 ‘굿파트너2’, 거침없는 상승세…9.8% 자체 최고 경신...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-28T00:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543984"
     }
    ]
   },
   {
    "keyword": "서울시 중등교사 임용시험",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-28T00:05:00.000Z",
    "exclusive": false,
@@ -167,47 +230,46 @@
      "title": "서울 중등교사 임용 1차시험",
      "press": "newsis.com",
      "publishedAt": "2026-11-28T00:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350476?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/003/0014350477?sid=102"
     }
    ]
   },
   {
-   "keyword": "송민규 데뷔골 폭발!",
+   "keyword": "띠별 운세",
    "sources": [
-    "nate"
+    "google"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-27T23:42:00.000Z",
+   "firstArticleAt": "2026-11-28T00:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "송민규, 포르투갈리그 데뷔골 폭발…나시오날 2-1 승리 견인",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-28T00:58:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785528"
+     "title": "[오늘의 띠별 운세] 2026년 11월 28일 토요일",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-28T01:12:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=323546"
     },
     {
-     "title": "송민규, 포르투갈 리그 데뷔골…나시오날 2-1 승리",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T00:25:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/003/0014350473"
+     "title": "[오늘의운세] 11월28일 토요일, 재미로 보는 오늘의 띠별운세",
+     "press": "job-post.co.kr",
+     "publishedAt": "2026-11-28T00:54:00.000Z",
+     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=241657"
     },
     {
-     "title": "'드디어' 한국 국가대표, 유럽 무대 데뷔골 폭발...나시오날 송민규, 환...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-27T23:42:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/477/0000641311"
+     "title": "[오늘의 운세] 2026년 11월 28일 띠별 운세",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-28T00:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003490843?sid=103"
     }
    ]
   },
   {
    "keyword": "서현진 긴급 체포",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
@@ -239,7 +301,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1990,
+  "flagged": 1994,
   "matched": 977,
   "avgLeadMin": 648,
   "recent": [
