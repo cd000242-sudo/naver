@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T11:43:14.865Z",
+ "builtAt": "2026-11-28T11:53:18.984Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,47 @@
  "measured": 28,
  "candidates": [
   {
+   "keyword": "신지아 시니어 그랑프리",
+   "sources": [
+    "nate",
+    "daum"
+   ],
+   "articles90": 15,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-28T10:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[영상] ‘개인 최고점’ 신지아, 짜릿한 역전극으로 생애 첫 시니어 그...",
+     "press": "feedapi.cloud.sbs.co.kr",
+     "publishedAt": "2026-11-28T11:44:00.000Z",
+     "link": "https://feedapi.cloud.sbs.co.kr/feed-api/article_hub/S20000002584"
+    },
+    {
+     "title": "1.81점 뒤졌던 신지아, 6.27점 차로 뒤집고 첫 피겨 그랑프리 金",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-28T11:37:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/018/0006416899"
+    },
+    {
+     "title": "피겨 신지아, 일본서 '역전 우승'…韓 4년 만에 그랑프리 금메달",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-28T11:35:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/008/0005447745"
+    }
+   ]
+  },
+  {
    "keyword": "철도노조 전철 105대 지연",
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-28T10:14:00.000Z",
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-28T10:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -39,71 +72,6 @@
      "press": "ikbc.co.kr",
      "publishedAt": "2026-11-28T11:28:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/660/0000122418?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "신지아 시니어 그랑프리",
-   "sources": [
-    "nate",
-    "daum"
-   ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-28T10:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "1.81점 뒤졌던 신지아, 6.27점 차로 뒤집고 첫 피겨 그랑프리 金",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-28T11:37:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/018/0006416899"
-    },
-    {
-     "title": "피겨 신지아, 일본서 '역전 우승'…韓 4년 만에 그랑프리 금메달",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-28T11:35:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/008/0005447745"
-    },
-    {
-     "title": "피겨 신지아, 생애 첫 시니어 그랑프리 금메달 획득…유영 동메달",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-28T11:30:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110134345492"
-    }
-   ]
-  },
-  {
-   "keyword": "최민정 월드투어 4연속 금",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-28T10:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "적수가 없다!…최민정, 4회 연속 금빛 질주",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-28T11:26:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001406584"
-    },
-    {
-     "title": "월드컵 메달 108개!…4개 대회 '싹쓸이'인데 왜 은퇴하나? 최민정, 쇼트...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-28T11:16:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/311/0002085069"
-    },
-    {
-     "title": "최민정, 쇼트트랙 월드투어 女1000m 4연속 금메달…배서찬 男1500m 금빛 ...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-28T11:04:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110134246253"
     }
    ]
   },
@@ -136,6 +104,38 @@
      "press": "kado.net",
      "publishedAt": "2026-11-28T11:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/654/0000213910?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "최민정 월드투어 4연속 금",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-28T10:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "적수가 없다!…최민정, 4회 연속 금빛 질주",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T11:26:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001406584"
+    },
+    {
+     "title": "월드컵 메달 108개!…4개 대회 '싹쓸이'인데 왜 은퇴하나? 최민정, 쇼트...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-28T11:16:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/311/0002085069"
+    },
+    {
+     "title": "최민정, 쇼트트랙 월드투어 女1000m 4연속 금메달…배서찬 男1500m 금빛 ...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-28T11:04:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110134246253"
     }
    ]
   },
@@ -177,10 +177,10 @@
     "nate",
     "daum"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T10:18:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-28T10:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -209,10 +209,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T10:20:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-28T10:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -237,14 +237,14 @@
    ]
   },
   {
-   "keyword": "dl그룹",
+   "keyword": "DL그룹 회장 400명 호출",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T10:18:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-28T10:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -255,16 +255,16 @@
      "link": "https://n.news.naver.com/mnews/article/214/0001538683?sid=102"
     },
     {
-     "title": "이해욱 DL그룹 회장, 심야에 직원 400명 불러…사망사고·적자 지적 논란",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-28T10:58:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631625"
-    },
-    {
      "title": "[메가이슈] ‘흑역사’ 추가한 이해욱 DL그룹 회장…밤 10시 직원 수백명...",
      "press": "megaeconomy.co.kr",
      "publishedAt": "2026-11-28T10:46:00.000Z",
      "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065609585680347"
+    },
+    {
+     "title": "밤 10시에 \"다시 출근하라\"…회장 질책에 직원 수백 명 호출",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-28T10:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522936?sid=102"
     }
    ]
   },
@@ -303,9 +303,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2063,
-  "matched": 1007,
-  "avgLeadMin": 653,
+  "flagged": 2060,
+  "matched": 1005,
+  "avgLeadMin": 646,
   "recent": [
    {
     "keyword": "크라잉넛 특집",
