@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T08:01:57.563Z",
+ "builtAt": "2026-11-28T08:12:01.188Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "이재명 AI 데이터센터",
+   "keyword": "이 대통령 주문진시장 방문",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 24,
-   "recent20": 6,
-   "press": 22,
-   "firstArticleAt": "2026-11-28T06:36:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'아시아 최대 규모' 동해 GS AI데이터센터 첫 삽",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-28T07:52:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466769"
-    },
-    {
-     "title": "GS, 아시아 최대 AI 데이터센터 구축 시동…동해에 첫 삽",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-28T07:50:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=303788"
-    },
-    {
-     "title": "[영상] 이재명 대통령, 3D 안경 쓰고 AI 기술 체험…“북극에 데이터센...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-28T07:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001233987?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "FC서울 대전 4-1 승리",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 18,
+   "articles90": 22,
    "recent20": 4,
-   "press": 16,
-   "firstArticleAt": "2026-11-28T07:00:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-28T06:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "FC서울, 시즌 마지막 홈 경기서 대전 4-1 완파…손정범 첫 멀티골",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-28T07:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485622?sid=102"
+     "title": "李대통령, 주문진시장 방문해 민생 점검… 오징어·노가리 구입",
+     "press": "segye.com",
+     "publishedAt": "2026-11-28T08:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178833?sid=100"
     },
     {
-     "title": "FC서울 '우승 파티'서 대전 4대 1 제압…손정범 첫 멀티골",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-28T07:48:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/055/0001406555"
+     "title": "李대통령, 강릉 주문진시장서 연말 물가 점검…오징어·노가리 구매",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-28T08:08:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088824"
     },
     {
-     "title": "'10년 만의 우승' 서울, 4-1 승리로 화려한 대관식",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-28T07:46:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/079/0004214858"
+     "title": "李대통령 \"강릉, 지방주도성장 모범사례\"…천연물 산업화 지원센터 예산...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-28T08:03:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261128000065"
     }
    ]
   },
@@ -79,13 +47,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 17,
-   "recent20": 2,
-   "press": 15,
+   "articles90": 18,
+   "recent20": 1,
+   "press": 16,
    "firstArticleAt": "2026-11-28T06:44:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "박지수, 통산 160경기 '더블더블'…女농구 KB, BNK 꺾고 3연승",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-28T08:02:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785551"
+    },
     {
      "title": "3연승 달린 김완수 감독 “이채은-허예은 3쿼터 3점슛, 분위기 끌어올렸...",
      "press": null,
@@ -97,12 +71,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-28T07:47:00.000Z",
      "link": "https://m.sports.naver.com/basketball/article/055/0001406554"
-    },
-    {
-     "title": "박지수 돌아오자 살아나는 KB, BNK 꺾고 3연승 질주",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-28T07:25:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/119/0003160510"
     }
    ]
   },
@@ -111,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
+   "articles90": 10,
    "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-28T06:32:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-28T06:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "野 \"무자격 내각\" vs 與 \"낡은 색깔론\" … 개각 인사청문회 앞두고 격돌",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-28T08:08:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/28/2026112850053.html"
+    },
     {
      "title": "인사청문회 앞두고 격돌, 국힘 \"무자격 내각\"...민주 \"색깔론·\"",
      "press": "news.jtbc.co.kr",
@@ -129,12 +103,6 @@
      "press": "donga.com",
      "publishedAt": "2026-11-28T07:38:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003765912?sid=100"
-    },
-    {
-     "title": "강금실·한준호·홍익표 청문회 전운…국힘 “무자격 내각” vs 민주 “...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-28T07:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061611?sid=100"
     }
    ]
   },
@@ -143,13 +111,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 9,
    "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-28T06:34:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-28T06:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령, 주문진시장 방문해 민생 점검… 오징어·노가리 구입",
+     "press": "segye.com",
+     "publishedAt": "2026-11-28T08:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004178833?sid=100"
+    },
     {
      "title": "\"장사 잘 되시냐\"...이 대통령, 주문진시장서 오징어·노가리 샀다",
      "press": "mbn.mk.co.kr",
@@ -161,44 +135,6 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-28T07:08:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004012270?sid=100"
-    },
-    {
-     "title": "이 대통령, 강원 주문진시장 찾아 민생 점검…오징어·노가리 구입",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-28T07:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406545?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "영국 미공군기지 드론",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-28T06:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "영국 내 美공군기지에 드론 출현...이란 연루 의심 속 회수 난항",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-28T07:44:00.000Z",
-     "link": "https://www.ajunews.com/view/20261128162636908"
-    },
-    {
-     "title": "미군, 이달 초 영국 공군 기지 출몰 드론 격퇴…\"이란 연루 의심\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-28T07:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980276?sid=104"
-    },
-    {
-     "title": "미군, 영국 공군기지 드론 6대 격퇴…배후·탑재물은 미확인",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-28T06:51:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087551"
     }
    ]
   },
@@ -207,10 +143,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-28T06:36:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-28T06:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,42 +171,40 @@
    ]
   },
   {
-   "keyword": "이해욱 회장 질책",
+   "keyword": "영국 미공군기지 드론",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 6,
    "recent20": 0,
    "press": 6,
-   "firstArticleAt": "2026-11-28T06:36:00.000Z",
+   "firstArticleAt": "2026-11-28T06:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이해욱 DL 회장, 실적 부진에 직원 '심야 소집' 논란",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-28T07:14:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=248015"
+     "title": "영국 내 美공군기지에 드론 출현...이란 연루 의심 속 회수 난항",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-28T07:44:00.000Z",
+     "link": "https://www.ajunews.com/view/20261128162636908"
     },
     {
-     "title": "재계 24위 그룹 총수, 밤 10시 직원 400명 불러…실적 질책하다 '심야 소...",
-     "press": "businessplus.kr",
-     "publishedAt": "2026-11-28T07:02:00.000Z",
-     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120663"
+     "title": "미군, 이달 초 영국 공군 기지 출몰 드론 격퇴…\"이란 연루 의심\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-28T07:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980276?sid=104"
     },
     {
-     "title": "플랜트서 1641억 증발…이해욱 DL그룹 회장의 이유 있는 질책",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-28T06:52:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733318"
+     "title": "미군, 영국 공군기지 드론 6대 격퇴…배후·탑재물은 미확인",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-28T06:51:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087551"
     }
    ]
   },
   {
    "keyword": "사고",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 5,
@@ -299,14 +233,53 @@
      "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=516761"
     }
    ]
+  },
+  {
+   "keyword": "이해욱 회장 질책",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T06:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이해욱 DL 회장, 실적 부진에 직원 '심야 소집' 논란",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-28T07:14:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=248015"
+    },
+    {
+     "title": "재계 24위 그룹 총수, 밤 10시 직원 400명 불러…실적 질책하다 '심야 소...",
+     "press": "businessplus.kr",
+     "publishedAt": "2026-11-28T07:02:00.000Z",
+     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120663"
+    },
+    {
+     "title": "플랜트서 1641억 증발…이해욱 DL그룹 회장의 이유 있는 질책",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-28T06:52:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733318"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 2072,
-  "matched": 1014,
-  "avgLeadMin": 666,
+  "matched": 1015,
+  "avgLeadMin": 665,
   "recent": [
+   {
+    "keyword": "FC서울 우승 대관식",
+    "hitKeyword": "FC서울 손정범 첫 멀티골",
+    "hitAt": "2026-11-28T17:00:00+09:00",
+    "leadMin": 18
+   },
    {
     "keyword": "서인영 남양주 신혼집 마련",
     "hitKeyword": "서인영 다이어트 떡볶이",
@@ -360,12 +333,6 @@
     "hitKeyword": "우체국 개인정보 유출",
     "hitAt": "2026-11-28T15:30:00+09:00",
     "leadMin": 19
-   },
-   {
-    "keyword": "목동",
-    "hitKeyword": "목동 재건축",
-    "hitAt": "2026-11-28T15:00:00+09:00",
-    "leadMin": 2823
    }
   ]
  }
