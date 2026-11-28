@@ -1,5 +1,5 @@
 // [2026-11-10] "떡상 영상 보드" head/tail split: `items` keeps the fastest 200 (the already installed extension reads exactly that
-// many and reports the rest as "dropped"), everything after them goes into the new `more` array (up to 600 in total).
+// many and reports the rest as "dropped"), everything after them goes into the new `more` array (up to 1000 in total).
 // Loaded by youtube-rising-floor.test.mjs -> youtube-rising.test.mjs (the deploy workflow runs that one file).
 // This file loads youtube-rising-genres.test.mjs, so the genre table checks also run before every deploy.
 import { test } from 'node:test';
@@ -21,14 +21,14 @@ const ago = (minutes) => new Date(NOW - minutes * MIN).toISOString();
 const found = (videoId, genre) => ({ videoId, genre, source: 'search', viewCount: 100 });
 const previousOf = (extra = {}) => ({ schemaVersion: 1, builtAt: ago(60), items: [], ...extra });
 
-test('head/tail split: 600 items -> items = fastest 200, more = the other 400, one continuous fastest-first order', () => {
-  const chart = chartOf(700);
+test('head/tail split: 1000 items -> items = fastest 200, more = the other 800, one continuous fastest-first order', () => {
+  const chart = chartOf(1200);
   const built = buildRisingBoard(chart, null, NOW, OPTIONS);
   assert.equal(built.items.length, 200);
-  assert.equal(built.more.length, 400);
+  assert.equal(built.more.length, 800);
   const order = [...built.items, ...built.more].map((entry) => entry.videoId);
-  assert.deepEqual(order, chart.slice(0, 600).map((entry) => entry.videoId));
-  assert.equal(new Set(order).size, 600, 'no video is in both arrays');
+  assert.deepEqual(order, chart.slice(0, 1000).map((entry) => entry.videoId));
+  assert.equal(new Set(order).size, 1000, 'no video is in both arrays');
   assert.equal(built.schemaVersion, 1);
 });
 
@@ -46,13 +46,13 @@ test('head/tail split: genre floor and genres count the whole board, not only th
     ...Array.from({ length: 15 }, (_, n) => item(id('s', n), 2_000 - n * 10, 'ent-issue')),
   ];
   const history = Array.from({ length: 30 }, (_, n) => item(id('h', n), 3_000 - n * 100, 'story'));
-  const built = buildRisingBoard([...chartOf(700), ...tips, ...history], null, NOW, OPTIONS);
+  const built = buildRisingBoard([...chartOf(1200), ...tips, ...history], null, NOW, OPTIONS);
   const all = [...built.items, ...built.more];
   assert.equal(all.length, BOARD_MAX_ITEMS);
   const countIn = (list, genre) => list.filter((entry) => entry.genre === genre).length;
-  assert.deepEqual([countIn(built.items, 'ent-issue'), countIn(built.more, 'ent-issue')], [10, 10], 'the genre spans both arrays');
-  assert.deepEqual([countIn(built.items, 'story'), countIn(built.more, 'story')], [0, 20], 'a slow genre keeps its 20 in more');
-  assert.deepEqual(built.genres, [{ id: 'ent-issue', name: '연예 이슈', count: 20 }, { id: 'story', name: '사연·썰', count: 20 }]);
+  assert.deepEqual([countIn(built.items, 'ent-issue'), countIn(built.more, 'ent-issue')], [10, 15], 'the genre spans both arrays');
+  assert.deepEqual([countIn(built.items, 'story'), countIn(built.more, 'story')], [0, 30], 'a slow genre keeps all 30 of its items in more');
+  assert.deepEqual(built.genres, [{ id: 'ent-issue', name: '연예 이슈', count: 25 }, { id: 'story', name: '사연·썰', count: 30 }]);
   const speeds = all.map((entry) => entry.viewsPerHour);
   assert.deepEqual(speeds, [...speeds].sort((a, b) => b - a));
 });

@@ -141,11 +141,11 @@ function fakeClient({ search = {}, gone = [] } = {}) {
   };
 }
 
-test('genre table is one data list; refresh 6 h, window 7 days, genre cap 50, board cap 600', () => {
-  assert.deepEqual(GENRES.map((g) => g.id), ['ent-issue', 'ent', 'ent-long', 'variety', 'drama', 'movie', 'issue', 'case', 'comedy', 'funny', 'prank', 'story', 'house']);
+test('genre table is one data list; refresh 6 h, window 7 days, genre cap 50, board cap 1000', () => {
+  assert.deepEqual(GENRES.map((g) => g.id), ['ent-issue', 'ent', 'ent-long', 'variety', 'drama', 'drama-long', 'movie', 'movie-long', 'issue', 'case', 'comedy', 'funny', 'prank', 'story', 'house']);
   assert.ok(GENRES.every((g) => /[가-힣]/.test(g.name) && (g.q || g.categoryId)), 'every row says what to search for');
   assert.equal(GENRES[0].q, '연예 이슈');
-  assert.deepEqual([SEARCH_REFRESH_MS, SEARCH_WINDOW_MS, GENRE_CAP, BOARD_MAX_ITEMS], [6 * HOUR, 7 * 24 * HOUR, 50, 600]);
+  assert.deepEqual([SEARCH_REFRESH_MS, SEARCH_WINDOW_MS, GENRE_CAP, BOARD_MAX_ITEMS], [6 * HOUR, 7 * 24 * HOUR, 50, 1000]);
 });
 
 test('search plan: reuse inside 6 hours; search at 6 hours, older, never (old-format board), unreadable or future', () => {
@@ -214,15 +214,15 @@ test('merge: the same video keeps its chart data and gains the genre; source say
   assert.equal(merged[1].title, 'chart title');
 });
 
-test('board: per-genre cap keeps the fastest of each genre; total cap 600; no options = the old 200', () => {
+test('board: per-genre cap keeps the fastest of each genre; total cap 1000; no options = the old 200', () => {
   const tips = Array.from({ length: 70 }, (_, n) => speedy(n, 'tips', 1000 + n * 100));
   const funny = Array.from({ length: 30 }, (_, n) => speedy(100 + n, 'funny', 90000 + n * 100));
   const items = boardItems(buildRisingBoard([...tips, ...funny], null, NOW, OPTIONS));
   const of = (genre) => items.filter((i) => i.genre === genre);
   assert.deepEqual([of('tips').length, of('funny').length], [50, 30]);
   assert.equal(Math.min(...of('tips').map((i) => i.viewCount)), 3000, 'the 20 slowest tips are cut (steps of 100 keep views/hour distinct)');
-  const many = Array.from({ length: 650 }, (_, n) => speedy(1000 + n, '', 100 + n));
-  assert.equal(boardItems(buildRisingBoard(many, null, NOW, OPTIONS)).length, 600);
+  const many = Array.from({ length: 1100 }, (_, n) => speedy(1000 + n, '', 100 + n));
+  assert.equal(boardItems(buildRisingBoard(many, null, NOW, OPTIONS)).length, 1000);
   assert.equal(buildRisingBoard(many, null, NOW).items.length, 200);
 });
 

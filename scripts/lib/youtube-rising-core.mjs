@@ -10,7 +10,7 @@
  * - Shorts are told apart with API fields (duration + player aspect), not by probing youtube.com/shorts/.
  * - 2026-11-10: per-genre Shorts search items are added (genre/source per item, searchedAt/genres on the board). These
  *   are additions only — schemaVersion stays 1 and no existing field changes its name or meaning.
- * - 2026-11-10: the board holds up to 600 videos, but `items` keeps only the fastest HEAD_ITEMS (200): the extension that is
+ * - 2026-11-10: the board holds up to 600 videos (1,000 since 2026-11-28), but `items` keeps only the fastest HEAD_ITEMS (200): the extension that is
  *   already installed reads at most 200 items and reports every further one as "dropped". The rest goes into the new
  *   `more` array (items first, then more = one fastest-first order). Anything that reads a previous board must read both
  *   (boardItems); a board without `more` (old format) reads as items only.

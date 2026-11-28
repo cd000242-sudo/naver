@@ -1,20 +1,22 @@
 /**
  * Genre table and limits for the per-genre search of the "떡상 영상 보드" (2026-11-10; rows reworked 2026-11-27 toward
- * entertainment / issue / funny / drama / movie videos that are longer than a Short). One data list: add, rename or drop
- * a genre here only — the search, the board header (genres, genresKey) and the per-genre cap all read this table.
+ * entertainment / issue / funny / drama / movie videos that are longer than a Short; 2026-11-28: movie and comedy search
+ * by Korean text instead of a category number, two long rows added, everything a search found is kept, board 1,000).
+ * One data list: add, rename or drop a genre here only — the search, the board header (genres, genresKey) and the
+ * per-genre cap all read this table.
  *
  * A row says how it searches: { id, name, q?, categoryId?, duration }. `q` is the search text, `categoryId` the video
  * category (videoCategoryId), `duration` is 'short' (under 4 min) | 'medium' (4-20 min) | 'long' (over 20 min) and
  * defaults to 'short'. A row needs q or categoryId or both. The table is validated once, when this module loads.
  *
  * Quota (YouTube Data API, 10,000 units/day shared with other features): search.list costs 100 units, so one search
- * round = 13 genres x 100 = 1,300. A round runs at most once per SEARCH_REFRESH_MS (6 h) = at most 4 a day =
- * 5,200 units. videos.list costs 1 unit per call (50 ids): a rebuild is 14 chart calls + at most 13 search-id calls
- * (13 genres x 50 ids = 650 ids = 13 calls) = 27 units, and a rebuild needs a previous board older than 25 minutes
- * (<= 57 a day) -> at most 1,539 units.
- * Worst case 6,739 units/day (5,200 + 1,539); a normal day with a handful of deploys is ~5,300.
- * A changed table (genresKey) searches at once: one extra round, +1,300 units on the day of the change, so that
- * day's worst case is 8,039 — still under 10,000, but it leaves only about 1,960 units for the other features.
+ * round = 15 genres x 100 = 1,500. A round runs at most once per SEARCH_REFRESH_MS (6 h) = at most 4 a day =
+ * 6,000 units. videos.list costs 1 unit per call (50 ids): a rebuild is 14 chart calls + at most 15 search-id calls
+ * (15 genres x 50 ids = 750 ids = 15 calls) = 29 units, and a rebuild needs a previous board older than 25 minutes
+ * (<= 57 a day) -> at most 1,653 units.
+ * Worst case 7,653 units/day (6,000 + 1,653); a normal day with a handful of deploys is ~6,100.
+ * A changed table (genresKey) searches at once: one extra round, +1,500 units on the day of the change, so that
+ * day's worst case is 9,153 — still under 10,000, but it leaves only about 847 units for the other features.
  */
 import { createHash } from 'node:crypto';
 
@@ -63,10 +65,12 @@ export const GENRES = Object.freeze(normalizeGenres([
   { id: 'ent-long', name: '연예·예능 긴 영상', categoryId: '24', duration: 'long' },
   { id: 'variety', name: '예능 레전드', q: '예능 레전드', duration: 'medium' },
   { id: 'drama', name: '드라마', q: '드라마', duration: 'medium' },
-  { id: 'movie', name: '영화', categoryId: '1', duration: 'medium' },
+  { id: 'drama-long', name: '드라마 몰아보기', q: '드라마 몰아보기', duration: 'long' },
+  { id: 'movie', name: '영화', q: '영화 리뷰', duration: 'medium' },
+  { id: 'movie-long', name: '영화 결말포함', q: '영화 결말포함', duration: 'long' },
   { id: 'issue', name: '사건·이슈', q: '이슈 정리', duration: 'medium' },
   { id: 'case', name: '사건·사고', q: '사건 사고', duration: 'medium' },
-  { id: 'comedy', name: '웃긴 영상', categoryId: '23', duration: 'medium' },
+  { id: 'comedy', name: '개그·코미디', q: '개그 코미디', duration: 'medium' },
   { id: 'funny', name: '웃긴 영상 모음', q: '웃긴 영상 모음', duration: 'medium' },
   { id: 'prank', name: '몰래카메라', q: '몰래카메라', duration: 'medium' },
   { id: 'story', name: '사연·썰', q: '사연 썰', duration: 'medium' },
@@ -90,7 +94,7 @@ export const SEARCH_WINDOW_MS = 7 * 24 * 60 * 60_000;
 export const SEARCH_CARRY_MAX_MS = SEARCH_WINDOW_MS;
 /** No genre may fill more than this many board slots. */
 export const GENRE_CAP = 50;
-/** The fastest this-many items of every genre stay on the board even when the popular chart alone would fill it. */
-export const GENRE_FLOOR = 20;
+/** The fastest this-many items of every genre stay on the board even when the popular chart alone would fill it (= GENRE_CAP: all a search found). */
+export const GENRE_FLOOR = 50;
 /** Board size once the search is in (chart-only callers keep MAX_ITEMS). */
-export const BOARD_MAX_ITEMS = 600;
+export const BOARD_MAX_ITEMS = 1000;

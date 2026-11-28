@@ -26,18 +26,20 @@ const EXPECTED = [
   { id: 'ent-long', name: '연예·예능 긴 영상', categoryId: '24', duration: 'long' },
   { id: 'variety', name: '예능 레전드', q: '예능 레전드', duration: 'medium' },
   { id: 'drama', name: '드라마', q: '드라마', duration: 'medium' },
-  { id: 'movie', name: '영화', categoryId: '1', duration: 'medium' },
+  { id: 'drama-long', name: '드라마 몰아보기', q: '드라마 몰아보기', duration: 'long' },
+  { id: 'movie', name: '영화', q: '영화 리뷰', duration: 'medium' },
+  { id: 'movie-long', name: '영화 결말포함', q: '영화 결말포함', duration: 'long' },
   { id: 'issue', name: '사건·이슈', q: '이슈 정리', duration: 'medium' },
   { id: 'case', name: '사건·사고', q: '사건 사고', duration: 'medium' },
-  { id: 'comedy', name: '웃긴 영상', categoryId: '23', duration: 'medium' },
+  { id: 'comedy', name: '개그·코미디', q: '개그 코미디', duration: 'medium' },
   { id: 'funny', name: '웃긴 영상 모음', q: '웃긴 영상 모음', duration: 'medium' },
   { id: 'prank', name: '몰래카메라', q: '몰래카메라', duration: 'medium' },
   { id: 'story', name: '사연·썰', q: '사연 썰', duration: 'medium' },
   { id: 'house', name: '집·건축', q: '집 인테리어 #shorts', duration: 'short' },
 ];
 
-test('genre table: 13 rows, exact ids / names / search fields in this order, unique ids, frozen', () => {
-  assert.equal(GENRES.length, 13);
+test('genre table: 15 rows, exact ids / names / search fields in this order, unique ids, frozen', () => {
+  assert.equal(GENRES.length, 15);
   assert.deepEqual(GENRES, EXPECTED);
   assert.equal(new Set(GENRES.map((g) => g.id)).size, GENRES.length);
   assert.ok(GENRES.every((g) => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(g.id) && /[가-힣]/.test(g.name)));
@@ -82,14 +84,26 @@ async function searchParamsOf(genre) {
 const BASE = { part: 'id', type: 'video', order: 'viewCount', regionCode: 'KR', relevanceLanguage: 'ko', maxResults: '50', publishedAfter: AFTER, key: 'K' };
 const byId = (id) => GENRES.find((g) => g.id === id);
 
+test('genre table: movie and comedy search by Korean text, not by category number; the two long rows follow their parents', () => {
+  for (const genre of [byId('movie'), byId('comedy')]) assert.ok(!('categoryId' in genre) && /[가-힣]/.test(genre.q), `${genre.id}: Korean q, no categoryId`);
+  const ids = GENRES.map((g) => g.id);
+  assert.equal(ids.indexOf('drama-long'), ids.indexOf('drama') + 1);
+  assert.equal(ids.indexOf('movie-long'), ids.indexOf('movie') + 1);
+  assert.deepEqual([byId('drama-long').duration, byId('movie-long').duration], ['long', 'long']);
+  assert.deepEqual(GENRES.filter((g) => g.q === undefined).map((g) => g.id), ['ent', 'ent-long'], 'only the 연예·예능 rows still search by category number alone');
+});
+
 test('search request: a q row sends q and its duration, and no category', async () => {
   assert.deepEqual(await searchParamsOf(byId('ent-issue')), { ...BASE, videoDuration: 'medium', q: '연예 이슈' });
+  assert.deepEqual(await searchParamsOf(byId('movie')), { ...BASE, videoDuration: 'medium', q: '영화 리뷰' });
+  assert.deepEqual(await searchParamsOf(byId('comedy')), { ...BASE, videoDuration: 'medium', q: '개그 코미디' });
+  assert.deepEqual(await searchParamsOf(byId('drama-long')), { ...BASE, videoDuration: 'long', q: '드라마 몰아보기' });
+  assert.deepEqual(await searchParamsOf(byId('movie-long')), { ...BASE, videoDuration: 'long', q: '영화 결말포함' });
 });
 
 test('search request: a categoryId row sends videoCategoryId and its duration, and no q', async () => {
   assert.deepEqual(await searchParamsOf(byId('ent')), { ...BASE, videoDuration: 'medium', videoCategoryId: '24' });
   assert.deepEqual(await searchParamsOf(byId('ent-long')), { ...BASE, videoDuration: 'long', videoCategoryId: '24' });
-  assert.deepEqual(await searchParamsOf(byId('movie')), { ...BASE, videoDuration: 'medium', videoCategoryId: '1' });
 });
 
 test('search request: a row with both q and categoryId sends both', async () => {
@@ -115,10 +129,11 @@ test('genresKey: short, stable, follows ids + q + categoryId + duration (and the
   assert.equal(genresKeyOf(EXPECTED.map((row) => ({ ...row }))), GENRES_KEY, 'a copy of the table gives the same key');
   assert.equal(genresKeyOf([{ id: 'a', name: '가', q: 'b', duration: 'short' }]), 'd4ed044163b4', 'pinned: the recipe must not drift');
   assert.equal(genresKeyOf([{ id: 'a', name: '다른 이름', q: 'b' }]), 'd4ed044163b4', 'name is not part of it; a missing duration reads as short');
+  assert.notEqual(GENRES_KEY, '3b009c2ed2b3', 'the table changed (2026-11-28), so the key moved off the 13-row table\'s key');
   const patched = (index, patch) => GENRES.map((genre, n) => (n === index ? { ...genre, ...patch } : genre));
   const changed = [
     patched(0, { id: 'ent-issue-2' }), patched(0, { q: '연예 뉴스' }), patched(1, { categoryId: '25' }), patched(1, { q: '예능' }),
-    patched(0, { duration: 'long' }), patched(12, { duration: 'medium' }), GENRES.slice(1), [...GENRES, { id: 'extra', name: '추가', q: '추가' }],
+    patched(0, { duration: 'long' }), patched(GENRES.length - 1, { duration: 'medium' }), GENRES.slice(1), [...GENRES, { id: 'extra', name: '추가', q: '추가' }],
     [GENRES[1], GENRES[0], ...GENRES.slice(2)],
   ];
   for (const table of changed) assert.notEqual(genresKeyOf(table), GENRES_KEY);
@@ -197,19 +212,24 @@ test('entries of genres that are no longer in the table are not carried over, no
   assert.deepEqual(out.items.map((item) => item.genre), ['house', 'ent-issue', 'drama']);
 });
 
-test('board room: the reserved floors of all genres fit in the board; a full day of search ids may exceed it', () => {
-  assert.ok(GENRES.length * GENRE_FLOOR <= BOARD_MAX_ITEMS, `${GENRES.length} x ${GENRE_FLOOR} <= ${BOARD_MAX_ITEMS}`);
+test('board room: every genre search result (15 x 50 = 750) fits in the 1000 slots, and a big popular chart cannot push any of it out', () => {
+  assert.equal(GENRE_FLOOR, GENRE_CAP, 'the floor is the cap: what a genre search found stays');
+  assert.ok(GENRES.length * GENRE_CAP <= BOARD_MAX_ITEMS, `${GENRES.length} x ${GENRE_CAP} <= ${BOARD_MAX_ITEMS}`);
   const raw = GENRES.flatMap((genre, g) => Array.from({ length: GENRE_CAP }, (_, n) => ({
     videoId: `g${String(g).padStart(2, '0')}${String(n).padStart(8, '0')}`, genre: genre.id, source: 'search', viewCount: 1000 + n, publishedAt: ago(600),
   })));
-  const built = boardItems(buildRisingBoard(raw, null, NOW, { maxItems: BOARD_MAX_ITEMS, genreCap: GENRE_CAP, genreFloor: GENRE_FLOOR }));
-  assert.equal(built.length, BOARD_MAX_ITEMS, '13 x 50 = 650 search items are cut to the 600 board slots');
-  for (const genre of GENRES) assert.ok(built.filter((item) => item.genre === genre.id).length >= GENRE_FLOOR, genre.id);
+  const options = { maxItems: BOARD_MAX_ITEMS, genreCap: GENRE_CAP, genreFloor: GENRE_FLOOR };
+  const alone = boardItems(buildRisingBoard(raw, null, NOW, options));
+  assert.equal(alone.length, GENRES.length * GENRE_CAP, 'not one of the 750 search items is cut');
+  const chart = Array.from({ length: 600 }, (_, n) => ({ videoId: `c${String(n).padStart(10, '0')}`, genre: '', source: 'chart', viewCount: 5_000_000 - n * 100, publishedAt: ago(600) }));
+  const built = boardItems(buildRisingBoard([...chart, ...raw], null, NOW, options));
+  assert.equal(built.length, BOARD_MAX_ITEMS, 'faster chart videos fill only the 250 slots the genres do not need');
+  for (const genre of GENRES) assert.equal(built.filter((item) => item.genre === genre.id).length, GENRE_CAP, genre.id);
+  assert.equal(built.filter((item) => item.source === 'chart').length, BOARD_MAX_ITEMS - GENRES.length * GENRE_CAP);
 });
 
-test('quota note: every number in it follows from the table (round = rows x 100)', () => {
-  const note = flat('../lib/youtube-rising-genres.mjs');
-  const fmt = (n) => n.toLocaleString('en-US');
+/** The quota arithmetic of today's table, worked out from the code (not typed in): the notes in the sources must say the same. */
+function quotaFacts() {
   const round = GENRES.length * 100;
   const roundsPerDay = Math.floor(24 * 60 * MIN / SEARCH_REFRESH_MS);
   const chartCalls = read('../youtube-rising.mjs').match(/const CATEGORIES = \[([^\]]*)\]/)[1].split(',').length;
@@ -217,15 +237,24 @@ test('quota note: every number in it follows from the table (round = rows x 100)
   const rebuild = chartCalls + idCalls;
   const listing = Math.floor(24 * 60 * MIN / MIN_REBUILD_MS) * rebuild;
   const worstDay = round * roundsPerDay + listing;
-  const changeDay = worstDay + round;
-  assert.deepEqual([round, roundsPerDay, chartCalls, idCalls, rebuild, listing, worstDay, changeDay], [1300, 4, 14, 13, 27, 1539, 6739, 8039]);
-  for (const text of [`${GENRES.length} genres`, fmt(round), fmt(round * roundsPerDay), `${chartCalls} chart calls`, `${idCalls} search-id calls`, `${rebuild} units`, fmt(listing), fmt(worstDay), fmt(changeDay)]) {
+  return { round, roundsPerDay, chartCalls, idCalls, rebuild, listing, worstDay, changeDay: worstDay + round, requests: chartCalls + GENRES.length + idCalls + 1 };
+}
+
+test('quota note: every number in it follows from the table (round = rows x 100)', () => {
+  const note = flat('../lib/youtube-rising-genres.mjs');
+  const fmt = (n) => n.toLocaleString('en-US');
+  const { round, roundsPerDay, chartCalls, idCalls, rebuild, listing, worstDay, changeDay } = quotaFacts();
+  assert.deepEqual([round, roundsPerDay, chartCalls, idCalls, rebuild, listing, worstDay, changeDay], [1500, 4, 14, 15, 29, 1653, 7653, 9153]);
+  for (const text of [`${GENRES.length} genres`, fmt(round), fmt(round * roundsPerDay), `${chartCalls} chart calls`, `${idCalls} search-id calls`, `${rebuild} units`, fmt(listing), fmt(worstDay), fmt(changeDay), `about ${fmt(10_000 - changeDay)} units`]) {
     assert.ok(note.includes(text), `the quota note says "${text}"`);
   }
   assert.ok(changeDay < 10_000, 'even the day of the change stays under the 10,000 shared units');
   assert.doesNotMatch(note, /1,100|4,400|5,800|25 units|11 search-id|11 genres/, 'no number of the old 11-row table is left');
-  const fetchNote = flat('../lib/youtube-rising-fetch.mjs');
-  const requests = chartCalls + GENRES.length + idCalls + 1;
-  assert.ok(fetchNote.includes(`${chartCalls} chart + ${GENRES.length} search + up to ${idCalls + 1} videos.list calls (~${requests} x 0.3-0.5 s`), 'the time note counts the same requests');
+  assert.doesNotMatch(note, /1,300|5,200|6,739|8,039|1,539|27 units|13 search-id|13 genres|1,960|5,300/, 'no number of the old 13-row table is left');
+});
+
+test('time note: youtube-rising-fetch.mjs counts the same requests as the table does', () => {
+  const { chartCalls, idCalls, requests } = quotaFacts();
+  assert.ok(flat('../lib/youtube-rising-fetch.mjs').includes(`${chartCalls} chart + ${GENRES.length} search + up to ${idCalls + 1} videos.list calls (~${requests} x 0.3-0.5 s`), 'the time note counts the same requests');
   assert.ok(requests * 500 <= RUN_BUDGET_MS / 4, `${requests} requests at 0.5 s stay well inside the ${RUN_BUDGET_MS / 1000} s budget`);
 });

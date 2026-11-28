@@ -12,23 +12,23 @@ const id = (prefix, n) => `${prefix}${String(n).padStart(10, '0')}`;
 const item = (videoId, viewCount, genre) => ({ videoId, viewCount, publishedAt: TEN_HOURS_AGO, genre, source: genre ? 'search' : 'chart' });
 const OPTIONS = { maxItems: BOARD_MAX_ITEMS, genreCap: GENRE_CAP, genreFloor: GENRE_FLOOR };
 
-test('genre floor: the fastest 20 of a slow genre stay on a full board, and the board is still fastest first', () => {
-  const chart = Array.from({ length: 700 }, (_, n) => item(id('c', n), 1_000_000 - n * 100, ''));
-  const history = Array.from({ length: 30 }, (_, n) => item(id('h', n), 3_000 - n * 100, 'story'));
+test('genre floor: the fastest 50 of a slow genre stay on a full board, and the board is still fastest first', () => {
+  const chart = Array.from({ length: 1200 }, (_, n) => item(id('c', n), 1_000_000 - n * 100, ''));
+  const history = Array.from({ length: 80 }, (_, n) => item(id('h', n), 8_000 - n * 100, 'story'));
   const built = buildRisingBoard([...chart, ...history], null, NOW, OPTIONS);
-  assert.equal(GENRE_FLOOR, 20);
+  assert.deepEqual([GENRE_FLOOR, GENRE_CAP, BOARD_MAX_ITEMS], [50, 50, 1000], 'everything a genre search found (up to the cap) is kept');
   const all = boardItems(built);
   assert.equal(all.length, BOARD_MAX_ITEMS);
   const kept = all.filter((entry) => entry.genre === 'story');
-  assert.deepEqual(kept.map((entry) => entry.videoId), history.slice(0, 20).map((entry) => entry.videoId));
-  assert.deepEqual(built.genres, [{ id: 'story', name: '사연·썰', count: 20 }]);
+  assert.deepEqual(kept.map((entry) => entry.videoId), history.slice(0, 50).map((entry) => entry.videoId));
+  assert.deepEqual(built.genres, [{ id: 'story', name: '사연·썰', count: 50 }]);
   const speeds = all.map((entry) => entry.viewsPerHour);
   assert.deepEqual(speeds, [...speeds].sort((a, b) => b - a));
 });
 
 test('genre floor: a genre with fewer items than the floor keeps all of them; without the option nothing is reserved', () => {
-  const chart = Array.from({ length: 700 }, (_, n) => item(id('c', n), 1_000_000 - n * 100, ''));
-  const few = Array.from({ length: 5 }, (_, n) => item(id('m', n), 500 - n * 10, 'mystery'));
+  const chart = Array.from({ length: 1200 }, (_, n) => item(id('c', n), 1_000_000 - n * 100, ''));
+  const few =Array.from({ length: 5 }, (_, n) => item(id('m', n), 500 - n * 10, 'mystery'));
   const withFloor = buildRisingBoard([...chart, ...few], null, NOW, OPTIONS);
   assert.equal(boardItems(withFloor).filter((entry) => entry.genre === 'mystery').length, 5);
   assert.equal(boardItems(withFloor).length, BOARD_MAX_ITEMS);

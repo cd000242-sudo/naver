@@ -4,8 +4,8 @@
  * status, the API's error reason and the error name.
  *
  * Time: requests run one after another, each with its own timeout (REQUEST_TIMEOUT_MS) and all of them share one run
- * budget (RUN_BUDGET_MS = 100 s, previous-board read included). Typical run = 14 chart + 13 search + up to 14
- * videos.list calls (~41 x 0.3-0.5 s = 12-21 s); when the budget is spent the remaining calls are skipped, so the
+ * budget (RUN_BUDGET_MS = 100 s, previous-board read included). Typical run = 14 chart + 15 search + up to 16
+ * videos.list calls (~45 x 0.3-0.5 s = 14-23 s); when the budget is spent the remaining calls are skipped, so the
  * script always ends inside the workflow's `timeout 120`.
  */
 import { normalizeVideo } from './youtube-rising-core.mjs';
