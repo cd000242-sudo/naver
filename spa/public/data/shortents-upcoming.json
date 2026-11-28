@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T12:43:35.818Z",
+ "builtAt": "2026-11-28T12:53:39.364Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 34,
-   "recent20": 3,
-   "press": 28,
+   "articles90": 35,
+   "recent20": 1,
+   "press": 29,
    "firstArticleAt": "2026-11-28T11:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "로또 1252회 1등 16명 17억 원씩…청주 1명",
+     "press": "jbnews.com",
+     "publishedAt": "2026-11-28T12:48:00.000Z",
+     "link": "https://www.jbnews.com/news/articleView.html?idxno=1517110"
+    },
     {
      "title": "제1252회 로또 당첨번호 '9·19·23·28·33·44'…1등 16명, 각 17억5909만...",
      "press": "mediafine.co.kr",
@@ -33,12 +39,6 @@
      "press": "namdonews.com",
      "publishedAt": "2026-11-28T12:24:00.000Z",
      "link": "https://www.namdonews.com/news/articleView.html?idxno=930698"
-    },
-    {
-     "title": "1252회 로또 1등 당첨번호 '9·19·23·28·33·44'번…1등 당첨지역 어디...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-28T12:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160533?sid=102"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 13,
    "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-28T11:14:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-28T11:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "일본서 대형사고! 韓 신지아 金메달 도둑 맞을 뻔…219.02점→220.84점 \"I...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-28T12:45:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/311/0002085080"
+    },
     {
      "title": "1.81점 뒤집었다…‘인간 토끼’ 신지아, 시니어 그랑프리 첫 우승",
      "press": "donga.com",
@@ -65,12 +71,6 @@
      "press": "isplus.com",
      "publishedAt": "2026-11-28T12:32:00.000Z",
      "link": "https://m.sports.naver.com/general/article/241/0003544029"
-    },
-    {
-     "title": "피겨 신지아, 쇼트 2위에서 프리스케이팅 1위로 역전 금메달",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-28T12:20:00.000Z",
-     "link": "https://www.ajunews.com/view/20261128210608016"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
    "firstArticleAt": "2026-11-28T11:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 “이라크, 석유 밀수 차단 노력 지지”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-28T12:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004687188?sid=104"
+    },
     {
      "title": "트럼프, 쿠르드·친이란과 대립한 이라크 중앙정부 공개지지",
      "press": "ajunews.com",
@@ -97,12 +103,6 @@
      "press": "khan.co.kr",
      "publishedAt": "2026-11-28T12:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/032/0003485629?sid=104"
-    },
-    {
-     "title": "트럼프 \"강력한 이라크\" 지지…친이란 세력 우회 압박",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-28T12:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930883?sid=104"
     }
    ]
   },
@@ -111,10 +111,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-28T11:14:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-28T11:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,12 +139,76 @@
    ]
   },
   {
+   "keyword": "철도노조 준법투쟁 지연",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-28T11:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "철도노조 준법투쟁 첫 주말…“큰 불편 없어”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-28T12:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303212?sid=101"
+    },
+    {
+     "title": "철도노조 준법투쟁 첫 주말…광역전철 105대 지연",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-28T12:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416901?sid=102"
+    },
+    {
+     "title": "철도노조 준법 투쟁 사흘째...열차 운행 지연 잇따라",
+     "press": "tbc.co.kr",
+     "publishedAt": "2026-11-28T11:34:00.000Z",
+     "link": "https://www.tbc.co.kr/news/view?pno=20261128184136AE09284&id=213890"
+    }
+   ]
+  },
+  {
+   "keyword": "포스코 임금교섭 타결",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-28T11:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "포항시의회, 포스코 임금협상 최종 타결 환영…\"경제 회복 기대\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-28T12:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214868?sid=102"
+    },
+    {
+     "title": "포스코 노사 임금 교섭 5개월 만에 타결",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-28T12:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303197?sid=101"
+    },
+    {
+     "title": "‘격려금 620만원에 +α’⋯ 58년 만에 파업했던 포스코, 결국 도장 찍었...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-28T11:56:00.000Z",
+     "link": "https://www.viva100.com/article/20261128500211"
+    }
+   ]
+  },
+  {
    "keyword": "유지애 곽시양 결혼",
    "sources": [
     "daum"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-28T11:44:00.000Z",
    "exclusive": true,
@@ -171,108 +235,12 @@
    ]
   },
   {
-   "keyword": "철도노조 준법투쟁 지연",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T11:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "철도노조 준법투쟁 첫 주말…광역전철 105대 지연",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-28T12:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416901?sid=102"
-    },
-    {
-     "title": "철도노조 준법 투쟁 사흘째...열차 운행 지연 잇따라",
-     "press": "tbc.co.kr",
-     "publishedAt": "2026-11-28T11:34:00.000Z",
-     "link": "https://www.tbc.co.kr/news/view?pno=20261128184136AE09284&id=213890"
-    },
-    {
-     "title": "철도노조 파업투쟁…지하철 지연",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-28T11:32:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611280119"
-    }
-   ]
-  },
-  {
-   "keyword": "김용준 전 소장 별세 87세",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T11:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[부고]김용준(전 헌법재판소장)씨 별세",
-     "press": "rightknow.co.kr",
-     "publishedAt": "2026-11-28T12:04:00.000Z",
-     "link": "http://www.rightknow.co.kr/news/articleView.html?idxno=35491"
-    },
-    {
-     "title": "19세 고시 수석·첫 지체장애인 대법관…김용준 전 헌재소장 별세",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-28T12:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568602?sid=102"
-    },
-    {
-     "title": "김용준 전 헌재소장 별세...22세 때 최연소 판사 임용",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T11:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439447?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "포스코 임금교섭 타결",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T11:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "포스코 노사 임금 교섭 5개월 만에 타결",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-28T12:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012303197?sid=101"
-    },
-    {
-     "title": "‘격려금 620만원에 +α’⋯ 58년 만에 파업했던 포스코, 결국 도장 찍었...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-28T11:56:00.000Z",
-     "link": "https://www.viva100.com/article/20261128500211"
-    },
-    {
-     "title": "'창사 첫 파업' 포스코, 5개월 만에 임금교섭 타결",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-28T11:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005611049?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "문무",
    "sources": [
     "nate"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-28T11:46:00.000Z",
    "exclusive": false,
@@ -299,10 +267,41 @@
    ]
   },
   {
+   "keyword": "김용준 전 소장 별세 87세",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-28T11:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[부고]김용준(전 헌법재판소장)씨 별세",
+     "press": "rightknow.co.kr",
+     "publishedAt": "2026-11-28T12:04:00.000Z",
+     "link": "http://www.rightknow.co.kr/news/articleView.html?idxno=35491"
+    },
+    {
+     "title": "19세 고시 수석·첫 지체장애인 대법관…김용준 전 헌재소장 별세",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-28T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568602?sid=102"
+    },
+    {
+     "title": "김용준 전 헌재소장 별세...22세 때 최연소 판사 임용",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T11:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439447?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "DL 이앤씨",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
    "articles90": 4,
    "recent20": 0,
@@ -312,16 +311,16 @@
    "capped": false,
    "samples": [
     {
-     "title": "DL이앤씨 심야·주말 호출, 수당은?",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-28T12:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288569"
-    },
-    {
      "title": "이해욱 DL그룹 회장의 갑질…잊을 만하면 터진다",
      "press": "dongponews.net",
      "publishedAt": "2026-11-28T12:12:00.000Z",
      "link": "https://www.dongponews.net/news/articleView.html?idxno=61959"
+    },
+    {
+     "title": "DL이앤씨 심야·주말 호출, 수당은?",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-28T12:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288569"
     },
     {
      "title": "'폭행 벌금형' DL 회장, 직원 400명 심야 소집해 또 '갑질' 논란",
@@ -334,9 +333,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2057,
-  "matched": 1003,
-  "avgLeadMin": 648,
+  "flagged": 2055,
+  "matched": 1001,
+  "avgLeadMin": 649,
   "recent": [
    {
     "keyword": "이태현 KBS 사장 후보자",
