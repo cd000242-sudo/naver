@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T07:41:50.236Z",
+ "builtAt": "2026-11-28T07:51:53.470Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "이 대통령 주문진시장 방문",
    "sources": [
     "daum"
    ],
-   "articles90": 28,
-   "recent20": 2,
-   "press": 27,
-   "firstArticleAt": "2026-11-28T06:15:00.000Z",
+   "articles90": 30,
+   "recent20": 5,
+   "press": 29,
+   "firstArticleAt": "2026-11-28T06:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, 온누리상품권 꺼냈다…주문진시장서 뭐 샀나 봤더니",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-28T07:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359343?sid=100"
+     "title": "李대통령 “강원 천연물 혁신센터 신속 추진”…강릉 시장서 민생 점검...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-28T07:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004687163?sid=100"
     },
     {
-     "title": "이 대통령, 주문진시장 방문…민생 점검하며 '이 특산물' 샀다",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-28T07:30:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1178602"
+     "title": "\"장사 잘 되시냐\"...이 대통령, 주문진시장서 오징어·노가리 샀다",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-28T07:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980278?sid=100"
     },
     {
-     "title": "이재명 대통령 강릉 주문진 건어물시장 찾아 민생행보",
-     "press": "kado.net",
-     "publishedAt": "2026-11-28T07:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213894?sid=102"
+     "title": "'아시아 최대' 동해 AI 데이터센터 첫 삽…이 대통령 \"정부 역량 총 지원...",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-28T07:44:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322211&inflow=N"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 2,
-   "press": 24,
-   "firstArticleAt": "2026-11-28T06:16:00.000Z",
+   "articles90": 29,
+   "recent20": 5,
+   "press": 26,
+   "firstArticleAt": "2026-11-28T06:22:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령, 강원 동해 AI데이터센터 착공식 참석…\"아시아 최대 인...",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-28T07:26:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=644247"
+     "title": "GS, 아시아 최대 AI 데이터센터 구축 시동…동해에 첫 삽",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-28T07:50:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=303788"
     },
     {
-     "title": "李대통령 \"동해에 아시아 최대 AI 인프라...글로벌 투자 이끌 것\"",
-     "press": "newspost.kr",
-     "publishedAt": "2026-11-28T07:22:00.000Z",
-     "link": "https://www.newspost.kr/news/articleView.html?idxno=227883"
+     "title": "[영상] 이재명 대통령, 3D 안경 쓰고 AI 기술 체험…“북극에 데이터센...",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-28T07:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001233987?sid=100"
     },
     {
-     "title": "이 대통령, 3주 연속 현장 방문…\"AI 선도국가에 모든 역량 동원\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-28T07:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406546?sid=100"
+     "title": "GS, 동해 1.2GW AI 데이터센터 착공… 허태수 \"AI 미래 명소로\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-28T07:44:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452896"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 14,
+   "articles90": 19,
+   "recent20": 3,
+   "press": 15,
    "firstArticleAt": "2026-11-28T06:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'10년 만의 우승' 서울, 4-1 승리로 화려한 대관식",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-28T07:46:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/079/0004214858"
+    },
     {
      "title": "'손정범 첫 멀티골' FC서울, 대전 4-1 완파…화려한 우승 대관식",
      "press": "yonhapnewstv.co.kr",
@@ -97,12 +103,38 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-28T07:36:00.000Z",
      "link": "https://www.newspim.com/news/view/20261128000061"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 한준호 인사청문회",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-28T06:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "인사청문회 앞두고 격돌, 국힘 \"무자격 내각\"...민주 \"색깔론·\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-28T07:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522922?sid=100"
     },
     {
-     "title": "[k1.interview] '경기 막판 충돌' 황선홍 감독, \"서울 우승 축하하지만, ...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-28T07:27:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/411/0000090603"
+     "title": "“한준호 행안위 활동 없잖나” 野 비판에…與 “국민 삶엔 상임위 없다...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-28T07:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765912?sid=100"
+    },
+    {
+     "title": "강금실·한준호·홍익표 청문회 전운…국힘 “무자격 내각” vs 민주 “...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-28T07:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061611?sid=100"
     }
    ]
   },
@@ -112,19 +144,13 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-28T06:12:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-28T06:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "DL그룹 이해욱 회장, 심야 직원 소집 논란…실적 부진 질책 과정서 수백...",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-28T07:35:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=644248"
-    },
     {
      "title": "이해욱 DL 회장, 실적 부진에 직원 '심야 소집' 논란",
      "press": "safetimes.co.kr",
@@ -136,38 +162,44 @@
      "press": "businessplus.kr",
      "publishedAt": "2026-11-28T07:02:00.000Z",
      "link": "https://www.businessplus.kr/news/articleView.html?idxno=120663"
+    },
+    {
+     "title": "플랜트서 1641억 증발…이해욱 DL그룹 회장의 이유 있는 질책",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-28T06:52:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733318"
     }
    ]
   },
   {
-   "keyword": "강금실 한준호 인사청문회",
+   "keyword": "영국 미공군기지 드론",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 9,
    "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-28T06:17:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-28T06:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국힘 “무자격” vs 與 “마녀사냥”…강금실·한준호 등 두고 공방",
-     "press": "donga.com",
-     "publishedAt": "2026-11-28T07:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765912?sid=100"
+     "title": "영국 내 美공군기지에 드론 출현...이란 연루 의심 속 회수 난항",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-28T07:44:00.000Z",
+     "link": "https://www.ajunews.com/view/20261128162636908"
     },
     {
-     "title": "강금실·한준호·홍익표 청문회 전운…국힘 “무자격 내각” vs 민주 “...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-28T07:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061611?sid=100"
+     "title": "미군, 이달 초 영국 공군 기지 출몰 드론 격퇴…\"이란 연루 의심\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-28T07:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980276?sid=104"
     },
     {
-     "title": "장동혁 “무자격 대통령에 무자격 내각” …강금실·한준호 청문회 앞두...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-28T07:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002836158?sid=100"
+     "title": "미군, 영국 공군기지 드론 6대 격퇴…배후·탑재물은 미확인",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-28T06:51:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087551"
     }
    ]
   },
@@ -176,10 +208,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T06:12:00.000Z",
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-28T06:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -190,16 +222,16 @@
      "link": "http://www.newstomato.com/ReadNews.aspx?no=1322212&inflow=N"
     },
     {
-     "title": "DL그룹 이해욱 회장, 심야 직원 소집 논란…실적 부진 질책 과정서 수백...",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-28T07:35:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=644248"
-    },
-    {
      "title": "이해욱 DL그룹 회장, 실적 질타하다 밤 10시 직원 400명 소집 논란",
      "press": "segyebiz.com",
      "publishedAt": "2026-11-28T07:06:00.000Z",
      "link": "http://www.segyebiz.com/newsView/20261128504539?OutUrl=naver"
+    },
+    {
+     "title": "이해욱 DL그룹 회장, DL이앤씨 플랜트 설계실 직원 400명 심야 소집",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-28T06:56:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026112815472626383"
     }
    ]
   },
@@ -236,47 +268,15 @@
    ]
   },
   {
-   "keyword": "영국 미공군기지 드론",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-28T06:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미군, 이달 초 영국 공군 기지 출몰 드론 격퇴…\"이란 연루 의심\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-28T07:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980276?sid=104"
-    },
-    {
-     "title": "미군, 영국 공군기지 드론 6대 격퇴…배후·탑재물은 미확인",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-28T06:51:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087551"
-    },
-    {
-     "title": "“유럽 최대 미군 전투기 기지에 드론 출몰…이란 연루 추정”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-28T06:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004687162?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "사고",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T06:19:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-28T07:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -297,38 +297,6 @@
      "press": "housingherald.co.kr",
      "publishedAt": "2026-11-28T07:14:00.000Z",
      "link": "https://www.housingherald.co.kr/news/articleView.html?idxno=63598"
-    }
-   ]
-  },
-  {
-   "keyword": "부스 방문한 한성숙 총리",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-28T06:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "네이버 부스 방문한 한성숙 국무총리",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-28T06:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468856?sid=100"
-    },
-    {
-     "title": "전국대학일자리플러스센터 부스 방문한 한성숙 국무총리",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-28T06:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468853?sid=100"
-    },
-    {
-     "title": "청년미래 콘서트 부스 둘러보는 한성숙 총리",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T06:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350731?sid=102"
     }
    ]
   }
