@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T05:51:06.772Z",
+ "builtAt": "2026-11-28T06:01:09.595Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,23 @@
  "measured": 29,
  "candidates": [
   {
-   "keyword": "AI 이재명 대통령",
+   "keyword": "대통령 AI데이터센터 착공식",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 64,
-   "recent20": 5,
-   "press": 40,
-   "firstArticleAt": "2026-11-28T04:23:00.000Z",
+   "articles90": 54,
+   "recent20": 4,
+   "press": 34,
+   "firstArticleAt": "2026-11-28T04:32:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령, 동해 AIDC 착공 참여...\"AI 경쟁서 선도국가 되도록 모든 역량...",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-28T05:56:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=2026112814542462369817d053b9_12"
+    },
     {
      "title": "허태수 GS, 30조 AI 데이터센터 사업 첫 삽…동해 아시아 최대 규모 조성",
      "press": "megaeconomy.co.kr",
@@ -33,12 +39,38 @@
      "press": "kyeonggi.com",
      "publishedAt": "2026-11-28T05:45:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/666/0000134157?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "dl그룹",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 31,
+   "recent20": 6,
+   "press": 31,
+   "firstArticleAt": "2026-11-28T04:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이해욱 DL그룹 회장, 심야에 직원 400여명 소집",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-28T05:58:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4447055"
     },
     {
-     "title": "李대통령 \"동해 AI데이터센터, 글로벌 기업 투자 이끄는 마중물”",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-28T05:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002447339?sid=105"
+     "title": "밤 10시 직원 수백 명 회사로 호출…이해욱 DL그룹 회장 논란",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-28T05:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522916?sid=101"
+    },
+    {
+     "title": "이해욱 DL그룹 회장, 한밤중 직원 400명 호출…'갑질' 논란 재점화",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-28T05:56:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=731391"
     }
    ]
   },
@@ -48,98 +80,66 @@
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 1,
+   "recent20": 3,
    "press": 10,
-   "firstArticleAt": "2026-11-28T04:28:00.000Z",
+   "firstArticleAt": "2026-11-28T04:32:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "황민현, 14년만에 결별→플레디스 떠난다..\"이종석 소속사와 계약 논의...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-28T05:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646456"
+    },
+    {
+     "title": "황민현, 14년 만 플레디스 떠난다 \"충분한 논의 끝 12월 전속계약 종료...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-28T05:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409925"
+    },
     {
      "title": "황민현, 14년 만에 플레디스 떠나기로…\"12월 계약 종료\"",
      "press": "sportsworldi.com",
      "publishedAt": "2026-11-28T05:47:00.000Z",
      "link": "https://m.entertain.naver.com/article/396/0000762230"
-    },
-    {
-     "title": "황민현, 14년 함께한 플레디스 떠난다…“찬란한 날들 가득하길” [전문...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-28T05:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005770244"
-    },
-    {
-     "title": "황민현, 새 소속사는 어디?",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-28T05:14:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611280093"
     }
    ]
   },
   {
-   "keyword": "DL그룹 회장 심야 직원 호출",
+   "keyword": "주진모 민혜연 임신에 오열",
    "sources": [
     "nate"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-28T04:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한밤중에 '우르르'… 이해욱 DL 회장, 설계실 직원 400명 심야 호출",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-28T05:48:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452880"
-    },
-    {
-     "title": "[속보] 이해욱 DL그룹 회장, 실적 부진 질책하다 심야 직원 호출…논란",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-28T05:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001233979?sid=102"
-    },
-    {
-     "title": "실적 부진 질책한 이해욱 DL 회장…설계실 직원 400명 심야 호출",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T05:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315285?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "주유소 기름값 하락",
-   "sources": [
-    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-28T05:05:00.000Z",
+   "firstArticleAt": "2026-11-28T04:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "전국 주유소 기름값 28주 연속 하락... 휘발유·경유 모두 소폭 내려",
-     "press": "vop.co.kr",
-     "publishedAt": "2026-11-28T05:36:00.000Z",
-     "link": "https://vop.co.kr/A00001697810.html"
+     "title": "주진모, ♥민혜연 임신에 오열…“아이 갖고 싶었는데 말 못해”",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-28T05:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001307282"
     },
     {
-     "title": "주유소 기름값 28주째 하락…전국 휘발유 평균 1천854원",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-28T05:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653963?sid=101"
+     "title": "52세 주진모, 결혼 7년만 ♥민혜연 임신에 오열 “아기 갖고 싶었는데 ...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-28T05:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192113"
     },
     {
-     "title": "전국 주유소 기름값 28주 연속 하락...서울 휘발유 1800원대",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-28T05:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160494?sid=101"
+     "title": "주진모 \"예전부터 아이 원했다\"… 아내 임신 소식에 오열",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T04:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000968291"
     }
    ]
   },
   {
-   "keyword": "김가연, 경복궁 한복 비판",
+   "keyword": "김가연 한복 대여점 비판",
    "sources": [
     "nate"
    ],
@@ -167,6 +167,38 @@
      "press": "mediafine.co.kr",
      "publishedAt": "2026-11-28T04:32:00.000Z",
      "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96141"
+    }
+   ]
+  },
+  {
+   "keyword": "주유소 기름값 하락",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T05:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "전국 주유소 기름값 28주 연속 하락... 휘발유·경유 모두 소폭 내려",
+     "press": "vop.co.kr",
+     "publishedAt": "2026-11-28T05:36:00.000Z",
+     "link": "https://vop.co.kr/A00001697810.html"
+    },
+    {
+     "title": "주유소 기름값 28주째 하락…전국 휘발유 평균 1천854원",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-28T05:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653963?sid=101"
+    },
+    {
+     "title": "전국 주유소 기름값 28주 연속 하락...서울 휘발유 1800원대",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-28T05:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160494?sid=101"
     }
    ]
   },
@@ -205,7 +237,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2038,
+  "flagged": 2041,
   "matched": 1004,
   "avgLeadMin": 643,
   "recent": [
