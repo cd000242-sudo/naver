@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T11:33:11.122Z",
+ "builtAt": "2026-11-28T11:43:14.865Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,18 +11,23 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "철도노조 첫 주말 전철 105대 지연",
+   "keyword": "철도노조 전철 105대 지연",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-28T10:07:00.000Z",
+   "articles90": 15,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-28T10:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "철도노조 준법 투쟁 사흘째...열차 운행 지연 잇따라",
+     "press": "tbc.co.kr",
+     "publishedAt": "2026-11-28T11:34:00.000Z",
+     "link": "https://www.tbc.co.kr/news/view?pno=20261128184136AE09284&id=213890"
+    },
     {
      "title": "철도노조 파업투쟁…지하철 지연",
      "press": "bntnews.co.kr",
@@ -34,12 +39,71 @@
      "press": "ikbc.co.kr",
      "publishedAt": "2026-11-28T11:28:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/660/0000122418?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "신지아 시니어 그랑프리",
+   "sources": [
+    "nate",
+    "daum"
+   ],
+   "articles90": 15,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-28T10:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "1.81점 뒤졌던 신지아, 6.27점 차로 뒤집고 첫 피겨 그랑프리 金",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-28T11:37:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/018/0006416899"
     },
     {
-     "title": "준법투쟁 후 첫 주말...\"광역전철 105대 20분 이상 지연\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T11:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439439?sid=101"
+     "title": "피겨 신지아, 일본서 '역전 우승'…韓 4년 만에 그랑프리 금메달",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-28T11:35:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/008/0005447745"
+    },
+    {
+     "title": "피겨 신지아, 생애 첫 시니어 그랑프리 금메달 획득…유영 동메달",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-28T11:30:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110134345492"
+    }
+   ]
+  },
+  {
+   "keyword": "최민정 월드투어 4연속 금",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-28T10:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "적수가 없다!…최민정, 4회 연속 금빛 질주",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T11:26:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001406584"
+    },
+    {
+     "title": "월드컵 메달 108개!…4개 대회 '싹쓸이'인데 왜 은퇴하나? 최민정, 쇼트...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-28T11:16:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/311/0002085069"
+    },
+    {
+     "title": "최민정, 쇼트트랙 월드투어 女1000m 4연속 금메달…배서찬 男1500m 금빛 ...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-28T11:04:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110134246253"
     }
    ]
   },
@@ -51,10 +115,16 @@
    "articles90": 9,
    "recent20": 1,
    "press": 9,
-   "firstArticleAt": "2026-11-28T10:06:00.000Z",
+   "firstArticleAt": "2026-11-28T10:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "지체장애 딛고 대법관·헌재소장까지…김용준 전 소장 별세",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-28T11:42:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611280021"
+    },
     {
      "title": "김용준 전 헌법재판소장 별세…지체장애인 출신 첫 대법관",
      "press": "donga.com",
@@ -66,77 +136,6 @@
      "press": "kado.net",
      "publishedAt": "2026-11-28T11:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/654/0000213910?sid=102"
-    },
-    {
-     "title": "‘장애인 첫 대법관’ 김용준 전 헌법재판소장 별세…향년 87세",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-28T11:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004687181?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "최민정, 4개 대회 연속 금메달!",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-28T10:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "월드컵 메달 108개!…4개 대회 '싹쓸이'인데 왜 은퇴하나? 최민정, 쇼트...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-28T11:16:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/311/0002085069"
-    },
-    {
-     "title": "쇼트트랙 최민정, 월드투어 4연속 여자 1000m '금빛 질주'…배서찬 1500m...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T10:52:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/003/0014350909"
-    },
-    {
-     "title": "'국가대표 은퇴 예고' 최민정, 월드투어 1000m 4연속 금메달",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T10:48:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/469/0000968306"
-    }
-   ]
-  },
-  {
-   "keyword": "최민희 중징계",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-28T10:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'최민희 중징계' 묻자 침묵…국회 밖으로까지 파장",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-28T11:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406580?sid=100"
-    },
-    {
-     "title": "최민희 중징계 다음날…\"김민석 사퇴하라\" 장외 전면전",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-28T11:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165984?sid=100"
-    },
-    {
-     "title": "'최민희 중징계' 당내 후폭풍‥\"김민석 사퇴\" 집회까지",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-28T11:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538682?sid=100"
     }
    ]
   },
@@ -145,10 +144,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-28T10:11:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T10:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -169,38 +168,6 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-28T10:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002439437?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "이 대통령, 연곡면 방문",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T10:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령, 강릉 지하수저류댐 공사 현장 점검…가뭄 대응·취수원 살펴",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-28T10:52:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261128000080"
-    },
-    {
-     "title": "李대통령, 강릉 가뭄 대비 지하수저류댐 공사장 현장 찾아 추진 상황 점...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-28T10:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001233994?sid=100"
-    },
-    {
-     "title": "이 대통령, 주말 강원 광폭 행보…장바구니 물가부터 미래 먹거리까지 ...",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-28T10:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000369015?sid=100"
     }
    ]
   },
@@ -238,34 +205,34 @@
    ]
   },
   {
-   "keyword": "남경필 아들 협박 혐의",
+   "keyword": "연곡면 댐 공사 현장 방문",
    "sources": [
     "nate"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-28T10:06:00.000Z",
+   "firstArticleAt": "2026-11-28T10:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'마약 중독 子 살리려 감옥 보냈는데'…남경필 아들, 이번엔 전 연인 폭...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-28T11:13:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128869"
+     "title": "李대통령, 강릉 지하수저류댐 공사 현장 점검…가뭄 대응·취수원 살펴",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-28T10:52:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261128000080"
     },
     {
-     "title": "남경필 아들 측 \"영상 유포 협박 안 해\"…내일 구속 기로",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-28T11:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980301?sid=102"
+     "title": "李대통령, 강릉 가뭄 대비 지하수저류댐 공사장 현장 찾아 추진 상황 점...",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-28T10:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001233994?sid=100"
     },
     {
-     "title": "경찰, ‘전 연인 협박·스토킹’ 남경필 전 경기지사 아들 구속영장 신...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-28T10:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485626?sid=102"
+     "title": "이 대통령, 강릉 연곡면 지하수 저류댐 공사 현장 찾아 가뭄대책 점검",
+     "press": "kado.net",
+     "publishedAt": "2026-11-28T10:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213908?sid=100"
     }
    ]
   },
@@ -302,34 +269,34 @@
    ]
   },
   {
-   "keyword": "영국 미공군기지 드론",
+   "keyword": "남경필 아들 스토킹 혐의",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-28T10:12:00.000Z",
+   "firstArticleAt": "2026-11-28T10:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "英 미군기지에 드론 출몰…배후로 이란 거론",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-28T10:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447743?sid=104"
+     "title": "'마약 중독 子 살리려 감옥 보냈는데'…남경필 아들, 이번엔 전 연인 폭...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-28T11:13:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128869"
     },
     {
-     "title": "FT \"유럽 최대 美 공군기지에 드론 출몰…이란 연루 추정\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-28T10:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000654007?sid=104"
+     "title": "남경필 아들 측 \"영상 유포 협박 안 해\"…내일 구속 기로",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-28T11:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980301?sid=102"
     },
     {
-     "title": "英 미군기지에 '미허가' 드론 출몰…이란 연루 의혹",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T10:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350902?sid=104"
+     "title": "경찰, ‘전 연인 협박·스토킹’ 남경필 전 경기지사 아들 구속영장 신...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-28T10:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485626?sid=102"
     }
    ]
   }
@@ -337,8 +304,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 2063,
-  "matched": 1009,
-  "avgLeadMin": 652,
+  "matched": 1007,
+  "avgLeadMin": 653,
   "recent": [
    {
     "keyword": "크라잉넛 특집",
