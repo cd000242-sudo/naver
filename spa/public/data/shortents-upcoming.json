@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T00:00:37.652Z",
+ "builtAt": "2026-11-28T00:10:41.176Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,51 +8,18 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 24,
  "candidates": [
-  {
-   "keyword": "서현진 긴급 체포",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-27T22:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'라이어' 서현진, 유연석 살인 용의자? '반전'",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-27T23:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054490"
-    },
-    {
-     "title": "‘라이어’ 유연석, 변사체로 발견→서현진 긴급 체포 ‘충격’",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-27T23:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000329397"
-    },
-    {
-     "title": "'라이어' 유연석 사망도 충격인데…서현진, 살해 용의자로 '긴급 체포' ...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-27T23:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002084980"
-    }
-   ]
-  },
   {
    "keyword": "굿파트너 2",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 5,
-   "press": 13,
-   "firstArticleAt": "2026-11-27T22:34:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-27T22:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -77,46 +44,143 @@
    ]
   },
   {
-   "keyword": "홍민기 배우",
+   "keyword": "주유소 기름값 하락",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T23:02:00.000Z",
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T23:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“홍민기가 임신중절 종용” 주장한 전 여친 실종…경찰, 마포대교 인근...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T23:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005770200"
+     "title": "주유소 기름값 28주째 내리막…서울 휘발유 2주 연속 1800원대",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-28T00:06:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68629"
     },
     {
-     "title": "마포대교 일대서 마지막 신호…홍민기 전 연인 ‘실종’, 경찰 수사",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-27T23:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005770199?sid=102"
+     "title": "국제유가 공급 과잉에 약세 … 주유소 기름값 1800원대, 28주 연속 하락",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-28T00:06:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/28/2026112850008.html"
     },
     {
-     "title": "홍민기, 데이트폭행·낙태 종용 의혹 제기 전 연인 실종…마포대교서 신...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-27T23:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000641310"
+     "title": "전국 주유소 기름값 28주째 하락…서울 2주 연속 1,800원대",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-27T23:54:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121535"
     }
    ]
   },
   {
-   "keyword": "이동연 보관 인증 공개",
+   "keyword": "최민희 징계",
    "sources": [
     "daum"
    ],
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-27T23:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주당, 최민희 '당원 자격정지 2년' 중징계... 최 \"재심 신청하겠다\"",
+     "press": "lawtv.kr",
+     "publishedAt": "2026-11-28T00:08:00.000Z",
+     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61546"
+    },
+    {
+     "title": "최민희 중징계에 ‘최-최 신당설’? … 실현 가능성 있나",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-28T00:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053698?sid=100"
+    },
+    {
+     "title": "與野 모두 '징계 내홍' 폭발…지도부 흔들고 계파전쟁 격화",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-27T23:56:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=102192"
+    }
+   ]
+  },
+  {
+   "keyword": "가죽 재킷",
+   "sources": [
+    "google"
+   ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 3,
    "press": 4,
-   "firstArticleAt": "2026-11-27T22:35:00.000Z",
+   "firstArticleAt": "2026-11-27T23:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨 황, 시그니처 '가죽' 버리고 면 재킷 차림으로 복귀…알고 보니 47...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-28T00:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001042821?sid=104"
+    },
+    {
+     "title": "가죽 재킷 대신 470만원 디올…젠슨 황의 '겸손 패션'",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-28T00:08:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888244"
+    },
+    {
+     "title": "디올 재킷에 에르메스 신발…\"680만 원짜리 겸손 연출\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T00:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406472?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "과징금",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-27T22:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'75만 명 개인정보 유출' 동행복권, 과징금 5억원 취소 소송 패소",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-28T00:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122390?sid=102"
+    },
+    {
+     "title": "75만명 정보 유출 책임 피하지 못했다…동행복권, 5억원 과징금 소송 패...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-27T23:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000134128?sid=102"
+    },
+    {
+     "title": "영풍 석포제련소, 환경 제재 지속…올해도 과징금 부과돼",
+     "press": "news.bizwatch.co.kr",
+     "publishedAt": "2026-11-27T22:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/648/0000053061?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이동연 팬레터 보관 인증",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-27T22:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,110 +203,50 @@
      "link": "https://m.entertain.naver.com/article/003/0014350418"
     }
    ]
-  },
-  {
-   "keyword": "남경주 제자 성관계 인정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T22:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "남경주, 제자와 성관계 인정-피감독자간음 부인",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-27T23:12:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96107"
-    },
-    {
-     "title": "‘제자 성폭행 혐의’ 남경주, 사건 열흘 뒤 편지…“세상에 알리지 말...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-27T23:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001233958?sid=102"
-    },
-    {
-     "title": "성관계 인정했다가 진술 번복…남경주 측, 제자와 키스 장면엔 “로맨틱...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-27T22:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001283981"
-    }
-   ]
-  },
-  {
-   "keyword": "과징금",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T22:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "75만명 정보 유출 책임 피하지 못했다…동행복권, 5억원 과징금 소송 패...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-27T23:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000134128?sid=102"
-    },
-    {
-     "title": "영풍 석포제련소, 환경 제재 지속…올해도 과징금 부과돼",
-     "press": "news.bizwatch.co.kr",
-     "publishedAt": "2026-11-27T22:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/648/0000053061?sid=101"
-    },
-    {
-     "title": "'75만명 정보 유출' 동행복권 과징금 불복 소송서 패소",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-27T22:48:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452817"
-    }
-   ]
-  },
-  {
-   "keyword": "가죽 재킷",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T22:37:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황, 반성 의미 담은 패션 맞어?…재킷은 470만원짜리 디올, 신발은...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-27T23:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729720?sid=104"
-    },
-    {
-     "title": "가죽 재킷 벗고 고개 숙인 젠슨 황…옷값 보니 '깜짝'",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-27T22:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359289?sid=104"
-    },
-    {
-     "title": "가죽 잠바 벗은 젠슨 황…‘반성 패션’에 걸친 명품만 700만원",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-27T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002836130?sid=101"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1977,
-  "matched": 971,
-  "avgLeadMin": 656,
+  "flagged": 1975,
+  "matched": 974,
+  "avgLeadMin": 646,
   "recent": [
+   {
+    "keyword": "시장",
+    "hitKeyword": "KBO FA 시장",
+    "hitAt": "2026-11-28T09:00:00+09:00",
+    "leadMin": 100
+   },
+   {
+    "keyword": "홍민기 전 연인 실종",
+    "hitKeyword": "홍민기 전 연인 실종",
+    "hitAt": "2026-11-28T09:00:00+09:00",
+    "leadMin": 90
+   },
+   {
+    "keyword": "AI 반등으로 뉴욕증시 상승",
+    "hitKeyword": "뉴욕증시 상승",
+    "hitAt": "2026-11-28T09:00:00+09:00",
+    "leadMin": 50
+   },
+   {
+    "keyword": "서현진 긴급 체포",
+    "hitKeyword": "라이어 서현진",
+    "hitAt": "2026-11-28T09:00:00+09:00",
+    "leadMin": 30
+   },
+   {
+    "keyword": "홍민기 배우",
+    "hitKeyword": "홍민기 전 연인 실종",
+    "hitAt": "2026-11-28T09:00:00+09:00",
+    "leadMin": 30
+   },
+   {
+    "keyword": "남경주 제자 성관계 인정",
+    "hitKeyword": "남경주 국민참여재판",
+    "hitAt": "2026-11-28T09:00:00+09:00",
+    "leadMin": 9
+   },
    {
     "keyword": "필라델피아 반도체 지수",
     "hitKeyword": "반도체 공급 부족",
@@ -266,42 +270,6 @@
     "hitKeyword": "국민연금 적립금 202조 감소",
     "hitAt": "2026-11-28T08:00:00+09:00",
     "leadMin": 20
-   },
-   {
-    "keyword": "손새은 임찬규 결혼",
-    "hitKeyword": "임찬규 손새은 결혼",
-    "hitAt": "2026-11-28T08:00:00+09:00",
-    "leadMin": 20
-   },
-   {
-    "keyword": "젠슨 황 디올 재킷 복귀",
-    "hitKeyword": "젠슨 황 재킷",
-    "hitAt": "2026-11-28T08:00:00+09:00",
-    "leadMin": 10
-   },
-   {
-    "keyword": "김장",
-    "hitKeyword": "김장환 부인 별세",
-    "hitAt": "2026-11-28T07:30:00+09:00",
-    "leadMin": 1549
-   },
-   {
-    "keyword": "CJ올리브영, 개인정보 유출",
-    "hitKeyword": "인터넷우체국 개인정보 유출",
-    "hitAt": "2026-11-28T07:30:00+09:00",
-    "leadMin": 1388
-   },
-   {
-    "keyword": "개인정보 유출 긴급대응",
-    "hitKeyword": "인터넷우체국 개인정보 유출",
-    "hitAt": "2026-11-28T07:30:00+09:00",
-    "leadMin": 1166
-   },
-   {
-    "keyword": "인터넷우체국 개인정보 유출",
-    "hitKeyword": "인터넷우체국 개인정보 유출",
-    "hitAt": "2026-11-28T07:30:00+09:00",
-    "leadMin": 412
    }
   ]
  }
