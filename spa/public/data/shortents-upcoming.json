@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T04:00:33.366Z",
+ "builtAt": "2026-11-28T04:10:36.657Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,53 +8,59 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "동해 AI 데이터센터 착공",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 97,
-   "recent20": 12,
-   "press": 50,
-   "firstArticleAt": "2026-11-28T02:31:00.000Z",
+   "articles90": 80,
+   "recent20": 19,
+   "press": 47,
+   "firstArticleAt": "2026-11-28T02:59:00.000Z",
    "exclusive": true,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "이 대통령 “AI 경쟁, 선도국 되도록 정부 모든 역량 동원”…동해 AIDC...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-28T03:58:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1178574"
+     "title": "[속보] 이 대통령 \"AI경쟁에서 선도국가 되도록 모든 역량 집중\"",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-28T04:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138999?sid=105"
     },
     {
-     "title": "동해에 2.4GW AI 심장 짓는다…李대통령 \"세계 AI 질서 주도\"",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-28T03:56:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=102198"
+     "title": "'최대 120조원 '동해 GS AI 데이터센터' 첫 삽...2029년 1단계 가동 목표",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-28T04:08:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=567327"
     },
     {
-     "title": "동해 GS AI데이터센터 착공..이재명 대통령 참석 메가프로젝트 ‘초고속...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-28T03:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729767?sid=101"
+     "title": "이재명 대통령 'AI데이터센터 착공식 축사'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T04:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009315226?sid=100"
     }
    ]
   },
   {
    "keyword": "국정원, 김정은 방중 동향 주시",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 0,
-   "press": 16,
-   "firstArticleAt": "2026-11-28T02:31:00.000Z",
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-28T02:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김정은 10월말 이어 또 방중 '임박설'…국정원 \"여러 동향 주시\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-28T04:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468773?sid=100"
+    },
     {
      "title": "[속보] 국정원, 김정은 추가 방중 가능성에 \"여러 동향을 주시 중\"",
      "press": "kado.net",
@@ -66,12 +72,6 @@
      "press": "jeonmae.co.kr",
      "publishedAt": "2026-11-28T03:14:00.000Z",
      "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1316722"
-    },
-    {
-     "title": "‘김정은 또 중국가나’…국정원 “여러 동향 주시 중”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-28T03:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729760?sid=100"
     }
    ]
   },
@@ -80,13 +80,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-28T02:33:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-28T02:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "인터넷우체국 해킹…등기 이용자 11만명 이상 정보 유출 '파장'",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-28T04:00:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904792"
+    },
     {
      "title": "인터넷우체국도 털렸다…\"하루치만 11만여 명\"",
      "press": "news.sbs.co.kr",
@@ -98,88 +104,82 @@
      "press": "jibs.co.kr",
      "publishedAt": "2026-11-28T03:26:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/661/0000087187?sid=102"
-    },
-    {
-     "title": "인터넷우체국 해킹으로 고객 개인정보 유출",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-28T03:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012303112?sid=105"
     }
    ]
   },
   {
-   "keyword": "디트로이트, 김하성 1년 계약",
+   "keyword": "LG 포스트시즌 다큐멘터리",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T02:32:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "MLB 디트로이트, 김하성 영입 공식 발표…주전 유격수로 재기 도전",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-28T03:32:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1316731"
-    },
-    {
-     "title": "김하성, 평균이하 연봉 67억 계약…언제든 버릴 수 있는 수준, 기회 많지...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-28T03:28:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/445/0000494189"
-    },
-    {
-     "title": "[오피셜]267억 원에서 67억 원으로 몸값 떨어졌지만…디트로이트는 왜 ...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-28T03:05:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/445/0000494186"
-    }
-   ]
-  },
-  {
-   "keyword": "예산안 미래대응기금",
-   "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 5,
    "recent20": 0,
    "press": 5,
-   "firstArticleAt": "2026-11-28T02:36:00.000Z",
+   "firstArticleAt": "2026-11-28T02:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "예산안 시한 D-4…여야 '104조 미래대응기금' 접점 못 찾고 헛바퀴",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-28T03:40:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731386"
+     "title": "LG는 2026 포스트시즌 실패에서 무엇을 느꼈을까…아픈 패배의 기억과 ...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-28T03:26:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/445/0000494187"
     },
     {
-     "title": "예산안 처리 시한 나흘 앞... 여야 '미래대응기금 공방'",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T03:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968287?sid=100"
-    },
-    {
-     "title": "미래대응기금 설전…與 \"재정 안정 방파제\" 野 \"미래세대 빚잔치\"",
+     "title": "LG, 2026시즌 가을야구 비하인드 담은 다큐멘터리 30일 공개",
      "press": "newsis.com",
-     "publishedAt": "2026-11-28T02:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350574?sid=100"
+     "publishedAt": "2026-11-28T03:24:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014350587"
+    },
+    {
+     "title": "'시사회 성료' LG 포스트시즌 비하인드 다큐멘터리, 30일 전격 공개",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-28T03:10:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/076/0004470413"
     }
    ]
   },
   {
-   "keyword": "지효, 비냐 델 마르 출격",
+   "keyword": "의사",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 5,
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-28T02:46:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[쇼츠] AI 가짜 의사 OUT… 이제 광고 걸리면 영업영지",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-28T04:06:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452855"
+    },
+    {
+     "title": "의사 국시 0.1점차 탈락에 \"기구 고장\" 소송…1·2심 모두 패소",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T04:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350605?sid=102"
+    },
+    {
+     "title": "'마나베와 봉준호는 안 된다'... 이 여성의 삶 [민병래의 사수만보]",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-28T02:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002537540?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "지효 비냐 델 마르 최초 출격",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T02:40:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-28T02:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,108 +204,68 @@
    ]
   },
   {
-   "keyword": "젠슨 황 중국 발견",
+   "keyword": "예산안 미래대응기금",
    "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T02:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 수출 통제 엔비디아 '블랙웰'…앨리스 황 연계 中기업서 발견",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-28T03:56:00.000Z",
-     "link": "https://www.ajunews.com/view/20261128123650784"
-    },
-    {
-     "title": "젠슨 황 불륜 상대' 연계 중국 시설에서 엔비디아 최첨단 칩 발견",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T03:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439327?sid=104"
-    },
-    {
-     "title": "'젠슨 황 불륜 상대' 연계 중국 시설서 '블랙웰' 발견",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-28T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522908?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "곽시양♥유지애 결혼합니다",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T02:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "곽시양♥유지애, 오늘(28일) 결혼..큰절 올리며 “행복하게 살게요”",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-28T03:24:00.000Z",
-     "link": "http://www.breaknews.com/1254993"
-    },
-    {
-     "title": "곽시양♥유지애, 오늘(28일) 결혼... \"행복하게 살게요 여러분\"",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-28T02:58:00.000Z",
-     "link": "https://www.insight.co.kr/news/583941"
-    },
-    {
-     "title": "2년 전 ​‘최애’ 고백→부부로…곽시양♥유지애, 오늘 결혼",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-28T02:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001283998"
-    }
-   ]
-  },
-  {
-   "keyword": "박홍근 법사위",
-   "sources": [
-    "daum"
+    "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-28T03:24:00.000Z",
+   "firstArticleAt": "2026-11-28T02:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박홍근, 입법 관문 된 법사위에 쓴소리…\"본연의 역할 충실해야\"",
-     "press": "gobalnews.com",
-     "publishedAt": "2026-11-28T03:42:00.000Z",
-     "link": "https://www.gobalnews.com/news/articleView.html?idxno=203187"
+     "title": "예산안 시한 D-4…여야 '104조 미래대응기금' 접점 못 찾고 헛바퀴",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-28T03:40:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=731386"
     },
     {
-     "title": "지역구 예산 질의 거부한 박홍근…법사위 기능 분리 제안",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-28T03:39:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261128000044"
+     "title": "예산안 처리 시한 나흘 앞... 여야 '미래대응기금 공방'",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T03:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968287?sid=100"
     },
     {
-     "title": "박홍근 “법사위 과도한 권한 개편해야”... 민주당끼리 충돌 후 장외 공...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-28T03:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012260?sid=100"
+     "title": "미래대응기금 설전…與 \"재정 안정 방파제\" 野 \"미래세대 빚잔치\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T02:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350574?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2017,
-  "matched": 996,
-  "avgLeadMin": 647,
+  "flagged": 2019,
+  "matched": 1000,
+  "avgLeadMin": 645,
   "recent": [
+   {
+    "keyword": "그냥 사람 친구 시청률은",
+    "hitKeyword": "그냥사람친구 시청률",
+    "hitAt": "2026-11-28T13:00:00+09:00",
+    "leadMin": 179
+   },
+   {
+    "keyword": "송민규 데뷔골 폭발!",
+    "hitKeyword": "송민규 데뷔골",
+    "hitAt": "2026-11-28T13:00:00+09:00",
+    "leadMin": 169
+   },
+   {
+    "keyword": "송민규 포르투갈 데뷔골",
+    "hitKeyword": "송민규 데뷔골",
+    "hitAt": "2026-11-28T13:00:00+09:00",
+    "leadMin": 159
+   },
+   {
+    "keyword": "디트로이트, 김하성 1년 계약",
+    "hitKeyword": "김하성 디트로이트 계약",
+    "hitAt": "2026-11-28T13:00:00+09:00",
+    "leadMin": 20
+   },
    {
     "keyword": "이동연 팬레터 폐기 사과",
     "hitKeyword": "이동연 해명",
@@ -341,30 +301,6 @@
     "hitKeyword": "곽시양 유지애 결혼",
     "hitAt": "2026-11-28T12:30:00+09:00",
     "leadMin": 40
-   },
-   {
-    "keyword": "대만",
-    "hitKeyword": "대만 부산병 유행",
-    "hitAt": "2026-11-28T12:00:00+09:00",
-    "leadMin": 1396
-   },
-   {
-    "keyword": "김하성 디트로이트 계약",
-    "hitKeyword": "김하성 디트로이트 입단",
-    "hitAt": "2026-11-28T12:00:00+09:00",
-    "leadMin": 119
-   },
-   {
-    "keyword": "디트로이트 김하성 계약 발표",
-    "hitKeyword": "김하성 디트로이트 입단",
-    "hitAt": "2026-11-28T12:00:00+09:00",
-    "leadMin": 79
-   },
-   {
-    "keyword": "굿파트너2",
-    "hitKeyword": "굿파트너2 시청률",
-    "hitAt": "2026-11-28T11:30:00+09:00",
-    "leadMin": 763
    }
   ]
  }
