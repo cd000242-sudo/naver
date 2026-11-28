@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T06:01:09.595Z",
+ "builtAt": "2026-11-28T06:11:14.214Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,66 @@
  "measured": 29,
  "candidates": [
   {
-   "keyword": "대통령 AI데이터센터 착공식",
+   "keyword": "이해욱 회장",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 36,
+   "recent20": 6,
+   "press": 36,
+   "firstArticleAt": "2026-11-28T04:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "금요일 밤에 직원 400명 호출...이해욱 DL 회장 또 '갑질' 논란",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-28T06:08:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326778/?sc=Naver"
+    },
+    {
+     "title": "DL그룹 회장, 한밤중 부서 직원 수백명 호출",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-28T06:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930827?sid=101"
+    },
+    {
+     "title": "이해욱 DL그룹 회장, 심야에 직원 400여명 소집",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-28T05:58:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4447055"
+    }
+   ]
+  },
+  {
+   "keyword": "AI 이재명 대통령",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 54,
-   "recent20": 4,
-   "press": 34,
-   "firstArticleAt": "2026-11-28T04:32:00.000Z",
+   "articles90": 44,
+   "recent20": 5,
+   "press": 30,
+   "firstArticleAt": "2026-11-28T04:44:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, 동해 AIDC 착공 참여...\"AI 경쟁서 선도국가 되도록 모든 역량...",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-28T05:56:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=2026112814542462369817d053b9_12"
+     "title": "GS, 동해에 120조 AI 승부수…1.2GW 데이터센터 첫 삽",
+     "press": "magazine.hankyung.com",
+     "publishedAt": "2026-11-28T06:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/050/0000113890?sid=101"
     },
     {
-     "title": "허태수 GS, 30조 AI 데이터센터 사업 첫 삽…동해 아시아 최대 규모 조성",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-28T05:50:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065591511286276"
+     "title": "GS, 동해 AI데이터센터 첫삽…\"글로벌 허브로\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-28T06:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930825?sid=101"
     },
     {
-     "title": "李대통령 “AI 속도전서 판도 바꾸는 선도자 되도록 정부 모든 역량 동...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-28T05:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000134157?sid=100"
+     "title": "[종합] 李대통령 \"총성 없는 전쟁…AI 선도국 위한 모든 역량 동원\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-28T06:04:00.000Z",
+     "link": "https://www.ajunews.com/view/20261128143459831"
     }
    ]
   },
@@ -47,13 +79,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 31,
-   "recent20": 6,
-   "press": 31,
-   "firstArticleAt": "2026-11-28T04:32:00.000Z",
+   "articles90": 28,
+   "recent20": 5,
+   "press": 28,
+   "firstArticleAt": "2026-11-28T04:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "DL그룹 회장, 한밤중 부서 직원 수백명 호출",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-28T06:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930827?sid=101"
+    },
     {
      "title": "이해욱 DL그룹 회장, 심야에 직원 400여명 소집",
      "press": "news.einfomax.co.kr",
@@ -65,44 +103,71 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-28T05:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000522916?sid=101"
-    },
-    {
-     "title": "이해욱 DL그룹 회장, 한밤중 직원 400명 호출…'갑질' 논란 재점화",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-28T05:56:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731391"
     }
    ]
   },
   {
-   "keyword": "황민현 14년 플레디스 떠난다",
+   "keyword": "황민현, 14년 플레디스 떠난다",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-28T04:32:00.000Z",
+   "articles90": 11,
+   "recent20": 4,
+   "press": 11,
+   "firstArticleAt": "2026-11-28T04:48:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "황민현, 14년만 플레디스 떠난다…\"12월 계약 종료\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T06:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014350723"
+    },
+    {
+     "title": "황민현 14년 만에 플레디스 떠난다…\"내달 14일 전속계약 종료\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-28T06:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/079/0004214855"
+    },
     {
      "title": "황민현, 14년만에 결별→플레디스 떠난다..\"이종석 소속사와 계약 논의...",
      "press": "osen.co.kr",
      "publishedAt": "2026-11-28T05:54:00.000Z",
      "link": "https://m.entertain.naver.com/article/109/0005646456"
+    }
+   ]
+  },
+  {
+   "keyword": "인터넷우체국 개인정보 유출",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-28T05:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] 인터넷우체국 뚫렸다…하루치만 11만명 개인정보 유출",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-28T06:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/024/0000109960?sid=102"
     },
     {
-     "title": "황민현, 14년 만 플레디스 떠난다 \"충분한 논의 끝 12월 전속계약 종료...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-28T05:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409925"
+     "title": "인터넷우체국도 11만여 명 개인정보 유출…해외 IP 이용한 해킹",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-28T05:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980267?sid=102"
     },
     {
-     "title": "황민현, 14년 만에 플레디스 떠나기로…\"12월 계약 종료\"",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-28T05:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000762230"
+     "title": "인터넷우체국 해킹...등기우편 고객 정보 유출",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-28T05:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002447337?sid=105"
     }
    ]
   },
@@ -111,13 +176,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-28T04:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'52세' 주진모, 결혼 7년 만에 첫 아이 소식에 오열... \"옛날부터 갖고 ...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-28T06:04:00.000Z",
+     "link": "https://www.insight.co.kr/news/583955"
+    },
     {
      "title": "주진모, ♥민혜연 임신에 오열…“아이 갖고 싶었는데 말 못해”",
      "press": "sports.donga.com",
@@ -129,12 +200,38 @@
      "press": "newsen.com",
      "publishedAt": "2026-11-28T05:23:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001192113"
+    }
+   ]
+  },
+  {
+   "keyword": "김기동 감독 축하해",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T05:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 김기동-황선홍 감독 '경기 전 반가운 인사'",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-28T06:09:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749509"
     },
     {
-     "title": "주진모 \"예전부터 아이 원했다\"… 아내 임신 소식에 오열",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T04:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000968291"
+     "title": "‘우승컵 들러리’ 될 생각 없다! 황선홍 대전 감독 “서울·전북을 만...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-28T05:28:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/144/0001152165"
+    },
+    {
+     "title": "[포토] 황선홍 감독, 김기동 감독 우승 축하해",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-28T05:17:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/076/0004470435"
     }
    ]
   },
@@ -146,10 +243,16 @@
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-28T04:32:00.000Z",
+   "firstArticleAt": "2026-11-28T04:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“엉터리 옷 한복인 양” 김가연, 경복궁 한복 대여점 ‘공개 저격’",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-28T06:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001152168"
+    },
     {
      "title": "김가연, 경복궁 한복 대여점 공개 비판… 이유는?",
      "press": "hankookilbo.com",
@@ -161,12 +264,38 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-28T04:58:00.000Z",
      "link": "https://m.entertain.naver.com/article/008/0005447710"
+    }
+   ]
+  },
+  {
+   "keyword": "성시경 쌈디",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T05:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"눈물 날 정도로 속상했다\"…성시경 쌈디에 절교 선언한 사연",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-28T06:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/015/0005359332"
     },
     {
-     "title": "김가연, 경복궁 한복 대여점 비판 \"엉터리 옷\"",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-28T04:32:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96141"
+     "title": "'음주 후 응급실行' 쌈디, 4년 만에 달라졌다…\"얌전하게 택시 타고 가더...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-28T05:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409924"
+    },
+    {
+     "title": "쌈디, 술자리 부상 후 성시경에게 손절당한 사연 \"최근 재회\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T05:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009315287"
     }
    ]
   },
@@ -201,46 +330,20 @@
      "link": "https://n.news.naver.com/mnews/article/119/0003160494?sid=101"
     }
    ]
-  },
-  {
-   "keyword": "김기동 감독 축하해",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-28T05:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘우승컵 들러리’ 될 생각 없다! 황선홍 대전 감독 “서울·전북을 만...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-28T05:28:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/144/0001152165"
-    },
-    {
-     "title": "[포토] 황선홍 감독, 김기동 감독 우승 축하해",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-28T05:17:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/076/0004470435"
-    },
-    {
-     "title": "[포토] 김기동 감독 우승 축하하는 최용수 전 감독",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-28T05:12:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/076/0004470433"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2041,
-  "matched": 1004,
-  "avgLeadMin": 643,
+  "flagged": 2044,
+  "matched": 1005,
+  "avgLeadMin": 645,
   "recent": [
+   {
+    "keyword": "목동",
+    "hitKeyword": "목동 재건축",
+    "hitAt": "2026-11-28T15:00:00+09:00",
+    "leadMin": 2823
+   },
    {
     "keyword": "한지민",
     "hitKeyword": "이서진 한지민 그냥사람친구",
@@ -294,12 +397,6 @@
     "hitKeyword": "이동연 해명",
     "hitAt": "2026-11-28T12:30:00+09:00",
     "leadMin": 270
-   },
-   {
-    "keyword": "이동연 팬레터 논란",
-    "hitKeyword": "이동연 해명",
-    "hitAt": "2026-11-28T12:30:00+09:00",
-    "leadMin": 260
    }
   ]
  }
