@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T07:31:46.091Z",
+ "builtAt": "2026-11-28T07:41:50.236Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,84 +8,123 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "dl 이앤씨",
+   "keyword": "이 대통령 주문진시장 방문",
    "sources": [
     "daum"
    ],
-   "articles90": 23,
-   "recent20": 3,
-   "press": 23,
-   "firstArticleAt": "2026-11-28T06:06:00.000Z",
+   "articles90": 28,
+   "recent20": 2,
+   "press": 27,
+   "firstArticleAt": "2026-11-28T06:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "금요일 밤10시 직원 400명 불러내 새벽 귀가시킨 DL 회장",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-28T07:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005611041?sid=101"
+     "title": "李대통령, 온누리상품권 꺼냈다…주문진시장서 뭐 샀나 봤더니",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-28T07:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359343?sid=100"
     },
     {
-     "title": "'폭행 벌금형' 이해욱 DL 회장, 이번엔 직원 400명 심야 소집",
-     "press": "greened.kr",
-     "publishedAt": "2026-11-28T07:22:00.000Z",
-     "link": "https://www.greened.kr/news/articleView.html?idxno=355839"
+     "title": "이 대통령, 주문진시장 방문…민생 점검하며 '이 특산물' 샀다",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-28T07:30:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178602"
     },
     {
-     "title": "이해욱 DL 회장, 실적 부진에 직원 '심야 소집' 논란",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-28T07:14:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=248015"
+     "title": "이재명 대통령 강릉 주문진 건어물시장 찾아 민생행보",
+     "press": "kado.net",
+     "publishedAt": "2026-11-28T07:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213894?sid=102"
     }
    ]
   },
   {
-   "keyword": "강금실 한준호 인사청문회",
+   "keyword": "이재명 AI 데이터센터",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 26,
    "recent20": 2,
+   "press": 24,
+   "firstArticleAt": "2026-11-28T06:16:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이재명 대통령, 강원 동해 AI데이터센터 착공식 참석…\"아시아 최대 인...",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-28T07:26:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=644247"
+    },
+    {
+     "title": "李대통령 \"동해에 아시아 최대 AI 인프라...글로벌 투자 이끌 것\"",
+     "press": "newspost.kr",
+     "publishedAt": "2026-11-28T07:22:00.000Z",
+     "link": "https://www.newspost.kr/news/articleView.html?idxno=227883"
+    },
+    {
+     "title": "이 대통령, 3주 연속 현장 방문…\"AI 선도국가에 모든 역량 동원\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T07:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406546?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "FC서울 우승 대관식",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 18,
+   "recent20": 4,
    "press": 14,
-   "firstArticleAt": "2026-11-28T06:05:00.000Z",
+   "firstArticleAt": "2026-11-28T06:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "강금실·한준호·홍익표 청문회 전운…국힘 “무자격 내각” vs 민주 “...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-28T07:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061611?sid=100"
+     "title": "'손정범 첫 멀티골' FC서울, 대전 4-1 완파…화려한 우승 대관식",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-28T07:39:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/422/0000930852"
     },
     {
-     "title": "장동혁 “무자격 대통령에 무자격 내각” …강금실·한준호 청문회 앞두...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-28T07:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002836158?sid=100"
+     "title": "[프로축구] '손정범 멀티골' 서울, 대전에 4-1…안방서 '우승 골잔치'",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-28T07:36:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261128000061"
     },
     {
-     "title": "개각 인사청문회 전초전... 국힘 \"무자격자들\" vs 민주 \"색깔론 말라\" 충...",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-28T07:08:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731399"
+     "title": "[k1.interview] '경기 막판 충돌' 황선홍 감독, \"서울 우승 축하하지만, ...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-28T07:27:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/411/0000090603"
     }
    ]
   },
   {
    "keyword": "이해욱 회장 질책",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 13,
+   "articles90": 14,
    "recent20": 1,
-   "press": 13,
+   "press": 14,
    "firstArticleAt": "2026-11-28T06:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "DL그룹 이해욱 회장, 심야 직원 소집 논란…실적 부진 질책 과정서 수백...",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-28T07:35:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=644248"
+    },
     {
      "title": "이해욱 DL 회장, 실적 부진에 직원 '심야 소집' 논란",
      "press": "safetimes.co.kr",
@@ -97,12 +136,38 @@
      "press": "businessplus.kr",
      "publishedAt": "2026-11-28T07:02:00.000Z",
      "link": "https://www.businessplus.kr/news/articleView.html?idxno=120663"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 한준호 인사청문회",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-28T06:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국힘 “무자격” vs 與 “마녀사냥”…강금실·한준호 등 두고 공방",
+     "press": "donga.com",
+     "publishedAt": "2026-11-28T07:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765912?sid=100"
     },
     {
-     "title": "플랜트서 1641억 증발…이해욱 DL그룹 회장의 이유 있는 질책",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-28T06:52:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733318"
+     "title": "강금실·한준호·홍익표 청문회 전운…국힘 “무자격 내각” vs 민주 “...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-28T07:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061611?sid=100"
+    },
+    {
+     "title": "장동혁 “무자격 대통령에 무자격 내각” …강금실·한준호 청문회 앞두...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-28T07:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002836158?sid=100"
     }
    ]
   },
@@ -111,63 +176,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-28T06:06:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-28T06:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "밤 10시 회사로 직원 400명 호출…이해욱 DL그룹 회장 또 구설",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-28T07:36:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322212&inflow=N"
+    },
+    {
+     "title": "DL그룹 이해욱 회장, 심야 직원 소집 논란…실적 부진 질책 과정서 수백...",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-28T07:35:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=644248"
+    },
     {
      "title": "이해욱 DL그룹 회장, 실적 질타하다 밤 10시 직원 400명 소집 논란",
      "press": "segyebiz.com",
      "publishedAt": "2026-11-28T07:06:00.000Z",
      "link": "http://www.segyebiz.com/newsView/20261128504539?OutUrl=naver"
-    },
-    {
-     "title": "이해욱 DL그룹 회장, DL이앤씨 플랜트 설계실 직원 400명 심야 소집",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-28T06:56:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026112815472626383"
-    },
-    {
-     "title": "플랜트서 1641억 증발…이해욱 DL그룹 회장의 이유 있는 질책",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-28T06:52:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733318"
-    }
-   ]
-  },
-  {
-   "keyword": "LG전자 이재명 대통령",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-28T06:04:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이재명 대통령, 강원 동해 AI데이터센터 착공식 참석…\"아시아 최대 인...",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-28T07:26:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=644247"
-    },
-    {
-     "title": "이 대통령, 강원 AIDC 착공식 참석…\"아시아 최대 규모 인프라\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-28T07:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406544?sid=100"
-    },
-    {
-     "title": "이 대통령, 동해 GS AI데이터센터 착공식 이후 국내 기업 기술 부스 방문",
-     "press": "kado.net",
-     "publishedAt": "2026-11-28T06:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213890?sid=100"
     }
    ]
   },
@@ -176,13 +208,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 1,
-   "press": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-28T06:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“손절했는데” 바다·슈, 불화설 종결…유진까지 S.E.S 완전체 뭉쳤다...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-28T07:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646504"
+    },
     {
      "title": "“정말 SES 슈 맞나”…지나 이어 ‘고속 노화’ 비주얼 재조명",
      "press": "biz.heraldcorp.com",
@@ -194,27 +232,60 @@
      "press": "heraldmuse.com",
      "publishedAt": "2026-11-28T07:11:00.000Z",
      "link": "https://m.entertain.naver.com/article/112/0003814684"
+    }
+   ]
+  },
+  {
+   "keyword": "영국 미공군기지 드론",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-28T06:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미군, 이달 초 영국 공군 기지 출몰 드론 격퇴…\"이란 연루 의심\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-28T07:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980276?sid=104"
     },
     {
-     "title": "'불화설 종결' 바다·슈, 팔짱 끼고 활짝..S.E.S. 데뷔 29주년 완전체 뭉...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-28T06:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004470472"
+     "title": "미군, 영국 공군기지 드론 6대 격퇴…배후·탑재물은 미확인",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-28T06:51:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087551"
+    },
+    {
+     "title": "“유럽 최대 미군 전투기 기지에 드론 출몰…이란 연루 추정”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-28T06:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004687162?sid=104"
     }
    ]
   },
   {
    "keyword": "사고",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 5,
    "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-28T06:18:00.000Z",
+   "firstArticleAt": "2026-11-28T06:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "연예계 음주 논란 속‥성시경, 쌈디 만취 사고에 절교한 사연 “눈 떠보...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-28T07:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192124"
+    },
     {
      "title": "구례군, '한국전기안전공사와 합동 점검'... 취약가구 안전사고 원천 차...",
      "press": "newsworker.co.kr",
@@ -226,56 +297,18 @@
      "press": "housingherald.co.kr",
      "publishedAt": "2026-11-28T07:14:00.000Z",
      "link": "https://www.housingherald.co.kr/news/articleView.html?idxno=63598"
-    },
-    {
-     "title": "\"내가 사고 쳐 자숙?\" 풍자, 채널 활동 6개월 휴식…뜻밖의 '오해' 해명...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-28T07:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000494208"
-    }
-   ]
-  },
-  {
-   "keyword": "김가연 한복 비판",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T06:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김가연, 경복궁 한복 대여점 비판 \"제대로 되지 않은 옷 한복인 양 홍보...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T07:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009315386"
-    },
-    {
-     "title": "김가연, 경복궁 한복 대여 실태 비판",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-28T07:00:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611280100"
-    },
-    {
-     "title": "“엉터리 옷을 한복인 양”…김가연, 경복궁 대여점 ‘작심 비판’",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-28T06:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005770253?sid=102"
     }
    ]
   },
   {
    "keyword": "부스 방문한 한성숙 총리",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 3,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T06:07:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-28T06:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -298,78 +331,44 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014350731?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "황민현, 플레디스 떠난다",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T06:03:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[단독] 황민현, 14년 의리 지킨 플레디스 떠난다..새 둥지로 이종석 소속...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T07:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646493"
-    },
-    {
-     "title": "황민현, 14년만 플레디스 떠난다…\"12월 계약 종료\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T06:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014350723"
-    },
-    {
-     "title": "황민현 14년 만에 플레디스 떠난다…\"내달 14일 전속계약 종료\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-28T06:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/079/0004214855"
-    }
-   ]
-  },
-  {
-   "keyword": "기사",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T06:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"경찰관 폭행에 신호위반 사고까지\"…60대 택시기사 징역 10개월",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T06:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315343?sid=102"
-    },
-    {
-     "title": "'보복운전 논란' 김영광, 유튜브 재개…택시기사에 재차 사과 \"면목 없다...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-28T06:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002085033"
-    },
-    {
-     "title": "“택시 기사님께 진심으로 사과” 김영광, 보복운전 논란 한 달 만에 복...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-28T06:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729778?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2065,
-  "matched": 1009,
-  "avgLeadMin": 660,
+  "flagged": 2069,
+  "matched": 1014,
+  "avgLeadMin": 666,
   "recent": [
+   {
+    "keyword": "서인영 남양주 신혼집 마련",
+    "hitKeyword": "서인영 다이어트 떡볶이",
+    "hitAt": "2026-11-28T16:30:00+09:00",
+    "leadMin": 3145
+   },
+   {
+    "keyword": "문가영",
+    "hitKeyword": "문가영 패션",
+    "hitAt": "2026-11-28T16:30:00+09:00",
+    "leadMin": 3044
+   },
+   {
+    "keyword": "연우 다이어트 감량",
+    "hitKeyword": "서인영 다이어트 떡볶이",
+    "hitAt": "2026-11-28T16:30:00+09:00",
+    "leadMin": 1817
+   },
+   {
+    "keyword": "연우 다이어트",
+    "hitKeyword": "서인영 다이어트 떡볶이",
+    "hitAt": "2026-11-28T16:30:00+09:00",
+    "leadMin": 1686
+   },
+   {
+    "keyword": "기사",
+    "hitKeyword": "설치기사 폭행 징역",
+    "hitAt": "2026-11-28T16:30:00+09:00",
+    "leadMin": 18
+   },
    {
     "keyword": "샌디스크 주가",
     "hitKeyword": "앤트로픽 샌디스크 급등",
@@ -399,36 +398,6 @@
     "hitKeyword": "목동 재건축",
     "hitAt": "2026-11-28T15:00:00+09:00",
     "leadMin": 2823
-   },
-   {
-    "keyword": "한지민",
-    "hitKeyword": "이서진 한지민 그냥사람친구",
-    "hitAt": "2026-11-28T14:30:00+09:00",
-    "leadMin": 420
-   },
-   {
-    "keyword": "인터넷우체국 개인정보 유출",
-    "hitKeyword": "인터넷우체국 해킹",
-    "hitAt": "2026-11-28T14:30:00+09:00",
-    "leadMin": 140
-   },
-   {
-    "keyword": "전국 기온 뚝 비 눈",
-    "hitKeyword": "전국 기온 급락",
-    "hitAt": "2026-11-28T13:30:00+09:00",
-    "leadMin": 229
-   },
-   {
-    "keyword": "젠슨 황 중국 발견",
-    "hitKeyword": "엔비디아 칩 중국 발견",
-    "hitAt": "2026-11-28T13:30:00+09:00",
-    "leadMin": 29
-   },
-   {
-    "keyword": "그냥 사람 친구 시청률은",
-    "hitKeyword": "그냥사람친구 시청률",
-    "hitAt": "2026-11-28T13:00:00+09:00",
-    "leadMin": 179
    }
   ]
  }
