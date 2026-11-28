@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T05:31:00.198Z",
+ "builtAt": "2026-11-28T05:41:03.556Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,57 +8,89 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "대통령 AI데이터센터 착공식",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 63,
-   "recent20": 9,
-   "press": 36,
+   "articles90": 64,
+   "recent20": 8,
+   "press": 38,
    "firstArticleAt": "2026-11-28T04:19:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
+     "title": "GS 동해 AI데이터센터 첫삽...메가프로젝트 첫 GW급 착공",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-28T05:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002447338?sid=105"
+    },
+    {
+     "title": "GS, 동해 1.2GW AI 데이터센터 첫 삽…'AI 인프라 허브' 구축 속도",
+     "press": "ftoday.co.kr",
+     "publishedAt": "2026-11-28T05:36:00.000Z",
+     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=370784"
+    },
+    {
      "title": "GS, 아시아 최대 AI 데이터센터 동해에 첫삽…사업 규모 최대 120조 원",
      "press": "munhwa.com",
      "publishedAt": "2026-11-28T05:28:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002836152?sid=101"
-    },
-    {
-     "title": "GS, 동해 1.2GW급 AI 데이터센터 착공… 2029년 준공·가동 목표",
-     "press": "mtnews.net",
-     "publishedAt": "2026-11-28T05:26:00.000Z",
-     "link": "https://www.mtnews.net/news/articleView.html?idxno=26693"
-    },
-    {
-     "title": "GS, 30조원 AI 데이터센터 사업 본격화⋯허태수 “AI 산업 미래 명소될 ...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-28T05:24:00.000Z",
-     "link": "https://www.viva100.com/article/20261128500130"
     }
    ]
   },
   {
-   "keyword": "DL그룹 회장 직원 호출",
+   "keyword": "황민현 계약 종료",
    "sources": [
     "daum"
    ],
-   "articles90": 32,
-   "recent20": 4,
-   "press": 32,
-   "firstArticleAt": "2026-11-28T04:02:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-28T04:13:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "황민현, 14년 함께한 플레디스 떠난다…“찬란한 날들 가득하길” [전문...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-28T05:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005770244"
+    },
+    {
+     "title": "황민현, 새 소속사는 어디?",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-28T05:14:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611280093"
+    },
+    {
+     "title": "황민현, '14년 동행' 플레디스 떠난다 \"전속계약 종료\" [전문]",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-28T05:14:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110132147579"
+    }
+   ]
+  },
+  {
+   "keyword": "DL그룹 회장 심야 직원 호출",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-28T04:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 실적 부진 지적하려고…DL그룹 회장, 한밤중에 직원 수백명 호출",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-28T05:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162487?sid=102"
+     "title": "[속보] 이해욱 DL그룹 회장, 실적 부진 질책하다 심야 직원 호출…논란",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-28T05:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001233979?sid=102"
     },
     {
      "title": "실적 부진 질책한 이해욱 DL 회장…설계실 직원 400명 심야 호출",
@@ -75,172 +107,88 @@
    ]
   },
   {
-   "keyword": "이재명, GS AI 센터 행사",
+   "keyword": "주유소 기름값 하락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 18,
-   "firstArticleAt": "2026-11-28T04:06:00.000Z",
-   "exclusive": true,
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T05:05:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "GS, 아시아 최대 AI 데이터센터 동해에 첫삽…사업 규모 최대 120조 원",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-28T05:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002836152?sid=101"
+     "title": "전국 주유소 기름값 28주 연속 하락... 휘발유·경유 모두 소폭 내려",
+     "press": "vop.co.kr",
+     "publishedAt": "2026-11-28T05:36:00.000Z",
+     "link": "https://vop.co.kr/A00001697810.html"
     },
     {
-     "title": "李대통령, 동해 데이터센터 착공식 참석…“AI 경쟁, 한 걸음 늦으면 영...",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-28T05:24:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261128504407?OutUrl=naver"
+     "title": "주유소 기름값 28주째 하락…전국 휘발유 평균 1천854원",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-28T05:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653963?sid=101"
     },
     {
-     "title": "GS, 30조원 AI 데이터센터 사업 본격화⋯허태수 “AI 산업 미래 명소될 ...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-28T05:24:00.000Z",
-     "link": "https://www.viva100.com/article/20261128500130"
+     "title": "전국 주유소 기름값 28주 연속 하락...서울 휘발유 1800원대",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-28T05:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160494?sid=101"
     }
    ]
   },
   {
-   "keyword": "황민현 14년 플레디스 떠난다",
+   "keyword": "김기동 감독 축하해",
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-28T04:14:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "황민현, 14년 함께한 플레디스 떠난다…“찬란한 날들 가득하길” [전문...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-28T05:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005770244"
-    },
-    {
-     "title": "황민현, '14년 동행' 플레디스 떠난다 \"전속계약 종료\" [전문]",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-28T05:14:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110132147579"
-    },
-    {
-     "title": "황민현, 새 소속사는 어디?",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-28T05:14:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611280093"
-    }
-   ]
-  },
-  {
-   "keyword": "국정원, 김정은 방중 동향 주시",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
+   "articles90": 4,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-28T04:08:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-28T05:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김정은 또 중국 가나 …국정원 \"여러 동향 주시 중\"(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T05:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350686?sid=100"
+     "title": "‘우승컵 들러리’ 될 생각 없다! 황선홍 대전 감독 “서울·전북을 만...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-28T05:28:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/144/0001152165"
     },
     {
-     "title": "G20 앞 김정은, 또 ‘방중 임박설’⋯국정원 “여러 동향 주시”[종합]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-28T05:10:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2654192"
+     "title": "[포토] 황선홍 감독, 김기동 감독 우승 축하해",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-28T05:17:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/076/0004470435"
     },
     {
-     "title": "[뉴스초점] 김정은 또 방중 가능성…국정원 “여러 동향 주시”",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-28T04:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930806?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "U-17 월드컵 32강 한일전",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T04:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'이강인, 김민재, 손흥민, 그리고 미우라 레츠고' 32강에서 격돌하는 日...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-28T05:00:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/411/0000090594"
-    },
-    {
-     "title": "U-17 월드컵 한일전, 12월 1일 밤 10시…중계 어디서?",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-28T04:44:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288364"
-    },
-    {
-     "title": "[축구] 한국 U-17, 월드컵 32강서 일본과 격돌… 한일전 승자 16강 진출",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-28T04:44:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452864"
-    }
-   ]
-  },
-  {
-   "keyword": "이스라엘 인간방패 폭로",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T04:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"팔레스타인 주민을 인간방패로\"…공영방송 폭로에 이스라엘 '발칵'",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-28T04:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930811?sid=104"
-    },
-    {
-     "title": "\"팔레스타인 주민 인간방패로 이용했다\"…현직 군인 폭로에 이스라엘 '...",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-28T04:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653959?sid=104"
-    },
-    {
-     "title": "\"팔레스타인 주민 인간 방패로 썼다\" 군인들 폭로에 이스라엘 발칵",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-28T04:10:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452856"
+     "title": "[포토] 김기동 감독 우승 축하하는 최용수 전 감독",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-28T05:12:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/076/0004470433"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2033,
-  "matched": 1002,
-  "avgLeadMin": 644,
+  "flagged": 2036,
+  "matched": 1004,
+  "avgLeadMin": 643,
   "recent": [
+   {
+    "keyword": "한지민",
+    "hitKeyword": "이서진 한지민 그냥사람친구",
+    "hitAt": "2026-11-28T14:30:00+09:00",
+    "leadMin": 420
+   },
+   {
+    "keyword": "인터넷우체국 개인정보 유출",
+    "hitKeyword": "인터넷우체국 해킹",
+    "hitAt": "2026-11-28T14:30:00+09:00",
+    "leadMin": 140
+   },
    {
     "keyword": "전국 기온 뚝 비 눈",
     "hitKeyword": "전국 기온 급락",
@@ -288,18 +236,6 @@
     "hitKeyword": "이동연 해명",
     "hitAt": "2026-11-28T12:30:00+09:00",
     "leadMin": 260
-   },
-   {
-    "keyword": "이동연 보관 인증 공개",
-    "hitKeyword": "이동연 해명",
-    "hitAt": "2026-11-28T12:30:00+09:00",
-    "leadMin": 219
-   },
-   {
-    "keyword": "이동연 팬레터 보관 인증",
-    "hitKeyword": "이동연 해명",
-    "hitAt": "2026-11-28T12:30:00+09:00",
-    "leadMin": 199
    }
   ]
  }
