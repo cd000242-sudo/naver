@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T04:10:36.657Z",
+ "builtAt": "2026-11-28T04:20:39.647Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 80,
-   "recent20": 19,
-   "press": 47,
-   "firstArticleAt": "2026-11-28T02:59:00.000Z",
+   "articles90": 33,
+   "recent20": 29,
+   "press": 21,
+   "firstArticleAt": "2026-11-28T03:55:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 이 대통령 \"AI경쟁에서 선도국가 되도록 모든 역량 집중\"",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-28T04:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138999?sid=105"
+     "title": "이 대통령, GS AI 데이터 센터 착공식에서 축사",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-28T04:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468797?sid=101"
     },
     {
-     "title": "'최대 120조원 '동해 GS AI 데이터센터' 첫 삽...2029년 1단계 가동 목표",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-28T04:08:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=567327"
+     "title": "이재명 대통령, GS AI 데이터 센터 착공식에서 축사",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-28T04:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468792?sid=101"
     },
     {
-     "title": "이재명 대통령 'AI데이터센터 착공식 축사'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T04:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315226?sid=100"
+     "title": "GS AI 데이터 센터 착공식에서 박수치는 이 대통령",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-28T04:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468791?sid=101"
     }
    ]
   },
@@ -48,13 +48,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T02:44:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-28T02:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국정원, 김정은 추가 방중설에 “여러 동향 주시 중”",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-28T04:14:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261128022256058"
+    },
     {
      "title": "김정은 10월말 이어 또 방중 '임박설'…국정원 \"여러 동향 주시\"(종합)",
      "press": "yna.co.kr",
@@ -66,12 +72,6 @@
      "press": "kado.net",
      "publishedAt": "2026-11-28T03:37:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/654/0000213882?sid=100"
-    },
-    {
-     "title": "국정원, 김정은 추가 방중 가능성에 \"여러 동향 주시 중\"",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-28T03:14:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1316722"
     }
    ]
   },
@@ -80,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-28T02:47:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-28T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,70 +140,6 @@
    ]
   },
   {
-   "keyword": "의사",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T02:46:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[쇼츠] AI 가짜 의사 OUT… 이제 광고 걸리면 영업영지",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-28T04:06:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452855"
-    },
-    {
-     "title": "의사 국시 0.1점차 탈락에 \"기구 고장\" 소송…1·2심 모두 패소",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T04:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350605?sid=102"
-    },
-    {
-     "title": "'마나베와 봉준호는 안 된다'... 이 여성의 삶 [민병래의 사수만보]",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-28T02:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002537540?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "지효 비냐 델 마르 최초 출격",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T02:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트와이스 지효, K팝 솔로 아티스트 최초 '2027 비냐 델 마르 페스티벌' ...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T03:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646364"
-    },
-    {
-     "title": "트와이스 지효, K팝 솔로 최초 칠레 ‘비냐 델 마르 페스티벌’ 출격",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-28T02:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001307272"
-    },
-    {
-     "title": "지효, '2027 비냐 델 마르 페스티벌' 출격…K-팝 솔로 최초",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T02:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009315193"
-    }
-   ]
-  },
-  {
    "keyword": "예산안 미래대응기금",
    "sources": [
     "signal.bz"
@@ -232,6 +168,38 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-28T02:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014350574?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "지효 비냐 델 마르 최초 출격",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T02:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트와이스 지효, K팝 솔로 아티스트 최초 '2027 비냐 델 마르 페스티벌' ...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-28T03:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646364"
+    },
+    {
+     "title": "트와이스 지효, K팝 솔로 최초 칠레 ‘비냐 델 마르 페스티벌’ 출격",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-28T02:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001307272"
+    },
+    {
+     "title": "지효, '2027 비냐 델 마르 페스티벌' 출격…K-팝 솔로 최초",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T02:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009315193"
     }
    ]
   }
