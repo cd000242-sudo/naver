@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T12:23:29.270Z",
+ "builtAt": "2026-11-28T12:33:32.230Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,50 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "로또 당첨 9 19 23 28 33 44 보너스 43",
    "sources": [
     "nate"
    ],
-   "articles90": 33,
-   "recent20": 14,
-   "press": 26,
+   "articles90": 36,
+   "recent20": 10,
+   "press": 28,
    "firstArticleAt": "2026-11-28T11:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "로또 1등 16명…당첨금 17억6천만원",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-28T12:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729844?sid=101"
+     "title": "제1252회 로또 당첨번호 '9·19·23·28·33·44'…1등 16명, 각 17억5909만...",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-28T12:30:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96146"
     },
     {
-     "title": "1252회 로또 1등 16명…당첨금 각 17억6천만원(종합)",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-28T12:22:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785575"
+     "title": "1252회 로또 1등 당첨번호 '9·19·23·28·33·44'번…1등 당첨지역 어디...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-28T12:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160533?sid=102"
     },
     {
-     "title": "강원 횡성 로또 1등 2게임 당첨, 동일인이면 '35억원' 대박…부산 해운...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-28T12:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042845?sid=101"
+     "title": "[오늘 로또] 1,252회 추첨 서울 52억·강원 35억…'잭팟' 터졌나",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-28T12:24:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=930698"
     }
    ]
   },
   {
-   "keyword": "신지아 시니어 그랑프리",
+   "keyword": "신지아 그랑프리 금메달",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 14,
+   "articles90": 13,
    "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-28T10:54:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-28T11:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,23 +76,113 @@
    ]
   },
   {
-   "keyword": "철도노조 전철 105대 지연",
+   "keyword": "트럼프 이라크 지지",
    "sources": [
     "signal.bz"
    ],
    "articles90": 8,
    "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-28T10:56:00.000Z",
+   "firstArticleAt": "2026-11-28T11:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“열차 백여대 지연”…대입 논술·면접 큰 차질 없어",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-28T12:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012303177?sid=101"
+     "title": "트럼프 \"강력한 이라크\" 지지…친이란 세력 우회 압박",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-28T12:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930883?sid=104"
     },
+    {
+     "title": "트럼프, 이라크 중앙정부 공개 지지…쿠르드 자치지역과 갈등 고조",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-28T12:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729841?sid=104"
+    },
+    {
+     "title": "트럼프, 이라크 국가 통제력 강화지지… 친이란 세력 압박",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-28T12:02:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452932"
+    }
+   ]
+  },
+  {
+   "keyword": "포스코 임금교섭 타결",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-28T11:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘격려금 620만원에 +α’⋯ 58년 만에 파업했던 포스코, 결국 도장 찍었...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-28T11:56:00.000Z",
+     "link": "https://www.viva100.com/article/20261128500211"
+    },
+    {
+     "title": "'창사 첫 파업' 포스코, 5개월 만에 임금교섭 타결",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-28T11:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005611049?sid=101"
+    },
+    {
+     "title": "포스코 노사, 임금협상 최종 타결…찬성 65%",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-28T11:38:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026112820345726878"
+    }
+   ]
+  },
+  {
+   "keyword": "유지애 곽시양 결혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T11:44:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "곽시양♥유지애 결혼식 현장 공개, ‘아츄’에 신랑 입장→러블리즈 멤...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-28T12:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192150"
+    },
+    {
+     "title": "곽시양♥유지애, 오늘(28일) 백년가약…러블리즈 특급 의리 빛났다[셀럽...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-28T12:20:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795866216531705005"
+    },
+    {
+     "title": "[단독] 유지애♥곽시양 오늘 결혼…‘축사·축가’ 러블리즈·연예인 하...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-28T12:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001284030"
+    }
+   ]
+  },
+  {
+   "keyword": "철도노조 준법투쟁 지연",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T11:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
     {
      "title": "철도노조 준법 투쟁 사흘째...열차 운행 지연 잇따라",
      "press": "tbc.co.kr",
@@ -103,18 +194,25 @@
      "press": "bntnews.co.kr",
      "publishedAt": "2026-11-28T11:32:00.000Z",
      "link": "https://www.bntnews.co.kr/article/view/bnt202611280119"
+    },
+    {
+     "title": "철도노조 준법투쟁 첫 주말…수도권 전철 105대 20분 이상 지연",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-28T11:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122418?sid=102"
     }
    ]
   },
   {
    "keyword": "김용준 전 소장 별세 87세",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-28T11:01:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T11:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -145,24 +243,24 @@
     "nate",
     "daum"
    ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-28T10:58:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T11:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "DL이앤씨 심야·주말 호출, 수당은?",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-28T12:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288569"
-    },
     {
      "title": "이해욱 DL그룹 회장의 갑질…잊을 만하면 터진다",
      "press": "dongponews.net",
      "publishedAt": "2026-11-28T12:12:00.000Z",
      "link": "https://www.dongponews.net/news/articleView.html?idxno=61959"
+    },
+    {
+     "title": "DL이앤씨 심야·주말 호출, 수당은?",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-28T12:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288569"
     },
     {
      "title": "'폭행 벌금형' DL 회장, 직원 400명 심야 소집해 또 '갑질' 논란",
@@ -171,78 +269,26 @@
      "link": "http://www.seouleconews.com/news/articleView.html?idxno=95318"
     }
    ]
-  },
-  {
-   "keyword": "곽시양 유지애 결혼",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T11:44:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "곽시양♥유지애, 오늘(28일) 백년가약…러블리즈 특급 의리 빛났다[셀럽...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-28T12:20:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795866216531705005"
-    },
-    {
-     "title": "[단독] 유지애♥곽시양 오늘 결혼…‘축사·축가’ 러블리즈 완전체·연...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-28T12:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001284030"
-    },
-    {
-     "title": "곽시양♥유지애, 드디어 부부 됐다…손 꼭 잡은 결혼식 현장 공개",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-28T11:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128872"
-    }
-   ]
-  },
-  {
-   "keyword": "구글 벨기에 데이터센터 중단",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T10:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "구글 데이터센터 중단, 시간당 600톤 냉각수 갈등…기존 허가는 유효",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-28T12:18:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288571"
-    },
-    {
-     "title": "\"물부족, 환경오염 어쩌나\" 무허가 데이터센터 다 지어가는데…빅테크...",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-28T11:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001274299?sid=104"
-    },
-    {
-     "title": "구글, 벨기서 무허가 데이터센터 건설 강행… 당국, 중단 명령",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-28T11:08:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452924"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 2057,
-  "matched": 1006,
-  "avgLeadMin": 646,
+  "matched": 1005,
+  "avgLeadMin": 650,
   "recent": [
+   {
+    "keyword": "이태현 KBS 사장 후보자",
+    "hitKeyword": "사랑이 온다 KBS 드라마",
+    "hitAt": "2026-11-28T21:30:00+09:00",
+    "leadMin": 6111
+   },
+   {
+    "keyword": "이해욱 직원 소집",
+    "hitKeyword": "DL그룹 회장 직원 소집",
+    "hitAt": "2026-11-28T21:30:00+09:00",
+    "leadMin": 359
+   },
    {
     "keyword": "최민정 4연속 금메달",
     "hitKeyword": "최민정 월드투어",
@@ -290,18 +336,6 @@
     "hitKeyword": "불후의 명곡 크라잉넛",
     "hitAt": "2026-11-28T20:30:00+09:00",
     "leadMin": 87
-   },
-   {
-    "keyword": "남경주 성폭행 재판",
-    "hitKeyword": "성폭행 허위 신고 여성",
-    "hitAt": "2026-11-28T20:00:00+09:00",
-    "leadMin": 148
-   },
-   {
-    "keyword": "100일의 거짓말 작가 입 열었다",
-    "hitKeyword": "100일의 거짓말",
-    "hitAt": "2026-11-28T19:30:00+09:00",
-    "leadMin": 3144
    }
   ]
  }
