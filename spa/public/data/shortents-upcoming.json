@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T02:23:01.133Z",
+ "builtAt": "2026-11-28T02:30:07.255Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,24 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "인터넷우체국 정보 유출",
+   "keyword": "인터넷우체국 개인정보 유출",
    "sources": [
-    "nate"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 24,
-   "recent20": 2,
-   "press": 24,
-   "firstArticleAt": "2026-11-28T00:54:00.000Z",
+   "articles90": 21,
+   "recent20": 1,
+   "press": 21,
+   "firstArticleAt": "2026-11-28T01:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "인터넷우체국에 외부해킹 공격…우본 \"11.3만명 개인정보 유출 확인\"",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-28T02:26:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261128010010923"
+    },
     {
      "title": "인터넷우체국도 해킹 피해...11만여명 개인정보 유출 확인",
      "press": "kgnews.co.kr",
@@ -33,76 +40,135 @@
      "press": "sedaily.com",
      "publishedAt": "2026-11-28T02:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004687133?sid=105"
-    },
-    {
-     "title": "인터넷우체국 해킹으로 개인정보 유출…하루치만 11만3천여명 확인",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-28T01:56:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566687"
     }
    ]
   },
   {
-   "keyword": "젠슨 시설서 발견된",
+   "keyword": "디트로이트 김하성 계약 발표",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 5,
+   "press": 15,
+   "firstArticleAt": "2026-11-28T01:08:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김하성, MLB 디트로이트에 새둥지…1년 계약 공식 발표",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-28T02:26:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611281125496346a6e8311f64_1"
+    },
+    {
+     "title": "'1년 단기 계약으로 내야 보강' 디트로이트, 김하성 영입 공식 발표",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-28T02:20:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/425/0000215467"
+    },
+    {
+     "title": "디트로이트, \"김하성과 1년 계약\" 영입 공식 발표",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-28T02:18:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1140818"
+    }
+   ]
+  },
+  {
+   "keyword": "곽시양♥유지애, 오늘 결혼해요",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T00:55:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-28T01:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "中 시설서 발견된 엔비디아 최첨단 칩…“젠슨 황 불륜 상대 연관 기업...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-28T01:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012252?sid=104"
+     "title": "큰절 올리며 배우 부부 탄생…드디어 오늘(28일) 결혼하는 '연예인 커플...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-28T02:18:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178562"
     },
     {
-     "title": "젠슨 황 연인 앨리스 황 연계 중국 시설에 엔비디아 AI 칩 발견",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-28T01:26:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731379"
+     "title": "곽시양·유지애, 오늘(28일) 결혼…배우X아이돌 부부 탄생",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-28T02:12:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110131199150"
     },
     {
-     "title": "'젠슨 황 불륜 상대' 연계 중국 시설에서 엔비디아 최첨단 칩 발견",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T01:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439273?sid=104"
+     "title": "곽시양·유지애, 오늘(28일) 결혼",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-28T02:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/018/0006416842"
     }
    ]
   },
   {
-   "keyword": "도로",
+   "keyword": "송민규 포르투갈 데뷔골",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 6,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T01:04:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-28T01:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "토요일 눈비에 고속도로 교통량 줄 듯…서울서 부산까지 5시간",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-28T01:12:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261128000034"
+     "title": "환상 개인기로 '유럽 데뷔골'…송민규, 보디 페인팅→수비수 제치고→오...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-28T02:10:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/117/0004128801"
     },
     {
-     "title": "용인특례시, 경기도 도로정비평가 우수기관 선정",
-     "press": "siminilbo.co.kr",
-     "publishedAt": "2026-11-28T01:10:00.000Z",
-     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160269781818253"
+     "title": "송민규, 아웃프런트로 포르투갈 무대 ‘데뷔골’ 쾅…나시오날은 마리...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-28T02:04:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/468/0001283993"
     },
     {
-     "title": "서해안고속도로에서 1톤 트럭 화재...차량 전소",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T01:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439274?sid=102"
+     "title": "‘국대 맹활약’ 송민규, 포르투갈리그 더비전서 데뷔골 폭발",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-28T02:02:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/119/0003160480"
+    }
+   ]
+  },
+  {
+   "keyword": "전국 기온 뚝 비 눈",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T01:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "비온 뒤 칼바람 기온 '뚝'…아침 최저 영하 5도[내일날씨]",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-28T01:30:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611280074"
+    },
+    {
+     "title": "전국 기온 5~10도 '뚝'…광주·전남 오전 비·눈",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-28T01:22:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087520"
+    },
+    {
+     "title": "전국 강풍으로 체감온도 '뚝'…남부 지방 곳곳에서는 '비'",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-28T01:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653931?sid=102"
     }
    ]
   }
