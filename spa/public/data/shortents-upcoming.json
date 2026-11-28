@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T11:23:06.945Z",
+ "builtAt": "2026-11-28T11:33:11.122Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 30,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "철도노조 준법투쟁 지연",
+   "keyword": "철도노조 첫 주말 전철 105대 지연",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-28T09:55:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-28T10:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "철도노조 파업투쟁…지하철 지연",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-28T11:32:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611280119"
+    },
+    {
+     "title": "철도노조 준법투쟁 첫 주말…수도권 전철 105대 20분 이상 지연",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-28T11:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122418?sid=102"
+    },
     {
      "title": "준법투쟁 후 첫 주말...\"광역전철 105대 20분 이상 지연\"",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-28T11:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002439439?sid=101"
-    },
-    {
-     "title": "철도노조 준법투쟁 사흘째…주말 수도권 전철 105대 20분 이상 지연",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-28T10:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000134177?sid=102"
-    },
-    {
-     "title": "철도노조 준법투쟁 사흘째…광역전철 105대 지연",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T10:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315500?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "최민정, 4개 대회 연속 금메달!",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-28T09:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "월드컵 메달 108개!…4개 대회 '싹쓸이'인데 왜 은퇴하나? 최민정, 쇼트...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-28T11:16:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/311/0002085069"
-    },
-    {
-     "title": "쇼트트랙 최민정, 월드투어 4연속 여자 1000m '금빛 질주'…배서찬 1500m...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T10:52:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/003/0014350909"
-    },
-    {
-     "title": "'국가대표 은퇴 예고' 최민정, 월드투어 1000m 4연속 금메달",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T10:48:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/469/0000968306"
     }
    ]
   },
@@ -79,10 +48,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 11,
+   "articles90": 9,
    "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-28T09:56:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-28T10:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,98 +76,99 @@
    ]
   },
   {
-   "keyword": "FC서울 우승 대관식",
+   "keyword": "최민정, 4개 대회 연속 금메달!",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 15,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-28T09:57:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-28T10:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'10년 만에' 상암으로 돌아온 K리그1 트로피…서울 7번째 대관식 화려하...",
+     "title": "월드컵 메달 108개!…4개 대회 '싹쓸이'인데 왜 은퇴하나? 최민정, 쇼트...",
      "press": "xportsnews.com",
-     "publishedAt": "2026-11-28T10:35:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/311/0002085064"
+     "publishedAt": "2026-11-28T11:16:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/311/0002085069"
     },
     {
-     "title": "FC서울 손정범, 대전전 데뷔 첫 멀티골…우승 대관식 직접 빛냈다",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-28T10:34:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288550"
+     "title": "쇼트트랙 최민정, 월드투어 4연속 여자 1000m '금빛 질주'…배서찬 1500m...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T10:52:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/003/0014350909"
     },
     {
-     "title": "FC서울 우승 파티 빛낸 막내 손정범…\"대표팀서 배우고 왔어요\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-28T10:25:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/001/0016469010"
+     "title": "'국가대표 은퇴 예고' 최민정, 월드투어 1000m 4연속 금메달",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T10:48:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/469/0000968306"
     }
    ]
   },
   {
-   "keyword": "강금실 중국 고문 해명",
+   "keyword": "최민희 중징계",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
-   "firstArticleAt": "2026-11-28T10:01:00.000Z",
+   "firstArticleAt": "2026-11-28T10:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국정원장 후보자의 ‘중국 고문’ 이력 논란…강금실 “박근혜 정부 때...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-28T11:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003704104?sid=100"
+     "title": "'최민희 중징계' 묻자 침묵…국회 밖으로까지 파장",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T11:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406580?sid=100"
     },
     {
-     "title": "강금실 \"中특별고문, 박근혜 정부 시기 친선차원 무보수 명예직\"",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-28T11:02:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244507"
+     "title": "최민희 중징계 다음날…\"김민석 사퇴하라\" 장외 전면전",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-28T11:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165984?sid=100"
     },
     {
-     "title": "강금실, 中특별고문 이력 해명… \"친선 차원 무보수 명예직\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-28T10:22:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452923"
+     "title": "'최민희 중징계' 당내 후폭풍‥\"김민석 사퇴\" 집회까지",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-28T11:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538682?sid=100"
     }
    ]
   },
   {
-   "keyword": "포스코 노사 임금 타결",
+   "keyword": "구글 벨기에 데이터센터 중단",
    "sources": [
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-28T09:54:00.000Z",
+   "firstArticleAt": "2026-11-28T10:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "포스코 노사, 5개월여 만 임협 최종 타결",
-     "press": "namdonews.com",
-     "publishedAt": "2026-11-28T11:10:00.000Z",
-     "link": "https://www.namdonews.com/news/articleView.html?idxno=930695"
+     "title": "\"물부족, 환경오염 어쩌나\" 무허가 데이터센터 다 지어가는데…빅테크...",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-28T11:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274299?sid=104"
     },
     {
-     "title": "포스코 노사 임금교섭 최종 타결...포항시민 환영",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-28T11:06:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1178624"
+     "title": "구글, 벨기서 무허가 데이터센터 건설 강행… 당국, 중단 명령",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-28T11:08:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452924"
     },
     {
-     "title": "포스코 노사, 5개월 진통 끝에 임금협상 최종 타결…찬성 65%",
-     "press": "imaeil.com",
+     "title": "구글, 벨기에서 무허가 데이터센터 강행하다 중단 명령",
+     "press": "ytn.co.kr",
      "publishedAt": "2026-11-28T10:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042840?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/052/0002439437?sid=104"
     }
    ]
   },
@@ -207,10 +177,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-28T09:58:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-28T10:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,12 +205,45 @@
    ]
   },
   {
+   "keyword": "DL 이앤씨",
+   "sources": [
+    "nate",
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-28T10:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이해욱 DL그룹 회장, 직원 수백 명 한밤 호출 '물의'",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-28T11:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538683?sid=102"
+    },
+    {
+     "title": "이해욱 DL그룹 회장, 심야에 직원 400명 불러…사망사고·적자 지적 논란",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-28T10:58:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631625"
+    },
+    {
+     "title": "[메가이슈] ‘흑역사’ 추가한 이해욱 DL그룹 회장…밤 10시 직원 수백명...",
+     "press": "megaeconomy.co.kr",
+     "publishedAt": "2026-11-28T10:46:00.000Z",
+     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065609585680347"
+    }
+   ]
+  },
+  {
    "keyword": "남경필 아들 협박 혐의",
    "sources": [
     "nate"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-28T10:06:00.000Z",
    "exclusive": false,
@@ -267,13 +270,12 @@
    ]
   },
   {
-   "keyword": "DL 이앤씨",
+   "keyword": "dl그룹",
    "sources": [
-    "nate",
     "daum"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-28T10:18:00.000Z",
    "exclusive": false,
@@ -330,47 +332,20 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014350902?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "홍민기 배우",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T10:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "홍민기 전 연인 ‘실종’에 커지는 우려…아직 끝나지 않은 ‘경찰 수색...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-28T10:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001284024"
-    },
-    {
-     "title": "'홍민기 사생활 폭로' 전여친, 실종 이틀째…경찰 행적 추적 '소재 파악...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-28T10:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002085065"
-    },
-    {
-     "title": "'데이트 폭력 의혹' 홍민기 전 연인, 실종 이틀째…경찰 수색 중",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-28T10:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054502"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2064,
+  "flagged": 2063,
   "matched": 1009,
   "avgLeadMin": 652,
   "recent": [
+   {
+    "keyword": "크라잉넛 특집",
+    "hitKeyword": "불후의 명곡 크라잉넛",
+    "hitAt": "2026-11-28T20:30:00+09:00",
+    "leadMin": 87
+   },
    {
     "keyword": "남경주 성폭행 재판",
     "hitKeyword": "성폭행 허위 신고 여성",
@@ -424,12 +399,6 @@
     "hitKeyword": "굿파트너2 장나라",
     "hitAt": "2026-11-28T18:30:00+09:00",
     "leadMin": 620
-   },
-   {
-    "keyword": "트럼프 푸틴 유럽 공격 중단",
-    "hitKeyword": "트럼프 관세 재검토",
-    "hitAt": "2026-11-28T18:30:00+09:00",
-    "leadMin": 610
    }
   ]
  }
