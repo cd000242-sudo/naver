@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T10:12:41.545Z",
+ "builtAt": "2026-11-28T10:22:45.131Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,50 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "포스코 노사 임금 타결",
+   "keyword": "최민희 중징계",
    "sources": [
+    "daum"
+   ],
+   "articles90": 25,
+   "recent20": 2,
+   "press": 21,
+   "firstArticleAt": "2026-11-28T08:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘최민희 중징계’에, 김민석 “드릴 말씀 없다”···친청계는 대표 ...",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-28T10:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053709?sid=100"
+    },
+    {
+     "title": "김민석, 최민희 중징계에 \"드릴 말 없다\"…친청계 반발 속 청소년 당원...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-28T10:16:00.000Z",
+     "link": "https://www.ajunews.com/view/20261128190845970"
+    },
+    {
+     "title": "최민희 중징계에 '김민석 사퇴' 국회앞 집회…친청계 \"당대표도 징계\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-28T09:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653999?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "포스코 임금협상 타결",
+   "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 33,
-   "recent20": 2,
-   "press": 29,
-   "firstArticleAt": "2026-11-28T08:45:00.000Z",
+   "articles90": 18,
+   "recent20": 0,
+   "press": 16,
+   "firstArticleAt": "2026-11-28T08:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -35,42 +68,74 @@
      "link": "https://n.news.naver.com/mnews/article/469/0000968304?sid=102"
     },
     {
-     "title": "포스코, 처우 개선으로 노사 접점…현장 경쟁력 강화 나선다",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-28T09:50:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2024572"
+     "title": "포스코 노사, 교섭 시작 5개월 만에 임단협 '최종 타결'",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-28T09:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214863?sid=101"
     }
    ]
   },
   {
-   "keyword": "김민석 최민희 중징계",
+   "keyword": "철도노조 준법투쟁 지연",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 29,
-   "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-28T08:47:00.000Z",
+   "articles90": 16,
+   "recent20": 5,
+   "press": 14,
+   "firstArticleAt": "2026-11-28T09:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "말 아끼는 김민석, 친명 \"윤리심판원 존중\"…'최고위원 보선' 새 뇌관",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-28T10:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000654000?sid=100"
+     "title": "철도노조 준법투쟁 첫 주말…\"광역전철 105대 20분 이상 지연\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-28T10:16:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326786/?sc=Naver"
     },
     {
-     "title": "최민희 중징계에 '김민석 사퇴' 국회앞 집회…친청계 \"당대표도 징계\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-28T09:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653999?sid=100"
+     "title": "철도노조 준법투쟁 첫 주말…수도권 전철 105대 지연",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T10:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406570?sid=102"
     },
     {
-     "title": "최민희 중징계에 민주당 내홍 확산…김민석 사퇴 요구까지",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-28T09:58:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=543674"
+     "title": "철도노조 준법투쟁 첫 주말…전철 105대 지연",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-28T10:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165983?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 중국 고문 해명",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-28T08:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강금실 \"中 특별고문,朴 정부 때 친선 차원 무보수 명예직\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T10:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968305?sid=100"
+    },
+    {
+     "title": "강금실 “중국 특별고문은 무보수 명예직”…경력 증빙은 못 했다",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-28T10:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000134175?sid=100"
+    },
+    {
+     "title": "[속보]강금실, '친중'공세 첫 반박…\"中특별고문, 박근혜 정부 시기 친선...",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-28T10:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122415?sid=100"
     }
    ]
   },
@@ -80,10 +145,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 34,
-   "recent20": 11,
-   "press": 14,
-   "firstArticleAt": "2026-11-28T08:43:00.000Z",
+   "articles90": 26,
+   "recent20": 7,
+   "press": 13,
+   "firstArticleAt": "2026-11-28T08:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -100,89 +165,31 @@
      "link": "https://m.sports.naver.com/kfootball/article/003/0014350896"
     },
     {
-     "title": "K리그1 우승 지휘한 김기동 감독",
-     "press": "newsis.com",
+     "title": "‘2만7477명 상암벌 열광’ FC서울, 빈틈 없었던 안방 대관식",
+     "press": "sportsworldi.com",
      "publishedAt": "2026-11-28T10:06:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014350897"
+     "link": "https://m.sports.naver.com/kfootball/article/396/0000762242"
     }
    ]
   },
   {
-   "keyword": "철도노조 준법투쟁 지연",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 15,
-   "recent20": 7,
-   "press": 13,
-   "firstArticleAt": "2026-11-28T09:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "철도노조 준법투쟁 후 첫 주말…\"광역전철 105대 지연\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-28T10:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930865?sid=102"
-    },
-    {
-     "title": "철도노조 준법투쟁 사흘째…열차 105대 지연",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-28T10:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012303157?sid=102"
-    },
-    {
-     "title": "철도노조 준법 투쟁 셋째 날, 열차 백여 대 지연",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-28T10:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012303154?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "강금실 중국 고문 해명",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-28T08:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보]강금실, '친중'공세 첫 반박…\"中특별고문, 박근혜 정부 시기 친선...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-28T10:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122415?sid=100"
-    },
-    {
-     "title": "강금실 \"중 특별고문, 박근혜 정부 당시 친선 차원 명예직\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T10:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439427?sid=100"
-    },
-    {
-     "title": "[속보] 강금실, 野 ‘친중 공세’에 첫 해명…\"박근혜 정부 때 무보수 명...",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-28T09:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001274293?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "최민정 월드투어 4대회 금메달",
+   "keyword": "최민정 1000M 금메달 4연속",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 5,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T08:43:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-28T09:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'은퇴 결사반대 나올 만하네' 최민정, 16전 16승 '미쳤다'... 월드투어 1...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-28T10:20:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/108/0003490832"
+    },
     {
      "title": "은퇴 앞둔 최민정, 여자 1000m 4개 대회 연속 금메달 기염",
      "press": "dailian.co.kr",
@@ -194,23 +201,17 @@
      "press": "isplus.com",
      "publishedAt": "2026-11-28T10:00:00.000Z",
      "link": "https://m.sports.naver.com/general/article/241/0003544027"
-    },
-    {
-     "title": "역시 쇼트트랙 여제...최민정, 월드투어 女1000m 4연속 금",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-28T09:59:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/018/0006416896"
     }
    ]
   },
   {
-   "keyword": "김영광, 보복운전 한 달 만에 복귀",
+   "keyword": "보복운전 논란 복귀",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
    "firstArticleAt": "2026-11-28T09:06:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -222,16 +223,16 @@
      "link": "https://n.news.naver.com/mnews/article/018/0006416897?sid=102"
     },
     {
+     "title": "‘보복운전 논란’ 김영광, 유튜브 복귀…택시 기사에 고개 숙였다",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-28T09:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568597?sid=102"
+    },
+    {
      "title": "\"택시기사님께 죄송하다\"…김영광, 한 달여 만에 유튜브 복귀",
      "press": "hankyung.com",
      "publishedAt": "2026-11-28T09:55:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005359355?sid=102"
-    },
-    {
-     "title": "\"택시기사님께 진심으로 사과\"…김영광, '보복운전 논란' 한달만 활동 재...",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-28T09:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001274294?sid=102"
     }
    ]
   },
@@ -242,11 +243,17 @@
    ],
    "articles90": 6,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T08:44:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-28T08:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李, 강릉 지하수저류댐 공사 현장 점검…가뭄 대비 용수 확보 살펴",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-28T10:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005611048?sid=100"
+    },
     {
      "title": "이 대통령, 강릉 지하수저류댐 현장 방문…추가 취수원 확보 등 확인",
      "press": "newsis.com",
@@ -258,51 +265,109 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-28T09:52:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009315483?sid=100"
-    },
-    {
-     "title": "李대통령 \"'첨단바이오 거점' 거듭난 강릉, 지방주도성장 모범사례 되길...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T08:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350853?sid=100"
     }
    ]
   },
   {
-   "keyword": "dl 이앤씨",
+   "keyword": "밤 10시 직원 호출",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T08:56:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-28T08:57:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "한밤중에 400명 불러 모은 DL 회장…실적 부진에 또 '갑질' 논란",
-     "press": "newsroad.co.kr",
+     "title": "DL그룹 회장, 밤 10시에 직원 수백명 호출…또 불거진 '갑질' 논란",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-28T10:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000654010?sid=101"
+    },
+    {
+     "title": "금요일 밤 10시에 직원 400명 긴급 호출…무슨 일?",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-28T09:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368998?sid=101"
+    },
+    {
+     "title": "DL 이해욱, 한밤중 직원 수백 명 소집...무슨 일이?",
+     "press": "ytn.co.kr",
      "publishedAt": "2026-11-28T09:32:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68633"
+     "link": "https://n.news.naver.com/mnews/article/052/0002439431?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 대통령 찾은 주문진시장",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-28T08:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강릉 주문진 시장 뜬 李대통령... 온누리상품권으로 오징어·노가리 구...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-28T10:04:00.000Z",
+     "link": "https://www.insight.co.kr/news/583972"
     },
     {
-     "title": "[단독] DL이앤씨 직원들, 한밤 호출 이어 주말에도 불려나왔다",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T09:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439423?sid=102"
+     "title": "주문진시장 찾은 이재명 대통령",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T09:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009315482?sid=100"
     },
     {
-     "title": "[단독] 이해욱 회장, 갑질논란 침묵...DL \"주주가치 제고 노력\" 해명",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T09:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439424?sid=102"
+     "title": "주문진 수산물 시장 찾은 이재명 대통령",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-28T09:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468994?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "이혁, 노라조 탈퇴 이유",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T09:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이혁, 노라조 탈퇴 결심한 이유 \"제2의 '녹색지대'로 알고 계약\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T10:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014350903"
+    },
+    {
+     "title": "이혁, 노라조 탈퇴한 진짜 이유..\"계약서 서명한 뒤에야 알아\"('백투더뮤...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-28T09:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646579"
+    },
+    {
+     "title": "이혁, 노라조 탈퇴 결심한 속사정 “계약서 서명한 뒤에야…” (백투더...",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-28T09:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329424"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2074,
+  "flagged": 2078,
   "matched": 1013,
   "avgLeadMin": 663,
   "recent": [
