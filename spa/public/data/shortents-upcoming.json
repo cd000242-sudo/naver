@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T02:01:18.815Z",
+ "builtAt": "2026-11-28T02:11:23.595Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "인터넷우체국 개인정보 유출",
@@ -16,94 +16,63 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 23,
+   "articles90": 25,
    "recent20": 5,
-   "press": 23,
+   "press": 25,
    "firstArticleAt": "2026-11-28T00:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "인터넷우체국도 해킹 피해...11만여명 개인정보 유출 확인",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-28T02:10:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=921510"
+    },
+    {
+     "title": "인터넷우체국 해킹에 개인정보 유출…하루치만 11만여명",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-28T02:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004687133?sid=105"
+    },
+    {
      "title": "인터넷우체국 해킹으로 개인정보 유출…하루치만 11만3천여명 확인",
      "press": "idaegu.co.kr",
      "publishedAt": "2026-11-28T01:56:00.000Z",
      "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566687"
-    },
-    {
-     "title": "인터넷우체국 해킹 피해…고객 11만 명 정보 유출",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-28T01:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012303103?sid=105"
-    },
-    {
-     "title": "인터넷우체국 개인정보 유출…하루치만 11만 3천여 명",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-28T01:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406500?sid=101"
     }
    ]
   },
   {
    "keyword": "디트로이트 김하성 계약 발표",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 19,
-   "firstArticleAt": "2026-11-28T00:38:00.000Z",
+   "articles90": 20,
+   "recent20": 4,
+   "press": 20,
+   "firstArticleAt": "2026-11-28T00:42:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "디트로이트, 김하성과 1년 계약 공식 발표",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T01:49:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/052/0002439293"
-    },
-    {
-     "title": "[오피셜]\"550타석만 채워달라\" DET는 2023년 김하성을 기억했다, 최대 $6...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-28T01:36:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/076/0004470402"
-    },
-    {
-     "title": "김하성, 디트로이트와 1년 계약…MLB 새 출발",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-28T01:26:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121548"
-    }
-   ]
-  },
-  {
-   "keyword": "곽시양 유지애 오늘 결혼한다",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T00:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "결혼 당일 큰절 올린 곽시양♥유지애…축가는 누구?",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-28T01:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000762217"
-    },
-    {
-     "title": "\"행복하게 잘 살게요\" 곽시양♥유지애, 결혼 당일(28일) 큰절",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-28T01:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000641323"
-    },
-    {
-     "title": "곽시양♥유지애, 28일 부부 돼 \"늘 한결같은 사람\"",
+     "title": "김하성, MLB 디트로이트 입단 공식 발표…1년 최대 600만달러 계약",
      "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-28T01:40:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96122"
+     "publishedAt": "2026-11-28T02:10:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96126"
+    },
+    {
+     "title": "김하성, 디트로이트서 새 출발…1년 계약 공식화",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-28T02:06:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611280014"
+    },
+    {
+     "title": "[오피셜] 드디어 기다리던 공식발표 떴다! '최대 80억' 계약, 치밀한 세...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-28T02:03:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/108/0003490793"
     }
    ]
   },
@@ -112,30 +81,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T00:36:00.000Z",
+   "articles90": 14,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-28T00:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "곽시양·유지애, 오늘(28일) 결혼",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-28T02:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/018/0006416842"
+    },
+    {
+     "title": "“행복하게 살게요” 큰절 올린 곽시양…러블리즈 유지애와 오늘 결혼",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-28T02:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/016/0002729751"
+    },
     {
      "title": "결혼 당일 큰절 올린 곽시양♥유지애…축가는 누구?",
      "press": "sportsworldi.com",
      "publishedAt": "2026-11-28T01:50:00.000Z",
      "link": "https://m.entertain.naver.com/article/396/0000762217"
-    },
-    {
-     "title": "\"행복하게 잘 살게요\" 곽시양♥유지애, 결혼 당일(28일) 큰절",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-28T01:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000641323"
-    },
-    {
-     "title": "곽시양♥유지애, 오늘(28일) 결혼 앞두고 큰절…축가는 러블리즈 류수정",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-28T01:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000329403"
     }
    ]
   },
@@ -145,30 +114,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-28T00:33:00.000Z",
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-28T00:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "송민규, 포르투갈 리그 데뷔골- 나시오날 2연승 견인",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-28T01:44:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96123"
+     "title": "환상 개인기로 '유럽 데뷔골'…송민규, 보디 페인팅→수비수 제치고→오...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-28T02:10:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/117/0004128801"
     },
     {
-     "title": "송민규 데뷔골에 극찬 \"예술 작품이었다! 수비수 완전히 농락\"…14년 만...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-28T01:21:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/311/0002084994"
+     "title": "송민규, 아웃프런트로 포르투갈 무대 ‘데뷔골’ 쾅…나시오날은 마리...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-28T02:04:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/468/0001283993"
     },
     {
-     "title": "송민규, 포르투갈 리그 데뷔골 폭발‥'경기 MVP' 선정",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-28T01:06:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/214/0001538641"
+     "title": "‘국대 맹활약’ 송민규, 포르투갈리그 더비전서 데뷔골 폭발",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-28T02:02:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/119/0003160480"
     }
    ]
   },
@@ -177,10 +146,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-28T00:36:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-28T00:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -205,34 +174,34 @@
    ]
   },
   {
-   "keyword": "전국 기온 뚝 비 눈",
+   "keyword": "이동연, 팬레터 폐기 2차 사과",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T00:32:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T00:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "비온 뒤 칼바람 기온 '뚝'…아침 최저 영하 5도[내일날씨]",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-28T01:30:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611280074"
+     "title": "[전문] 가족까지 나섰다…'팬레터 폐기 논란' 이동연, 2차 사과문 업로...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-28T02:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000786563"
     },
     {
-     "title": "전국 기온 5~10도 '뚝'…광주·전남 오전 비·눈",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-28T01:22:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087520"
+     "title": "이동연, 팬레터 폐기 논란 2차 사과… 보관 중인 편지 인증까지",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-28T01:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003160472"
     },
     {
-     "title": "전국 강풍으로 체감온도 '뚝'…남부 지방 곳곳에서는 '비'",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-28T01:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653931?sid=102"
+     "title": "'팬레터 폐기 논란' 이동연, 2차 사과→인증에 여론 뒤집혔다…쏟아진 ...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-28T00:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409896"
     }
    ]
   },
@@ -267,14 +236,102 @@
      "link": "http://www.celuvmedia.com/article.php?aid=1795826145531691006"
     }
    ]
+  },
+  {
+   "keyword": "전국 기온 뚝 비 눈",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T01:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "비온 뒤 칼바람 기온 '뚝'…아침 최저 영하 5도[내일날씨]",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-28T01:30:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611280074"
+    },
+    {
+     "title": "전국 기온 5~10도 '뚝'…광주·전남 오전 비·눈",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-28T01:22:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087520"
+    },
+    {
+     "title": "전국 강풍으로 체감온도 '뚝'…남부 지방 곳곳에서는 '비'",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-28T01:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653931?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "의사",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T00:43:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"의사가 추천\"…AI '가짜 전문가' 광고 철퇴",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-28T01:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930765?sid=101"
+    },
+    {
+     "title": "빚 16억 숨기고 대출받은 40대 의사 징역형 집행유예",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-28T01:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653930?sid=102"
+    },
+    {
+     "title": "박태성 北총리, 평양의사당서 러시아 장관 접견",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T00:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009315143?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2000,
-  "matched": 980,
-  "avgLeadMin": 654,
+  "flagged": 2001,
+  "matched": 984,
+  "avgLeadMin": 651,
   "recent": [
+   {
+    "keyword": "곽시양 유지애 오늘 결혼 큰절 약속",
+    "hitKeyword": "곽시양 유지애 결혼",
+    "hitAt": "2026-11-28T11:00:00+09:00",
+    "leadMin": 79
+   },
+   {
+    "keyword": "곽시양 유지애 오늘 결혼해요",
+    "hitKeyword": "곽시양 유지애 결혼",
+    "hitAt": "2026-11-28T11:00:00+09:00",
+    "leadMin": 59
+   },
+   {
+    "keyword": "곽시양 유지애 결혼",
+    "hitKeyword": "곽시양 유지애 결혼",
+    "hitAt": "2026-11-28T11:00:00+09:00",
+    "leadMin": 39
+   },
+   {
+    "keyword": "곽시양 유지애 오늘 결혼한다",
+    "hitKeyword": "곽시양 유지애 결혼",
+    "hitAt": "2026-11-28T11:00:00+09:00",
+    "leadMin": 19
+   },
    {
     "keyword": "미국 이란 제재",
     "hitKeyword": "미국 쿠팡 제재 압박",
@@ -310,30 +367,6 @@
     "hitKeyword": "그냥사람친구 첫방송",
     "hitAt": "2026-11-28T10:00:00+09:00",
     "leadMin": 69
-   },
-   {
-    "keyword": "송민규 포르투갈 리그 데뷔골",
-    "hitKeyword": "송민규 데뷔골",
-    "hitAt": "2026-11-28T09:30:00+09:00",
-    "leadMin": 9
-   },
-   {
-    "keyword": "시장",
-    "hitKeyword": "KBO FA 시장",
-    "hitAt": "2026-11-28T09:00:00+09:00",
-    "leadMin": 100
-   },
-   {
-    "keyword": "홍민기 전 연인 실종",
-    "hitKeyword": "홍민기 전 연인 실종",
-    "hitAt": "2026-11-28T09:00:00+09:00",
-    "leadMin": 90
-   },
-   {
-    "keyword": "AI 반등으로 뉴욕증시 상승",
-    "hitKeyword": "뉴욕증시 상승",
-    "hitAt": "2026-11-28T09:00:00+09:00",
-    "leadMin": 50
    }
   ]
  }
