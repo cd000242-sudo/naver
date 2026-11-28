@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T08:12:01.188Z",
+ "builtAt": "2026-11-28T08:22:04.480Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,46 +11,14 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "이 대통령 주문진시장 방문",
+   "keyword": "박지수 BNK 3연승",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 22,
-   "recent20": 4,
-   "press": 21,
-   "firstArticleAt": "2026-11-28T06:43:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령, 주문진시장 방문해 민생 점검… 오징어·노가리 구입",
-     "press": "segye.com",
-     "publishedAt": "2026-11-28T08:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178833?sid=100"
-    },
-    {
-     "title": "李대통령, 강릉 주문진시장서 연말 물가 점검…오징어·노가리 구매",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-28T08:08:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088824"
-    },
-    {
-     "title": "李대통령 \"강릉, 지방주도성장 모범사례\"…천연물 산업화 지원센터 예산...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-28T08:03:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261128000065"
-    }
-   ]
-  },
-  {
-   "keyword": "KB 3연승",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-28T06:44:00.000Z",
+   "articles90": 16,
+   "recent20": 0,
+   "press": 15,
+   "firstArticleAt": "2026-11-28T06:58:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -75,14 +43,78 @@
    ]
   },
   {
+   "keyword": "무자격 후보 마녀사냥",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-28T06:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "장동혁, 개각 후보자 4명에 “무자격 내각”… 민주당 “답정너식 마녀...",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-28T08:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000087198?sid=100"
+    },
+    {
+     "title": "野 \"무자격 내각\" vs 與 \"낡은 색깔론\" … 개각 인사청문회 앞두고 격돌",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-28T08:08:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/28/2026112850053.html"
+    },
+    {
+     "title": "장동혁 \"무자격 대통령에 무자격 내각…끌려 내려오는 일만 남아\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-28T07:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653987?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명, KIST 천연물 방문",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-28T07:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령, 강릉 천연물 바이오산업 육성...“연구개발부터 제품화까지 ...",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-28T08:14:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73704"
+    },
+    {
+     "title": "이 대통령, KIST 강릉 분원 방문‥\"천연물 산업화 혁신센터 조성\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-28T08:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538668?sid=100"
+    },
+    {
+     "title": "李대통령 \"강릉, 지방주도성장 모범사례\"…천연물 산업화 지원센터 예산...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-28T08:03:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261128000065"
+    }
+   ]
+  },
+  {
    "keyword": "강금실 한준호 인사청문회",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-28T06:44:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-28T06:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,34 +139,130 @@
    ]
   },
   {
-   "keyword": "방문해 오징어 노가리 구입",
+   "keyword": "dl 이앤씨",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-28T06:46:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-28T06:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, 주문진시장 방문해 민생 점검… 오징어·노가리 구입",
-     "press": "segye.com",
-     "publishedAt": "2026-11-28T08:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178833?sid=100"
+     "title": "'실적은 경영진 책임인데'…DL이앤씨 직원 수백 명 한밤중 '호출'",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-28T07:56:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244476"
     },
     {
-     "title": "\"장사 잘 되시냐\"...이 대통령, 주문진시장서 오징어·노가리 샀다",
+     "title": "밤 10시 회사로 직원 400명 호출…이해욱 DL그룹 회장 또 구설",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-28T07:36:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322212&inflow=N"
+    },
+    {
+     "title": "금요일 밤10시 직원 400명 불러내 새벽 귀가시킨 DL 회장",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-28T07:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005611041?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "아일릿 모카 활동 재개",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-28T07:04:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[공식] 아일릿 모카, 불안 증세로 활동 중단 5개월만 복귀..“일부 일정...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-28T08:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646526"
+    },
+    {
+     "title": "아일릿 모카, 활동 복귀 공식화… \"일부 일정 참여\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T07:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000968299"
+    },
+    {
+     "title": "아일릿 모카, ‘활동 중단’ 5개월 만 복귀…“일부 일정부터 참여”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-28T07:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005770264?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "서울 우승 대관식 4-1 완승!",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-28T07:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'손정범 첫 멀티골' FC서울, 대전 4-1 완파…화려한 우승 대관식",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-28T07:39:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/422/0000930852"
+    },
+    {
+     "title": "[k1.interview] '경기 막판 충돌' 황선홍 감독, \"서울 우승 축하하지만, ...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-28T07:27:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/411/0000090603"
+    },
+    {
+     "title": "'손정범 멀티골' 서울, '우승 대관식'서 대전에 4-1 대승",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-28T07:04:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110132633524"
+    }
+   ]
+  },
+  {
+   "keyword": "영국 미공군기지 드론",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T07:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"영국 기지에 미 전투기 노린 드론 출몰...이란 연루 의심\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T08:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439400?sid=104"
+    },
+    {
+     "title": "영국 내 美공군기지에 드론 출현...이란 연루 의심 속 회수 난항",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-28T07:44:00.000Z",
+     "link": "https://www.ajunews.com/view/20261128162636908"
+    },
+    {
+     "title": "미군, 이달 초 영국 공군 기지 출몰 드론 격퇴…\"이란 연루 의심\"",
      "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-28T07:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980278?sid=100"
-    },
-    {
-     "title": "李대통령, 강릉 주문진시장 방문... 오징어·노가리 구입",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-28T07:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012270?sid=100"
+     "publishedAt": "2026-11-28T07:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980276?sid=104"
     }
    ]
   },
@@ -143,10 +271,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 7,
+   "articles90": 3,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-28T06:44:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-28T06:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -169,108 +297,11 @@
      "link": "https://www.newsway.co.kr/news/view?ud=2026112815472626383"
     }
    ]
-  },
-  {
-   "keyword": "영국 미공군기지 드론",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-28T06:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "영국 내 美공군기지에 드론 출현...이란 연루 의심 속 회수 난항",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-28T07:44:00.000Z",
-     "link": "https://www.ajunews.com/view/20261128162636908"
-    },
-    {
-     "title": "미군, 이달 초 영국 공군 기지 출몰 드론 격퇴…\"이란 연루 의심\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-28T07:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980276?sid=104"
-    },
-    {
-     "title": "미군, 영국 공군기지 드론 6대 격퇴…배후·탑재물은 미확인",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-28T06:51:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087551"
-    }
-   ]
-  },
-  {
-   "keyword": "사고",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T07:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "광명 소하동 공사현장서 사다리 추락 사고… 60대 근로자 숨져",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-28T07:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000134167?sid=102"
-    },
-    {
-     "title": "연예계 음주 논란 속‥성시경, 쌈디 만취 사고에 절교한 사연 “눈 떠보...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-28T07:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192124"
-    },
-    {
-     "title": "구례군, '한국전기안전공사와 합동 점검'... 취약가구 안전사고 원천 차...",
-     "press": "newsworker.co.kr",
-     "publishedAt": "2026-11-28T07:26:00.000Z",
-     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=516761"
-    }
-   ]
-  },
-  {
-   "keyword": "이해욱 회장 질책",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T06:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이해욱 DL 회장, 실적 부진에 직원 '심야 소집' 논란",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-28T07:14:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=248015"
-    },
-    {
-     "title": "재계 24위 그룹 총수, 밤 10시 직원 400명 불러…실적 질책하다 '심야 소...",
-     "press": "businessplus.kr",
-     "publishedAt": "2026-11-28T07:02:00.000Z",
-     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120663"
-    },
-    {
-     "title": "플랜트서 1641억 증발…이해욱 DL그룹 회장의 이유 있는 질책",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-28T06:52:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733318"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2072,
+  "flagged": 2077,
   "matched": 1015,
   "avgLeadMin": 665,
   "recent": [
