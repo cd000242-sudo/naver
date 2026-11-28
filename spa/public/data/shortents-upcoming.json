@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T09:22:24.675Z",
+ "builtAt": "2026-11-28T09:32:27.890Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,33 +13,32 @@
   {
    "keyword": "포스코 임금교섭 타결",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 50,
-   "recent20": 4,
-   "press": 44,
+   "articles90": 54,
+   "recent20": 5,
+   "press": 46,
    "firstArticleAt": "2026-11-28T08:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "포스코 임금협상 5개월 만에 타결…조합원 65% 찬성",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-28T09:14:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026112818122698423"
+     "title": "‘파업 초읽기’ 포스코 노사 임금교섭 최종 타결",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-28T09:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162490?sid=102"
     },
     {
-     "title": "창사 첫 파업 겪은 포스코, 5개월 진통 끝 임금교섭 타결",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-28T09:08:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=543671"
+     "title": "파업까지 치달은 포스코 노사 갈등…5개월 만에 극적 타결",
+     "press": "magazine.hankyung.com",
+     "publishedAt": "2026-11-28T09:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/050/0000113896?sid=101"
     },
     {
-     "title": "[속보] 포스코 노사 임금교섭 최종 타결…찬성 65.01%",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-28T09:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160523?sid=101"
+     "title": "포스코 노사, 두 차례 파업 끝 합의⋯조합원 65% 찬성 [종합]",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-28T09:24:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654215"
     }
    ]
   },
@@ -48,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 26,
+   "articles90": 18,
    "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-28T07:54:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-28T08:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -81,7 +80,7 @@
     "nate"
    ],
    "articles90": 40,
-   "recent20": 2,
+   "recent20": 1,
    "press": 10,
    "firstArticleAt": "2026-11-28T08:09:00.000Z",
    "exclusive": false,
@@ -112,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 2,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-28T08:04:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "아일릿 모카, 활동 중단 끝 복귀 시동…\"일부 일정부터 참여, 건강 최우...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-28T09:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002085057"
+    },
     {
      "title": "아일릿 모카, 활동 재개 시점?",
      "press": "topstarnews.net",
@@ -130,12 +135,6 @@
      "press": "tvreport.co.kr",
      "publishedAt": "2026-11-28T09:10:00.000Z",
      "link": "https://m.entertain.naver.com/article/213/0001409946"
-    },
-    {
-     "title": "'아일릿' 모카, '활중' 5개월만에 복귀⋯소속사 \"일부 일정 참여\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-28T08:50:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2654211"
     }
    ]
   },
@@ -144,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-28T08:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"英 최대 미군 전투기 기지에 드론 6대 출몰…이란 소행 의심\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T09:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009315468?sid=104"
+    },
     {
      "title": "\"영국 기지에 美 전투기 노린 드론 출몰‥이란 연루 의심\"",
      "press": "imnews.imbc.com",
@@ -162,53 +167,15 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-28T08:30:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288481"
-    },
-    {
-     "title": "\"영국 기지에 미 전투기 노린 드론 출몰...이란 연루 의심\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T08:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439400?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "이지아 욕 좀 할 테니까",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T08:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘서태지·정우성 결별’ 이지아 “이상형? 신뢰할 수 있는 사람”",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-28T08:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001152184"
-    },
-    {
-     "title": "이지아, ‘가장 후회되는 연애’ 질문에 “내가 욕 좀 할 테니까”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-28T08:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005770268"
-    },
-    {
-     "title": "이지아 \"후회되는 연애? 욕 좀 하겠다\"(외계인이지아)",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-28T08:02:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110133243365"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2077,
-  "matched": 1018,
-  "avgLeadMin": 663,
+  "flagged": 2074,
+  "matched": 1015,
+  "avgLeadMin": 662,
   "recent": [
    {
     "keyword": "2026",
