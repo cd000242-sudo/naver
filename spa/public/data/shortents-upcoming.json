@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T07:21:41.526Z",
+ "builtAt": "2026-11-28T07:31:46.091Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,78 @@
  "measured": 29,
  "candidates": [
   {
-   "keyword": "이해욱 회장",
+   "keyword": "dl 이앤씨",
    "sources": [
     "daum"
    ],
-   "articles90": 26,
+   "articles90": 23,
+   "recent20": 3,
+   "press": 23,
+   "firstArticleAt": "2026-11-28T06:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "금요일 밤10시 직원 400명 불러내 새벽 귀가시킨 DL 회장",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-28T07:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005611041?sid=101"
+    },
+    {
+     "title": "'폭행 벌금형' 이해욱 DL 회장, 이번엔 직원 400명 심야 소집",
+     "press": "greened.kr",
+     "publishedAt": "2026-11-28T07:22:00.000Z",
+     "link": "https://www.greened.kr/news/articleView.html?idxno=355839"
+    },
+    {
+     "title": "이해욱 DL 회장, 실적 부진에 직원 '심야 소집' 논란",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-28T07:14:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=248015"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 한준호 인사청문회",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
    "recent20": 2,
-   "press": 26,
-   "firstArticleAt": "2026-11-28T05:52:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-28T06:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강금실·한준호·홍익표 청문회 전운…국힘 “무자격 내각” vs 민주 “...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-28T07:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061611?sid=100"
+    },
+    {
+     "title": "장동혁 “무자격 대통령에 무자격 내각” …강금실·한준호 청문회 앞두...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-28T07:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002836158?sid=100"
+    },
+    {
+     "title": "개각 인사청문회 전초전... 국힘 \"무자격자들\" vs 민주 \"색깔론 말라\" 충...",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-28T07:08:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=731399"
+    }
+   ]
+  },
+  {
+   "keyword": "이해욱 회장 질책",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-28T06:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -29,16 +93,16 @@
      "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=248015"
     },
     {
-     "title": "이해욱 DL그룹 회장, 실적 질타하다 밤 10시 직원 400명 소집 논란",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-28T07:06:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261128504539?OutUrl=naver"
+     "title": "재계 24위 그룹 총수, 밤 10시 직원 400명 불러…실적 질책하다 '심야 소...",
+     "press": "businessplus.kr",
+     "publishedAt": "2026-11-28T07:02:00.000Z",
+     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120663"
     },
     {
-     "title": "‘불금’에 퇴근한 직원들, 회사로 호출한 이해욱 DL회장···또 갑질 논...",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-28T07:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053706?sid=102"
+     "title": "플랜트서 1641억 증발…이해욱 DL그룹 회장의 이유 있는 질책",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-28T06:52:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733318"
     }
    ]
   },
@@ -47,10 +111,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-28T05:52:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-28T06:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,61 +139,29 @@
    ]
   },
   {
-   "keyword": "강금실 한준호 인사청문회",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-28T06:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장동혁 “무자격 대통령에 무자격 내각” …강금실·한준호 청문회 앞두...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-28T07:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002836158?sid=100"
-    },
-    {
-     "title": "與, 강금실 등 李정부 2기 인선 '엄호'…野 \"무자격만 골라\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T07:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315380?sid=100"
-    },
-    {
-     "title": "개각 인사청문회 전초전... 국힘 \"무자격자들\" vs 민주 \"색깔론 말라\" 충...",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-28T07:08:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731399"
-    }
-   ]
-  },
-  {
    "keyword": "LG전자 이재명 대통령",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 10,
    "recent20": 1,
-   "press": 8,
+   "press": 9,
    "firstArticleAt": "2026-11-28T06:04:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
+     "title": "이재명 대통령, 강원 동해 AI데이터센터 착공식 참석…\"아시아 최대 인...",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-28T07:26:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=644247"
+    },
+    {
      "title": "이 대통령, 강원 AIDC 착공식 참석…\"아시아 최대 규모 인프라\"",
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-28T07:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001406544?sid=100"
-    },
-    {
-     "title": "이 대통령, 동해 AI데이터센터 착공식 참석... “지역 경제 활성화 이끌...",
-     "press": "vop.co.kr",
-     "publishedAt": "2026-11-28T06:42:00.000Z",
-     "link": "https://vop.co.kr/A00001697811.html"
     },
     {
      "title": "이 대통령, 동해 GS AI데이터센터 착공식 이후 국내 기업 기술 부스 방문",
@@ -140,34 +172,98 @@
    ]
   },
   {
-   "keyword": "황민현, 플레디스 떠난다",
+   "keyword": "슈",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 5,
+   "articles90": 7,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T05:52:00.000Z",
-   "exclusive": true,
+   "press": 7,
+   "firstArticleAt": "2026-11-28T06:31:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[단독] 황민현, 14년 의리 지킨 플레디스 떠난다..새 둥지로 이종석 소속...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T07:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646493"
+     "title": "“정말 SES 슈 맞나”…지나 이어 ‘고속 노화’ 비주얼 재조명",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-28T07:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729785?sid=103"
     },
     {
-     "title": "황민현, 14년만 플레디스 떠난다…\"12월 계약 종료\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T06:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014350723"
+     "title": "‘재혼 황후’ 이종석 “하인리, 소비에슈 신경 쓸 상대조차 아닐듯..주...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-28T07:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003814684"
     },
     {
-     "title": "황민현 14년 만에 플레디스 떠난다…\"내달 14일 전속계약 종료\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-28T06:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/079/0004214855"
+     "title": "'불화설 종결' 바다·슈, 팔짱 끼고 활짝..S.E.S. 데뷔 29주년 완전체 뭉...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-28T06:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004470472"
+    }
+   ]
+  },
+  {
+   "keyword": "사고",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T06:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "구례군, '한국전기안전공사와 합동 점검'... 취약가구 안전사고 원천 차...",
+     "press": "newsworker.co.kr",
+     "publishedAt": "2026-11-28T07:26:00.000Z",
+     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=516761"
+    },
+    {
+     "title": "IPARK현대산업개발, 광주 사고 이후, 산수2구역 수주 확정… 지역 사회 ...",
+     "press": "housingherald.co.kr",
+     "publishedAt": "2026-11-28T07:14:00.000Z",
+     "link": "https://www.housingherald.co.kr/news/articleView.html?idxno=63598"
+    },
+    {
+     "title": "\"내가 사고 쳐 자숙?\" 풍자, 채널 활동 6개월 휴식…뜻밖의 '오해' 해명...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-28T07:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000494208"
+    }
+   ]
+  },
+  {
+   "keyword": "김가연 한복 비판",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-28T06:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김가연, 경복궁 한복 대여점 비판 \"제대로 되지 않은 옷 한복인 양 홍보...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T07:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009315386"
+    },
+    {
+     "title": "김가연, 경복궁 한복 대여 실태 비판",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-28T07:00:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611280100"
+    },
+    {
+     "title": "“엉터리 옷을 한복인 양”…김가연, 경복궁 대여점 ‘작심 비판’",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-28T06:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005770253?sid=102"
     }
    ]
   },
@@ -176,10 +272,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 8,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-28T05:59:00.000Z",
+   "firstArticleAt": "2026-11-28T06:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,34 +300,34 @@
    ]
   },
   {
-   "keyword": "김가연 한복 비판",
+   "keyword": "황민현, 플레디스 떠난다",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-28T06:05:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-28T06:03:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "김가연, 경복궁 한복 대여 실태 비판",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-28T07:00:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611280100"
+     "title": "[단독] 황민현, 14년 의리 지킨 플레디스 떠난다..새 둥지로 이종석 소속...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-28T07:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646493"
     },
     {
-     "title": "“엉터리 옷을 한복인 양”…김가연, 경복궁 대여점 ‘작심 비판’",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-28T06:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005770253?sid=102"
+     "title": "황민현, 14년만 플레디스 떠난다…\"12월 계약 종료\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T06:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014350723"
     },
     {
-     "title": "“엉터리 옷 한복인 양” 김가연, 경복궁 한복 대여점 ‘공개 저격’",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-28T06:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001152168"
+     "title": "황민현 14년 만에 플레디스 떠난다…\"내달 14일 전속계약 종료\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-28T06:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/079/0004214855"
     }
    ]
   },
@@ -266,43 +362,11 @@
      "link": "https://n.news.naver.com/mnews/article/016/0002729778?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "주유소",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T06:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "주유소 기름값 28주째 하락…수입 원유가 떨어져",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-28T06:48:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545294"
-    },
-    {
-     "title": "전국 주유소 기름값 28주째 하락… 휘발유 1854원",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-28T06:38:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452890"
-    },
-    {
-     "title": "주유소 기름값 28주째 하락…50리터 넣어도 35원 절약",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-28T06:18:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288405"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2062,
+  "flagged": 2065,
   "matched": 1009,
   "avgLeadMin": 660,
   "recent": [
