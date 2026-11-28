@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T09:02:17.916Z",
+ "builtAt": "2026-11-28T09:12:21.420Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 30,
  "candidates": [
   {
    "keyword": "포스코 임금교섭 타결",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 44,
-   "recent20": 14,
-   "press": 38,
+   "articles90": 49,
+   "recent20": 11,
+   "press": 43,
    "firstArticleAt": "2026-11-28T08:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 포스코 노사 임금교섭 최종 타결",
-     "press": "magazine.hankyung.com",
-     "publishedAt": "2026-11-28T08:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/050/0000113895?sid=101"
+     "title": "창사 첫 파업 겪은 포스코, 5개월 진통 끝 임금교섭 타결",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-28T09:08:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=543671"
     },
     {
-     "title": "포스코 노사, 임금 협상 최종 타결…투표율·찬성률 과반 넘겨",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-28T08:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061614?sid=101"
+     "title": "[속보] 포스코 노사 임금교섭 최종 타결…찬성 65.01%",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-28T09:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160523?sid=101"
     },
     {
-     "title": "포스코 노사 임금교섭 임금협상 최종 타결…노조원 65% 찬성",
-     "press": "kyongbuk.co.kr",
-     "publishedAt": "2026-11-28T08:56:00.000Z",
-     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4092358"
+     "title": "한 차례 부결된 포스코 임금협상…기본급 2.6% 인상으로 타결",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-28T09:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568593?sid=101"
     }
    ]
   },
@@ -48,7 +49,7 @@
     "nate"
    ],
    "articles90": 32,
-   "recent20": 4,
+   "recent20": 3,
    "press": 21,
    "firstArticleAt": "2026-11-28T07:46:00.000Z",
    "exclusive": false,
@@ -61,48 +62,16 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014350853?sid=100"
     },
     {
-     "title": "李대통령 \"강릉 천연물 산업화 지원센터 예산 반영\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-28T08:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005611045?sid=100"
-    },
-    {
      "title": "李대통령 \"강원 천연물 혁신센터 예산 반영…R&D부터 사업화까지 지원\"",
      "press": "news.einfomax.co.kr",
      "publishedAt": "2026-11-28T08:56:00.000Z",
      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4447058"
-    }
-   ]
-  },
-  {
-   "keyword": "북창 공군기지 운영재개",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T07:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "북 북창 공군기지 노후 전투기 포착...\"3년 만에 운영재개\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T08:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439407?sid=104"
     },
     {
-     "title": "北 북창 공군기지 노후 전투기 포착… 3년 만에 보수 끝 운영재개 정황",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-28T08:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193811?sid=100"
-    },
-    {
-     "title": "北, 3년간 공사하던 공군기지에 전투기 등장…운영 재개 정황",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T08:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968301?sid=104"
+     "title": "李대통령 \"강릉 천연물 산업화 지원센터 예산 반영\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-28T08:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005611045?sid=100"
     }
    ]
   },
@@ -111,30 +80,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 36,
-   "recent20": 11,
+   "articles90": 39,
+   "recent20": 8,
    "press": 11,
-   "firstArticleAt": "2026-11-28T07:36:00.000Z",
+   "firstArticleAt": "2026-11-28T07:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "10년 만에 돌아온 K리그1 우승 트로피, 상암벌에서 만끽한 '우승 대관식...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-28T09:01:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/076/0004470501"
+     "title": "서울의 미래 손정범, 데뷔 첫 멀티골…우승 대관식 자축",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-28T09:02:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/119/0003160522"
+    },
+    {
+     "title": "FC서울, 10년 만의 대관식",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T09:02:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/421/0009315461"
     },
     {
      "title": "우승 세리머니 마친 김기동, 재계약 이슈 묻자 “심도 있게 얘기가 아직...",
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-28T09:01:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/468/0001284018"
-    },
-    {
-     "title": "“팬들과 약속 지켰다” 챔피언 김기동 서울 감독, 대관식 후 첫 소감 “...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-28T08:53:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/144/0001152187"
     }
    ]
   },
@@ -143,13 +112,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
    "firstArticleAt": "2026-11-28T08:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"빠르다 빨라\"…'보복운전 논란' 김영광, 한 달여 만에 복귀→사죄 속 ...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-28T09:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409945"
+    },
     {
      "title": "김영광 '보복운전' 논란 한 달여 만에 복귀…\"면목없다\"",
      "press": "nocutnews.co.kr",
@@ -161,108 +136,70 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-28T08:28:00.000Z",
      "link": "https://m.entertain.naver.com/article/421/0009315438"
-    },
-    {
-     "title": "\"한 달 복귀는 예상 못했다\"…'보복운전 논란' 김영광, 팬들도 당황한 ...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-28T08:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002085049"
     }
    ]
   },
   {
-   "keyword": "한성숙 총리 부스 방문",
+   "keyword": "아일릿 모카 활동 재개",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T07:50:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'활동 중단' 아일릿 모카, 불안 증세 딛고 돌아온다.. \"건강 살피며 활동...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-28T09:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409946"
+    },
+    {
+     "title": "'아일릿' 모카, '활중' 5개월만에 복귀⋯소속사 \"일부 일정 참여\"",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-28T08:50:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654211"
+    },
+    {
+     "title": "'건강 적신호' 아일릿 모카, 활동 재개 “일부 일정 참여”",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-28T08:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000522928"
+    }
+   ]
+  },
+  {
+   "keyword": "영국 미공군기지 드론",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-28T08:28:00.000Z",
+   "firstArticleAt": "2026-11-28T07:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "韓총리, 삼성·SK하이닉스에 \"내년 신입 더 뽑아달라\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-28T08:58:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4447059"
+     "title": "\"영국 기지에 美 전투기 노린 드론 출몰‥이란 연루 의심\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-28T08:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538670?sid=104"
     },
     {
-     "title": "\"내년엔 얼마나 뽑나요?\"…삼성·SK에 채용 확대 당부한 한 총리",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-28T08:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406562?sid=102"
+     "title": "영국 미공군기지 드론 6대 격퇴…이란 배후설 물증은?",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-28T08:30:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288481"
     },
     {
-     "title": "한성숙 총리, 삼성전자·SK하이닉스에 “청년 채용 늘려달라”",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-28T08:46:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261128023456080"
-    }
-   ]
-  },
-  {
-   "keyword": "박지수 BNK 3연승",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T07:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박지수, 통산 160경기 '더블더블'…女농구 KB, BNK 꺾고 3연승",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-28T08:02:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785551"
-    },
-    {
-     "title": "3연승 달린 김완수 감독 “이채은-허예은 3쿼터 3점슛, 분위기 끌어올렸...",
-     "press": null,
-     "publishedAt": "2026-11-28T07:48:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/065/0000305327"
-    },
-    {
-     "title": "'20득점 20리바운드' 박지수, 통산 160번째 더블더블…KB 3연승",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-28T07:47:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/055/0001406554"
-    }
-   ]
-  },
-  {
-   "keyword": "남경주 성폭행 재판",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T07:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'제자 성폭행 혐의' 남경주, 피해자에 보낸 편지에선 \"세상에 알리지 말...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-28T08:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000641342"
-    },
-    {
-     "title": "“성관계 시도한 건 사실이지만…” 제자 성폭행 혐의로 재판정 선 남경...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-28T07:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005770266?sid=102"
-    },
-    {
-     "title": "‘제자 성폭행 의혹’ 남경주, 음주운전 정황…딱 걸렸는데 처벌 못하는...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-28T07:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729789?sid=102"
+     "title": "\"영국 기지에 미 전투기 노린 드론 출몰...이란 연루 의심\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T08:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439400?sid=104"
     }
    ]
   }
@@ -270,9 +207,39 @@
  "hitRate": {
   "days": 7,
   "flagged": 2088,
-  "matched": 1020,
-  "avgLeadMin": 663,
+  "matched": 1025,
+  "avgLeadMin": 666,
   "recent": [
+   {
+    "keyword": "2026",
+    "hitKeyword": "해운대 빛축제 2026",
+    "hitAt": "2026-11-28T18:00:00+09:00",
+    "leadMin": 1766
+   },
+   {
+    "keyword": "2026 K-라이스 페스타",
+    "hitKeyword": "해운대 빛축제 2026",
+    "hitAt": "2026-11-28T18:00:00+09:00",
+    "leadMin": 1656
+   },
+   {
+    "keyword": "2026 제네시스 시상식 수상자들",
+    "hitKeyword": "해운대 빛축제 2026",
+    "hitAt": "2026-11-28T18:00:00+09:00",
+    "leadMin": 1434
+   },
+   {
+    "keyword": "2026 제네시스 시상식",
+    "hitKeyword": "해운대 빛축제 2026",
+    "hitAt": "2026-11-28T18:00:00+09:00",
+    "leadMin": 1374
+   },
+   {
+    "keyword": "이스라엘 인간방패 폭로",
+    "hitKeyword": "팔레스타인 인간방패 폭로",
+    "hitAt": "2026-11-28T18:00:00+09:00",
+    "leadMin": 229
+   },
    {
     "keyword": "GS AI 데이터센터 착공식 참석",
     "hitKeyword": "중국 데이터센터 엔비디아",
@@ -302,36 +269,6 @@
     "hitKeyword": "중국 데이터센터 엔비디아",
     "hitAt": "2026-11-28T17:30:00+09:00",
     "leadMin": 48
-   },
-   {
-    "keyword": "FC서울 우승 대관식",
-    "hitKeyword": "FC서울 손정범 첫 멀티골",
-    "hitAt": "2026-11-28T17:00:00+09:00",
-    "leadMin": 18
-   },
-   {
-    "keyword": "서인영 남양주 신혼집 마련",
-    "hitKeyword": "서인영 다이어트 떡볶이",
-    "hitAt": "2026-11-28T16:30:00+09:00",
-    "leadMin": 3145
-   },
-   {
-    "keyword": "문가영",
-    "hitKeyword": "문가영 패션",
-    "hitAt": "2026-11-28T16:30:00+09:00",
-    "leadMin": 3044
-   },
-   {
-    "keyword": "연우 다이어트 감량",
-    "hitKeyword": "서인영 다이어트 떡볶이",
-    "hitAt": "2026-11-28T16:30:00+09:00",
-    "leadMin": 1817
-   },
-   {
-    "keyword": "연우 다이어트",
-    "hitKeyword": "서인영 다이어트 떡볶이",
-    "hitAt": "2026-11-28T16:30:00+09:00",
-    "leadMin": 1686
    }
   ]
  }
