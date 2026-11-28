@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T08:22:04.480Z",
+ "builtAt": "2026-11-28T08:32:07.516Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,82 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 29,
  "candidates": [
+  {
+   "keyword": "이 대통령 주문진시장 방문",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 20,
+   "recent20": 3,
+   "press": 19,
+   "firstArticleAt": "2026-11-28T07:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령, 강릉 천연물 바이오산업 육성 약속…\"정부 지원 아끼지 않을...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-28T08:26:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1140831"
+    },
+    {
+     "title": "이 대통령, 주문진 건어물 시장 방문‥특산품 구입 등 민생행보",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-28T08:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538669?sid=100"
+    },
+    {
+     "title": "李대통령, 강릉 천연물 바이오산업 육성...“연구개발부터 제품화까지 ...",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-28T08:14:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73704"
+    }
+   ]
+  },
+  {
+   "keyword": "포스코 임금교섭 타결",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 17,
+   "recent20": 15,
+   "press": 16,
+   "firstArticleAt": "2026-11-28T08:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] 포스코 노사, 2026년도 임금협상 타결",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-28T08:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000556465?sid=102"
+    },
+    {
+     "title": "포스코 노사, 5달 만에 임금 교섭 최종 타결…65% 찬성",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-28T08:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980283?sid=102"
+    },
+    {
+     "title": "포스코 임단협 5개월 만에 최종 타결… 2차 합의안 찬성률 65% 가결",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-28T08:28:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=731403"
+    }
+   ]
+  },
   {
    "keyword": "박지수 BNK 3연승",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 16,
+   "articles90": 15,
    "recent20": 0,
-   "press": 15,
-   "firstArticleAt": "2026-11-28T06:58:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-28T07:04:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -43,34 +108,34 @@
    ]
   },
   {
-   "keyword": "무자격 후보 마녀사냥",
+   "keyword": "북창 공군기지 운영재개",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-28T06:58:00.000Z",
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-28T07:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장동혁, 개각 후보자 4명에 “무자격 내각”… 민주당 “답정너식 마녀...",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-28T08:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000087198?sid=100"
+     "title": "北 북창 공군기지, 3년 보수 끝 운영 재개 정황…'항공절' 앞두고 미그-...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-28T08:26:00.000Z",
+     "link": "https://www.ajunews.com/view/20261128171724925"
     },
     {
-     "title": "野 \"무자격 내각\" vs 與 \"낡은 색깔론\" … 개각 인사청문회 앞두고 격돌",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-28T08:08:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/28/2026112850053.html"
+     "title": "北북창 공군기지 운영재개…70년대 노후 전투기 포착",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-28T08:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004687166?sid=102"
     },
     {
-     "title": "장동혁 \"무자격 대통령에 무자격 내각…끌려 내려오는 일만 남아\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-28T07:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653987?sid=100"
+     "title": "3년간 개보수 마친 北 북창 공군기지…전투기 재배치 포착",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-28T08:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214860?sid=100"
     }
    ]
   },
@@ -79,13 +144,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 13,
+   "articles90": 14,
    "recent20": 3,
-   "press": 9,
+   "press": 10,
    "firstArticleAt": "2026-11-28T07:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이 대통령, 강릉 천연물 바이오산업 육성 약속…\"정부 지원 아끼지 않을...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-28T08:26:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1140831"
+    },
     {
      "title": "李대통령, 강릉 천연물 바이오산업 육성...“연구개발부터 제품화까지 ...",
      "press": "m-economynews.com",
@@ -97,76 +168,38 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-28T08:13:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001538668?sid=100"
-    },
-    {
-     "title": "李대통령 \"강릉, 지방주도성장 모범사례\"…천연물 산업화 지원센터 예산...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-28T08:03:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261128000065"
     }
    ]
   },
   {
-   "keyword": "강금실 한준호 인사청문회",
+   "keyword": "무자격 후보 마녀사냥",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 9,
-   "recent20": 1,
+   "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-28T06:58:00.000Z",
+   "firstArticleAt": "2026-11-28T07:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "강금실·한준호 청문회 앞두고 여야 격돌⋯\"무자격 후보\" vs \"마녀사냥\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-28T08:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001079284?sid=100"
+    },
+    {
+     "title": "장동혁, 개각 후보자 4명에 “무자격 내각”… 민주당 “답정너식 마녀...",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-28T08:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000087198?sid=100"
+    },
     {
      "title": "野 \"무자격 내각\" vs 與 \"낡은 색깔론\" … 개각 인사청문회 앞두고 격돌",
      "press": "newdaily.co.kr",
      "publishedAt": "2026-11-28T08:08:00.000Z",
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/28/2026112850053.html"
-    },
-    {
-     "title": "인사청문회 앞두고 격돌, 국힘 \"무자격 내각\"...민주 \"색깔론·\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-28T07:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522922?sid=100"
-    },
-    {
-     "title": "“한준호 행안위 활동 없잖나” 野 비판에…與 “국민 삶엔 상임위 없다...",
-     "press": "donga.com",
-     "publishedAt": "2026-11-28T07:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765912?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "dl 이앤씨",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-28T06:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'실적은 경영진 책임인데'…DL이앤씨 직원 수백 명 한밤중 '호출'",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-28T07:56:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244476"
-    },
-    {
-     "title": "밤 10시 회사로 직원 400명 호출…이해욱 DL그룹 회장 또 구설",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-28T07:36:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322212&inflow=N"
-    },
-    {
-     "title": "금요일 밤10시 직원 400명 불러내 새벽 귀가시킨 DL 회장",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-28T07:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005611041?sid=101"
     }
    ]
   },
@@ -176,7 +209,7 @@
     "nate"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-28T07:04:00.000Z",
    "exclusive": true,
@@ -205,15 +238,22 @@
   {
    "keyword": "서울 우승 대관식 4-1 완승!",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-28T07:00:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-28T07:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "추위 잊은 '서울의 봄'…FC서울, 10년 만의 성대한 우승 파티",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-28T08:24:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016468914"
+    },
     {
      "title": "'손정범 첫 멀티골' FC서울, 대전 4-1 완파…화려한 우승 대관식",
      "press": "yonhapnewstv.co.kr",
@@ -225,83 +265,77 @@
      "press": "fourfourtwo.co.kr",
      "publishedAt": "2026-11-28T07:27:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/411/0000090603"
-    },
-    {
-     "title": "'손정범 멀티골' 서울, '우승 대관식'서 대전에 4-1 대승",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-28T07:04:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110132633524"
     }
    ]
   },
   {
-   "keyword": "영국 미공군기지 드론",
+   "keyword": "남경주 성폭행 재판",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-28T07:20:00.000Z",
+   "firstArticleAt": "2026-11-28T07:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"영국 기지에 미 전투기 노린 드론 출몰...이란 연루 의심\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T08:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439400?sid=104"
+     "title": "'제자 성폭행 혐의' 남경주, 피해자에 보낸 편지에선 \"세상에 알리지 말...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-28T08:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000641342"
     },
     {
-     "title": "영국 내 美공군기지에 드론 출현...이란 연루 의심 속 회수 난항",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-28T07:44:00.000Z",
-     "link": "https://www.ajunews.com/view/20261128162636908"
+     "title": "“성관계 시도한 건 사실이지만…” 제자 성폭행 혐의로 재판정 선 남경...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-28T07:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005770266?sid=102"
     },
     {
-     "title": "미군, 이달 초 영국 공군 기지 출몰 드론 격퇴…\"이란 연루 의심\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-28T07:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980276?sid=104"
+     "title": "‘제자 성폭행 의혹’ 남경주, 음주운전 정황…딱 걸렸는데 처벌 못하는...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-28T07:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729789?sid=102"
     }
    ]
   },
   {
-   "keyword": "dl그룹",
+   "keyword": "황선홍 감독 서울전 패배",
    "sources": [
     "daum"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-28T06:56:00.000Z",
+   "firstArticleAt": "2026-11-28T07:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "밤 10시 회사로 직원 400명 호출…이해욱 DL그룹 회장 또 구설",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-28T07:36:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322212&inflow=N"
+     "title": "\"기본적인 부분에서 미흡\" 서울전 패배에 아쉬움 표한 황선홍 감독, 경...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-28T07:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/076/0004470479"
     },
     {
-     "title": "이해욱 DL그룹 회장, 실적 질타하다 밤 10시 직원 400명 소집 논란",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-28T07:06:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261128504539?OutUrl=naver"
+     "title": "“변명의 여지가 없다” 황선홍 대전 감독 서울전 대배 후 “내 부족함...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-28T07:35:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/144/0001152176"
     },
     {
-     "title": "이해욱 DL그룹 회장, DL이앤씨 플랜트 설계실 직원 400명 심야 소집",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-28T06:56:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026112815472626383"
+     "title": "'서울에 1-4 패배' 대전 황선홍 감독 \"변명의 여지 없는 완패\"...경기 막...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-28T07:30:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/117/0004128840"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2077,
+  "flagged": 2081,
   "matched": 1015,
   "avgLeadMin": 665,
   "recent": [
