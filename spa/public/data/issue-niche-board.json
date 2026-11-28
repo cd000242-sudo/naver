@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-11-27T21:37:03.137Z",
+  "publishedAt": "2026-11-28T03:10:21.585Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
-    "issues": 16,
-    "candidates": 224,
-    "niche": 0,
-    "preemption": 6,
+    "issues": 18,
+    "candidates": 213,
+    "niche": 1,
+    "preemption": 8,
     "pending": 0
   },
   "freeSample": {
@@ -18,6 +18,107 @@
     ]
   },
   "rows": [
+    {
+      "keyword": "의사 면허번호 조회",
+      "issue": "의사",
+      "topic": "의사",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 1건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 1,
+        "sampledTitles": 10,
+        "topTitles": [
+          "보건복지부 면허조회｜면허민원 홈페이지 재발급·증명서 발급",
+          "의사 간호사 면허 발급 방법 후속편 - 빠른등기부터 면허증 실제 도착까지 걸린 기간",
+          "2026 의사 간호사 면허 조회, 1분 만에 끝내는 법! (재발급/증명서 출력)",
+          "간호조무사 자격증 발급 서류, 의사 진단서를 맨 마지막에 떼야 하는 이유",
+          "간호사국가고시일정 접수부터 면허까지 날짜별 할 일 정리",
+          "2026 간호사 국가고시 2주 공부 합격 후기 | 시험장소 선택 · 준비물 · 면허증 발급 방법 총정리",
+          "간호사 면허증 발급 방법, 의사진단서 마약검사(정리)",
+          "운전면허 신체검사 병원 찾기, 비용·준비물·검사 항목 총정리",
+          "[취준생] 간호사 면허증 발급방법",
+          "의사 국가시험 부정행위로 합격했다면? 면허 취소·재교부 불가"
+        ],
+        "measuredAt": "2026-11-28T03:08:54.819Z"
+      },
+      "documentCount": 14323,
+      "documentCountMeasured": true,
+      "searchVolume": 910,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.0809520791743574,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 910",
+        "문서수 14,323",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 910 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.1배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1919,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-11-28T03:06:46.991Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "인핸스 공홈",
       "issue": "인핸스",
@@ -119,7 +220,6 @@
           0,
           0,
           0,
-          0,
           8,
           0,
           0,
@@ -136,9 +236,12 @@
           30,
           27,
           16,
-          18
+          18,
+          20
         ],
-        "measuredAt": "2026-11-27T18:39:25.011Z"
+        "label": "📉 단발성",
+        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
+        "measuredAt": "2026-11-28T03:10:22.373Z"
       },
       "kinCount": 2,
       "kinTop": [],
@@ -261,15 +364,15 @@
           0,
           0,
           0,
-          0,
           69,
           100,
           79,
           50,
           69,
-          59
+          59,
+          31
         ],
-        "measuredAt": "2026-11-27T18:39:25.011Z"
+        "measuredAt": "2026-11-28T03:10:22.373Z"
       },
       "kinCount": 0,
       "kinTop": [],
@@ -370,7 +473,6 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          13,
           16,
           11,
           13,
@@ -398,9 +500,10 @@
           30,
           33,
           31,
-          39
+          39,
+          35
         ],
-        "measuredAt": "2026-11-27T18:39:25.011Z"
+        "measuredAt": "2026-11-28T03:10:22.373Z"
       },
       "kinCount": 16,
       "kinTop": [],
@@ -410,54 +513,35 @@
       "exclusionReason": null,
       "kinMode": "date-views-v2",
       "carried": true
-    },
+    }
+  ],
+  "observations": [
     {
-      "keyword": "김가영 기자",
-      "issue": "김가영",
-      "topic": "김가영",
-      "lane": "realtime",
+      "keyword": "브이엠에스솔루션스 연봉",
+      "issue": "브이엠에스 솔루션스",
+      "topic": "브이엠에스 솔루션스",
+      "lane": "tech",
       "issueType": "fresh",
       "isDerived": true,
       "origin": "autocomplete",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "김가영·스롱 피아비, 휴온스 LPBA 8강서 재대결…김가영은 지난 결승 패배를 설욕할까?",
-          "“40만원이 필요해서 나간 대회”, 4시간 연습하고 우승… 당구여제 김가영은 처음부터 좀 이상했다",
-          "재혼황후 리뷰 '별궁 장면 어땠길래', 소비에슈를 보는 시선이 갈린 진짜 이유",
-          "세계 챔피언이 한순간에 등록 말소.. 김가영 당구선수 3쿠션 10억 문턱까지 온 길",
-          "김가영 아나운서, 연봉 400억 프로듀서와 결별? 그런데 8kg 감량했어요!",
-          "[스포츠 비하인드] 우승해도 칭찬은 엄마 통해 들었다…당구 여제 김가영의 뜻밖의 뒷이야기",
-          "\"이별이 명답\" 피독, 악플 피해…'故오요안나 괴롭힘 의혹' 김가영 탓?",
-          "김가영 기상캐스터, 직장 내 괴롭힘 가해자 의혹→파주 홍보대사 해촉도 논의",
-          "“경성의 김유정은 어디 갔어?”…‘100일의 거짓말’ 찍던 그녀, 밤거리에서 완전히 달라졌다",
-          "프로 당구 선수 김가영 김민아 프로필 2026 우리금융캐피탈 LPBA 챔피언십 결승전 우승상금"
-        ],
-        "measuredAt": "2026-11-25T21:42:12.749Z"
-      },
-      "documentCount": 11393,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 3,
       "documentCountMeasured": true,
-      "searchVolume": 390,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1.2277666091711967,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
       "issueStatus": "stable",
-      "isHot": true,
+      "isHot": false,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 390",
-        "문서수 11,393",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+        "문서수 3",
+        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -465,146 +549,390 @@
           "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 390 실측 — 트래픽 하한 통과"
-        },
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-28T03:06:46.991Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "래블업 인턴 월급",
+      "issue": "래블업",
+      "topic": "래블업",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 3,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "declining",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 3",
+        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
+      ],
+      "evidence": [
         {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.2배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
           "code": "empty-field",
           "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
         }
       ],
-      "whySearch": {
-        "text": "당구선수 김가영이 경기에서 스트로크와 뱅킹을 선보였다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
+      "whySearch": null,
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "김가영 기자 오도희와 뱅킹 초구 장면 각도 계산까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "김가영 기자가 김가영 당구선수 프로필 보다가 큐 잡는 손 모양에서 멈칫했던 게 있더라고",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "김가영 당구선수",
-          "searchVolume": 8010,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김가영 프로필",
-          "searchVolume": 730,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김가영 당구",
-          "searchVolume": 530,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "김가영 당구선수",
-          "searchVolume": 8010,
-          "documentCount": 12164,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김가영 프로필",
-          "searchVolume": 730,
-          "documentCount": 4955,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김가영 당구",
-          "searchVolume": 530,
-          "documentCount": 13343,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김가영 선수",
-          "searchVolume": 90,
-          "documentCount": 16257,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김가영 오도희",
-          "searchVolume": 20,
-          "documentCount": 664,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": {
-        "series": [
-          96,
-          65,
-          43,
-          0,
-          52,
-          52,
-          70,
-          39,
-          91,
-          35,
-          30,
-          52,
-          74,
-          52,
-          39,
-          78,
-          35,
-          43,
-          70,
-          70,
-          61,
-          78,
-          0,
-          0,
-          26,
-          87,
-          100,
-          22,
-          48
-        ],
-        "measuredAt": "2026-11-27T18:39:25.011Z"
-      },
-      "kinCount": 11,
-      "kinTop": [
-        {
-          "title": "김가영으로 삼행시",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80702&docId=51386989&answerNo=6",
-          "views": 1634,
-          "answers": 4
-        }
-      ],
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-11-25T21:38:18.047Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "carried": true,
-      "kinMode": "date-views-v2"
-    }
-  ],
-  "observations": [
+      "measuredAt": "2026-11-28T03:06:46.991Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "래블업 채용",
+      "issue": "래블업",
+      "topic": "래블업",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 188,
+      "documentCountMeasured": true,
+      "searchVolume": 20,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "declining",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 20",
+        "문서수 188",
+        "선점 후보 — 경쟁 문서 188건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-28T03:06:46.991Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "브이엠에스솔루션스 매출",
+      "issue": "브이엠에스 솔루션스",
+      "topic": "브이엠에스 솔루션스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 18,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 18",
+        "선점 후보 — 경쟁 문서 18건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-28T03:06:46.991Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "래블업 사원수",
+      "issue": "래블업",
+      "topic": "래블업",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 24,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "declining",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 24",
+        "선점 후보 — 경쟁 문서 24건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-28T03:06:46.991Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "래블업 인원",
+      "issue": "래블업",
+      "topic": "래블업",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 62,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "declining",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 62",
+        "선점 후보 — 경쟁 문서 62건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-28T03:06:46.991Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "래블업 컨퍼런스",
+      "issue": "래블업",
+      "topic": "래블업",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 289,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "declining",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 289",
+        "선점 후보 — 경쟁 문서 289건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-28T03:06:46.991Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "텐센트 샴푸",
+      "issue": "텐센트",
+      "topic": "텐센트",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 274,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 274",
+        "선점 후보 — 경쟁 문서 274건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 6,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-28T03:06:46.991Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "최민정 남친",
       "issue": "최민정",
@@ -667,164 +995,8 @@
       "monetize": null,
       "measuredAt": "2026-11-27T21:35:27.127Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "래블업 인턴 월급",
-      "issue": "래블업",
-      "topic": "래블업",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 3,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 3",
-        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-27T21:35:27.127Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "래블업 채용",
-      "issue": "래블업",
-      "topic": "래블업",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 188,
-      "documentCountMeasured": true,
-      "searchVolume": 20,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 20",
-        "문서수 188",
-        "선점 후보 — 경쟁 문서 188건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-27T21:35:27.127Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "래블업 사원수",
-      "issue": "래블업",
-      "topic": "래블업",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 24,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 24",
-        "선점 후보 — 경쟁 문서 24건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-27T21:35:27.127Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "이서진 블핑 지수",
@@ -875,110 +1047,6 @@
       "kinTop": null,
       "monetize": null,
       "measuredAt": "2026-11-27T21:35:27.127Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "래블업 컨퍼런스",
-      "issue": "래블업",
-      "topic": "래블업",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 288,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 288",
-        "선점 후보 — 경쟁 문서 288건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-27T21:35:27.127Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "브이엠에스솔루션스 연봉",
-      "issue": "브이엠에스 솔루션스",
-      "topic": "브이엠에스 솔루션스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 3,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 3",
-        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-27T18:36:11.870Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
@@ -1062,59 +1130,6 @@
       "reasons": [
         "문서수 5",
         "선점 후보 — 경쟁 문서 5건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-27T18:36:11.870Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "브이엠에스솔루션스 매출",
-      "issue": "브이엠에스 솔루션스",
-      "topic": "브이엠에스 솔루션스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 18,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 18",
-        "선점 후보 — 경쟁 문서 18건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -2600,557 +2615,82 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "윤이나 쐐기 3점",
-      "issue": "윤이나",
-      "topic": "윤이나",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 64,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 64",
-        "선점 후보 — 경쟁 문서 64건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "윤이나가 WTGL 데뷔전에서 장타로 보스턴 승리를 견인했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "윤이나 쐐기 3점으로 WTGL 데뷔전 보스턴 첫 승 견인",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "윤이나 쐐기 3점 나온 WTGL 데뷔전에서 홀인원 놓친 장면이 더 아쉽더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "윤이나 WTGL",
-          "searchVolume": 2350,
-          "frame": "generic"
-        },
-        {
-          "keyword": "윤이나 WTGL 데뷔전",
-          "searchVolume": 160,
-          "frame": "generic"
-        },
-        {
-          "keyword": "윤이나 보스턴",
-          "searchVolume": 60,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "윤이나 WTGL",
-          "searchVolume": 2350,
-          "documentCount": 524,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "윤이나 WTGL 데뷔전",
-          "searchVolume": 160,
-          "documentCount": 178,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "윤이나 보스턴",
-          "searchVolume": 60,
-          "documentCount": 591,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "윤이나 스크린골프",
-          "searchVolume": 30,
-          "documentCount": 1144,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-25T21:38:18.047Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "시루도 깃허브",
-      "issue": "시루도",
-      "topic": "시루도",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "소스 확보 수요",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 81,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 81",
-        "선점 후보 — 경쟁 문서 81건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 소스 확보 수요"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈AI·시스코가 리눅스 보호 오픈소스 보안 '시루도'를 공개했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "시루도 깃허브 오픈소스 코드 다운로드와 시스코 발표 내용",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "시루도 깃허브 오픈소스가 패치 전 공격을 막는다는데 어디까지 되나",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-25T21:38:18.047Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "윤이나 인성 논란",
-      "issue": "윤이나",
-      "topic": "윤이나",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 89,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 3,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 89",
-        "선점 후보 — 경쟁 문서 89건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 3건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "윤이나가 WTGL 데뷔전에서 장타로 보스턴 승리를 견인했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "윤이나 인성 논란 오구 사건부터 WTGL 데뷔전까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "윤이나 인성 논란 이후 WTGL 데뷔전 홀인원 놓친 장면에서 갈리네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "윤이나 WTGL",
-          "searchVolume": 2350,
-          "frame": "generic"
-        },
-        {
-          "keyword": "윤이나 보스턴",
-          "searchVolume": 60,
-          "frame": "generic"
-        },
-        {
-          "keyword": "윤이나 나이",
-          "searchVolume": 60,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "윤이나 WTGL",
-          "searchVolume": 2350,
-          "documentCount": 524,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "윤이나 보스턴",
-          "searchVolume": 60,
-          "documentCount": 591,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "윤이나 나이",
-          "searchVolume": 60,
-          "documentCount": 3010,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "윤이나 LPGA",
-          "searchVolume": 60,
-          "documentCount": 12765,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-25T21:38:18.047Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "lgu+ 도어캠 비용",
-      "issue": "LGU+",
-      "topic": "LGU+",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 186,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 186",
-        "선점 후보 — 경쟁 문서 186건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "LGU+가 유독에서 유튜브 프리미엄을 반값 할인하고 가족 보호 알리미를 출시했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "lgu+ 도어캠 비용 설치비·월 요금·약정 조건 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "lgu+ 도어캠 비용 설치할 때랑 약정 끝날 때랑 좀 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": [
-        {
-          "title": "lg 유플러스 도어캠 말고 더 있나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=107040202&docId=490687170&answerNo=1",
-          "views": 496,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-25T21:38:18.047Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "윤이나 WTGL 순위",
-      "issue": "윤이나",
-      "topic": "윤이나",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "팀 성적 확인",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 217,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 217",
-        "선점 후보 — 경쟁 문서 217건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 팀 성적 확인"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "윤이나가 WTGL 데뷔전에서 장타로 보스턴 승리를 견인했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "윤이나 WTGL 순위 데뷔전 보스턴 8대3 승리 기록",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "윤이나 WTGL 순위 보려다 윤이나 보스턴 어쩌다 나온 건지 한참 봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "윤이나 보스턴",
-          "searchVolume": 60,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "윤이나 보스턴",
-          "searchVolume": 60,
-          "documentCount": 591,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-25T21:38:18.047Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "윤이나 홀인원 아쉬움",
-      "issue": "윤이나",
-      "topic": "윤이나",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 287,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 287",
-        "선점 후보 — 경쟁 문서 287건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "윤이나가 WTGL 데뷔전에서 장타로 보스턴 승리를 견인했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "윤이나 홀인원 아쉬움, WTGL 데뷔전 보스턴 승리 장면",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "윤이나 홀인원 아쉬움에 가려졌는데 WTGL 데뷔전 장타는 많이들 놓치더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "윤이나 WTGL",
-          "searchVolume": 2350,
-          "frame": "generic"
-        },
-        {
-          "keyword": "윤이나 보스턴",
-          "searchVolume": 60,
-          "frame": "generic"
-        },
-        {
-          "keyword": "윤이나 스크린골프",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "윤이나 WTGL",
-          "searchVolume": 2350,
-          "documentCount": 524,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "윤이나 보스턴",
-          "searchVolume": 60,
-          "documentCount": 591,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "윤이나 스크린골프",
-          "searchVolume": 30,
-          "documentCount": 1144,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-25T21:38:18.047Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
+    {
+      "issue": "의사",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": null,
+      "headlines": [
+        {
+          "title": "[속보]北 표류선박 어민 7명중 6명 송환·1명 귀순 의사",
+          "press": "sedaily.com",
+          "publishedAt": "2026-11-27T02:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004686851?sid=100"
+        },
+        {
+          "title": "'표류' 北어선 동해상으로 송환…어민 7명 중 1명 귀순의사",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-11-27T03:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005848811?sid=100"
+        },
+        {
+          "title": "뚝딱 만드는 AI 가짜 의사…광고에 쓰면 영업정지",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-11-27T12:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012302869?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "의사 되는 과정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "의사 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "의사 파업",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "의사 순서",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "의사 연봉",
+          "searchVolume": 2050,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "의사 프로필",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "의사 드라마",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "의사 국시 일정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
     {
       "issue": "인핸스",
       "issueType": "fresh",
@@ -3296,352 +2836,23 @@
       "nextWave": [],
       "rowCount": 1,
       "carried": true
-    },
-    {
-      "issue": "김가영",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "당구선수 김가영이 경기에서 스트로크와 뱅킹을 선보였다",
-      "headlines": [
-        {
-          "title": "[ST포토] 김가영 '빈쿠션 치기 시도'",
-          "press": "stoo.com",
-          "publishedAt": "2026-11-25T07:04:00.000Z",
-          "link": "http://www.stoo.com/article.php?aid=110081149163"
-        },
-        {
-          "title": "[B&포토] \"초구를 잡아라\" 뱅킹하는 김가영과 오도희",
-          "press": "thebilliards.kr",
-          "publishedAt": "2026-11-25T07:56:00.000Z",
-          "link": "https://www.thebilliards.kr/news/articleView.html?idxno=32575"
-        },
-        {
-          "title": "[ST포토] 김가영 '신중하게 초크칠'",
-          "press": "stoo.com",
-          "publishedAt": "2026-11-25T06:44:00.000Z",
-          "link": "http://www.stoo.com/article.php?aid=110080576572"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "김가영 당구선수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김가영 아나운서",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "리센느 김가영",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김가영 기상캐스터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김가영 치어리더",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "당구 김가영",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "당구선수 김가영",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김가영 당구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "김가영 경기결과",
-          "reason": "당일 승패 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "김가영 PBA 순위",
-          "reason": "랭킹 변동 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "김가영 다음경기",
-          "reason": "일정 체크",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "김가영 상대",
-          "reason": "대진 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "윤이나",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "윤이나가 WTGL 데뷔전에서 장타로 보스턴 승리를 견인했다",
-      "headlines": [
-        {
-          "title": "스크린골프에서도 ‘윤이나네’",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-11-25T13:00:00.000Z",
-          "link": "https://m.sports.naver.com/golf/article/144/0001151701"
-        },
-        {
-          "title": "윤이나 WTGL 데뷔전에서 홀인원 할 뻔 했다 ... 팀 8대3 승리 견인",
-          "press": "chosun.com",
-          "publishedAt": "2026-11-25T07:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004011676?sid=104"
-        },
-        {
-          "title": "장타에 정교한 웨지샷 … 보스턴 승리 이끈 윤이나",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-25T08:27:00.000Z",
-          "link": "https://m.sports.naver.com/golf/article/009/0005768938"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "윤이나 프로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤이나 wtgl",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤이나 강백호",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "wtgl 윤이나",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "강백호 윤이나",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤이나 키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤이나 근황",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤이나 나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "윤이나 다음경기",
-          "reason": "일정 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "윤이나 WTGL 순위",
-          "reason": "팀 성적 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "윤이나 LPGA 복귀",
-          "reason": "진출 시점 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "윤이나 상금",
-          "reason": "대회 보상 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "시루도",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "오픈AI·시스코가 리눅스 보호 오픈소스 보안 '시루도'를 공개했다",
-      "headlines": [
-        {
-          "title": "AI 공격보다 느린 패치…오픈AI·시스코의 해법 '시루도' [보안 아웃룩]",
-          "press": "it.chosun.com",
-          "publishedAt": "2026-11-25T02:12:00.000Z",
-          "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001771"
-        },
-        {
-          "title": "취약점 패치 전 임시 방패... 오픈AI·시스코, 리눅스 서버 지키는 '시루...",
-          "press": "boannews.com",
-          "publishedAt": "2026-11-25T01:48:00.000Z",
-          "link": "https://www.boannews.com/news/articleView.html?idxno=147509"
-        },
-        {
-          "title": "오픈AI·시스코, AI로 리눅스 공격 막는 보안 기술 '시루도' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-25T08:30:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=217766"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "시루도 설치",
-          "reason": "도입 방법 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "시루도 깃허브",
-          "reason": "소스 확보 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "시루도 성능",
-          "reason": "효과 검증 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "시루도 라이선스",
-          "reason": "사용 조건 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "LGU+",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "LGU+가 유독에서 유튜브 프리미엄을 반값 할인하고 가족 보호 알리미를 출시했다",
-      "headlines": [
-        {
-          "title": "LGU+, '유독'서 유튜브프리미엄 구독료 반값 할인",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-11-25T01:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002446817?sid=105"
-        },
-        {
-          "title": "LGU+, 보이스피싱 위험 가족에 즉시 알린다…‘가족 보호 알리미’ 출시",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-11-25T00:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006415140?sid=105"
-        },
-        {
-          "title": "LGU+, 블프 맞아 유튜브 프리미엄 '반값'",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-25T00:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009308478?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "lg u+ 고객센터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "lg u+ 매장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "lg u+ 요금제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "lg u+ 인터넷",
-          "searchVolume": 4590,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "lg u+ 알뜰폰",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "lg u+ 대리점",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "lg u+ 로밍",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "lg u+ tv",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "LGU+ 블프 이벤트",
-          "reason": "프로모션 기간 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
     }
-  ]
+  ],
+  "enrichedAt": "2026-11-28T03:10:43.057Z",
+  "enrichStats": {
+    "enriched": 0,
+    "subsAdded": 0,
+    "titleUpgraded": 0,
+    "proposed": 0,
+    "verified": 0,
+    "judged": 0,
+    "judgedBad": 0,
+    "related": 0,
+    "picked": 0,
+    "pooled": 0,
+    "aiTitled": 0,
+    "trended": 0,
+    "aiCalls": 4,
+    "partial": false
+  }
 }
