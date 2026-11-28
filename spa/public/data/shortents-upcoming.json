@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T06:21:17.400Z",
+ "builtAt": "2026-11-28T06:31:20.807Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 40,
-   "recent20": 10,
-   "press": 29,
-   "firstArticleAt": "2026-11-28T04:52:00.000Z",
+   "articles90": 43,
+   "recent20": 13,
+   "press": 32,
+   "firstArticleAt": "2026-11-28T05:02:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, 강원도 AIDC 착공식 참석…\"아시아 최대규모 인프라\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-28T06:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468849?sid=100"
-    },
-    {
-     "title": "李대통령 \"동해 AIDC 핵심거점...선도국가 자리에 역량 동원\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-28T06:16:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326779/?sc=Naver"
-    },
-    {
-     "title": "이 대통령, 강릉 주문진시장 방문…연말 장바구니 물가 살펴",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T06:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350727?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "dl그룹",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 25,
-   "recent20": 3,
-   "press": 25,
-   "firstArticleAt": "2026-11-28T04:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "DL그룹 회장, 한밤중에 직원 수백명 호출…무슨 일이?",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-28T06:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653972?sid=101"
-    },
-    {
-     "title": "한밤중 회장 호출에 직원 400명 우르르…DL그룹 회장 또 갑질 논란",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-28T06:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004687158?sid=102"
-    },
-    {
-     "title": "DL그룹 회장, 한밤중 부서 직원 수백명 호출",
+     "title": "이 대통령, 주문진시장서 민생 점검…\"골목상권 온기 이어지길\"",
      "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-28T06:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930827?sid=101"
+     "publishedAt": "2026-11-28T06:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930835?sid=100"
+    },
+    {
+     "title": "이재명 대통령, 강릉 주문진시장 찾아 민생물가 점검",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-28T06:28:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261128026326069"
+    },
+    {
+     "title": "[종합] 동해에 2.4GW AI 데이터센터 들어선다…메가프로젝트 첫 삽",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-28T06:28:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=102199"
     }
    ]
   },
@@ -79,30 +47,94 @@
    "sources": [
     "nate"
    ],
-   "articles90": 27,
-   "recent20": 6,
-   "press": 22,
-   "firstArticleAt": "2026-11-28T04:52:00.000Z",
+   "articles90": 26,
+   "recent20": 4,
+   "press": 23,
+   "firstArticleAt": "2026-11-28T05:03:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[종합] 동해에 2.4GW AI 데이터센터 들어선다…메가프로젝트 첫 삽",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-28T06:28:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=102199"
+    },
+    {
+     "title": "李대통령 \"동해 AI 데이터센터, 글로벌 투자 마중물 될 것\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-28T06:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359336?sid=100"
+    },
     {
      "title": "李대통령, 강원도 AIDC 착공식 참석…\"아시아 최대규모 인프라\"(종합)",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-28T06:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016468849?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "이해욱 직원 소집",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 16,
+   "recent20": 8,
+   "press": 16,
+   "firstArticleAt": "2026-11-28T05:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "회장님 호출에 다시 출근…DL 직원 400명 '한밤 소집' 논란",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-28T06:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000143233?sid=101"
     },
     {
-     "title": "李대통령 \"동해 AIDC 핵심거점...선도국가 자리에 역량 동원\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-28T06:16:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326779/?sc=Naver"
+     "title": "“실적 나쁘다고 밤 10시 집합?”…직원 수백명 불러낸 대기업 회장",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-28T06:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416872?sid=101"
     },
     {
-     "title": "동해 GS AI 데이터센터 착공…李대통령 \"강원, AI 핵심 거점으로\"",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-28T06:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002395032?sid=100"
+     "title": "DL그룹 회장, 실적부진 부서 직원 수백명 ‘야간 소집’ 논란",
+     "press": "donga.com",
+     "publishedAt": "2026-11-28T06:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765910?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "DL그룹 회장 심야 직원 호출",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 13,
+   "recent20": 6,
+   "press": 13,
+   "firstArticleAt": "2026-11-28T05:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“실적 나쁘다고 밤 10시 집합?”…직원 수백명 불러낸 대기업 회장",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-28T06:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416872?sid=101"
+    },
+    {
+     "title": "이해욱 DL 회장, 직원 400명 심야 호출해 질타",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-28T06:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368980?sid=101"
+    },
+    {
+     "title": "DL이앤씨 '심야 소집' 논란...이해욱 회장, 설계실 전 직원에 출근 지시",
+     "press": "newslock.co.kr",
+     "publishedAt": "2026-11-28T06:22:00.000Z",
+     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=141246"
     }
    ]
   },
@@ -112,7 +144,7 @@
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 2,
+   "recent20": 0,
    "press": 10,
    "firstArticleAt": "2026-11-28T05:02:00.000Z",
    "exclusive": false,
@@ -144,7 +176,7 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-28T05:04:00.000Z",
    "exclusive": false,
@@ -167,38 +199,6 @@
      "press": "zdnet.co.kr",
      "publishedAt": "2026-11-28T05:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/092/0002447337?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "김가연, 한복 대여점 비판",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T04:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“엉터리 옷을 한복인 양”…김가연, 경복궁 대여점 ‘작심 비판’",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-28T06:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005770253?sid=102"
-    },
-    {
-     "title": "“엉터리 옷 한복인 양” 김가연, 경복궁 한복 대여점 ‘공개 저격’",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-28T06:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001152168"
-    },
-    {
-     "title": "김가연, 경복궁 한복 대여점 공개 비판… 이유는?",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T05:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000968293"
     }
    ]
   },
@@ -235,12 +235,44 @@
    ]
   },
   {
+   "keyword": "김가연, 한복 대여점 비판",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T05:43:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“엉터리 옷을 한복인 양”…김가연, 경복궁 대여점 ‘작심 비판’",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-28T06:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005770253?sid=102"
+    },
+    {
+     "title": "“엉터리 옷 한복인 양” 김가연, 경복궁 한복 대여점 ‘공개 저격’",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-28T06:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001152168"
+    },
+    {
+     "title": "김가연, 경복궁 한복 대여점 공개 비판… 이유는?",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T05:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000968293"
+    }
+   ]
+  },
+  {
    "keyword": "김기동 감독 우승 축하해",
    "sources": [
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-28T05:09:00.000Z",
    "exclusive": false,
@@ -272,7 +304,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-28T05:31:00.000Z",
    "exclusive": false,
@@ -333,7 +365,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2048,
+  "flagged": 2049,
   "matched": 1005,
   "avgLeadMin": 645,
   "recent": [
