@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T06:51:27.904Z",
+ "builtAt": "2026-11-28T07:01:31.951Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
+  {
+   "keyword": "dl 이앤씨",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 29,
+   "recent20": 5,
+   "press": 29,
+   "firstArticleAt": "2026-11-28T05:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이해욱 DL그룹 회장, DL이앤씨 플랜트 설계실 직원 400명 심야 소집",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-28T06:56:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026112815472626383"
+    },
+    {
+     "title": "플랜트서 1641억 증발…이해욱 DL그룹 회장의 이유 있는 질책",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-28T06:52:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733318"
+    },
+    {
+     "title": "“금요일 밤늦게 수백명 긴급 호출”… DL그룹 회장 또 ‘갑질’ 구설",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-28T06:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834388?sid=102"
+    }
+   ]
+  },
   {
    "keyword": "dl그룹",
    "sources": [
     "daum"
    ],
    "articles90": 20,
-   "recent20": 4,
+   "recent20": 5,
    "press": 20,
-   "firstArticleAt": "2026-11-28T05:27:00.000Z",
+   "firstArticleAt": "2026-11-28T05:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이해욱 DL그룹 회장, DL이앤씨 플랜트 설계실 직원 400명 심야 소집",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-28T06:56:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026112815472626383"
+    },
+    {
+     "title": "플랜트서 1641억 증발…이해욱 DL그룹 회장의 이유 있는 질책",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-28T06:52:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733318"
+    },
     {
      "title": "“금요일 밤늦게 수백명 긴급 호출”… DL그룹 회장 또 ‘갑질’ 구설",
      "press": "hani.co.kr",
      "publishedAt": "2026-11-28T06:48:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002834388?sid=102"
-    },
-    {
-     "title": "이해욱 DL그룹 회장, 한밤중 직원 수백명 소집 물의",
-     "press": "autodaily.co.kr",
-     "publishedAt": "2026-11-28T06:46:00.000Z",
-     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602534"
-    },
-    {
-     "title": "[속보] DL그룹 회장, 밤 10시 “전직원 나와” 새벽 귀가시켜…한밤 호...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-28T06:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003704096?sid=102"
     }
    ]
   },
@@ -47,24 +79,24 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 5,
-   "press": 16,
-   "firstArticleAt": "2026-11-28T05:24:00.000Z",
+   "articles90": 15,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-28T06:04:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[비즈+]GS, 동해에 1.2GW AI 데이터센터 착공…15조원 투자 본격화",
+     "press": "businessplus.kr",
+     "publishedAt": "2026-11-28T06:56:00.000Z",
+     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120662"
+    },
     {
      "title": "李대통령, 강릉 주문진시장 방문…오징어·노가리 구매",
      "press": "fnnews.com",
      "publishedAt": "2026-11-28T06:43:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005611038?sid=100"
-    },
-    {
-     "title": "이 대통령, 동해 GS AI데이터센터 착공식 이후 국내 기업 기술 부스 방문",
-     "press": "kado.net",
-     "publishedAt": "2026-11-28T06:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213890?sid=100"
     },
     {
      "title": "이 대통령, 동해 AI데이터센터 착공식 참석... “지역 경제 활성화 이끌...",
@@ -75,74 +107,41 @@
    ]
   },
   {
-   "keyword": "이해욱 직원 소집",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-28T05:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이해욱 DL그룹 회장, 한밤중 직원 수백명 소집 물의",
-     "press": "autodaily.co.kr",
-     "publishedAt": "2026-11-28T06:46:00.000Z",
-     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602534"
-    },
-    {
-     "title": "이해욱 DL그룹 회장 직원 수백 명 심야 소집 논란",
-     "press": "cwn.kr",
-     "publishedAt": "2026-11-28T06:36:00.000Z",
-     "link": "https://www.cwn.kr/news/articleView.html?idxno=62852"
-    },
-    {
-     "title": "회장님 호출에 다시 출근…DL 직원 400명 '한밤 소집' 논란",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-28T06:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000143233?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "강금실 한준호 인사청문회",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 9,
    "recent20": 2,
-   "press": 7,
+   "press": 9,
    "firstArticleAt": "2026-11-28T06:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "강금실·한준호 등 개각 공방…與 \"색깔론·낙인찍기\" 野 \"무자격·미달...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T06:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350785?sid=100"
+    },
+    {
+     "title": "강금실·한준호·홍익표 '무자격'으로 겨눈 국힘… 민주 \"답정너 식 마녀...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T06:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968296?sid=100"
+    },
+    {
      "title": "강금실·한준호 겨눈 국힘 “무자격 내각”…민주 “마녀사냥”",
      "press": "mk.co.kr",
      "publishedAt": "2026-11-28T06:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/009/0005770255?sid=100"
-    },
-    {
-     "title": "강금실·한준호 청문회 앞두고 여야 검증 공방",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-28T06:32:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261128500088"
-    },
-    {
-     "title": "여야, 강금실·한준호·홍익표 두고 공방…“무자격” vs “마녀사냥”",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-28T06:26:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261128027186067"
     }
    ]
   },
   {
    "keyword": "황민현, 플레디스 떠난다",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 5,
    "recent20": 0,
@@ -177,7 +176,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-28T05:36:00.000Z",
    "exclusive": false,
@@ -204,14 +203,46 @@
    ]
   },
   {
-   "keyword": "성시경 쌈디",
+   "keyword": "김가연, 경복궁 한복 대여점 비판",
    "sources": [
-    "google"
+    "nate"
    ],
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-28T05:31:00.000Z",
+   "firstArticleAt": "2026-11-28T05:43:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김가연, 경복궁 한복 대여 실태 비판",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-28T07:00:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611280100"
+    },
+    {
+     "title": "“엉터리 옷을 한복인 양”…김가연, 경복궁 대여점 ‘작심 비판’",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-28T06:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005770253?sid=102"
+    },
+    {
+     "title": "“엉터리 옷 한복인 양” 김가연, 경복궁 한복 대여점 ‘공개 저격’",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-28T06:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001152168"
+    }
+   ]
+  },
+  {
+   "keyword": "성시경 쌈디",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T05:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -236,23 +267,49 @@
    ]
   },
   {
-   "keyword": "커리, 3경기 결장",
+   "keyword": "한성숙 총리 부스 방문",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T05:59:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "네이버 부스 방문한 한성숙 국무총리",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-28T06:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468856?sid=100"
+    },
+    {
+     "title": "전국대학일자리플러스센터 부스 방문한 한성숙 국무총리",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-28T06:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468853?sid=100"
+    },
+    {
+     "title": "청년미래 콘서트 부스 둘러보는 한성숙 총리",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T06:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350731?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "복사근 커리 3경기",
    "sources": [
     "nate"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-28T06:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "‘복사근 파열’ 스테픈 커리, 최소 3경기 추가 결장… 내달 초 재검진...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-28T06:37:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/396/0000762232"
-    },
     {
      "title": "'복사근 파열' 커리, 추가 결장…12월 중순 복귀 전망",
      "press": "news1.kr",
@@ -260,42 +317,16 @@
      "link": "https://m.sports.naver.com/basketball/article/421/0009315347"
     },
     {
+     "title": "‘복사근 파열’ 스테픈 커리, 최소 3경기 추가 결장… 내달 초 재검진...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-28T06:37:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/396/0000762232"
+    },
+    {
      "title": "[NBA] '복사근 부상' 커리, 최소 3경기 추가 결장…내달초 재검진",
      "press": "newspim.com",
      "publishedAt": "2026-11-28T06:00:00.000Z",
      "link": "https://www.newspim.com/news/view/20261128000048"
-    }
-   ]
-  },
-  {
-   "keyword": "김가연, 한복 대여점 비판",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T05:43:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“엉터리 옷을 한복인 양”…김가연, 경복궁 대여점 ‘작심 비판’",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-28T06:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005770253?sid=102"
-    },
-    {
-     "title": "“엉터리 옷 한복인 양” 김가연, 경복궁 한복 대여점 ‘공개 저격’",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-28T06:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001152168"
-    },
-    {
-     "title": "김가연, 경복궁 한복 대여점 공개 비판… 이유는?",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T05:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000968293"
     }
    ]
   },
@@ -327,14 +358,14 @@
      "title": "청소년 당원 만난 김민석 대표",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-28T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468839?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/001/0016468841?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2053,
+  "flagged": 2057,
   "matched": 1006,
   "avgLeadMin": 645,
   "recent": [
