@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T06:11:14.214Z",
+ "builtAt": "2026-11-28T06:21:17.400Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 27,
  "candidates": [
-  {
-   "keyword": "이해욱 회장",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 36,
-   "recent20": 6,
-   "press": 36,
-   "firstArticleAt": "2026-11-28T04:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "금요일 밤에 직원 400명 호출...이해욱 DL 회장 또 '갑질' 논란",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-28T06:08:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326778/?sc=Naver"
-    },
-    {
-     "title": "DL그룹 회장, 한밤중 부서 직원 수백명 호출",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-28T06:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930827?sid=101"
-    },
-    {
-     "title": "이해욱 DL그룹 회장, 심야에 직원 400여명 소집",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-28T05:58:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4447055"
-    }
-   ]
-  },
   {
    "keyword": "AI 이재명 대통령",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 44,
-   "recent20": 5,
-   "press": 30,
-   "firstArticleAt": "2026-11-28T04:44:00.000Z",
+   "articles90": 40,
+   "recent20": 10,
+   "press": 29,
+   "firstArticleAt": "2026-11-28T04:52:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "GS, 동해에 120조 AI 승부수…1.2GW 데이터센터 첫 삽",
-     "press": "magazine.hankyung.com",
-     "publishedAt": "2026-11-28T06:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/050/0000113890?sid=101"
+     "title": "李대통령, 강원도 AIDC 착공식 참석…\"아시아 최대규모 인프라\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-28T06:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468849?sid=100"
     },
     {
-     "title": "GS, 동해 AI데이터센터 첫삽…\"글로벌 허브로\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-28T06:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930825?sid=101"
+     "title": "李대통령 \"동해 AIDC 핵심거점...선도국가 자리에 역량 동원\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-28T06:16:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326779/?sc=Naver"
     },
     {
-     "title": "[종합] 李대통령 \"총성 없는 전쟁…AI 선도국 위한 모든 역량 동원\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-28T06:04:00.000Z",
-     "link": "https://www.ajunews.com/view/20261128143459831"
+     "title": "이 대통령, 강릉 주문진시장 방문…연말 장바구니 물가 살펴",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T06:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350727?sid=100"
     }
    ]
   },
@@ -79,44 +47,75 @@
    "sources": [
     "daum"
    ],
-   "articles90": 28,
-   "recent20": 5,
-   "press": 28,
-   "firstArticleAt": "2026-11-28T04:42:00.000Z",
+   "articles90": 25,
+   "recent20": 3,
+   "press": 25,
+   "firstArticleAt": "2026-11-28T04:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "DL그룹 회장, 한밤중에 직원 수백명 호출…무슨 일이?",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-28T06:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653972?sid=101"
+    },
+    {
+     "title": "한밤중 회장 호출에 직원 400명 우르르…DL그룹 회장 또 갑질 논란",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-28T06:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004687158?sid=102"
+    },
     {
      "title": "DL그룹 회장, 한밤중 부서 직원 수백명 호출",
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-28T06:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000930827?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "AI 냉각",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 27,
+   "recent20": 6,
+   "press": 22,
+   "firstArticleAt": "2026-11-28T04:52:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령, 강원도 AIDC 착공식 참석…\"아시아 최대규모 인프라\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-28T06:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468849?sid=100"
     },
     {
-     "title": "이해욱 DL그룹 회장, 심야에 직원 400여명 소집",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-28T05:58:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4447055"
+     "title": "李대통령 \"동해 AIDC 핵심거점...선도국가 자리에 역량 동원\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-28T06:16:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326779/?sc=Naver"
     },
     {
-     "title": "밤 10시 직원 수백 명 회사로 호출…이해욱 DL그룹 회장 논란",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-28T05:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522916?sid=101"
+     "title": "동해 GS AI 데이터센터 착공…李대통령 \"강원, AI 핵심 거점으로\"",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-28T06:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002395032?sid=100"
     }
    ]
   },
   {
    "keyword": "황민현, 14년 플레디스 떠난다",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 11,
-   "firstArticleAt": "2026-11-28T04:48:00.000Z",
-   "exclusive": true,
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-28T05:02:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
@@ -172,39 +171,71 @@
    ]
   },
   {
-   "keyword": "주진모 민혜연 임신에 오열",
+   "keyword": "김가연, 한복 대여점 비판",
    "sources": [
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-28T04:42:00.000Z",
+   "firstArticleAt": "2026-11-28T04:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'52세' 주진모, 결혼 7년 만에 첫 아이 소식에 오열... \"옛날부터 갖고 ...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-28T06:04:00.000Z",
-     "link": "https://www.insight.co.kr/news/583955"
+     "title": "“엉터리 옷을 한복인 양”…김가연, 경복궁 대여점 ‘작심 비판’",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-28T06:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005770253?sid=102"
     },
     {
-     "title": "주진모, ♥민혜연 임신에 오열…“아이 갖고 싶었는데 말 못해”",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-28T05:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001307282"
+     "title": "“엉터리 옷 한복인 양” 김가연, 경복궁 한복 대여점 ‘공개 저격’",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-28T06:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001152168"
     },
     {
-     "title": "52세 주진모, 결혼 7년만 ♥민혜연 임신에 오열 “아기 갖고 싶었는데 ...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-28T05:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192113"
+     "title": "김가연, 경복궁 한복 대여점 공개 비판… 이유는?",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T05:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000968293"
     }
    ]
   },
   {
-   "keyword": "김기동 감독 축하해",
+   "keyword": "주유소 기름값 하락",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-28T05:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "주유소 기름값 28주째 하락…50리터 넣어도 35원 절약",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-28T06:18:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288405"
+    },
+    {
+     "title": "전국 주유소 기름값 28주 연속 하락... 휘발유·경유 모두 소폭 내려",
+     "press": "vop.co.kr",
+     "publishedAt": "2026-11-28T05:36:00.000Z",
+     "link": "https://vop.co.kr/A00001697810.html"
+    },
+    {
+     "title": "주유소 기름값 28주째 하락…전국 휘발유 평균 1천854원",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-28T05:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653963?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "김기동 감독 우승 축하해",
    "sources": [
     "nate"
    ],
@@ -236,38 +267,6 @@
    ]
   },
   {
-   "keyword": "김가연 한복 대여점 비판",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T04:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“엉터리 옷 한복인 양” 김가연, 경복궁 한복 대여점 ‘공개 저격’",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-28T06:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001152168"
-    },
-    {
-     "title": "김가연, 경복궁 한복 대여점 공개 비판… 이유는?",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T05:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000968293"
-    },
-    {
-     "title": "김가연 \"제대로 안된 한복 입혀놔\"…경복궁 대여점에 쓴소리",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-28T04:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005447710"
-    }
-   ]
-  },
-  {
    "keyword": "성시경 쌈디",
    "sources": [
     "google"
@@ -280,7 +279,7 @@
    "capped": false,
    "samples": [
     {
-     "title": "\"눈물 날 정도로 속상했다\"…성시경 쌈디에 절교 선언한 사연",
+     "title": "\"눈물 날 정도로 속상했다\"…성시경, 쌈디에 절교 선언한 사연",
      "press": "hankyung.com",
      "publishedAt": "2026-11-28T06:02:00.000Z",
      "link": "https://m.entertain.naver.com/article/015/0005359332"
@@ -300,41 +299,41 @@
    ]
   },
   {
-   "keyword": "주유소 기름값 하락",
+   "keyword": "청소년 만난 김민석",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T05:05:00.000Z",
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-28T06:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "전국 주유소 기름값 28주 연속 하락... 휘발유·경유 모두 소폭 내려",
-     "press": "vop.co.kr",
-     "publishedAt": "2026-11-28T05:36:00.000Z",
-     "link": "https://vop.co.kr/A00001697810.html"
+     "title": "청소년 당원 만난 김민석 대표 '미래세대 목소리 경청' [TF사진관]",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-28T06:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000556460?sid=100"
     },
     {
-     "title": "주유소 기름값 28주째 하락…전국 휘발유 평균 1천854원",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-28T05:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653963?sid=101"
+     "title": "청소년 당원 만난 김민석 대표 [포토]",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-28T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000556459?sid=100"
     },
     {
-     "title": "전국 주유소 기름값 28주 연속 하락...서울 휘발유 1800원대",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-28T05:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160494?sid=101"
+     "title": "청소년 당원 만난 김민석 대표",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-28T06:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468842?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2044,
+  "flagged": 2048,
   "matched": 1005,
   "avgLeadMin": 645,
   "recent": [
