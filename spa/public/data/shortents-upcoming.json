@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T10:32:47.920Z",
+ "builtAt": "2026-11-28T10:42:52.706Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 30,
  "candidates": [
   {
    "keyword": "철도노조 준법투쟁 지연",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 4,
+   "articles90": 18,
+   "recent20": 2,
    "press": 15,
    "firstArticleAt": "2026-11-28T09:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "철도노조 준법투쟁 첫 주말, 수도권 전철 105대 ‘줄지연’",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-28T10:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160530?sid=101"
+    },
     {
      "title": "철도노조 준법투쟁 장기화 조짐…주말 수도권 전철 105편 운행 지연",
      "press": "jemin.com",
@@ -33,44 +39,103 @@
      "press": "jasm.co.kr",
      "publishedAt": "2026-11-28T10:16:00.000Z",
      "link": "https://www.jasm.co.kr/news/view/326786/?sc=Naver"
-    },
-    {
-     "title": "철도노조 준법투쟁 첫 주말…수도권 전철 105대 지연",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-28T10:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406570?sid=102"
     }
    ]
   },
   {
-   "keyword": "최민희 중징계",
+   "keyword": "포스코 노사 임금 타결",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 17,
-   "recent20": 2,
+   "articles90": 15,
+   "recent20": 1,
    "press": 15,
-   "firstArticleAt": "2026-11-28T09:03:00.000Z",
+   "firstArticleAt": "2026-11-28T09:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘최민희 중징계’에, 김민석 “드릴 말씀 없다”···친청계는 대표 ...",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-28T10:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053709?sid=100"
+     "title": "포스코 노사 임단협 잠정합의안 가결…65% 찬성",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-28T10:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930879?sid=102"
     },
     {
-     "title": "김민석, 최민희 중징계에 \"드릴 말 없다\"…친청계 반발 속 청소년 당원...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-28T10:16:00.000Z",
-     "link": "https://www.ajunews.com/view/20261128190845970"
+     "title": "포스코 노사, 5개월여 만에 임금협상 최종 타결-기본급 2.6% 인상",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-28T09:58:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96145"
     },
     {
-     "title": "최민희 중징계에 '김민석 사퇴' 국회앞 집회…친청계 \"당대표도 징계\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-28T09:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653999?sid=100"
+     "title": "'창사 이래 첫 파업' 포스코, 임금 교섭 타결… 기본급 2.6% 인상",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T09:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968304?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 대통령 방문",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 6,
+   "press": 14,
+   "firstArticleAt": "2026-11-28T09:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[영상] 이재명 대통령, KIST 강릉분원 방문…“천연물 혁신센터 신속 추...",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-28T10:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001233995?sid=100"
+    },
+    {
+     "title": "李대통령, 강릉 가뭄 대비 지하수저류댐 공사장 현장 찾아 추진 상황 점...",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-28T10:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001233994?sid=100"
+    },
+    {
+     "title": "이 대통령, 주말 강원 광폭 행보…장바구니 물가부터 미래 먹거리까지 ...",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-28T10:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000369015?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "FC서울 우승 대관식",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 21,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-28T09:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'10년 만에' 상암으로 돌아온 K리그1 트로피…서울 7번째 대관식 화려하...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-28T10:35:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/311/0002085064"
+    },
+    {
+     "title": "FC서울 손정범, 대전전 데뷔 첫 멀티골…우승 대관식 직접 빛냈다",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-28T10:34:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288550"
+    },
+    {
+     "title": "FC서울 우승 파티 빛낸 막내 손정범…\"대표팀서 배우고 왔어요\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-28T10:25:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016469010"
     }
    ]
   },
@@ -79,10 +144,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-28T09:07:00.000Z",
+   "articles90": 12,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-28T09:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,79 +172,12 @@
    ]
   },
   {
-   "keyword": "FC서울 우승 대관식",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 20,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T09:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "FC서울 우승 파티 빛낸 막내 손정범…\"대표팀서 배우고 왔어요\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-28T10:25:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/001/0016469010"
-    },
-    {
-     "title": "상암에 돌아온 우승컵…FC서울, 2만7000여 팬과 대관식",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-28T10:24:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611281920204247740eacf404_1"
-    },
-    {
-     "title": "K리그1 우승 지휘한 김기동 감독",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T10:06:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014350897"
-    }
-   ]
-  },
-  {
-   "keyword": "포스코 임금협상 타결",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-28T09:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "포스코 노사, 5개월여 만에 임금협상 최종 타결-기본급 2.6% 인상",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-28T09:58:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96145"
-    },
-    {
-     "title": "'창사 이래 첫 파업' 포스코, 임금 교섭 타결… 기본급 2.6% 인상",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T09:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968304?sid=102"
-    },
-    {
-     "title": "포스코 노사, 교섭 시작 5개월 만에 임단협 '최종 타결'",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-28T09:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214863?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "최민정 1000M 금메달 4연속",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-28T09:16:00.000Z",
    "exclusive": false,
@@ -208,13 +206,12 @@
   {
    "keyword": "보복운전 논란 복귀",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-28T09:06:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-28T09:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -239,81 +236,23 @@
    ]
   },
   {
-   "keyword": "이재명 대통령 찾은 주문진시장",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T09:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령, 주문진시장서 마른오징어·노가리 구입…상인들 만나 ‘민생...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-28T10:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002836172?sid=100"
-    },
-    {
-     "title": "동해 찾은 이재명 대통령…2.4GW 규모 AI 데이터센터 캠퍼스 착공",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-28T10:26:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3766217"
-    },
-    {
-     "title": "강릉 주문진 시장 뜬 李대통령... 온누리상품권으로 오징어·노가리 구...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-28T10:04:00.000Z",
-     "link": "https://www.insight.co.kr/news/583972"
-    }
-   ]
-  },
-  {
-   "keyword": "밤 10시 직원 호출",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T09:28:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "DL그룹 회장, 밤 10시에 직원 수백명 호출…또 불거진 '갑질' 논란",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-28T10:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000654010?sid=101"
-    },
-    {
-     "title": "금요일 밤 10시에 직원 400명 긴급 호출…무슨 일?",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-28T09:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368998?sid=101"
-    },
-    {
-     "title": "DL 이해욱, 한밤중 직원 수백 명 소집...무슨 일이?",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T09:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439431?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "영국 미공군기지 드론",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-28T09:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "英 미군기지에 드론 출몰…배후로 이란 거론",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-28T10:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447743?sid=104"
+    },
     {
      "title": "FT \"유럽 최대 美 공군기지에 드론 출몰…이란 연루 추정\"",
      "press": "news.tvchosun.com",
@@ -325,22 +264,78 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-28T10:12:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014350902?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "크라잉넛 특집",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-28T09:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "극동아시아타이거즈, 객석 뛰어든 '룩셈부르크'…크라잉넛도 기립",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-28T10:22:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785559"
     },
     {
-     "title": "\"英 최대 미군 전투기 기지에 드론 6대 출몰…이란 소행 의심\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T09:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315468?sid=104"
+     "title": "극동아시아타이거즈, 크라잉넛과 첫 만남 회상…공연 중 깜짝 등장",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-28T09:58:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785557"
+    },
+    {
+     "title": "잔나비가 바라본 크라잉넛 “인디 밴드의 시조, 그들 없었으면 터 잡지...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-28T09:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001192131"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2072,
-  "matched": 1010,
-  "avgLeadMin": 653,
+  "flagged": 2070,
+  "matched": 1014,
+  "avgLeadMin": 654,
   "recent": [
+   {
+    "keyword": "100일의 거짓말 작가 입 열었다",
+    "hitKeyword": "100일의 거짓말",
+    "hitAt": "2026-11-28T19:30:00+09:00",
+    "leadMin": 3144
+   },
+   {
+    "keyword": "100일의 거짓말",
+    "hitKeyword": "100일의 거짓말",
+    "hitAt": "2026-11-28T19:30:00+09:00",
+    "leadMin": 609
+   },
+   {
+    "keyword": "DL그룹 회장 직원 호출",
+    "hitKeyword": "DL그룹 회장 논란",
+    "hitAt": "2026-11-28T19:30:00+09:00",
+    "leadMin": 309
+   },
+   {
+    "keyword": "DL그룹 회장 심야 직원 호출",
+    "hitKeyword": "DL그룹 회장 논란",
+    "hitAt": "2026-11-28T19:30:00+09:00",
+    "leadMin": 289
+   },
+   {
+    "keyword": "dl그룹",
+    "hitKeyword": "DL그룹 회장 논란",
+    "hitAt": "2026-11-28T19:30:00+09:00",
+    "leadMin": 269
+   },
    {
     "keyword": "우리은행 연승 성공",
     "hitKeyword": "우리은행 강이슬 복귀",
@@ -370,36 +365,6 @@
     "hitKeyword": "성시경 쌈디 절교",
     "hitAt": "2026-11-28T18:30:00+09:00",
     "leadMin": 199
-   },
-   {
-    "keyword": "2026",
-    "hitKeyword": "해운대 빛축제 2026",
-    "hitAt": "2026-11-28T18:00:00+09:00",
-    "leadMin": 1766
-   },
-   {
-    "keyword": "2026 K-라이스 페스타",
-    "hitKeyword": "해운대 빛축제 2026",
-    "hitAt": "2026-11-28T18:00:00+09:00",
-    "leadMin": 1656
-   },
-   {
-    "keyword": "2026 제네시스 시상식 수상자들",
-    "hitKeyword": "해운대 빛축제 2026",
-    "hitAt": "2026-11-28T18:00:00+09:00",
-    "leadMin": 1434
-   },
-   {
-    "keyword": "2026 제네시스 시상식",
-    "hitKeyword": "해운대 빛축제 2026",
-    "hitAt": "2026-11-28T18:00:00+09:00",
-    "leadMin": 1374
-   },
-   {
-    "keyword": "이스라엘 인간방패 폭로",
-    "hitKeyword": "팔레스타인 인간방패 폭로",
-    "hitAt": "2026-11-28T18:00:00+09:00",
-    "leadMin": 229
    }
   ]
  }
