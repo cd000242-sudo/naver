@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T05:20:56.871Z",
+ "builtAt": "2026-11-28T05:31:00.198Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 61,
-   "recent20": 12,
-   "press": 31,
-   "firstArticleAt": "2026-11-28T04:18:00.000Z",
+   "articles90": 63,
+   "recent20": 9,
+   "press": 36,
+   "firstArticleAt": "2026-11-28T04:19:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 \"동해 AI 데이터센터, 투자 마중물…선도 국가 위해 역량 총동...",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-28T05:20:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904795"
+     "title": "GS, 아시아 최대 AI 데이터센터 동해에 첫삽…사업 규모 최대 120조 원",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-28T05:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002836152?sid=101"
     },
     {
-     "title": "[포토뉴스] 동해 GS AI데이터센터 착공식 참석한 이재명 대통령",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-28T05:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001233978?sid=100"
+     "title": "GS, 동해 1.2GW급 AI 데이터센터 착공… 2029년 준공·가동 목표",
+     "press": "mtnews.net",
+     "publishedAt": "2026-11-28T05:26:00.000Z",
+     "link": "https://www.mtnews.net/news/articleView.html?idxno=26693"
     },
     {
-     "title": "전시 제품 설명 듣는 이재명 대통령",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T05:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315278?sid=100"
+     "title": "GS, 30조원 AI 데이터센터 사업 본격화⋯허태수 “AI 산업 미래 명소될 ...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-28T05:24:00.000Z",
+     "link": "https://www.viva100.com/article/20261128500130"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 30,
-   "recent20": 6,
-   "press": 30,
+   "articles90": 32,
+   "recent20": 4,
+   "press": 32,
    "firstArticleAt": "2026-11-28T04:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "[속보] 실적 부진 지적하려고…DL그룹 회장, 한밤중에 직원 수백명 호출",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-28T05:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162487?sid=102"
+    },
+    {
+     "title": "실적 부진 질책한 이해욱 DL 회장…설계실 직원 400명 심야 호출",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T05:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009315285?sid=101"
+    },
+    {
      "title": "이해욱 DL 회장, 금요일 밤 직원 수백 명 회사로 호출...심야 소집 파장",
      "press": "chosun.com",
      "publishedAt": "2026-11-28T05:16:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004012265?sid=101"
-    },
-    {
-     "title": "이해욱 DL그룹 회장, 밤 10시 직원 400명 호출…또 '갑질' 논란",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-28T05:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042832?sid=101"
-    },
-    {
-     "title": "[속보] 이해욱 DL그룹 회장, 밤늦게 직원 수백명 소집…실적·사고 질타",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-28T05:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061605?sid=101"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-28T03:52:00.000Z",
+   "articles90": 18,
+   "recent20": 4,
+   "press": 18,
+   "firstArticleAt": "2026-11-28T04:06:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 \"동해 AI 데이터센터, 투자 마중물…선도 국가 위해 역량 총동...",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-28T05:20:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904795"
+     "title": "GS, 아시아 최대 AI 데이터센터 동해에 첫삽…사업 규모 최대 120조 원",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-28T05:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002836152?sid=101"
     },
     {
-     "title": "동해 GS AI데이터센터 착공… 1단계 1.2GW 규모 구축",
-     "press": "pointdaily.co.kr",
-     "publishedAt": "2026-11-28T05:06:00.000Z",
-     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=327850"
+     "title": "李대통령, 동해 데이터센터 착공식 참석…“AI 경쟁, 한 걸음 늦으면 영...",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-28T05:24:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261128504407?OutUrl=naver"
     },
     {
-     "title": "GS, 동해 1.2GW AI 데이터센터 착공…허태수 \"동해를 AI 산업 미래 명소...",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-28T04:58:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005972262"
+     "title": "GS, 30조원 AI 데이터센터 사업 본격화⋯허태수 “AI 산업 미래 명소될 ...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-28T05:24:00.000Z",
+     "link": "https://www.viva100.com/article/20261128500130"
     }
    ]
   },
@@ -112,7 +112,7 @@
     "nate"
    ],
    "articles90": 10,
-   "recent20": 5,
+   "recent20": 3,
    "press": 10,
    "firstArticleAt": "2026-11-28T04:14:00.000Z",
    "exclusive": true,
@@ -125,16 +125,16 @@
      "link": "https://m.entertain.naver.com/article/009/0005770244"
     },
     {
-     "title": "황민현, 새 소속사는 어디?",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-28T05:14:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611280093"
-    },
-    {
      "title": "황민현, '14년 동행' 플레디스 떠난다 \"전속계약 종료\" [전문]",
      "press": "stoo.com",
      "publishedAt": "2026-11-28T05:14:00.000Z",
      "link": "http://www.stoo.com/article.php?aid=110132147579"
+    },
+    {
+     "title": "황민현, 새 소속사는 어디?",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-28T05:14:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611280093"
     }
    ]
   },
@@ -143,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 10,
    "recent20": 1,
-   "press": 8,
+   "press": 9,
    "firstArticleAt": "2026-11-28T04:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김정은 또 중국 가나 …국정원 \"여러 동향 주시 중\"(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T05:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350686?sid=100"
+    },
     {
      "title": "G20 앞 김정은, 또 ‘방중 임박설’⋯국정원 “여러 동향 주시”[종합]",
      "press": "etoday.co.kr",
@@ -161,12 +167,6 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-28T04:46:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000930806?sid=100"
-    },
-    {
-     "title": "김정은 추가 방중설에 정보당국 촉각…국정원 \"여러 동향 주시\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-28T04:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005611024?sid=100"
     }
    ]
   },
@@ -175,10 +175,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T04:01:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-28T04:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
