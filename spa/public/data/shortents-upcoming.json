@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T03:00:15.437Z",
+ "builtAt": "2026-11-28T03:10:18.392Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,78 +11,111 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "디트로이트 김하성 계약 발표",
+   "keyword": "김정은 방중 국정원 주시 중",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-28T01:36:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[야구] MLB 디트로이트, 김하성과 1년 계약 공식 발표(종합)",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-28T02:48:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452849"
-    },
-    {
-     "title": "\"기대 산산조각 났다\" 김하성 합류에 대만 좌절! '곽빈 상대 홈런' 좌타...",
-     "press": "sportalkorea.com",
-     "publishedAt": "2026-11-28T02:32:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/139/0002256689"
-    },
-    {
-     "title": "김하성, MLB 디트로이트에 새둥지…1년 계약 공식 발표",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-28T02:26:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611281125496346a6e8311f64_1"
-    }
-   ]
-  },
-  {
-   "keyword": "곽시양♥유지애, 오늘 결혼해요",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T01:38:00.000Z",
+   "articles90": 33,
+   "recent20": 4,
+   "press": 33,
+   "firstArticleAt": "2026-11-28T01:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "곽시양♥유지애, 오늘(28일) 결혼... \"행복하게 살게요 여러분\"",
-     "press": "insight.co.kr",
+     "title": "김정은 추가 방중 가능성…국정원 \"여러 동향 주시 중\"",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-28T03:08:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322210&inflow=N"
+    },
+    {
+     "title": "김정은 또 중국 방문할까…국정원 “여러 동향 주시 중”",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-28T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485612?sid=100"
+    },
+    {
+     "title": "국정원, 김정은 추가 방중 가능성에 \"여러 동향을 주시 중\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-28T02:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416850?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "인터넷우체국 개인정보 유출",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-28T01:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "인터넷우체국서 개인정보 유출…하루치만 11만명",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-28T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002250215?sid=105"
+    },
+    {
+     "title": "인터넷우체국 해킹 공격…약 11만명 개인정보 유출",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-28T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522907?sid=101"
+    },
+    {
+     "title": "국가 우편서비스 보안 구멍 … 11만명 개인정보 털리고도 피해 파악 깜...",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-28T03:00:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/28/2026112850023.html"
+    }
+   ]
+  },
+  {
+   "keyword": "예산안 미래대응기금",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-28T01:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "예산안 처리 시한 나흘 앞... 여야 '미래대응기금 공방'",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T03:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968287?sid=100"
+    },
+    {
+     "title": "미래대응기금 설전…與 \"재정 안정 방파제\" 野 \"미래세대 빚잔치\"",
+     "press": "newsis.com",
      "publishedAt": "2026-11-28T02:58:00.000Z",
-     "link": "https://www.insight.co.kr/news/583941"
+     "link": "https://n.news.naver.com/mnews/article/003/0014350574?sid=100"
     },
     {
-     "title": "2년 전 ​‘최애’ 고백→부부로…곽시양♥유지애, 오늘 결혼",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-28T02:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001283998"
-    },
-    {
-     "title": "[TOP이슈] 곽시양♥유지애, 오늘(28일) 부부 된다",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-28T02:38:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288302"
+     "title": "예산안 처리 시한 나흘 남았는데…여야 104조원 미래대응기금 놓고 갈등",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-28T02:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729755?sid=100"
     }
    ]
   },
   {
    "keyword": "곽시양 유지애 오늘 결혼",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 13,
+   "articles90": 10,
    "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T01:38:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-28T01:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,45 +140,62 @@
    ]
   },
   {
-   "keyword": "의사",
+   "keyword": "송민규 포르투갈 데뷔골",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T01:31:00.000Z",
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-28T01:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'마나베와 봉준호는 안 된다'... 이 여성의 삶 [민병래의 사수만보]",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-28T02:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002537540?sid=102"
+     "title": "나시오날 송민규, 포르투갈 리그 데뷔골 폭발",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T02:59:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/052/0002439320"
     },
     {
-     "title": "국회의사당역 5번 출구 버스정류장 정오부터 옮겨 운영",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-28T02:46:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=412524"
+     "title": "송민규, 포르투갈 리그 데뷔골…나시오날 2연승 견인",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-28T02:56:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261128500016"
     },
     {
-     "title": "\"의사가 추천\"…AI '가짜 전문가' 광고 철퇴",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-28T01:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930765?sid=101"
+     "title": "송민규 선제골로 나시오날 승리…마리티무에 2-1",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-28T02:54:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3765993"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2006,
-  "matched": 987,
+  "flagged": 2009,
+  "matched": 990,
   "avgLeadMin": 650,
   "recent": [
+   {
+    "keyword": "대만",
+    "hitKeyword": "대만 부산병 유행",
+    "hitAt": "2026-11-28T12:00:00+09:00",
+    "leadMin": 1396
+   },
+   {
+    "keyword": "김하성 디트로이트 계약",
+    "hitKeyword": "김하성 디트로이트 입단",
+    "hitAt": "2026-11-28T12:00:00+09:00",
+    "leadMin": 119
+   },
+   {
+    "keyword": "디트로이트 김하성 계약 발표",
+    "hitKeyword": "김하성 디트로이트 입단",
+    "hitAt": "2026-11-28T12:00:00+09:00",
+    "leadMin": 79
+   },
    {
     "keyword": "굿파트너2",
     "hitKeyword": "굿파트너2 시청률",
@@ -187,24 +237,6 @@
     "hitKeyword": "곽시양 유지애 결혼",
     "hitAt": "2026-11-28T11:00:00+09:00",
     "leadMin": 19
-   },
-   {
-    "keyword": "미국 이란 제재",
-    "hitKeyword": "미국 쿠팡 제재 압박",
-    "hitAt": "2026-11-28T10:30:00+09:00",
-    "leadMin": 5330
-   },
-   {
-    "keyword": "미국 쿠팡 과징금 비판",
-    "hitKeyword": "미국 쿠팡 제재 압박",
-    "hitAt": "2026-11-28T10:30:00+09:00",
-    "leadMin": 2191
-   },
-   {
-    "keyword": "이상이 배우",
-    "hitKeyword": "이상이 왼손 피아니스트",
-    "hitAt": "2026-11-28T10:30:00+09:00",
-    "leadMin": 59
    }
   ]
  }
