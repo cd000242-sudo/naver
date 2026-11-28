@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T07:01:31.951Z",
+ "builtAt": "2026-11-28T07:11:35.614Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "dl 이앤씨",
    "sources": [
     "daum"
    ],
-   "articles90": 29,
-   "recent20": 5,
-   "press": 29,
-   "firstArticleAt": "2026-11-28T05:33:00.000Z",
+   "articles90": 28,
+   "recent20": 4,
+   "press": 28,
+   "firstArticleAt": "2026-11-28T05:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이해욱 DL그룹 회장, 실적 질타하다 밤 10시 직원 400명 소집 논란",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-28T07:06:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261128504539?OutUrl=naver"
+    },
+    {
+     "title": "‘불금’에 퇴근한 직원들 회사로 불러모은 이해욱 DL회장···또 갑질 ...",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-28T07:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053706?sid=102"
+    },
     {
      "title": "이해욱 DL그룹 회장, DL이앤씨 플랜트 설계실 직원 400명 심야 소집",
      "press": "newsway.co.kr",
      "publishedAt": "2026-11-28T06:56:00.000Z",
      "link": "https://www.newsway.co.kr/news/view?ud=2026112815472626383"
-    },
-    {
-     "title": "플랜트서 1641억 증발…이해욱 DL그룹 회장의 이유 있는 질책",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-28T06:52:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733318"
-    },
-    {
-     "title": "“금요일 밤늦게 수백명 긴급 호출”… DL그룹 회장 또 ‘갑질’ 구설",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-28T06:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834388?sid=102"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 20,
-   "recent20": 5,
-   "press": 20,
-   "firstArticleAt": "2026-11-28T05:32:00.000Z",
+   "articles90": 17,
+   "recent20": 3,
+   "press": 17,
+   "firstArticleAt": "2026-11-28T05:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이해욱 DL그룹 회장, 실적 질타하다 밤 10시 직원 400명 소집 논란",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-28T07:06:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261128504539?OutUrl=naver"
+    },
     {
      "title": "이해욱 DL그룹 회장, DL이앤씨 플랜트 설계실 직원 400명 심야 소집",
      "press": "newsway.co.kr",
@@ -65,38 +71,65 @@
      "press": "ebn.co.kr",
      "publishedAt": "2026-11-28T06:52:00.000Z",
      "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733318"
-    },
-    {
-     "title": "“금요일 밤늦게 수백명 긴급 호출”… DL그룹 회장 또 ‘갑질’ 구설",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-28T06:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002834388?sid=102"
     }
    ]
   },
   {
-   "keyword": "이재명 AI 데이터센터 방문",
+   "keyword": "강금실 한준호 인사청문회",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
+   "articles90": 12,
    "recent20": 4,
-   "press": 14,
+   "press": 12,
+   "firstArticleAt": "2026-11-28T06:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "與, 강금실 등 李정부 2기 인선 '엄호'…野 \"무자격만 골라\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T07:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009315380?sid=100"
+    },
+    {
+     "title": "개각 인사청문회 전초전... 국힘 \"무자격자들\" vs 민주 \"색깔론 말라\" 충...",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-28T07:08:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=731399"
+    },
+    {
+     "title": "국힘, 강금실·한준호 \"무자격 후보\" 맹비난...與 \"마녀사냥\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-28T07:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261128154353884"
+    }
+   ]
+  },
+  {
+   "keyword": "LG전자 이재명 대통령",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 8,
    "firstArticleAt": "2026-11-28T06:04:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[비즈+]GS, 동해에 1.2GW AI 데이터센터 착공…15조원 투자 본격화",
-     "press": "businessplus.kr",
-     "publishedAt": "2026-11-28T06:56:00.000Z",
-     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120662"
+     "title": "이 대통령, 강원 AIDC 착공식 참석…\"아시아 최대 규모 인프라\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T07:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406544?sid=100"
     },
     {
-     "title": "李대통령, 강릉 주문진시장 방문…오징어·노가리 구매",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-28T06:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005611038?sid=100"
+     "title": "이 대통령, 동해 GS AI데이터센터 착공식 이후 국내 기업 기술 부스 방문",
+     "press": "kado.net",
+     "publishedAt": "2026-11-28T06:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213890?sid=100"
     },
     {
      "title": "이 대통령, 동해 AI데이터센터 착공식 참석... “지역 경제 활성화 이끌...",
@@ -107,49 +140,23 @@
    ]
   },
   {
-   "keyword": "강금실 한준호 인사청문회",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-28T06:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강금실·한준호 등 개각 공방…與 \"색깔론·낙인찍기\" 野 \"무자격·미달...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T06:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350785?sid=100"
-    },
-    {
-     "title": "강금실·한준호·홍익표 '무자격'으로 겨눈 국힘… 민주 \"답정너 식 마녀...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T06:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968296?sid=100"
-    },
-    {
-     "title": "강금실·한준호 겨눈 국힘 “무자격 내각”…민주 “마녀사냥”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-28T06:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005770255?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "황민현, 플레디스 떠난다",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 0,
+   "articles90": 6,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-28T05:47:00.000Z",
-   "exclusive": false,
+   "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[단독] 황민현, 14년 의리 지킨 플레디스 떠난다..새 둥지로 이종석 소속...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-28T07:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646493"
+    },
     {
      "title": "황민현, 14년만 플레디스 떠난다…\"12월 계약 종료\"",
      "press": "newsis.com",
@@ -161,44 +168,38 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-28T06:03:00.000Z",
      "link": "https://m.entertain.naver.com/article/079/0004214855"
-    },
-    {
-     "title": "황민현, 14년만에 결별→플레디스 떠난다..\"이종석 소속사와 계약 논의...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T05:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646456"
     }
    ]
   },
   {
-   "keyword": "주유소 기름값 하락",
+   "keyword": "기사",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T05:36:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T05:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "주유소 기름값 28주째 하락…수입 원유가 떨어져",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-28T06:48:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545294"
-    },
-    {
-     "title": "전국 주유소 기름값 28주째 하락… 휘발유 1854원",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-28T06:38:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452890"
-    },
-    {
-     "title": "주유소 기름값 28주째 하락…50리터 넣어도 35원 절약",
-     "press": "topstarnews.net",
+     "title": "\"경찰관 폭행에 신호위반 사고까지\"…60대 택시기사 징역 10개월",
+     "press": "news1.kr",
      "publishedAt": "2026-11-28T06:18:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288405"
+     "link": "https://n.news.naver.com/mnews/article/421/0009315343?sid=102"
+    },
+    {
+     "title": "'보복운전 논란' 김영광, 유튜브 재개…택시기사에 재차 사과 \"면목 없다...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-28T06:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002085033"
+    },
+    {
+     "title": "“택시 기사님께 진심으로 사과” 김영광, 보복운전 논란 한 달 만에 복...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-28T06:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729778?sid=102"
     }
    ]
   },
@@ -235,38 +236,6 @@
    ]
   },
   {
-   "keyword": "성시경 쌈디",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T05:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"형, 한 번만 만나줘\"…'절교' 성시경과 화해한 쌈디, 달라진 술버릇",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-28T06:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005447723"
-    },
-    {
-     "title": "\"눈물 날 정도로 속상했다\"…성시경, 쌈디에 절교 선언한 사연",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-28T06:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/015/0005359332"
-    },
-    {
-     "title": "'음주 후 응급실行' 쌈디, 4년 만에 달라졌다…\"얌전하게 택시 타고 가더...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-28T05:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409924"
-    }
-   ]
-  },
-  {
    "keyword": "한성숙 총리 부스 방문",
    "sources": [
     "nate"
@@ -294,7 +263,7 @@
      "title": "청년미래 콘서트 부스 둘러보는 한성숙 총리",
      "press": "newsis.com",
      "publishedAt": "2026-11-28T06:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350731?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/003/0014350744?sid=102"
     }
    ]
   },
@@ -331,44 +300,94 @@
    ]
   },
   {
-   "keyword": "청소년 만난 김민석",
+   "keyword": "주유소",
    "sources": [
-    "signal.bz"
+    "google"
    ],
    "articles90": 3,
    "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-28T06:00:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-28T06:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "청소년 당원 만난 김민석 대표 '미래세대 목소리 경청' [TF사진관]",
-     "press": "news.tf.co.kr",
+     "title": "주유소 기름값 28주째 하락…수입 원유가 떨어져",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-28T06:48:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545294"
+    },
+    {
+     "title": "전국 주유소 기름값 28주째 하락… 휘발유 1854원",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-28T06:38:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452890"
+    },
+    {
+     "title": "주유소 기름값 28주째 하락…50리터 넣어도 35원 절약",
+     "press": "topstarnews.net",
      "publishedAt": "2026-11-28T06:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000556460?sid=100"
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288405"
+    }
+   ]
+  },
+  {
+   "keyword": "성시경 쌈디",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T05:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"형, 한 번만 만나줘\"…'절교' 성시경과 화해한 쌈디, 달라진 술버릇",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-28T06:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005447723"
     },
     {
-     "title": "청소년 당원 만난 김민석 대표 [포토]",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-28T06:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000556459?sid=100"
+     "title": "\"눈물 날 정도로 속상했다\"…성시경, 쌈디에 절교 선언한 사연",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-28T06:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/015/0005359332"
     },
     {
-     "title": "청소년 당원 만난 김민석 대표",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-28T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468841?sid=100"
+     "title": "'음주 후 응급실行' 쌈디, 4년 만에 달라졌다…\"얌전하게 택시 타고 가더...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-28T05:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409924"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2057,
-  "matched": 1006,
-  "avgLeadMin": 645,
+  "flagged": 2060,
+  "matched": 1009,
+  "avgLeadMin": 660,
   "recent": [
+   {
+    "keyword": "샌디스크 주가",
+    "hitKeyword": "앤트로픽 샌디스크 급등",
+    "hitAt": "2026-11-28T16:00:00+09:00",
+    "leadMin": 6648
+   },
+   {
+    "keyword": "군인",
+    "hitKeyword": "전역군인 공포탄 적발",
+    "hitAt": "2026-11-28T16:00:00+09:00",
+    "leadMin": 5771
+   },
+   {
+    "keyword": "앤트로픽 공모가 하회",
+    "hitKeyword": "앤트로픽 샌디스크 급등",
+    "hitAt": "2026-11-28T16:00:00+09:00",
+    "leadMin": 4791
+   },
    {
     "keyword": "인터넷우체국 개인정보 유출",
     "hitKeyword": "우체국 개인정보 유출",
@@ -410,24 +429,6 @@
     "hitKeyword": "그냥사람친구 시청률",
     "hitAt": "2026-11-28T13:00:00+09:00",
     "leadMin": 179
-   },
-   {
-    "keyword": "송민규 데뷔골 폭발!",
-    "hitKeyword": "송민규 데뷔골",
-    "hitAt": "2026-11-28T13:00:00+09:00",
-    "leadMin": 169
-   },
-   {
-    "keyword": "송민규 포르투갈 데뷔골",
-    "hitKeyword": "송민규 데뷔골",
-    "hitAt": "2026-11-28T13:00:00+09:00",
-    "leadMin": 159
-   },
-   {
-    "keyword": "디트로이트, 김하성 1년 계약",
-    "hitKeyword": "김하성 디트로이트 계약",
-    "hitAt": "2026-11-28T13:00:00+09:00",
-    "leadMin": 20
    }
   ]
  }
