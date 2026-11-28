@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T12:13:26.150Z",
+ "builtAt": "2026-11-28T12:23:29.270Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "1252회 로또 당첨 번호",
+   "keyword": "로또 당첨 9 19 23 28 33 44 보너스 43",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 22,
-   "recent20": 11,
-   "press": 17,
+   "articles90": 33,
+   "recent20": 14,
+   "press": 26,
    "firstArticleAt": "2026-11-28T11:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "1252회 로또 1등 '9·19·23·28·33·44'",
-     "press": "the-today.com",
-     "publishedAt": "2026-11-28T12:12:00.000Z",
-     "link": "https://www.the-today.com/news/articleView.html?idxno=94235"
+     "title": "로또 1등 16명…당첨금 17억6천만원",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-28T12:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729844?sid=101"
     },
     {
-     "title": "1252회 로또 당첨번호 9·19·23·28·33·44…1등 16매·17억5909만원",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-28T12:12:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=758775"
+     "title": "1252회 로또 1등 16명…당첨금 각 17억6천만원(종합)",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-28T12:22:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785575"
     },
     {
-     "title": "1252회 로또 1등 각 17억씩…자동 7명·수동 8명·반자동 1명(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T12:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350928?sid=102"
+     "title": "강원 횡성 로또 1등 2게임 당첨, 동일인이면 '35억원' 대박…부산 해운...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-28T12:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001042845?sid=101"
     }
    ]
   },
@@ -47,30 +47,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-28T10:45:00.000Z",
+   "articles90": 14,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-28T10:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'퀸연아' 계보 잇나…신지아, 한국 선수 4년 만에 시니어 그랑프리 우승",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-28T12:20:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261128000081"
+    },
+    {
+     "title": "피겨 신지아, 쇼트 2위에서 프리스케이팅 1위로 역전 금메달",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-28T12:20:00.000Z",
+     "link": "https://www.ajunews.com/view/20261128210608016"
+    },
     {
      "title": "'일본 심장에 태극기 꽂았다!' 女 피겨 신지아 짜릿한 역전 우승…개인...",
      "press": "sportschosun.com",
      "publishedAt": "2026-11-28T11:59:00.000Z",
      "link": "https://m.sports.naver.com/general/article/076/0004470518"
+    }
+   ]
+  },
+  {
+   "keyword": "철도노조 전철 105대 지연",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-28T10:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“열차 백여대 지연”…대입 논술·면접 큰 차질 없어",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-28T12:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303177?sid=101"
     },
     {
-     "title": "'인생 연기' 신지아, 시니어 그랑프리서 첫 금메달",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-28T11:58:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001406591"
+     "title": "철도노조 준법 투쟁 사흘째...열차 운행 지연 잇따라",
+     "press": "tbc.co.kr",
+     "publishedAt": "2026-11-28T11:34:00.000Z",
+     "link": "https://www.tbc.co.kr/news/view?pno=20261128184136AE09284&id=213890"
     },
     {
-     "title": "'김연아·김예림 다음은 나' 신지아, 日 도쿄서 역전 드라마... 시니어 ...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-28T11:55:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/108/0003490841"
+     "title": "철도노조 파업투쟁…지하철 지연",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-28T11:32:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611280119"
     }
    ]
   },
@@ -79,10 +111,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-28T10:44:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-28T11:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,48 +139,16 @@
    ]
   },
   {
-   "keyword": "철도노조 전철 105대 지연",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-28T10:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "철도노조 준법 투쟁 사흘째...열차 운행 지연 잇따라",
-     "press": "tbc.co.kr",
-     "publishedAt": "2026-11-28T11:34:00.000Z",
-     "link": "https://www.tbc.co.kr/news/view?pno=20261128184136AE09284&id=213890"
-    },
-    {
-     "title": "철도노조 파업투쟁…지하철 지연",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-28T11:32:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611280119"
-    },
-    {
-     "title": "철도노조 준법투쟁 첫 주말…수도권 전철 105대 20분 이상 지연",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-28T11:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122418?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "DL 이앤씨",
    "sources": [
     "signal.bz",
     "nate",
     "daum"
    ],
-   "articles90": 7,
-   "recent20": 4,
-   "press": 7,
-   "firstArticleAt": "2026-11-28T10:46:00.000Z",
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-28T10:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -173,49 +173,23 @@
    ]
   },
   {
-   "keyword": "구글 벨기에 데이터센터 중단",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T10:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"물부족, 환경오염 어쩌나\" 무허가 데이터센터 다 지어가는데…빅테크...",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-28T11:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001274299?sid=104"
-    },
-    {
-     "title": "구글, 벨기서 무허가 데이터센터 건설 강행… 당국, 중단 명령",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-28T11:08:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452924"
-    },
-    {
-     "title": "구글, 벨기에서 무허가 데이터센터 강행하다 중단 명령",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T10:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439437?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "곽시양 유지애 결혼",
    "sources": [
     "daum"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
    "firstArticleAt": "2026-11-28T11:44:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "곽시양♥유지애, 오늘(28일) 백년가약…러블리즈 특급 의리 빛났다[셀럽...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-28T12:20:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795866216531705005"
+    },
     {
      "title": "[단독] 유지애♥곽시양 오늘 결혼…‘축사·축가’ 러블리즈 완전체·연...",
      "press": "sportsseoul.com",
@@ -227,12 +201,38 @@
      "press": "mydaily.co.kr",
      "publishedAt": "2026-11-28T11:46:00.000Z",
      "link": "https://m.entertain.naver.com/article/117/0004128872"
+    }
+   ]
+  },
+  {
+   "keyword": "구글 벨기에 데이터센터 중단",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-28T10:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "구글 데이터센터 중단, 시간당 600톤 냉각수 갈등…기존 허가는 유효",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-28T12:18:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288571"
     },
     {
-     "title": "곽시양♥유지애, 결혼식 현장 포착..러블리즈도 울고 웃었다 \"잘가\"[스타...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-28T11:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003490840"
+     "title": "\"물부족, 환경오염 어쩌나\" 무허가 데이터센터 다 지어가는데…빅테크...",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-28T11:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274299?sid=104"
+    },
+    {
+     "title": "구글, 벨기서 무허가 데이터센터 건설 강행… 당국, 중단 명령",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-28T11:08:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452924"
     }
    ]
   }
@@ -240,8 +240,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 2057,
-  "matched": 1007,
-  "avgLeadMin": 645,
+  "matched": 1006,
+  "avgLeadMin": 646,
   "recent": [
    {
     "keyword": "최민정 4연속 금메달",
