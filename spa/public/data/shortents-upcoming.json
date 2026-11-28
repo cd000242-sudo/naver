@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T10:42:52.706Z",
+ "builtAt": "2026-11-28T10:52:56.179Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 2,
+   "articles90": 19,
+   "recent20": 3,
    "press": 15,
    "firstArticleAt": "2026-11-28T09:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "[속보] 철도노조 안전운행 투쟁 시작 후 첫 주말, 대전역 열차 운행 차질",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-28T10:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193813?sid=102"
+    },
+    {
+     "title": "철도노조 준법투쟁 후 첫 주말…\"광역전철 105대 20분 이상 지연\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T10:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406572?sid=101"
+    },
+    {
      "title": "철도노조 준법투쟁 첫 주말, 수도권 전철 105대 ‘줄지연’",
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-28T10:40:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003160530?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 대통령 방문",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-28T09:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령, 강릉 주문진 건어물시장 찾아 민생 행보…상인·시민들과 소...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-28T10:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214865?sid=102"
     },
     {
-     "title": "철도노조 준법투쟁 장기화 조짐…주말 수도권 전철 105편 운행 지연",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-28T10:26:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848755"
+     "title": "[영상] 이재명 대통령, KIST 강릉분원 방문…“천연물 혁신센터 신속 추...",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-28T10:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001233995?sid=100"
     },
     {
-     "title": "철도노조 준법투쟁 첫 주말…\"광역전철 105대 20분 이상 지연\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-28T10:16:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326786/?sc=Naver"
+     "title": "李대통령, 강릉 가뭄 대비 지하수저류댐 공사장 현장 찾아 추진 상황 점...",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-28T10:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001233994?sid=100"
     }
    ]
   },
@@ -47,10 +79,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 15,
+   "articles90": 13,
    "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-28T09:14:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-28T09:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,47 +107,15 @@
    ]
   },
   {
-   "keyword": "이재명 대통령 방문",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 25,
-   "recent20": 6,
-   "press": 14,
-   "firstArticleAt": "2026-11-28T09:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[영상] 이재명 대통령, KIST 강릉분원 방문…“천연물 혁신센터 신속 추...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-28T10:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001233995?sid=100"
-    },
-    {
-     "title": "李대통령, 강릉 가뭄 대비 지하수저류댐 공사장 현장 찾아 추진 상황 점...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-28T10:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001233994?sid=100"
-    },
-    {
-     "title": "이 대통령, 주말 강원 광폭 행보…장바구니 물가부터 미래 먹거리까지 ...",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-28T10:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000369015?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "FC서울 우승 대관식",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 21,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-28T09:19:00.000Z",
+   "articles90": 20,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-28T09:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -144,10 +144,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 10,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T09:20:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-28T09:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -177,12 +177,18 @@
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 0,
+   "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-28T09:16:00.000Z",
+   "firstArticleAt": "2026-11-28T09:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'국가대표 은퇴 예고' 최민정, 월드투어 1000m 4연속 금메달",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T10:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968306?sid=104"
+    },
     {
      "title": "'은퇴 결사반대' 나올 만하네! 최민정, 16전 16승 '무패 질주'... 월드투...",
      "press": "starnewskorea.com",
@@ -194,12 +200,6 @@
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-28T10:10:00.000Z",
      "link": "https://m.sports.naver.com/general/article/119/0003160528"
-    },
-    {
-     "title": "최민정, 상하이서도 여자 1000m 정상…월드투어 4개 대회 연속 금빛 피날...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-28T10:00:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/241/0003544027"
     }
    ]
   },
@@ -302,8 +302,8 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2070,
-  "matched": 1014,
+  "flagged": 2068,
+  "matched": 1013,
   "avgLeadMin": 654,
   "recent": [
    {
