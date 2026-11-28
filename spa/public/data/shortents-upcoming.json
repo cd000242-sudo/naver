@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T01:51:15.481Z",
+ "builtAt": "2026-11-28T02:01:18.815Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "인터넷우체국 개인정보 유출",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 24,
-   "recent20": 8,
-   "press": 24,
-   "firstArticleAt": "2026-11-28T00:22:00.000Z",
+   "articles90": 23,
+   "recent20": 5,
+   "press": 23,
+   "firstArticleAt": "2026-11-28T00:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "인터넷우체국 해킹으로 개인정보 유출…하루치만 11만3천여명",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-28T01:44:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005972224"
+     "title": "인터넷우체국 해킹으로 개인정보 유출…하루치만 11만3천여명 확인",
+     "press": "idaegu.co.kr",
+     "publishedAt": "2026-11-28T01:56:00.000Z",
+     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566687"
     },
     {
-     "title": "인터넷우체국 해킹…8일치 중 하루만 봤는데 11만명 정보 유출",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-28T01:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568572?sid=102"
+     "title": "인터넷우체국 해킹 피해…고객 11만 명 정보 유출",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-28T01:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303103?sid=105"
     },
     {
-     "title": "인터넷우체국도 해킹 피해... 최소 11만3천여명 개인정보 유출",
-     "press": "vop.co.kr",
-     "publishedAt": "2026-11-28T01:38:00.000Z",
-     "link": "https://vop.co.kr/A00001697806.html"
+     "title": "인터넷우체국 개인정보 유출…하루치만 11만 3천여 명",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T01:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406500?sid=101"
     }
    ]
   },
@@ -47,10 +48,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 21,
-   "recent20": 2,
-   "press": 20,
-   "firstArticleAt": "2026-11-28T00:25:00.000Z",
+   "articles90": 19,
+   "recent20": 1,
+   "press": 19,
+   "firstArticleAt": "2026-11-28T00:38:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -79,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 5,
-   "press": 14,
-   "firstArticleAt": "2026-11-28T00:26:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-28T00:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,15 +108,47 @@
    ]
   },
   {
+   "keyword": "곽시양♥유지애, 오늘 결혼해요",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-28T00:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "결혼 당일 큰절 올린 곽시양♥유지애…축가는 누구?",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-28T01:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000762217"
+    },
+    {
+     "title": "\"행복하게 잘 살게요\" 곽시양♥유지애, 결혼 당일(28일) 큰절",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-28T01:41:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000641323"
+    },
+    {
+     "title": "곽시양♥유지애, 오늘(28일) 결혼 앞두고 큰절…축가는 러블리즈 류수정",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-28T01:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329403"
+    }
+   ]
+  },
+  {
    "keyword": "송민규 포르투갈 데뷔골",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 13,
+   "articles90": 10,
    "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-28T00:25:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-28T00:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,14 +173,46 @@
    ]
   },
   {
+   "keyword": "전원회의 대미 메시지",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-28T00:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "핵탄두 대거 공개한 北 김정은…연말 전원회의서 트럼프에 어떤 메시지...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-28T01:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002836141?sid=100"
+    },
+    {
+     "title": "北, 연말 전원회의 예고‥'대남·대미 메시지' 주목",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-28T01:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538645?sid=100"
+    },
+    {
+     "title": "北 연말 전원회의 소집…김정은 대미 메시지 주목",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-28T01:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005611003?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "전국 기온 뚝 비 눈",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T00:22:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-28T00:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,73 +237,41 @@
    ]
   },
   {
-   "keyword": "이동연, 팬레터 폐기 2차 사과",
+   "keyword": "굿파트너 2",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T00:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이동연, 팬레터 폐기 논란 2차 사과… 보관 중인 편지 인증까지",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-28T01:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003160472"
-    },
-    {
-     "title": "'팬레터 폐기 논란' 이동연, 2차 사과→인증에 여론 뒤집혔다…쏟아진 ...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-28T00:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409896"
-    },
-    {
-     "title": "\"편지 읽고 다시 스티커 붙여 보관했다\"…이동연, 팬레터 폐기 논란 2차...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-28T00:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000494167"
-    }
-   ]
-  },
-  {
-   "keyword": "띠별 운세",
-   "sources": [
-    "google"
-   ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-28T00:41:00.000Z",
+   "firstArticleAt": "2026-11-28T01:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 띠별 운세] 2026년 11월 28일 토요일",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-28T01:24:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=770968"
+     "title": "장나라 노하우 깨달은 김혜윤…'굿파트너2', 최고 시청률 경신 9.8%",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-28T01:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/018/0006416837"
     },
     {
-     "title": "[오늘의운세] 11월28일 토요일, 재미로 보는 오늘의 띠별운세",
-     "press": "job-post.co.kr",
-     "publishedAt": "2026-11-28T00:54:00.000Z",
-     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=241657"
+     "title": "'굿파트너2', 두 자릿수 시청률 목전…9.8% '자체 최고'",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-28T01:14:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110130629359"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 28일 띠별 운세",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-28T00:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490843?sid=103"
+     "title": "김혜윤, 장나라의 '리봄' 의미 깨달았다…'굿파트너2' 9.8% 자체 최고[시...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-28T01:02:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795826145531691006"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1998,
+  "flagged": 2000,
   "matched": 980,
   "avgLeadMin": 654,
   "recent": [
