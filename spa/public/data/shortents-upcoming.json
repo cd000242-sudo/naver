@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T12:33:32.230Z",
+ "builtAt": "2026-11-28T12:43:35.818Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,15 +8,15 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "로또 당첨 9 19 23 28 33 44 보너스 43",
+   "keyword": "1252회 로또 1등 당첨 번호",
    "sources": [
     "nate"
    ],
-   "articles90": 36,
-   "recent20": 10,
+   "articles90": 34,
+   "recent20": 3,
    "press": 28,
    "firstArticleAt": "2026-11-28T11:40:00.000Z",
    "exclusive": false,
@@ -29,49 +29,48 @@
      "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96146"
     },
     {
-     "title": "1252회 로또 1등 당첨번호 '9·19·23·28·33·44'번…1등 당첨지역 어디...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-28T12:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160533?sid=102"
-    },
-    {
      "title": "[오늘 로또] 1,252회 추첨 서울 52억·강원 35억…'잭팟' 터졌나",
      "press": "namdonews.com",
      "publishedAt": "2026-11-28T12:24:00.000Z",
      "link": "https://www.namdonews.com/news/articleView.html?idxno=930698"
+    },
+    {
+     "title": "1252회 로또 1등 당첨번호 '9·19·23·28·33·44'번…1등 당첨지역 어디...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-28T12:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160533?sid=102"
     }
    ]
   },
   {
    "keyword": "신지아 그랑프리 금메달",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 14,
    "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T11:10:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-28T11:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'퀸연아' 계보 잇나…신지아, 한국 선수 4년 만에 시니어 그랑프리 우승",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-28T12:20:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261128000081"
+     "title": "1.81점 뒤집었다…‘인간 토끼’ 신지아, 시니어 그랑프리 첫 우승",
+     "press": "donga.com",
+     "publishedAt": "2026-11-28T12:34:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/020/0003765923"
+    },
+    {
+     "title": "1.81점 열세 뒤집은 ‘개인 최고 220.84점’ 대역전극…신지아, NHK 트로...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-28T12:32:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/241/0003544029"
     },
     {
      "title": "피겨 신지아, 쇼트 2위에서 프리스케이팅 1위로 역전 금메달",
      "press": "ajunews.com",
      "publishedAt": "2026-11-28T12:20:00.000Z",
      "link": "https://www.ajunews.com/view/20261128210608016"
-    },
-    {
-     "title": "'일본 심장에 태극기 꽂았다!' 女 피겨 신지아 짜릿한 역전 우승…개인...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-28T11:59:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/076/0004470518"
     }
    ]
   },
@@ -80,62 +79,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
    "firstArticleAt": "2026-11-28T11:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "트럼프, 쿠르드·친이란과 대립한 이라크 중앙정부 공개지지",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-28T12:36:00.000Z",
+     "link": "https://www.ajunews.com/view/20261128212505023"
+    },
+    {
+     "title": "트럼프, 이라크 정부의 석유·무기 통제 강화 지지…친이란 세력 압박",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-28T12:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485629?sid=104"
+    },
+    {
      "title": "트럼프 \"강력한 이라크\" 지지…친이란 세력 우회 압박",
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-28T12:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000930883?sid=104"
-    },
-    {
-     "title": "트럼프, 이라크 중앙정부 공개 지지…쿠르드 자치지역과 갈등 고조",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-28T12:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729841?sid=104"
-    },
-    {
-     "title": "트럼프, 이라크 국가 통제력 강화지지… 친이란 세력 압박",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-28T12:02:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452932"
     }
    ]
   },
   {
-   "keyword": "포스코 임금교섭 타결",
+   "keyword": "강금실 무보수 명예직",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-28T11:06:00.000Z",
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-28T11:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘격려금 620만원에 +α’⋯ 58년 만에 파업했던 포스코, 결국 도장 찍었...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-28T11:56:00.000Z",
-     "link": "https://www.viva100.com/article/20261128500211"
+     "title": "강금실 “中특별고문, 박근혜 정부 때 무보수 명예직”…‘친중’ 논란...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-28T12:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004687186?sid=100"
     },
     {
-     "title": "'창사 첫 파업' 포스코, 5개월 만에 임금교섭 타결",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-28T11:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005611049?sid=101"
+     "title": "강금실 \"中 특별고문, 박근혜 정부 때 친선 차원 무보수 명예직\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-28T12:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930884?sid=100"
     },
     {
-     "title": "포스코 노사, 임금협상 최종 타결…찬성 65%",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-28T11:38:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026112820345726878"
+     "title": "'친중' 공세에 입 연 강금실…\"박근혜 정부 때 무보수 명예직\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-28T12:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359367?sid=100"
     }
    ]
   },
@@ -144,13 +143,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 2,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-28T11:44:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "유지애 곽시양♥결혼…입맞춤 나눈 웨딩 영상 공개",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-28T12:34:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631645"
+    },
     {
      "title": "곽시양♥유지애 결혼식 현장 공개, ‘아츄’에 신랑 입장→러블리즈 멤...",
      "press": "newsen.com",
@@ -162,12 +167,6 @@
      "press": "celuvmedia.com",
      "publishedAt": "2026-11-28T12:20:00.000Z",
      "link": "http://www.celuvmedia.com/article.php?aid=1795866216531705005"
-    },
-    {
-     "title": "[단독] 유지애♥곽시양 오늘 결혼…‘축사·축가’ 러블리즈·연예인 하...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-28T12:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001284030"
     }
    ]
   },
@@ -177,12 +176,18 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 0,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-28T11:11:00.000Z",
+   "firstArticleAt": "2026-11-28T11:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "철도노조 준법투쟁 첫 주말…광역전철 105대 지연",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-28T12:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416901?sid=102"
+    },
     {
      "title": "철도노조 준법 투쟁 사흘째...열차 운행 지연 잇따라",
      "press": "tbc.co.kr",
@@ -194,20 +199,13 @@
      "press": "bntnews.co.kr",
      "publishedAt": "2026-11-28T11:32:00.000Z",
      "link": "https://www.bntnews.co.kr/article/view/bnt202611280119"
-    },
-    {
-     "title": "철도노조 준법투쟁 첫 주말…수도권 전철 105대 20분 이상 지연",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-28T11:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122418?sid=102"
     }
    ]
   },
   {
    "keyword": "김용준 전 소장 별세 87세",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 5,
    "recent20": 0,
@@ -237,30 +235,93 @@
    ]
   },
   {
-   "keyword": "DL 이앤씨",
+   "keyword": "포스코 임금교섭 타결",
    "sources": [
-    "signal.bz",
-    "nate",
-    "daum"
+    "signal.bz"
    ],
    "articles90": 5,
    "recent20": 0,
    "press": 5,
-   "firstArticleAt": "2026-11-28T11:05:00.000Z",
+   "firstArticleAt": "2026-11-28T11:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이해욱 DL그룹 회장의 갑질…잊을 만하면 터진다",
-     "press": "dongponews.net",
-     "publishedAt": "2026-11-28T12:12:00.000Z",
-     "link": "https://www.dongponews.net/news/articleView.html?idxno=61959"
+     "title": "포스코 노사 임금 교섭 5개월 만에 타결",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-28T12:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303197?sid=101"
     },
+    {
+     "title": "‘격려금 620만원에 +α’⋯ 58년 만에 파업했던 포스코, 결국 도장 찍었...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-28T11:56:00.000Z",
+     "link": "https://www.viva100.com/article/20261128500211"
+    },
+    {
+     "title": "'창사 첫 파업' 포스코, 5개월 만에 임금교섭 타결",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-28T11:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005611049?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "문무",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-28T11:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘문무’ 피범벅 이현욱, 수많은 시체 속에서 홀로 눈 떴다",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-28T12:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329438"
+    },
+    {
+     "title": "KBS 대하드라마 ‘문무’ 방영…경주 신라 유적 주목",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-28T12:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303200?sid=103"
+    },
+    {
+     "title": "‘문무’ 사면초가 놓인 김춘추의 승부수",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-28T12:16:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305903"
+    }
+   ]
+  },
+  {
+   "keyword": "DL 이앤씨",
+   "sources": [
+    "signal.bz",
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-28T12:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
     {
      "title": "DL이앤씨 심야·주말 호출, 수당은?",
      "press": "topstarnews.net",
      "publishedAt": "2026-11-28T12:12:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288569"
+    },
+    {
+     "title": "이해욱 DL그룹 회장의 갑질…잊을 만하면 터진다",
+     "press": "dongponews.net",
+     "publishedAt": "2026-11-28T12:12:00.000Z",
+     "link": "https://www.dongponews.net/news/articleView.html?idxno=61959"
     },
     {
      "title": "'폭행 벌금형' DL 회장, 직원 400명 심야 소집해 또 '갑질' 논란",
@@ -274,8 +335,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 2057,
-  "matched": 1005,
-  "avgLeadMin": 650,
+  "matched": 1003,
+  "avgLeadMin": 648,
   "recent": [
    {
     "keyword": "이태현 KBS 사장 후보자",
