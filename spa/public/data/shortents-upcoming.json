@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T05:10:54.159Z",
+ "builtAt": "2026-11-28T05:20:56.871Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,87 @@
  "measured": 28,
  "candidates": [
   {
+   "keyword": "대통령 AI데이터센터 착공식",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 61,
+   "recent20": 12,
+   "press": 31,
+   "firstArticleAt": "2026-11-28T04:18:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 \"동해 AI 데이터센터, 투자 마중물…선도 국가 위해 역량 총동...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-28T05:20:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904795"
+    },
+    {
+     "title": "[포토뉴스] 동해 GS AI데이터센터 착공식 참석한 이재명 대통령",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-28T05:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001233978?sid=100"
+    },
+    {
+     "title": "전시 제품 설명 듣는 이재명 대통령",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T05:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009315278?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "DL그룹 회장 직원 호출",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 30,
+   "recent20": 6,
+   "press": 30,
+   "firstArticleAt": "2026-11-28T04:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이해욱 DL 회장, 금요일 밤 직원 수백 명 회사로 호출...심야 소집 파장",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-28T05:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004012265?sid=101"
+    },
+    {
+     "title": "이해욱 DL그룹 회장, 밤 10시 직원 400명 호출…또 '갑질' 논란",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-28T05:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001042832?sid=101"
+    },
+    {
+     "title": "[속보] 이해욱 DL그룹 회장, 밤늦게 직원 수백명 소집…실적·사고 질타",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-28T05:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061605?sid=101"
+    }
+   ]
+  },
+  {
    "keyword": "이재명, GS AI 센터 행사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 3,
-   "press": 20,
-   "firstArticleAt": "2026-11-28T03:41:00.000Z",
+   "articles90": 19,
+   "recent20": 2,
+   "press": 19,
+   "firstArticleAt": "2026-11-28T03:52:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령 \"동해 AI 데이터센터, 투자 마중물…선도 국가 위해 역량 총동...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-28T05:20:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904795"
+    },
     {
      "title": "동해 GS AI데이터센터 착공… 1단계 1.2GW 규모 구축",
      "press": "pointdaily.co.kr",
@@ -33,12 +103,38 @@
      "press": "mbnmoney.mbn.co.kr",
      "publishedAt": "2026-11-28T04:58:00.000Z",
      "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005972262"
+    }
+   ]
+  },
+  {
+   "keyword": "황민현 14년 플레디스 떠난다",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 5,
+   "press": 10,
+   "firstArticleAt": "2026-11-28T04:14:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "황민현, 14년 함께한 플레디스 떠난다…“찬란한 날들 가득하길” [전문...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-28T05:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005770244"
     },
     {
-     "title": "GS, 동해에 15조원 투입…초대형 AI 산업기지 조성 본격화",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-28T04:52:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848730"
+     "title": "황민현, 새 소속사는 어디?",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-28T05:14:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611280093"
+    },
+    {
+     "title": "황민현, '14년 동행' 플레디스 떠난다 \"전속계약 종료\" [전문]",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-28T05:14:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110132147579"
     }
    ]
   },
@@ -47,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 7,
+   "articles90": 9,
+   "recent20": 1,
+   "press": 8,
    "firstArticleAt": "2026-11-28T04:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "G20 앞 김정은, 또 ‘방중 임박설’⋯국정원 “여러 동향 주시”[종합]",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-28T05:10:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654192"
+    },
     {
      "title": "[뉴스초점] 김정은 또 방중 가능성…국정원 “여러 동향 주시”",
      "press": "yonhapnewstv.co.kr",
@@ -65,76 +167,6 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-28T04:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005611024?sid=100"
-    },
-    {
-     "title": "김정은 또 중국 가나…국정원 “북중 동향 예의주시”",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-28T04:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061604?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "황민현 14년 플레디스 떠난다",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-28T04:14:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "황민현, 플레디스 떠난다…새 소속사 어디?",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-28T05:02:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288351"
-    },
-    {
-     "title": "[공식] 황민현, 14년 만에 새출발…12월 소속사 떠난다 (전문)",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-28T04:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004128817"
-    },
-    {
-     "title": "[공식] 황민현, 14년 몸담은 플레디스 떠난다…새 출발 예고",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-28T04:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001152163"
-    }
-   ]
-  },
-  {
-   "keyword": "국가시험 점검",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T03:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "부전~마산 복선전철, 내년 4월 1일 부분개통 목표…경남도 현장점검",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-28T05:02:00.000Z",
-     "link": "http://www.breaknews.com/1254997"
-    },
-    {
-     "title": "국가시험 AI 부정행위 논란 속 의사·간호사 국시 일부 과목 만점자 증...",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-28T05:02:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628226"
-    },
-    {
-     "title": "보건의료인 국가시험도 ‘AI 부정행위’ 비상… 전파탐지기·전신 가리...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-28T04:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012262?sid=102"
     }
    ]
   },
@@ -144,7 +176,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-28T04:01:00.000Z",
    "exclusive": false,
@@ -171,44 +203,12 @@
    ]
   },
   {
-   "keyword": "남경필 장남 구속심사 진행",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T03:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보] 남경필 장남, '前연인 성관계 영상 유포 협박' 등 혐의…출소 1년...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-28T04:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042831?sid=102"
-    },
-    {
-     "title": "남경필 전 경기지사 장남, 구속 기로…전 연인 폭행·스토킹 혐의",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-28T04:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214849?sid=102"
-    },
-    {
-     "title": "[속보] 경찰, '스토킹·협박' 남경필 장남에 구속영장…내일 구속심사",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-28T04:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001274278?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "이스라엘 인간방패 폭로",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-28T04:10:00.000Z",
    "exclusive": false,
@@ -237,7 +237,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2031,
+  "flagged": 2033,
   "matched": 1002,
   "avgLeadMin": 644,
   "recent": [
