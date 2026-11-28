@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T02:11:23.595Z",
+ "builtAt": "2026-11-28T02:23:01.133Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,18 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "인터넷우체국 개인정보 유출",
+   "keyword": "인터넷우체국 정보 유출",
    "sources": [
-    "signal.bz",
-    "daum"
+    "nate"
    ],
-   "articles90": 25,
-   "recent20": 5,
-   "press": 25,
-   "firstArticleAt": "2026-11-28T00:52:00.000Z",
+   "articles90": 24,
+   "recent20": 2,
+   "press": 24,
+   "firstArticleAt": "2026-11-28T00:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -44,267 +43,73 @@
    ]
   },
   {
-   "keyword": "디트로이트 김하성 계약 발표",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 20,
-   "recent20": 4,
-   "press": 20,
-   "firstArticleAt": "2026-11-28T00:42:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김하성, MLB 디트로이트 입단 공식 발표…1년 최대 600만달러 계약",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-28T02:10:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96126"
-    },
-    {
-     "title": "김하성, 디트로이트서 새 출발…1년 계약 공식화",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-28T02:06:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611280014"
-    },
-    {
-     "title": "[오피셜] 드디어 기다리던 공식발표 떴다! '최대 80억' 계약, 치밀한 세...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-28T02:03:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/108/0003490793"
-    }
-   ]
-  },
-  {
-   "keyword": "곽시양♥유지애, 오늘 결혼해요",
+   "keyword": "젠슨 시설서 발견된",
    "sources": [
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-28T00:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "곽시양·유지애, 오늘(28일) 결혼",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-28T02:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/018/0006416842"
-    },
-    {
-     "title": "“행복하게 살게요” 큰절 올린 곽시양…러블리즈 유지애와 오늘 결혼",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-28T02:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/016/0002729751"
-    },
-    {
-     "title": "결혼 당일 큰절 올린 곽시양♥유지애…축가는 누구?",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-28T01:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000762217"
-    }
-   ]
-  },
-  {
-   "keyword": "송민규 포르투갈 데뷔골",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T00:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "환상 개인기로 '유럽 데뷔골'…송민규, 보디 페인팅→수비수 제치고→오...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-28T02:10:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/117/0004128801"
-    },
-    {
-     "title": "송민규, 아웃프런트로 포르투갈 무대 ‘데뷔골’ 쾅…나시오날은 마리...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-28T02:04:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/468/0001283993"
-    },
-    {
-     "title": "‘국대 맹활약’ 송민규, 포르투갈리그 더비전서 데뷔골 폭발",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-28T02:02:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/119/0003160480"
-    }
-   ]
-  },
-  {
-   "keyword": "전원회의 대미 메시지",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-28T00:56:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-28T00:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "핵탄두 대거 공개한 北 김정은…연말 전원회의서 트럼프에 어떤 메시지...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-28T01:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002836141?sid=100"
-    },
-    {
-     "title": "北, 연말 전원회의 예고‥'대남·대미 메시지' 주목",
-     "press": "imnews.imbc.com",
+     "title": "中 시설서 발견된 엔비디아 최첨단 칩…“젠슨 황 불륜 상대 연관 기업...",
+     "press": "chosun.com",
      "publishedAt": "2026-11-28T01:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538645?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/023/0004012252?sid=104"
     },
     {
-     "title": "北 연말 전원회의 소집…김정은 대미 메시지 주목",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-28T01:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005611003?sid=100"
+     "title": "젠슨 황 연인 앨리스 황 연계 중국 시설에 엔비디아 AI 칩 발견",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-28T01:26:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=731379"
+    },
+    {
+     "title": "'젠슨 황 불륜 상대' 연계 중국 시설에서 엔비디아 최첨단 칩 발견",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T01:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439273?sid=104"
     }
    ]
   },
   {
-   "keyword": "이동연, 팬레터 폐기 2차 사과",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T00:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[전문] 가족까지 나섰다…'팬레터 폐기 논란' 이동연, 2차 사과문 업로...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-28T02:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786563"
-    },
-    {
-     "title": "이동연, 팬레터 폐기 논란 2차 사과… 보관 중인 편지 인증까지",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-28T01:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003160472"
-    },
-    {
-     "title": "'팬레터 폐기 논란' 이동연, 2차 사과→인증에 여론 뒤집혔다…쏟아진 ...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-28T00:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409896"
-    }
-   ]
-  },
-  {
-   "keyword": "굿파트너 2",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T01:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장나라 노하우 깨달은 김혜윤…'굿파트너2', 최고 시청률 경신 9.8%",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-28T01:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/018/0006416837"
-    },
-    {
-     "title": "'굿파트너2', 두 자릿수 시청률 목전…9.8% '자체 최고'",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-28T01:14:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110130629359"
-    },
-    {
-     "title": "김혜윤, 장나라의 '리봄' 의미 깨달았다…'굿파트너2' 9.8% 자체 최고[시...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-28T01:02:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795826145531691006"
-    }
-   ]
-  },
-  {
-   "keyword": "전국 기온 뚝 비 눈",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T01:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "비온 뒤 칼바람 기온 '뚝'…아침 최저 영하 5도[내일날씨]",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-28T01:30:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611280074"
-    },
-    {
-     "title": "전국 기온 5~10도 '뚝'…광주·전남 오전 비·눈",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-28T01:22:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087520"
-    },
-    {
-     "title": "전국 강풍으로 체감온도 '뚝'…남부 지방 곳곳에서는 '비'",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-28T01:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653931?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "의사",
+   "keyword": "도로",
    "sources": [
     "google"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T00:43:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-28T01:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"의사가 추천\"…AI '가짜 전문가' 광고 철퇴",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-28T01:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930765?sid=101"
+     "title": "토요일 눈비에 고속도로 교통량 줄 듯…서울서 부산까지 5시간",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-28T01:12:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261128000034"
     },
     {
-     "title": "빚 16억 숨기고 대출받은 40대 의사 징역형 집행유예",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-28T01:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653930?sid=102"
+     "title": "용인특례시, 경기도 도로정비평가 우수기관 선정",
+     "press": "siminilbo.co.kr",
+     "publishedAt": "2026-11-28T01:10:00.000Z",
+     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160269781818253"
     },
     {
-     "title": "박태성 北총리, 평양의사당서 러시아 장관 접견",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T00:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315143?sid=100"
+     "title": "서해안고속도로에서 1톤 트럭 화재...차량 전소",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T01:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439274?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2001,
+  "flagged": 2004,
   "matched": 984,
   "avgLeadMin": 651,
   "recent": [
