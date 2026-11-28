@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T12:03:23.061Z",
+ "builtAt": "2026-11-28T12:13:26.150Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,46 @@
  "measured": 27,
  "candidates": [
   {
+   "keyword": "1252회 로또 당첨 번호",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 22,
+   "recent20": 11,
+   "press": 17,
+   "firstArticleAt": "2026-11-28T11:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "1252회 로또 1등 '9·19·23·28·33·44'",
+     "press": "the-today.com",
+     "publishedAt": "2026-11-28T12:12:00.000Z",
+     "link": "https://www.the-today.com/news/articleView.html?idxno=94235"
+    },
+    {
+     "title": "1252회 로또 당첨번호 9·19·23·28·33·44…1등 16매·17억5909만원",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-28T12:12:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=758775"
+    },
+    {
+     "title": "1252회 로또 1등 각 17억씩…자동 7명·수동 8명·반자동 1명(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T12:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350928?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "신지아 시니어 그랑프리",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-28T10:41:00.000Z",
+   "articles90": 15,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-28T10:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,34 +75,34 @@
    ]
   },
   {
-   "keyword": "1252회 로또 당첨 번호",
+   "keyword": "김용준 전 소장 별세 87세",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 17,
-   "recent20": 11,
-   "press": 14,
-   "firstArticleAt": "2026-11-28T11:40:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-28T10:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "1252회 로또 1등 16명…당첨금 각 17억5909만 원",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-28T12:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162493?sid=101"
+     "title": "[부고]김용준(전 헌법재판소장)씨 별세",
+     "press": "rightknow.co.kr",
+     "publishedAt": "2026-11-28T12:04:00.000Z",
+     "link": "http://www.rightknow.co.kr/news/articleView.html?idxno=35491"
     },
     {
-     "title": "1252회 로또 1등번호 당첨자 16명...17억씩 배당",
-     "press": "headlinejeju.co.kr",
-     "publishedAt": "2026-11-28T12:00:00.000Z",
-     "link": "https://www.headlinejeju.co.kr/news/articleView.html?idxno=602945"
+     "title": "19세 고시 수석·첫 지체장애인 대법관…김용준 전 헌재소장 별세",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-28T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568602?sid=102"
     },
     {
-     "title": "제1252회 로또 당첨번호조회…1등 '9·19·23·28·33·44' 보너스 '43'",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-28T12:00:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631640"
+     "title": "김용준 전 헌재소장 별세...22세 때 최연소 판사 임용",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T11:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439447?sid=102"
     }
    ]
   },
@@ -79,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
+   "articles90": 9,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-28T10:40:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-28T10:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,34 +139,36 @@
    ]
   },
   {
-   "keyword": "김용준 전 소장 별세 87세",
+   "keyword": "DL 이앤씨",
    "sources": [
-    "nate"
+    "signal.bz",
+    "nate",
+    "daum"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-28T10:44:00.000Z",
+   "articles90": 7,
+   "recent20": 4,
+   "press": 7,
+   "firstArticleAt": "2026-11-28T10:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "19세 고시 수석·첫 지체장애인 대법관…김용준 전 헌재소장 별세",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-28T12:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003568602?sid=102"
+     "title": "DL이앤씨 심야·주말 호출, 수당은?",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-28T12:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288569"
     },
     {
-     "title": "김용준 전 헌재소장 별세...22세 때 최연소 판사 임용",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T11:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439447?sid=102"
+     "title": "이해욱 DL그룹 회장의 갑질…잊을 만하면 터진다",
+     "press": "dongponews.net",
+     "publishedAt": "2026-11-28T12:12:00.000Z",
+     "link": "https://www.dongponews.net/news/articleView.html?idxno=61959"
     },
     {
-     "title": "지체장애 딛고 대법관·헌재소장까지…김용준 전 소장 별세",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-28T11:42:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611280021"
+     "title": "'폭행 벌금형' DL 회장, 직원 400명 심야 소집해 또 '갑질' 논란",
+     "press": "seouleconews.com",
+     "publishedAt": "2026-11-28T12:10:00.000Z",
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95318"
     }
    ]
   },
@@ -143,10 +177,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T10:38:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-28T10:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,77 +205,43 @@
    ]
   },
   {
-   "keyword": "DL 이앤씨",
+   "keyword": "곽시양 유지애 결혼",
    "sources": [
-    "signal.bz",
-    "nate",
     "daum"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T10:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'폭행 벌금형' DL 회장, 이번엔 직원 400명 심야 소집해 '물의'",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-28T12:02:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82816"
-    },
-    {
-     "title": "이해욱 DL그룹 회장, 직원 수백 명 한밤 호출 '물의'",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-28T11:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538683?sid=102"
-    },
-    {
-     "title": "이해욱 DL그룹 회장, 심야에 직원 400명 불러…사망사고·적자 지적 논란",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-28T10:58:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631625"
-    }
-   ]
-  },
-  {
-   "keyword": "연곡면 댐 공사 현장",
-   "sources": [
-    "nate"
-   ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-28T10:36:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-28T11:44:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령, 강릉 가뭄 대비 지하수 저류 댐 공사 현장 점검",
-     "press": "mbceg.co.kr",
-     "publishedAt": "2026-11-28T11:04:00.000Z",
-     "link": "https://www.mbceg.co.kr/post/142417"
+     "title": "[단독] 유지애♥곽시양 오늘 결혼…‘축사·축가’ 러블리즈 완전체·연...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-28T12:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001284030"
     },
     {
-     "title": "李대통령, 강릉 지하수저류댐 공사 현장 점검…가뭄 대응·취수원 살펴",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-28T10:52:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261128000080"
+     "title": "곽시양♥유지애, 드디어 부부 됐다…손 꼭 잡은 결혼식 현장 공개",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-28T11:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128872"
     },
     {
-     "title": "李대통령, 강릉 가뭄 대비 지하수저류댐 공사장 현장 찾아 추진 상황 점...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-28T10:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001233994?sid=100"
+     "title": "곽시양♥유지애, 결혼식 현장 포착..러블리즈도 울고 웃었다 \"잘가\"[스타...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-28T11:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003490840"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2062,
-  "matched": 1012,
-  "avgLeadMin": 642,
+  "flagged": 2057,
+  "matched": 1007,
+  "avgLeadMin": 645,
   "recent": [
    {
     "keyword": "최민정 4연속 금메달",
