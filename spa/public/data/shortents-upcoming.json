@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T05:00:51.063Z",
+ "builtAt": "2026-11-28T05:10:54.159Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 28,
  "candidates": [
-  {
-   "keyword": "동해 AI 데이터센터 착공 첫 삽",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 38,
-   "recent20": 5,
-   "press": 36,
-   "firstArticleAt": "2026-11-28T03:31:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "GS, 동해 1.2GW AI 데이터센터 착공…허태수 \"동해를 AI 산업 미래 명소...",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-28T04:58:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005972262"
-    },
-    {
-     "title": "[영상] 이재명 대통령 “총성 없는 전쟁”｜글로벌 AI 경쟁, 한 걸음이 ...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-28T04:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001233976?sid=100"
-    },
-    {
-     "title": "[속보]“한 걸음만 늦어도 영원한 추격자”…이재명 대통령 AI 경쟁에 정...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-28T04:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002836149?sid=100"
-    }
-   ]
-  },
   {
    "keyword": "이재명, GS AI 센터 행사",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 20,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-28T03:40:00.000Z",
+   "recent20": 3,
+   "press": 20,
+   "firstArticleAt": "2026-11-28T03:41:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "동해 GS AI데이터센터 착공… 1단계 1.2GW 규모 구축",
+     "press": "pointdaily.co.kr",
+     "publishedAt": "2026-11-28T05:06:00.000Z",
+     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=327850"
+    },
     {
      "title": "GS, 동해 1.2GW AI 데이터센터 착공…허태수 \"동해를 AI 산업 미래 명소...",
      "press": "mbnmoney.mbn.co.kr",
@@ -65,25 +39,18 @@
      "press": "jemin.com",
      "publishedAt": "2026-11-28T04:52:00.000Z",
      "link": "https://www.jemin.com/news/articleView.html?idxno=848730"
-    },
-    {
-     "title": "李, '亞 최대' GS 동해 AIDC 착공식 참석…“강원, AI 핵심 거점 도약”",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-28T04:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490861?sid=100"
     }
    ]
   },
   {
    "keyword": "국정원, 김정은 방중 동향 주시",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-28T03:37:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-28T04:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,19 +75,115 @@
    ]
   },
   {
-   "keyword": "남경필",
+   "keyword": "황민현 14년 플레디스 떠난다",
    "sources": [
     "nate"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
+   "firstArticleAt": "2026-11-28T04:14:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "황민현, 플레디스 떠난다…새 소속사 어디?",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-28T05:02:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288351"
+    },
+    {
+     "title": "[공식] 황민현, 14년 만에 새출발…12월 소속사 떠난다 (전문)",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-28T04:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004128817"
+    },
+    {
+     "title": "[공식] 황민현, 14년 몸담은 플레디스 떠난다…새 출발 예고",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-28T04:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001152163"
+    }
+   ]
+  },
+  {
+   "keyword": "국가시험 점검",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T03:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "부전~마산 복선전철, 내년 4월 1일 부분개통 목표…경남도 현장점검",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-28T05:02:00.000Z",
+     "link": "http://www.breaknews.com/1254997"
+    },
+    {
+     "title": "국가시험 AI 부정행위 논란 속 의사·간호사 국시 일부 과목 만점자 증...",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-28T05:02:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=628226"
+    },
+    {
+     "title": "보건의료인 국가시험도 ‘AI 부정행위’ 비상… 전파탐지기·전신 가리...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-28T04:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004012262?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "U-17 월드컵 32강 한일전",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-28T04:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'이강인, 김민재, 손흥민, 그리고 미우라 레츠고' 32강에서 격돌하는 日...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-28T05:00:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/411/0000090594"
+    },
+    {
+     "title": "U-17 월드컵 한일전, 12월 1일 밤 10시…중계 어디서?",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-28T04:44:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288364"
+    },
+    {
+     "title": "[축구] 한국 U-17, 월드컵 32강서 일본과 격돌… 한일전 승자 16강 진출",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-28T04:44:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452864"
+    }
+   ]
+  },
+  {
+   "keyword": "남경필 장남 구속심사 진행",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-28T03:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 남경필 장남, 前 연인 폭행·스토킹 혐의…출소 1년 만에 또 구속...",
+     "title": "[속보] 남경필 장남, '前연인 성관계 영상 유포 협박' 등 혐의…출소 1년...",
      "press": "imaeil.com",
      "publishedAt": "2026-11-28T04:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/088/0001042831?sid=102"
@@ -132,81 +195,49 @@
      "link": "https://n.news.naver.com/mnews/article/079/0004214849?sid=102"
     },
     {
-     "title": "남경필 장남, 출소 후 전 연인 폭행·스토킹 혐의…구속영장 신청",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-28T04:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003704092?sid=102"
+     "title": "[속보] 경찰, '스토킹·협박' 남경필 장남에 구속영장…내일 구속심사",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-28T04:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274278?sid=102"
     }
    ]
   },
   {
-   "keyword": "예산안 미래대응기금",
+   "keyword": "이스라엘 인간방패 폭로",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T03:40:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-28T04:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "104조원 미래대응기금 공방…여야 예산안 협상 평행선",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-28T04:46:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087536"
+     "title": "\"팔레스타인 주민을 인간방패로\"…공영방송 폭로에 이스라엘 '발칵'",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-28T04:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930811?sid=104"
     },
     {
-     "title": "예산안 처리 시한 D-4…여야 미래대응기금 놓고 '평행선'",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-28T04:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005849064?sid=100"
+     "title": "\"팔레스타인 주민 인간방패로 이용했다\"…현직 군인 폭로에 이스라엘 '...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-28T04:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653959?sid=104"
     },
     {
-     "title": "예산 법정시한 D-4…'104조 미래대응기금' 여야 충돌, 해법은?",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-28T04:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122402?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "정은경 국가시험 점검",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T03:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "보건의료인 국시도 전파탐지기·전신가리개 적용… 정은경 장관, 현장 ...",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-28T04:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193799?sid=102"
-    },
-    {
-     "title": "보건의료인 국가시험도 ‘AI 부정행위’ 비상… 전파탐지기·전신 가리...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-28T04:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012262?sid=102"
-    },
-    {
-     "title": "정은경 장관, 국가시험 현장 점검",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T04:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315217?sid=100"
+     "title": "\"팔레스타인 주민 인간 방패로 썼다\" 군인들 폭로에 이스라엘 발칵",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-28T04:10:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452856"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2026,
+  "flagged": 2031,
   "matched": 1002,
   "avgLeadMin": 644,
   "recent": [
