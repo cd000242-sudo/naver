@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T10:02:37.475Z",
+ "builtAt": "2026-11-28T10:12:41.545Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 30,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "포스코 노사 임금 타결",
    "sources": [
     "nate"
    ],
-   "articles90": 44,
-   "recent20": 4,
-   "press": 40,
-   "firstArticleAt": "2026-11-28T08:34:00.000Z",
+   "articles90": 33,
+   "recent20": 2,
+   "press": 29,
+   "firstArticleAt": "2026-11-28T08:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,17 +43,152 @@
    ]
   },
   {
+   "keyword": "김민석 최민희 중징계",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 29,
+   "recent20": 4,
+   "press": 22,
+   "firstArticleAt": "2026-11-28T08:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "말 아끼는 김민석, 친명 \"윤리심판원 존중\"…'최고위원 보선' 새 뇌관",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-28T10:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000654000?sid=100"
+    },
+    {
+     "title": "최민희 중징계에 '김민석 사퇴' 국회앞 집회…친청계 \"당대표도 징계\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-28T09:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653999?sid=100"
+    },
+    {
+     "title": "최민희 중징계에 민주당 내홍 확산…김민석 사퇴 요구까지",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-28T09:58:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=543674"
+    }
+   ]
+  },
+  {
+   "keyword": "FC서울 우승 대관식",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 34,
+   "recent20": 11,
+   "press": 14,
+   "firstArticleAt": "2026-11-28T08:43:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "K리그1 우승 이뤄낸 FC서울",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T10:06:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014350900"
+    },
+    {
+     "title": "FC서울 우승 이끈 김기동 감독",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T10:06:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014350896"
+    },
+    {
+     "title": "K리그1 우승 지휘한 김기동 감독",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T10:06:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014350897"
+    }
+   ]
+  },
+  {
+   "keyword": "철도노조 준법투쟁 지연",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 15,
+   "recent20": 7,
+   "press": 13,
+   "firstArticleAt": "2026-11-28T09:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "철도노조 준법투쟁 후 첫 주말…\"광역전철 105대 지연\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-28T10:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930865?sid=102"
+    },
+    {
+     "title": "철도노조 준법투쟁 사흘째…열차 105대 지연",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-28T10:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303157?sid=102"
+    },
+    {
+     "title": "철도노조 준법 투쟁 셋째 날, 열차 백여 대 지연",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-28T10:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303154?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 중국 고문 해명",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-28T08:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보]강금실, '친중'공세 첫 반박…\"中특별고문, 박근혜 정부 시기 친선...",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-28T10:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122415?sid=100"
+    },
+    {
+     "title": "강금실 \"중 특별고문, 박근혜 정부 당시 친선 차원 명예직\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T10:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439427?sid=100"
+    },
+    {
+     "title": "[속보] 강금실, 野 ‘친중 공세’에 첫 해명…\"박근혜 정부 때 무보수 명...",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-28T09:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274293?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "최민정 월드투어 4대회 금메달",
    "sources": [
     "nate"
    ],
-   "articles90": 16,
+   "articles90": 12,
    "recent20": 5,
-   "press": 16,
-   "firstArticleAt": "2026-11-28T08:36:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-28T08:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "은퇴 앞둔 최민정, 여자 1000m 4개 대회 연속 금메달 기염",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-28T10:10:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/119/0003160528"
+    },
     {
      "title": "최민정, 상하이서도 여자 1000m 정상…월드투어 4개 대회 연속 금빛 피날...",
      "press": "isplus.com",
@@ -65,109 +200,38 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-28T09:59:00.000Z",
      "link": "https://m.sports.naver.com/general/article/018/0006416896"
-    },
-    {
-     "title": "쇼트트랙 최민정, 여자 1000m 4개 대회 연속 금메달",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-28T09:55:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/448/0000653998"
     }
    ]
   },
   {
-   "keyword": "FC서울 우승 대관식",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 37,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-28T08:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "7번째 별을 달다… 레전드·팬과 함께한 서울의 대관식",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-28T10:00:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888266"
-    },
-    {
-     "title": "우승 트로피 든 FC서울 김진수의 MVP 욕심…\"꼭 내가 받길\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-28T09:58:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/001/0016469003"
-    },
-    {
-     "title": "'조기 우승' 서울, 2만 7477명 관중 몰린 대관식서 대전 4-1 완파(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T09:57:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/421/0009315489"
-    }
-   ]
-  },
-  {
-   "keyword": "철도노조 준법투쟁 지연",
+   "keyword": "김영광, 보복운전 한 달 만에 복귀",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 7,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T08:40:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-28T09:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "철도노조 준법투쟁 후 첫 주말…광역전철 105대 20분 이상 지연",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-28T10:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207930?sid=102"
+     "title": "\"택시기사님께 죄송\" 김영광 복귀…'보복운전' 판단 엇갈린 이유",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-28T10:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006416897?sid=102"
     },
     {
-     "title": "철도노조 준법투쟁 첫 주말…수도권 전철 105대 지연",
-     "press": "biz.heraldcorp.com",
+     "title": "\"택시기사님께 죄송하다\"…김영광, 한 달여 만에 유튜브 복귀",
+     "press": "hankyung.com",
      "publishedAt": "2026-11-28T09:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729813?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/015/0005359355?sid=102"
     },
     {
-     "title": "[속보] 철도노조 준법투쟁 사흘째·첫 주말 \"전철 105대, 20분 이상 지연...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-28T09:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160527?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "강금실 중국 고문 해명",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-28T08:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보] 강금실, 野 ‘친중 공세’에 첫 해명…\"박근혜 정부 때 무보수 명...",
+     "title": "\"택시기사님께 진심으로 사과\"…김영광, '보복운전 논란' 한달만 활동 재...",
      "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-28T09:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001274293?sid=100"
-    },
-    {
-     "title": "[속보]강금실 국정원장 후보 “中 치치하얼·옌볜특별고문 무보수 명예...",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-28T09:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162491?sid=100"
-    },
-    {
-     "title": "[속보] 中고문 이력이 친중? 강금실 \"박근혜 정부때 위촉된 무보수 명예...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-28T09:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042838?sid=100"
+     "publishedAt": "2026-11-28T09:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274294?sid=102"
     }
    ]
   },
@@ -176,10 +240,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-28T08:33:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T08:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,75 +268,43 @@
    ]
   },
   {
-   "keyword": "김영광, 보복운전 한 달 만에 복귀",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-28T08:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"택시기사님께 죄송하다\"…김영광, 한 달여 만에 유튜브 복귀",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-28T09:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359355?sid=102"
-    },
-    {
-     "title": "\"택시기사님께 진심으로 사과\"…김영광, '보복운전 논란' 한달만 활동 재...",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-28T09:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001274294?sid=102"
-    },
-    {
-     "title": "김영광, 보복운전 논란 이후 유튜브 복귀… \"죄송하고 면목없다\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T09:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000968303"
-    }
-   ]
-  },
-  {
-   "keyword": "크라잉넛 특집",
+   "keyword": "dl 이앤씨",
    "sources": [
     "daum"
    ],
    "articles90": 4,
-   "recent20": 2,
-   "press": 2,
-   "firstArticleAt": "2026-11-28T09:34:00.000Z",
-   "exclusive": false,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T08:56:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "극동아시아타이거즈, 크라잉넛과 첫 만남 회상…공연 중 깜짝 등장",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-28T09:58:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785557"
+     "title": "한밤중에 400명 불러 모은 DL 회장…실적 부진에 또 '갑질' 논란",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-28T09:32:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68633"
     },
     {
-     "title": "잔나비가 바라본 크라잉넛 “인디 밴드의 시조, 그들 없었으면 터 잡지...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-28T09:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192131"
+     "title": "[단독] DL이앤씨 직원들, 한밤 호출 이어 주말에도 불려나왔다",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T09:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439423?sid=102"
     },
     {
-     "title": "크라잉넛 ‘후배 선물’ 박제, 잔나비는 그 힘으로 컸다 “산울림 비틀...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-28T09:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192130"
+     "title": "[단독] 이해욱 회장, 갑질논란 침묵...DL \"주주가치 제고 노력\" 해명",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T09:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439424?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2079,
-  "matched": 1016,
-  "avgLeadMin": 667,
+  "flagged": 2074,
+  "matched": 1013,
+  "avgLeadMin": 663,
   "recent": [
    {
     "keyword": "우리은행 연승 성공",
