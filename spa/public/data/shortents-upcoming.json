@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T05:41:03.556Z",
+ "builtAt": "2026-11-28T05:51:06.772Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,49 +11,55 @@
  "measured": 29,
  "candidates": [
   {
-   "keyword": "대통령 AI데이터센터 착공식",
+   "keyword": "AI 이재명 대통령",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 64,
-   "recent20": 8,
-   "press": 38,
-   "firstArticleAt": "2026-11-28T04:19:00.000Z",
+   "recent20": 5,
+   "press": 40,
+   "firstArticleAt": "2026-11-28T04:23:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "GS 동해 AI데이터센터 첫삽...메가프로젝트 첫 GW급 착공",
+     "title": "허태수 GS, 30조 AI 데이터센터 사업 첫 삽…동해 아시아 최대 규모 조성",
+     "press": "megaeconomy.co.kr",
+     "publishedAt": "2026-11-28T05:50:00.000Z",
+     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065591511286276"
+    },
+    {
+     "title": "李대통령 “AI 속도전서 판도 바꾸는 선도자 되도록 정부 모든 역량 동...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-28T05:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000134157?sid=100"
+    },
+    {
+     "title": "李대통령 \"동해 AI데이터센터, 글로벌 기업 투자 이끄는 마중물”",
      "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-28T05:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002447338?sid=105"
-    },
-    {
-     "title": "GS, 동해 1.2GW AI 데이터센터 첫 삽…'AI 인프라 허브' 구축 속도",
-     "press": "ftoday.co.kr",
-     "publishedAt": "2026-11-28T05:36:00.000Z",
-     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=370784"
-    },
-    {
-     "title": "GS, 아시아 최대 AI 데이터센터 동해에 첫삽…사업 규모 최대 120조 원",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-28T05:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002836152?sid=101"
+     "publishedAt": "2026-11-28T05:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002447339?sid=105"
     }
    ]
   },
   {
-   "keyword": "황민현 계약 종료",
+   "keyword": "황민현 14년 플레디스 떠난다",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-28T04:13:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-28T04:28:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "황민현, 14년 만에 플레디스 떠나기로…\"12월 계약 종료\"",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-28T05:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000762230"
+    },
     {
      "title": "황민현, 14년 함께한 플레디스 떠난다…“찬란한 날들 가득하길” [전문...",
      "press": "mk.co.kr",
@@ -65,12 +71,6 @@
      "press": "bntnews.co.kr",
      "publishedAt": "2026-11-28T05:14:00.000Z",
      "link": "https://www.bntnews.co.kr/article/view/bnt202611280093"
-    },
-    {
-     "title": "황민현, '14년 동행' 플레디스 떠난다 \"전속계약 종료\" [전문]",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-28T05:14:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110132147579"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 2,
-   "press": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-28T04:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한밤중에 '우르르'… 이해욱 DL 회장, 설계실 직원 400명 심야 호출",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-28T05:48:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452880"
+    },
     {
      "title": "[속보] 이해욱 DL그룹 회장, 실적 부진 질책하다 심야 직원 호출…논란",
      "press": "kwnews.co.kr",
@@ -97,12 +103,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-28T05:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009315285?sid=101"
-    },
-    {
-     "title": "이해욱 DL 회장, 금요일 밤 직원 수백 명 회사로 호출...심야 소집 파장",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-28T05:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012265?sid=101"
     }
    ]
   },
@@ -139,12 +139,44 @@
    ]
   },
   {
+   "keyword": "김가연, 경복궁 한복 비판",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T04:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김가연, 경복궁 한복 대여점 공개 비판… 이유는?",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T05:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000968293"
+    },
+    {
+     "title": "김가연 \"제대로 안된 한복 입혀놔\"…경복궁 대여점에 쓴소리",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-28T04:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005447710"
+    },
+    {
+     "title": "김가연, 경복궁 한복 대여점 비판 \"엉터리 옷\"",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-28T04:32:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96141"
+    }
+   ]
+  },
+  {
    "keyword": "김기동 감독 축하해",
    "sources": [
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 2,
    "firstArticleAt": "2026-11-28T05:09:00.000Z",
    "exclusive": false,
@@ -173,7 +205,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2036,
+  "flagged": 2038,
   "matched": 1004,
   "avgLeadMin": 643,
   "recent": [
