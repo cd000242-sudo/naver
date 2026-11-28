@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T08:52:14.687Z",
+ "builtAt": "2026-11-28T09:02:17.916Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "포스코 임금교섭 타결",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 38,
-   "recent20": 20,
-   "press": 33,
+   "articles90": 44,
+   "recent20": 14,
+   "press": 38,
    "firstArticleAt": "2026-11-28T08:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "포스코 노사, 2차 잠정합의안 통과하며 올해 임단협 매듭",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-28T08:50:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3766188"
+     "title": "[속보] 포스코 노사 임금교섭 최종 타결",
+     "press": "magazine.hankyung.com",
+     "publishedAt": "2026-11-28T08:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/050/0000113895?sid=101"
     },
     {
-     "title": "기본급 2.6% 올린다…포스코 임금합의안 65% 찬성 가결",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-28T08:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005359350?sid=101"
+     "title": "포스코 노사, 임금 협상 최종 타결…투표율·찬성률 과반 넘겨",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-28T08:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061614?sid=101"
     },
     {
-     "title": "포스코 임금협상 4개월 만에 타결…\"철강위기 극복에 최선\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T08:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315449?sid=102"
+     "title": "포스코 노사 임금교섭 임금협상 최종 타결…노조원 65% 찬성",
+     "press": "kyongbuk.co.kr",
+     "publishedAt": "2026-11-28T08:56:00.000Z",
+     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4092358"
     }
    ]
   },
   {
-   "keyword": "이재명 강릉 바이오",
+   "keyword": "강릉 천연물 바이오 연구",
    "sources": [
     "nate"
    ],
-   "articles90": 36,
-   "recent20": 3,
-   "press": 19,
-   "firstArticleAt": "2026-11-28T07:27:00.000Z",
+   "articles90": 32,
+   "recent20": 4,
+   "press": 21,
+   "firstArticleAt": "2026-11-28T07:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 \"강릉 천연물 혁신센터 예산 반영해 신속 추진\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-28T08:44:00.000Z",
-     "link": "https://www.ajunews.com/view/20261128172637930"
+     "title": "李대통령 \"'첨단바이오 거점' 거듭난 강릉, 지방주도성장 모범사례 되길...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T08:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350853?sid=100"
     },
     {
-     "title": "강릉이 키운 기술, 지역 일자리로…李 “사업화 과정 전반 빈틈없이 지...",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-28T08:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003490872?sid=100"
+     "title": "李대통령 \"강릉 천연물 산업화 지원센터 예산 반영\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-28T08:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005611045?sid=100"
     },
     {
-     "title": "李대통령 \"동해 AI센터, 글로벌 투자 마중물…강릉 천연물 산업화 지원...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T08:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315440?sid=100"
+     "title": "李대통령 \"강원 천연물 혁신센터 예산 반영…R&D부터 사업화까지 지원\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-28T08:56:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4447058"
     }
    ]
   },
@@ -80,12 +80,18 @@
     "signal.bz"
    ],
    "articles90": 12,
-   "recent20": 2,
+   "recent20": 3,
    "press": 12,
-   "firstArticleAt": "2026-11-28T07:25:00.000Z",
+   "firstArticleAt": "2026-11-28T07:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "북 북창 공군기지 노후 전투기 포착...\"3년 만에 운영재개\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T08:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439407?sid=104"
+    },
     {
      "title": "北 북창 공군기지 노후 전투기 포착… 3년 만에 보수 끝 운영재개 정황",
      "press": "daejonilbo.com",
@@ -93,112 +99,106 @@
      "link": "https://n.news.naver.com/mnews/article/656/0000193811?sid=100"
     },
     {
-     "title": "北, 3년 만에 북창 공군기지 운영 재개…노후 전투기 포착",
+     "title": "北, 3년간 공사하던 공군기지에 전투기 등장…운영 재개 정황",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-28T08:45:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000968301?sid=104"
-    },
-    {
-     "title": "북한 북창 공군기지에서 전투기 포착‥3년 만에 운영 재개 정황",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-28T08:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538671?sid=100"
     }
    ]
   },
   {
-   "keyword": "서울 4-1 우승 대관식",
+   "keyword": "FC서울 우승 대관식",
    "sources": [
     "nate"
    ],
-   "articles90": 27,
-   "recent20": 12,
-   "press": 9,
-   "firstArticleAt": "2026-11-28T07:27:00.000Z",
+   "articles90": 36,
+   "recent20": 11,
+   "press": 11,
+   "firstArticleAt": "2026-11-28T07:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[사진]K리그1 2026 우승 FC서울",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T08:47:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/109/0005646559"
+     "title": "10년 만에 돌아온 K리그1 우승 트로피, 상암벌에서 만끽한 '우승 대관식...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-28T09:01:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/076/0004470501"
     },
     {
-     "title": "[사진]10년만 V7 달성 FC서울, 신나는 샴페인 샤워",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T08:47:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/109/0005646558"
+     "title": "우승 세리머니 마친 김기동, 재계약 이슈 묻자 “심도 있게 얘기가 아직...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-28T09:01:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/468/0001284018"
     },
     {
-     "title": "[사진]안데르손-문선민, 신나는 우승 샴페인 세리머니",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T08:44:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/109/0005646555"
+     "title": "“팬들과 약속 지켰다” 챔피언 김기동 서울 감독, 대관식 후 첫 소감 “...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-28T08:53:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/144/0001152187"
     }
    ]
   },
   {
-   "keyword": "아일릿 모카 활동 재개",
+   "keyword": "김영광, 보복운전 한 달 만 복귀",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-28T07:24:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'아일릿' 모카, '활중' 5개월만에 복귀⋯소속사 \"일부 일정 참여\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-28T08:50:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2654211"
-    },
-    {
-     "title": "'건강 적신호' 아일릿 모카, 활동 재개 “일부 일정 참여”",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-28T08:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000522928"
-    },
-    {
-     "title": "[공식] 아일릿 모카, 불안 증세로 활동 중단 5개월만 복귀..“일부 일정...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T08:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646526"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 규탄 대회",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T07:51:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-28T08:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국힘, 대전서 대규모 규탄 집회…\"조희대 전에 李 먼저 탄핵\"(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T08:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350846?sid=100"
+     "title": "김영광 '보복운전' 논란 한 달여 만에 복귀…\"면목없다\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-28T08:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214861?sid=102"
     },
     {
-     "title": "[현장] 대전, 장동혁 \"충청인이여 일어나라\"… 국민의힘 '조작기소 특검...",
-     "press": "newscj.com",
+     "title": "김영광, 보복운전 논란 한달만에 유튜브 복귀…\"택시 기사님께 진심 사...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T08:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009315438"
+    },
+    {
+     "title": "\"한 달 복귀는 예상 못했다\"…'보복운전 논란' 김영광, 팬들도 당황한 ...",
+     "press": "xportsnews.com",
      "publishedAt": "2026-11-28T08:26:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452904"
+     "link": "https://m.entertain.naver.com/article/311/0002085049"
+    }
+   ]
+  },
+  {
+   "keyword": "한성숙 총리 부스 방문",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-28T08:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "韓총리, 삼성·SK하이닉스에 \"내년 신입 더 뽑아달라\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-28T08:58:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4447059"
     },
     {
-     "title": "대전서 '이재명 탈옥법' 규탄대회 개최, 장동혁 \"재판 즉각 재개해야\"",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-28T08:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193808?sid=100"
+     "title": "\"내년엔 얼마나 뽑나요?\"…삼성·SK에 채용 확대 당부한 한 총리",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T08:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406562?sid=102"
+    },
+    {
+     "title": "한성숙 총리, 삼성전자·SK하이닉스에 “청년 채용 늘려달라”",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-28T08:46:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261128023456080"
     }
    ]
   },
@@ -207,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T07:25:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-28T07:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -265,43 +265,11 @@
      "link": "https://n.news.naver.com/mnews/article/016/0002729789?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "밤 10시 직원 호출",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T07:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'실적은 경영진 책임인데'…DL이앤씨 직원 수백 명 한밤중 '호출'",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-28T07:56:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244476"
-    },
-    {
-     "title": "밤 10시 회사로 직원 400명 호출…이해욱 DL그룹 회장 또 구설",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-28T07:36:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322212&inflow=N"
-    },
-    {
-     "title": "금요일 밤10시 직원 400명 불러내 새벽 귀가시킨 DL 회장",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-28T07:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005611041?sid=101"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2085,
+  "flagged": 2088,
   "matched": 1020,
   "avgLeadMin": 663,
   "recent": [
