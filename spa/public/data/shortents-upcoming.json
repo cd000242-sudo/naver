@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T04:30:42.232Z",
+ "builtAt": "2026-11-28T04:40:45.409Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,102 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "동해 AI 데이터센터 착공 첫 삽",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 56,
-   "recent20": 9,
-   "press": 46,
-   "firstArticleAt": "2026-11-28T03:02:00.000Z",
+   "articles90": 43,
+   "recent20": 10,
+   "press": 40,
+   "firstArticleAt": "2026-11-28T03:11:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령 \"동해 AI 센터, 글로벌 투자 마중물\"",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-28T04:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165969?sid=100"
+     "title": "동해 AI 데이터센터 120조의 실체",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-28T04:40:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288362"
     },
     {
-     "title": "李대통령 “AI 속도전서 한 걸음 앞서야 선도자”…동해 AIDC 착공식 참석",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-28T04:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003061603?sid=105"
+     "title": "李, '亞 최대' GS 동해 AIDC 착공식 참석…“강원, AI 핵심 거점 도약”",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-28T04:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003490861?sid=100"
     },
     {
-     "title": "GS, 동해 AI 데이터센터 착공…허태수 \"동해를 AI 명소로\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-28T04:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930784?sid=101"
+     "title": "이 대통령 \"전세계 AI 경쟁서 선도국가 되도록 모든 역량 동원\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T04:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406525?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "GS AI데이터센터 착공식",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 37,
+   "recent20": 14,
+   "press": 20,
+   "firstArticleAt": "2026-11-28T04:11:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "GS, 동해 AI 데이터센터 착공…총 30조 투자",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-28T04:38:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4447053"
+    },
+    {
+     "title": "李, '亞 최대' GS 동해 AIDC 착공식 참석…“강원, AI 핵심 거점 도약”",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-28T04:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003490861?sid=100"
+    },
+    {
+     "title": "GS, '메가프로젝트' 동해 AI 데이터센터 착공…15조원 투자",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-28T04:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359321?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이해욱 회장",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 15,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-28T03:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이해욱 DL그룹 회장, 밤 10시 직원 400여명 긴급 호출 왜",
+     "press": "srtimes.kr",
+     "publishedAt": "2026-11-28T04:38:00.000Z",
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=218908"
+    },
+    {
+     "title": "DL그룹 회장, 실적 부진 부서직원 수백명 한밤 호출 '물의'(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-28T04:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016468803?sid=101"
+    },
+    {
+     "title": "수주잔고 3.5조 증발…DL그룹 회장, 한밤중 설계실 직원 소집",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-28T04:32:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261128010010918"
     }
    ]
   },
@@ -48,30 +113,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-28T03:07:00.000Z",
+   "articles90": 9,
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-28T03:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국정원, 김정은 추가 방중설에 “여러 동향 주시 중”",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-28T04:14:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261128022256058"
+     "title": "김정은 또 중국 가나…국정원 “북중 동향 예의주시”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-28T04:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061604?sid=100"
     },
     {
-     "title": "김정은 10월말 이어 또 방중 '임박설'…국정원 \"여러 동향 주시\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-28T04:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468773?sid=100"
+     "title": "北 다음 달 전원회의…김정은 G20 앞 '방중' 가능성 거론",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-28T04:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930787?sid=100"
     },
     {
-     "title": "[속보] 국정원, 김정은 추가 방중 가능성에 \"여러 동향을 주시 중\"",
-     "press": "kado.net",
-     "publishedAt": "2026-11-28T03:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213882?sid=100"
+     "title": "김정은 추가 방중 가능성에…국정원 “여러 동향 주시 중”",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-28T04:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162483?sid=100"
     }
    ]
   },
@@ -80,10 +145,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 3,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-28T03:01:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-28T03:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -106,14 +171,58 @@
      "link": "https://n.news.naver.com/mnews/article/661/0000087187?sid=102"
     }
    ]
+  },
+  {
+   "keyword": "최민희 중징계",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T03:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'최민희 중징계'에 민주 당원·지지자들, '김민석 사퇴' 촉구 집회",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-28T03:32:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785540"
+    },
+    {
+     "title": "‘최민희 중징계’에 친청계 반발 극심…“김민석 해당행위는 괜찮나”",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-28T03:26:00.000Z",
+     "link": "https://www.kyeongin.com/article/1775554"
+    },
+    {
+     "title": "최민희 중징계 후폭풍…오늘 '김민석 사퇴' 촉구 집회",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T03:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406515?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2020,
-  "matched": 1000,
-  "avgLeadMin": 645,
+  "flagged": 2023,
+  "matched": 1002,
+  "avgLeadMin": 644,
   "recent": [
+   {
+    "keyword": "전국 기온 뚝 비 눈",
+    "hitKeyword": "전국 기온 급락",
+    "hitAt": "2026-11-28T13:30:00+09:00",
+    "leadMin": 229
+   },
+   {
+    "keyword": "젠슨 황 중국 발견",
+    "hitKeyword": "엔비디아 칩 중국 발견",
+    "hitAt": "2026-11-28T13:30:00+09:00",
+    "leadMin": 29
+   },
    {
     "keyword": "그냥 사람 친구 시청률은",
     "hitKeyword": "그냥사람친구 시청률",
@@ -161,18 +270,6 @@
     "hitKeyword": "이동연 해명",
     "hitAt": "2026-11-28T12:30:00+09:00",
     "leadMin": 199
-   },
-   {
-    "keyword": "이동연, 팬레터 폐기 2차 사과",
-    "hitKeyword": "이동연 해명",
-    "hitAt": "2026-11-28T12:30:00+09:00",
-    "leadMin": 109
-   },
-   {
-    "keyword": "곽시양 유지애 오늘 결혼",
-    "hitKeyword": "곽시양 유지애 결혼",
-    "hitAt": "2026-11-28T12:30:00+09:00",
-    "leadMin": 40
    }
   ]
  }
