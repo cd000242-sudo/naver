@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T07:51:53.470Z",
+ "builtAt": "2026-11-28T08:01:57.563Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,49 +11,23 @@
  "measured": 29,
  "candidates": [
   {
-   "keyword": "이 대통령 주문진시장 방문",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 30,
-   "recent20": 5,
-   "press": 29,
-   "firstArticleAt": "2026-11-28T06:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 “강원 천연물 혁신센터 신속 추진”…강릉 시장서 민생 점검...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-28T07:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004687163?sid=100"
-    },
-    {
-     "title": "\"장사 잘 되시냐\"...이 대통령, 주문진시장서 오징어·노가리 샀다",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-28T07:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980278?sid=100"
-    },
-    {
-     "title": "'아시아 최대' 동해 AI 데이터센터 첫 삽…이 대통령 \"정부 역량 총 지원...",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-28T07:44:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322211&inflow=N"
-    }
-   ]
-  },
-  {
    "keyword": "이재명 AI 데이터센터",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 29,
-   "recent20": 5,
-   "press": 26,
-   "firstArticleAt": "2026-11-28T06:22:00.000Z",
+   "articles90": 24,
+   "recent20": 6,
+   "press": 22,
+   "firstArticleAt": "2026-11-28T06:36:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "'아시아 최대 규모' 동해 GS AI데이터센터 첫 삽",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-28T07:52:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466769"
+    },
     {
      "title": "GS, 아시아 최대 AI 데이터센터 구축 시동…동해에 첫 삽",
      "press": "financialpost.co.kr",
@@ -65,44 +39,70 @@
      "press": "kwnews.co.kr",
      "publishedAt": "2026-11-28T07:45:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/087/0001233987?sid=100"
-    },
-    {
-     "title": "GS, 동해 1.2GW AI 데이터센터 착공… 허태수 \"AI 미래 명소로\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-28T07:44:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452896"
     }
    ]
   },
   {
-   "keyword": "FC서울 우승 대관식",
+   "keyword": "FC서울 대전 4-1 승리",
    "sources": [
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-28T06:42:00.000Z",
+   "articles90": 18,
+   "recent20": 4,
+   "press": 16,
+   "firstArticleAt": "2026-11-28T07:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "FC서울, 시즌 마지막 홈 경기서 대전 4-1 완파…손정범 첫 멀티골",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-28T07:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003485622?sid=102"
+    },
+    {
+     "title": "FC서울 '우승 파티'서 대전 4대 1 제압…손정범 첫 멀티골",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T07:48:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/055/0001406555"
+    },
     {
      "title": "'10년 만의 우승' 서울, 4-1 승리로 화려한 대관식",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-28T07:46:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/079/0004214858"
+    }
+   ]
+  },
+  {
+   "keyword": "KB 3연승",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 17,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-28T06:44:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "3연승 달린 김완수 감독 “이채은-허예은 3쿼터 3점슛, 분위기 끌어올렸...",
+     "press": null,
+     "publishedAt": "2026-11-28T07:48:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/065/0000305327"
     },
     {
-     "title": "'손정범 첫 멀티골' FC서울, 대전 4-1 완파…화려한 우승 대관식",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-28T07:39:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/422/0000930852"
+     "title": "'20득점 20리바운드' 박지수, 통산 160번째 더블더블…KB 3연승",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T07:47:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/055/0001406554"
     },
     {
-     "title": "[프로축구] '손정범 멀티골' 서울, 대전에 4-1…안방서 '우승 골잔치'",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-28T07:36:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261128000061"
+     "title": "박지수 돌아오자 살아나는 KB, BNK 꺾고 3연승 질주",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-28T07:25:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/119/0003160510"
     }
    ]
   },
@@ -111,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T06:26:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-28T06:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,35 +139,34 @@
    ]
   },
   {
-   "keyword": "이해욱 회장 질책",
+   "keyword": "방문해 오징어 노가리 구입",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-28T06:22:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-28T06:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이해욱 DL 회장, 실적 부진에 직원 '심야 소집' 논란",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-28T07:14:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=248015"
+     "title": "\"장사 잘 되시냐\"...이 대통령, 주문진시장서 오징어·노가리 샀다",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-28T07:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001980278?sid=100"
     },
     {
-     "title": "재계 24위 그룹 총수, 밤 10시 직원 400명 불러…실적 질책하다 '심야 소...",
-     "press": "businessplus.kr",
-     "publishedAt": "2026-11-28T07:02:00.000Z",
-     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120663"
+     "title": "李대통령, 강릉 주문진시장 방문... 오징어·노가리 구입",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-28T07:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004012270?sid=100"
     },
     {
-     "title": "플랜트서 1641억 증발…이해욱 DL그룹 회장의 이유 있는 질책",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-28T06:52:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733318"
+     "title": "이 대통령, 강원 주문진시장 찾아 민생 점검…오징어·노가리 구입",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T07:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406545?sid=100"
     }
    ]
   },
@@ -208,10 +207,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-28T06:26:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-28T06:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -236,34 +235,35 @@
    ]
   },
   {
-   "keyword": "슈",
+   "keyword": "이해욱 회장 질책",
    "sources": [
-    "google"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-28T06:31:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-28T06:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“손절했는데” 바다·슈, 불화설 종결…유진까지 S.E.S 완전체 뭉쳤다...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T07:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646504"
+     "title": "이해욱 DL 회장, 실적 부진에 직원 '심야 소집' 논란",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-28T07:14:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=248015"
     },
     {
-     "title": "“정말 SES 슈 맞나”…지나 이어 ‘고속 노화’ 비주얼 재조명",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-28T07:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729785?sid=103"
+     "title": "재계 24위 그룹 총수, 밤 10시 직원 400명 불러…실적 질책하다 '심야 소...",
+     "press": "businessplus.kr",
+     "publishedAt": "2026-11-28T07:02:00.000Z",
+     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120663"
     },
     {
-     "title": "‘재혼 황후’ 이종석 “하인리, 소비에슈 신경 쓸 상대조차 아닐듯..주...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-28T07:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003814684"
+     "title": "플랜트서 1641억 증발…이해욱 DL그룹 회장의 이유 있는 질책",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-28T06:52:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733318"
     }
    ]
   },
@@ -273,13 +273,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-28T07:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "광명 소하동 공사현장서 사다리 추락 사고… 60대 근로자 숨져",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-28T07:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000134167?sid=102"
+    },
     {
      "title": "연예계 음주 논란 속‥성시경, 쌈디 만취 사고에 절교한 사연 “눈 떠보...",
      "press": "newsen.com",
@@ -291,19 +297,13 @@
      "press": "newsworker.co.kr",
      "publishedAt": "2026-11-28T07:26:00.000Z",
      "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=516761"
-    },
-    {
-     "title": "IPARK현대산업개발, 광주 사고 이후, 산수2구역 수주 확정… 지역 사회 ...",
-     "press": "housingherald.co.kr",
-     "publishedAt": "2026-11-28T07:14:00.000Z",
-     "link": "https://www.housingherald.co.kr/news/articleView.html?idxno=63598"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2069,
+  "flagged": 2072,
   "matched": 1014,
   "avgLeadMin": 666,
   "recent": [
