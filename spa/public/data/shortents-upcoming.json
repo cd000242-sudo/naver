@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T04:20:39.647Z",
+ "builtAt": "2026-11-28T04:30:42.232Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,50 +8,50 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "동해 AI 데이터센터 착공",
+   "keyword": "동해 AI 데이터센터 착공 첫 삽",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 33,
-   "recent20": 29,
-   "press": 21,
-   "firstArticleAt": "2026-11-28T03:55:00.000Z",
+   "articles90": 56,
+   "recent20": 9,
+   "press": 46,
+   "firstArticleAt": "2026-11-28T03:02:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령, GS AI 데이터 센터 착공식에서 축사",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-28T04:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468797?sid=101"
+     "title": "이재명 대통령 \"동해 AI 센터, 글로벌 투자 마중물\"",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-28T04:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165969?sid=100"
     },
     {
-     "title": "이재명 대통령, GS AI 데이터 센터 착공식에서 축사",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-28T04:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468792?sid=101"
+     "title": "李대통령 “AI 속도전서 한 걸음 앞서야 선도자”…동해 AIDC 착공식 참석",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-28T04:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003061603?sid=105"
     },
     {
-     "title": "GS AI 데이터 센터 착공식에서 박수치는 이 대통령",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-28T04:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468791?sid=101"
+     "title": "GS, 동해 AI 데이터센터 착공…허태수 \"동해를 AI 명소로\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-28T04:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000930784?sid=101"
     }
    ]
   },
   {
    "keyword": "국정원, 김정은 방중 동향 주시",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-28T02:52:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-28T03:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -80,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-28T03:00:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-28T03:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -106,107 +106,11 @@
      "link": "https://n.news.naver.com/mnews/article/661/0000087187?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "LG 포스트시즌 다큐멘터리",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T02:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG는 2026 포스트시즌 실패에서 무엇을 느꼈을까…아픈 패배의 기억과 ...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-28T03:26:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/445/0000494187"
-    },
-    {
-     "title": "LG, 2026시즌 가을야구 비하인드 담은 다큐멘터리 30일 공개",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T03:24:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014350587"
-    },
-    {
-     "title": "'시사회 성료' LG 포스트시즌 비하인드 다큐멘터리, 30일 전격 공개",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-28T03:10:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/076/0004470413"
-    }
-   ]
-  },
-  {
-   "keyword": "예산안 미래대응기금",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T02:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "예산안 시한 D-4…여야 '104조 미래대응기금' 접점 못 찾고 헛바퀴",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-28T03:40:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731386"
-    },
-    {
-     "title": "예산안 처리 시한 나흘 앞... 여야 '미래대응기금 공방'",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T03:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968287?sid=100"
-    },
-    {
-     "title": "미래대응기금 설전…與 \"재정 안정 방파제\" 野 \"미래세대 빚잔치\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T02:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350574?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "지효 비냐 델 마르 최초 출격",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T02:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트와이스 지효, K팝 솔로 아티스트 최초 '2027 비냐 델 마르 페스티벌' ...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T03:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646364"
-    },
-    {
-     "title": "트와이스 지효, K팝 솔로 최초 칠레 ‘비냐 델 마르 페스티벌’ 출격",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-28T02:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001307272"
-    },
-    {
-     "title": "지효, '2027 비냐 델 마르 페스티벌' 출격…K-팝 솔로 최초",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T02:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009315193"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2019,
+  "flagged": 2020,
   "matched": 1000,
   "avgLeadMin": 645,
   "recent": [
