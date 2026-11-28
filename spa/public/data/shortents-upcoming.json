@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T01:21:03.868Z",
+ "builtAt": "2026-11-28T01:31:07.104Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "주유소 기름값 하락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-27T23:54:00.000Z",
+   "articles90": 16,
+   "recent20": 3,
+   "press": 16,
+   "firstArticleAt": "2026-11-28T00:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "부산 주유소 휘발유 평균가 ℓ당 1836.1원… 전주보다 0.9원 ↓",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-28T01:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162480?sid=101"
+    },
+    {
+     "title": "주유소 기름값 28주째 하락…서울 2주 연속 평균 1천800원대",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-28T01:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303101?sid=101"
+    },
     {
      "title": "주유소 기름값 28주째 하락‥서울 2주 연속 1천8백 원대",
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-28T01:15:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001538642?sid=101"
-    },
-    {
-     "title": "주유소 기름값 28주 연속 하락…서울 휘발유 2주째 1800원대",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-28T01:08:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322208&inflow=N"
-    },
-    {
-     "title": "주유소 기름값 28주 연속 하락⋯휘발유·경유 동반 내림세",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-28T01:08:00.000Z",
-     "link": "https://www.viva100.com/article/20261128500042"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 14,
+   "articles90": 15,
    "recent20": 1,
-   "press": 14,
+   "press": 15,
    "firstArticleAt": "2026-11-28T00:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "송민규 데뷔골에 극찬 \"예술 작품이었다! 수비수 완전히 농락\"…14년 만...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-28T01:21:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/311/0002084994"
+    },
     {
      "title": "송민규, 포르투갈 리그 데뷔골 폭발‥'경기 MVP' 선정",
      "press": "imnews.imbc.com",
@@ -65,12 +71,6 @@
      "press": "slist.kr",
      "publishedAt": "2026-11-28T00:58:00.000Z",
      "link": "https://www.slist.kr/news/articleView.html?idxno=785528"
-    },
-    {
-     "title": "송민규, 포르투갈 리그 데뷔골 '쾅'…나시오날 승리 견인",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-28T00:58:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110130544674"
     }
    ]
   },
@@ -80,29 +80,29 @@
     "daum"
    ],
    "articles90": 12,
-   "recent20": 1,
+   "recent20": 2,
    "press": 12,
-   "firstArticleAt": "2026-11-28T00:00:00.000Z",
+   "firstArticleAt": "2026-11-28T00:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "곽시양♥유지애, 오늘 결혼 \"행복하게 살게요\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T01:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014350526"
+    },
+    {
+     "title": "곽시양·유지애, 오늘(28일) 결혼…큰절하며 \"행복하게 살게요\"",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-28T01:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003160473"
+    },
     {
      "title": "“D-day” 큰절 올린 곽시양♥유지애, 오늘(28일) 웨딩마치",
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-28T01:05:00.000Z",
      "link": "https://m.entertain.naver.com/article/144/0001152146"
-    },
-    {
-     "title": "곽시양·유지애, 오늘(28일) 결혼… \"행복하게 살게요\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T00:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000968272"
-    },
-    {
-     "title": "곽시양♥유지애 오늘(28일) 결혼식, 큰절 올리며 “행복하게 살게요”",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-28T00:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001192077"
     }
    ]
   },
@@ -111,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-27T23:59:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-28T00:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,38 +171,6 @@
    ]
   },
   {
-   "keyword": "굿파트너 2",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-27T23:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'굿파트너2', 두 자릿수 시청률 목전…9.8% '자체 최고'",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-28T01:14:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110130629359"
-    },
-    {
-     "title": "김혜윤, 장나라의 '리봄' 의미 깨달았다…'굿파트너2' 9.8% 자체 최고[시...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-28T01:02:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795826145531691006"
-    },
-    {
-     "title": "장나라·김혜윤 ‘굿파트너2’, 거침없는 상승세…9.8% 자체 최고 경신...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-28T00:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543984"
-    }
-   ]
-  },
-  {
    "keyword": "서울시 중등교사 임용시험",
    "sources": [
     "signal.bz"
@@ -230,7 +198,39 @@
      "title": "서울 중등교사 임용 1차시험",
      "press": "newsis.com",
      "publishedAt": "2026-11-28T00:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350477?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/003/0014350478?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "굿파트너 2",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T00:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'굿파트너2', 두 자릿수 시청률 목전…9.8% '자체 최고'",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-28T01:14:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110130629359"
+    },
+    {
+     "title": "김혜윤, 장나라의 '리봄' 의미 깨달았다…'굿파트너2' 9.8% 자체 최고[시...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-28T01:02:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795826145531691006"
+    },
+    {
+     "title": "장나라·김혜윤 ‘굿파트너2’, 거침없는 상승세…9.8% 자체 최고 경신...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-28T00:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543984"
     }
    ]
   },
@@ -248,9 +248,9 @@
    "samples": [
     {
      "title": "[오늘의 띠별 운세] 2026년 11월 28일 토요일",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-28T01:12:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=323546"
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-28T01:24:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=770968"
     },
     {
      "title": "[오늘의운세] 11월28일 토요일, 재미로 보는 오늘의 띠별운세",
@@ -263,38 +263,6 @@
      "press": "etnews.com",
      "publishedAt": "2026-11-28T00:41:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/030/0003490843?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "서현진 긴급 체포",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-27T23:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서현진, 유연석 살해 용의자로 긴급 체포…’라이어’ 시청률 4.8% [IS차...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-28T00:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543986"
-    },
-    {
-     "title": "'라이어' 서현진, 유연석 살인 용의자? '반전'",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-27T23:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054490"
-    },
-    {
-     "title": "‘라이어’ 유연석, 변사체로 발견→서현진 긴급 체포 ‘충격’",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-27T23:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000329397"
     }
    ]
   }
