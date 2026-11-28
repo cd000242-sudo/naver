@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T02:40:10.434Z",
+ "builtAt": "2026-11-28T02:50:12.958Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,21 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
+  {
+   "keyword": "김정은 추가 방중 가능성",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 31,
+   "recent20": 8,
+   "press": 31,
+   "firstArticleAt": "2026-11-28T01:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김정은 추가 방중설에…국정원 \"여러 동향 주시 중\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T02:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406513?sid=102"
+    },
+    {
+     "title": "국정원, 北 김정은 추가 방중 가능성에 \"여러 동향 주시 중\"",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-28T02:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003160483?sid=100"
+    },
+    {
+     "title": "김정은 또 中 가나…국정원 \"여러 동향 주시 중\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-28T02:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005611009?sid=100"
+    }
+   ]
+  },
   {
    "keyword": "디트로이트 김하성 계약 발표",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 15,
+   "articles90": 16,
    "recent20": 2,
-   "press": 15,
+   "press": 16,
    "firstArticleAt": "2026-11-28T01:22:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[야구] MLB 디트로이트, 김하성과 1년 계약 공식 발표(종합)",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-28T02:48:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452849"
+    },
     {
      "title": "\"기대 산산조각 났다\" 김하성 합류에 대만 좌절! '곽빈 상대 홈런' 좌타...",
      "press": "sportalkorea.com",
@@ -34,19 +71,44 @@
      "press": "g-enews.com",
      "publishedAt": "2026-11-28T02:26:00.000Z",
      "link": "https://www.g-enews.com/view.php?ud=202611281125496346a6e8311f64_1"
-    },
-    {
-     "title": "'1년 단기 계약으로 내야 보강' 디트로이트, 김하성 영입 공식 발표",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-28T02:20:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/425/0000215467"
     }
    ]
   },
   {
    "keyword": "곽시양♥유지애, 오늘 결혼해요",
    "sources": [
-    "signal.bz",
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-28T01:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2년 전 ​‘최애’ 고백→부부로…곽시양♥유지애, 오늘 결혼",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-28T02:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001283998"
+    },
+    {
+     "title": "[TOP이슈] 곽시양♥유지애, 오늘(28일) 부부 된다",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-28T02:38:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288302"
+    },
+    {
+     "title": "곽시양·유지애, 오늘(28일) 결혼… 큰절 인증샷 \"행복하게 살게요\" [MHN...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-28T02:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000494183"
+    }
+   ]
+  },
+  {
+   "keyword": "곽시양 유지애 오늘 결혼",
+   "sources": [
     "nate"
    ],
    "articles90": 14,
@@ -57,7 +119,7 @@
    "capped": false,
    "samples": [
     {
-     "title": "​​‘최애 배우’ 고백 2년 만에 부부로…곽시양♥유지애 오늘(28일) 결...",
+     "title": "2년 전 ​‘최애’ 고백→부부로…곽시양♥유지애, 오늘 결혼",
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-28T02:39:00.000Z",
      "link": "https://m.entertain.naver.com/article/468/0001283998"
@@ -79,7 +141,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2004,
+  "flagged": 2006,
   "matched": 987,
   "avgLeadMin": 650,
   "recent": [
