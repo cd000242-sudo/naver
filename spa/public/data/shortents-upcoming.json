@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T08:32:07.516Z",
+ "builtAt": "2026-11-28T08:42:11.506Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,90 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 27,
  "candidates": [
+  {
+   "keyword": "포스코 임금교섭 타결",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 30,
+   "recent20": 20,
+   "press": 27,
+   "firstArticleAt": "2026-11-28T08:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "포스코, 5개월 노사 갈등 마침표 … 기본급 2.6% 인상·일시금 620만원 지...",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-28T08:40:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/28/2026112850054.html"
+    },
+    {
+     "title": "포스코 노사, 5개월여 만에 임금협상 타결…찬성률 65.01%",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-28T08:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000556468?sid=102"
+    },
+    {
+     "title": "포스코 임금협상 타결에… 상공인·화물차 기사 “감사하고 고맙다”",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T08:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009315446?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 강릉 바이오",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 35,
+   "recent20": 4,
+   "press": 18,
+   "firstArticleAt": "2026-11-28T07:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강릉이 키운 기술, 지역 일자리로…李 “사업화 과정 전반 빈틈없이 지...",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-28T08:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003490872?sid=100"
+    },
+    {
+     "title": "李대통령 \"동해 AI센터, 글로벌 투자 마중물…강릉 천연물 산업화 지원...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T08:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009315440?sid=100"
+    },
+    {
+     "title": "李대통령 \"강릉 천연물 혁신센터, 예산 반영해 신속 추진\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-28T08:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447732?sid=100"
+    }
+   ]
+  },
   {
    "keyword": "이 대통령 주문진시장 방문",
    "sources": [
     "daum"
    ],
-   "articles90": 20,
-   "recent20": 3,
-   "press": 19,
-   "firstArticleAt": "2026-11-28T07:03:00.000Z",
+   "articles90": 17,
+   "recent20": 2,
+   "press": 16,
+   "firstArticleAt": "2026-11-28T07:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이 대통령, 주문진건어물시장 방문서 민생 살펴…노가리·마른오징어 온...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-28T08:38:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631613"
+    },
     {
      "title": "이 대통령, 강릉 천연물 바이오산업 육성 약속…\"정부 지원 아끼지 않을...",
      "press": "mediapen.com",
@@ -33,58 +103,83 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-28T08:16:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001538669?sid=100"
-    },
-    {
-     "title": "李대통령, 강릉 천연물 바이오산업 육성...“연구개발부터 제품화까지 ...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-28T08:14:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73704"
     }
    ]
   },
   {
-   "keyword": "포스코 임금교섭 타결",
+   "keyword": "북창 공군기지 운영재개",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 15,
-   "press": 16,
-   "firstArticleAt": "2026-11-28T08:06:00.000Z",
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-28T07:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 포스코 노사, 2026년도 임금협상 타결",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-28T08:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000556465?sid=102"
+     "title": "북한 북창 공군기지에서 전투기 포착‥3년 만에 운영 재개 정황",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-28T08:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001538671?sid=100"
     },
     {
-     "title": "포스코 노사, 5달 만에 임금 교섭 최종 타결…65% 찬성",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-28T08:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001980283?sid=102"
+     "title": "北 북창 공군기지, 3년 보수 끝 운영 재개 정황…'항공절' 앞두고 미그-...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-28T08:26:00.000Z",
+     "link": "https://www.ajunews.com/view/20261128171724925"
     },
     {
-     "title": "포스코 임단협 5개월 만에 최종 타결… 2차 합의안 찬성률 65% 가결",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-28T08:28:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731403"
+     "title": "北북창 공군기지 운영재개…70년대 노후 전투기 포착",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-28T08:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004687166?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "서울 4-1 우승 대관식",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 20,
+   "recent20": 12,
+   "press": 10,
+   "firstArticleAt": "2026-11-28T07:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[사진]김기동 감독-허창수 구단주, K리그 우승 트로피 번쩍",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-28T08:33:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/109/0005646541"
+    },
+    {
+     "title": "[사진]FC서울, 우리가 챔피언!",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-28T08:33:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/109/0005646538"
+    },
+    {
+     "title": "[사진]10년만 V7 달성 FC서울, 화려한 축포 속 우승 세리머니",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-28T08:33:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/109/0005646539"
     }
    ]
   },
   {
    "keyword": "박지수 BNK 3연승",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 15,
+   "articles90": 9,
    "recent20": 0,
-   "press": 14,
-   "firstArticleAt": "2026-11-28T07:04:00.000Z",
-   "exclusive": true,
+   "press": 8,
+   "firstArticleAt": "2026-11-28T07:17:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
@@ -108,110 +203,14 @@
    ]
   },
   {
-   "keyword": "북창 공군기지 운영재개",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-28T07:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "北 북창 공군기지, 3년 보수 끝 운영 재개 정황…'항공절' 앞두고 미그-...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-28T08:26:00.000Z",
-     "link": "https://www.ajunews.com/view/20261128171724925"
-    },
-    {
-     "title": "北북창 공군기지 운영재개…70년대 노후 전투기 포착",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-28T08:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004687166?sid=102"
-    },
-    {
-     "title": "3년간 개보수 마친 北 북창 공군기지…전투기 재배치 포착",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-28T08:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004214860?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명, KIST 천연물 방문",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-28T07:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령, 강릉 천연물 바이오산업 육성 약속…\"정부 지원 아끼지 않을...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-28T08:26:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1140831"
-    },
-    {
-     "title": "李대통령, 강릉 천연물 바이오산업 육성...“연구개발부터 제품화까지 ...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-28T08:14:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73704"
-    },
-    {
-     "title": "이 대통령, KIST 강릉 분원 방문‥\"천연물 산업화 혁신센터 조성\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-28T08:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538668?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "무자격 후보 마녀사냥",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-28T07:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강금실·한준호 청문회 앞두고 여야 격돌⋯\"무자격 후보\" vs \"마녀사냥\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-28T08:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001079284?sid=100"
-    },
-    {
-     "title": "장동혁, 개각 후보자 4명에 “무자격 내각”… 민주당 “답정너식 마녀...",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-28T08:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000087198?sid=100"
-    },
-    {
-     "title": "野 \"무자격 내각\" vs 與 \"낡은 색깔론\" … 개각 인사청문회 앞두고 격돌",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-28T08:08:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/28/2026112850053.html"
-    }
-   ]
-  },
-  {
    "keyword": "아일릿 모카 활동 재개",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-28T07:04:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-28T07:14:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -236,35 +235,34 @@
    ]
   },
   {
-   "keyword": "서울 우승 대관식 4-1 완승!",
+   "keyword": "조작기소 특검법 규탄 대회",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 9,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T07:04:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-28T07:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "추위 잊은 '서울의 봄'…FC서울, 10년 만의 성대한 우승 파티",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-28T08:24:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/001/0016468914"
+     "title": "[현장] 대전, 장동혁 \"충청인이여 일어나라\"… 국민의힘 '조작기소 특검...",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-28T08:26:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452904"
     },
     {
-     "title": "'손정범 첫 멀티골' FC서울, 대전 4-1 완파…화려한 우승 대관식",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-28T07:39:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/422/0000930852"
+     "title": "대전서 '이재명 탈옥법' 규탄대회 개최, 장동혁 \"재판 즉각 재개해야\"",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-28T08:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193808?sid=100"
     },
     {
-     "title": "[k1.interview] '경기 막판 충돌' 황선홍 감독, \"서울 우승 축하하지만, ...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-28T07:27:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/411/0000090603"
+     "title": "국힘, 대전서 대규모 규탄 집회…\"조희대보다 李 먼저 탄핵해야\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T08:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350823?sid=100"
     }
    ]
   },
@@ -301,44 +299,74 @@
    ]
   },
   {
-   "keyword": "황선홍 감독 서울전 패배",
+   "keyword": "밤 10시 직원 호출",
    "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-28T07:30:00.000Z",
+   "firstArticleAt": "2026-11-28T07:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"기본적인 부분에서 미흡\" 서울전 패배에 아쉬움 표한 황선홍 감독, 경...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-28T07:55:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/076/0004470479"
+     "title": "'실적은 경영진 책임인데'…DL이앤씨 직원 수백 명 한밤중 '호출'",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-28T07:56:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244476"
     },
     {
-     "title": "“변명의 여지가 없다” 황선홍 대전 감독 서울전 대배 후 “내 부족함...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-28T07:35:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/144/0001152176"
+     "title": "밤 10시 회사로 직원 400명 호출…이해욱 DL그룹 회장 또 구설",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-28T07:36:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322212&inflow=N"
     },
     {
-     "title": "'서울에 1-4 패배' 대전 황선홍 감독 \"변명의 여지 없는 완패\"...경기 막...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-28T07:30:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/117/0004128840"
+     "title": "금요일 밤10시 직원 400명 불러내 새벽 귀가시킨 DL 회장",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-28T07:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005611041?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2081,
-  "matched": 1015,
-  "avgLeadMin": 665,
+  "flagged": 2085,
+  "matched": 1020,
+  "avgLeadMin": 663,
   "recent": [
+   {
+    "keyword": "GS AI 데이터센터 착공식 참석",
+    "hitKeyword": "중국 데이터센터 엔비디아",
+    "hitAt": "2026-11-28T17:30:00+09:00",
+    "leadMin": 290
+   },
+   {
+    "keyword": "동해 AI 데이터센터 착공",
+    "hitKeyword": "중국 데이터센터 엔비디아",
+    "hitAt": "2026-11-28T17:30:00+09:00",
+    "leadMin": 279
+   },
+   {
+    "keyword": "동해 AI 데이터센터 착공 첫 삽",
+    "hitKeyword": "중국 데이터센터 엔비디아",
+    "hitAt": "2026-11-28T17:30:00+09:00",
+    "leadMin": 239
+   },
+   {
+    "keyword": "이재명 AI 데이터센터 방문",
+    "hitKeyword": "중국 데이터센터 엔비디아",
+    "hitAt": "2026-11-28T17:30:00+09:00",
+    "leadMin": 109
+   },
+   {
+    "keyword": "이재명 AI 데이터센터",
+    "hitKeyword": "중국 데이터센터 엔비디아",
+    "hitAt": "2026-11-28T17:30:00+09:00",
+    "leadMin": 48
+   },
    {
     "keyword": "FC서울 우승 대관식",
     "hitKeyword": "FC서울 손정범 첫 멀티골",
@@ -368,36 +396,6 @@
     "hitKeyword": "서인영 다이어트 떡볶이",
     "hitAt": "2026-11-28T16:30:00+09:00",
     "leadMin": 1686
-   },
-   {
-    "keyword": "기사",
-    "hitKeyword": "설치기사 폭행 징역",
-    "hitAt": "2026-11-28T16:30:00+09:00",
-    "leadMin": 18
-   },
-   {
-    "keyword": "샌디스크 주가",
-    "hitKeyword": "앤트로픽 샌디스크 급등",
-    "hitAt": "2026-11-28T16:00:00+09:00",
-    "leadMin": 6648
-   },
-   {
-    "keyword": "군인",
-    "hitKeyword": "전역군인 공포탄 적발",
-    "hitAt": "2026-11-28T16:00:00+09:00",
-    "leadMin": 5771
-   },
-   {
-    "keyword": "앤트로픽 공모가 하회",
-    "hitKeyword": "앤트로픽 샌디스크 급등",
-    "hitAt": "2026-11-28T16:00:00+09:00",
-    "leadMin": 4791
-   },
-   {
-    "keyword": "인터넷우체국 개인정보 유출",
-    "hitKeyword": "우체국 개인정보 유출",
-    "hitAt": "2026-11-28T15:30:00+09:00",
-    "leadMin": 19
    }
   ]
  }
