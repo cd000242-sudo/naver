@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T08:42:11.506Z",
+ "builtAt": "2026-11-28T08:52:14.687Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 30,
+   "articles90": 38,
    "recent20": 20,
-   "press": 27,
+   "press": 33,
    "firstArticleAt": "2026-11-28T08:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "포스코, 5개월 노사 갈등 마침표 … 기본급 2.6% 인상·일시금 620만원 지...",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-28T08:40:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/28/2026112850054.html"
+     "title": "포스코 노사, 2차 잠정합의안 통과하며 올해 임단협 매듭",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-28T08:50:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3766188"
     },
     {
-     "title": "포스코 노사, 5개월여 만에 임금협상 타결…찬성률 65.01%",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-28T08:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000556468?sid=102"
+     "title": "기본급 2.6% 올린다…포스코 임금합의안 65% 찬성 가결",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-28T08:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005359350?sid=101"
     },
     {
-     "title": "포스코 임금협상 타결에… 상공인·화물차 기사 “감사하고 고맙다”",
+     "title": "포스코 임금협상 4개월 만에 타결…\"철강위기 극복에 최선\"",
      "press": "news1.kr",
-     "publishedAt": "2026-11-28T08:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315446?sid=102"
+     "publishedAt": "2026-11-28T08:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009315449?sid=102"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 35,
-   "recent20": 4,
-   "press": 18,
+   "articles90": 36,
+   "recent20": 3,
+   "press": 19,
    "firstArticleAt": "2026-11-28T07:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령 \"강릉 천연물 혁신센터 예산 반영해 신속 추진\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-28T08:44:00.000Z",
+     "link": "https://www.ajunews.com/view/20261128172637930"
+    },
     {
      "title": "강릉이 키운 기술, 지역 일자리로…李 “사업화 과정 전반 빈틈없이 지...",
      "press": "etnews.com",
@@ -65,44 +71,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-28T08:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009315440?sid=100"
-    },
-    {
-     "title": "李대통령 \"강릉 천연물 혁신센터, 예산 반영해 신속 추진\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-28T08:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447732?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "이 대통령 주문진시장 방문",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 17,
-   "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-28T07:15:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령, 주문진건어물시장 방문서 민생 살펴…노가리·마른오징어 온...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-28T08:38:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=631613"
-    },
-    {
-     "title": "이 대통령, 강릉 천연물 바이오산업 육성 약속…\"정부 지원 아끼지 않을...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-28T08:26:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1140831"
-    },
-    {
-     "title": "이 대통령, 주문진 건어물 시장 방문‥특산품 구입 등 민생행보",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-28T08:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538669?sid=100"
     }
    ]
   },
@@ -112,29 +80,29 @@
     "signal.bz"
    ],
    "articles90": 12,
-   "recent20": 3,
+   "recent20": 2,
    "press": 12,
-   "firstArticleAt": "2026-11-28T07:16:00.000Z",
+   "firstArticleAt": "2026-11-28T07:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "北 북창 공군기지 노후 전투기 포착… 3년 만에 보수 끝 운영재개 정황",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-28T08:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193811?sid=100"
+    },
+    {
+     "title": "北, 3년 만에 북창 공군기지 운영 재개…노후 전투기 포착",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T08:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968301?sid=104"
+    },
     {
      "title": "북한 북창 공군기지에서 전투기 포착‥3년 만에 운영 재개 정황",
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-28T08:32:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001538671?sid=100"
-    },
-    {
-     "title": "北 북창 공군기지, 3년 보수 끝 운영 재개 정황…'항공절' 앞두고 미그-...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-28T08:26:00.000Z",
-     "link": "https://www.ajunews.com/view/20261128171724925"
-    },
-    {
-     "title": "北북창 공군기지 운영재개…70년대 노후 전투기 포착",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-28T08:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004687166?sid=102"
     }
    ]
   },
@@ -143,30 +111,94 @@
    "sources": [
     "nate"
    ],
-   "articles90": 20,
+   "articles90": 27,
    "recent20": 12,
-   "press": 10,
-   "firstArticleAt": "2026-11-28T07:22:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-28T07:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[사진]김기동 감독-허창수 구단주, K리그 우승 트로피 번쩍",
+     "title": "[사진]K리그1 2026 우승 FC서울",
      "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T08:33:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/109/0005646541"
+     "publishedAt": "2026-11-28T08:47:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/109/0005646559"
     },
     {
-     "title": "[사진]FC서울, 우리가 챔피언!",
+     "title": "[사진]10년만 V7 달성 FC서울, 신나는 샴페인 샤워",
      "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T08:33:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/109/0005646538"
+     "publishedAt": "2026-11-28T08:47:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/109/0005646558"
     },
     {
-     "title": "[사진]10년만 V7 달성 FC서울, 화려한 축포 속 우승 세리머니",
+     "title": "[사진]안데르손-문선민, 신나는 우승 샴페인 세리머니",
      "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T08:33:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/109/0005646539"
+     "publishedAt": "2026-11-28T08:44:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/109/0005646555"
+    }
+   ]
+  },
+  {
+   "keyword": "아일릿 모카 활동 재개",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-28T07:24:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'아일릿' 모카, '활중' 5개월만에 복귀⋯소속사 \"일부 일정 참여\"",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-28T08:50:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2654211"
+    },
+    {
+     "title": "'건강 적신호' 아일릿 모카, 활동 재개 “일부 일정 참여”",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-28T08:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000522928"
+    },
+    {
+     "title": "[공식] 아일릿 모카, 불안 증세로 활동 중단 5개월만 복귀..“일부 일정...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-28T08:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646526"
+    }
+   ]
+  },
+  {
+   "keyword": "조작기소 특검법 규탄 대회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T07:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국힘, 대전서 대규모 규탄 집회…\"조희대 전에 李 먼저 탄핵\"(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T08:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350846?sid=100"
+    },
+    {
+     "title": "[현장] 대전, 장동혁 \"충청인이여 일어나라\"… 국민의힘 '조작기소 특검...",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-28T08:26:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452904"
+    },
+    {
+     "title": "대전서 '이재명 탈옥법' 규탄대회 개최, 장동혁 \"재판 즉각 재개해야\"",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-28T08:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193808?sid=100"
     }
    ]
   },
@@ -175,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 5,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-28T07:17:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-28T07:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -199,70 +231,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-28T07:47:00.000Z",
      "link": "https://m.sports.naver.com/basketball/article/055/0001406554"
-    }
-   ]
-  },
-  {
-   "keyword": "아일릿 모카 활동 재개",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-28T07:14:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[공식] 아일릿 모카, 불안 증세로 활동 중단 5개월만 복귀..“일부 일정...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T08:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646526"
-    },
-    {
-     "title": "아일릿 모카, 활동 복귀 공식화… \"일부 일정 참여\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T07:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000968299"
-    },
-    {
-     "title": "아일릿 모카, ‘활동 중단’ 5개월 만 복귀…“일부 일정부터 참여”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-28T07:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005770264?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 규탄 대회",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T07:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[현장] 대전, 장동혁 \"충청인이여 일어나라\"… 국민의힘 '조작기소 특검...",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-28T08:26:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452904"
-    },
-    {
-     "title": "대전서 '이재명 탈옥법' 규탄대회 개최, 장동혁 \"재판 즉각 재개해야\"",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-28T08:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193808?sid=100"
-    },
-    {
-     "title": "국힘, 대전서 대규모 규탄 집회…\"조희대보다 李 먼저 탄핵해야\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T08:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350823?sid=100"
     }
    ]
   },
