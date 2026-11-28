@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T10:22:45.131Z",
+ "builtAt": "2026-11-28T10:32:47.920Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
+  {
+   "keyword": "철도노조 준법투쟁 지연",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 17,
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-28T09:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "철도노조 준법투쟁 장기화 조짐…주말 수도권 전철 105편 운행 지연",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-28T10:26:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848755"
+    },
+    {
+     "title": "철도노조 준법투쟁 첫 주말…\"광역전철 105대 20분 이상 지연\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-28T10:16:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326786/?sc=Naver"
+    },
+    {
+     "title": "철도노조 준법투쟁 첫 주말…수도권 전철 105대 지연",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-28T10:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001406570?sid=102"
+    }
+   ]
+  },
   {
    "keyword": "최민희 중징계",
    "sources": [
     "daum"
    ],
-   "articles90": 25,
+   "articles90": 17,
    "recent20": 2,
-   "press": 21,
-   "firstArticleAt": "2026-11-28T08:54:00.000Z",
+   "press": 15,
+   "firstArticleAt": "2026-11-28T09:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,15 +75,80 @@
    ]
   },
   {
+   "keyword": "강금실 중국 고문 해명",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-28T09:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강금실, 中특별고문 이력 해명… \"친선 차원 무보수 명예직\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-28T10:22:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452923"
+    },
+    {
+     "title": "강금실 \"中 특별고문,朴 정부 때 친선 차원 무보수 명예직\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T10:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968305?sid=100"
+    },
+    {
+     "title": "강금실 “중국 특별고문은 무보수 명예직”…경력 증빙은 못 했다",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-28T10:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000134175?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "FC서울 우승 대관식",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 20,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-28T09:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "FC서울 우승 파티 빛낸 막내 손정범…\"대표팀서 배우고 왔어요\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-28T10:25:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016469010"
+    },
+    {
+     "title": "상암에 돌아온 우승컵…FC서울, 2만7000여 팬과 대관식",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-28T10:24:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611281920204247740eacf404_1"
+    },
+    {
+     "title": "K리그1 우승 지휘한 김기동 감독",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T10:06:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014350897"
+    }
+   ]
+  },
+  {
    "keyword": "포스코 임금협상 타결",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 18,
+   "articles90": 12,
    "recent20": 0,
-   "press": 16,
-   "firstArticleAt": "2026-11-28T08:55:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-28T09:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,116 +173,20 @@
    ]
   },
   {
-   "keyword": "철도노조 준법투쟁 지연",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 16,
-   "recent20": 5,
-   "press": 14,
-   "firstArticleAt": "2026-11-28T09:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "철도노조 준법투쟁 첫 주말…\"광역전철 105대 20분 이상 지연\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-28T10:16:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326786/?sc=Naver"
-    },
-    {
-     "title": "철도노조 준법투쟁 첫 주말…수도권 전철 105대 지연",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-28T10:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406570?sid=102"
-    },
-    {
-     "title": "철도노조 준법투쟁 첫 주말…전철 105대 지연",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-28T10:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165983?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "강금실 중국 고문 해명",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-28T08:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강금실 \"中 특별고문,朴 정부 때 친선 차원 무보수 명예직\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T10:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968305?sid=100"
-    },
-    {
-     "title": "강금실 “중국 특별고문은 무보수 명예직”…경력 증빙은 못 했다",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-28T10:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000134175?sid=100"
-    },
-    {
-     "title": "[속보]강금실, '친중'공세 첫 반박…\"中특별고문, 박근혜 정부 시기 친선...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-28T10:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122415?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "FC서울 우승 대관식",
+   "keyword": "최민정 1000M 금메달 4연속",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 26,
-   "recent20": 7,
-   "press": 13,
-   "firstArticleAt": "2026-11-28T08:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "K리그1 우승 이뤄낸 FC서울",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T10:06:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014350900"
-    },
-    {
-     "title": "FC서울 우승 이끈 김기동 감독",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T10:06:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014350896"
-    },
-    {
-     "title": "‘2만7477명 상암벌 열광’ FC서울, 빈틈 없었던 안방 대관식",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-28T10:06:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/396/0000762242"
-    }
-   ]
-  },
-  {
-   "keyword": "최민정 1000M 금메달 4연속",
-   "sources": [
-    "nate"
-   ],
    "articles90": 8,
-   "recent20": 2,
+   "recent20": 1,
    "press": 8,
    "firstArticleAt": "2026-11-28T09:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'은퇴 결사반대 나올 만하네' 최민정, 16전 16승 '미쳤다'... 월드투어 1...",
+     "title": "'은퇴 결사반대' 나올 만하네! 최민정, 16전 16승 '무패 질주'... 월드투...",
      "press": "starnewskorea.com",
      "publishedAt": "2026-11-28T10:20:00.000Z",
      "link": "https://m.sports.naver.com/general/article/108/0003490832"
@@ -207,10 +208,11 @@
   {
    "keyword": "보복운전 논란 복귀",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-28T09:06:00.000Z",
    "exclusive": false,
@@ -229,7 +231,7 @@
      "link": "https://n.news.naver.com/mnews/article/025/0003568597?sid=102"
     },
     {
-     "title": "\"택시기사님께 죄송하다\"…김영광, 한 달여 만에 유튜브 복귀",
+     "title": "\"택시기사님께 죄송\"…'보복운전 논란' 김영광, 유튜브 복귀",
      "press": "hankyung.com",
      "publishedAt": "2026-11-28T09:55:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005359355?sid=102"
@@ -237,34 +239,34 @@
    ]
   },
   {
-   "keyword": "강릉 천연물 바이오",
+   "keyword": "이재명 대통령 찾은 주문진시장",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T08:56:00.000Z",
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T09:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李, 강릉 지하수저류댐 공사 현장 점검…가뭄 대비 용수 확보 살펴",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-28T10:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005611048?sid=100"
+     "title": "李대통령, 주문진시장서 마른오징어·노가리 구입…상인들 만나 ‘민생...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-28T10:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002836172?sid=100"
     },
     {
-     "title": "이 대통령, 강릉 지하수저류댐 현장 방문…추가 취수원 확보 등 확인",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T09:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350891?sid=100"
+     "title": "동해 찾은 이재명 대통령…2.4GW 규모 AI 데이터센터 캠퍼스 착공",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-28T10:26:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3766217"
     },
     {
-     "title": "李대통령, 강릉 지하수저류댐 현장 점검…추가 취수원 확보 방안 살펴",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T09:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315483?sid=100"
+     "title": "강릉 주문진 시장 뜬 李대통령... 온누리상품권으로 오징어·노가리 구...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-28T10:04:00.000Z",
+     "link": "https://www.insight.co.kr/news/583972"
     }
    ]
   },
@@ -273,10 +275,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T08:57:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-28T09:28:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -301,75 +303,43 @@
    ]
   },
   {
-   "keyword": "이재명 대통령 찾은 주문진시장",
+   "keyword": "영국 미공군기지 드론",
    "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T08:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강릉 주문진 시장 뜬 李대통령... 온누리상품권으로 오징어·노가리 구...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-28T10:04:00.000Z",
-     "link": "https://www.insight.co.kr/news/583972"
-    },
-    {
-     "title": "주문진시장 찾은 이재명 대통령",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T09:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315482?sid=100"
-    },
-    {
-     "title": "주문진 수산물 시장 찾은 이재명 대통령",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-28T09:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468994?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "이혁, 노라조 탈퇴 이유",
-   "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-28T09:00:00.000Z",
+   "firstArticleAt": "2026-11-28T09:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이혁, 노라조 탈퇴 결심한 이유 \"제2의 '녹색지대'로 알고 계약\"",
+     "title": "FT \"유럽 최대 美 공군기지에 드론 출몰…이란 연루 추정\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-28T10:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000654007?sid=104"
+    },
+    {
+     "title": "英 미군기지에 '미허가' 드론 출몰…이란 연루 의혹",
      "press": "newsis.com",
-     "publishedAt": "2026-11-28T10:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014350903"
+     "publishedAt": "2026-11-28T10:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350902?sid=104"
     },
     {
-     "title": "이혁, 노라조 탈퇴한 진짜 이유..\"계약서 서명한 뒤에야 알아\"('백투더뮤...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T09:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646579"
-    },
-    {
-     "title": "이혁, 노라조 탈퇴 결심한 속사정 “계약서 서명한 뒤에야…” (백투더...",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-28T09:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000329424"
+     "title": "\"英 최대 미군 전투기 기지에 드론 6대 출몰…이란 소행 의심\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T09:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009315468?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2078,
-  "matched": 1013,
-  "avgLeadMin": 663,
+  "flagged": 2072,
+  "matched": 1010,
+  "avgLeadMin": 653,
   "recent": [
    {
     "keyword": "우리은행 연승 성공",
