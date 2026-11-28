@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T09:42:31.287Z",
+ "builtAt": "2026-11-28T09:52:34.351Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 30,
  "candidates": [
   {
    "keyword": "포스코 임금교섭 타결",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 55,
+   "articles90": 50,
    "recent20": 6,
-   "press": 46,
-   "firstArticleAt": "2026-11-28T08:16:00.000Z",
+   "press": 44,
+   "firstArticleAt": "2026-11-28T08:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "포항시의회, 포스코 임금협상 최종 타결 환영…\"노사 상생이 지역경제 ...",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-28T09:40:00.000Z",
-     "link": "http://www.breaknews.com/1255006"
+     "title": "포스코, 처우 개선으로 노사 접점…현장 경쟁력 강화 나선다",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-28T09:50:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2024572"
     },
     {
-     "title": "포스코 노사, 임금교섭 5개월 만 최종 타결…찬성률 65.01%",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-28T09:38:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=303789"
+     "title": "포스코 임금교섭 타결…포스코홀딩스 주가에 호재 될까",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-28T09:46:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288524"
     },
     {
-     "title": "포스코, 5개월여 만에 임금협상 극적 타결…기본급 2.6% 인상",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-28T09:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003160525?sid=101"
+     "title": "포스코 노사, 교섭 시작 5개월 만에 임단협 '최종 타결'",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-28T09:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004214863?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "김민석 최민희 중징계",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 27,
+   "recent20": 4,
+   "press": 23,
+   "firstArticleAt": "2026-11-28T08:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김민석, ‘최민희 중징계’에 “드릴 말 없다”…사퇴 촉구 집회도",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-28T09:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003568596?sid=100"
+    },
+    {
+     "title": "최민희 중징계 후폭풍⋯김민석 \"특별히 드릴 말 없다\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-28T09:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001079289?sid=100"
+    },
+    {
+     "title": "김민석, ‘최민희 중징계’에 “특별히 할 말 없다”…친청계는 잇단 반...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-28T09:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004687172?sid=100"
     }
    ]
   },
@@ -47,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 19,
+   "articles90": 20,
+   "recent20": 2,
+   "press": 20,
    "firstArticleAt": "2026-11-28T08:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "韓총리, 삼성전자·SK하이닉스에 “채용 많이 해달라”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-28T09:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003765917?sid=100"
+    },
     {
      "title": "韓총리 “삼전·하이닉스 채용 많이 해달라” 당부",
      "press": "sedaily.com",
@@ -65,12 +103,6 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-28T09:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000930863?sid=100"
-    },
-    {
-     "title": "[속보] 한 총리, 삼전·하이닉스에 \"신입사원 채용 많이 해달라\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-28T09:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001079288?sid=100"
     }
    ]
   },
@@ -79,10 +111,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 16,
+   "articles90": 15,
    "recent20": 0,
-   "press": 16,
-   "firstArticleAt": "2026-11-28T08:18:00.000Z",
+   "press": 15,
+   "firstArticleAt": "2026-11-28T08:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -99,10 +131,10 @@
      "link": "https://m.sports.naver.com/general/article/052/0002439413"
     },
     {
-     "title": "쇼트트랙 국가대표 최민정, 여자 1000ｍ 4개 대회 연속 금메달 쾌거",
-     "press": "wikitree.co.kr",
+     "title": "최민정, 쇼트트랙 월드투어 여자 1000ｍ 4개 대회 연속 우승",
+     "press": "khan.co.kr",
      "publishedAt": "2026-11-28T08:46:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1178614"
+     "link": "https://m.sports.naver.com/general/article/032/0003485624"
     }
    ]
   },
@@ -112,13 +144,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 43,
+   "articles90": 42,
    "recent20": 4,
    "press": 13,
-   "firstArticleAt": "2026-11-28T08:16:00.000Z",
+   "firstArticleAt": "2026-11-28T08:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "우승 안긴 김기동 감독, \"재계약 논의 깊게 들어가지 않았다\"",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-28T09:50:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888284"
+    },
     {
      "title": "'10년 만의 우승' 서울 김기동 감독이 내쉰 안도의 한숨, \"팬들과 약속 ...",
      "press": "mydaily.co.kr",
@@ -130,12 +168,6 @@
      "press": "sportschosun.com",
      "publishedAt": "2026-11-28T09:35:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/076/0004470507"
-    },
-    {
-     "title": "FC서울, 우승 파티서 대전 4-1 완파…광주는 5경기 무패(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T09:35:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014350871"
     }
    ]
   },
@@ -144,10 +176,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 13,
+   "articles90": 8,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-28T08:14:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-28T08:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,14 +204,46 @@
    ]
   },
   {
+   "keyword": "김영광, 보복운전 한 달 만에 복귀",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-28T08:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'보복운전 논란' 김영광, 유튜브 복귀...\"진심으로 사과\"",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-28T09:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001274294?sid=102"
+    },
+    {
+     "title": "김영광, 보복운전 논란 이후 유튜브 복귀… \"죄송하고 면목없다\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T09:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000968303"
+    },
+    {
+     "title": "김영광, ‘보복운전 논란’ 한 달여 만 유튜브 복귀…“반성하는 시간 ...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-28T09:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005770284"
+    }
+   ]
+  },
+  {
    "keyword": "북창 공군기지 운영재개",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-28T08:18:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-28T08:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -200,38 +264,6 @@
      "press": "daejonilbo.com",
      "publishedAt": "2026-11-28T08:51:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/656/0000193811?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "김영광, 보복운전 한 달 만에 복귀",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-28T08:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김영광, 보복운전 논란 이후 유튜브 복귀… \"죄송하고 면목없다\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T09:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000968303"
-    },
-    {
-     "title": "김영광, ‘보복운전 논란’ 한 달여 만 유튜브 복귀…“반성하는 시간 ...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-28T09:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005770284"
-    },
-    {
-     "title": "\"빠르다 빨라\"…'보복운전 논란' 김영광, 한 달여 만에 복귀→사죄 속 ...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-28T09:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409945"
     }
    ]
   },
@@ -266,13 +298,45 @@
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288484"
     }
    ]
+  },
+  {
+   "keyword": "dl 이앤씨",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T08:56:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한밤중에 400명 불러 모은 DL 회장…실적 부진에 또 '갑질' 논란",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-28T09:32:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68633"
+    },
+    {
+     "title": "[단독] DL이앤씨 직원들, 한밤 호출 이어 주말에도 불려나왔다",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T09:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439423?sid=102"
+    },
+    {
+     "title": "이해욱 DL그룹 회장, 또 갑질 논란… 운전기사 폭행 이어 퇴근한 직원 4...",
+     "press": "s-journal.co.kr",
+     "publishedAt": "2026-11-28T08:56:00.000Z",
+     "link": "https://www.s-journal.co.kr/news/articleView.html?idxno=45764"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2076,
-  "matched": 1018,
-  "avgLeadMin": 666,
+  "flagged": 2075,
+  "matched": 1017,
+  "avgLeadMin": 667,
   "recent": [
    {
     "keyword": "우리은행 연승 성공",
