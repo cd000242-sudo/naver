@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T01:00:57.171Z",
+ "builtAt": "2026-11-28T01:11:00.822Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 23,
  "candidates": [
   {
-   "keyword": "김하성 디트로이트 계약",
+   "keyword": "주유소 기름값 하락",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 6,
-   "press": 16,
-   "firstArticleAt": "2026-11-28T00:00:00.000Z",
-   "exclusive": true,
+   "articles90": 14,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-27T23:54:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오피셜] '한국 복귀 위기→FA 1호 계약' 대반전 만든 김하성, 디트로이...",
-     "press": "sportalkorea.com",
-     "publishedAt": "2026-11-28T00:57:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/139/0002256687"
+     "title": "주유소 기름값 28주 연속 하락…서울 휘발유 2주째 1800원대",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-28T01:08:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322208&inflow=N"
     },
     {
-     "title": "MLB 디트로이트, 김하성과 1년 500만달러 계약 공식발표",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-28T00:50:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=785524"
+     "title": "주유소 기름값 28주 연속 하락⋯휘발유·경유 동반 내림세",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-28T01:08:00.000Z",
+     "link": "https://www.viva100.com/article/20261128500042"
     },
     {
-     "title": "김하성, 디트로이트 이적 '확정' … \"입단 환영합니다\"",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-28T00:48:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/28/2026112850014.html"
+     "title": "주유소 기름값 28주 연속 하락",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-28T01:06:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888763"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 5,
-   "press": 12,
-   "firstArticleAt": "2026-11-27T23:34:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-28T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“D-day” 큰절 올린 곽시양♥유지애, 오늘(28일) 웨딩마치",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-28T01:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001152146"
+    },
     {
      "title": "곽시양·유지애, 오늘(28일) 결혼… \"행복하게 살게요\"",
      "press": "hankookilbo.com",
@@ -65,140 +71,38 @@
      "press": "newsen.com",
      "publishedAt": "2026-11-28T00:49:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001192077"
-    },
-    {
-     "title": "곽시양♥유지애, 오늘(28일) 결혼…”행복하게 살게요” [왓IS]",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-28T00:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543988"
     }
    ]
   },
   {
-   "keyword": "주유소 기름값 하락",
+   "keyword": "S&P 프랑스 신용등급 전망",
    "sources": [
     "signal.bz"
    ],
    "articles90": 11,
    "recent20": 1,
    "press": 11,
-   "firstArticleAt": "2026-11-27T23:54:00.000Z",
+   "firstArticleAt": "2026-11-27T23:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "주유소 기름값 28주째↓…국제유가도 동반 하락",
-     "press": "segye.com",
-     "publishedAt": "2026-11-28T00:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004178776?sid=102"
+     "title": "S&P, 프랑스 신용등급 전망 '부정적' 하향…재정악화·정치불안 우려",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-28T01:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005447683?sid=101"
     },
     {
-     "title": "주유소 기름값 28주째 하락...서울 2주 연속 평균 1천800원대",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-28T00:38:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73699"
+     "title": "S&P, 프랑스 신용등급 전망 '부정적'으로 하향…경기침체에 재정 악화",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-28T00:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522898?sid=104"
     },
     {
-     "title": "전국 기름값 28주째 하락...서울 휘발윳값 1,800원대",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T00:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439265?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "전국 기온 뚝 비 눈",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-27T23:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[날씨] 기온 최대 10도 ‘뚝’⋯충청·호남 눈·비, 일요일 영하권 추위",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-28T00:32:00.000Z",
-     "link": "https://www.viva100.com/article/20261128500024"
-    },
-    {
-     "title": "전국 기온 뚝…남부 곳곳 비·눈 예보 [오늘 날씨]",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-28T00:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416815?sid=102"
-    },
-    {
-     "title": "[주말 날씨]어제보다 기온 '뚝'…일요일 전국 영하권",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-28T00:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005610995?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 불륜 상대 연계",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-27T23:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨황 불륜녀 연관 中시설서 ‘엔비디아 최첨단 칩’ 발견…“덩치 커...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-28T00:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003704087?sid=104"
-    },
-    {
-     "title": "“젠슨 황 불륜 상대와 연계된 중국 데이터센터에 엔비디아 블랙웰 설치...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-28T00:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012303091?sid=104"
-    },
-    {
-     "title": "젠슨 황 불륜 상대 연계 中 데이터센터서 ‘블랙웰’ 발견",
-     "press": "busan.com",
-     "publishedAt": "2026-11-28T00:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001409353?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "굿파트너 2",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-27T23:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장나라·김혜윤 ‘굿파트너2’, 거침없는 상승세…9.8% 자체 최고 경신...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-28T00:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543984"
-    },
-    {
-     "title": "장나라 “이혼은 정답 없는 길”…‘굿파트너2’ 최고 시청률 11.1%",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-27T23:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000329398"
-    },
-    {
-     "title": "'굿파트너2' 장나라의 역발상 통했다…시청률 9.8%로 자체 기록 경신",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-27T23:58:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848720"
+     "title": "S&P, 프랑스 신용 등급 전망 ‘부정적’…재정 적자·정치 갈등 우려",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-28T00:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004012246?sid=104"
     }
    ]
   },
@@ -235,40 +139,9 @@
    ]
   },
   {
-   "keyword": "부산 날씨",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T00:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "아침 일찍 약속 있으면 반드시 알아야…내일(29일) 날씨 소식 심상치 않...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-28T00:40:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1178547"
-    },
-    {
-     "title": "[날씨] 기온 최대 10도 ‘뚝’⋯충청·호남 눈·비, 일요일 영하권 추위",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-28T00:32:00.000Z",
-     "link": "https://www.viva100.com/article/20261128500024"
-    },
-    {
-     "title": "[내일(29일) 날씨] 전국 맑은 가운데 영하권 아침 추위…새벽까지 호남...",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-28T00:12:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=95839"
-    }
-   ]
-  },
-  {
    "keyword": "서울시 중등교사 임용시험",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 9,
@@ -294,39 +167,39 @@
      "title": "서울 중등교사 임용 1차시험",
      "press": "newsis.com",
      "publishedAt": "2026-11-28T00:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350478?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/003/0014350476?sid=102"
     }
    ]
   },
   {
-   "keyword": "오픈ai",
+   "keyword": "송민규 데뷔골 폭발!",
    "sources": [
-    "google"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-27T23:46:00.000Z",
+   "firstArticleAt": "2026-11-27T23:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "오픈AI, 애플에 맞소송 제기⋯“영업비밀 탈취·하드웨어 공급망 압박”",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-28T00:54:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2654171"
+     "title": "송민규, 포르투갈리그 데뷔골 폭발…나시오날 2-1 승리 견인",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-28T00:58:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=785528"
     },
     {
-     "title": "오픈AI, 애플에 맞소송…\"영업비밀 탈취·시장 진출 방해\"",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-28T00:40:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1733296"
+     "title": "송민규, 포르투갈 리그 데뷔골…나시오날 2-1 승리",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T00:25:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/003/0014350473"
     },
     {
-     "title": "영업비밀 소송 맞불…이번엔 오픈AI가 애플 때렸다",
-     "press": "choicenews.co.kr",
-     "publishedAt": "2026-11-27T23:46:00.000Z",
-     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173578"
+     "title": "'드디어' 한국 국가대표, 유럽 무대 데뷔골 폭발...나시오날 송민규, 환...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-27T23:42:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/477/0000641311"
     }
    ]
   },
@@ -366,10 +239,28 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1988,
-  "matched": 974,
-  "avgLeadMin": 646,
+  "flagged": 1990,
+  "matched": 977,
+  "avgLeadMin": 648,
   "recent": [
+   {
+    "keyword": "롯데 자이언츠",
+    "hitKeyword": "롯데 자이언츠 FA",
+    "hitAt": "2026-11-28T10:00:00+09:00",
+    "leadMin": 2926
+   },
+   {
+    "keyword": "이종석 신민아에 재혼황후",
+    "hitKeyword": "이세영 재혼황후",
+    "hitAt": "2026-11-28T10:00:00+09:00",
+    "leadMin": 592
+   },
+   {
+    "keyword": "그냥 사람 친구",
+    "hitKeyword": "그냥사람친구 첫방송",
+    "hitAt": "2026-11-28T10:00:00+09:00",
+    "leadMin": 69
+   },
    {
     "keyword": "송민규 포르투갈 리그 데뷔골",
     "hitKeyword": "송민규 데뷔골",
@@ -411,24 +302,6 @@
     "hitKeyword": "남경주 국민참여재판",
     "hitAt": "2026-11-28T09:00:00+09:00",
     "leadMin": 9
-   },
-   {
-    "keyword": "필라델피아 반도체 지수",
-    "hitKeyword": "반도체 공급 부족",
-    "hitAt": "2026-11-28T08:30:00+09:00",
-    "leadMin": 30
-   },
-   {
-    "keyword": "인터넷우체국 개인정보 유출",
-    "hitKeyword": "인터넷우체국 개인정보 유출",
-    "hitAt": "2026-11-28T08:30:00+09:00",
-    "leadMin": 20
-   },
-   {
-    "keyword": "젠슨 황 디올 재킷 착용",
-    "hitKeyword": "젠슨 황 재킷",
-    "hitAt": "2026-11-28T08:00:00+09:00",
-    "leadMin": 30
    }
   ]
  }
