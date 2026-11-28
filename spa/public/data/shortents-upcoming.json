@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T03:30:24.489Z",
+ "builtAt": "2026-11-28T03:40:28.466Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,60 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 10,
  "candidates": [
+  {
+   "keyword": "GS AI 데이터센터 착공식 참석",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 69,
+   "recent20": 14,
+   "press": 39,
+   "firstArticleAt": "2026-11-28T02:23:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "도현수 GS AI인프라 대표 지역 상생·인재 육성 청사진 제시",
+     "press": "kado.net",
+     "publishedAt": "2026-11-28T03:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213883?sid=100"
+    },
+    {
+     "title": "[포토] 동해 GS AI데이터센터 착공식",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-28T03:38:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5088816"
+    },
+    {
+     "title": "李대통령, AI 속도전 강조…\"단 한 걸음만 늦어져도 영원한 추격자\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-28T03:36:00.000Z",
+     "link": "https://www.ajunews.com/view/20261128122722769"
+    }
+   ]
+  },
   {
    "keyword": "국정원, 김정은 방중 동향 주시",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 28,
-   "recent20": 2,
-   "press": 28,
-   "firstArticleAt": "2026-11-28T02:01:00.000Z",
+   "articles90": 24,
+   "recent20": 1,
+   "press": 24,
+   "firstArticleAt": "2026-11-28T02:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[속보] 국정원, 김정은 추가 방중 가능성에 \"여러 동향을 주시 중\"",
+     "press": "kado.net",
+     "publishedAt": "2026-11-28T03:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213882?sid=100"
+    },
     {
      "title": "국정원, 김정은 추가 방중 가능성에 \"여러 동향 주시 중\"",
      "press": "jeonmae.co.kr",
@@ -33,12 +73,39 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-28T03:12:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002729760?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "디트로이트, 김하성 1년 계약",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-28T02:14:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "MLB 디트로이트, 김하성 영입 공식 발표…주전 유격수로 재기 도전",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-28T03:32:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1316731"
     },
     {
-     "title": "김정은 추가 방중 가능성…국정원 \"여러 동향 주시 중\"",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-28T03:08:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1322210&inflow=N"
+     "title": "김하성, 평균이하 연봉 67억 계약…언제든 버릴 수 있는 수준, 기회 많지...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-28T03:28:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/445/0000494189"
+    },
+    {
+     "title": "[오피셜]267억 원에서 67억 원으로 몸값 떨어졌지만…디트로이트는 왜 ...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-28T03:05:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/445/0000494186"
     }
    ]
   },
@@ -47,10 +114,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 10,
    "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-28T02:06:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-28T02:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -71,70 +138,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-28T03:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012303112?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "곽시양 유지애 오늘 결혼",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-28T02:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "곽시양♥유지애, 오늘(28일) 결혼..큰절 올리며 “행복하게 살게요”",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-28T03:24:00.000Z",
-     "link": "http://www.breaknews.com/1254993"
-    },
-    {
-     "title": "곽시양♥유지애, 오늘(28일) 결혼... \"행복하게 살게요 여러분\"",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-28T02:58:00.000Z",
-     "link": "https://www.insight.co.kr/news/583941"
-    },
-    {
-     "title": "2년 전 ​‘최애’ 고백→부부로…곽시양♥유지애, 오늘 결혼",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-28T02:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001283998"
-    }
-   ]
-  },
-  {
-   "keyword": "송민규 포르투갈 데뷔골",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-28T02:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "송민규가 증명했다... 포르투갈 데뷔골 폭발",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-28T03:21:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/047/0002537542"
-    },
-    {
-     "title": "나시오날 송민규, 포르투갈 리그 데뷔골 폭발",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T02:59:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/052/0002439320"
-    },
-    {
-     "title": "송민규, 포르투갈 리그 데뷔골…나시오날 2연승 견인",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-28T02:56:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261128500016"
     }
    ]
   },
@@ -169,14 +172,83 @@
      "link": "https://n.news.naver.com/mnews/article/016/0002729755?sid=100"
     }
    ]
+  },
+  {
+   "keyword": "지효, 비냐 델 마르 출격",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T02:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트와이스 지효, K팝 솔로 아티스트 최초 '2027 비냐 델 마르 페스티벌' ...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-28T03:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646364"
+    },
+    {
+     "title": "트와이스 지효, K팝 솔로 최초 칠레 ‘비냐 델 마르 페스티벌’ 출격",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-28T02:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001307272"
+    },
+    {
+     "title": "지효, '2027 비냐 델 마르 페스티벌' 출격…K-팝 솔로 최초",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-28T02:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009315193"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2010,
-  "matched": 990,
-  "avgLeadMin": 650,
+  "flagged": 2013,
+  "matched": 996,
+  "avgLeadMin": 647,
   "recent": [
+   {
+    "keyword": "이동연 팬레터 폐기 사과",
+    "hitKeyword": "이동연 해명",
+    "hitAt": "2026-11-28T12:30:00+09:00",
+    "leadMin": 270
+   },
+   {
+    "keyword": "이동연 팬레터 논란",
+    "hitKeyword": "이동연 해명",
+    "hitAt": "2026-11-28T12:30:00+09:00",
+    "leadMin": 260
+   },
+   {
+    "keyword": "이동연 보관 인증 공개",
+    "hitKeyword": "이동연 해명",
+    "hitAt": "2026-11-28T12:30:00+09:00",
+    "leadMin": 219
+   },
+   {
+    "keyword": "이동연 팬레터 보관 인증",
+    "hitKeyword": "이동연 해명",
+    "hitAt": "2026-11-28T12:30:00+09:00",
+    "leadMin": 199
+   },
+   {
+    "keyword": "이동연, 팬레터 폐기 2차 사과",
+    "hitKeyword": "이동연 해명",
+    "hitAt": "2026-11-28T12:30:00+09:00",
+    "leadMin": 109
+   },
+   {
+    "keyword": "곽시양 유지애 오늘 결혼",
+    "hitKeyword": "곽시양 유지애 결혼",
+    "hitAt": "2026-11-28T12:30:00+09:00",
+    "leadMin": 40
+   },
    {
     "keyword": "대만",
     "hitKeyword": "대만 부산병 유행",
@@ -200,42 +272,6 @@
     "hitKeyword": "굿파트너2 시청률",
     "hitAt": "2026-11-28T11:30:00+09:00",
     "leadMin": 763
-   },
-   {
-    "keyword": "인터넷우체국 개인정보 유출",
-    "hitKeyword": "인터넷우체국 해킹",
-    "hitAt": "2026-11-28T11:30:00+09:00",
-    "leadMin": 49
-   },
-   {
-    "keyword": "인터넷우체국 정보 유출",
-    "hitKeyword": "인터넷우체국 해킹",
-    "hitAt": "2026-11-28T11:30:00+09:00",
-    "leadMin": 7
-   },
-   {
-    "keyword": "곽시양 유지애 오늘 결혼 큰절 약속",
-    "hitKeyword": "곽시양 유지애 결혼",
-    "hitAt": "2026-11-28T11:00:00+09:00",
-    "leadMin": 79
-   },
-   {
-    "keyword": "곽시양 유지애 오늘 결혼해요",
-    "hitKeyword": "곽시양 유지애 결혼",
-    "hitAt": "2026-11-28T11:00:00+09:00",
-    "leadMin": 59
-   },
-   {
-    "keyword": "곽시양 유지애 결혼",
-    "hitKeyword": "곽시양 유지애 결혼",
-    "hitAt": "2026-11-28T11:00:00+09:00",
-    "leadMin": 39
-   },
-   {
-    "keyword": "곽시양 유지애 오늘 결혼한다",
-    "hitKeyword": "곽시양 유지애 결혼",
-    "hitAt": "2026-11-28T11:00:00+09:00",
-    "leadMin": 19
    }
   ]
  }
