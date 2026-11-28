@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T03:50:30.823Z",
+ "builtAt": "2026-11-28T04:00:33.366Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "동해 AI 데이터센터 착공",
    "sources": [
     "nate"
    ],
-   "articles90": 91,
-   "recent20": 11,
-   "press": 45,
-   "firstArticleAt": "2026-11-28T02:23:00.000Z",
+   "articles90": 97,
+   "recent20": 12,
+   "press": 50,
+   "firstArticleAt": "2026-11-28T02:31:00.000Z",
    "exclusive": true,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "[속보]李대통령 \"AI 경쟁 선도국가 위해 총력 지원\"…'메가프로젝트' 동...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-28T03:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122401?sid=101"
+     "title": "이 대통령 “AI 경쟁, 선도국 되도록 정부 모든 역량 동원”…동해 AIDC...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-28T03:58:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1178574"
     },
     {
-     "title": "1.2GW급 GS 동해 AI 데이터센터 착공…정부 메가프로젝트 ‘첫 삽’",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-28T03:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207921?sid=101"
+     "title": "동해에 2.4GW AI 심장 짓는다…李대통령 \"세계 AI 질서 주도\"",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-28T03:56:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=102198"
     },
     {
-     "title": "이 대통령 \"동해에 亞 최대 AI인프라 첫 삽… 글로벌 투자 마중물\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T03:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968288?sid=100"
+     "title": "동해 GS AI데이터센터 착공..이재명 대통령 참석 메가프로젝트 ‘초고속...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-28T03:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729767?sid=101"
     }
    ]
   },
@@ -48,10 +48,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 19,
-   "firstArticleAt": "2026-11-28T02:21:00.000Z",
+   "articles90": 16,
+   "recent20": 0,
+   "press": 16,
+   "firstArticleAt": "2026-11-28T02:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -80,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-28T02:26:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-28T02:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,46 +108,14 @@
    ]
   },
   {
-   "keyword": "예산안 미래대응기금",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-28T02:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "예산안 시한 D-4…여야 '104조 미래대응기금' 접점 못 찾고 헛바퀴",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-28T03:40:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=731386"
-    },
-    {
-     "title": "예산안 처리 시한 나흘 앞... 여야 '미래대응기금 공방'",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-28T03:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000968287?sid=100"
-    },
-    {
-     "title": "미래대응기금 설전…與 \"재정 안정 방파제\" 野 \"미래세대 빚잔치\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T02:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350574?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "디트로이트, 김하성 1년 계약",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-28T02:26:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T02:32:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -168,6 +136,38 @@
      "press": "mhnse.com",
      "publishedAt": "2026-11-28T03:05:00.000Z",
      "link": "https://m.sports.naver.com/wbaseball/article/445/0000494186"
+    }
+   ]
+  },
+  {
+   "keyword": "예산안 미래대응기금",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T02:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "예산안 시한 D-4…여야 '104조 미래대응기금' 접점 못 찾고 헛바퀴",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-28T03:40:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=731386"
+    },
+    {
+     "title": "예산안 처리 시한 나흘 앞... 여야 '미래대응기금 공방'",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-28T03:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000968287?sid=100"
+    },
+    {
+     "title": "미래대응기금 설전…與 \"재정 안정 방파제\" 野 \"미래세대 빚잔치\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T02:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014350574?sid=100"
     }
    ]
   },
@@ -204,6 +204,38 @@
    ]
   },
   {
+   "keyword": "젠슨 황 중국 발견",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-28T02:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 수출 통제 엔비디아 '블랙웰'…앨리스 황 연계 中기업서 발견",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-28T03:56:00.000Z",
+     "link": "https://www.ajunews.com/view/20261128123650784"
+    },
+    {
+     "title": "젠슨 황 불륜 상대' 연계 중국 시설에서 엔비디아 최첨단 칩 발견",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-28T03:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002439327?sid=104"
+    },
+    {
+     "title": "'젠슨 황 불륜 상대' 연계 중국 시설서 '블랙웰' 발견",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-28T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522908?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "곽시양♥유지애 결혼합니다",
    "sources": [
     "nate"
@@ -234,11 +266,43 @@
      "link": "https://m.entertain.naver.com/article/468/0001283998"
     }
    ]
+  },
+  {
+   "keyword": "박홍근 법사위",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T03:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박홍근, 입법 관문 된 법사위에 쓴소리…\"본연의 역할 충실해야\"",
+     "press": "gobalnews.com",
+     "publishedAt": "2026-11-28T03:42:00.000Z",
+     "link": "https://www.gobalnews.com/news/articleView.html?idxno=203187"
+    },
+    {
+     "title": "지역구 예산 질의 거부한 박홍근…법사위 기능 분리 제안",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-28T03:39:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261128000044"
+    },
+    {
+     "title": "박홍근 “법사위 과도한 권한 개편해야”... 민주당끼리 충돌 후 장외 공...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-28T03:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004012260?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2015,
+  "flagged": 2017,
   "matched": 996,
   "avgLeadMin": 647,
   "recent": [
