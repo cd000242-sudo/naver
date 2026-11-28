@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T06:41:24.792Z",
+ "builtAt": "2026-11-28T06:51:27.904Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 18,
-   "firstArticleAt": "2026-11-28T05:12:00.000Z",
+   "articles90": 20,
+   "recent20": 4,
+   "press": 20,
+   "firstArticleAt": "2026-11-28T05:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이해욱 DL그룹 회장 직원 수백 명 심야 소집 논란",
-     "press": "cwn.kr",
-     "publishedAt": "2026-11-28T06:36:00.000Z",
-     "link": "https://www.cwn.kr/news/articleView.html?idxno=62852"
+     "title": "“금요일 밤늦게 수백명 긴급 호출”… DL그룹 회장 또 ‘갑질’ 구설",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-28T06:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002834388?sid=102"
     },
     {
-     "title": "DL그룹 회장, 실적부진 부서 직원 수백명 ‘야간 소집’",
-     "press": "donga.com",
-     "publishedAt": "2026-11-28T06:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003765910?sid=102"
+     "title": "이해욱 DL그룹 회장, 한밤중 직원 수백명 소집 물의",
+     "press": "autodaily.co.kr",
+     "publishedAt": "2026-11-28T06:46:00.000Z",
+     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602534"
     },
     {
-     "title": "DL그룹 회장, 한밤중에 직원 수백명 호출…무슨 일이?",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-28T06:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653972?sid=101"
+     "title": "[속보] DL그룹 회장, 밤 10시 “전직원 나와” 새벽 귀가시켜…한밤 호...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-28T06:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003704096?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 AI 데이터센터 방문",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 17,
+   "recent20": 5,
+   "press": 16,
+   "firstArticleAt": "2026-11-28T05:24:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령, 강릉 주문진시장 방문…오징어·노가리 구매",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-28T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005611038?sid=100"
+    },
+    {
+     "title": "이 대통령, 동해 GS AI데이터센터 착공식 이후 국내 기업 기술 부스 방문",
+     "press": "kado.net",
+     "publishedAt": "2026-11-28T06:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213890?sid=100"
+    },
+    {
+     "title": "이 대통령, 동해 AI데이터센터 착공식 참석... “지역 경제 활성화 이끌...",
+     "press": "vop.co.kr",
+     "publishedAt": "2026-11-28T06:42:00.000Z",
+     "link": "https://vop.co.kr/A00001697811.html"
     }
    ]
   },
@@ -47,13 +79,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 14,
-   "recent20": 6,
-   "press": 14,
-   "firstArticleAt": "2026-11-28T05:12:00.000Z",
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-28T05:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이해욱 DL그룹 회장, 한밤중 직원 수백명 소집 물의",
+     "press": "autodaily.co.kr",
+     "publishedAt": "2026-11-28T06:46:00.000Z",
+     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602534"
+    },
     {
      "title": "이해욱 DL그룹 회장 직원 수백 명 심야 소집 논란",
      "press": "cwn.kr",
@@ -65,77 +103,6 @@
      "press": "sisajournal.com",
      "publishedAt": "2026-11-28T06:29:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/586/0000143233?sid=101"
-    },
-    {
-     "title": "“실적 나쁘다고 밤 10시 집합?”…직원 수백명 불러낸 대기업 회장",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-28T06:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416872?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 AI 데이터센터 방문",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 14,
-   "recent20": 7,
-   "press": 13,
-   "firstArticleAt": "2026-11-28T05:24:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "GS, 동해 AI 데이터센터 착공…허태수 회장 “AI 산업의 미래를 보여주...",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-28T06:40:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611281533084760027"
-    },
-    {
-     "title": "GS, 동해에 AI 데이터센터 짓는다…메가프로젝트 GW급 첫 착공",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-28T06:36:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261128500031"
-    },
-    {
-     "title": "이재명 대통령, 강릉 주문진시장 찾아 민생물가 점검",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-28T06:28:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261128026326069"
-    }
-   ]
-  },
-  {
-   "keyword": "황민현, 플레디스 떠난다",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-28T05:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "황민현, 14년만 플레디스 떠난다…\"12월 계약 종료\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T06:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014350723"
-    },
-    {
-     "title": "황민현 14년 만에 플레디스 떠난다…\"내달 14일 전속계약 종료\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-28T06:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/079/0004214855"
-    },
-    {
-     "title": "황민현, 14년만에 결별→플레디스 떠난다..\"이종석 소속사와 계약 논의...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-28T05:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005646456"
     }
    ]
   },
@@ -145,7 +112,7 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 3,
+   "recent20": 2,
    "press": 7,
    "firstArticleAt": "2026-11-28T06:05:00.000Z",
    "exclusive": false,
@@ -172,14 +139,111 @@
    ]
   },
   {
-   "keyword": "커리, 3경기 결장",
+   "keyword": "황민현, 플레디스 떠난다",
    "sources": [
+    "signal.bz",
     "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T05:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "황민현, 14년만 플레디스 떠난다…\"12월 계약 종료\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-28T06:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014350723"
+    },
+    {
+     "title": "황민현 14년 만에 플레디스 떠난다…\"내달 14일 전속계약 종료\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-28T06:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/079/0004214855"
+    },
+    {
+     "title": "황민현, 14년만에 결별→플레디스 떠난다..\"이종석 소속사와 계약 논의...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-28T05:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005646456"
+    }
+   ]
+  },
+  {
+   "keyword": "주유소 기름값 하락",
+   "sources": [
+    "signal.bz"
    ],
    "articles90": 4,
    "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-28T05:19:00.000Z",
+   "firstArticleAt": "2026-11-28T05:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "주유소 기름값 28주째 하락…수입 원유가 떨어져",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-28T06:48:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1545294"
+    },
+    {
+     "title": "전국 주유소 기름값 28주째 하락… 휘발유 1854원",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-28T06:38:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3452890"
+    },
+    {
+     "title": "주유소 기름값 28주째 하락…50리터 넣어도 35원 절약",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-28T06:18:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288405"
+    }
+   ]
+  },
+  {
+   "keyword": "성시경 쌈디",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-28T05:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"형, 한 번만 만나줘\"…'절교' 성시경과 화해한 쌈디, 달라진 술버릇",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-28T06:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005447723"
+    },
+    {
+     "title": "\"눈물 날 정도로 속상했다\"…성시경, 쌈디에 절교 선언한 사연",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-28T06:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/015/0005359332"
+    },
+    {
+     "title": "'음주 후 응급실行' 쌈디, 4년 만에 달라졌다…\"얌전하게 택시 타고 가더...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-28T05:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409924"
+    }
+   ]
+  },
+  {
+   "keyword": "커리, 3경기 결장",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T06:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -200,70 +264,6 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-28T06:00:00.000Z",
      "link": "https://www.newspim.com/news/view/20261128000048"
-    }
-   ]
-  },
-  {
-   "keyword": "주유소 기름값 하락",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T05:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "전국 주유소 기름값 28주째 하락… 휘발유 1854원",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-28T06:38:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3452890"
-    },
-    {
-     "title": "주유소 기름값 28주째 하락…50리터 넣어도 35원 절약",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-28T06:18:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288405"
-    },
-    {
-     "title": "전국 주유소 기름값 28주 연속 하락... 휘발유·경유 모두 소폭 내려",
-     "press": "vop.co.kr",
-     "publishedAt": "2026-11-28T05:36:00.000Z",
-     "link": "https://vop.co.kr/A00001697810.html"
-    }
-   ]
-  },
-  {
-   "keyword": "김기동 감독 우승 축하해",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T05:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 김기동-황선홍 감독 '경기 전 반가운 인사'",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-28T06:09:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749509"
-    },
-    {
-     "title": "‘우승컵 들러리’ 될 생각 없다! 황선홍 대전 감독 “서울·전북을 만...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-28T05:28:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/144/0001152165"
-    },
-    {
-     "title": "[포토] 황선홍 감독, 김기동 감독 우승 축하해",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-28T05:17:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/076/0004470435"
     }
    ]
   },
@@ -300,38 +300,6 @@
    ]
   },
   {
-   "keyword": "성시경 쌈디",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T05:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"눈물 날 정도로 속상했다\"…성시경, 쌈디에 절교 선언한 사연",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-28T06:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/015/0005359332"
-    },
-    {
-     "title": "'음주 후 응급실行' 쌈디, 4년 만에 달라졌다…\"얌전하게 택시 타고 가더...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-28T05:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409924"
-    },
-    {
-     "title": "쌈디, 술자리 부상 후 성시경에게 손절당한 사연 \"최근 재회\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T05:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009315287"
-    }
-   ]
-  },
-  {
    "keyword": "청소년 만난 김민석",
    "sources": [
     "signal.bz"
@@ -359,7 +327,7 @@
      "title": "청소년 당원 만난 김민석 대표",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-28T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016468842?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/001/0016468839?sid=100"
     }
    ]
   }
