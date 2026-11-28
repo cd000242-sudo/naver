@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T00:10:41.176Z",
+ "builtAt": "2026-11-28T00:20:44.082Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,35 +11,34 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "굿파트너 2",
+   "keyword": "송민규 포르투갈 리그 데뷔골",
    "sources": [
-    "signal.bz",
-    "nate"
+    "daum"
    ],
    "articles90": 12,
    "recent20": 2,
    "press": 12,
-   "firstArticleAt": "2026-11-27T22:41:00.000Z",
+   "firstArticleAt": "2026-11-27T22:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장나라 “이혼은 정답 없는 길”…‘굿파트너2’ 최고 시청률 11.1%",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-27T23:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000329398"
+     "title": "‘마데이라 더비’서 터진 송민규의 포르투갈 데뷔골…나시오날 2연승",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-28T00:18:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/144/0001152132"
     },
     {
-     "title": "'굿파트너2' 장나라의 역발상 통했다…시청률 9.8%로 자체 기록 경신",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-27T23:58:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848720"
+     "title": "송민규, 마데이라 더비서 포르투갈 무대 데뷔골…나시오날 2-1 승리 이끌...",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-28T00:10:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=436046"
     },
     {
-     "title": "‘굿파트너2’ 시청률 2.2%p 껑충 자체 최고 기록",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-27T23:50:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305892"
+     "title": "송민규, 포르투갈 리그서 데뷔골… 나시오날 2-1 승",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-27T23:46:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888243"
     }
    ]
   },
@@ -48,18 +47,18 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 3,
-   "press": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-27T23:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "주유소 기름값 28주째 내리막…서울 휘발유 2주 연속 1800원대",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-28T00:06:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68629"
+     "title": "주유소 기름값 28주째 하락…서울 휘발유 2주 연속 1800원대",
+     "press": "ftoday.co.kr",
+     "publishedAt": "2026-11-28T00:18:00.000Z",
+     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=370777"
     },
     {
      "title": "국제유가 공급 과잉에 약세 … 주유소 기름값 1800원대, 28주 연속 하락",
@@ -68,42 +67,43 @@
      "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/28/2026112850008.html"
     },
     {
-     "title": "전국 주유소 기름값 28주째 하락…서울 2주 연속 1,800원대",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-27T23:54:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121535"
+     "title": "주유소 기름값 28주째 내리막…서울 휘발유 2주 연속 1800원대",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-28T00:06:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68629"
     }
    ]
   },
   {
-   "keyword": "최민희 징계",
+   "keyword": "굿파트너 2",
    "sources": [
-    "daum"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-27T23:01:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-27T22:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민주당, 최민희 '당원 자격정지 2년' 중징계... 최 \"재심 신청하겠다\"",
-     "press": "lawtv.kr",
-     "publishedAt": "2026-11-28T00:08:00.000Z",
-     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61546"
+     "title": "장나라·김혜윤 ‘굿파트너2’, 거침없는 상승세…9.8% 자체 최고 경신...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-28T00:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543984"
     },
     {
-     "title": "최민희 중징계에 ‘최-최 신당설’? … 실현 가능성 있나",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-28T00:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053698?sid=100"
+     "title": "'굿파트너2' 장나라의 역발상 통했다…시청률 9.8%로 자체 기록 경신",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-27T23:58:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848720"
     },
     {
-     "title": "與野 모두 '징계 내홍' 폭발…지도부 흔들고 계파전쟁 격화",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-27T23:56:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=102192"
+     "title": "장나라 “이혼은 정답 없는 길”…‘굿파트너2’ 최고 시청률 11.1%",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-27T23:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329398"
     }
    ]
   },
@@ -112,13 +112,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 3,
-   "press": 4,
+   "articles90": 6,
+   "recent20": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-27T23:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "복귀한 젠슨 황, 가죽 재킷 벗고 입은 '반성 재킷' 알고 보니 '470만원 디...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-28T00:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005610994?sid=101"
+    },
     {
      "title": "젠슨 황, 시그니처 '가죽' 버리고 면 재킷 차림으로 복귀…알고 보니 47...",
      "press": "imaeil.com",
@@ -130,12 +136,38 @@
      "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-28T00:08:00.000Z",
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=888244"
+    }
+   ]
+  },
+  {
+   "keyword": "100일의 거짓말",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 4,
+   "press": 5,
+   "firstArticleAt": "2026-11-27T23:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'100일의 거짓말' 박진영, 김현주와 총구 맞댄 대치",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-28T00:18:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288266"
     },
     {
-     "title": "디올 재킷에 에르메스 신발…\"680만 원짜리 겸손 연출\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-28T00:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001406472?sid=104"
+     "title": "김현주, 박진영에 총구 겨눴다 (100일의 거짓말)",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-28T00:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001307256"
+    },
+    {
+     "title": "100일의 거짓말, 박진영·김현주 대치",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-28T00:14:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611280064"
     }
    ]
   },
@@ -145,10 +177,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-27T22:48:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-27T22:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -207,9 +239,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1975,
-  "matched": 974,
-  "avgLeadMin": 646,
+  "flagged": 1976,
+  "matched": 973,
+  "avgLeadMin": 647,
   "recent": [
    {
     "keyword": "시장",
