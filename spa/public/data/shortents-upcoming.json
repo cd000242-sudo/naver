@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T03:10:18.392Z",
+ "builtAt": "2026-11-28T03:20:21.543Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 33,
+   "articles90": 30,
    "recent20": 4,
-   "press": 33,
-   "firstArticleAt": "2026-11-28T01:42:00.000Z",
+   "press": 30,
+   "firstArticleAt": "2026-11-28T01:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국정원, 김정은 추가 방중 가능성에 \"여러 동향 주시 중\"",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-28T03:14:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1316722"
+    },
+    {
+     "title": "‘김정은 또 중국가나’…국정원 “여러 동향 주시 중”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-28T03:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729760?sid=100"
+    },
     {
      "title": "김정은 추가 방중 가능성…국정원 \"여러 동향 주시 중\"",
      "press": "newstomato.com",
      "publishedAt": "2026-11-28T03:08:00.000Z",
      "link": "http://www.newstomato.com/ReadNews.aspx?no=1322210&inflow=N"
-    },
-    {
-     "title": "김정은 또 중국 방문할까…국정원 “여러 동향 주시 중”",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-28T03:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003485612?sid=100"
-    },
-    {
-     "title": "국정원, 김정은 추가 방중 가능성에 \"여러 동향을 주시 중\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-28T02:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006416850?sid=100"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 13,
    "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-28T01:42:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-28T01:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "인터넷우체국 해킹으로 고객 개인정보 유출",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-28T03:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012303112?sid=105"
+    },
     {
      "title": "인터넷우체국서 개인정보 유출…하루치만 11만명",
      "press": "ddaily.co.kr",
@@ -65,12 +71,6 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-28T03:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000522907?sid=101"
-    },
-    {
-     "title": "국가 우편서비스 보안 구멍 … 11만명 개인정보 털리고도 피해 파악 깜...",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-28T03:00:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/28/2026112850023.html"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-28T01:47:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-28T01:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -112,10 +112,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-28T01:41:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-28T02:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -144,10 +144,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-28T01:44:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-28T02:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
