@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T07:11:35.614Z",
+ "builtAt": "2026-11-28T07:21:41.526Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,23 @@
  "measured": 29,
  "candidates": [
   {
-   "keyword": "dl 이앤씨",
+   "keyword": "이해욱 회장",
    "sources": [
     "daum"
    ],
-   "articles90": 28,
-   "recent20": 4,
-   "press": 28,
-   "firstArticleAt": "2026-11-28T05:42:00.000Z",
+   "articles90": 26,
+   "recent20": 2,
+   "press": 26,
+   "firstArticleAt": "2026-11-28T05:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이해욱 DL 회장, 실적 부진에 직원 '심야 소집' 논란",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-28T07:14:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=248015"
+    },
     {
      "title": "이해욱 DL그룹 회장, 실적 질타하다 밤 10시 직원 400명 소집 논란",
      "press": "segyebiz.com",
@@ -29,16 +35,10 @@
      "link": "http://www.segyebiz.com/newsView/20261128504539?OutUrl=naver"
     },
     {
-     "title": "‘불금’에 퇴근한 직원들 회사로 불러모은 이해욱 DL회장···또 갑질 ...",
+     "title": "‘불금’에 퇴근한 직원들, 회사로 호출한 이해욱 DL회장···또 갑질 논...",
      "press": "weekly.khan.co.kr",
      "publishedAt": "2026-11-28T07:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/033/0000053706?sid=102"
-    },
-    {
-     "title": "이해욱 DL그룹 회장, DL이앤씨 플랜트 설계실 직원 400명 심야 소집",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-28T06:56:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026112815472626383"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-28T05:42:00.000Z",
+   "articles90": 15,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-28T05:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 13,
    "recent20": 4,
-   "press": 12,
+   "press": 13,
    "firstArticleAt": "2026-11-28T06:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "장동혁 “무자격 대통령에 무자격 내각” …강금실·한준호 청문회 앞두...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-28T07:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002836158?sid=100"
+    },
     {
      "title": "與, 강금실 등 李정부 2기 인선 '엄호'…野 \"무자격만 골라\"",
      "press": "news1.kr",
@@ -97,12 +103,6 @@
      "press": "hidomin.com",
      "publishedAt": "2026-11-28T07:08:00.000Z",
      "link": "https://www.hidomin.com/news/articleView.html?idxno=731399"
-    },
-    {
-     "title": "국힘, 강금실·한준호 \"무자격 후보\" 맹비난...與 \"마녀사냥\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-28T07:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261128154353884"
     }
    ]
   },
@@ -126,16 +126,16 @@
      "link": "https://n.news.naver.com/mnews/article/055/0001406544?sid=100"
     },
     {
-     "title": "이 대통령, 동해 GS AI데이터센터 착공식 이후 국내 기업 기술 부스 방문",
-     "press": "kado.net",
-     "publishedAt": "2026-11-28T06:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213890?sid=100"
-    },
-    {
      "title": "이 대통령, 동해 AI데이터센터 착공식 참석... “지역 경제 활성화 이끌...",
      "press": "vop.co.kr",
      "publishedAt": "2026-11-28T06:42:00.000Z",
      "link": "https://vop.co.kr/A00001697811.html"
+    },
+    {
+     "title": "이 대통령, 동해 GS AI데이터센터 착공식 이후 국내 기업 기술 부스 방문",
+     "press": "kado.net",
+     "publishedAt": "2026-11-28T06:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213890?sid=100"
     }
    ]
   },
@@ -144,10 +144,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T05:47:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-28T05:52:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -172,71 +172,7 @@
    ]
   },
   {
-   "keyword": "기사",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-28T05:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"경찰관 폭행에 신호위반 사고까지\"…60대 택시기사 징역 10개월",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-28T06:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009315343?sid=102"
-    },
-    {
-     "title": "'보복운전 논란' 김영광, 유튜브 재개…택시기사에 재차 사과 \"면목 없다...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-28T06:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002085033"
-    },
-    {
-     "title": "“택시 기사님께 진심으로 사과” 김영광, 보복운전 논란 한 달 만에 복...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-28T06:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002729778?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김가연, 경복궁 한복 대여점 비판",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T05:43:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김가연, 경복궁 한복 대여 실태 비판",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-28T07:00:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611280100"
-    },
-    {
-     "title": "“엉터리 옷을 한복인 양”…김가연, 경복궁 대여점 ‘작심 비판’",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-28T06:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005770253?sid=102"
-    },
-    {
-     "title": "“엉터리 옷 한복인 양” 김가연, 경복궁 한복 대여점 ‘공개 저격’",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-28T06:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001152168"
-    }
-   ]
-  },
-  {
-   "keyword": "한성숙 총리 부스 방문",
+   "keyword": "부스 방문한 한성숙 총리",
    "sources": [
     "nate"
    ],
@@ -263,39 +199,71 @@
      "title": "청년미래 콘서트 부스 둘러보는 한성숙 총리",
      "press": "newsis.com",
      "publishedAt": "2026-11-28T06:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350744?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/003/0014350731?sid=102"
     }
    ]
   },
   {
-   "keyword": "복사근 커리 3경기",
+   "keyword": "김가연 한복 비판",
    "sources": [
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-28T06:00:00.000Z",
+   "firstArticleAt": "2026-11-28T06:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'복사근 파열' 커리, 추가 결장…12월 중순 복귀 전망",
+     "title": "김가연, 경복궁 한복 대여 실태 비판",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-28T07:00:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611280100"
+    },
+    {
+     "title": "“엉터리 옷을 한복인 양”…김가연, 경복궁 대여점 ‘작심 비판’",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-28T06:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005770253?sid=102"
+    },
+    {
+     "title": "“엉터리 옷 한복인 양” 김가연, 경복궁 한복 대여점 ‘공개 저격’",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-28T06:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001152168"
+    }
+   ]
+  },
+  {
+   "keyword": "기사",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-28T06:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"경찰관 폭행에 신호위반 사고까지\"…60대 택시기사 징역 10개월",
      "press": "news1.kr",
-     "publishedAt": "2026-11-28T06:37:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/421/0009315347"
+     "publishedAt": "2026-11-28T06:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009315343?sid=102"
     },
     {
-     "title": "‘복사근 파열’ 스테픈 커리, 최소 3경기 추가 결장… 내달 초 재검진...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-28T06:37:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/396/0000762232"
+     "title": "'보복운전 논란' 김영광, 유튜브 재개…택시기사에 재차 사과 \"면목 없다...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-28T06:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002085033"
     },
     {
-     "title": "[NBA] '복사근 부상' 커리, 최소 3경기 추가 결장…내달초 재검진",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-28T06:00:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261128000048"
+     "title": "“택시 기사님께 진심으로 사과” 김영광, 보복운전 논란 한 달 만에 복...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-28T06:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002729778?sid=102"
     }
    ]
   },
@@ -330,43 +298,11 @@
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16288405"
     }
    ]
-  },
-  {
-   "keyword": "성시경 쌈디",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T05:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"형, 한 번만 만나줘\"…'절교' 성시경과 화해한 쌈디, 달라진 술버릇",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-28T06:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005447723"
-    },
-    {
-     "title": "\"눈물 날 정도로 속상했다\"…성시경, 쌈디에 절교 선언한 사연",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-28T06:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/015/0005359332"
-    },
-    {
-     "title": "'음주 후 응급실行' 쌈디, 4년 만에 달라졌다…\"얌전하게 택시 타고 가더...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-28T05:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409924"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 2060,
+  "flagged": 2062,
   "matched": 1009,
   "avgLeadMin": 660,
   "recent": [
