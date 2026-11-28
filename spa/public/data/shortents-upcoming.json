@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-28T01:31:07.104Z",
+ "builtAt": "2026-11-28T01:41:11.664Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,82 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "주유소 기름값 하락",
+   "keyword": "인터넷우체국 개인정보 유출",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-28T00:06:00.000Z",
+   "articles90": 23,
+   "recent20": 7,
+   "press": 23,
+   "firstArticleAt": "2026-11-28T00:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "부산 주유소 휘발유 평균가 ℓ당 1836.1원… 전주보다 0.9원 ↓",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-28T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162480?sid=101"
+     "title": "인터넷우체국도 해킹 피해... 최소 11만3천여명 개인정보 유출",
+     "press": "vop.co.kr",
+     "publishedAt": "2026-11-28T01:38:00.000Z",
+     "link": "https://vop.co.kr/A00001697806.html"
     },
     {
-     "title": "주유소 기름값 28주째 하락…서울 2주 연속 평균 1천800원대",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-28T01:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012303101?sid=101"
+     "title": "인터넷우체국 등기 고객 11만명 정보 유출",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-28T01:38:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261128503186?OutUrl=naver"
     },
     {
-     "title": "주유소 기름값 28주째 하락‥서울 2주 연속 1천8백 원대",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-28T01:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001538642?sid=101"
+     "title": "우체국도 털렸다…하루치만 11만명 개인정보 유출",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-28T01:36:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122901"
+    }
+   ]
+  },
+  {
+   "keyword": "디트로이트 김하성 계약 발표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 22,
+   "recent20": 5,
+   "press": 21,
+   "firstArticleAt": "2026-11-28T00:16:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오피셜]\"550타석만 채워달라\" DET는 2023년 김하성을 기억했다, 최대 $6...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-28T01:36:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/076/0004470402"
+    },
+    {
+     "title": "디트로이트, 김하성과 1년 계약 공식 발표",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-28T01:28:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/119/0003160474"
+    },
+    {
+     "title": "김하성, 디트로이트와 1년 계약…MLB 새 출발",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-28T01:26:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4121548"
     }
    ]
   },
   {
    "keyword": "송민규 포르투갈 데뷔골",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-28T00:10:00.000Z",
+   "articles90": 14,
+   "recent20": 0,
+   "press": 14,
+   "firstArticleAt": "2026-11-28T00:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,162 +108,98 @@
    ]
   },
   {
-   "keyword": "곽시양 유지애 결혼",
+   "keyword": "곽시양 유지애 오늘 결혼한다",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
+   "articles90": 13,
+   "recent20": 5,
+   "press": 13,
    "firstArticleAt": "2026-11-28T00:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "곽시양♥유지애, 오늘 결혼 \"행복하게 살게요\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T01:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014350526"
+     "title": "곽시양♥유지애, 오늘(28일) 결혼 앞두고 큰절…축가는 러블리즈 류수정",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-28T01:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329403"
     },
     {
-     "title": "곽시양·유지애, 오늘(28일) 결혼…큰절하며 \"행복하게 살게요\"",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-28T01:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003160473"
+     "title": "곽시양♥유지애, 28일 부부 돼 \"늘 한결같은 사람\"",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-28T01:40:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=96122"
     },
     {
-     "title": "“D-day” 큰절 올린 곽시양♥유지애, 오늘(28일) 웨딩마치",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-28T01:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001152146"
+     "title": "곽시양·유지애, 오늘(28일) 결혼…\"행복하게 살게요\"",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-28T01:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000762214"
     }
    ]
   },
   {
-   "keyword": "S&P 프랑스 신용등급 전망",
+   "keyword": "전국 기온 뚝 비 눈",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
    "firstArticleAt": "2026-11-28T00:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "S&P, 프랑스 신용등급 전망 '부정적' 하향…재정악화·정치불안 우려",
-     "press": "mt.co.kr",
+     "title": "비온 뒤 칼바람 기온 '뚝'…아침 최저 영하 5도[내일날씨]",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-28T01:30:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611280074"
+    },
+    {
+     "title": "전국 기온 5~10도 '뚝'…광주·전남 오전 비·눈",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-28T01:22:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000087520"
+    },
+    {
+     "title": "전국 강풍으로 체감온도 '뚝'…남부 지방 곳곳에서는 '비'",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-28T01:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653931?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이동연, 팬레터 폐기 2차 사과",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-28T00:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이동연, 팬레터 폐기 논란 2차 사과… 보관 중인 편지 인증까지",
+     "press": "dailian.co.kr",
      "publishedAt": "2026-11-28T01:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005447683?sid=101"
+     "link": "https://m.entertain.naver.com/article/119/0003160472"
     },
     {
-     "title": "S&P, 프랑스 신용등급 전망 '부정적'으로 하향…경기침체에 재정 악화",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-28T00:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522898?sid=104"
+     "title": "'팬레터 폐기 논란' 이동연, 2차 사과→인증에 여론 뒤집혔다…쏟아진 ...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-28T00:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409896"
     },
     {
-     "title": "S&P, 프랑스 신용 등급 전망 ‘부정적’…재정 적자·정치 갈등 우려",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-28T00:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004012246?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "북러 경제협조 활성화",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-28T00:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "북러 경제공동위 개최…“쌍방 경제분야 협조 사업 활성화”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-28T00:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012303096?sid=100"
-    },
-    {
-     "title": "북러 경제공동위 개최…\"쌍방 경제분야 협조사업 활성화\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-28T00:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000930748?sid=100"
-    },
-    {
-     "title": "북러 경제공동위 개최...\"경제분야 협조사업 활성화\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T00:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439264?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "서울시 중등교사 임용시험",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-28T00:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서울시교육청도 '임용고시' 감독 강화...1교시 한창",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-28T00:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002439270?sid=102"
-    },
-    {
-     "title": "서울 중등교사 임용시험 '모든 통신·전자기기 반입 금지' [TF사진관]",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-28T00:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000556437?sid=102"
-    },
-    {
-     "title": "서울 중등교사 임용 1차시험",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-28T00:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014350478?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "굿파트너 2",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-28T00:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'굿파트너2', 두 자릿수 시청률 목전…9.8% '자체 최고'",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-28T01:14:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110130629359"
-    },
-    {
-     "title": "김혜윤, 장나라의 '리봄' 의미 깨달았다…'굿파트너2' 9.8% 자체 최고[시...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-28T01:02:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795826145531691006"
-    },
-    {
-     "title": "장나라·김혜윤 ‘굿파트너2’, 거침없는 상승세…9.8% 자체 최고 경신...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-28T00:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543984"
+     "title": "\"편지 읽고 다시 스티커 붙여 보관했다\"…이동연, 팬레터 폐기 논란 2차...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-28T00:41:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000494167"
     }
    ]
   },
@@ -269,10 +238,28 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1994,
-  "matched": 977,
-  "avgLeadMin": 648,
+  "flagged": 1998,
+  "matched": 980,
+  "avgLeadMin": 654,
   "recent": [
+   {
+    "keyword": "미국 이란 제재",
+    "hitKeyword": "미국 쿠팡 제재 압박",
+    "hitAt": "2026-11-28T10:30:00+09:00",
+    "leadMin": 5330
+   },
+   {
+    "keyword": "미국 쿠팡 과징금 비판",
+    "hitKeyword": "미국 쿠팡 제재 압박",
+    "hitAt": "2026-11-28T10:30:00+09:00",
+    "leadMin": 2191
+   },
+   {
+    "keyword": "이상이 배우",
+    "hitKeyword": "이상이 왼손 피아니스트",
+    "hitAt": "2026-11-28T10:30:00+09:00",
+    "leadMin": 59
+   },
    {
     "keyword": "롯데 자이언츠",
     "hitKeyword": "롯데 자이언츠 FA",
@@ -314,24 +301,6 @@
     "hitKeyword": "뉴욕증시 상승",
     "hitAt": "2026-11-28T09:00:00+09:00",
     "leadMin": 50
-   },
-   {
-    "keyword": "서현진 긴급 체포",
-    "hitKeyword": "라이어 서현진",
-    "hitAt": "2026-11-28T09:00:00+09:00",
-    "leadMin": 30
-   },
-   {
-    "keyword": "홍민기 배우",
-    "hitKeyword": "홍민기 전 연인 실종",
-    "hitAt": "2026-11-28T09:00:00+09:00",
-    "leadMin": 30
-   },
-   {
-    "keyword": "남경주 제자 성관계 인정",
-    "hitKeyword": "남경주 국민참여재판",
-    "hitAt": "2026-11-28T09:00:00+09:00",
-    "leadMin": 9
    }
   ]
  }
